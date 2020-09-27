@@ -1,3 +1,7 @@
+const mysqlx = require('@mysql/xdevapi');
+
+require('dotenv').config();
+
 const config = {
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
@@ -6,13 +10,10 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const mysqlx = require('@mysql/xdevapi');
-
-const conn = async () =>
+const connection = async () =>
   mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
     .catch((err) => console.log(err.message));
 
-
-module.exports = conn;
+module.exports = connection;

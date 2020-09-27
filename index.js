@@ -7,7 +7,7 @@ const controllers = require('./controllers');
 
 require('dotenv').config();
 
-const conn = require('./models/connection');
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,9 +16,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
-});
+app.get('/', controllers.recipeController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
@@ -28,8 +26,8 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
 
-conn().then((session) => {
-  console.log('Conectado ao MySQL');
-});
+const connection = require('./models/connection');
+
+connection().then((data) => console.log('data:', data));

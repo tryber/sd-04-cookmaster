@@ -5,9 +5,7 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
-require('dotenv').config();
-
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +25,3 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
-
-const connection = require('./models/connection');
-
-connection().then((data) => console.log('data:', data));

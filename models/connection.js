@@ -17,9 +17,9 @@ const connection = () =>
   //   :
   mysqlx
     .getSession(config)
-    .then(async (session) => await session.getSchema('cookmaster'))
+    .then(async (session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      console.error(err);
+      console.log(err);
       process.exit(1);
     });
 

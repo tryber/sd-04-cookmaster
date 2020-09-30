@@ -1,8 +1,8 @@
 .recipe {
-  width: 343px;
+  background: #c4c4c4;
   height: 117px;
-  background: #C4C4C4;
   margin: 5px 3px;
+  width: 343px;
 }
 
 .title {
@@ -11,6 +11,6 @@
 
 .box {
   display: flex;
-  width: 90%;
   flex-wrap: wrap;
+  width: 90%;
 }

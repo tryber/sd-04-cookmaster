@@ -10,11 +10,14 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-
+require('dotenv/config');
 const  my = require('mysql2');
 
 function queryTestDb(query, config) {
-  const connection = my.createConnection({host: process.env.HOSTNAME, user: process.env.MYSQL_USER, password: process.env.MYSQL_PASSWORD})
+  const connection = my.createConnection({
+    host: process.env.HOSTNAME,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD})
   connection.connect()
   return new Promise((resolve, reject) => {
     connection.query(query, (error, results) => {

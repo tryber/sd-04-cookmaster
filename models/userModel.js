@@ -27,7 +27,7 @@ const findById = async (id) => {
 };
 
 const isEmailValid = (email) => {
-  const emailValid;
+  let emailValid;
   return email.test(emailValid);
 };
 

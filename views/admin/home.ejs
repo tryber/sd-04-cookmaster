@@ -7,9 +7,28 @@
   </head>
 
   <body>
-    <h1>Painel Administrativo Cookmaster</h1>
-    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-    <pre><%= JSON.stringify(user, null, 4) %></pre>
-    <button onclick="window.location.pathname='/logout'">Logout</button>
+    <header>
+      <h1>Cookmaster</h1>
+      <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+      <pre><%= JSON.stringify(user, null, 4) %></pre>
+      <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+    </header>
+    <section>
+      <nav>
+        <h1>Receitas</h1>
+        <button>Minhas Receitas</button>
+        <button data-testid="buscar-receita">Buscar</button>
+        <button data-testid="nova-receita">Nova Receita</button>
+        <button>Minha Conta</button>
+      </nav>
+      <article>
+        <div>
+          <span>Nome da Receita</span>
+          <span>Nome do usuário</span>
+          <a href="Link">Ver mais</a>
+        </div>
+      </article>
+    </section>
+    <!-- <h1>Painel Administrativo Cookmaster</h1> -->
   </body>
 </html>

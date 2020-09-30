@@ -1,23 +1,23 @@
 const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config'); // para uso do dotenv
 
-const config = {
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  host: process.env.HOSTNAME,
-  port: 33060,
-  schema: process.env.MYSQL_DB,
-  socketPath: '/var/run/mysqld/mysqld.sock',
-};
+// const config = {
+//   user: process.env.MYSQL_USER,
+//   password: process.env.MYSQL_PASSWORD,
+//   host: process.env.HOSTNAME,
+//   db: process.env.MYSQL_DB,
+//   port: 33060,
+//   socketPath: '/var/run/mysqld/mysqld.sock',
+// };
 
 const connection = () => {
   return mysqlx
     .getSession({
-      user: "root",
-      password: "292311",
-      host: "localhost",
+      user: 'root',
+      password: '292311',
+      host: 'localhost',
       port: 33060,
-      schema: "cookmaster",
+      schema: 'cookmaster',
     })
     .then((session) => {
       return session.getSchema('cookmaster');

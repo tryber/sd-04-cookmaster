@@ -12,7 +12,7 @@
       <% recipes.forEach(recipe => { %>
         <li><%= recipe.user %> - <%= recipe.name %> - <a class="btn btn-sm btn-secondary" href="/recipes/<%= recipe.id %>">Ver mais</a></li>
       <% }) %>
-    </ul>    
+    </ul>
     <a href="/" data-testid="buscar-receita" class="btn btn-sm btn-primary">Buscar Receita</a>
     <% if (user) {%>
     <a href="/" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
@@ -21,6 +21,5 @@
     <% if (user) {%>
     <a href="/" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
     <% } %>
-  
   </body>
 </html>

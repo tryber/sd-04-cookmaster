@@ -19,39 +19,8 @@ const connection = () =>
     .getSession(config)
     .then(async (session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      console.log(err);
+      throw err;
       process.exit(1);
     });
-
-// const getAll = async () =>
-//   con().then((db) =>
-//     db
-//       .getTable('recipes')
-//       .select([user, name, ingredients, instructions])
-//       .execute()
-//       .then((results) => results.fetchAll())
-//       .then((results) =>
-//         results.map(([id, user, name, ingredients, instructions]) => ({
-//           id,
-//           user,
-//           name,
-//           ingredients,
-//           instructions,
-//         })),
-//       ),
-//   );
-
-// const getRecipeById = async () =>
-//   con().then((db) =>
-//     db
-//       .getTable('recipes')
-//       .select([id, name])
-//       .where('id = :id')
-//       .bind('id', id)
-//       .execute()
-//       .then((results) => results.fetchAll())
-//       .then((results) => results.fetchAll()[0])
-//       .then((recipes) => recipes.map((name) => name)),
-//   );
 
 module.exports = { connection };

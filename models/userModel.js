@@ -26,7 +26,24 @@ const findById = async (id) => {
   return TEMP_USER;
 };
 
+const isEmailValid = (email) => {
+  const emailValid = regex();
+  return email.test(emailValid);
+};
+
+const isPasswordValid = (password) => password.length >= 6;
+
+const isCounterPasswordValid = (counterPassword, password) => counterPassword === password;
+
+const isUserNameValid = (name) => typeof name === 'string' && name.length >= 3;
+
+const isUserLastNameValid = (lastName) => typeof lastName === 'string' && lastName.length >= 3;
+
 module.exports = {
   findByEmail,
   findById,
+  isUserNameValid,
+  isUserLastNameValid,
+  isPasswordValid,
+  isCounterPasswordValid,
 };

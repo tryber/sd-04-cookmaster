@@ -18,8 +18,4 @@ module.exports = () => {
   return mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
 };

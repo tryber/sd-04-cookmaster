@@ -25,6 +25,6 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/recipeDetails/:id', controllers.recipeController.recipeDetails);
+// app.get('/recipeDetails/:id', controllers.recipeController.recipeDetails);
 
 app.listen(3000, () => console.log('Running server on 3000'));

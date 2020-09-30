@@ -27,7 +27,7 @@ const findById = async (id) => {
 };
 
 const isEmailValid = (email) => {
-  const emailValid = regex();
+  const emailValid;
   return email.test(emailValid);
 };
 

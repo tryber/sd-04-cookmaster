@@ -18,7 +18,7 @@ const getAll = async () =>
       ),
   );
 
-const getRecipeById = async () =>
+const getRecipeById = async (id) =>
   connection().then((db) =>
     db
       .getTable('recipes')

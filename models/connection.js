@@ -20,7 +20,7 @@ const connection = () =>
     .then(async (session) => session.getSchema('cookmaster'))
     .catch((err) => {
       throw err;
-      process.exit(1);
+      // process.exit(1);
     });
 
 module.exports = { connection };

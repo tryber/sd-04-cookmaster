@@ -41,6 +41,7 @@
     "mochawesome-merge": "^4.0.0",
     "mochawesome-report-generator": "^4.1.0",
     "nodemon": "^2.0.4",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "dotenv": "^8.2.0"
   }
 }

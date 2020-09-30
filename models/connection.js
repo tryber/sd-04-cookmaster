@@ -11,7 +11,6 @@ const connection = () =>
     })
     .then((session) => session.getSchema('cookmaster'))
     .catch(() => {
-      console.log('deu ruim');
       process.exit(1);
     });
 

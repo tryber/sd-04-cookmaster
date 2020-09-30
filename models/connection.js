@@ -10,13 +10,12 @@ const connection = () => {
       port: 33060,
     })
     .then((session) => {
-      schema = session.getSchema('cookmaster');
-      return schema;
+      return session.getSchema('cookmaster');
     })
     .catch((err) => {
-      console.error(err);
+      console.error("deu ruim");
       process.exit(1);
     });
 };
 
-module.exports = (connection)
+module.exports = (connection);

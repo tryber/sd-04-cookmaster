@@ -9,16 +9,15 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const connection = () => {
+const connection = async () => {
   return mysqlx
     .getSession(config)
-    .then(session => session.getSchema('cookmaster'))
+    .then((session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      console.log(err);
       process.exit(1);
     });
-}
+};
 
 module.exports = {
-  connection
-}
+  connection,
+};

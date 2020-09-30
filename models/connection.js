@@ -10,10 +10,14 @@ const config = {
 };
 
 const connection = async () => {
+  if (schema) {
+    return Promise.resolve(schema);
+  }
   return mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
     .catch((err) => {
+      console.log(err);
       process.exit(1);
     });
 };

@@ -15,6 +15,7 @@ const getUser = async (req) => {
   return user;
 };
 
+// validando o acesso:
 const authMiddleware = (required = true) => async (req, res, next) => {
   const user = await getUser(req);
 

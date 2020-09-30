@@ -21,7 +21,7 @@ function connection() {
           return schema;
         })
         .catch((err) => {
-          Console.error(err);
+          console.log(err);
           process.exit(1);
         });
 }

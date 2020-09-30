@@ -12,16 +12,18 @@ const config = {
 let schema;
 
 function connection() {
-  return mysqlx
-    .getSession(config)
-    .then((session) => {
-      schema = session.getSchema('cookmaster');
-      return schema;
-    })
-    .catch((err) => {
-      Console.error(err);
-      process.exit(1);
-    });
+  return schema
+    ? Promise.resolve(schema)
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          schema = session.getSchema('cookmaster');
+          return schema;
+        })
+        .catch((err) => {
+          Console.error(err);
+          process.exit(1);
+        });
 }
 
 module.exports = connection;

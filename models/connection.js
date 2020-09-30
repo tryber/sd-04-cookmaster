@@ -1,7 +1,9 @@
 require('dotenv/config');
+
 const mysqlx = require('@mysql/xdevapi');
 
 let schema;
+
 
 module.exports = () => {
   if (schema) return Promise.resolve(schema);

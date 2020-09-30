@@ -16,7 +16,7 @@ function connection() {
       return session.getSchema('cookmaster');
     })
     .catch(function (err) {
-      console.error(err);
+      console.err(err);
       process.exit(1);
     });
 }

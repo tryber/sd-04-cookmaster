@@ -9,8 +9,8 @@ const config = {
 };
 
 const connection = () => mysqlx.getSession(config)
-  .then((session) => session.getSchema('cookmaster')).catch((err) => {
-    console.log(err);
+  .then((session) => session.getSchema('cookmaster')).catch(() => {
+  // console.error(err);
     process.exit(1);
   });
 

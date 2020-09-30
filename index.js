@@ -25,3 +25,5 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.listen(3000, () => console.log('Listening on 3000'));
+
+//Ih rapaz...

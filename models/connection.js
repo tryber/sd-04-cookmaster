@@ -10,8 +10,8 @@ const connection = () =>
       port: 33060,
     })
     .then((session) => session.getSchema('cookmaster'))
-    .catch((_err) => {
-      console.error('deu ruim');
+    .catch(() => {
+      console.log('deu ruim');
       process.exit(1);
     });
 

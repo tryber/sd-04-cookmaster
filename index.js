@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
+const { findByEmail } = require('./models')
 const { recipesController, userController } = require('./controllers');
 
 const { loginForm, logout, login } = userController;
@@ -14,7 +15,9 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+findByEmail('bruno.batista@gmail.com').then(result => console.log(result));
 app.get('/', home);
+
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

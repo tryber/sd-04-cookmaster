@@ -15,4 +15,4 @@ const getRecipes = async () => {
   }));
 };
 
-module.exports = getRecipes;
+module.exports = { getRecipes };

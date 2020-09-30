@@ -15,4 +15,4 @@ const connection = () =>
     .then((session) => session.getSchema('cookmaster'))
     .catch(() => process.exit(1));
 
-module.exports = connection;
+module.exports = { connection };

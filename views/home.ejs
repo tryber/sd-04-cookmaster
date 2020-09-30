@@ -6,8 +6,11 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <h1>Cookmaster</h1>
+    <a href='/login' data-testid='login'>Login</button>
+    <button data-testid='buscar-receita'>Buscar Receitas</button>
     <ul>
+      <hi>Receitas</hi>
       <% recipes.forEach(({user, recipe, id}) => { %>
       <li><%= `${recipe} ${user}` %></li>
       <a href= <%=`recipes/${id}`%> >Ver mais</a>

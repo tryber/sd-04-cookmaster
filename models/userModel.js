@@ -1,31 +1,19 @@
-/* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
-// const TEMP_USER = {
-//   id: 'd2a667c4-432d-4dd5-8ab1-b51e88ddb5fe',
-//   email: 'taylor.doe@company.com',
-//   password: 'password',
-//   name: 'Taylor',
-//   lastName: 'Doe',
-// };
+const { connection } = require('./connection');
 
-const connection = require('./connection');
-
-/* Substitua o código das funções abaixo para que ela,
-de fato, realize a busca no banco de dados */
-
-const findByEmail = async (email) => {
-  const user = connection().then((schema) => {
-    schema.getTable('users');
-  });
-  return user;
+const findByEmail = async (emailInput) => {
+  const db = await connection();
+  const table = await db.getTable('users');
+  const results = await table.select([]).where('email = :emailInput').bind({ emailInput }).execute();
+  const [id, email, password, name, lastName] = results.fetchOne();
+  return { id, email, password, name, lastName };
 };
 
-/**
- * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
- */
-const findById = async (id) => {
-  const userID = id;
-  return userID;
+const findById = async (idInput) => {
+  const db = await connection();
+  const table = await db.getTable('users');
+  const results = await table.select([]).where('id = :idInput').bind({ idInput }).execute();
+  const [id, email, password, name, lastName] = results.fetchOne();
+  return { id, email, password, name, lastName };
 };
 
 module.exports = {

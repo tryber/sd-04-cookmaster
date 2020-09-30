@@ -11,7 +11,10 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-module.exports = async () => {
+module.exports = () => {
+  if (schema) {
+    return Promise.resolve(schema);
+  }
   return mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'));

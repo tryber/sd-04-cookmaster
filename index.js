@@ -12,8 +12,9 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
+app.get('/', (req, res) => {
+  const { receitas } = req.body;
+  return res.render('home', { receitas });
 });
 
 app.get('/admin', middlewares.auth(), (req, res) => {

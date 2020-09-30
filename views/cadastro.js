@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Login</title>
+    <title>Cookmaster - Cadastro</title>
   </head>
   <body>
     <% if (message) {%>
@@ -14,12 +14,15 @@
       <input data-testid="email" type="text" name="email" id="emailInput" /><br />
       <label for="passwordInput">Senha: </label>
       <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
-      <% if (redirect) { %>
+      <label for="confirmar-passwordInput">Confirmar senha: </label>
+      <input data-testid="confirmar-senha" type="password" name="confirmar-password" id="confirmar-passwordInput" /><br />
+
+      {/* <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
-      <% } %>
-      <button data-testid="entrar" type="submit">Login</button>
-      <a href="/cadastro" data-testid="cadastrar" type="submit">Cadastre-se</a>
-      <!-- não sei se é necessário data-testid no link para cadastro -->
+      <% } %> */}
+
+      <button href="/cadastro" data-testid="cadastrar" type="submit">Cadastre-se</button>
+      <a href="/login" data-testid="login" type="submit">Login</a>
     </form>
   </body>
 </html>

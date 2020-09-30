@@ -11,7 +11,7 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const connection = async () => {
+module.exports = () => {
   if (schema) {
     return Promise.resolve(schema);
   }
@@ -22,8 +22,4 @@ const connection = async () => {
       console.error(err);
       process.exit(1);
     });
-};
-
-module.exports = {
-  connection,
 };

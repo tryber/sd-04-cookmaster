@@ -15,7 +15,6 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-findByEmail('bruno.batista@gmail.com').then(result => console.log(result));
 app.get('/', home);
 
 

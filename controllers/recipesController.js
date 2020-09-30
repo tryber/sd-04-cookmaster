@@ -1,8 +1,10 @@
-const getRecipes = require('../models/recipesModel');
+const { getRecipes } = require('../models');
 
-const home = async (_req, res) => {
+const home = async (req, res) => {
+  const { token = '' } = req.cookies || {};
+  const islogged = !!token;
   const recipes = await getRecipes();
-  return res.render('home', { recipes });
+  return res.render('home', { recipes, islogged });
 };
 
 module.exports = { home };

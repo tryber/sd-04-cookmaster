@@ -7,8 +7,10 @@
   </head>
   <body>
     <h1>Cookmaster</h1>
-    <a href='/login' data-testid='login'>Login</button>
+    <% if (!islogged) { %> <a href='/login' data-testid='login'>Login</a>  <% } %>
+    <% if (islogged) { %> <a href='/logout' data-testid='logout'>Logout</a>  <% } %>
     <button data-testid='buscar-receita'>Buscar Receitas</button>
+    <% if (islogged) { %> <button data-testid='nova-receita'>Nova Receitas</button> <% } %>
     <ul>
       <h1>Receitas</h1>
       <% recipes.forEach(({user, recipe, id}) => { %>

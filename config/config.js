@@ -1,3 +1,5 @@
+require('dotenv/config'); // para uso do dotenv
+
 module.exports = {
   "development": {
     "username": process.env.MYSQL_USER,

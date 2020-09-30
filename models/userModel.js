@@ -7,6 +7,8 @@ const TEMP_USER = {
   lastName: 'Doe',
 };
 
+const connection = require('./connection');
+
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
@@ -15,7 +17,17 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return TEMP_USER;
+  const db = await connection();
+  const stmt = await db
+    .getTable('users')
+    .select(['email', 'password'])
+    .where('email = :email')
+    .bind('email', email)
+    .execute();
+  const rows = await stmt.fetchAll();
+  const user = rows[0].reduce((email, password) => ({ email, password }));
+  //console.log(user) // objeto user
+  return user;
 };
 
 /**
@@ -23,7 +35,17 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return TEMP_USER;
+  const db = await connection();
+  const stmt = await db
+    .getTable('users')
+    .select(['id', 'password'])
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+  const rows = await stmt.fetchAll();
+  const users = rows[0].reduce((id, password) => ({ id, password }));;
+  return users;
+  //console.log(users);
 };
 
 module.exports = {

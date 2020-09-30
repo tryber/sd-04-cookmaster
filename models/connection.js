@@ -1,6 +1,8 @@
 const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config');
 
+let schema;
+
 const config = {
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
@@ -17,7 +19,7 @@ const connection = async () => {
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       process.exit(1);
     });
 };

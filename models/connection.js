@@ -1,4 +1,4 @@
-const mysqlx = require("@mysql/xdevapi");
+const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config');
 
 const config = {
@@ -6,14 +6,14 @@ const config = {
   password: process.env.MYSQL_PASSWORD,
   host: process.env.HOSTNAME,
   port: 33060,
-  socketPath: "/var/run/mysqld/mysqld.sock",
+  socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
 const connection = () => {
   return mysqlx
     .getSession(config)
     .then((session) => {
-      schema = session.getSchema("cookmaster");
+      schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => {

@@ -11,7 +11,6 @@ const getAllRecipes = async () => {
       name,
     }));
   } catch (error) {
-    console.log(error);
     return error;
   }
 };

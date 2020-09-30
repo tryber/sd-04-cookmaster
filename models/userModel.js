@@ -7,17 +7,15 @@
 //   lastName: 'Doe',
 // };
 
-const connection = require('./connection')
-
-
+const connection = require('./connection');
 
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
 const findByEmail = async (email) => {
-  const user = connection().then((schema)=> {
+  const user = connection().then((schema) => {
     schema.getTable('users');
-  })
+  });
   return user;
 };
 
@@ -26,7 +24,8 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return TEMP_USER;
+  const userID = id;
+  return userID;
 };
 
 module.exports = {

@@ -26,7 +26,6 @@ const getRecipeById = async (id) =>
       .where('id = :id')
       .bind('id', id)
       .execute()
-      .then((results) => results.fetchAll())
       .then((results) => results.fetchAll()[0])
       .then((recipes) => recipes.map((name) => name)),
   );

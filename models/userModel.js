@@ -21,7 +21,7 @@ const findByEmail = async (email) => {
   an empty list. */
   const user = await results
     .fetchAll()
-    .then((list) => list[0].reduce(([id, email, password]) => ({ id, email, password })));
+    .then((list) => list[0].reduce(([id, userEmail, password]) => ({ id, userEmail, password })));
 
   return user;
 };
@@ -41,7 +41,7 @@ const findById = async (id) => {
 
   const user = await results
     .fetchAll()
-    .then((list) => list[0].reduce(([id, email, password]) => ({ id, email, password })));
+    .then((list) => list[0].reduce(([userId, email, password]) => ({ id, email, password })));
 
   return user;
 };

@@ -12,9 +12,9 @@
     </div>
     <% } %>
     <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
+      <label for="emailInput" data-testid="email">Email: </label>
       <input type="text" name="email" id="emailInput" /><br />
-      <label for="passwordInput">Senha: </label>
+      <label for="passwordInput" data-testid="senha">Senha: </label>
       <input type="password" name="password" id="passwordInput" /><br />
       <% if (redirect) { %>
       <input
@@ -23,7 +23,7 @@
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button type="submit">Entrar</button>
+      <button type="submit" data-testid="entrar">Entrar</button>
     </form>
   </body>
 </html>

@@ -22,16 +22,23 @@ const hashPassword = (password) => crypto.createHash('sha256').update(password).
  * @param {string} password User password
  */
 const user = async (userEmail, userPassword) => {
-  const userData = await connection().then((schema) =>
-    schema
-      .getTable('users')
-      .select(['user', 'password'])
-      .where('email = :userEmail and password = :userPassword')
-      .bind('email', userEmail)
-      .bind('password', userPassword)
-      .execute()
-      .then((result) => result.fetchAll())
-      .then((userLogin) => userLogin.map(([email, password]) => ({ email, password }))));
+  const userData = await connection()
+    .then((schema) =>
+      schema
+        .getTable('users')
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('email = :email AND password = :password')
+        .bind('email', userEmail)
+        .bind('password', hashPassword(userPassword))
+        .execute())
+    .then((result) => result.fetchAll())
+    .then((userLogin) => userLogin.map(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    })));
 
   return userData || null;
 };

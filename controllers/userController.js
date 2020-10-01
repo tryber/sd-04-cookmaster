@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password) {
@@ -24,8 +24,8 @@ const login = async (req, res, next) => {
     });
   }
 
-  const user = await userModel.findByEmail(email);
-  if (!user || user.password !== password) {
+  const user = await userModel.user(email, password);
+  if (!user) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
       redirect: null,

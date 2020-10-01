@@ -29,7 +29,7 @@ const user = async (userEmail, userPassword) => {
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
         .where('email = :email AND password = :password')
         .bind('email', userEmail)
-        .bind('password', hashPassword(userPassword))
+        .bind('password', userPassword)
         .execute())
     .then((result) => result.fetchAll())
     .then((userLogin) =>

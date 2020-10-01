@@ -20,7 +20,7 @@
    <button data-testid="buscar-receita">Buscar Receita</button>
    <% if (user) { %>
     <button data-testid="nova-receita">"Nova Receita</button>
-    <button data-testid="logout">Logout</button>
+    <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
    <% } %>
     <% if (!user) { %>
       <a data-testid="login" href="/login">Login</a>

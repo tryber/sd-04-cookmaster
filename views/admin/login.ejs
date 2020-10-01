@@ -12,8 +12,6 @@
   </div>
   <% } %>
   <form action="/login" method="POST">
-    <fieldset>
-      <legend>Cookmaster - Login</legend>
       <label for="emailInput">Email: </label>
       <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
@@ -21,8 +19,8 @@
       <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>
+      <a href="/register">Cadastre-se</a>
       <button type="submit" data-testid="entrar">Entrar</button>
-    </fieldset>
   </form>
 </body>
 </html>

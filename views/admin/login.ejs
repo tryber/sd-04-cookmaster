@@ -18,13 +18,12 @@
       <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
       <% if (redirect) { %>
       <input
-        data-testid="entrar"
         type="hidden"
         name="redirect"
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button type="submit">Entrar</button>
+      <button data-testid="entrar" type="submit">Entrar</button>
     </form>
   </body>
 </html>

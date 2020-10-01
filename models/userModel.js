@@ -16,9 +16,8 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return TEMP_USER; 
-}
-  
+  return TEMP_USER;
+};
 
 /**
  * Busca um usuário através do seu ID
@@ -26,7 +25,7 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   return TEMP_USER;
-}
+};
 
 module.exports = {
   findByEmail,

@@ -6,7 +6,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
 const app = express();
-// const connection = require('./models/connection');
+const connection = require('./models/connection');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -26,3 +26,7 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.listen(3000, () => console.log('Listening on 3000'));
+
+connection().then((session) => {
+  console.log('Conectado ao MySQL!');
+});

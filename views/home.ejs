@@ -4,14 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-  <%- include('../components/header/header'); %>
-  <main>
-    <div>
-      <h1>Receitas</h1>
-      <button data-testid="buscar-receita">Buscar Receita</button>
-    </div>
-  </main>
+  <div class="main-container">
+    <%- include('../components/header/header'); %>
+    <main class="main-content">
+      <div class="top-bar">
+        <h1>Receitas</h1>
+        <button
+          class="search-btn"
+          data-testid="buscar-receita"
+        >
+          Buscar Receita
+        </button>
+      </div>
+    </main>
+  </div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .top-bar:only-child {
+      padding: 50px 150px 10px;
+    }
+
+    .cabecalho {
+      align-items: center;
+      background-color: #c4c4c4;
+      display: flex;
+      height: 60px;
+      justify-content: space-between;
+    }
+
+    .header-element {
+      padding: 30px;
+    }
+
+    .search-btn {
+      background: #2d9cdb;
+      border: none;
+      color: white;
+      height: 42px;
+      width: 174px;
+    }
+  </style>
 </body>
 </html>

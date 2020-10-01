@@ -9,43 +9,56 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <style>
+      .my-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .my-box {
+        border: 2px solid black ;
+        width: 25%;
+      }
+    </style>
     <title>Cookmaster - Home</title>
   </head>
   <body>
     <div class="navbar navbar-expand-lg navbar-light bg-light">
       <h5>Cookmaster</h5>
       <% if (user == null) { %>
-        <a data-testid="login" class="nav-link" href="/login">Login</a>
+      <a data-testid="login" class="nav-link" href="/login">Login</a>
       <%} else {%>
-        <p><%= `${user.name} ${user.lastName}` %></p>
-        <a data-testid="logout" class="nav-link" href="/logout"> Logout</a>
+      <p><%= `${user.name} ${user.lastName}` %></p>
+      <a data-testid="logout" class="nav-link" href="/logout"> Logout</a>
       <%}%>
     </div>
     <div class="container">
       <h2>Receitas</h2>
-      <div class="mb-3 container">
+      <div class="mb-3">
         <% if (user == null) { %>
-          <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
+        <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
         <%} else {%>
-          <a class="btn btn-primary" data-testid="nova-receita" href="/">Nova Receita</a>
-          <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
+        <a class="btn btn-primary" data-testid="nova-receita" href="/">Nova Receita</a>
+        <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
         <%}%>
       </div>
-      <% recipes.forEach(food => { %>
-      <div class="container-sm">
-        <div class="p-3 mb-2 bg-info text-white">
-          <div class="row">
-            <div class="col">
-              <p class="d-flex justify-content-center"><%= food.name %></p>
-              <p class="d-flex justify-content-center"><%= food.user %></p>
-            </div>
-            <div class="col align-self-end">
-              <a class="text-light d-flex justify-content-center" href="/recipes/:id">Ver mais</a>
+      <div class="my-container">
+        <% recipes.forEach(food => { %>
+        <div class="mb-5 mr-5 my-box">
+          <div class="p-3 bg-info text-white">
+            <div class="row">
+              <div class="col">
+                <p class="d-flex justify-content-center"><%= food.name %></p>
+                <p class="d-flex justify-content-center"><%= food.user %></p>
+              </div>
+              <div class="col align-self-end">
+                <a class="text-light d-flex justify-content-center" href="/recipes/:id">Ver mais</a>
+              </div>
             </div>
           </div>
         </div>
+        <%})%>
       </div>
-      <%})%>
     </div>
   </body>
 </html>

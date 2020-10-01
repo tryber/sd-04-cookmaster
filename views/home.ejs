@@ -28,9 +28,10 @@
     <% }) %>
 
     <!-- Only visible when logged in. -->
+    <% if (user) { %>
     <button data-testid="nova-receita">
       <a href="/recipe/new">Nova Receita</a>
     </button>
-
+    <% } %>
   </body>
 </html>

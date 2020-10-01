@@ -10,12 +10,12 @@ const conn = require('./connection');
 
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
-
+const build = () => { }
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */
-const findByEmail = async (email) =>
+const findByEmail = async (item) =>
   conn
     .connection()
     .then((db) =>
@@ -31,13 +31,13 @@ const findByEmail = async (email) =>
         lastName,
       })),
     )
-    .then((res) => res.find((user) => user.email === email));
+    .then((res) => res.find((user) => user.email === item));
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) =>
+const findById = async (item) =>
   conn
     .connection()
     .then((db) =>
@@ -53,7 +53,7 @@ const findById = async (id) =>
         lastName,
       })),
     )
-    .then((res) => res.find((user) => user.id === id));
+    .then((res) => res.find((user) => user.id === item));
 
 module.exports = {
   findByEmail,

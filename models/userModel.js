@@ -12,7 +12,7 @@ const findByEmail = async (email) => {
   const user = await connection()
     .then((schema) => {
       const table = schema.getTable('users');
-      return table.select([]).where('email = :email').bind({ email }).execute();
+      return table.select([]).where('email = :email').bind('email', email).execute();
     })
     .then((selectResult) => selectResult.fetchOne());
   const userObject = createUserObject(user);

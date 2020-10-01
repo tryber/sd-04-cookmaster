@@ -14,9 +14,9 @@
       <% if (isLogged){ %>
     <a href="/logout" data-testid="logout">logout</a>
        <% } %>
-    <!-- <% if (isLogged){ %> -->
-      <button type="button" data-testid="nova-receita">Nova Receita</button>
-    <!-- <% } %> -->
+    <% if (isLogged){ %>
+    <button type="button" data-testid="nova-receita">Nova Receita</button>
+    <% } %>
     <button type="button" data-testid="buscar-receita">Buscar Receita</button>
     <% recipes.forEach(e => { %>
      <h2><%= `${e.name} - ${e.user} ` %></h2>

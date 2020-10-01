@@ -1,7 +1,7 @@
-const connect = require('./connection');
+const connection = require('./connection');
 
 const getAllRecipes = async () => {
-  const db = await connect();
+  const db = await connection();
   const results = await db
     .getTable('recipes')
     .select(['id', 'user', 'name'])

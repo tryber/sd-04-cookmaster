@@ -15,7 +15,7 @@ app.use(express.static('./style'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', middlewares.auth(false), recipeController.listRecipes); 
+app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

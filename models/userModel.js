@@ -7,43 +7,44 @@ de fato, realize a busca no banco de dados */
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */
-const findByEmail = async (email) => {
+const findByEmail = async (userEmail) => {
   const db = await connection();
   const results = await db
     .getTable('users')
     .select(['id', 'email', 'password'])
     .where('email = :email')
-    .bind('email', email)
+    .bind('email', userEmail)
     .execute();
 
-  /* The method fetches all (or all remaining) rows of a query result set
-  and returns a list of tuples. If no more rows are available, it returns
-  an empty list. */
-  const user = await results
-    .fetchAll()
-    .then((list) => list[0].reduce(([id, userEmail, password]) => ({ id, userEmail, password })));
+  const listing = await results.fetchAll();
+  const list = await listing.map(([id, email, password]) => ({
+    id,
+    email,
+    password,
+  }))[0];
+  console.log('results', results);
+  console.log('list', list);
 
-  return user;
+  return list;
 };
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) => {
+const findById = async (userId) => {
   const db = await connection();
   const results = await db
     .getTable('users')
     .select(['id', 'email', 'password'])
     .where('id = :id')
-    .bind('id', id)
+    .bind('id', userId)
     .execute();
 
-  const user = await results
-    .fetchAll()
-    .then((list) => list[0].reduce(([userId, email, password]) => ({ userId, email, password })));
+  const listing = await results.fetchAll();
+  const list = await listing.map(([id, email, password]) => ({ id, email, password }))[0];
 
-  return user;
+  return list;
 };
 
 module.exports = {

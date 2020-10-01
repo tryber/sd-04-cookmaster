@@ -1,4 +1,4 @@
-const { recipeRoutes } = require('./recipe');
+const recipeRoutes = require('./recipe');
 
 module.exports = {
   recipeRoutes,

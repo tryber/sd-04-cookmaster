@@ -21,18 +21,17 @@ const config = {
 const connection = async () => {
   let schema = null;
 
-  return schema
-    ? schema
-    : mysqlx
-        .getSession(config)
-        .then((session) => {
-          schema = session.getSchema(config.database);
-          return schema;
-        })
-        .catch((err) => {
-          console.log(err);
-          process.exit(1);
-        });
+  return schema || mysqlx
+    .getSession(config)
+    .then((session) => {
+      schema = session.getSchema(config.database);
+
+      return schema;
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit(1);
+    });
 };
 
 module.exports = connection;

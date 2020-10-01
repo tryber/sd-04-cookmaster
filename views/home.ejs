@@ -7,5 +7,11 @@
   </head>
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
+    <% recipes.forEach((recipe) => { %>
+      <ul>
+        <li><%= recipe[3] %></li>
+        <li><%= recipe[1] %></li>
+      </ul>
+    <% }) %>
   </body>
 </html>

@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
-const routes = require('./routes');
+// const routes = require('./routes');
+
+const recipeRoutes = require('./routes/recipe');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,7 +15,8 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', routes.recipeRoutes);
+app.use('/', recipeRoutes);
+// app.get('/', recipeController.getRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 

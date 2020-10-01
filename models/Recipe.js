@@ -24,7 +24,8 @@ const create = async (recipe) => {
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'instructions', 'ingredientes'])
       .values(userID, user, name, instructions, ingredientes.toString())
-      .execute());
+      .execute(),
+  );
 
   return result || null;
 };
@@ -50,11 +51,13 @@ const recipe = async (id) => {
  */
 const recipes = async () => {
   const recipesData = await connection()
-    .then((schema) => {
-      schema.getTable('recipes').execute();
-    })
+    .then((schema) =>
+      schema
+        .getTable('recipes')
+        .select(['id', 'user', 'user_id', 'name', 'ingredients', 'instructions'])
+        .execute())
     .then((results) => results.fetchAll())
-    .then((data) => data[0]);
+    .then((data) => data);
 
   return recipesData || null;
 };

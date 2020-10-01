@@ -17,6 +17,7 @@
       <% if (user == null) { %>
         <a data-testid="login" class="nav-link" href="/login">Login</a>
       <%} else {%>
+        <p><%= `${user.name} ${user.lastName}` %></p>
         <a data-testid="logout" class="nav-link" href="/logout"> Logout</a>
       <%}%>
     </div>

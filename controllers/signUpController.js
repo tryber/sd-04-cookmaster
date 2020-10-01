@@ -1,4 +1,3 @@
-
 const signUpForm = async (req, res) => {
   res.render('admin/userSignup');
 };
@@ -8,5 +7,5 @@ const signUp = async (req, res) => {
 
 module.exports = {
   signUpForm,
-  signUp
+  signUp,
 };

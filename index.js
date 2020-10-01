@@ -24,4 +24,12 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+// Testando a conexão com o banco
+
+const connection = require('./models/connection');
+
+connection().then((session) => {
+  console.log('Conectado ao MySQL!');
+});
+
 app.listen(3000, () => console.log('Listening on 3000'));

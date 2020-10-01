@@ -15,8 +15,9 @@ const loginForm = (req, res) => {
 };
 
 const login = async (req, res, next) => {
-  const { email, password, redirect } = req.body;
-
+  const { email, password } = req.body;
+  const redirect = req.query.redirect;
+  console.log(redirect)
   if (!email || !password)
     return res.render('admin/login', {
       message: 'Preencha o email e a senha',
@@ -32,9 +33,9 @@ const login = async (req, res, next) => {
 
   const token = uuid();
   SESSIONS[token] = user.id;
-
+  console.log(SESSIONS)
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {

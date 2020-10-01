@@ -1,10 +1,12 @@
 const { getRecipes } = require('../models/getRecipes');
 
 
-const recipesController = async (_req, res) => {
+const recipesController = async (req, res) => {
   const recipes = await getRecipes();
-
-  return res.render('home', { recipes });
+  const { token = '' } = req.cookies || {};
+  console.log(token);
+  console.log(recipes)
+  return res.render('home', { recipes, token });
 };
 
 module.exports = recipesController;

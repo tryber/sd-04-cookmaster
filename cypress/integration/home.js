@@ -34,6 +34,7 @@ describe('1 - Crie uma tela de listagem de receitas.', () => {
 
   it('Verificar se existe o botão "Nova Receita" quando estou logado e acessando a home', () => {
     login(Cypress.env('login'), Cypress.env('password'));
+    cy.visit('http://localhost:3000/');
     verifyContainsText('Cookmaster');
     verifyContainsText('bruno batista');
     verifyContainsText('Nova Receita');

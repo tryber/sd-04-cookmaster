@@ -30,7 +30,7 @@
 
 h2 {
   color: black;
-  font-family: Roboto, 'Times New Roman', Times, serif;
+  font-family: Roboto, Times, serif;
   font-size: 48px;
   font-style: normal;
   height: 56px;
@@ -42,10 +42,8 @@ h2 {
 }
 
 h3 {
-  /* Nome da Receita */
-  
   color: black;
-  font-family: Roboto, 'Times New Roman', Times, serif;
+  font-family: Roboto, serif;
   font-size: 24px;
   font-style: normal;
   height: 28px;

@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const getAll = async () =>
+const getAllRecipes = async () =>
   connection().then((db) =>
     db
       .getTable('recipes')
@@ -30,4 +30,4 @@ const getRecipeById = async (id) =>
       .then((recipes) => recipes.map((name) => name)),
   );
 
-module.exports = { getAll, getRecipeById };
+module.exports = { getAllRecipes, getRecipeById };

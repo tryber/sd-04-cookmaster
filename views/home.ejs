@@ -25,10 +25,10 @@
       <h2>Receitas</h2>
       <div class="mb-3 container">
         <% if (user == null) { %>
-          <input data-testid="buscar-receita" type="button" value="Buscar Receitas" />
+          <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
         <%} else {%>
-          <input data-testid="nova-receita" type="button" value="Nova Receita" />
-          <input data-testid="buscar-receita" type="button" value="Buscar Receitas" />
+          <a class="btn btn-primary" data-testid="nova-receita" href="/">Nova Receita</a>
+          <a class="btn btn-primary" data-testid="buscar-receita" href="/">Buscar Receitas</a>
         <%}%>
       </div>
       <% recipes.forEach(food => { %>
@@ -40,7 +40,7 @@
               <p class="d-flex justify-content-center"><%= food.user %></p>
             </div>
             <div class="col align-self-end">
-              <a class="text-light d-flex justify-content-center" href="/login">Ver Mais</a>
+              <a class="text-light d-flex justify-content-center" href="/recipes/:id">Ver mais</a>
             </div>
           </div>
         </div>

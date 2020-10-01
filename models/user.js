@@ -32,13 +32,14 @@ const user = async (userEmail, userPassword) => {
         .bind('password', hashPassword(userPassword))
         .execute())
     .then((result) => result.fetchAll())
-    .then((userLogin) => userLogin.map(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    })));
+    .then((userLogin) =>
+      userLogin.map(([id, email, password, firstName, lastName]) => ({
+        id,
+        email,
+        password,
+        firstName,
+        lastName,
+      })));
 
   return userData || null;
 };
@@ -47,9 +48,28 @@ const user = async (userEmail, userPassword) => {
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) => TEMP_USER;
+const userById = async (id) => {
+  const userData = await connection()
+    .then((schema) =>
+      schema
+        .getTable('users')
+        .select(['email', 'first_name', 'last_name'])
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+    .then((result) => result.fetchAll())
+    .then((userLogin) =>
+      userLogin.map(([email, firstName, lastName]) => ({
+        email,
+        firstName,
+        lastName,
+      })));
+
+  return userData || null;
+};
 
 module.exports = {
   user,
-  findById,
+  userById,
 };

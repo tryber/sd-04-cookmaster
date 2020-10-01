@@ -24,7 +24,9 @@ const login = async (req, res) => {
     });
   }
 
-  const user = await userModel.user(email, password);
+  const userData = await userModel.user(email, password);
+  const user = userData[0];
+
   if (!user) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',

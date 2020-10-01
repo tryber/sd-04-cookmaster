@@ -9,10 +9,10 @@ const getUser = async (req) => {
   const userId = SESSIONS[token];
   if (!userId) return null;
 
-  const user = await userModel.user(userId);
+  const user = await userModel.userById(userId);
   if (!user) return null;
 
-  return user;
+  return user[0];
 };
 
 const authMiddleware = (required = true) => async (req, res, next) => {
@@ -22,9 +22,9 @@ const authMiddleware = (required = true) => async (req, res, next) => {
 
   if (!user && !required) return next();
 
-  const { password, ...userData } = user;
+  // const { password, ...userData } = user;0
 
-  req.user = userData;
+  req.user = user;
 
   return next();
 };

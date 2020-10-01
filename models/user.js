@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const connection = require('./connections');
 
 /* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
 const TEMP_USER = {
@@ -15,26 +16,33 @@ const TEMP_USER = {
  */
 const hashPassword = (password) => crypto.createHash('sha256').update(password).digest('base64');
 
-/* Substitua o código das funções abaixo para que ela,
-de fato, realize a busca no banco de dados */
-
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
+ * @param {string} password User password
  */
-const findByEmail = async (email) => {
-  return TEMP_USER;
+const user = async (userEmail, userPassword) => {
+  const userData = await connection().then((schema) =>
+    schema
+      .getTable('users')
+      .select(['user', 'password'])
+      .where('email = :userEmail and password = :userPassword')
+      .bind('email', userEmail)
+      .bind('password', userPassword)
+      .execute()
+      .then((result) => result.fetchAll())
+      .then((userLogin) => userLogin.map(([email, password]) => ({ email, password }))));
+
+  return userData || null;
 };
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) => {
-  return TEMP_USER;
-};
+const findById = async (id) => TEMP_USER;
 
 module.exports = {
-  findByEmail,
+  user,
   findById,
 };

@@ -3,6 +3,7 @@
   "rules": {
     "no-alert": "off",
     "prefer-arrow-callback": "off",
+    "object-curly-newline": "off",
     "func-names": "off",
     "arrow-parens": [
       2,

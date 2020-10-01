@@ -31,7 +31,7 @@ const findByEmail = async (email) =>
         lastName,
       })),
     )
-    .then((res) => res.find((user) => user.email == email));
+    .then((res) => res.find((user) => user.email === email));
 
 /**
  * Busca um usuário através do seu ID
@@ -53,7 +53,7 @@ const findById = async (id) =>
         lastName,
       })),
     )
-    .then((res) => res.find((user) => user.id == id));
+    .then((res) => res.find((user) => user.id === id));
 
 module.exports = {
   findByEmail,

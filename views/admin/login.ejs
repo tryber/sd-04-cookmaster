@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Login</title>
-  </head>
-  <body>
-    <% if (message) {%>
-    <div class="message">
-      <%= message %>
-    </div>
-    <% } %>
-    <form action="/login" method="POST">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Login</title>
+</head>
+
+<body>
+  <% if (message) {%>
+  <div class="message">
+    <%= message %>
+  </div>
+  <% } %>
+  <form action="/login" method="POST">
+    <fieldset>
+      <legend>Cookmaster - Login</legend>
       <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" /><br />
+      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
+      <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
       <% if (redirect) { %>
-      <input
-        type="hidden"
-        name="redirect"
-        value="<%= decodeURIComponent(redirect) %>"
-      />
+      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>
-      <button type="submit">Entrar</button>
-    </form>
-  </body>
+      <button type="submit" data-testid="entrar">Entrar</button>
+    </fieldset>
+  </form>
+</body>
+
 </html>

@@ -12,9 +12,11 @@
     </button>
 
     <!-- Only visible when logged -->
-    <button data-testid="logout">
-      <a href="/logout">Logout</a>
-    </button>
+    <% if (user) { %>
+      <button data-testid="logout">
+        <a href="/logout">Logout</a>
+      </button>
+    <% } %>
 
     <h2>Receitas</h2>
     <% recipes.forEach((recipe) => { %>

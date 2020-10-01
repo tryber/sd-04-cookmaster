@@ -17,7 +17,11 @@ de fato, realize a busca no banco de dados */
 const findByEmail = async (emailInput) => {
   const db = await connection();
   const table = await db.getTable('users');
-  const result = await table.select([]).where('email = :email').bind('email', emailInput).execute();
+  const result = await table
+    .select([])
+    .where('email = :email')
+    .bind('email', emailInput)
+    .execute();
   const [id, email, password, name, lastName] = await result.fetchOne();
   return { id, email, password, name, lastName };
 };
@@ -28,8 +32,13 @@ const findByEmail = async (emailInput) => {
  */
 const findById = async (idInput) => {
   const db = await connection();
-  const table = await db.getTable('users');
-  const result = await table.select([]).where('id = :id').bind('id', idInput).execute();
+  const table = await db
+    .getTable('users');
+  const result = await table
+    .select([])
+    .where('id = :id')
+    .bind('id', idInput)
+    .execute();
   const [id, email, password, name, lastName] = await result.fetchOne();
   return { id, email, password, name, lastName };
 };

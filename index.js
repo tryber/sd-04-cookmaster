@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const userModel = require('./models/userModel');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
@@ -10,9 +9,6 @@ const recipeController = require('./controllers/recipeController');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-userModel.findByEmail('carolina.silva@gmail.com')
-  .then(e => console.log(e));
 
 app.set('view engine', 'ejs');
 app.set('views', './views');

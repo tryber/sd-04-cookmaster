@@ -1,4 +1,4 @@
-const connection = require('./connection')
+const connection = require('./connection');
 
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.

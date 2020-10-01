@@ -18,13 +18,13 @@
 .recipe {
   background: grey;
   height: 117px;
+  margin-right: 5px;
   margin-top: 200px;  
-  margin: 5px 3px;
   width: 343px;
 }
 
 .button {
-  background:blue;
+  background: blue;
   border-color: white;
   bottom: 83%;
   color: white;

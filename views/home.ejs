@@ -6,12 +6,12 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('header', { user }) -%>
+    <%- include('header', { token }) -%>
     <div>
       <button type="button" data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">Buscar Receita</button>
       <h1>Receitas</h1>
       <!-- These buttons should only appear if the user is logged in. -->
-      <% if(user) {%>
+      <% if(token) {%>
         <button onclick="window.location.pathname='/recipes/new'" data-testid="nova-receita" >
           Nova Receita
         </button>

@@ -1,3 +1,5 @@
+const connection = require('./connection');
+
 /* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
 const TEMP_USER = {
   id: 'd2a667c4-432d-4dd5-8ab1-b51e88ddb5fe',
@@ -10,23 +12,75 @@ const TEMP_USER = {
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
+const userTable = async () => {
+  const users = await connection('cookmaster');
+  return users.getTable('users');
+};
+
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */
-const findByEmail = async (email) => {
-  return TEMP_USER;
+const findByEmail = async (emailInp) => {
+  try {
+    const tab = await userTable();
+    const userSelect = await tab
+      .select([])
+      .where('email = :email')
+      .bind('email', emailInp)
+      .execute();
+
+    const [id, email, password, name, lastName] = await userSelect.fetchOne();
+    return {
+      id,
+      email,
+      password,
+      name,
+      lastName,
+    };
+  } catch (error) {
+    return error;
+  }
 };
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) => {
-  return TEMP_USER;
+const findById = async (idInp) => {
+  try {
+    const tab = await userTable();
+    const userSelect = await tab.select([]).where('id = :id').bind('id', idInp).execute();
+
+    const [id, email, password, name, lastName] = await userSelect.fetchOne();
+    return {
+      id,
+      email,
+      password,
+      name,
+      lastName,
+    };
+  } catch (error) {
+    return error;
+  }
 };
+
+// const createUser = async (email, password, name, lastName) => {
+//   try {
+//     const db = await connection();
+//     const createUsers = await db
+//       .getTable('users')
+//       .insert(['email', 'password', 'first_name', 'last_name'])
+//       .values(email, password, name, lastName)
+//       .execute();
+//     return createUsers;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 module.exports = {
   findByEmail,
   findById,
+  // createUser,
 };

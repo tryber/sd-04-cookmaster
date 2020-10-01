@@ -6,12 +6,11 @@
   </head>
   <body>
     <header>
-      <h2>Cookmaster</h2>
       <nav>
+        <h1>Cookmaster</h1>
         <div>
           <!-- If logged in show logout button -->
-          <% if(user) { %>
-          <p><strong><%= `${user.name} ${user.lastName}` %></strong> </p>
+          <% if(token) { %>
           <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
           <% } else { %>
           <!-- If NOT logged in, show login button -->

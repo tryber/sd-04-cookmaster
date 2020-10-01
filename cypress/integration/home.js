@@ -45,4 +45,6 @@ describe('1 - Crie uma tela de listagem de receitas.', () => {
     verifyContainsText('bruno batista');
     verifyContainsText('Ver mais');
   })
-});
+  after(() => {
+    createAndInsertsDataBase();
+  })});

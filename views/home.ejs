@@ -3,9 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="ho"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <div class="container">
+          <h1>Cookmaster</h1>
+          <h3>Login</h3>
+    </div>
+    <div>
+      <h1>Receitas</h1>
+      <button>Buscar Receitas</button>
+    </div>
+    <div>
+      <p>foreach de cards aqui</p>
+      <ul>
+        <h1>Receitas</h1>
+        <% recipes.forEach(({user, recipe, id}) => { %>
+          <li>
+            <%=`${recipe} ${user}`%>
+            <a href=<%= `recipes/${id}` %> >Ver mais</a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
   </body>
 </html>

@@ -1,12 +1,9 @@
 const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config');
 
-let schema;
-
-function connection() {
-  return schema ?
-    Promise.resolve(schema) :
-    mysqlx.getSession({
+const connection = () => {
+  return mysqlx
+    .getSession({
       user: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       host: process.env.HOSTNAME,
@@ -21,6 +18,6 @@ function connection() {
     .catch(() => {
       process.exit(1);
     });
-}
+};
 
 module.exports = connection;

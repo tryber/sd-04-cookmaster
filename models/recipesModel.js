@@ -10,6 +10,6 @@ const recipes = async () =>
     )
     .then((results) => results.fetchAll())
     .then((recipesRes) => recipesRes)
-    .catch((err) => console.error(err));
+    .catch((err) => err);
 
 module.exports = recipes;

@@ -1,9 +1,12 @@
 const recipeModel = require('../models/Recipe.js');
 
-const getRecipes = async (_req, res) => {
+const getRecipes = async (req, res) => {
+  const { user } = req;
   const recipes = await recipeModel.recipes();
 
-  return recipes ? res.render('home', { recipes }) : res.render('home', { message: 'No recipes found.' });
+  return recipes
+    ? res.render('home', { user, recipes })
+    : res.render('home', { message: 'No recipes found.' });
 };
 
 // const getRecipe = async (req, res) => {

@@ -9,12 +9,19 @@
   <body>
     <nav class="navbar">
       <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <a data-testid="logout" href="/logout">Logout</a>
+        <% } %>
       <a data-testid="login" href="/login" >Login</a>
     </nav>
 
     <h2>Receitas</h2>
-
-    <button class="button" data-testid="buscar-receita">Buscar Receitas</button>
+    <div class='buttonContainer'>
+      <button class="button" data-testid="buscar-receita">Buscar Receitas</button>
+      <% if (user) { %>
+        <button class="button" data-testid="nova-receita">Nova Receita</button>
+      <% } %>
+    </div>
 
       </div>
       <h2>Receitas</h2>
@@ -23,7 +30,7 @@
           <div class="recipe">
             <p><%= recipe.name %></p>
             <p><%= recipe.user %></p>
-            <a link=#>Ver mais</a>
+            <a href=<% recipe.id %>>Ver mais</a>
           </div>
         <% }) %>
       </div>

@@ -22,8 +22,6 @@ const findByEmail = async (userEmail) => {
     email,
     password,
   }))[0];
-  console.log('results', results);
-  console.log('list', list);
 
   return list;
 };

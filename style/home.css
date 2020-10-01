@@ -1,17 +1,16 @@
 .navbar {
-  background: #c4c4c4;
-  bottom: 0%;
+  background: rgb(180, 180, 180);
+  bottom: 0;
   height: 60px;
-  left: 0%;
+  left: 0;
   position: absolute;
-  right: 0%;
-  top: 0%;
+  right: 0;
+  top: 0;
   width: 100%;
 }
 
 .recipe {
-  /* position: absolute; */
-  background: #c4c4c4;
+  background: rgb(180, 180, 180);
   height: 117px;
   left: 162px;
   top: 208px;
@@ -19,7 +18,7 @@
 }
 
 .button {
-  background: #2d9cdb;
+  background: rgb(38, 135, 199);
   border-color: white;
   bottom: 83%;
   color: white;
@@ -30,11 +29,10 @@
 }
 
 h2 {
-  color: #000000;
-  font-family: Roboto;
+  color: black;
+  font-family: Roboto, 'Times New Roman', Times, serif;
   font-size: 48px;
   font-style: normal;
-  font-weight: normal;
   height: 56px;
   left: 34px;
   line-height: 56px;
@@ -45,11 +43,11 @@ h2 {
 
 h3 {
   /* Nome da Receita */
-  color: #000000;
-  font-family: Roboto;
+  
+  color: black;
+  font-family: Roboto, 'Times New Roman', Times, serif;
   font-size: 24px;
   font-style: normal;
-  font-weight: normal;
   height: 28px;
   left: 196px;
   line-height: 28px;

@@ -19,7 +19,7 @@ const connection = async () =>
       socketPath: '/var/run/mysqld/mysqld.sock',
     })
     .then((session) => {
-      let schema = session.getSchema('cookmaster');
+      const schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch(() => {

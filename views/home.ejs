@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-    <link type="text/css" rel="stylesheet" href="/styles/styles.css">
-  </head>
-  <body>
-    <div>
-      <div class="title">
-        <div>
-          <span>Cookmaster</span>
-          <span>Login</span>
-        </div>
-      </div>
-      <h2>Receitas</h2>
-      <div class="box">
-        <% recipes.forEach(recipe => { %>
-          <div class="recipe">
-            <h3><%= recipe.name %></h3>
-            <p><%= recipe.user %></p>
-            <a link=#>Ver mais</a>
-          </div>
-        <% }) %>
-      </div>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Home</title>
+  <link type="text/css" rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+  <div>
+    <div class="title">
+      <nav class="navbar">
+        <h2>Cookmaster</h2></span>
+        <span><a href='/login' data-testid="login">Login</a></span> 
+        <% if (user) { %>
+          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
+        <% } %>
+      </nav>
     </div>
-  </body>
+    <div>
+      <button data-testid="buscar-receita">Buscar Receitas</button>
+      <% if (user) { %>
+        <button data-testid="nova-receita">Nova Receitas</button>
+      <% } %>
+    </div>
+    <h2>Receitas</h2>
+    <div class="box">
+      <% recipes.forEach(recipe => { %>
+      <div class="recipe">
+        <h3><%= recipe.name %></h3>
+        <p><%= recipe.user %></p>
+        <a href=<% recipe.id %>>Ver mais</a>
+      </div>
+      <% }) %>
+    </div>
+
+  </div>
+</body>
+
 </html>

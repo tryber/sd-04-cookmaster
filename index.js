@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const userModel = require('./models/userModel');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
@@ -10,12 +11,15 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+userModel.findByEmail('carolina.silva@gmail.com')
+  .then(e => console.log(e));
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.static('./public'));
 
-app.get('/', recipeController.listRecipes);
+app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

@@ -1,5 +1,5 @@
 .navbar {
-  background: rgb(180, 180, 180);
+  background: gray;
   bottom: 0;
   height: 60px;
   left: 0;
@@ -9,16 +9,22 @@
   width: 100%;
 }
 
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
 .recipe {
-  background: rgb(180, 180, 180);
+  background: grey;
   height: 117px;
-  left: 162px;
-  top: 208px;
+  margin-top: 200px;  
+  margin: 5px 3px;
   width: 343px;
 }
 
 .button {
-  background: rgb(38, 135, 199);
+  background:blue;
   border-color: white;
   bottom: 83%;
   color: white;

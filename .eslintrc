@@ -4,6 +4,7 @@
     "no-alert": "off",
     "prefer-arrow-callback": "off",
     "object-curly-newline": "off",
+    "implicit-arrow-linebreak": "off",
     "func-names": "off",
     "arrow-parens": [
       2,

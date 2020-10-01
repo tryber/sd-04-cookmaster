@@ -1,5 +1,16 @@
 const connection = require('./connections');
 
+const isRecipeValid = (recipe) => {
+  let result = false;
+
+  /** Check if given recipe data lenght is valid */
+  result = !(Object.keys(recipe).length < 5);
+  /** Check if given recipe user id is a integer */
+  result = Number.isInteger(recipe.user_id);
+
+  return result;
+};
+
 /**
  * Create a new recipe resource
  *
@@ -8,10 +19,12 @@ const connection = require('./connections');
 const create = async (recipe) => {
   const { userID, user, name, instructions, ingredientes } = recipe;
 
-  const result = await connection().then((schema) => schema.getTable('recipes')
-    .insert(['user_id', 'user', 'name', 'instructions', 'ingredientes'])
-    .values(userID, user, name, instructions, ingredientes.toString())
-    .execute());
+  const result = await connection().then((schema) =>
+    schema
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'instructions', 'ingredientes'])
+      .values(userID, user, name, instructions, ingredientes.toString())
+      .execute());
 
   return result || null;
 };
@@ -47,6 +60,7 @@ const recipes = async () => {
 };
 
 module.exports = {
+  isRecipeValid,
   create,
   recipe,
   recipes,

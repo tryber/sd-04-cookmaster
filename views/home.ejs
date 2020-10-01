@@ -8,5 +8,16 @@
   <body>
     <h1>Cookmaster</h1>
     <h3>Receitas</h3>
+    <div>
+      <% recipes.forEach((recipe) => { %>
+      <p><%= recipe.recipeName %></p>
+      <p><%= recipe.userName %></p>
+      <a href="/recipes/<%= recipe.recipeID %>">Ver mais</a>
+      <% }) %>
+    </div>
+    <button type="button" data-testid="nova-receita">Nova Receita</button>
+    <button type="button" data-testid="buscar-receita">Buscar Receita</button>
+    <a href="/login" data-testid="login">Login</a>
+    <a href="/logout" data-testid="logout">Logout</a>
   </body>
 </html>

@@ -34,7 +34,18 @@ const findById = async (id) => {
   return userObject;
 };
 
+const createNewUser = async ({ email, password, name, lastName }) => {
+  connection().then((schema) => {
+    const table = schema.getTable('users');
+    return table
+      .insert('email', 'password', 'first_name', 'last_name')
+      .values(email, password, name, lastName)
+      .execute();
+  });
+};
+
 module.exports = {
   findByEmail,
   findById,
+  createNewUser,
 };

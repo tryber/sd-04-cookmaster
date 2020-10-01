@@ -7,7 +7,10 @@
   </head>
   <body>
     <h1>Cookmaster - Cadastro</h1>
-    <form action="/login" method="POST">
+    <% if (message) {%>
+      <div class="message"><%= message %></div>
+      <% } %>
+    <form action="/signUp" method="POST">
       <label for="emailInput">Email: </label>
       <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
@@ -15,16 +18,16 @@
       <label for="confPasswordInput">Confirmar Senha: </label>
       <input
         type="password"
-        name="password"
+        name="passwordConf"
         id="confPasswordInput"
         data-testid="confirmar-senha"
       /><br />
       <label for="nameInput">Nome: </label>
-      <input type="password" name="password" id="nameInput" data-testid="nome" /><br />
+      <input type="text" name="name" id="nameInput" data-testid="nome" /><br />
       <label for="lastNameInput">Sobrenome: </label>
-      <input type="password" name="password" id="lastNameInput" data-testid="sobrenome" /><br />
+      <input type="text" name="lastName" id="lastNameInput" data-testid="sobrenome" /><br />
       <button type="submit" data-testid="cadastrar">Cadastar-se</button>
-      <a href="/login">Cadastar-se</a>
     </form>
+    <a href="/login">Fazer login</a>
   </body>
 </html>

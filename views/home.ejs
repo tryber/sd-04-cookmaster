@@ -12,15 +12,8 @@
 
     <p>Receitas</p>
 
-    <% receitas.forEach((recipe) => { %>
-    <h3><%= recipe.nome %></h3>
-    <h5><%= recipe.user %></h5>
-    <a href="/:id">Ver mais</a>
-    <% }) %> <%if (user) { return %>
+    <%= receitas.name %>
 
-    <button data-testid="nova-receita">Nova Receita</button>
-
-    <% } %>
 
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>

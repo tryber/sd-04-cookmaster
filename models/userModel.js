@@ -47,7 +47,7 @@ const findById = async (id) => {
 };
 
 const isEmailValid = (email) => {
-  const reg = `[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}`;
+  const reg = '[A-Z0-9]{1,}@[A-Z0-9]{2,}.[A-Z0-9]{2,}';
   return reg.test(email);
 };
 

@@ -16,12 +16,11 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use('/', recipeRoutes);
-// app.get('/', recipeController.getRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
-app.get('/login', controllers.user.loginForm);
-app.get('/logout', controllers.user.logout);
-app.post('/login', controllers.user.login);
+app.get('/login', controllers.userController.loginForm);
+app.get('/logout', controllers.userController.logout);
+app.post('/login', controllers.userController.login);
 
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(3000);

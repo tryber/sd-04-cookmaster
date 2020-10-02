@@ -1,9 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const middlewares = require('../middlewares')
-const recipeController = require('../controllers/recipe');
+const middlewares = require('../middlewares');
+const controllers = require('../controllers');
 
-router.get('/', middlewares.auth(false), recipeController.getRecipes);
+// const recipeController = require('../controllers/recipe');
+
+router.get('/', middlewares.auth(false), controllers.recipeController.getRecipes);
 
 module.exports = router;

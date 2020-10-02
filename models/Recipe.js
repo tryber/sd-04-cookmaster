@@ -24,8 +24,7 @@ const create = async (recipe) => {
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'instructions', 'ingredientes'])
       .values(userID, user, name, instructions, ingredientes.toString())
-      .execute(),
-  );
+      .execute());
 
   return result || null;
 };

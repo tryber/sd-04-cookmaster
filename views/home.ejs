@@ -19,6 +19,17 @@
           Buscar Receita
         </button>
       </div>
+      <div>
+        <% recipes.map((recipe) => { %>
+          <div>
+            <span><%= recipe.name %></span>
+            <span><%= recipe.user %></span>
+            <div>
+              <a href="Link">Ver mais</a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
     </main>
   </div>
   <style>

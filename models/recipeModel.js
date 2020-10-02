@@ -26,16 +26,14 @@ const getById = async (ID) =>
       return table.select([]).where('id = :ID').bind({ ID }).execute();
     })
     .then((selectResult) => selectResult.fetchOne())
-    .then(([id, userId, user, name, ingredients, instructions]) => {
-      return {
-        id,
-        userId,
-        user,
-        name,
-        ingredients,
-        instructions,
-      };
-    });
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
 
 const getAllByUser = async (ID) =>
   connection()

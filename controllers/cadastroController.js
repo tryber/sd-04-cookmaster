@@ -1,4 +1,4 @@
-const newUser = require('../models/userModel');
+// const newUser = require('../models/userModel');
 
 const cadastroForm = (req, res) => {
   res.render('cadastro', { message: null, redirect: null });

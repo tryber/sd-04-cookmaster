@@ -24,8 +24,8 @@
       <article>
         <% recipes.map(recipe => {%>
         <div>
-          <span><%= `${recipe.user}` %></span>
-          <span><%= `${recipe.name}` %></span>
+          <span><%= recipe.user %></span>
+          <span><%= recipe.name %></span>
           <a href="Link">Ver mais</a>
         </div>
         <% })%>

@@ -2,6 +2,7 @@ const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
+const { validation, createUser } = require('../models/signUpModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -44,7 +45,16 @@ const logout = (req, res) => {
 };
 
 const signup = (_req, res) => {
-  res.render('admin/signup');
+  res.render('admin/signup', { message: null });
+};
+
+const newUser = async (req, res) => {
+  const isValid = await validation({ ...req.body });
+
+  if (!isValid) return res.status(400).render('admin/signup', { ...isValid });
+
+  await createUser({ ...req.body });
+  res.status(200).render('admin/signup', { ...isValid });
 };
 
 module.exports = {
@@ -52,4 +62,5 @@ module.exports = {
   loginForm,
   logout,
   signup,
+  newUser,
 };

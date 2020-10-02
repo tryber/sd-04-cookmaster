@@ -20,6 +20,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 });
 
 app.get('/signup', controllers.userController.signup);
+app.post('/signup', controllers.userController.newUser);
+
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

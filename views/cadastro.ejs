@@ -15,6 +15,10 @@
     <form action="/login" method="POST">
       <label for="emailInput">Email: </label>
       <input data-testid="email" type="text" name="email" id="emailInput" />
+      <label for="name">Nome: </label>
+      <input data-testid="nome" type="text" name="name" id="name" />
+      <label for="last-name">Sobrenome: </label>
+      <input data-testid="sobrenome" type="text" name="last-name" id="last-name" />
       <label for="passwordInput">Senha: </label>
       <input data-testid="senha" type="password" name="password" id="passwordInput" />
       <label for="confirmar-passwordInput">Confirmar senha: </label>
@@ -25,7 +29,7 @@
         id="confirmar-passwordInput"
       />
 
-      <a href="/home" data-testid="cadastrar" type="submit">Cadastre-se</a>
+      <a href="/home" data-testid="cadastrar">Cadastre-se</a>
       <a href="/login" data-testid="login">Login</a>
     </form>
   </body>

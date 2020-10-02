@@ -21,8 +21,7 @@ const user = async (userEmail, userPassword) => {
         .where('email = :email AND password = :password')
         .bind('email', userEmail)
         .bind('password', userPassword)
-        .execute(),
-    )
+        .execute())
     .then((result) => result.fetchAll())
     .then((userLogin) =>
       userLogin.map(([id, email, password, firstName, lastName]) => ({
@@ -31,8 +30,7 @@ const user = async (userEmail, userPassword) => {
         password,
         firstName,
         lastName,
-      })),
-    );
+      })));
 
   return userData || null;
 };
@@ -49,21 +47,19 @@ const userById = async (id) => {
         .select(['email', 'first_name', 'last_name'])
         .where('id = :id')
         .bind('id', id)
-        .execute(),
-    )
+        .execute())
     .then((result) => result.fetchAll())
     .then((userLogin) =>
       userLogin.map(([email, firstName, lastName]) => ({
         email,
         firstName,
         lastName,
-      })),
-    );
+      })));
 
   return userData || null;
 };
 
-const create = async ({ email, password, passwordRetype, firstName, lastName }) => {
+const create = async ({ id, email, password, firstName, lastName }) => {
   const result = await connection().then((schema) =>
     schema
       .getTable('users')

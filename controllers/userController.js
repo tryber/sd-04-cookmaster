@@ -43,8 +43,13 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signup = (_req, res) => {
+  res.render('admin/signup');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signup,
 };

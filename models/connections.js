@@ -28,8 +28,7 @@ const connection = async () => {
 
       return schema;
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       process.exit(1);
     });
 };

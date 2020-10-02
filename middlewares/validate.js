@@ -17,6 +17,8 @@ const userDataRules = () => [
     if (passwordRetype !== req.body.password) {
       throw new Error('As senhas tem que ser iguais');
     }
+
+    return true;
   }),
   /** user first name must be at least 3 characters long */
   body('firstName', 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras')
@@ -35,8 +37,9 @@ const userDataRules = () => [
  */
 const userData = (req, res, next) => {
   const errors = validationResult(req);
-
-  if (!errors) return next();
+  console.log(errors);
+  
+  if (errors.isEmpty()) return next();
 
   const normalizedErrors = errors.array().map((error) => error.msg);
 

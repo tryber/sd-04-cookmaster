@@ -46,6 +46,7 @@ const validatedRegister = async (req, _res, next) => {
   } catch (error) {
     return error;
   }
+  return null; // Gambiarra por causa do CC.
 };
 
 module.exports = { validatedRegister };

@@ -3,28 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <nav>
-      <h1>Cookmaster</h1>
-      <% if (user) { %>
-      <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-      <pre><%= JSON.stringify(user, null, 4) %></pre>
-      <a data-testid="logout" href='/logout'">Logout</a>
-      <% } else { %>
-      <a data-testid="login" href='/login'">Login</a>
-      <% } %>
-    </nav>
-    <section>
+    <%- include('./templates/header.ejs', {user}); %>
+    <section class="container-fluid">
       <nav>
         <h1>Receitas</h1>
         <% if (user) { %>
-        <button>Minhas Receitas</button>
-        <button data-testid="nova-receita">Nova Receita</button>
-        <button>Minha Conta</button>
+        <a class="btn btn-primary">Minhas Receitas</a>
+        <a href="/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
+        <a class="btn btn-primary">Minha Conta</a>
         <% } %>
-        <button data-testid="buscar-receita">Buscar</button>
+        <a class="btn btn-primary" data-testid="buscar-receita">Buscar</a>
       </nav>
       <article>
         <% recipes.map(recipe => {%>

@@ -4,15 +4,6 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
-const { registerForm,
-  verifyEmpty,
-  verifyEmail,
-  verifyExistEmail,
-  verifyPasswordLength,
-  verifyPasswordEqual,
-  verifyFirstName,
-  verifyLastsName,
-  register, } = controllers.registerUserController;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,16 +22,16 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/register', registerForm);
+app.get('/register', controllers.registerUserController.registerForm);
 app.post('/register',
-  verifyEmpty,
-  verifyEmail,
-  verifyExistEmail,
-  verifyPasswordLength,
-  verifyPasswordEqual,
-  verifyFirstName,
-  verifyLastsName,
-  register
+  controllers.registerUserController.verifyEmpty,
+  controllers.registerUserController.verifyEmail,
+  controllers.registerUserController.verifyExistEmail,
+  controllers.registerUserController.verifyPasswordLength,
+  controllers.registerUserController.verifyPasswordEqual,
+  controllers.registerUserController.verifyFirstName,
+  controllers.registerUserController.verifyLastsName,
+  controllers.registerUserController.register,
 );
 
 app.listen(3000, () => console.log('Listening on 3000'));

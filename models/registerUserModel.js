@@ -7,8 +7,8 @@ const createUser = async (email, password, firstName, lastName) => {
         .getTable('users')
         .insert(['email', 'password', 'first_name', 'last_name'])
         .values(email, password, firstName, lastName)
-        .execute()
-    )
-}
+        .execute(),
+    );
+};
 
 module.exports = createUser;

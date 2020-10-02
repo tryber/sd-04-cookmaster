@@ -23,9 +23,11 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.get('/cadastro', controllers.cadastroController.cadastroForm);
-app.post(
-  '/cadastro',
-  controllers.cadastroController.isEmpty
-);
+// app.post(
+//   '/cadastro',
+//   controllers.cadastroController.signup
+// );
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showDetails);
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -6,6 +6,20 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <navbar>
+      <%- include('navbar')%>
+      <h1>Receitas</h1>
+    </navbar>
+
+    <section>
+      <nav>
+        <% if (user) { %>
+        <button>Minhas Receitas</button>
+        <button data-testid="nova-receita">Nova Receita</button>
+        <button>Minha Conta</button>
+        <% } %>
+        <button data-testid="buscar-receita">Buscar Receitas</button>
+      </nav>
+    </section>
   </body>
 </html>

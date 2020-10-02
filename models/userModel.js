@@ -7,6 +7,7 @@ const TEMP_USER = {
   lastName: 'Doe',
 };
 
+
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
@@ -29,4 +30,5 @@ const findById = async (id) => {
 module.exports = {
   findByEmail,
   findById,
+  
 };

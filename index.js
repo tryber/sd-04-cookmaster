@@ -23,12 +23,6 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.get('/cadastro', controllers.cadastroController.cadastroForm);
-app.post(
-  '/cadastro',
-  controllers.cadastroController.validateEmail,
-  controllers.cadastroController.validatePassword,
-  controllers.cadastroController.validateNome,
-  controllers.cadastroController.create,
-);
+app.post('/cadastro', controllers.cadastroController.signup);
 
 app.listen(3000, () => console.log('Listening on 3000'));

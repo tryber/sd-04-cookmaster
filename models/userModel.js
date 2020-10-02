@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
 const getUser = (userData) => {
-  const [email, password, id] = userData;
-  return { email, password, id };
+  const [email, password, id, first_name, last_name] = userData;
+  return { email, password, id, name: first_name, lastName: last_name };
 };
 
 /* Substitua o código das funções abaixo para que ela,
@@ -17,7 +17,7 @@ const findByEmail = async (email) => {
     .then((db) =>
       db
         .getTable('users')
-        .select(['email', 'password', 'id'])
+        .select(['email', 'password', 'id', 'first_name', 'last_name'])
         .where('email = :email')
         .bind('email', email)
         .execute(),
@@ -39,7 +39,7 @@ const findById = async (id) => {
     .then((db) =>
       db
         .getTable('users')
-        .select(['email', 'password', 'id'])
+        .select(['email', 'password', 'id', 'first_name', 'last_name'])
         .where('id = :id')
         .bind('id', id)
         .execute(),

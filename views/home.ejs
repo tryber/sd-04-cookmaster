@@ -21,5 +21,14 @@
         <button data-testid="buscar-receita">Buscar Receitas</button>
       </nav>
     </section>
+    <table>
+      <% recipes.forEach(recipe => { %> 
+      
+          <p><%= recipe.user %></p>
+          <p><%= recipe.name %></p>
+          <a href="link">Ver mais</p>
+        
+        <% }) %>
+    </table>
   </body>
 </html>

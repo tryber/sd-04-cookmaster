@@ -22,7 +22,6 @@ const validation = ({ email, password, passwordConfirmation, first_name, last_na
       };
     default:
       return { message: 'Cadastro efetuado com sucesso!' };
-      break;
   }
 };
 

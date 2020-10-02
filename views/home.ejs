@@ -7,5 +7,18 @@
   </head>
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
+    <section>
+      <% if (recipes) { %>
+      <ul>
+        <li>
+          <% recipes.forEach((recipe) => { %>
+          <h3><%= recipe.name %></h3>
+          <h4><%= recipe.user %></h4>
+          <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+          <% }) %>
+        </li>
+      </ul>
+      <% } %>
+    </section>
   </body>
 </html>

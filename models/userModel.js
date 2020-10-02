@@ -1,7 +1,5 @@
 const conn = require('./connection');
 
-
-
 const findByEmail = async (item) =>
   conn
     .connection()

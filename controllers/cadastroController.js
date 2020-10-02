@@ -1,8 +1,8 @@
 const newUser = require('../models/userModel');
 
 const cadastroForm = (req, res) => {
-    res.render('cadastro', {message: null, redirect: null})
-}
+  res.render('cadastro', { message: null, redirect: null });
+};
 
 const signup = async (req, res) => {
   const { email, password, passconfirm, name, lastName } = req.body;
@@ -36,8 +36,8 @@ const signup = async (req, res) => {
       redirect: null,
     });
   }
-  await newUser.createUser( email, password, name, lastName )
-  res.render('cadastro', {message: "Cadastro efetuado com sucesso!"});
+  await newUser.createUser(email, password, name, lastName);
+  res.render('cadastro', { message: 'Cadastro efetuado com sucesso!' });
 };
 
 module.exports = {

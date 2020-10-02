@@ -14,11 +14,15 @@ app.set('views', './views');
 
 app.get('/', controllers.recipesController);
 
-
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.get('/cadastro', (_req, res) => res.render('cadastro', { message: null }));
+
+app.post('/cadastro', controllers.registerUserController);
+
 
 app.listen(3000, () => console.log('Listening on 3000'));

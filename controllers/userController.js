@@ -15,8 +15,7 @@ const loginForm = (req, res) => {
 };
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
-  const redirect = req.query.redirect;
+  const { email, password, redirect } = req.body;
 
   if (!email || !password)
     return res.render('admin/login', {

@@ -66,4 +66,8 @@ describe('2 - Crie uma página de cadastro de usuários.', () => {
     registerUser(randomEmail, '12345678', '12345678', randomName, ' ');
     verifyContainsText('O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
   })
+
+  after(() => {
+    createAndInsertsDataBase();
+  })
 });

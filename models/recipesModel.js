@@ -13,7 +13,7 @@ const getRecipeDetails = async (id) => {
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['name', 'ingredients', 'instructions'])
+        .select(['name', 'ingredients', 'instructions', 'user_id'])
         .where('id = :id')
         .bind('id', id)
         .execute(),
@@ -21,8 +21,8 @@ const getRecipeDetails = async (id) => {
     .then((results) => results.fetchAll())
     .then((recipe) => recipe[0]);
 
-  const [name, ingredients, instructions] = recipeDetails;
-  return { name, ingredients, instructions };
+  const [name, ingredients, instructions, user_id] = recipeDetails;
+  return { name, ingredients, instructions, user_id };
 };
 
 module.exports = { getRecipes, getRecipeDetails };

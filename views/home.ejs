@@ -7,18 +7,10 @@
   </head>
   <body>
     <h1>Cookmaster</h1>
-    <nav>
-      <% if(user) { %>
-      <p><%= user.name + " " + user.lastName %></p>
-      <button type="button" data-testid="nova-receita">Nova Receita</button>
-      <a href="/logout" data-testid="logout">Logout</a>
-      <% } else { %>
-      <p>Usuário não autenticado</p>
-      <a href="/login" data-testid="login">Login</a>
-      <% } %>
-    </nav>
+    <%- include('navbar', {user}) %>
     <h3>Receitas</h3>
     <button type="button" data-testid="buscar-receita">Buscar Receita</button>
+    <% if (user) { %> <button type="button" data-testid="nova-receita">Nova Receita</button> <% } %>
     <div>
       <% recipes.forEach((recipe) => { %>
       <p><%= recipe.recipeName %></p>

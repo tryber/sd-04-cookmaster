@@ -6,8 +6,13 @@
     <title>Cookmaster - Recipe Details</title>
   </head>
   <body>
+    <%- include('navbar', {user}) %>
     <h1><%= recipeDetails.name %></h1>
     <h3><%= recipeDetails.ingredients %></h3>
     <h3><%= recipeDetails.instructions %></h3>
+    <% if(user !== undefined && user.id == recipeDetails.user_id) { %>
+    <button type="button" data-testid="editar-receita">Editar Receita</button>
+    <button type="button" data-testid="excluir-receita">Excluir Receita</button>
+    <% } %>
   </body>
 </html>

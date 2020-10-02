@@ -7,7 +7,7 @@ const controllers = require('./controllers');
 // const routes = require('./routes');
 
 const recipeRoutes = require('./routes/recipe');
-const loginRoutes = require('./routes/login');
+const sessionRoutes = require('./routes/session');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 /** Login routes */
-app.use('/', loginRoutes);
+app.use('/', sessionRoutes);
 /** Recipes routes */
 app.use('/', recipeRoutes);
 

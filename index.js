@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', [middlewares.auth(false), controllers.recipesController.listRecipes]);
+app.get('/', middlewares.auth(false), controllers.recipesController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
@@ -25,15 +25,16 @@ app.post('/login', controllers.userController.login);
 app.get('/signup', (_req, res) => {
   return res.render('signup', { message: null });
 });
-
 app.post('/signup', controllers.signupController.signup);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.details);
 
 app.listen(3000, () => console.log('Listening on 3000'));
 
 // Testando a conexão com o banco
 
-// const connection = require('./models/connection');
+const connection = require('./models/connection');
 
-// connection().then((session) => {
-//   console.log('Conectado ao MySQL!');
-// });
+connection().then((session) => {
+  console.log('Conectado ao MySQL!');
+});

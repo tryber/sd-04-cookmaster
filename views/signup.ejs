@@ -6,6 +6,11 @@
     <title>Signup</title>
   </head>
   <body>
+    <% if (messages) {%>
+      <div class="message">
+        <%= messages[0] %>
+      </div>
+    <% } %>
     <form action="/signup" method="post">
       <label for="emailInput">Email: </label>
       <input data-testid="email" type="text" name="email" id="emailInput" />
@@ -20,9 +25,6 @@
         name="passwordRetype"
         id="passwordInputRetype"
       />
-      <br />
-      <label for="nameInput">Nome: </label>
-      <input data-testid="nome" type="text" name="name" id="nameInput" />
       <br />
       <label for="firstNameInput">Nome: </label>
       <input data-testid="nome" type="text" name="firstName" id="firstNameInput" />

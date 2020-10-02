@@ -3,19 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <title>Cookmaster - Login</title>
   </head>
-  <body>
+  <body class="text-center">
     <% if (message) {%>
-    <div class="message">
+    <div class="mt-5 message ">
       <%= message %>
     </div>
     <% } %>
-    <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
-      <input data-testid="email" type="text" name="email" id="emailInput" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
+    <div class="m-5 p-8 ">
+    <form class="form-signin" action="/login" method="POST">
+      <label class="sr-only" for="emailInput">Email: </label>
+      <input class="form-control" data-testid="email" type="text" name="email" id="emailInput" placeholder="Email" /><br />
+      <label class="sr-only" for="passwordInput">Senha: </label>
+      <input class="form-control" data-testid="senha" type="password" name="password" id="passwordInput" placeholder="Senha" /><br />
       <% if (redirect) { %>
       <input
         type="hidden"
@@ -23,7 +30,9 @@
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button data-testid="entrar" type="submit">Entrar</button>
+      <a data-testid="cadastrar" href="/cadastro">Cadastre-se</a>
+      <button class="btn btn-lg btn-primary " data-testid="entrar" type="submit">Entrar</button>
     </form>
+  </div>
   </body>
 </html>

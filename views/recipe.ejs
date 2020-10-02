@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body>
+    <header>
+      <h1><%= name %></h1>
+      <h2><%= user %></h2>
+      <% if (token){ %>
+      <a href=<%= `recipes/:${id}/edit` %> data-testid="editar-receita">Editar Receita</a>
+      <a href=<%= `recipes/:${id}/delete` %> data-testid="excluir-receita">Excluir Receita</a>
+      <% } %>
+    </header>
+    <h2>Ingredientes</h2>
+    <p><%= ingredients %></p>
+    <h2>Modo de preparo</h2>
+    <p><%= instructions %></p>
+  </body>
+</html>

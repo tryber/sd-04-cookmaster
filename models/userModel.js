@@ -65,22 +65,22 @@ const findById = async (idInp) => {
   }
 };
 
-// const createUser = async (email, password, name, lastName) => {
-//   try {
-//     const db = await connection();
-//     const createUsers = await db
-//       .getTable('users')
-//       .insert(['email', 'password', 'first_name', 'last_name'])
-//       .values(email, password, name, lastName)
-//       .execute();
-//     return createUsers;
-//   } catch (error) {
-//     return error;
-//   }
-// };
+const createUserModel = async (email, password, name, lastName) => {
+  try {
+    const db = connection('cookmaster');
+    const createUsers = await db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password, name, lastName)
+      .execute();
+    return createUsers;
+  } catch (error) {
+    return error;
+  }
+};
 
 module.exports = {
   findByEmail,
   findById,
-  // createUser,
+  createUserModel,
 };

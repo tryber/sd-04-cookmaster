@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register User</title>
+  </head>
+  <body>
+    <% if (message) {%>
+      <div class="message">
+        <%= message %>
+      </div>
+    <% } %>
+    <form method="POST">
+      <label for="email">Email
+        <input id="email" data-testid="email", type="email" name="email">
+      </label>
+      <br>
+      <label for="password">Senha
+        <input id="password" data-testid="senha", type="password" name="password">
+      </label>
+      <br>
+      <label for="confirmPassword">Confirmar Senha
+        <input id="confirmPassword" data-testid="confirmar-senha", type="password" name="confirmPassword">
+      </label>
+      <br>
+      <label for="name">Nome
+        <input id="name" data-testid="nome", type="text" name="name">
+      </label>
+      <br>
+      <label for="lastName">Sobrenome
+        <input id="lastName" data-testid="sobrenome", type="text" name="lastName">
+      </label>
+      <br><br>
+      <button type="submit" data-testid="cadastrar">
+        Cadastar-se
+      </button>
+      <br><br><br>
+      <a href="/login" data-testid="login">
+        Login
+      </a>
+    </form>
+  </body>
+</html>

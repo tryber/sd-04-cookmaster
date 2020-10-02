@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
+const userController = require('./controllers/userController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,12 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.get('/register', (_req, res) => {
+  res.render('registerUser', { message: null });
+});
+
+app.post('/register', middlewares.validatedRegister, userController.registerUser);
 
 // app.get('/recipes/search', middlewares.auth(false), );
 

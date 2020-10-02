@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password)
@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/');
+  return res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +43,21 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const registerUsersController = async (req, res) => {
+  if (req.body && req.validation) {
+    const { email, password, name, lastName } = req.body;
+    await userModel.createUserModel(email, password, name, lastName);
+    return res.render('registerUser', { message: req.message });
+  }
+  return res.render('registerUser', {
+    redirect: null,
+    message: null || req.message,
+  });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  registerUser: registerUsersController,
 };

@@ -4,7 +4,7 @@
  */
 const { body, validationResult } = require('express-validator');
 
-const userDataValidationRules = () => [
+const userDataRules = () => [
   /** User email must be valid */
   body('email', 'O email deve ter o formato email@mail.com').exists().isEmail().normalizeEmail(),
   /** User password must be at last 6 characters long */
@@ -22,17 +22,17 @@ const userDataValidationRules = () => [
 ];
 
 /** Do user data validation using given data validation rules on the route */
-const validateUserData = (req, res, next) => {
+const userData = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors) return next();
 
   const normalizedErrors = errors.array().map((error) => ({ [error.param]: error.msg }));
 
-  return res.render('signup', { normalizedErrors });
+  return res.render('signup', { messages: normalizedErrors });
 };
 
 module.exports = {
-  userDataValidationRules,
-  validateUserData,
+  userDataRules,
+  userData,
 };

@@ -22,6 +22,12 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+app.get('/signup', (_req, res) => {
+  return res.render('signup', { message: null });
+});
+
+app.post('/signup', controllers.signupController.signup);
+
 app.listen(3000, () => console.log('Listening on 3000'));
 
 // Testando a conexão com o banco

@@ -52,7 +52,20 @@ const findById = async (id) => {
   return getUser(userData);
 };
 
+// Cadastrar um novo usuário
+
+const newUser = async (email, password, firstName, lastName) => {
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password[0], firstName, lastName)
+      .execute(),
+  );
+};
+
 module.exports = {
   findByEmail,
   findById,
+  newUser,
 };

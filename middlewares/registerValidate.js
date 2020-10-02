@@ -33,15 +33,19 @@ const validateUsers = async (email, password, confirmEmail, name, lastName) => {
 };
 
 const validatedRegister = async (req, _res, next) => {
-  const { email, password, confirmPassword, name, lastName } = req.body;
+  try {
+    const { email, password, confirmPassword, name, lastName } = req.body;
 
-  req.message = await validateUsers(email, password, confirmPassword, name, lastName);
+    req.message = await validateUsers(email, password, confirmPassword, name, lastName);
 
-  if (req.message === messageReturn.confirmRegister) {
-    req.validation = true;
-    return next();
+    if (req.message === messageReturn.confirmRegister) {
+      req.validation = true;
+      return next();
+    }
+    if (!req.validation) return next();
+  } catch (error) {
+    return error;
   }
-  if (!req.validation) return next();
 };
 
 module.exports = { validatedRegister };

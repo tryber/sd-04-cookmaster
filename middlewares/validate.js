@@ -13,7 +13,11 @@ const userDataRules = () => [
   /** User password must be at last 6 characters long */
   body('password', 'A senha deve ter pelo menos 6 caracteres').exists().isLength({ min: 6 }),
   /** User password and password retyne need to match */
-  body('passwordRetype', 'As senhas tem que ser iguais').contains(body('password')),
+  body('passwordRetype').custom((passwordRetype, { req }) => {
+    if (passwordRetype !== req.body.password) {
+      throw new Error('As senhas tem que ser iguais');
+    }
+  }),
   /** user first name must be at least 3 characters long */
   body('firstName', 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras')
     .exists()

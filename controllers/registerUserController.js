@@ -53,7 +53,7 @@ const verifyFirstName = (req, res, next) => {
   const { firstName } = req.body;
   if (numberInStringRegex.test(firstName) || firstName.length < 3) {
     return res.render('register', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras'
+      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
   }
   return next();
@@ -63,7 +63,7 @@ const verifyLastsName = (req, res, next) => {
   const { lastName } = req.body;
   if (numberInStringRegex.test(lastName) || lastName.length < 3) {
     return res.render('register', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras'
+      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
   }
   return next();

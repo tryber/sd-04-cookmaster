@@ -1,20 +1,11 @@
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const connection = require('./connections');
-
-/* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
-const TEMP_USER = {
-  id: 'd2a667c4-432d-4dd5-8ab1-b51e88ddb5fe',
-  email: 'taylor.doe@company.com',
-  password: 'password',
-  name: 'Taylor',
-  lastName: 'Doe',
-};
 
 /**
  * Create user password hash
  * @param {string} password - User password
  */
-const hashPassword = (password) => crypto.createHash('sha256').update(password).digest('base64');
+// const hashPassword = (password) => crypto.createHash('sha256').update(password).digest('base64');
 
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
@@ -56,8 +47,7 @@ const userById = async (id) => {
         .select(['email', 'first_name', 'last_name'])
         .where('id = :id')
         .bind('id', id)
-        .execute(),
-    )
+        .execute())
     .then((result) => result.fetchAll())
     .then((userLogin) =>
       userLogin.map(([email, firstName, lastName]) => ({

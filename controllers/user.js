@@ -15,7 +15,7 @@ const loginForm = (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password, redirect } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     return res.render('admin/login', {
@@ -26,6 +26,7 @@ const login = async (req, res) => {
 
   const userData = await userModel.user(email, password);
   const user = userData[0];
+  const token = uuid();
 
   if (!user) {
     return res.render('admin/login', {
@@ -34,17 +35,17 @@ const login = async (req, res) => {
     });
   }
 
-  const token = uuid();
   SESSIONS[token] = user.id;
-
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/');
+
+  return res.redirect('/');
 };
 
 const logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
-  res.render('admin/logout');
+
+  return res.render('admin/logout');
 };
 
 module.exports = {

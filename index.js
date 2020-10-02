@@ -7,6 +7,7 @@ const controllers = require('./controllers');
 // const routes = require('./routes');
 
 const recipeRoutes = require('./routes/recipe');
+const loginRoutes = require('./routes/login');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +16,9 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+/** Login routes */
+app.use('/', loginRoutes);
+/** Recipes routes */
 app.use('/', recipeRoutes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));

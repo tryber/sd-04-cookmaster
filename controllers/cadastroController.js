@@ -4,14 +4,42 @@ const cadastroForm = (req, res) => {
   res.render('cadastro', { message: null, redirect: null });
 };
 
+const isEmpty = (req ,res) => {
+  const { email, password, passconfirm, name, lastName } = req.body;
+
+  const con1 = (!email.includes('@') || !email.includes('.')) ? res.render('cadastro', {
+    message: 'O email deve ter o formato email@mail.com',
+  }) : null;
+  const con2 = (password.length < 6) ? res.render('cadastro', {
+    message: 'A senha deve ter pelo menos 6 caracteres',
+  }) : null;
+  const con3 = (password !== passconfirm) ? res.render('cadastro', {
+    message: 'As senhas tem que ser iguais',
+  }) : null;
+  const con4 = (typeof name !== 'string' || name.length <= 3) ? res.render('cadastro', {
+    message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+  }) : null;
+  const con5 = (typeof lastName !== 'string' || lastName.length <= 3) ? res.render('cadastro', {
+    message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+  }) : null;
+
+  if ( con1===null && con2===null && con3===null && con4 ===null&& con5===null) {
+    newUser.createUser(email, password, name, lastName);
+      res.render('cadastro', { message: 'Cadastro efetuado com sucesso!' });
+  }
+
+}
+
 // const validateEmail = (req, res, next) => {
 //   const { email } = req.body;
 //   if (!email.includes('@') || !email.includes('.')) {
 //     res.render('cadastro', {
 //       message: 'O email deve ter o formato email@mail.com',
 //     });
+//     next();
 //   }
-//   next();
+//   create()
+  
 // };
 
 // const validatePassword = (req, res, next) => {
@@ -20,13 +48,15 @@ const cadastroForm = (req, res) => {
 //     res.render('cadastro', {
 //       message: 'A senha deve ter pelo menos 6 caracteres',
 //     });
+//     next()
 //   }
 //   if (password !== passconfirm) {
 //     res.render('cadastro', {
 //       message: 'As senhas tem que ser iguais',
 //     });
+//     next()
 //   }
-//   next();
+//   create()
 // };
 
 // const validateNome = (req, res, next) => {
@@ -35,13 +65,15 @@ const cadastroForm = (req, res) => {
 //     res.render('cadastro', {
 //       message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
 //     });
+//     next();
 //   }
 //   if (typeof lastName !== 'string' || lastName.length <= 3) {
 //     res.render('cadastro', {
 //       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
 //     });
+//     next();
 //   }
-//   next();
+//   create()
 // };
 
 // const create = (req, res) => {
@@ -50,33 +82,13 @@ const cadastroForm = (req, res) => {
 //   res.render('cadastro', { message: 'Cadastro efetuado com sucesso!' });
 // };
 
-const signup = (req, res) => {
-  const { email, password, passconfirm, name, lastName } = req.body;
-  !email.includes('@') || !email.includes('.')
-    ? res.render('cadastro', {
-        message: 'O email deve ter o formato email@mail.com',
-      })
-    : password.length < 6
-    ? res.render('cadastro', {
-        message: 'A senha deve ter pelo menos 6 caracteres',
-      })
-    : password !== passconfirm
-    ? res.render('cadastro', {
-        message: 'As senhas tem que ser iguais',
-      })
-    : typeof name !== 'string' || name.length <= 3
-    ? res.render('cadastro', {
-        message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      })
-    : typeof lastName !== 'string' || lastName.length <= 3
-    ? res.render('cadastro', {
-        message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      })
-    : newUser.createUser(email, password, name, lastName);
-  res.render('cadastro', { message: 'Cadastro efetuado com sucesso!' });
-};
+// const signup = () => {
+//   if (validateEmail && validatePassword && validateNome) {
+//     create()
+//   }
+// }
 
 module.exports = {
   cadastroForm,
-  signup,
+  isEmpty
 };

@@ -19,9 +19,9 @@ const validation = ({ email, password, passwordConfirmation, first_name, last_na
     return {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     };
+  } else {
+    return { message: 'Cadastro efetuado com sucesso!' };
   }
-
-  return { message: 'Cadastro efetuado com sucesso!' };
 };
 
 const createUser = async ({ email, password, first_name, last_name }) => {

@@ -19,6 +19,42 @@ const getAll = async () => {
   return recipesObjs;
 };
 
+const getById = async (ID) =>
+  connection()
+    .then((schema) => {
+      const table = schema.getTable('recipes');
+      return table.select([]).where('id = :id').bind({ ID }).execute();
+    })
+    .then((selectResult) => selectResult.fetchOne())
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
+
+const getAllByUser = async (ID) =>
+  connection()
+    .then((schema) => {
+      const table = schema.getTable('recipes');
+      return table.select([]).where('user_id = :userId').bind({ ID }).execute();
+    })
+    .then((selectResult) => selectResult.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    );
+
 module.exports = {
   getAll,
+  getById,
+  getAllByUser,
 };

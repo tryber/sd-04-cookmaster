@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { getAllByUser } = require('../models/recipeModel');
 
 const userModel = require('../models/userModel');
 
@@ -45,8 +46,14 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
+const admin = async (req, res) => {
+  const userRecipes = await getAllByUser(req.user.id);
+  res.render('admin/home', { user: req.user, userRecipes });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  admin,
 };

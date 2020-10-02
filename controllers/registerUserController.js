@@ -13,7 +13,7 @@ const verifyEmpty = (req, res, next) => {
 };
 
 const verifyEmail = (req, res, next) => {
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
   const { email } = req.body;
   const testRegex = emailRegex.test(email);
   if (!testRegex) {

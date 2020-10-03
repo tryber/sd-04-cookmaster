@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipesController');
+const signUpController = require('./controllers/signUpController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +18,8 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
+app.get('/admin', middlewares.auth(), controllers.userController.admin);
+
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
@@ -24,5 +27,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.get('/signUp', signUpController.signUpForm);
+app.post('/signUp', signUpController.signUp);
 
 app.listen(3000, () => console.log('Listening on 3000'));

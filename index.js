@@ -14,6 +14,8 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController);
 
+app.get('/recipes/:id',middlewares.auth(false), controllers.recipesDetailsController)
+
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });

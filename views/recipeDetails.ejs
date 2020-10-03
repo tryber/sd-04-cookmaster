@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <header>
+   <div>
+     <p>Cookmaster</p>
+     <% if (!user) { %>
+      <a data-testid="login" href="/login">Login</a>
+    <% } %>
+    <% if (user) { %>
+      <p><%= `${user.firstName} ${user.lastName}` %></p>
+      <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+    <% } %>
+   </div>
+ </header>
+ <div>
+  <% if (user.id === parseInt(recipe[0][1])) { %>
+    <button onclick="window.location.pathname='/recipes/:id/edit'">Editar Receita</button>
+    <button onclick="window.location.pathname='/recipes/:id/delete'">Excluir Receita</button>
+  <% } %>
+   <h1><%= recipe[0][3] %></h1>
+   <p>Enviada por <%= recipe[0][2] %></p>
+   <h2>Ingredientes</h2>
+   <ul>
+    <% recipe[0][4].split(',').forEach((ingredient) => { %>
+      <li><%= ingredient %></li>
+    <% }) %>
+   </ul>
+   <h2>Modo de preparo</h2>
+   <p><%= recipe[0][5] %></p>
+ </div>
+</body>
+</html>

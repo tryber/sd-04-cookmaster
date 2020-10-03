@@ -14,12 +14,12 @@
           <p><%= recipe[2] %></p>
           <p><%= recipe[3] %></p>
         </li>
-        <a href="Link">Ver mais</a>
+        <a href=<%=`/recipes/${recipe[0]}` %>>Ver mais</a>
       <% }) %>
     </ul>
    <button data-testid="buscar-receita">Buscar Receita</button>
    <% if (user) { %>
-    <button data-testid="nova-receita">"Nova Receita</button>
+    <button data-testid="nova-receita">Nova Receita</button>
     <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
    <% } %>
     <% if (!user) { %>

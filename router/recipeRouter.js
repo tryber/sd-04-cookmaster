@@ -5,5 +5,6 @@ const middlewares = require('../middlewares');
 const recipeRouter = Router();
 
 recipeRouter.get('/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
+recipeRouter.get('/:id/edit', middlewares.auth(), controllers.recipesController.editRecipe);
 
 module.exports = recipeRouter;

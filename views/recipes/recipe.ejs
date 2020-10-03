@@ -10,12 +10,12 @@
     <section>
       <h1><%= name %></h1>
       <% if(user) { %>
-      <button type="submit" class="btn btn-primary" data-testid="editar-receita">
+      <a href="/recipes/<%= id %>/edit" class="btn btn-primary" data-testid="editar-receita">
         Editar Receita
-      </button>
-      <button type="submit" class="btn btn-primary" data-testid="excluir-receita">
-        'Excluir Receita'
-      </button>
+      </a>
+      <a href="/recipes/<%= id %>/delete" class="btn btn-primary" data-testid="excluir-receita">
+        Excluir Receita
+      </a>
       <% } %>
     </section>
     <section>

@@ -8,5 +8,14 @@
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
     <p>Realmente funcionando essa parada</p>
+    <div style="display: flex">
+      <% recipes.forEach(recipe => { %>
+        <div style="background-color: grey; margin: 10px">
+        <h3><%= recipe[1] %></h3>
+        <p><%= recipe[2] %></p>
+        <a href=`/${recipe[0]}`>Ver mais</a>
+        </div>
+        <%})%>
+      </div>
   </body>
 </html>

@@ -16,10 +16,10 @@ app.set('views', './views');
 app.get('/', async (_req, res) => {
   try{
     const db = await connection();
-    const results = await db.getTable('recipes').select(['name', 'user']).execute();
+    const results = await db.getTable('recipes').select(['id', 'name', 'user']).execute();
     const recipes = results.fetchAll();
     console.log(recipes);
-    return res.render('home');
+    return res.render('home', { recipes });
   } catch (err) {
     console.error(err);
     res.status(500).send('<h2>Erro ao tentar realizar a operação</h2>')

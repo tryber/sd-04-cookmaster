@@ -2,6 +2,7 @@ const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
+const userRecipes = require('../models/recipeModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};

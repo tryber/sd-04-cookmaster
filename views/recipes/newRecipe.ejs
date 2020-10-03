@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Nova Receita</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs', {user}) %>
+    <form action="/recipes/new" method="POST">
+      <div>
+        <h1>Nova Receita</h1>
+        <label for="nameRecipe">Nome da Receita</label>
+        <input type="text" name="name" id="nameRecipe" data-testid="nome-receita" />
+        <h3>Ingredientes</h3>
+        <div>
+          <ul id="listaIngredients"></ul>
+        </div>
+        <input id="ingredients" type="text" name="ingredients" data-testid="ingredientes" />
+        <button id="add" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+        <label for="nameRecipe">Modo de Preparo</label>
+        <input type="text" name="instructions" id="nameRecipe" data-testid="modo-de-preparo" />
+      </div>
+      <a href="/">Voltar</a>
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <% if (message) { %>
+    <p><%= message %></p>
+    <%}%>
+  </body>
+  <script src="ejs.min.js"></script>
+  <script>
+    const input = document.querySelector('#ingredients');
+    const ul = document.querySelector('#listIngredients');
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    let ingredients = [];
+
+    document.querySelector('#add').addEventListener('click', (e) => {
+      e.preventDefault();
+      ingredients.push(input.value);
+      return ingredients;
+    });
+
+    ingredients.forEach((item) => {
+      ul.appendChild = li;
+      li.innerHTML = item;
+      button.innerHTML = 'Excluir Ingrediente';
+      ul.appendChild = button;
+
+      input.value = null;
+    });
+
+    btn.addEventListener('click', () => {
+      const deleteIngredient = ingredients.filter((item) => item == li.innerText);
+      ingredients.splice(ingredients.indexOf(deleteIngredient), 1);
+      li.remove();
+      btn.remove();
+    });
+  </script>
+</html>

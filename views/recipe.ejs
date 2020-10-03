@@ -7,9 +7,16 @@
   </head>
   <body>
     <% if (user) { %>
-     <button type="button" data-testid="editar-receita">
-       <
-     </button>
+      <button type="button" data-testid="editar-receita">
+        <a href="<%- `/recipe/${id}/edit` %>">
+          Editar Receita
+        </a>
+      </button>
+      <button type="button" data-testid="editar-receita">
+        <a href="<%- `/recipe/${id}/remove` %>">
+          Exluir Receita
+        </a>
+      </button>
     <% } %>
     <h1><%= recipe.name %></h1>
     <br />

@@ -8,4 +8,6 @@ const controllers = require('../controllers');
 
 router.get('/', middlewares.auth(false), controllers.recipeController.getRecipes);
 
+router.get('/recipe/:id', middlewares.auth(false), controllers.recipeController.getRecipe);
+
 module.exports = router;

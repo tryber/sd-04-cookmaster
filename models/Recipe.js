@@ -36,13 +36,23 @@ const create = async (recipe) => {
  */
 const recipe = async (id) => {
   const recipeData = await connection()
-    .then((schema) => {
-      schema.getTable('recipes').where('id = :id').bind('id', id).execute();
-    })
+    .then((schema) =>
+      schema
+        .getTable('recipes')
+        .select(['user', 'name', 'ingredients', 'instructions'])
+        .where('id = :id')
+        .bind('id', id)
+        .execute())
     .then((result) => result.fetchAll())
-    .then((data) => data[0]);
+    .then((data) =>
+      data.map(([user, name, ingredients, instructions]) => ({
+        user,
+        name,
+        ingredients: ingredients.split(','),
+        instructions,
+      })));
 
-  return recipeData || null;
+  return recipeData[0] || null;
 };
 
 /**

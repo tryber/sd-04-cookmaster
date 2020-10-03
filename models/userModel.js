@@ -25,7 +25,7 @@ const findById = async (idInput) => {
   return { id, email, password, name, lastName };
 };
 
-const addUser = async(email, password, firstName, lastName) => {
+const addUser = async (email, password, firstName, lastName) => {
   const db = await conn();
   return db
     .getTable('users')
@@ -38,7 +38,7 @@ const emailIsValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);
 
 const passwordIsValid = (password = '') => password.length > 5;
 
-const confirmPass = (password = '', confirmPass = '') => (password === confirmPass);
+const confirmPass = (password = '', confirmPassword = '') => (password === confirmPassword);
 
 const nameIsValid = (name = '') => name.match(/^\w{3,}/i);
 

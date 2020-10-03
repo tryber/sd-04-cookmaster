@@ -51,7 +51,7 @@ const newUser = async (req, res) => {
 
   const emailMessage = handleEmailMessage(email);
   const passMessage = handlePassMessage(password);
-  const confirmPass = handleConfirmPass(password, confirmPass);
+  const confirmPass = handleConfirmPass(password, confirmPassword);
   const firstNamemessage = handleFirstNameMessage(firstName);
   const lastNameMessage = handleLastNameMessage(lastName);
 

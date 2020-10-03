@@ -6,9 +6,9 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include('../templates/header.ejs') %>
+    <%- include('../templates/header.ejs', {user}) %>
     <section>
-      <h1>Nome da Receita</h1>
+      <h1><%= name %></h1>
       <% if(user) { %>
       <button type="submit" class="btn btn-primary" data-testid="editar-receita">
         Editar Receita
@@ -19,11 +19,11 @@
       <% } %>
     </section>
     <section>
-      <h3>Ingredientes</h3>
+      <h3><%= ingredients %></h3>
     </section>
     <section>
       <h2>Modo de Preparo</h2>
-      <p>preparo</p>
+      <p><%= instructions %></p>
     </section>
   </body>
 </html>

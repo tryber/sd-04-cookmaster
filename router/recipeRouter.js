@@ -3,8 +3,6 @@ const controllers = require('../controllers');
 
 const recipeRouter = Router();
 
-recipeRouter.get('/:id', (req, res) => {
-  const { id } = req.params;
-});
+recipeRouter.get('/:id', controllers.recipesController.showRecipe);
 
 module.exports = recipeRouter;

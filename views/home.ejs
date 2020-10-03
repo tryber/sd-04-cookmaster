@@ -22,7 +22,7 @@
         <a class="btn btn-primary" data-testid="buscar-receita">Buscar</a>
       </nav>
       <article>
-        <% recipes.map(recipe => {%>
+        <% recipes.forEach(recipe => {%>
         <div>
           <span><%= recipe.user %></span>
           <span><%= recipe.name %></span>

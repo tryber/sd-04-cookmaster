@@ -49,6 +49,12 @@
       "isOrdered": true,
       "folders": {},
       "files": {}
+    },
+    "router": {
+      "name": "router",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
     }
   },
   "files": {

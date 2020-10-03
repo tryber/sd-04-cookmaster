@@ -7,7 +7,7 @@
   </head>
   <body>
     <%- include('../templates/header.ejs', {user}) %>
-    <form action="/new" method="POST">
+    <form action="/recipes" method="POST">
       <div>
         <h1>Nova Receita</h1>
         <label for="nameRecipe">Nome da Receita</label>
@@ -15,7 +15,7 @@
         <h3>Ingredientes</h3>
         <div>
           <input type="hidden" name="ingredients" id="ingredients" />
-          <ul id="listaIngredients"></ul>
+          <ul id="listIngredients"></ul>
         </div>
         <input id="ingredientsInput" type="text" data-testid="ingredientes" />
         <button id="add" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
@@ -32,34 +32,32 @@
   <script>
     const input = document.querySelector('#ingredientsInput');
     const ul = document.querySelector('#listIngredients');
-    const li = document.createElement('li');
-    const btn = document.createElement('button');
     const ingredients = document.querySelector('#ingredients');
     let arrayIngredients = [];
 
     document.querySelector('#add').addEventListener('click', (e) => {
       e.preventDefault();
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+
+      li.innerText = input.value;
+      btn.innerText = 'Excluir Ingrediente';
+
       arrayIngredients.push(input.value);
       ingredients.value = arrayIngredients.join(','); // para salvar no banco de dados
-      return arrayIngredients;
-    });
 
-    arrayIngredients.forEach((item) => {
-      ul.appendChild = li;
-      li.innerText = item;
-      button.innerText = 'Excluir Ingrediente';
-      ul.appendChild = button;
-
+      ul.appendChild(li);
+      ul.appendChild(btn);
       input.value = null;
-    });
 
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
-      arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
-      ingredients.value = arrayIngredients.join(',');
-      li.remove();
-      btn.remove();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
+        arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
+        ingredients.value = arrayIngredients.join(',');
+        li.remove();
+        btn.remove();
+      });
     });
   </script>
 </html>

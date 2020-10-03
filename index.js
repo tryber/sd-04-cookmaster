@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipeController');
+const signUpController = require('./controllers/signUpController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +21,9 @@ app.get('/', middlewares.auth(false), recipeController.listRecipes);
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
+
+app.get('/signup', signUpController.renderSignup);
+app.post('/signup', signUpController.newUser);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

@@ -9,12 +9,18 @@ const getRecipes = async (req, res) => {
     : res.render('home', { message: 'No recipes found.' });
 };
 
-// const getRecipe = async (req, res) => {
-//   const { id } = req.params;
-//   const recipe = await recipeModel.recipe();
+/**
+ * Get recipe by given id.
+ * @param {integer} req.param.id - Recipe id | GET Param
+ */
+const getRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipeModel.recipe(id);
 
-//   return recipe ? res.render('/', { recipe }) : res.render('/', { message: 'Recipe found.' });
-// };
+  return recipe
+    ? res.render('recipe', { recipe })
+    : res.render('/', { message: 'Recipe found.' });
+};
 
 const createRecipe = async (req, res) => {
   const { recipe } = req.body;
@@ -28,5 +34,6 @@ const createRecipe = async (req, res) => {
 
 module.exports = {
   getRecipes,
+  getRecipe,
   createRecipe,
 };

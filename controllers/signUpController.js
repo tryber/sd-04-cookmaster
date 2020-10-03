@@ -51,15 +51,15 @@ const newUser = async (req, res) => {
 
   const emailMessage = handleEmailMessage(email);
   const passMessage = handlePassMessage(password);
-  const confirmPass = handleConfirmPass(password, confirmPassword);
+  const confirmPassMessage = handleConfirmPass(password, confirmPass);
   const firstNamemessage = handleFirstNameMessage(firstName);
   const lastNameMessage = handleLastNameMessage(lastName);
 
-  if (emailMessage || passMessage || confirmPass || firstNamemessage || lastNameMessage) {
+  if (emailMessage || passMessage || confirmPassMessage || firstNamemessage || lastNameMessage) {
     res.status(402).render('admin/signUp', {
       emailMessage,
       passMessage,
-      confirmPass,
+      confirmPassMessage,
       firstNamemessage,
       lastNameMessage,
       successMessage: null,

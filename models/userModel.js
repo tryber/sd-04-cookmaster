@@ -30,3 +30,5 @@ module.exports = {
   findByEmail,
   findById,
 };
+
+// iniciando projeto

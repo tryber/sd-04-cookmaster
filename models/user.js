@@ -59,12 +59,12 @@ const userById = async (id) => {
   return userData || null;
 };
 
-const create = async ({ id, email, password, firstName, lastName }) => {
+const create = async ({ email, password, firstName, lastName }) => {
   const result = await connection().then((schema) =>
     schema
       .getTable('users')
-      .insert([id, email, password, firstName, lastName])
-      .values(id, email, password, firstName, lastName)
+      .insert(['email', 'password', 'first_Name', 'last_Name'])
+      .values(email, password, firstName, lastName)
       .execute());
 
   return result || null;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs') %>
+    <section>
+      <h1>Nome da Receita</h1>
+      <% if(user) { %>
+      <button type="submit" class="btn btn-primary" data-testid="editar-receita">
+        Editar Receita
+      </button>
+      <button type="submit" class="btn btn-primary" data-testid="excluir-receita">
+        'Excluir Receita'
+      </button>
+      <% } %>
+    </section>
+    <section>
+      <h3>Ingredientes</h3>
+    </section>
+    <section>
+      <h2>Modo de Preparo</h2>
+      <p>preparo</p>
+    </section>
+  </body>
+</html>

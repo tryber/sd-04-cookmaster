@@ -1,3 +1,4 @@
+const { insertUserModel } = require('../models/inserUserModel');
 
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
@@ -25,7 +26,7 @@ const regexValidations = (email, name, lastName) => {
   return message;
 };
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   const { email, password, verifyPassword, name, lastName } = req.body;
 
   if (!email || !password || !verifyPassword || !name || !lastName) {
@@ -37,6 +38,11 @@ const createUser = (req, res) => {
 
   if (passwordMessage || regexMessage) {
     return res.render('cadastro', { message: passwordMessage || regexMessage });
+  }
+
+  const warningCount = await insertUserModel(email, password, name, lastName);
+  if (warningCount > 0) {
+    return res.render('cadastro', { message: 'erro ao inserir usuario no banco de dados' });
   }
 
   return res.render('admin/login', {

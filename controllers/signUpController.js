@@ -4,7 +4,7 @@ const signUpForm = async (_req, res) => {
   res.render('admin/signUp', { message: '' });
 };
 
-const messageName = (name, lastName) => {
+const messageNameCheck = (name, lastName) => {
   const namePattern = /\d/;
   let message;
   if (name.length < 3 || namePattern.test(name)) {
@@ -16,10 +16,10 @@ const messageName = (name, lastName) => {
   return message;
 };
 
-const messages = (email, password, passwordConf, name, lastName) => {
+const messagesAllCheck = (email, password, passwordConf, name, lastName) => {
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   let message = 'Cadastro efetuado com sucesso!';
-  const nameMessage = messageName(name, lastName);
+  const nameMessage = messageNameCheck(name, lastName);
   if (!emailPattern.test(email)) {
     message = 'O email deve ter o formato email@mail.com';
   }
@@ -29,10 +29,10 @@ const messages = (email, password, passwordConf, name, lastName) => {
   if (password.length < 6) {
     message = 'A senha deve ter pelo menos 6 caracteres';
   }
-  if (messageName(name, lastName)) {
+  if (messageNameCheck(name, lastName)) {
     message = nameMessage;
   }
-  return messages;
+  return message;
 };
 
 // const messageEmail = (email) => {
@@ -55,10 +55,10 @@ const messages = (email, password, passwordConf, name, lastName) => {
 //   return message;
 // };
 
-// const messages = (email, password, passwordConf, name, lastName) => {
+// const messagesAllCheck = (email, password, passwordConf, name, lastName) => {
 //   let message = 'Cadastro efetuado com sucesso';
-//   if (messageName(name, lastName)) {
-//     message = messageName;
+//   if (messageNameCheck(name, lastName)) {
+//     message = messageNameCheck;
 //   }
 //   if (messageEmail(email)) {
 //     message = messageEmail;
@@ -72,7 +72,7 @@ const messages = (email, password, passwordConf, name, lastName) => {
 const signUp = async (req, res) => {
   const { email, password, passwordConf, name, lastName } = req.body;
 
-  const message = messages(email, password, passwordConf, name, lastName);
+  const message = messagesAllCheck(email, password, passwordConf, name, lastName);
 
   createNewUser({
     email,

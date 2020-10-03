@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
+const connection = require('./models/connection');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,8 +13,17 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
+app.get('/', async (_req, res) => {
+  try{
+    const db = await connection();
+    const results = await db.getTable('recipes').select(['name', 'user']).execute();
+    const recipes = results.fetchAll();
+    console.log(recipes);
+    return res.render('home');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('<h2>Erro ao tentar realizar a operação</h2>')
+  }
 });
 
 app.get('/admin', middlewares.auth(), (req, res) => {

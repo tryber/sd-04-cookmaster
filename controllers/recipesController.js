@@ -30,18 +30,13 @@ const createRecipe = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
   const { id, first_name, last_name } = req.user;
 
-  const nameUser = await `${first_name}${last_name}`;
+  const nameUser = await `${first_name} ${last_name}`;
 
   await recipesModel.newRecipe(id, nameUser, name, ingredients, instructions);
-  return res.render('recipes/newRecipe', {
-    user: req.user,
-    message: 'Nova Receita Criada Com Sucesso!',
-  });
+  return res.redirect('/');
 };
 
-const newRecipe = (req, res) => {
-  return res.render('recipes/newRecipe', { user: req.user, message: null });
-};
+const newRecipe = (req, res) => res.render('recipes/newRecipe', { user: req.user, message: null });
 
 module.exports = {
   showAllRecipes,

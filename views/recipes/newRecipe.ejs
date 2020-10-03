@@ -7,16 +7,17 @@
   </head>
   <body>
     <%- include('../templates/header.ejs', {user}) %>
-    <form action="/recipes/new" method="POST">
+    <form action="/new" method="POST">
       <div>
         <h1>Nova Receita</h1>
         <label for="nameRecipe">Nome da Receita</label>
         <input type="text" name="name" id="nameRecipe" data-testid="nome-receita" />
         <h3>Ingredientes</h3>
         <div>
+          <input type="hidden" name="ingredients" id="ingredients" />
           <ul id="listaIngredients"></ul>
         </div>
-        <input id="ingredients" type="text" name="ingredients" data-testid="ingredientes" />
+        <input id="ingredientsInput" type="text" data-testid="ingredientes" />
         <button id="add" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
         <label for="nameRecipe">Modo de Preparo</label>
         <input type="text" name="instructions" id="nameRecipe" data-testid="modo-de-preparo" />
@@ -28,32 +29,35 @@
     <p><%= message %></p>
     <%}%>
   </body>
-  <script src="ejs.min.js"></script>
   <script>
-    const input = document.querySelector('#ingredients');
+    const input = document.querySelector('#ingredientsInput');
     const ul = document.querySelector('#listIngredients');
     const li = document.createElement('li');
     const btn = document.createElement('button');
-    let ingredients = [];
+    const ingredients = document.querySelector('#ingredients');
+    let arrayIngredients = [];
 
     document.querySelector('#add').addEventListener('click', (e) => {
       e.preventDefault();
-      ingredients.push(input.value);
-      return ingredients;
+      arrayIngredients.push(input.value);
+      ingredients.value = arrayIngredients.join(','); // para salvar no banco de dados
+      return arrayIngredients;
     });
 
-    ingredients.forEach((item) => {
+    arrayIngredients.forEach((item) => {
       ul.appendChild = li;
-      li.innerHTML = item;
-      button.innerHTML = 'Excluir Ingrediente';
+      li.innerText = item;
+      button.innerText = 'Excluir Ingrediente';
       ul.appendChild = button;
 
       input.value = null;
     });
 
-    btn.addEventListener('click', () => {
-      const deleteIngredient = ingredients.filter((item) => item == li.innerText);
-      ingredients.splice(ingredients.indexOf(deleteIngredient), 1);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
+      arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
+      ingredients.value = arrayIngredients.join(',');
       li.remove();
       btn.remove();
     });

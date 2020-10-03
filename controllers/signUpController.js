@@ -32,7 +32,7 @@ const messages = (email, password, passwordConf, name, lastName) => {
   if (messageName(name, lastName)) {
     message = nameMessage;
   }
-  return message;
+  return messages;
 };
 
 // const messageEmail = (email) => {

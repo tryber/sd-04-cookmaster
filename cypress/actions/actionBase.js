@@ -1,3 +1,4 @@
+require('dotenv').config();
 export function verifyContainsText(text) {
   cy.contains(text).should('be.visible');
 }

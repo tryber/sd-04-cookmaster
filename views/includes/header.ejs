@@ -1,16 +1,15 @@
 <header>
   <div>Cookmaster</div>
   <div>
-    <% if (!user) { %>
-      <button>
-        <a href="/login">Login</a>
-      </button>
-    <% } %>
     <% if (user) { %>
       <span><%- `${user.firstName} ${user.lastName} |` %> </span>
-      <button>
+      <button type="button" data-testid="logout">
         <a href="/logout">Logout</a>
       </button>
-    <% } %>
+    <% } else { %>
+      <button type="button" data-testid="login">
+        <a href="/login">Login</a>
+      </button>
+    <% } %> 
   </div>
 </header>

@@ -6,19 +6,9 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Cookmaster!</h1>
-    <button data-testid="login">
-      <a href="/login">Login</a>
-    </button>
+    <%- include('./includes/header.ejs', { user }) %>
 
-    <!-- Only visible when logged -->
-    <% if (user) { %>
-      <button data-testid="logout">
-        <a href="/logout">Logout</a>
-      </button>
-    <% } %>
-
-    <h2>Receitas</h2>
+    <h1>Receitas</h1>
     <% recipes.forEach((recipe) => { %>
     <ul>
       <li><%= recipe[3] %></li>

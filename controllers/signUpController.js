@@ -5,7 +5,7 @@ const renderSignup = async (_req, res) => {
     emailMessage: null,
     passMessage: null,
     confirmPass: null,
-    firstNamemessage: null,
+    firstNameMessage: null,
     lastNameMessage: null,
     successMessage: null,
   });
@@ -52,15 +52,15 @@ const newUser = async (req, res) => {
   const emailMessage = handleEmailMessage(email);
   const passMessage = handlePassMessage(password);
   const confirmPassMessage = handleConfirmPass(password, confirmPass);
-  const firstNamemessage = handleFirstNameMessage(firstName);
+  const firstNameMessage = handleFirstNameMessage(firstName);
   const lastNameMessage = handleLastNameMessage(lastName);
 
-  if (emailMessage || passMessage || confirmPassMessage || firstNamemessage || lastNameMessage) {
+  if (emailMessage || passMessage || confirmPassMessage || firstNameMessage || lastNameMessage) {
     res.status(402).render('admin/signUp', {
       emailMessage,
       passMessage,
       confirmPassMessage,
-      firstNamemessage,
+      firstNameMessage,
       lastNameMessage,
       successMessage: null,
     });
@@ -72,7 +72,7 @@ const newUser = async (req, res) => {
     emailMessage,
     passMessage,
     confirmPass,
-    firstNamemessage,
+    firstNameMessage,
     lastNameMessage,
     successMessage: 'Cadastro efetuado com sucesso!',
   });

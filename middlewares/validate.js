@@ -37,8 +37,7 @@ const userDataRules = () => [
  */
 const userData = (req, res, next) => {
   const errors = validationResult(req);
-  console.log(errors);
-  
+
   if (errors.isEmpty()) return next();
 
   const normalizedErrors = errors.array().map((error) => error.msg);

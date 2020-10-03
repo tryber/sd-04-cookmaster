@@ -7,7 +7,7 @@ const checkEmail = async (req, res, next) => {
     return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
   }
 
-  next();
+  return next();
 };
 
 const checkPassword = async (req, res, next) => {
@@ -16,7 +16,7 @@ const checkPassword = async (req, res, next) => {
     return res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
   }
 
-  next();
+  return next();
 };
 
 const checkConfirmPassword = async (req, res, next) => {
@@ -25,7 +25,7 @@ const checkConfirmPassword = async (req, res, next) => {
     return res.render('signup', { message: 'As senhas tem que ser iguais' });
   }
 
-  next();
+  return next();
 };
 
 const checkFirstName = async (req, res, next) => {
@@ -37,7 +37,7 @@ const checkFirstName = async (req, res, next) => {
     });
   }
 
-  next();
+  return next();
 };
 
 const checkLastName = async (req, res, next) => {
@@ -48,7 +48,7 @@ const checkLastName = async (req, res, next) => {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
   }
-  next();
+  return next();
 };
 
 const signup = async (req, res) => {

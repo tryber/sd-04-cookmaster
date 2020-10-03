@@ -41,8 +41,8 @@ app.listen(3000, () => console.log('Listening on 3000'));
 
 // Testando a conexão com o banco
 
-const connection = require('./models/connection');
+// const connection = require('./models/connection');
 
-connection().then((_session) => {
-  console.log('Conectado ao MySQL!');
-});
+// connection().then((_session) => {
+//   console.log('Conectado ao MySQL!');
+// });

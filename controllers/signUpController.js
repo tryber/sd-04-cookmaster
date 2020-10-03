@@ -23,9 +23,9 @@ const messageEmail = (email) => {
     message = 'O email deve ter o formato email@mail.com';
   }
   return message;
-}
+};
 
-const messagePassword = (password, passwordConf) => {
+let messagePassword = (password, passwordConf) => {
   let message = 'Cadastro efetuado com sucesso';
   if (password !== passwordConf) {
     message = 'As senhas tem que ser iguais';
@@ -37,6 +37,7 @@ const messagePassword = (password, passwordConf) => {
 };
 
 const messages = (email, password, passwordConf, name, lastName) => {
+  let message = 'Cadastro efetuado com sucesso';
   if (messageName(name, lastName)) {
     message = messageName;
   }
@@ -44,12 +45,12 @@ const messages = (email, password, passwordConf, name, lastName) => {
     message = messageEmail
   }
   if ((messagePassword = (password, passwordConf))) {
-    message = messagePassword
+    message = messagePassword;
   }
   return message;
 };
 
-const signUp = async (req, _res) => {
+const signUp = async (req, res) => {
   const { email, password, passwordConf, name, lastName } = req.body;
 
   const message = messages(email, password, passwordConf, name, lastName);

@@ -44,7 +44,7 @@ const logout = (req, res) => {
 };
 
 const admin = async (req, res) => {
-  const userRecipes = await getAllByUser(req.user.id);
+  const userRecipes = await getAllRecipesByUser(req.user.id);
   res.render('admin/home', { user: req.user, userRecipes });
 };
 

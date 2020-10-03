@@ -23,7 +23,7 @@ const searchRecipe = async (req, res) => {
   if (q === '') return res.render('recipes/search', { recipes: null, user: req.user });
 
   const recipes = await recipesModel.searchRecipes(q);
-  res.render('recipes/searchRecipe', { recipes, user: req.user });
+  return res.render('recipes/searchRecipe', { recipes, user: req.user });
 };
 
 module.exports = {

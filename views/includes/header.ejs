@@ -1,0 +1,16 @@
+<header>
+  <div>Cookmaster</div>
+  <div>
+    <% if (!user) { %>
+      <button>
+        <a href="/login">Login</a>
+      </button>
+    <% } %>
+    <% if (user) { %>
+      <span><%- `${user.firstName} ${user.lastName} |` %> </span>
+      <button>
+        <a href="/logout">Logout</a>
+      </button>
+    <% } %>
+  </div>
+</header>

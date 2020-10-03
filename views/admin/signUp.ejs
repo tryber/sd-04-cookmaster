@@ -36,14 +36,14 @@
         data-testid="confirmar-senha"
         id="confirmPassInput"
       />
-      <% if (confirmPass) { %>
+      <% if (confirmPassMessage) { %>
       <div>
-        <span><%= confirmPass %></span>
+        <span><%= confirmPassMessage %></span>
       </div>
       <% } %>
     </div>
     <div>
-      <label for="firstNameInput">Email </label>
+      <label for="firstNameInput">Nome </label>
       <input type="text" name="firstName" data-testid="nome" id="firstNameInput" />
       <% if (firstNameMessage) { %>
       <div>
@@ -52,7 +52,7 @@
       <% } %>
     </div>
     <div>
-      <label for="lastNameInput">Email </label>
+      <label for="lastNameInput">Sobrenome </label>
       <input type="text" name="lastName" data-testid="sobrenome" id="lastNameInput" />
       <% if (lastNameMessage) { %>
       <div>

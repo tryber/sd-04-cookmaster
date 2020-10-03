@@ -4,7 +4,7 @@ const renderSignup = async (_req, res) => {
   res.render('admin/signUp', {
     emailMessage: null,
     passMessage: null,
-    confirmPass: null,
+    confirmPassMessage: null,
     firstNameMessage: null,
     lastNameMessage: null,
     successMessage: null,
@@ -71,7 +71,7 @@ const newUser = async (req, res) => {
   res.status(201).render('admin/signUp', {
     emailMessage,
     passMessage,
-    confirmPass,
+    confirmPassMessage,
     firstNameMessage,
     lastNameMessage,
     successMessage: 'Cadastro efetuado com sucesso!',

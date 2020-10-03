@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= recipe.name %> | coockmaster</title>
   </head>
-  <body>  
+  <body>
+    <% if (user) { %>
+     <button type="button" data-testid="editar-receita">
+       <
+     </button>
+    <% } %>
     <h1><%= recipe.name %></h1>
     <br />
     <span>Enviada por <%= recipe.user %> </span>

@@ -46,6 +46,7 @@ const recipe = async (id) => {
     .then((result) => result.fetchAll())
     .then((data) =>
       data.map(([user, name, ingredients, instructions]) => ({
+        id,
         user,
         name,
         ingredients: ingredients.split(','),

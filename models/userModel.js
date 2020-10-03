@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
 const getUser = (userData) => {
-  const [email, password, id, first_name, last_name] = userData;
-  return { email, password, id, name: first_name, lastName: last_name };
+  const [email, password, id, firstName, lastName] = userData;
+  return { email, password, id, name: firstName, lastName };
 };
 
 /* Substitua o código das funções abaixo para que ela,
@@ -55,7 +55,7 @@ const findById = async (id) => {
 // Cadastrar um novo usuário
 
 const newUser = async (email, password, firstName, lastName) => {
-  connection().then((db) =>
+  await connection().then((db) =>
     db
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])

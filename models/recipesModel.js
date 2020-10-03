@@ -21,8 +21,8 @@ const getRecipeDetails = async (id) => {
     .then((results) => results.fetchAll())
     .then((recipe) => recipe[0]);
 
-  const [name, ingredients, instructions, user_id] = recipeDetails;
-  return { name, ingredients, instructions, user_id };
+  const [name, ingredients, instructions, userID] = recipeDetails;
+  return { name, ingredients, instructions, userID };
 };
 
 module.exports = { getRecipes, getRecipeDetails };

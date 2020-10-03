@@ -25,7 +25,15 @@ app.post('/login', controllers.userController.login);
 app.get('/signup', (_req, res) => {
   return res.render('signup', { message: null });
 });
-app.post('/signup', controllers.signupController.signup);
+app.post(
+  '/signup',
+  controllers.signupController.checkEmail,
+  controllers.signupController.checkPassword,
+  controllers.signupController.checkConfirmPassword,
+  controllers.signupController.checkFirstName,
+  controllers.signupController.checkLastName,
+  controllers.signupController.signup,
+);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.details);
 
@@ -35,6 +43,6 @@ app.listen(3000, () => console.log('Listening on 3000'));
 
 const connection = require('./models/connection');
 
-connection().then((session) => {
+connection().then((_session) => {
   console.log('Conectado ao MySQL!');
 });

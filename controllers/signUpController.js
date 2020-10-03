@@ -16,39 +16,58 @@ const messageName = (name, lastName) => {
   return message;
 };
 
-const messageEmail = (email) => {
+const messages = (email, password, passwordConf, name, lastName) => {
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   let message = 'Cadastro efetuado com sucesso!';
+  const nameMessage = messageName(name, lastName);
   if (!emailPattern.test(email)) {
     message = 'O email deve ter o formato email@mail.com';
   }
-  return message;
-};
-
-let messagePassword = (password, passwordConf) => {
-  let message = 'Cadastro efetuado com sucesso';
   if (password !== passwordConf) {
     message = 'As senhas tem que ser iguais';
   }
   if (password.length < 6) {
     message = 'A senha deve ter pelo menos 6 caracteres';
   }
+  if (messageName(name, lastName)) {
+    message = nameMessage;
+  }
   return message;
 };
 
-const messages = (email, password, passwordConf, name, lastName) => {
-  let message = 'Cadastro efetuado com sucesso';
-  if (messageName(name, lastName)) {
-    message = messageName;
-  }
-  if (messageEmail(email)) {
-    message = messageEmail
-  }
-  if ((messagePassword = (password, passwordConf))) {
-    message = messagePassword;
-  }
-  return message;
-};
+// const messageEmail = (email) => {
+//   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+//   let message = 'Cadastro efetuado com sucesso!';
+//   if (!emailPattern.test(email)) {
+//     message = 'O email deve ter o formato email@mail.com';
+//   }
+//   return message;
+// };
+
+// let messagePassword = (password, passwordConf) => {
+//   let message = 'Cadastro efetuado com sucesso';
+//   if (password !== passwordConf) {
+//     message = 'As senhas tem que ser iguais';
+//   }
+//   if (password.length < 6) {
+//     message = 'A senha deve ter pelo menos 6 caracteres';
+//   }
+//   return message;
+// };
+
+// const messages = (email, password, passwordConf, name, lastName) => {
+//   let message = 'Cadastro efetuado com sucesso';
+//   if (messageName(name, lastName)) {
+//     message = messageName;
+//   }
+//   if (messageEmail(email)) {
+//     message = messageEmail;
+//   }
+//   if ((messagePassword = (password, passwordConf))) {
+//     message = messagePassword;
+//   }
+//   return message;
+// };
 
 const signUp = async (req, res) => {
   const { email, password, passwordConf, name, lastName } = req.body;

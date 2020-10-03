@@ -36,15 +36,13 @@ const findById = async (idInput) => {
 
 const createNewUser = async ({ email, password, name, lastName }) => {
   const db = await connection();
-   const createUser = await db
+  const createUser = await db
     .getTable('users')
     .insert(['email', 'password', 'first_name', 'last_name'])
     .values(email, password, name, lastName)
     .execute();
   return createUser;
 };
-
-
 
 module.exports = {
   findByEmail,

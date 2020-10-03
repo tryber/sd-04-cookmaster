@@ -10,6 +10,8 @@ recipeRouter.get('/new', middlewares.auth(), controllers.recipesController.newRe
 recipeRouter.post('/', middlewares.auth(), controllers.recipesController.createRecipe);
 
 recipeRouter.get('/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
+recipeRouter.post('/:id', middlewares.auth(false), controllers.recipesController.);
+
 recipeRouter.get('/:id/edit', middlewares.auth(), controllers.recipesController.editRecipe);
 
 module.exports = recipeRouter;

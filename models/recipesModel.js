@@ -54,6 +54,19 @@ const newRecipe = async (userId, nameUser, name, ingredients, instructions) => {
     .execute();
 };
 
+const editRecipe = async (recipeId, name, ingredients, instructions) => {
+  const db = await connection();
+  await db
+    .getTable('recipes')
+    .update()
+    .set('name', name)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :id')
+    .bind('id', recipeId)
+    .execute();
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,

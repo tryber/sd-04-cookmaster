@@ -14,7 +14,9 @@ const showRecipe = async (req, res) => {
 };
 
 const editRecipe = async (_req, res) => {
-  res.render('recipes/edit');
+  res.render('recipes/editRecipe');
+
+  return res.redirect('/'); // sucess
 };
 
 const searchRecipe = async (req, res) => {

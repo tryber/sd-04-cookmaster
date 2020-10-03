@@ -40,12 +40,12 @@ const findById = async (userId) => {
     .execute();
 
   const listing = await results.fetchAll();
-  const list = await listing.map(([id, email, password, first_name, last_name]) => ({
+  const list = await listing.map(([id, email, password, firstName, lastName]) => ({
     id,
     email,
     password,
-    first_name,
-    last_name,
+    firstName,
+    lastName,
   }))[0];
 
   return list;

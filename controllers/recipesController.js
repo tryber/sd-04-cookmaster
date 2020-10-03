@@ -28,9 +28,9 @@ const searchRecipe = async (req, res) => {
 
 const createRecipe = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
-  const { id, first_name, last_name } = req.user;
+  const { id, firstName, lastName } = req.user;
 
-  const nameUser = await `${first_name} ${last_name}`;
+  const nameUser = await `${firstName} ${lastName}`;
 
   await recipesModel.newRecipe(id, nameUser, name, ingredients, instructions);
   return res.redirect('/');

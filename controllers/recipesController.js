@@ -9,7 +9,7 @@ const showAllRecipes = async (req, res) => {
 const showRecipe = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipesModel.getRecipeById(id);
-
+  console.log(req);
   res.render('recipes/recipe', { ...recipe, user: req.user });
 };
 

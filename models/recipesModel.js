@@ -27,7 +27,6 @@ const getRecipeById = async (userId) => {
     instructions,
   }))[0];
 
-  console.log(listing);
   return list;
 };
 

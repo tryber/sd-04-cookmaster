@@ -11,12 +11,10 @@ const config = {
 };
 
 const connection = () =>
-  mysqlx
-    .getSession(config)
-    .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => {
-      console.log(err);
-      process.exit(1);
-    });
+  mysqlx.getSession(config).then((session) => session.getSchema('cookmaster'));
+// .catch((err) => {
+//   console.error(err);
+//   process.exit(1);
+// });
 
 module.exports = connection;

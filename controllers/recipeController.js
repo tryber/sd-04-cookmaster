@@ -72,7 +72,7 @@ const myRecipes = async (req, res) => {
   const recipes = await recipeModel.getRecipeByUserId(req.user.id);
 
   res.status(200).render('me/recipes', { recipes, message: null, user: req.user });
-}
+};
 
 module.exports = {
   listRecipes,

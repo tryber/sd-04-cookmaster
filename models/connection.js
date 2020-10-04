@@ -1,5 +1,5 @@
 require('dotenv/config');
-const my = require('@mysql/xdevapi');
+const mysqlx = require('@mysql/xdevapi');
 
 const config = {
   user: process.env.MYSQL_USER,
@@ -9,4 +9,10 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const connection
+const connection = () =>
+  mysqlx
+    .getSession(config)
+    .then((session) => session.getSchema('cookmaster'))
+    .catch(() => process.exit(1));
+
+module.exports = { connection };

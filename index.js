@@ -8,7 +8,7 @@ const controllers = require('./controllers');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+// dar pull
 app.set('view engine', 'ejs');
 app.set('views', './views');
 

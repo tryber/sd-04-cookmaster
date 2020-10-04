@@ -39,13 +39,7 @@ const addRecipe = async (req, res) => {
     instructions,
   );
 
-  res.status(201).render('recipes/new', {
-    user: req.user,
-    nameMessage: null,
-    ingredientsMessage: null,
-    instructionsMessage: null,
-    successMessage: 'Receita adicionada com sucesso!',
-  });
+  res.redirect('/');
 };
 
 const editRecipe = async (req, res) => {
@@ -64,8 +58,13 @@ const editRecipe = async (req, res) => {
 
 const updateRecipe = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
-  await recipeModel.updateRecipe(req.user.id, name, ingredients, instructions);
-  res.redirect('/');
+  const { id } = req.params;
+  try {
+    await recipeModel.updateRecipe(id, name, ingredients, instructions);
+    res.redirect('/');
+  } catch (err) {
+    res.send(err);
+  }
 };
 
 const myRecipes = async (req, res) => {

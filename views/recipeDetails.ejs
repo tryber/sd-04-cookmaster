@@ -19,7 +19,7 @@
    </div>
  </header>
  <div>
-  <% if (user.id === parseInt(recipe[0][1])) { %>
+  <% if (user && user.id === parseInt(recipe[0][1])) { %>
     <button onclick="window.location.pathname='/recipes/:id/edit'">Editar Receita</button>
     <button onclick="window.location.pathname='/recipes/:id/delete'">Excluir Receita</button>
   <% } %>

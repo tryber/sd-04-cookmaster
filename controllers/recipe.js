@@ -19,7 +19,7 @@ const getRecipe = async (req, res) => {
 
   return recipe
     ? res.render('recipe', { recipe })
-    : res.render('/', { message: 'Recipe found.' });
+    : res.render('home', { message: 'Recipe found.' });
 };
 
 const createRecipe = async (req, res) => {

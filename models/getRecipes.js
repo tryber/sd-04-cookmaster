@@ -10,4 +10,16 @@ const getRecipes = async () => {
   }));
 };
 
-module.exports = { getRecipes };
+const findRecipeById = async (idInput) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table.select([]).where('id = :id').bind('id', idInput).execute();
+  const [id, userId, user, title, ingredientsString, instructions] = await result.fetchOne();
+  const ingredients = ingredientsString.split(',');
+  return { id, userId, user, title, ingredients, instructions };
+};
+
+module.exports = {
+  getRecipes,
+  findRecipeById,
+};

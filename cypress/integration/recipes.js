@@ -69,4 +69,8 @@ describe('3 - Crie uma tela para visualizar uma receita específica.', () => {
     verifyElementNotVisible('[data-testid="editar-receita"]');
     verifyElementNotVisible('[data-testid="excluir-receita"]');
   })
+
+  after(() => {
+    createAndInsertsDataBase();
+  })
 });

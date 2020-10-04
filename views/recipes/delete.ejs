@@ -6,6 +6,9 @@
     <title>Cookmaster - Excluir Receita</title>
   </head>
   <body>
+    <% if (user) { %>
+      <a data-testid="excluir-receita" href="#">Excluir Receita</a>
+    <% } %>
     <div class="row">
       <h3>Confirmar Exclusão</h3>
       <form action=<%=`/recipes/${user.id}/delete`%> method="POST">

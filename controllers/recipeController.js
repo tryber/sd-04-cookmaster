@@ -48,10 +48,32 @@ const addRecipe = async (req, res) => {
   });
 };
 
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipeModel.getRecipeById(id);
+
+  res.status(201).render('recipes/edit', {
+    user: req.user,
+    nameMessage: null,
+    ingredientsMessage: null,
+    instructionsMessage: null,
+    successMessage: null,
+    recipe,
+  });
+};
+
+const updateRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  await recipeModel.updateRecipe(req.user.id, name, ingredients, instructions);
+  res.redirect('/');
+};
+
 module.exports = {
   listRecipes,
   recipeDetails,
   searchRecipes,
   newRecipe,
   addRecipe,
+  editRecipe,
+  updateRecipe,
 };

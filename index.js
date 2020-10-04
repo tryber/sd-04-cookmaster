@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+// teste de comit
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 

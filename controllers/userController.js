@@ -50,7 +50,6 @@ const cadastrar = (_, res) => {
 
 const newUser = async (req, res) => {
   const isValid = await validation({ ...req.body });
-  console.log(isValid);
   if (isValid) return res.status(400).render('cadastro', { ...isValid });
 };
 

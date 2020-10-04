@@ -6,14 +6,17 @@
     <title><%= recipe.name %> | coockmaster</title>
   </head>
   <body>
-    <% if (user) { %>
+    <!-- App Header -->
+    <%- include('./includes/header.ejs', { user }) %>
+
+    <% if (user && user.id === recipe.userID) { %>
       <button type="button" data-testid="editar-receita">
-        <a href="<%- `/recipe/${id}/edit` %>">
+        <a href="<%- `/recipe/${recipe.id}/edit` %>">
           Editar Receita
         </a>
       </button>
-      <button type="button" data-testid="editar-receita">
-        <a href="<%- `/recipe/${id}/remove` %>">
+      <button type="button" data-testid="excluir-receita">
+        <a href="<%- `/recipe/${recipe.id}/remove` %>">
           Exluir Receita
         </a>
       </button>

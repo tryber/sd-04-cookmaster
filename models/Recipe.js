@@ -39,15 +39,16 @@ const recipe = async (id) => {
     .then((schema) =>
       schema
         .getTable('recipes')
-        .select(['user', 'name', 'ingredients', 'instructions'])
+        .select(['user', 'user_id', 'name', 'ingredients', 'instructions'])
         .where('id = :id')
         .bind('id', id)
         .execute())
     .then((result) => result.fetchAll())
     .then((data) =>
-      data.map(([user, name, ingredients, instructions]) => ({
+      data.map(([user, user_id, name, ingredients, instructions]) => ({
         id,
         user,
+        userID: user.id,
         name,
         ingredients: ingredients.split(','),
         instructions,

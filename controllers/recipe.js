@@ -15,10 +15,12 @@ const getRecipes = async (req, res) => {
  */
 const getRecipe = async (req, res) => {
   const { id } = req.params;
+  const { user } = req;
+
   const recipe = await recipeModel.recipe(id);
 
   return recipe
-    ? res.render('recipe', { recipe })
+    ? res.render('recipe', { user, recipe })
     : res.render('home', { message: 'Recipe found.' });
 };
 

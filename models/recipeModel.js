@@ -83,7 +83,7 @@ const deleteRecipeById = async (recipeId) => {
     .where('id = :recipeId')
     .bind('recipeId', recipeId)
     .execute();
-}
+};
 
 const verifyUser = async (recipeId, userId, password) => {
   const recipe = await getRecipeById(recipeId);

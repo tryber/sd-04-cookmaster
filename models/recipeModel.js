@@ -1,4 +1,5 @@
 const conn = require('./connection');
+const userModel = require('./userModel');
 
 const getAllRecipes = async () => {
   const db = await conn();
@@ -74,6 +75,25 @@ const getRecipeByUserId = async (userId) => {
   return recipes.map(([id, user, name]) => ({ id, user, name }));
 };
 
+const deleteRecipeById = async (recipeId) => {
+  const db = await conn();
+  return db
+    .getTable('recipes')
+    .delete()
+    .where('id = :recipeId')
+    .bind('recipeId', recipeId)
+    .execute();
+}
+
+const verifyUser = async (recipeId, userId, password) => {
+  const recipe = await getRecipeById(recipeId);
+  const recipeUser = await userModel.findById(recipe.userId);
+  if (userId !== recipeUser.id || password !== recipeUser.password) {
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
@@ -81,4 +101,6 @@ module.exports = {
   addRecipe,
   updateRecipe,
   getRecipeByUserId,
+  deleteRecipeById,
+  verifyUser,
 };

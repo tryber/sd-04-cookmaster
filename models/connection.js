@@ -17,5 +17,8 @@ module.exports = () => {
   }
   return mysqlx
     .getSession(config)
-    .then((session) => session.getSchema('cookmaster'));
+    .then((session) => {
+      schema = session.getSchema('cookmaster');
+      return schema;
+    });
 };

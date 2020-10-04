@@ -1,0 +1,31 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Recipe</title>
+</head>
+
+<body>
+  <header>
+    <p>Cookmaster</p>
+    <% if (!userData) { %>
+    <a data-testid="login" href="/login">Login</a>
+    <% } %>
+    <% if (userData) { %>
+    <a data-testid="logout" href="/logout">Logout</a>
+    <% } %>
+  </header>
+  <% if (userData && userData.id === user_id) { %>
+  <button data-testid="editar-receita">editar receita</button>
+  <button data-testid="excluir-receita">excluir receita</button>
+  <% } %>
+  <h1><%=name%></h1>
+  <h5><%=user%></h5>
+  <h3>Ingredientes</h3>
+  <p><%=ingredients%></p>
+  <h3>Modo de preparo</h3>
+  <p><%=instructions%></p>
+</body>
+
+</html>

@@ -18,15 +18,14 @@ const getUser = async (req) => {
 const authMiddleware = (required = true) => async (req, res, next) => {
   const user = await getUser(req);
 
-  if (!user && required)
-    return res.redirect(`/login?redirect=${encodeURIComponent(req.url)}`);
+  if (!user && required) return res.redirect(`/login?redirect=${encodeURIComponent(req.url)}`);
 
   if (!user && !required) return next();
 
   const { password, ...userData } = user;
 
-  req.user = userData;
-
+  req.userData = userData;
+  console.log(userData);
   return next();
 };
 

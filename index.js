@@ -31,6 +31,8 @@ app.get('/recipes/new', middlewares.auth(false), recipeController.newRecipe);
 app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), recipeController.recipeDetails);
+app.post('/recipes/:id', middlewares.auth(false), recipeController.updateRecipe);
+app.get('/recipes/:id/edit', middlewares.auth(false), recipeController.editRecipe);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

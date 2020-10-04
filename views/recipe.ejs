@@ -8,7 +8,7 @@
   <body>
     <!-- App Header -->
     <%- include('./includes/header.ejs', { user }) %>
-
+    <% console.log(user) %>
     <% if (user && user.id === recipe.userID) { %>
       <button type="button" data-testid="editar-receita">
         <a href="<%- `/recipe/${recipe.id}/edit` %>">

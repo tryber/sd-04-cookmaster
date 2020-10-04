@@ -45,10 +45,11 @@ const recipe = async (id) => {
         .execute())
     .then((result) => result.fetchAll())
     .then((data) =>
+      // eslint-disable-next-line camelcase
       data.map(([user, user_id, name, ingredients, instructions]) => ({
         id,
         user,
-        userID: user.id,
+        userID: user_id,
         name,
         ingredients: ingredients.split(','),
         instructions,

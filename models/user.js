@@ -51,6 +51,7 @@ const userById = async (id) => {
     .then((result) => result.fetchAll())
     .then((userLogin) =>
       userLogin.map(([email, firstName, lastName]) => ({
+        id,
         email,
         firstName,
         lastName,

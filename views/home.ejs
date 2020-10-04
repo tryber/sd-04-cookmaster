@@ -4,29 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <navbar>
-      <%- include('navbar')%>
-      <h1>Receitas</h1>
-    </navbar>
+    <navbar> <%- include('navbar')%> </navbar>
 
-    <section>
-      <nav>
-        <% if (user) { %>
-        <button>Minhas Receitas</button>
-        <button data-testid="nova-receita">Nova Receita</button>
-        <button>Minha Conta</button>
-        <% } %>
-        <button data-testid="buscar-receita">Buscar Receitas</button>
-      </nav>
-    </section>
-    <table>
+    <div class="header">
+      <section>
+        <nav>
+          <h1>Receitas</h1>
+          <% if (user) { %>
+          <button class="btn btn-primary">Minhas Receitas</button>
+          <button class="btn btn-primary" data-testid="nova-receita">Nova Receita</button>
+          <button class="btn btn-primary">Minha Conta</button>
+          <% } %>
+        </nav>
+      </section>
+      <div class="col-lg" style="text-align: right">
+        <button type="button" class="btn btn-primary" data-testid="buscar-receita">
+          Buscar Receitas
+        </button>
+      </div>
+    </div>
+
+    <!--     <div class="card">
       <% recipes.forEach(recipe => { %>
-      <p><%= recipe.user %></p>
-      <p><%= recipe.name %></p>
-      <a href="link">Ver mais</a>
+      <p class="card-title"><%= recipe.user %></p>
+      <p class="card-text"><%= recipe.name %></p>
+      <a href="link" class="btn btn-primary">Ver mais</a>
       <% }) %>
-    </table>
+    </div> -->
+    <div class="conteudo">
+      <% recipes.forEach(recipe => { %>
+      <div class="card w-75" style="margin: 10px; background-color: rgb(167, 191, 192)">
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.user %></h5>
+          <p class="card-text"><%= recipe.name %></p>
+          <a href="#" class="btn btn-primary btn-small">Ver mais</a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
   </body>
+  <style>
+    .conteudo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .header {
+      display: flex;
+      margin: 10px;
+    }
+  </style>
 </html>

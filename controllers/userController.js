@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { validation } = require('../models/cadastroModel');
 
 const userModel = require('../models/userModel');
 
@@ -43,8 +44,20 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const cadastrar = (_, res) => {
+  res.render('cadastro', { message: null });
+};
+
+const newUser = async (req, res) => {
+  const isValid = await validation({ ...req.body });
+  console.log(isValid);
+  if (isValid) return res.status(400).render('cadastro', { ...isValid });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  cadastrar,
+  newUser,
 };

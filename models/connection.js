@@ -19,11 +19,9 @@ function connection() {
       port: 33060,
       schema: 'cookmaster',
     })
-    .then((session) => {
-      return session.getSchema('cookmaster');
-    })
+    .then((session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      //console.error(err);
+      console.log(err);
       process.exit(1);
     });
 }

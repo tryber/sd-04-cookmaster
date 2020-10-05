@@ -34,7 +34,7 @@ const findByEmail = async (email) => {
     .execute();
   const rows = await stmt.fetchOne();
   const users = toObject(rows);
-  //console.log(users);
+  // console.log(users);
   return users;
 };
 
@@ -52,7 +52,7 @@ const findById = async (id) => {
     .execute();
   const rows = await stmt.fetchOne();
   const users = toObject(rows);
-  //console.log(users);
+  // console.log(users);
   return users;
 };
 

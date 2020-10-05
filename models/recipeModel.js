@@ -45,4 +45,4 @@ const create = async (id, user, name, ingredients, instructions) =>
         .execute(),
     );
 
-module.exports = { getAllRecipes, getRecipeById, create, isValidCreatedRecipe };
+module.exports = { getAllRecipes, getRecipeById, create };

@@ -20,7 +20,12 @@ const findByEmail = async (emailInput) => {
   const db = await connection();
   const table = await db.getTable('users');
   const result = await table.select([]).where('email = :email').bind('email', emailInput).execute();
-  const [id, email, password, name, lastName] = await result.fetchOne();
+  const user = await result.fetchOne();
+
+  if (!user) return null;
+
+  const [id, email, password, name, lastName] = user;
+
   return { id, email, password, name, lastName };
 };
 

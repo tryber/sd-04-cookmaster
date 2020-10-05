@@ -110,7 +110,7 @@ const newUser = async (req, res) => {
     });
 
   await userModel.createUser(email, password, firstName, lastName);
-  return res.status(200).render('cadastro', {
+  return res.render('cadastro', {
     message: 'Cadastro efetuado com sucesso!',
   });
 };

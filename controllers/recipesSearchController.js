@@ -5,9 +5,9 @@ const recipeSearchInput = async (req, res) => {
   res.render('recipesSearch', {
     recipes,
     message: 'Nenhuma receita encontrada',
-    user: req.user
+    user: req.user,
   });
-}
+};
 
 module.exports = {
   recipeSearchInput,

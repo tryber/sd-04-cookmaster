@@ -35,39 +35,34 @@ const findById = async (Id) => {
 };
 
 const isValid = async (data) => {
-  const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i ;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
   const stringRegex = /[a-zA-Z\u00C0-\u00FF ]+/i;
-  let message = [];
+  const message = [];
   switch (true) {
     case (!emailRegex.test(data.email)) :
-      console.log('entrou EMAIL')
-      return message.push('O email deve ter o formato email@mail.com');
+      message.push('O email deve ter o formato email@mail.com');
     case (data.password < 6) :
-      console.log('entrou SENHA')
-      return message.push('A senha deve ter pelo menos 6 caracteres');
+      message.push('A senha deve ter pelo menos 6 caracteres');
     case (data.confirmPassword !== data.password) :
-      console.log('entrou CONFIRM')
       message.push('As senhas tem que ser iguais');
     case (!stringRegex.test(data.name) || data.name < 3) :
-      console.log('entrou NAME')
-      return message.push('O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
+      message.push('O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
     case (!stringRegex.test(data.lastName) || data.lastName < 3) :
-      console.log('entrou LAST NAME')
-      return message.push('O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
+      message.push('O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
     default:
       break;
   }
 
   return message;
-}
+};
 
-const register = async ({ email, password, name, lastName}) => {
+const register = async ({ email, password, name, lastName }) => {
   const db = await connection();
   await db.getTable('users')
     .insert(['email', 'password', 'name', 'lastName'])
     .values(email, password, name, lastName)
-    .execute()
-}
+    .execute();
+};
 
 module.exports = {
   findByEmail,

@@ -44,20 +44,20 @@ const logout = (req, res) => {
 };
 
 const register = (req, res) => {
-  res.render('admin/register', { message: null })
-}
+  res.render('admin/register', { message: null });
+};
 
 const registerForm = async (req, res) => {
   const data = req.body;
   const message = await userModel.isValid(data);
-  if (message.length > 1){
-    res.render('admin/register', { message })
+  if (message.length > 1) {
+    res.render('admin/register', { message });
   } else {
     userModel.register(data);
-    message.push('Cadastro efetuado com sucesso!')
+    message.push('Cadastro efetuado com sucesso!');
   }
   res.render('admin/register', { message })
-}
+};
 
 module.exports = {
   login,

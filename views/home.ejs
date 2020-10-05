@@ -9,7 +9,14 @@
     <%- include('navbar', {user}); %> <% if (recipes) {%>
     <div>
       <h1>Receitas</h1>
-      <% recipes.forEach(recipe => { %>
+      <% if (user) {%>
+      <a href="/recipe/new">
+        <button data-testid="nova-receita">Nova Receita</button>
+      </a>
+      <a href="">
+        <button data-testid="buscar-receita">Buscar Receita</button>
+      </a>
+      <%}%> <% recipes.forEach(recipe => { %>
       <div>
         <p>Receita: <%= recipe.name %></p>
         <p>Autor: <%= recipe.user%></p>

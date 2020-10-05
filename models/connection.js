@@ -8,9 +8,8 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
-// connection = async () => {}
-
-const connection = () => {
+/*
+const connection = async () => {
   return mysqlx
     .getSession(config)
     .then((session) => {
@@ -22,5 +21,17 @@ const connection = () => {
       process.exit(err);
     });
 };
+*/
+function connection() {
+  return mysqlx
+    .getSession(config)
+    .then((session) => {
+      const schema = session.getSchema('cookmaster');
+      return schema;
+    })
+    .catch((err) => {
+      process.exit(err);
+    });
+}
 
 module.exports = connection;

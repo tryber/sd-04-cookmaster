@@ -21,8 +21,8 @@
     <p><%= recipe[4] %></p>
 
     <% if (user) { %>
-    <a href="/" data-testid="editar-receita">Editar Receita</a>
-    <a href="/" data-testid="excluir-receita">Excluir Receita</a>
+    <a href="/recipes/<%= recipe[0] %>/edit" data-testid="editar-receita">Editar Receita</a>
+    <a href="/recipes/<%= recipe[0] %>/delete" data-testid="excluir-receita">Excluir Receita</a>
     <% } %>
   </body>
 </html>

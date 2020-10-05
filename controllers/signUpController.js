@@ -1,7 +1,7 @@
 const { createNewUser } = require('../models/userModel');
 
 const signUpForm = async (_req, res) => {
-  res.render('admin/signUp', {message: ''});
+  res.render('admin/signUp', { message: '' });
 };
 
 const messageNameCheck = (name, lastName) => {
@@ -10,10 +10,11 @@ const messageNameCheck = (name, lastName) => {
   let message = '';
 
   if (name.length < 3 || namePattern.test(name)) {
-    return message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    return (message =
+      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
   }
   if (lastName.length < 3 || namePattern.test(lastName)) {
-    return message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    return (message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
   }
   return message;
 };
@@ -27,16 +28,16 @@ const messagesAllCheck = (email, password, confPassword, name, lastName) => {
   let message = 'Cadastro efetuado com sucesso!';
 
   if (!emailPattern.test(email)) {
-    return message = 'O email deve ter o formato email@mail.com';
+    return (message = 'O email deve ter o formato email@mail.com');
   }
   if (password.length < 6) {
-    return message = 'A senha deve ter pelo menos 6 caracteres';
+    return (message = 'A senha deve ter pelo menos 6 caracteres');
   }
   if (password !== confPassword) {
-    return message = 'As senhas tem que ser iguais';
+    return (message = 'As senhas tem que ser iguais');
   }
   if (messageNameCheck(name, lastName)) {
-    return message = nameMessage;
+    return (message = nameMessage);
   }
   return message;
 };

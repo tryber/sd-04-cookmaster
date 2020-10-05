@@ -9,6 +9,14 @@
 
 const connection = require('./connection');
 
+const toObject = ([id, email, password, name, lastName]) => ({
+  id,
+  email,
+  password,
+  name,
+  lastName,
+});
+
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
@@ -20,14 +28,14 @@ const findByEmail = async (email) => {
   const db = await connection();
   const stmt = await db
     .getTable('users')
-    .select(['email', 'password'])
+    .select([])
     .where('email = :email')
     .bind('email', email)
     .execute();
   const rows = await stmt.fetchOne();
-  const user = rows.reduce((email, password) => ({ email, password }));
-  //console.log(rows) // objeto user
-  return user;
+  const users = toObject(rows);
+  //console.log(users);
+  return users;
 };
 
 /**
@@ -38,14 +46,14 @@ const findById = async (id) => {
   const db = await connection();
   const stmt = await db
     .getTable('users')
-    .select(['id', 'password'])
+    .select([])
     .where('id = :id')
     .bind('id', id)
     .execute();
   const rows = await stmt.fetchOne();
-  const users = rows.reduce((id, email, password) => ({ id, email, password }));
-  return users;
+  const users = toObject(rows);
   //console.log(users);
+  return users;
 };
 
 module.exports = {

@@ -18,7 +18,7 @@ const getRecipe = async (req, res) => {
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
   const recipes = await getRecipesByName(q);
-  res.render('searchRecipe', { recipes });
+  res.status(200).render('searchRecipe', { recipes });
 };
 
 module.exports = {

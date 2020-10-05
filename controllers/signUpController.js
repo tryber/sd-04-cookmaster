@@ -39,7 +39,7 @@ const messagesAllCheck = (email, password, confPassword, name, lastName) => {
   if (messageNameCheck(name, lastName)) {
     return (message = nameMessage);
   }
-  return message;
+  return 'Cadastro efetuado com sucesso!';
 };
 
 const signUp = async (req, res) => {

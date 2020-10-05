@@ -8,6 +8,7 @@
 
 .env
 .vscode
+.eslintrc.json
 
 # User-specific stuff
 .idea/**/workspace.xml

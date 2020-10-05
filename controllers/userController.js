@@ -36,7 +36,7 @@ const login = async (req, res) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  return res.redirect(redirect || '/admin');
+  return res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -45,8 +45,11 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
+const register = (_req, res) => res.render('admin/registerUser');
+
 module.exports = {
   login,
   loginForm,
   logout,
+  register,
 };

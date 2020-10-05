@@ -38,6 +38,7 @@ const getTableObj = async (tableName, query, method) => {
 // por mais que seria mais viável nesse projeto com apenas 2 tabelas,
 // esse código é totalmente flexível e se adapta a qualquer tabela
 module.exports = {
+  config,
   tables: {
     recipes: (query, method) => getTableObj('recipes', query, method),
     users: (query, method) => getTableObj('users', query, method),

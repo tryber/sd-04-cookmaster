@@ -7,18 +7,10 @@
 </head>
 
 <body>
-  <header>
-    <p>Cookmaster</p>
-    <% if (!userData) { %>
-    <a data-testid="login" href="/login">Login</a>
-    <% } %>
-    <% if (userData) { %>
-    <a data-testid="logout" href="/logout">Logout</a>
-    <% } %>
-  </header>
+  <%-include('../header', {userData})%>
   <% if (userData && userData.id === user_id) { %>
-  <button data-testid="editar-receita">editar receita</button>
-  <button data-testid="excluir-receita">excluir receita</button>
+  <a data-testid="editar-receita" href=<%=`/recipes/${id}/edit`%>>editar receita</a>
+  <a data-testid="excluir-receita" href=<%=`/recipes/${id}/delete`%>>excluir receita</a>
   <% } %>
   <h1><%=name%></h1>
   <h5><%=user%></h5>

@@ -7,10 +7,17 @@ const homeRecipes = async ({ userData = false }, res) => {
 
 const oneRecipe = async ({ params: { id }, userData = false }, res) => {
   const recipe = await getRecipeById(id);
-  res.render('recipe', { ...recipe, userData });
+  res.render('recipes/showOne', { ...recipe, userData });
+};
+
+const editRecipe = async ({ params: { id }, userData }, res) => {
+  const recipe = await getRecipeById(id);
+  if (recipe.user_id !== userData.id) res.redirect(`/recipes/${id}`);
+  return res.render('recipes/edit', { recipe, userData });
 };
 
 module.exports = {
   homeRecipes,
   oneRecipe,
+  editRecipe,
 };

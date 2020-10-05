@@ -9,8 +9,6 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-let schema;
-
 const connection = () =>
   mysqlx
     .getSession(config)

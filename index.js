@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // recipes router
+app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.buscaReceita);
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 app.post('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);

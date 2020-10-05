@@ -33,10 +33,24 @@ const deleteRecipe = async (req, res) => {
   res.render('recipe', { recipes, user: req.user });
 };
 
+// const searchRecipe = async (req, res) => {
+
+// res.render('search', { recipes, user: req.user });
+// };
+
+const buscaReceita = async (req, res) => {
+  const { q } = req.query;
+
+  const recipes = await recipesModel.getRecipesByName(q);
+
+  res.render('search', { recipes, user: req.user });
+};
+
 module.exports = {
   showAllRecipes,
   showRecipeDetails,
   showRecipe,
   editRecipe,
   deleteRecipe,
+  buscaReceita,
 };

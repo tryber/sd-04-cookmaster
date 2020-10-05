@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use('/', routes.homeRouter);
+app.use('/me', routes.myRouter);
 app.use('/recipes', routes.recipeRouter);
 
 app.listen(3000, () => console.log('Listening on 3000'));

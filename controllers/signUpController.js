@@ -19,27 +19,36 @@ const messageNameCheck = (name, lastName) => {
   return message;
 };
 
-const messagesAllCheck = (email, password, confPassword, name, lastName) => {
-  // tirado do https://emailregex.com/
-  // the regex used in type=”email” from W3C
-  const nameMessage = messageNameCheck(name, lastName);
-  const emailPattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-  let message = 'Cadastro efetuado com sucesso!';
-
-  if (!emailPattern.test(email)) {
-    return (message = 'O email deve ter o formato email@mail.com');
-  }
+const messagesPasswordCheck = (password, confPassword) => {
+  let message = '';
   if (password.length < 6) {
     return (message = 'A senha deve ter pelo menos 6 caracteres');
   }
   if (password !== confPassword) {
     return (message = 'As senhas tem que ser iguais');
   }
-  if (messageNameCheck(name, lastName)) {
-    return (message = nameMessage);
+  return message;
+};
+
+const messagesAllCheck = (email, password, confPassword, name, lastName) => {
+  // tirado do https://emailregex.com/
+  // the regex used in type=”email” from W3C
+  const nameMessage = messageNameCheck(name, lastName);
+  const messagesPassword = messagesPasswordCheck(password, confPassword);
+  const emailPattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  let message = 'Cadastro efetuado com sucesso!';
+
+  if (!emailPattern.test(email)) {
+    message = 'O email deve ter o formato email@mail.com';
   }
-  return 'Cadastro efetuado com sucesso!';
+  if (messagesPasswordCheck(password, confPassword)) {
+    message = messagesPassword;
+  }
+  if (messageNameCheck(name, lastName)) {
+    message = nameMessage;
+  }
+  return message;
 };
 
 const signUp = async (req, res) => {

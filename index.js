@@ -16,14 +16,15 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 app.post('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
-app.post('/recipes/:id/delete', middlewares.auth(false), controllers.recipesController.deleteRecipe);
-
+app.post(
+  '/recipes/:id/delete',
+  middlewares.auth(false),
+  controllers.recipesController.deleteRecipe,
+);
 
 //user router
 app.get('/cadastro', controllers.userController.cadastrar);
 app.post('/cadastro', controllers.userController.newUser);
-
-
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

@@ -31,7 +31,7 @@ const find = async (id) =>
     )
     .then((results) => results.fetchAll())
     .then((recipesById) =>
-      recipesById.reduce(({id, name, ingredients, instructions}) => ({
+      recipesById.reduce(({ id, name, ingredients, instructions }) => ({
         id,
         name,
         ingredients,

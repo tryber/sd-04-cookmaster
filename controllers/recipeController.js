@@ -16,21 +16,21 @@ const showRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user});
+  res.render('recipe', { recipes, user: req.user });
 };
 
 const editRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user});
+  res.render('recipe', { recipes, user: req.user });
 };
 
 const deleteRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user});
+  res.render('recipe', { recipes, user: req.user });
 };
 
 module.exports = {
@@ -38,5 +38,5 @@ module.exports = {
   showRecipeDetails,
   showRecipe,
   editRecipe,
-  deleteRecipe
+  deleteRecipe,
 };

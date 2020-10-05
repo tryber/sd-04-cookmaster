@@ -9,13 +9,15 @@
     <h1>Boas vindas ao Cookmaster!</h1>
     <h2>Receitas</h2>
     <ul>
-      <% recipes.forEach((recipe) => { %>
-        <li>
-          <p><%= recipe[2] %></p>
-          <p><%= recipe[3] %></p>
-        </li>
-        <a href=<%=`/recipes/${recipe[0]}` %>>Ver mais</a>
-      <% }) %>
+      <% if (recipes.length > 0) { %>
+        <% recipes.forEach((recipe) => { %>
+          <li>
+            <p><%= recipe[2] %></p>
+            <p><%= recipe[3] %></p>
+          </li>
+          <a href=<%=`/recipes/${recipe[0]}` %>>Ver mais</a>
+        <% }) %>
+      <% } %>
     </ul>
    <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">Buscar Receitas</button>
    <% if (user) { %>

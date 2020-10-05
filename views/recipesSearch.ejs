@@ -18,10 +18,22 @@
      <% } %>
     </div>
   </header>
-  <form action="/recipes/search" method="POST">
+  <form action="/recipes/search" method="GET">
     <label for="searchInput">Buscar</label>
-    <input type="text" name="search" id="searchInput" data-testid="receita" />
+    <input type="text" name="q" id="searchInput" data-testid="receita" />
     <button type="submit" data-testid="buscar">Buscar</button>
   </form>
+  <% if (recipes.length > 0) { %>
+    <% recipes.forEach((recipe) => { %>
+      <li>
+        <p><%= recipe[2] %></p>
+        <p><%= recipe[3] %></p>
+      </li>
+      <a href=<%=`/recipes/${recipe[0]}` %>>Ver mais</a>
+    <% }) %>
+  <% } %>
+  <% if (recipes.length === 0) { %>
+    <p><%= message %></p>
+  <% } %>
 </body>
 </html>

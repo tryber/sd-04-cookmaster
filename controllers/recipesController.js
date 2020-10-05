@@ -13,12 +13,6 @@ const showRecipe = async (req, res) => {
   res.render('recipes/recipe', { ...recipe, user: req.user });
 };
 
-const editRecipe = async (_req, res) => {
-  res.render('recipes/editRecipe');
-
-  return res.redirect('/'); // sucess
-};
-
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
 
@@ -40,10 +34,30 @@ const createRecipe = async (req, res) => {
 
 const newRecipe = (req, res) => res.render('recipes/newRecipe', { user: req.user, message: null });
 
+const editRecipe = async (req, res) => {
+  const userInfo = req.user;
+  const { id } = req.params;
+  const recipe = await recipesModel.getRecipeById(id);
+
+  if (recipe.userId === userInfo.id) {
+    return res.render('recipes/editRecipe', { ...recipe, user: userInfo });
+  }
+
+  // Path-relative redirects are also possible.
+  // If you were on http://example.com/admin/post/new,
+  // the following would redirect to http://example.com/admin/post:
+  return res.redirect('..');
+};
+
+const editSucess = async (req, res) => {
+  const { id } = req.params;
+};
+
 module.exports = {
   showAllRecipes,
   showRecipe,
   editRecipe,
+  editSucess,
   createRecipe,
   newRecipe,
   searchRecipe,

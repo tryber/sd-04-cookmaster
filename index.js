@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const routes = require('./router');
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 

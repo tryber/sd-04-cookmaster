@@ -9,18 +9,19 @@ const getAllRecipes = async () => {
   return list;
 };
 
-const getRecipeById = async (userId) => {
+const getRecipeById = async (recipeId) => {
   const db = await connection();
   const results = await db
     .getTable('recipes')
-    .select(['id', 'name', 'ingredients', 'instructions'])
+    .select(['id', 'user_id', 'name', 'ingredients', 'instructions'])
     .where('id = :id')
-    .bind('id', userId)
+    .bind('id', recipeId)
     .execute();
 
   const listing = await results.fetchAll();
-  const list = await listing.map(([id, name, ingredients, instructions]) => ({
+  const list = await listing.map(([id, userId, name, ingredients, instructions]) => ({
     id,
+    userId,
     name,
     ingredients,
     instructions,

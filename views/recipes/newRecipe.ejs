@@ -17,10 +17,16 @@
           <input type="hidden" name="ingredients" id="ingredients" />
           <ul id="listIngredients"></ul>
         </div>
-        <input id="ingredientsInput" type="text" data-testid="ingredientes" />
-        <button id="add" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
-        <label for="nameRecipe">Modo de Preparo</label>
-        <input type="text" name="instructions" id="nameRecipe" data-testid="modo-de-preparo" />
+        <div>
+          <input id="ingredientsInput" type="text" data-testid="ingredientes" />
+          <button for="ingredients" type="button" id="add" data-testid="adicionar-ingrediente">
+            Adicionar Ingrediente
+          </button>
+        </div>
+        <div>
+          <label for="nameRecipe">Modo de Preparo</label>
+          <input type="text" name="instructions" id="nameRecipe" data-testid="modo-de-preparo" />
+        </div>
       </div>
       <a href="/">Voltar</a>
       <button type="submit" data-testid="postar-receita">Salvar Receita</button>
@@ -35,8 +41,7 @@
     const ingredients = document.querySelector('#ingredients');
     let arrayIngredients = [];
 
-    document.querySelector('#add').addEventListener('click', (e) => {
-      e.preventDefault();
+    document.querySelector('#add').addEventListener('click', () => {
       const li = document.createElement('li');
       const btn = document.createElement('button');
 
@@ -51,7 +56,6 @@
       input.value = null;
 
       btn.addEventListener('click', (e) => {
-        e.preventDefault();
         const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
         arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
         ingredients.value = arrayIngredients.join(',');

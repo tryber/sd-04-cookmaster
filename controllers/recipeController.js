@@ -24,9 +24,10 @@ const recipeDetails = async (req, res) => {
 const createRecipe = async (req, res) => {
   const { id, user, name, ingredients, instructions } = await req.body;
   const newRecipeCreated = await Recipes.create(id, user, name, ingredients, instructions);
-  console.log('recipe Created!\n', newRecipeCreated);
 
-  // res.render('newRecipe', { newRecipeCreated });
+  // console.log('recipe Created!\n', newRecipeCreated);
+
+  res.render('newRecipe', { newRecipeCreated });
 };
 
 module.exports = { recipeDetails, listAllRecipes, createRecipe };

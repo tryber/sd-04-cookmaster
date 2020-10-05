@@ -93,7 +93,7 @@ const renderEditUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const { email, password, confirmPass, firstName, lastName } = req.body;
 
   const emailMessage = handleEmailMessage(email);
   const passMessage = handlePassMessage(password);

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body>
+    <h3>Nova Receita</h3>
+
+    <form action="/recipes" method="POST">
+      <label for="nome-receita">Nome da Receita</label>
+      <input data-testid="nome-receita" name="nome-receita" id="nome-receita" type="text" />
+
+      <button>Adicionar Ingrediente</buttontestid="adicionar-ingrediente"
+        name="adicionar-ingrediente"
+        id="adicionar-ingrediente"
+        type="text"
+      />
+
+      <label for="nome-receita">Modo de Preparo</label>
+      <input data-testid="modo-de-preparo" name="modo-de-preparo" id="modo-de-preparo" type="text" />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+
+  </body>
+</html>

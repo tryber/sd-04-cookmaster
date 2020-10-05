@@ -30,4 +30,16 @@ const getRecipeById = async (id) =>
       .then((recipes) => recipes.map((name) => name)),
   );
 
-module.exports = { getAllRecipes, getRecipeById };
+const create = async (id, user, name, ingredients, instructions) => {
+  connection
+    .connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .insert(['id', 'user', 'name', 'ingredientes', 'instructions'])
+        .values(id, user, name, ingredients, instructions)
+        .execute(),
+    );
+};
+
+module.exports = { getAllRecipes, getRecipeById, create };

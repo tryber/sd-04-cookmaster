@@ -20,7 +20,6 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 app.get('/', middlewares.auth(false), recipeControlle.index);
 
-
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

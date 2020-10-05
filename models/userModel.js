@@ -44,19 +44,26 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   const db = await connection();
-  const stmt = await db
-    .getTable('users')
-    .select([])
-    .where('id = :id')
-    .bind('id', id)
-    .execute();
+  const stmt = await db.getTable('users').select([]).where('id = :id').bind('id', id).execute();
   const rows = await stmt.fetchOne();
   const users = toObject(rows);
   // console.log(users);
   return users;
 };
 
+// ? verificar o cadastro de pessoas com o mesmo email
+const newUser = async (email, password, name, lastName) => {
+  const db = await connection();
+  const user = db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, name, lastName)
+    .execute();
+  return user;
+};
+
 module.exports = {
   findByEmail,
   findById,
+  newUser
 };

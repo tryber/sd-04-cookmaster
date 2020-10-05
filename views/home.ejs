@@ -7,19 +7,22 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Receitas</h1>
-    <ul>
-      <% recipes.forEach(recipe => { %>
-        <li><%= recipe.user %> - <%= recipe.name %> - <a class="btn btn-sm btn-secondary" href="/recipes/<%= recipe.id %>">Ver mais</a></li>
-      <% }) %>
-    </ul>
-    <a href="/" data-testid="buscar-receita" class="btn btn-sm btn-primary">Buscar Receita</a>
-    <% if (user) {%>
-    <a href="/" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
-    <% } %>
-    <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>
-    <% if (user) {%>
-    <a href="/" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
-    <% } %>
+    <div class="container">
+      <h1>Receitas</h1>    
+      <ul>
+        <% recipes.forEach(recipe => { %>
+          <li><%= recipe.user %> - <%= recipe.name %> - <a class="btn btn-sm btn-secondary" href="/recipes/<%= recipe.id %>">Ver mais</a></li>
+        <% }) %>
+      </ul>
+      <% if (!user) {%> 
+        <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>
+      <% }  else { %>
+        <a href="/" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
+      <% } %>
+      <a href="/" data-testid="buscar-receita" class="btn btn-sm btn-primary">Buscar Receita</a>
+      <% if (user) {%>
+        <a href="/" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
+      <% } %>
+    </div>
   </body>
 </html>

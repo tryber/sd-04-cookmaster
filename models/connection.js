@@ -1,7 +1,5 @@
-const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config');
-
-let schema;
+const mysqlx = require('@mysql/xdevapi');
 
 const config = {
   user: process.env.MYSQL_USER,
@@ -11,17 +9,21 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-function connection() {
-  return schema ?
-    Promise.resolve(schema) :
-    mysqlx.getSession(config)
-    .then((session) => {
-      schema = session.getSchema('cookmaster');
-      return schema;
-    })
-    .catch(() => {
-      process.exit(1);
-    });
-}
+let schema;
+
+const connection = () => {
+  return schema
+    ? Promise.resolve(schema)
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          schema = session.getSchema('cookmaster');
+          return schema;
+        })
+        .catch((err) => {
+          console.error(err);
+          process.exit(1);
+        });
+};
 
 module.exports = connection;

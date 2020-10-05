@@ -52,15 +52,47 @@ const logout = (req, res) => {
 // -------------------------------------------------
 // -------------------------------------------------
 
+const emailAndNameValidation = (email, firstName, lastName) => {
+  const emailRegex = /\S+@\S+\.\S+/;
+  let message;
+
+  if (!emailRegex.test(email)) message = 'O email deve ter o formato email@mail.com';
+
+  if (firstName.length < 3 || typeof firstName !== 'string') {
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  if (lastName.length < 3 || typeof lastName !== 'string') {
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+
+  return message;
+};
+
 const newUser = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
-  const emailRegex = /\S+@\S+\.\S+/;
+  // const emailRegex = /\S+@\S+\.\S+/;
 
-  if (!emailRegex.test(email))
-    return res.render('cadastro', {
-      message: 'O email deve ter o formato email@mail.com',
-    });
+  // if (!emailRegex.test(email))
+  //   return res.render('cadastro', {
+  //     message: 'O email deve ter o formato email@mail.com',
+  //   });
+
+  // if (firstName.length < 3 || typeof firstName !== 'string')
+  // return res.render('cadastro', {
+  //   message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+  // });
+
+  // if (lastName.length < 3 || typeof lastName !== 'string')
+  //   return res.render('cadastro', {
+  //     message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+  //   });
+
+  const returnMessage = emailAndNameValidation(email, firstName, lastName);
+
+  if (returnMessage) {
+    return res.render('cadastro', { message: returnMessage });
+  }
 
   if (!email || !password || !firstName || !lastName)
     return res.render('cadastro', {
@@ -75,16 +107,6 @@ const newUser = async (req, res) => {
   if (password !== confirmPassword)
     return res.render('cadastro', {
       message: 'As senhas tem que ser iguais',
-    });
-
-  if (firstName.length < 3 || typeof firstName !== 'string')
-    return res.render('cadastro', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    });
-
-  if (lastName.length < 3 || typeof lastName !== 'string')
-    return res.render('cadastro', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
   await userModel.createUser(email, password, firstName, lastName);

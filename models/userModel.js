@@ -17,7 +17,20 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return TEMP_USER;
+  try {
+    const db = await connection();
+    const results = await db
+      .getTable('users')
+      .select([])
+      .where('email = :email')
+      .bind('email', email)
+      .execute();
+
+    const [id, email, password, name, lastName] = await results.fetchOne();
+    return { id, email, password, name, lastName };
+  } catch (err) {
+    return err;
+  }
 };
 
 /**

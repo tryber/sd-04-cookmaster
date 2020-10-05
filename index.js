@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 // const connection = require('./models/connection');
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -14,9 +15,8 @@ app.set('views', './views');
 
 app.get('/', controllers.recipeController.listRecipes);
 
-// app.get('/', (_req, res) => {
-//   return res.render('home');
-// });
+app.post('/login', async (req, res) => {
+});
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

@@ -50,9 +50,7 @@ const register = (req, res) => {
 const registerForm = async (req, res) => {
   const data = req.body;
   const message = await userModel.isValid(data);
-  if (message.length > 1) {
-    res.render('admin/register', { message });
-  } else {
+  if (message.length === 0) {
     userModel.register(data);
     message.push('Cadastro efetuado com sucesso!');
   }

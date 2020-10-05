@@ -6,7 +6,18 @@
     <title>Navibar - Home</title>
   </head>
   <body>
-    <span>Cookmaster</span>
-    <button>Login</button>
+    <nav>
+      <span>Cookmaster</span>
+      <% if (!user) {%>
+      <a href="/login">
+        <button data-testid="login">Login</button>
+      </a>
+      <%}%> <% if (user) {%>
+      <span><%= user.name %> <%= user.lastName %></span>
+      <a href="/logout">
+        <button data-testid="logout">Logout</button>
+      </a>
+      <%}%>
+    </nav>
   </body>
 </html>

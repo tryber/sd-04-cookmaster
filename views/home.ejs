@@ -12,9 +12,10 @@
 
     <p>Receitas</p>
 
-    <%= receitas.name %>
-
-
+    <% recipes.forEach((recipe) => { %>
+    <p><%= recipe.name %></p>
+    <p><%= recipe.user %></p>
+    <% }) %>
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>
 </html>

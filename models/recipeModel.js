@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAllRecipes = async () =>
-  connection().then((db) =>
+  connection.connection().then((db) =>
     db
       .getTable('recipes')
       .select(['id', 'user', 'name', 'ingredients', 'instructions'])
@@ -19,10 +19,10 @@ const getAllRecipes = async () =>
   );
 
 const getRecipeById = async (id) =>
-  connection().then((db) =>
+  connection.connection().then((db) =>
     db
       .getTable('recipes')
-      .select(['id', 'name'])
+      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
       .where('id = :id')
       .bind('id', id)
       .execute()

@@ -1,40 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <form class="recipesAddForm" action="/recipes" method="POST">
+    <input type="hidden" name="userId" value='<%= user.id %>' />
+    <input type="hidden" name="userName" value='<%= `${user.firstName} ${user.lastName}`  %>' />
     <label for="recipeNameInput">Nome da Receita</label>
     <input type="text" name="recipeName" id="recipeNameInput" data-testid="nome-receita" />
     <ul class="ingredientsListBox"></ul>
     <input type="text" name="recipeIngredients" id="recipeIngredientsInput" data-testid="ingredientes" />
     <button type="button" data-testid="adicionar-ingrediente" id="btnAddIngredients">Adicionar Ingrediente</button>
-    <label for="recipeinstructionsInput">Modo de Preparo</label>
-    <input type="text" name="recipeinstructions" id="recipeinstructionsInput" data-testid="modo-de-preparo">
+    <label for="recipeInstructionsInput">Modo de Preparo</label>
+    <input
+      type="text"
+      maxlength="300"
+      name="recipeInstructions"
+      id="recipeInstructionsInput"
+      data-testid="modo-de-preparo"
+    >
     <button type="button" onclick="window.location.pathname='/'">Voltar</button>
     <button type="submit" data-testid="postar-receita">Salvar Receita</button>
   </form>
   <script>
+
     const btnAddIngredients = document.querySelector('#btnAddIngredients');
+
     const recipeIngredientsInput = document.querySelector('#recipeIngredientsInput');
+
     const ingredientsListBox = document.querySelector('.ingredientsListBox');
-    btnAddIngredients.addEventListener('click', () => {
+
+    function onClickAddIngredients() {
       const ingredientsListItem = document.createElement('li');
       ingredientsListItem.classList.add('ingredientsListItem');
       ingredientsListItem.innerText = recipeIngredientsInput.value;
       ingredientsListBox.appendChild(ingredientsListItem);
+      const btnRemoveIngredients = document.createElement('button');
+      btnRemoveIngredients.innerText = 'Excluir Ingrediente';
+      btnRemoveIngredients.type = 'button';
+      ingredientsListItem.appendChild(btnRemoveIngredients);
+      btnRemoveIngredients.addEventListener('click', (event) => {
+        event.target.parentNode.remove()
+      });
       const itemInputHidden = document.createElement('input');
       itemInputHidden.type = 'hidden';
       itemInputHidden.name = 'ingredients';
       itemInputHidden.value = recipeIngredientsInput.value;
       const recipesAddForm = document.querySelector('.recipesAddForm');
-      recipesAddForm.appendChild(itemInputHidden);
+      ingredientsListItem.appendChild(itemInputHidden);
       recipeIngredientsInput.value = null;
-    });
+    }
+
+    function addIngredients() {
+      btnAddIngredients.addEventListener('click', onClickAddIngredients)
+    }
+
+    addIngredients();
 
   </script>
 </body>
+
 </html>

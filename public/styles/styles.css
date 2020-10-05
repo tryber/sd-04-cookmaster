@@ -1,0 +1,16 @@
+.recipe {
+  background: grey;
+  height: 117px;
+  margin: 5px 3px;
+  width: 343px;
+}
+
+.title {
+  color: blue;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+}

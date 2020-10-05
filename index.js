@@ -20,9 +20,11 @@ app.get('/recipes/new', middlewares.auth(), controllers.recipesNewController.rec
 
 app.post('/recipes', middlewares.auth(), controllers.recipesNewController.recipesNew);
 
-app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesEditController.editForm);
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesEditController.recipeEditForm);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesDetailsController);
+
+app.post('/recipes/:id', controllers.recipesEditController.recipeEdit);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

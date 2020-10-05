@@ -19,5 +19,10 @@
     <h3>Modo de preparo</h3>
 
     <p><%= recipe[4] %></p>
+
+    <% if (user) { %>
+    <a href="/" data-testid="editar-receita">Editar Receita</a>
+    <a href="/" data-testid="excluir-receita">Excluir Receita</a>
+    <% } %>
   </body>
 </html>

@@ -32,7 +32,7 @@ const addRecipe = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
 
   await recipeModel.addRecipe(
-    `${req.user.firstName} ${req.user.lastName}`,
+    `${req.user.name} ${req.user.lastName}`,
     req.user.id,
     name,
     ingredients,
@@ -74,9 +74,11 @@ const myRecipes = async (req, res) => {
 };
 
 const deleteForm = async (req, res) => {
+  const { id } = req.params;
   res.status(201).render('recipes/delete', {
     user: req.user,
     message: null,
+    id,
   });
 };
 
@@ -90,6 +92,7 @@ const deleteRecipe = async (req, res) => {
   }
   res.status(401).render('recipes/delete', {
     user: req.user,
+    id,
     message: 'Senha Incorreta.',
   });
 };

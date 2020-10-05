@@ -19,14 +19,14 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.re
 // app.get('recipes/search');
 
 app.get('/recipes/new', controllers.recipeController.createRecipe);
-app.post('/recipes/new', controllers.recipeController.createRecipe);
+// app.post('/recipes/new', controllers.recipeController.createRecipe);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
 app.get('/cadastro', (_req, res) => res.render('cadastro'));
-// app.post('/cadastro', (_req, res) => res.render('cadastro'));
+app.post('/cadastro', (_req, res) => res.send('cadastro'));
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

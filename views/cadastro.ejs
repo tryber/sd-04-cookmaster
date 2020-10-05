@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <form action="/login" method="POST">
+    <form action="/cadastro" method="POST">
       <label for="email">Email: </label>
       <input data-testid="email" type="text" name="email" id="email" />
       <label for="nome">Nome: </label>
@@ -29,9 +29,9 @@
         name="confirmar-senha"
         id="confirmar-senha"
       />
-
-      <a href="/home" data-testid="cadastrar">Cadastre-se</a>
-      <a href="/login" data-testid="login">Login</a>
+      <button type="submit">Cadastrar</button>
     </form>
+    <a href="/home" data-testid="cadastrar">Cadastre-se</a>
+    <a href="/login" data-testid="login">Login</a>
   </body>
 </html>

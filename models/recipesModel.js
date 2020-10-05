@@ -15,4 +15,29 @@ const getAllRecipes = async () => {
   }
 };
 
-module.exports = { getAllRecipes };
+const recipeDetails = async (idInp) => {
+  try {
+    const db = await connection();
+    const dbSelectId = await db
+      .getTable('recipes')
+      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .where('id = :idInp')
+      .bind('idInp', idInp)
+      .execute();
+    const [id, user, name, ingredients, instructions] = await dbSelectId.fetchOne();
+    return {
+      id,
+      user,
+      name,
+      ingredients,
+      instructions,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = {
+  getAllRecipes,
+  recipeDetails,
+};

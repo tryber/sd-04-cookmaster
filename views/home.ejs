@@ -6,12 +6,12 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('header', { token }) -%>
+    <%- include('header', { user }) -%>
     <div>
       <button type="button" data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">Buscar Receita</button>
       <h1>Receitas</h1>
       <!-- These buttons should only appear if the user is logged in. -->
-      <% if(token) {%>
+      <% if(user) {%>
         <button onclick="window.location.pathname='/recipes/new'" data-testid="nova-receita" >
           Nova Receita
         </button>
@@ -27,8 +27,7 @@
       <div>
         <p>Receita: <%= item.name %> </p>
         <p>Usuário: <%= item.user %> </p>
-        <!-- I will probably have to forward to some route like: / recipes / {id}. -->
-        <a href="Link">Ver mais</a>
+        <a href= <%= `/recipes/${item.id}` %> >Ver mais</a>
       </div>
       <% }) %>
     </div>

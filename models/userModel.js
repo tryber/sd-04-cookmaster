@@ -42,6 +42,20 @@ const confirmPass = (password = '', confirmPassword = '') => (password === confi
 
 const nameIsValid = (name = '') => name.match(/^\w{3,}/i);
 
+const updateUser = async (id, email, password, firstName, lastName) => {
+  const db = await conn();
+  return db
+    .getTable('users')
+    .update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', firstName)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 module.exports = {
   findByEmail,
   findById,
@@ -50,4 +64,5 @@ module.exports = {
   passwordIsValid,
   confirmPass,
   nameIsValid,
+  updateUser,
 };

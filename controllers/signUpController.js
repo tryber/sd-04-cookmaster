@@ -78,7 +78,49 @@ const newUser = async (req, res) => {
   });
 };
 
+const renderEditUser = async (req, res) => {
+  const user = await userModel.findById(req.user.id);
+
+  res.render('me/edit', {
+    user,
+    emailMessage: null,
+    passMessage: null,
+    confirmPassMessage: null,
+    firstNameMessage: null,
+    lastNameMessage: null,
+    successMessage: null,
+  });
+};
+
+const editUser = async (req, res) => {
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
+
+  const emailMessage = handleEmailMessage(email);
+  const passMessage = handlePassMessage(password);
+  const confirmPassMessage = handleConfirmPass(password, confirmPass);
+  const firstNameMessage = handleFirstNameMessage(firstName);
+  const lastNameMessage = handleLastNameMessage(lastName);
+
+  const user = await userModel.findById(req.user.id);
+  if (emailMessage || passMessage || confirmPassMessage || firstNameMessage || lastNameMessage) {
+    res.status(402).render('me/edit', {
+      user,
+      emailMessage,
+      passMessage,
+      confirmPassMessage,
+      firstNameMessage,
+      lastNameMessage,
+      successMessage: null,
+    });
+  }
+
+  await userModel.updateUser(req.user.id, email, password, firstName, lastName);
+  res.redirect('/');
+};
+
 module.exports = {
   renderSignup,
   newUser,
+  renderEditUser,
+  editUser,
 };

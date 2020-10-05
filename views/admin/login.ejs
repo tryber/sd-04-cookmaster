@@ -4,26 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <% if (message) {%>
-    <div class="message">
-      <%= message %>
-    </div>
+    <div class="message"><%= message %></div>
     <% } %>
-    <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
-      <% if (redirect) { %>
-      <input
-        type="hidden"
-        name="redirect"
-        value="<%= decodeURIComponent(redirect) %>"
-      />
-      <% } %>
-      <button type="submit">Entrar</button>
-    </form>
+    <div class="d-flex flex-column align-items-center mt-5 border">
+      <h2>Login</h2>
+      <div class="d-flex justify-content-center">
+        <form action="/login" method="POST" class="form-horizontal">
+          <div class="form-group">
+            <div>
+              <label for="emailInput">Email: </label>
+              <input
+                data-testid="email"
+                class="form-control"
+                type="text"
+                name="email"
+                id="emailInput"
+              /><br />
+            </div>
+            <div>
+              <label for="passwordInput">Senha: </label>
+              <input
+                data-testid="senha"
+                class="form-control"
+                type="password"
+                name="password"
+                id="passwordInput"
+              /><br />
+            </div>
+            <% if (redirect) { %>
+            <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+            <% } %>
+            <button class="btn btn-primary" data-testid="entrar" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

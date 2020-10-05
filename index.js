@@ -6,6 +6,7 @@ require('dotenv').config();
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const userController = require('./controllers/userController');
+const { request } = require('express');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,6 +30,10 @@ app.get('/register', (_req, res) => {
 });
 
 app.post('/register', middlewares.validatedRegister, userController.registerUser);
+
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.enterNewRecipe);
+
+app.post('/recipes', middlewares.auth(), controllers.recipesController.createNewRecipe);
 
 app.get(
   '/recipes/search',

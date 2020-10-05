@@ -57,8 +57,23 @@ const recipeSearchByName = async (nameInp) => {
   }
 };
 
+const createRecipeModel = async (id, user, name, ingredients, instructions) => {
+  try {
+    const db = connection();
+    const createdRecipe = await db
+      .getTable('recipes')
+      .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(id, user, name, ingredients, instructions)
+      .execute();
+    return createdRecipe;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllRecipes,
   recipeDetails,
   recipeSearchByName,
+  createRecipeModel,
 };

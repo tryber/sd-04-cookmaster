@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - New Recipe</title>
+  </head>
+  <body>
+    <%- include('header', { user }) -%>
+    <div>
+      <h1>Nova Receita</h1>
+      <form action="/recipes" method="POST">
+        <label for="nameInp">Nome da Receita</label><br />
+        <input
+          type="text"
+          name="name"
+          id="nameInp"
+          data-testid="nome-receita"
+          required
+        /><br /><br />
+        <label>Ingredientes</label>
+        <ul id="ingredients-list"></ul>
+        <input type="text" name="ingredientInp" id="ingredientInp" data-testid="ingredientes" />
+        <button type="button" id="add-ingredient" data-testid="adicionar-ingrediente">
+          Adicionar Ingrediente</button
+        ><br /><br />
+        <label for="instructionsInput">Modo de preparo: </label><br />
+        <textarea
+          name="instructions"
+          id="instructionsInput"
+          cols="50"
+          rows="30"
+          data-testid="modo-de-preparo"
+          required
+        ></textarea
+        ><br /><br />
+        <button type="button" onclick="window.location.pathname='/'">Voltar</button>
+        <button type="submit" id='postarReceita' data-testid="postar-receita">Salvar Receita</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    let ingredients = [];
+    let addIngredient = document.getElementById('add-ingredient');
+    let inputValue = document.getElementById('ingredientInp');
+
+    addIngredient.addEventListener('click', () => {
+      const li = document.createElement('li');
+      li.classList = 'li-ingredients';
+      li.innerText = inputValue.value;
+      document.getElementById('ingredients-list').appendChild(li);
+      document.getElementById('ingredientInp').value = '';
+
+      const addButtonDelete = document.createElement('button');
+      addButtonDelete.innerText = 'Excluir Ingrediente';
+      document.getElementById('ingredients-list').appendChild(addButtonDelete);
+
+      addButtonDelete.addEventListener('click', () => {
+        ingredients = ingredients.filter((item) => item !== li.innerText);
+        addButtonDelete.remove();
+        li.remove();
+      });
+
+      postarReceita.addEventListener('click', () => {
+        inputValue.value = ingredients.join()
+      })
+    });
+  </script>
+</html>

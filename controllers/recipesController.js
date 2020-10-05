@@ -29,8 +29,31 @@ const searchByNameController = async (req, res) => {
   }
 };
 
+const enterNewRecipe = async (req, res) => {
+  try {
+    res.render('newRecipe', { user: req.user });
+  } catch (error) {
+    return error;
+  }
+};
+
+const createNewRecipe = async (req, res) => {
+  try {
+    const { id, user } = req.user;
+    const { name, ingredients, instructions } = req.body;
+
+    await recipesModel.createRecipeModel(id, user, name, ingredients, instructions);
+
+    return res.redirect('/');
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetailsController,
   searchByNameController,
+  enterNewRecipe,
+  createNewRecipe,
 };

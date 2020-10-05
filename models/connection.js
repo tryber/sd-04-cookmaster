@@ -10,7 +10,7 @@ const config = {
 };
 
 const connection = () => {
-  mysqlx
+  return mysqlx
     .getSession(config)
     .then((session) => {
       schema = session.getSchema('cookmaster');

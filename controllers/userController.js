@@ -52,7 +52,7 @@ const logout = (req, res) => {
 // -------------------------------------------------
 // -------------------------------------------------
 
-const emailAndNameValidation = (email, firstName, lastName) => {
+const emailAndNameValidation = (email, firstName, lastName, password, confirmPassword) => {
   const emailRegex = /\S+@\S+\.\S+/;
   let message;
 
@@ -64,6 +64,8 @@ const emailAndNameValidation = (email, firstName, lastName) => {
   if (lastName.length < 3 || typeof lastName !== 'string') {
     message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
+  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (password !== confirmPassword) message = 'As senhas tem que ser iguais';
 
   return message;
 };
@@ -72,6 +74,16 @@ const newUser = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   // const emailRegex = /\S+@\S+\.\S+/;
+
+  // if (password.length < 6)
+  //   return res.render('cadastro', {
+  //     message: 'A senha deve ter pelo menos 6 caracteres',
+  //   });
+
+  // if (password !== confirmPassword)
+  //   return res.render('cadastro', {
+  //     message: 'As senhas tem que ser iguais',
+  //   });
 
   // if (!emailRegex.test(email))
   //   return res.render('cadastro', {
@@ -88,25 +100,21 @@ const newUser = async (req, res) => {
   //     message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
   //   });
 
-  const returnMessage = emailAndNameValidation(email, firstName, lastName);
+  const returnMessage = emailAndNameValidation(
+    email,
+    firstName,
+    lastName,
+    password,
+    confirmPassword,
+  );
 
   if (returnMessage) {
     return res.render('cadastro', { message: returnMessage });
   }
 
-  if (!email || !password || !firstName || !lastName)
+  if (!email || !password || !confirmPassword || !firstName || !lastName)
     return res.render('cadastro', {
       message: 'Preencha todos os campos',
-    });
-
-  if (password.length < 6)
-    return res.render('cadastro', {
-      message: 'A senha deve ter pelo menos 6 caracteres',
-    });
-
-  if (password !== confirmPassword)
-    return res.render('cadastro', {
-      message: 'As senhas tem que ser iguais',
     });
 
   await userModel.createUser(email, password, firstName, lastName);

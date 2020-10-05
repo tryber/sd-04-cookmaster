@@ -14,8 +14,8 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
-  const { email, password, redirect } = req.body;
+const login = async (req, res, _next) => {
+  const { email, password } = req.body;
 
   if (!email || !password)
     return res.render('admin/login', {

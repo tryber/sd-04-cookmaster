@@ -5,12 +5,10 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
-// require('dotenv/config');
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-// dar pull
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 

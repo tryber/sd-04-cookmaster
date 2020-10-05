@@ -6,8 +6,13 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('components/header', user) %>
+    <%- include('./components/header.ejs', { user }) %>
     <h1>Receitas</h1>
+    <% if (user) { %>
+      <button data-testid="nova-receita">
+        Nova Receita
+      </button>
+    <% } %>
     <button data-testid="buscar-receita">Buscar Receitas</button>
     <div>
       <ul>

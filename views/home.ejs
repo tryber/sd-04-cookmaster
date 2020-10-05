@@ -4,8 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
+    <style>
+    </style>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <header>
+      <nav>
+        <h1>Cookmaster</h1>
+
+        <% if (token) { %>
+          <button onclick="window.location.pathname='/logout'">Logout</button>
+          <% } else { %>
+        <a href="/login" data-testid="login">login</a>
+        <% } %>
+
+      </nav>
+    </header>
+    <div>
+      <h1>Receitas</h1>
+
+      <% if (token) { %>
+        <button data-testid="nova-receita">Nova Receita</button>
+      <% } %>
+
+      <a><button data-testid="buscar-receita">Buscar Receita</button></a>
+      
+    </div>
+    <ul>
+      <% recipes.forEach(({name, user, id}) => { %>
+        <li>
+          <%= `${name} - ${user}` %>
+          <a href=<%=`recipes/${id}` %>>Ver mais</a>
+        </li>
+     <% }) %>
+    </ul>
   </body>
 </html>

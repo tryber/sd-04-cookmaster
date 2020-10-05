@@ -5,15 +5,29 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
+const RecipesController = require('./controllers/recipesController');
+const UserController = require('./controllers/userController');
+
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
+// -----------------------------------------------------------------------------------------------------------
+
+// home com todas as receitas
+app.get('/', RecipesController.recipeController);
+
+// página de cadastro
+app.get('/cadastro', UserController.newUser);
+app.post('/cadastro', UserController.newUser);
+
+// página para cada receita específica
+app.get('/recipes/:id', (_req, res) => {
+  res.send('nome da receita pipipipopopo');
 });
 
 app.get('/admin', middlewares.auth(), (req, res) => {

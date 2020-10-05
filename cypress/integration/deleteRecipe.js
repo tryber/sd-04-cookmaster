@@ -41,4 +41,8 @@ describe('7 - Crie uma página de exclusão de uma receita.', () => {
     verifyContainsText('Cookmaster');
     verifyContainsText('Receitas');
   })
+
+  after(() => {
+    createAndInsertsDataBase();
+  })
 });

@@ -8,7 +8,7 @@
   <body>
     <h1>Cookmaster</h1>
     <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
-    <% if (token) { %>
+    <% if (user) { %>
       <button data-testid="nova-receita">Nova Receita</button>
     <% } %>
     <a data-testid="login" href="/login" >Login</a>

@@ -1,10 +1,10 @@
-const { getRecipes, findRecipeById, getRecipesByName } = require('../models/getRecipes');
-
+const { getRecipes, findRecipeById, getRecipesByName, deleteRecipeById } = require('../models/recipesModel');
+const { findById } = require('../models/userModel');
 
 const getAllRecipes = async (req, res) => {
   const recipes = await getRecipes();
-  const { token = '' } = req.cookies || {};
-  return res.render('home', { recipes, token });
+  const { user = '' } = req;
+  return res.render('home', { recipes, user });
 };
 
 const getRecipe = async (req, res) => {
@@ -21,8 +21,26 @@ const searchRecipe = async (req, res) => {
   res.status(200).render('searchRecipe', { recipes });
 };
 
+const deleteRecipe = async (req, res) => {
+  const { user, params, body } = req;
+  const { password } = await findById(user.id);
+
+  if (password !== body.password) {
+    return res.render('admin/confirmPassword', { id: params.id, message: 'Senha Incorreta.' });
+  }
+
+  const warningsCount = await deleteRecipeById(params.id);
+
+  if (warningsCount > 0) {
+    return res.render('admin/confirmPassword', { id: params.id, message: 'erro ao excluir receita' });
+  }
+
+  return res.status(200).redirect('/');
+};
+
 module.exports = {
   getAllRecipes,
   getRecipe,
   searchRecipe,
+  deleteRecipe,
 };

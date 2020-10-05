@@ -29,8 +29,16 @@ const getRecipesByName = async (name) => {
   }));
 };
 
+const deleteRecipeById = async (idInput) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table.delete().where('id = :id').bind('id', idInput).execute();
+  return result.getWarningsCount();
+};
+
 module.exports = {
   getRecipes,
   findRecipeById,
   getRecipesByName,
+  deleteRecipeById,
 };

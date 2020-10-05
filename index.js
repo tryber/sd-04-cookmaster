@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
+const { authMiddleware } = require('./middlewares/auth');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +28,8 @@ app.get('/cadastro', controllers.cadastroController.cadastroForm);
 //   '/cadastro',
 //   controllers.cadastroController.signup
 // );
+
+app.get('recipes/new', authMiddleware(false), controllers.editController.editRecipe);
 
 app.get('/recipes/search', middlewares.auth(false), controllers.searchController.searchRecipe);
 

@@ -1,4 +1,4 @@
-const { getRecipes, findRecipeById } = require('../models/getRecipes');
+const { getRecipes, findRecipeById, getRecipesByName } = require('../models/getRecipes');
 
 
 const getAllRecipes = async (req, res) => {
@@ -15,7 +15,14 @@ const getRecipe = async (req, res) => {
   return res.render('recipeDetails', { recipe, isRecipeCreator });
 };
 
+const searchRecipe = async (req, res) => {
+  const { q } = req.query;
+  const recipes = await getRecipesByName(q);
+  res.render('searchRecipe', { recipes });
+}
+
 module.exports = {
   getAllRecipes,
   getRecipe,
+  searchRecipe,
 };

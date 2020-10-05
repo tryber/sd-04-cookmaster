@@ -20,7 +20,7 @@
           <h1>Receitas</h1>
           <% if (user) { %>
           <button class="btn btn-primary">Minhas Receitas</button>
-          <button class="btn btn-primary" data-testid="nova-receita">Nova Receita</button>
+          <a href= <%= `/recipes/new` %> class="btn btn-primary btn-small" data-testid="nova-receita">Nova Receita</a>
           <button class="btn btn-primary">Minha Conta</button>
           <% } %>
         </nav>

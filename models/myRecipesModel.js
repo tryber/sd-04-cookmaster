@@ -1,12 +1,12 @@
 const connection = require('./connection');
 
-const showMyRecipes = async (userId) => {
+const showMyRecipes = async (userIdP) => {
   const db = await connection();
   const results = await db
     .getTable('recipes')
     .select([])
     .where('user_id = :user_id')
-    .bind('user_id', userId)
+    .bind('user_id', userIdP)
     .execute();
 
   const listing = await results.fetchAll();

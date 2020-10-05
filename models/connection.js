@@ -13,7 +13,7 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => {
-    let schema = session.getSchema('cookmaster');
+      const schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => {

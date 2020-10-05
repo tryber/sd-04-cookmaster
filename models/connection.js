@@ -20,10 +20,7 @@ function connection() {
       schema: 'cookmaster',
     })
     .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => {
-      console.log(err);
-      process.exit(1);
-    });
+    .catch((err) => err);
 }
 
 module.exports = connection;

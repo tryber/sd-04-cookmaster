@@ -1,8 +1,7 @@
 const registerNewRecipe = require('../models/recipesNewModel');
 
-const recipesNewForm = (req, res) => {
-  return res.render('recipesNew', { user: req.user });
-};
+const recipesNewForm = (req, res) =>
+  rres.render('recipesNew', { user: req.user });
 
 const recipesNew = async (req, res) => {
   const { userId, userName, recipeName, ingredients, recipeInstructions } = req.body;

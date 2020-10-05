@@ -13,11 +13,10 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => {
-      schema = session.getSchema('cookmaster');
+    let schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => {
-      console.error(err);
       process.exit(1);
     });
 module.exports = connection;

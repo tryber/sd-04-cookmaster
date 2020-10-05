@@ -6,12 +6,25 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Cookmaster</h1>
     <%- include('navbar', {user}) %>
+    <h1>Cookmaster</h1>
     <h3>Receitas</h3>
-    <button type="button" data-testid="buscar-receita">Buscar Receita</button>
+    <button
+      type="button"
+      data-testid="buscar-receita"
+      onclick="window.location.pathname='/recipes/search'"
+    >
+      Buscar Receita
+    </button>
     <% if (user) { %>
-    <button type="button" data-testid="nova-receita">Nova Receita</button> <% } %>
+    <button
+      type="button"
+      data-testid="nova-receita"
+      onclick="window.location.pathname='/recipes/new'"
+    >
+      Nova Receita
+    </button>
+    <% } %>
     <div>
       <% recipes.forEach((recipe) => { %>
       <p><%= recipe.recipeName %></p>

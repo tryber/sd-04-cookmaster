@@ -35,6 +35,10 @@ app.post(
   controllers.signupController.signup,
 );
 
+app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
+
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.registerRecipes);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.details);
 
 app.get('/edit', controllers.recipesController.editRecipe);

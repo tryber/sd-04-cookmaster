@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Recipes</title>
+  </head>
+  <body>
+    <%- include('navbar', {user}) %>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+      <label for="recipeName">Nome da Receita</label>
+      <input type="text" id="recipeName" name="recipeName" data-testid="nome-receita" />
+      <label for="ingredients">Ingredientes</label>
+      <input type="text" id="ingredients" name="ingredients" data-testid="ingredientes" />
+      <button type="button" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+      <label for="instructions">Modo de Preparo</label>
+      <textarea id="instructions" name="instructions" data-testid="modo-de-preparo"></textarea>
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+  </body>
+</html>

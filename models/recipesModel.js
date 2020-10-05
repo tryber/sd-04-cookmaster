@@ -10,9 +10,9 @@ const findAll = async () =>
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
         id,
-        user_id,
+        userId,
         user,
         name,
         ingredients,

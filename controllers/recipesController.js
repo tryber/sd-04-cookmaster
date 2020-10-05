@@ -8,7 +8,6 @@ const recipeController = async (req, res) => {
   try {
     res.status(200).render('home', { recipes, token });
   } catch (err) {
-    console.error(err);
     res.status(500).send('<h2>Não foi possivel realizar essa operação</h2>');
   }
 };

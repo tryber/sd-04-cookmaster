@@ -53,47 +53,41 @@ const logout = (req, res) => {
 // -------------------------------------------------
 
 const newUser = async (req, res) => {
-  const { email, password, confirm_password, first_name, last_name } = req.body;
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   const emailRegex = /\S+@\S+\.\S+/;
 
-  // Validação email
   if (!emailRegex.test(email))
     return res.render('cadastro', {
       message: 'O email deve ter o formato email@mail.com',
     });
 
-  // Validação todos os campos
-  if (!email || !password || !first_name || !last_name)
+  if (!email || !password || !firstName || !lastName)
     return res.render('cadastro', {
       message: 'Preencha todos os campos',
     });
 
-  // Validação da senha
   if (password.length < 6)
     return res.render('cadastro', {
       message: 'A senha deve ter pelo menos 6 caracteres',
     });
 
-  // Validação das duas senhas
-  if (password !== confirm_password)
+  if (password !== confirmPassword)
     return res.render('cadastro', {
       message: 'As senhas tem que ser iguais',
     });
 
-  // Validação do nome
-  if (first_name.length < 3 || typeof first_name !== 'string')
+  if (firstName.length < 3 || typeof firstName !== 'string')
     return res.render('cadastro', {
       message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
-  // Validação do sobrenome
-  if (last_name.length < 3 || typeof last_name !== 'string')
+  if (lastName.length < 3 || typeof lastName !== 'string')
     return res.render('cadastro', {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
-  await userModel.createUser(email, password, first_name, last_name);
+  await userModel.createUser(email, password, firstName, lastName);
   return res.status(200).render('cadastro', {
     message: 'Cadastro efetuado com sucesso!',
   });

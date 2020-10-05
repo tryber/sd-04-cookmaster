@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// -----------------------------------------------------------------------------------------------------------
+// -------------------------------------------------
 
 // home com todas as receitas
 app.get('/', RecipesController.recipeController);

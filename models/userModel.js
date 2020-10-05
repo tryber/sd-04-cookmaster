@@ -24,12 +24,12 @@ const findById = async (idInput) => {
 // -------------------------------------------------
 
 // Criar novo usuário
-const createUser = (email, password, first_name, last_name) => {
+const createUser = (email, password, firstName, lastName) => {
   connection().then((db) =>
     db
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
-      .values(email, password, first_name, last_name)
+      .values(email, password, firstName, lastName)
       .execute(),
   );
 };

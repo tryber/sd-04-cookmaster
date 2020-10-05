@@ -34,24 +34,23 @@
     </div>
     <div class="container">
       <h2>Buscar Receitas</h2>
-      <div >
+      <div>
         <form class="mb-3 d-flex" action="" method="GET">
-            <label class="sr-only" for="searchInput">Search </label>
-            <input
+          <label class="sr-only" for="searchInput">Search </label>
+          <input
             class="mr-2 form-control"
             data-testid="receita"
             type="text"
             name="q"
             id="searchInput"
-            />
-            <button class="btn btn-primary align-self-center" data-testid="buscar" >Buscar</button>
+          />
+          <button class="btn btn-primary align-self-center" data-testid="buscar">Buscar</button>
         </form>
       </div>
       <div class="my-container">
-        <% if (recipes == null) { %> 
-            <p>busca</p>
-        <%} else {%>
-        <% recipes.forEach(food => { %>
+        <% if (recipes == null) { %>
+        <p>busca</p>
+        <%} else {%> <% recipes.forEach(food => { %>
         <div class="mb-5 mr-5 my-box">
           <div class="p-3 bg-info text-white">
             <div class="row">

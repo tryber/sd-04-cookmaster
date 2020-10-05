@@ -19,7 +19,7 @@ const searchRecipe = async (req, res) => {
   const { q } = req.query;
   const recipes = await getRecipesByName(q);
   res.render('searchRecipe', { recipes });
-}
+};
 
 module.exports = {
   getAllRecipes,

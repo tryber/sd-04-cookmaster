@@ -10,10 +10,10 @@
     <div class="message"><%= message %></div>
     <% } %>
     <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
-      <input data-testid="email" type="text" name="email" id="emailInput" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
+      <label for="email">Email: </label>
+      <input data-testid="email" type="text" name="email" id="email" /><br />
+      <label for="senha">Senha: </label>
+      <input data-testid="senha" type="password" name="senha" id="senha" /><br />
       <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>

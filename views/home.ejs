@@ -10,13 +10,15 @@
 
     <p>Cookmaster</p>
 
-    <p>Receitas</p>
+    <h3>Receitas</h3>
 
     <% recipes.forEach((recipe) => { %>
-    <p><%= recipe.name %></p>
+    <h4><%= recipe.name %></h4>
     <p><%= recipe.user %></p>
-    <a href="/recipes/<%= recipe.id %>" role="button">Detalhes da receita</a>
+    <a href="/recipes/<%= recipe.id %>" role="button">Ver mais</a>
     <% }) %>
+
+    <button data-testid="nova-receita">Nova Receita</button>
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>
 </html>

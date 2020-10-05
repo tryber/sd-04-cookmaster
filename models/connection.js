@@ -8,6 +8,7 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
+// connection = async () => {}
 
 const connection = () => {
   return mysqlx
@@ -17,7 +18,7 @@ const connection = () => {
       return schema;
     })
     .catch((err) => {
-      console.error(err);
+      // console.log(err);
       process.exit(1);
     });
 };

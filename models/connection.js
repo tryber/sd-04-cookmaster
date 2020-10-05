@@ -16,10 +16,7 @@ const connection = () => {
     ? Promise.resolve(schema)
     : mysqlx
         .getSession(config)
-        .then((session) => {
-          schema = session.getSchema('cookmaster');
-          return schema;
-        })
+        .then((session) => (schema = session.getSchema('cookmaster')))
         .catch(() => process.exit(1));
 };
 

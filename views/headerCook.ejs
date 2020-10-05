@@ -20,18 +20,8 @@
       <% } %>
     </header>
 
-    <p>Cookmaster</p>
-
-    <h3>Receitas</h3>
-
-    <% recipes.forEach((recipe) => { %>
-    <h4><%= recipe.name %></h4>
-    <p><%= recipe.user %></p>
-    <a href="/recipes/<%= recipe.id %>" role="button">Ver mais</a>
-    <% }) %>
-
     <% if (user) { %>
-    <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+    <a href="/recipes/new" data-testid="buscar-receita">Nova Receita</a>
     <% } %>
 
     <button data-testid="buscar-receita">Buscar Receita</button>

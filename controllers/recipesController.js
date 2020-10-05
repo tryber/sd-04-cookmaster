@@ -9,7 +9,7 @@ const listAllRecipes = async (req, res) => {
   }
 };
 
-const recipeDetails = async (req, res) => {
+const recipeDetailsController = async (req, res) => {
   try {
     const { id } = req.params;
     const recipeDetails = await recipesModel.recipeDetails(id);
@@ -21,5 +21,5 @@ const recipeDetails = async (req, res) => {
 
 module.exports = {
   listAllRecipes,
-  recipeDetails,
+  recipeDetailsController,
 };

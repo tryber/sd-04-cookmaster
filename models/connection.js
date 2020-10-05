@@ -13,9 +13,8 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => {
-      console.log('Erro conectar o banco', err);
-      process.exit(1);
+    .catch((err) => { 
+      throw err
     });
 
 module.exports = connection;

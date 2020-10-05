@@ -28,7 +28,9 @@ const findById = async (idInput) => {
       firstName,
       lastName,
     }))
-    .catch(err => console.log(err));
+    .catch(err => {
+      throw err
+    });
 };
 
 module.exports = {

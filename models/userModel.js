@@ -1,31 +1,34 @@
 const connection = require('./connection');
 
-const findByEmail = async (email) => {
+const findByEmail = async (emailInput) => {
   return connection()
     .then((db) =>
-      db.getTable('users').select([]).where('email =:email').bind('email', email).execute(),
+      db.getTable('users').select([]).where('email =:emailInput').bind('emailInput', emailInput)
+      .execute(),
     )
     .then((result) => result.fetchOne())
-    .then(([id, email, password, first_name, last_name]) => ({
+    .then(([id, email, password, firstName, lastName]) => ({
       id,
       email,
       password,
-      first_name,
-      last_name,
+      firstName,
+      lastName,
     }));
 };
 
-const findById = async (id) => {
+const findById = async (idInput) => {
   return connection()
-    .then((db) => db.getTable('users').select([]).where('id =:id').bind('id', id).execute())
+    .then((db) => db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput)
+    .execute())
     .then((result) => result.fetchOne())
-    .then(([id, email, password, first_name, last_name]) => ({
+    .then(([id, email, password, firstName, lastName]) => ({
       id,
       email,
       password,
-      first_name,
-      last_name,
-    }));
+      firstName,
+      lastName,
+    }))
+    .catch(err => console.log(err));
 };
 
 module.exports = {

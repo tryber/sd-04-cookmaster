@@ -15,6 +15,7 @@
     <% recipes.forEach((recipe) => { %>
     <p><%= recipe.name %></p>
     <p><%= recipe.user %></p>
+    <a href="/recipes/<%= recipe.id %>" role="button">Detalhes da receita</a>
     <% }) %>
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>

@@ -2,6 +2,7 @@ const Recipes = require('../models/recipeModel');
 
 const listAllRecipes = async (_req, res) => {
   const recipes = await Recipes.getAllRecipes();
+  console.log('recipes home\n',recipes);
   res.render('home', { recipes });
 };
 

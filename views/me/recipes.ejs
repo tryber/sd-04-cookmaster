@@ -11,11 +11,10 @@
     <div class="title">
       <nav class="navbar">
         <h2>Cookmaster</h2></span>
-        <span><a href='/login' data-testid="login">Login</a></span>
         <% if (!user) { %>
-          <a href="/login" data-testid="login">Login</a>
+          <span><a href='/login' data-testid="login">Login</a></span>
         <% } else { %>
-          <a href="/logout" data-testid="logout">Logout</a>
+          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
         <% } %>
       </nav>
     </div>

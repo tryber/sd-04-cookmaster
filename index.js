@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', controllers.recipeController.listRecipes);
+app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
 
 app.post('/login', async (req, res) => {
 });

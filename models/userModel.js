@@ -38,7 +38,20 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return TEMP_USER;
+  try {
+    const db = await connection();
+    const results = await db
+      .getTable('users')
+      .select([])
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
+
+    const [id, email, password, name, lastName] = await results.fetchOne();
+    return { id, email, password, name, lastName };
+  } catch (err) {
+    return err;
+  }
 };
 
 module.exports = {

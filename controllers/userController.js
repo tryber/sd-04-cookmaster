@@ -57,7 +57,7 @@ const emailAndNameValidation = (email, password, confirmPassword, firstName, las
   let message;
 
   if (!emailRegex.test(email)) message = 'O email deve ter o formato email@mail.com';
-  // if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
+
   if (password !== confirmPassword) message = 'As senhas tem que ser iguais';
 
   if (firstName.length < 3 || typeof firstName !== 'string') {
@@ -73,37 +73,15 @@ const emailAndNameValidation = (email, password, confirmPassword, firstName, las
 const newUser = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
-  // const emailRegex = /\S+@\S+\.\S+/;
-
   if (!email || !password || !confirmPassword || !firstName || !lastName)
     return res.render('cadastro', {
       message: 'Preencha todos os campos',
     });
 
-  // if (!emailRegex.test(email))
-  // return res.render('cadastro', {
-  //   message: 'O email deve ter o formato email@mail.com',
-  // });
-
   if (password.length < 6)
     return res.render('cadastro', {
       message: 'A senha deve ter pelo menos 6 caracteres',
     });
-
-  // if (password !== confirmPassword)
-  //   return res.render('cadastro', {
-  //     message: 'As senhas tem que ser iguais',
-  //   });
-
-  // if (firstName.length < 3 || typeof firstName !== 'string')
-  // return res.render('cadastro', {
-  //   message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-  // });
-
-  // if (lastName.length < 3 || typeof lastName !== 'string')
-  //   return res.render('cadastro', {
-  //     message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-  //   });
 
   const returnMessage = emailAndNameValidation(
     email,

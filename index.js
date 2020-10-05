@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-//recipes router
+// recipes router
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 app.post('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
@@ -22,7 +22,7 @@ app.post(
   controllers.recipesController.deleteRecipe,
 );
 
-//user router
+// user router
 app.get('/cadastro', controllers.userController.cadastrar);
 app.post('/cadastro', controllers.userController.newUser);
 

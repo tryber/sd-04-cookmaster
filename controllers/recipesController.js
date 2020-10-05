@@ -19,7 +19,18 @@ const recipeDetailsController = async (req, res) => {
   }
 };
 
+const searchByNameController = async (req, res) => {
+  try {
+    const { q } = req.query;
+    const searchByName = await recipesModel.recipeSearchByName(q);
+    return res.render('recipeSearch', { searchByName, user: req.user });
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetailsController,
+  searchByNameController,
 };

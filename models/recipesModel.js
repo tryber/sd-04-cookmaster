@@ -37,7 +37,28 @@ const recipeDetails = async (idInp) => {
   }
 };
 
+const recipeSearchByName = async (nameInp) => {
+  try {
+    const db = await connection();
+    const dbSearchByName = await db
+      .getTable('recipes')
+      .select(['id', 'user', 'name'])
+      .where('name LIKE :nameInp')
+      .bind('nameInp', `%${nameInp}%`)
+      .execute();
+    const results = await dbSearchByName.fetchAll();
+    return results.map(([id, user, name]) => ({
+      id,
+      user,
+      name,
+    }));
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllRecipes,
   recipeDetails,
+  recipeSearchByName,
 };

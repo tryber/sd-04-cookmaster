@@ -6,6 +6,17 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <header>
+      <div>
+        <h1>Cookmaster</h1>
+        <button>Login</button>
+      </div>
+    </header>
+    
+    <% recipes.map(({user, name, id}) =>{ %>
+      <li>
+        <%=`${name} ${user}`%>
+      </li>
+    <% }) %>
   </body>
 </html>

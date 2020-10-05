@@ -13,8 +13,8 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => { 
-      throw err
+    .catch((err) => {
+      throw err;
     });
 
 module.exports = connection;

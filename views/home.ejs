@@ -6,7 +6,19 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <header>
+      <h1>Boas vindas ao Cookmaster!</h1>
+
+      <% if (user) { %>
+
+      <a href="/login" data-testid="login">Login</a>
+
+      <% } else {%>
+
+      <a href="/logout" data-testid="logout">Logout</a>
+
+      <% } %>
+    </header>
 
     <p>Cookmaster</p>
 
@@ -18,7 +30,10 @@
     <a href="/recipes/<%= recipe.id %>" role="button">Ver mais</a>
     <% }) %>
 
+    <% if (user) { %>
     <a href="/recipes/new" data-testid="buscar-receita">Nova Receita</a>
+    <% } %>
+
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>
 </html>

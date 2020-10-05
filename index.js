@@ -6,7 +6,6 @@ require('dotenv').config();
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const userController = require('./controllers/userController');
-const { request } = require('express');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

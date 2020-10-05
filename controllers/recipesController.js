@@ -35,7 +35,7 @@ const enterNewRecipe = async (req, res) => {
   } catch (error) {
     return error;
   }
-  return null; //Satisfazer CC
+  return null; // Satisfazer CC
 };
 
 const createNewRecipe = async (req, res) => {

@@ -5,23 +5,21 @@ require('dotenv/config');
 
 let connection;
 
-module.exports = () => (
+module.exports = () =>
   connection
-  ? Promise.resolve(connection)
-  : mysqlx
-    .getSession({
-      host: process.env.HOSTNAME,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      port: '33060',
-      socketPath: '/var/run/mysqld/mysqld.sock',
-    })
-  .then(async (session) => {
-    connection = await session.getSchema('cookmaster');
-    return connection;
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  })
-);
+    ? Promise.resolve(connection)
+    : mysqlx
+        .getSession({
+          host: process.env.HOSTNAME,
+          user: process.env.MYSQL_USER,
+          password: process.env.MYSQL_PASSWORD,
+          port: '33060',
+          socketPath: '/var/run/mysqld/mysqld.sock',
+        })
+        .then(async (session) => {
+          connection = await session.getSchema('cookmaster');
+          return connection;
+        })
+        .catch(() => {
+          process.exit(1);
+        });

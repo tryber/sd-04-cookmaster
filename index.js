@@ -28,6 +28,8 @@ app.get('/cadastro', controllers.cadastroController.cadastroForm);
 //   controllers.cadastroController.signup
 // );
 
+app.get('/recipes/search', middlewares.auth(false), controllers.searchController.searchRecipe);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showDetails);
 
 app.listen(3000, () => console.log('Listening on 3000'));

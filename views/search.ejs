@@ -16,33 +16,41 @@
         flex-wrap: wrap;
       }
       .my-box {
-        border: 2px solid black ;
+        border: 2px solid black;
         width: 25%;
       }
     </style>
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Buscar</title>
   </head>
   <body>
     <div class="text-light navbar navbar-dark bg-dark">
-      <h5 class="col ">Cookmaster</h5>
+      <h5 class="col">Cookmaster</h5>
       <% if (user == null) { %>
       <a data-testid="login" class="nav-link col text-light text-right" href="/login">Login</a>
       <%} else {%>
       <p class="col text-center"><%= `${user.name} ${user.lastName}` %></p>
-      <a data-testid="logout" class="text-light nav-link col text-right " href="/logout"> Logout</a>
+      <a data-testid="logout" class="text-light nav-link col text-right" href="/logout"> Logout</a>
       <%}%>
     </div>
     <div class="container">
-      <h2>Receitas</h2>
-      <div class="mb-3">
-        <% if (user == null) { %>
-        <a class="btn btn-primary" data-testid="buscar-receita" href="/recipes/search">Buscar Receitas</a>
-        <%} else {%>
-        <a class="btn btn-primary" data-testid="nova-receita" href="/">Nova Receita</a>
-        <a class="btn btn-primary" data-testid="buscar-receita" href="/recipes/search">Buscar Receitas</a>
-        <%}%>
+      <h2>Buscar Receitas</h2>
+      <div >
+        <form class="mb-3 d-flex" action="" method="GET">
+            <label class="sr-only" for="searchInput">Search </label>
+            <input
+            class="mr-2 form-control"
+            data-testid="receita"
+            type="text"
+            name="q"
+            id="searchInput"
+            />
+            <button class="btn btn-primary align-self-center" data-testid="buscar" >Buscar</button>
+        </form>
       </div>
       <div class="my-container">
+        <% if (recipes == null) { %> 
+            <p>busca</p>
+        <%} else {%>
         <% recipes.forEach(food => { %>
         <div class="mb-5 mr-5 my-box">
           <div class="p-3 bg-info text-white">
@@ -52,12 +60,14 @@
                 <p class="d-flex justify-content-center"><%= food.user %></p>
               </div>
               <div class="col align-self-end">
-                <a class="text-light d-flex justify-content-center" href="/recipes/<%= food.id %>">Ver mais</a>
+                <a class="text-light d-flex justify-content-center" href="/recipes/<%= food.id %>"
+                  >Ver mais</a
+                >
               </div>
             </div>
           </div>
         </div>
-        <%})%>
+        <%})%> <%}%>
       </div>
     </div>
   </body>

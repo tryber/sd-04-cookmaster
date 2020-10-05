@@ -28,7 +28,17 @@ const getRecipeById = async (id) =>
       })),
     );
 
+const searchRecipe = async (recipe) => {
+  conn
+    .connection()
+    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
+    .then((results) => results.fetchAll())
+    .then((recipes) => recipes.map(([id, user, name]) => ({id, user, name })))
+    .then((res) => res.find((food) => food.name == recipe))
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
+  searchRecipe,
 };

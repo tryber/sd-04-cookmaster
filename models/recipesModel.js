@@ -13,20 +13,20 @@ const getRecipeById = async (recipeId) => {
   const db = await connection();
   const results = await db
     .getTable('recipes')
-    .select(['id', 'user_id', 'name', 'ingredients', 'instructions'])
+    .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
     .where('id = :id')
     .bind('id', recipeId)
     .execute();
 
   const listing = await results.fetchAll();
-  const list = await listing.map(([id, userId, name, ingredients, instructions]) => ({
+  const list = await listing.map(([id, userId, user, name, ingredients, instructions]) => ({
     id,
     userId,
+    user,
     name,
     ingredients,
     instructions,
   }))[0];
-
   return list;
 };
 
@@ -73,4 +73,5 @@ module.exports = {
   getRecipeById,
   searchRecipes,
   newRecipe,
+  editRecipe,
 };

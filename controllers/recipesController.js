@@ -39,8 +39,12 @@ const editRecipe = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipesModel.getRecipeById(id);
 
+  const arrayIng = recipe.ingredients.split(',');
+
+  recipe.ingredients = arrayIng;
+
   if (recipe.userId === userInfo.id) {
-    return res.render('recipes/editRecipe', { ...recipe, user: userInfo });
+    return res.render('recipes/editRecipe', { recipe, user: userInfo });
   }
 
   // Path-relative redirects are also possible.
@@ -51,6 +55,10 @@ const editRecipe = async (req, res) => {
 
 const editSucess = async (req, res) => {
   const { id } = req.params;
+  const { name, ingredients, instructions } = req.body;
+
+  await recipesModel.editRecipe(id, name, ingredients, instructions);
+  return res.redirect('/me/recipes');
 };
 
 module.exports = {

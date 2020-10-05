@@ -6,8 +6,8 @@
     <title>Cookmaster - Nova Receita</title>
   </head>
   <body>
-    <%- include('../templates/header.ejs', {user}) %>
-    <form action="/recipes/<%= id %>" method="POST">
+    <%- include('../templates/header.ejs', {user}) %> <% if (recipe) {%>
+    <form action="/recipes/<%= recipe.id %>" method="POST">
       <div>
         <h1>Editar Receita</h1>
         <label for="nameRecipe">Nome da Receita:</label>
@@ -15,17 +15,23 @@
           type="text"
           name="name"
           id="nameRecipe"
-          value="<%= name %>"
+          value="<%= recipe.name %>"
           data-testid="nome-receita"
         />
         <h3>Ingredientes:</h3>
         <div>
-          <input type="hidden" id="ingredients" value="<%= ingredients %>" />
-          <ul id="listIngredients"></ul>
+          <input type="hidden" id="ingredients" name="ingredients" />
+          <ul id="listIngredients">
+            <% recipe.ingredients.forEach(item => { %>
+            <li class="ingredientItem"><%= item %></li>
+            <%})%>
+          </ul>
         </div>
         <div>
-          <input id="ingredientsInput" type="text" data-testid="ingredientes" name="ingredients" />
-          <button id="add" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+          <input id="ingredientsInput" type="text" data-testid="ingredientes" />
+          <button for="ingredients" type="button" id="add" data-testid="adicionar-ingrediente">
+            Adicionar Ingrediente
+          </button>
         </div>
         <div>
           <label for="nameRecipe">Modo de Preparo</label>
@@ -33,34 +39,33 @@
             type="text"
             name="instructions"
             id="nameRecipe"
-            value="<%= instructions %>"
+            value="<%= recipe.instructions %>"
             data-testid="modo-de-preparo"
           />
         </div>
       </div>
-      <a href="/">Voltar</a>
       <button type="submit" data-testid="postar-receita">Salvar Receita</button>
     </form>
+    <% } %>
+    <a href="/">Voltar</a>
   </body>
   <script>
     const input = document.querySelector('#ingredientsInput');
     const ul = document.querySelector('#listIngredients');
+    const liExists = document.querySelectorAll('.ingredientItem');
     const ingredients = document.querySelector('#ingredients');
     const li = document.createElement('li');
     const btn = document.createElement('button');
     let arrayIngredients = [];
 
     const addItensExist = () => {
-      '<%= ingredients %>'.split(',').forEach((item) => {
+      '<%= recipe.ingredients %>'.split(',').forEach((item) => {
         arrayIngredients.push(item);
       });
-
-      arrayIngredients.forEach((item) => {
-        li.innerText = item;
+      liExists.forEach((li) => {
         btn.innerText = 'Excluir Ingrediente';
 
-        ul.appendChild(li);
-        ul.appendChild(btn);
+        li.appendChild(btn);
 
         btn.addEventListener('click', () => {
           const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
@@ -74,6 +79,7 @@
 
     document.querySelector('#add').addEventListener('click', () => {
       li.innerText = input.value;
+      li.className = 'ingredientItem';
       btn.innerText = 'Excluir Ingrediente';
 
       arrayIngredients.push(input.value);

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+  <h1>Cadastro</h1>
+  <form action="/cadastro" method="POST">
+    <label for="emailInput">Email</label>
+    <input data-testid="email" name="email" type="text" id="emailInput" /><br />
+    <label for="senha">Senha</label>
+    <input type="password" data-testid="senha" name="password" id="senha" /><br />
+    <label for="passwordInput">Confirmar Senha</label>
+    <input type="password" data-testid="confirmar-senha" name="verifyPassword" id="passwordInput" /><br />
+    <label for="nameInput">Nome</label>
+    <input type="text" data-testid="nome" name="name" id="nameInput" /><br />
+    <label for="lastNameInput">Sobrenome</label>
+    <input type="text" data-testid="sobrenome" name="lastName" id="lastNameInput" /><br />
+    <button type="submit" data-testid="cadastro">Cadastre-se</button>
+  </form>
+  <a href="/login" data-testid="login">Login</a>
+</body>
+</html>

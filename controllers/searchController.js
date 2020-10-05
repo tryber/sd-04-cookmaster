@@ -1,5 +1,5 @@
 const Recipe = require('../models/recipeModel');
-
+// finalizar searchRecipe
 const searchRecipe = async (req, res) => {
   const user = req.user;
   const { q } = req.query;

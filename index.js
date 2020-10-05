@@ -25,9 +25,15 @@ app.get('/', RecipesController.recipeController);
 app.get('/cadastro', UserController.newUser);
 app.post('/cadastro', UserController.newUser);
 
-// página para cada receita específica
-app.get('/recipes/:id', (_req, res) => {
-  res.send('nome da receita pipipipopopo');
+// página de detalhes da receita
+app.get('/recipes/:id', RecipesController.recipeDetailsController);
+
+// páginas excluir e editar (ainda nao implementadas)
+app.get('/editar', (_req, res) => {
+  res.send('página para editar receita');
+});
+app.get('/delete', (_req, res) => {
+  res.send('página para excluir receita');
 });
 
 app.get('/admin', middlewares.auth(), (req, res) => {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Login</title>
+  </head>
+  <body>
+    <% if (message) {%>
+    <div class="message">
+      <ul>
+        <% message.forEach((mess) => { %>
+          <li><%= mess %></li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+    <form action="/register" method="POST">
+      <label for="emailInput">Email</label>
+      <input type="text" name="email" id="emailInput" data-testid="email" required/><br />
+      <label for="passwordInput">Senha</label>
+      <input type="password" name="password" id="passwordInput" data-testid="senha" required/><br />
+      <label for="passwordInput">Confirmar Senha</label>
+      <input type="password" name="confirmPassword" id="passwordInput" data-testid="confirmar-senha" required/><br />
+      <label for="nameInput">Nome</label>
+      <input type="text" name="name" id="nameInput" data-testid="nome" required/><br />
+      <label for="lastNameInput">Sobrenome</label>
+      <input type="text" name="lastName" id="lastNameInput" data-testid="sobrenome" required/><br />
+      <a href="/login" data-testid="login">Login</a>
+      <button type="submit" data-testid="cadastrar">Cadastar-se</button>
+    </form>
+  </body>
+</html>

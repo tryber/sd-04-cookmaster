@@ -10,7 +10,8 @@
     <%- include('navbar', {user}) %>
     <h3>Receitas</h3>
     <button type="button" data-testid="buscar-receita">Buscar Receita</button>
-    <% if (user) { %> <button type="button" data-testid="nova-receita">Nova Receita</button> <% } %>
+    <% if (user) { %>
+    <button type="button" data-testid="nova-receita">Nova Receita</button> <% } %>
     <div>
       <% recipes.forEach((recipe) => { %>
       <p><%= recipe.recipeName %></p>

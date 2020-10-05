@@ -37,6 +37,10 @@ app.post(
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.details);
 
+app.get('/edit', controllers.recipesController.editRecipe);
+
+app.get('/delete', controllers.recipesController.deleteRecipe);
+
 app.listen(3000, () => console.log('Listening on 3000'));
 
 // Testando a conexão com o banco

@@ -45,7 +45,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= recipe.user %></h5>
           <p class="card-text"><%= recipe.name %></p>
-          <a href="#" class="btn btn-primary btn-small">Ver mais</a>
+          <a href= <%= `/recipes/${recipe.id}` %> class="btn btn-primary btn-small">Ver mais</a>
         </div>
       </div>
       <% }) %>

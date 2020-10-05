@@ -1,3 +1,4 @@
+// Toda lógica da validação no back-end foi realizada junto com Alice - https://github.com/tryber/sd-04-cookmaster/pull/15
 const emailValidator = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
 const passwordValidator = /^(\d|\w){6,}$/;
 const namesValidator = /\w{3,}/;

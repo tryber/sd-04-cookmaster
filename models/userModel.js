@@ -17,7 +17,7 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return await connection.connection().then((db) =>
+  return connection.connection().then((db) =>
     db
       .getTable('users')
       .select([])
@@ -25,12 +25,12 @@ const findByEmail = async (email) => {
       .bind('email', email)
       .execute()
       .then((results) => results.fetchOne())
-      .then(([id, email, password, first_name, last_name]) => ({
+      .then(([id, eMail, password, firstName, lastName]) => ({
         id,
-        email,
+        eMail,
         password,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
       })),
   );
 };
@@ -40,7 +40,7 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return await connection.connection().then((db) =>
+  return connection.connection().then((db) =>
     db
       .getTable('users')
       .select([])
@@ -48,12 +48,12 @@ const findById = async (id) => {
       .bind('id', id)
       .execute()
       .then((results) => results.fetchOne())
-      .then(([id, email, password, first_name, last_name]) => ({
-        id,
+      .then(([iD, email, password, firstName, lastName]) => ({
+        iD,
         email,
         password,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
       })),
   );
 };

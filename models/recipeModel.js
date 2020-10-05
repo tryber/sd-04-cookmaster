@@ -30,9 +30,9 @@ const getRecipeById = async (id) =>
       .then((recipes) => recipes.map((name) => name)),
   );
 
-const isValidCreatedRecipe = (id, user, name, ingredients, instructions) => {
-  return id && user && name && ingredients && instructions;
-};
+// const isValidCreatedRecipe = (id, user, name, ingredients, instructions) => {
+//   return id && user && name && ingredients && instructions;
+// };
 
 const create = async (id, user, name, ingredients, instructions) =>
   connection

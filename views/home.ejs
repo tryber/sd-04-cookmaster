@@ -13,7 +13,7 @@
   </head>
   <body>
     <header>
-      <h1>Boas vindas ao Cookmaster!</h1>
+      <h1 class="text-center">Boas vindas ao Cookmaster!</h1>
 
       <% if (!user) { %>
 
@@ -26,7 +26,7 @@
       <% } %>
     </header>
 
-    <p>Cookmaster</p>
+    <h3>Cookmaster</h3>
 
     <h3>Receitas</h3>
 
@@ -34,7 +34,7 @@
     <div class="card text-white bg-success mb-3 text-center">
       <h4 class="card-title"><%= recipe.name %></h4>
       <p class="card-text"><%= recipe.user %></p>
-      <a class="btn btn-dark" href="/recipes/<%= recipe.id %>">Ver mais</a>
+      <a class="btn btn-secondary" href="/recipes/<%= recipe.id %>">Ver mais</a>
     </div>
     <% }) %> <% if (user) { %>
     <a class="btn btn-dark" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>

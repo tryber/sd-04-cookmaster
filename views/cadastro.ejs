@@ -4,34 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Cadastro</title>
-    <style>
-      form {
-        display: flex;
-        flex-direction: column;
-        width: 200px;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <form action="/cadastro" method="POST">
-      <label for="email">Email: </label>
-      <input data-testid="email" type="text" name="email" id="email" />
-      <label for="nome">Nome: </label>
-      <input data-testid="nome" type="text" name="nome" id="nome" />
-      <label for="sobrenome">Sobrenome: </label>
-      <input data-testid="sobrenome" type="text" name="sobrenome" id="sobrenome" />
-      <label for="senha">Senha: </label>
-      <input data-testid="senha" type="password" name="senha" id="senha" />
-      <label for="confirmar-passwordInput">Confirmar senha: </label>
-      <input
-        data-testid="confirmar-senha"
-        type="password"
-        name="confirmar-senha"
-        id="confirmar-senha"
-      />
-      <button type="submit">Cadastrar</button>
+    <form class="mb-3" action="/cadastro" method="POST">
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input class="form-control" data-testid="email" type="text" name="email" id="email" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome: </label>
+        <input class="form-control" data-testid="nome" type="text" name="nome" id="nome" />
+      </div>
+      <div class="form-group">
+        <label for="sobrenome">Sobrenome: </label>
+        <input
+          class="form-control"
+          data-testid="sobrenome"
+          type="text"
+          name="sobrenome"
+          id="sobrenome"
+        />
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha: </label>
+        <input class="form-control" data-testid="senha" type="password" name="senha" id="senha" />
+      </div>
+      <div class="form-group">
+        <label for="confirmar-passwordInput">Confirmar senha: </label>
+        <input
+          class="form-control"
+          data-testid="confirmar-senha"
+          type="password"
+          name="confirmar-senha"
+          id="confirmar-senha"
+        />
+      </div>
+      <button class="btn btn-secondary" type="submit">Cadastrar</button>
     </form>
-    <a href="/home" data-testid="cadastrar">Cadastre-se</a>
-    <a href="/login" data-testid="login">Login</a>
+    <a class="btn btn-dark" href="/home" data-testid="cadastrar">Cadastre-se</a>
+    <a class="btn btn-dark" href="/login" data-testid="login">Login</a>
   </body>
 </html>

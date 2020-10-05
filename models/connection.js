@@ -14,12 +14,12 @@ const connection = () => {
   return mysqlx
     .getSession(config)
     .then((session) => {
-      schema = session.getSchema('cookmaster');
+      const schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => {
       // console.log(err);
-      process.exit(1);
+      process.exit(err);
     });
 };
 

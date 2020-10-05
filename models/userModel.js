@@ -13,6 +13,16 @@ const TEMP_USER = {
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
+function userObj(data) {
+  return {
+    id: data[0],
+    email: data[1],
+    password: data[2],
+    name: data[3],
+    lastName: data[4],
+  };
+}
+
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
@@ -28,14 +38,8 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne());
-  //.then((users) => users.reduce((id, email, password, name, lastName) => ({ id, email, password, name, lastName})));
-  const user = {
-    id: data[0],
-    email: data[1],
-    password: data[2],
-    name: data[3],
-    lastName: data[4],
-  };
+
+  const user = userObj(data);
   // console.log(data);
   // console.log(user);
   return user;
@@ -56,13 +60,7 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne());
-  const user = {
-    id: data[0],
-    email: data[1],
-    password: data[2],
-    name: data[3],
-    lastName: data[4],
-  };
+  const user = userObj(data);
   return user;
 };
 

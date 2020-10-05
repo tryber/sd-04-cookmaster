@@ -13,18 +13,19 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // recipes router
-
+app.get('/recipes/new', (req, res) => {
+  res.render('newReceita');
+});
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.buscaReceita);
 
-
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 app.post('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
 app.post(
   '/recipes/:id/delete',
   middlewares.auth(false),
   controllers.recipesController.deleteRecipe,
 );
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 
 // user router
 app.get('/cadastro', controllers.userController.cadastrar);

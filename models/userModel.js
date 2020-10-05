@@ -35,20 +35,25 @@ const findById = async (Id) => {
 };
 
 const isValid = async (data) => {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const stringRegex = /[a-zA-Z\u00C0-\u00FF ]+/i;
   const message = [];
   switch (true) {
     case (!emailRegex.test(data.email)) :
       message.push('O email deve ter o formato email@mail.com');
+      break;
     case (data.password < 6) :
       message.push('A senha deve ter pelo menos 6 caracteres');
+      break;
     case (data.confirmPassword !== data.password) :
       message.push('As senhas tem que ser iguais');
+      break;
     case (!stringRegex.test(data.name) || data.name < 3) :
       message.push('O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
+      break;
     case (!stringRegex.test(data.lastName) || data.lastName < 3) :
       message.push('O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
+      break;
     default:
       break;
   }

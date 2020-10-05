@@ -56,7 +56,7 @@ const registerForm = async (req, res) => {
     userModel.register(data);
     message.push('Cadastro efetuado com sucesso!');
   }
-  res.render('admin/register', { message })
+  res.render('admin/register', { message });
 };
 
 module.exports = {

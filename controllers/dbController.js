@@ -1,5 +1,5 @@
 const DB = require('../models/dbModel');
-const userModel = require('../models/userModel');
+// const userModel = require('../models/userModel');
 
 const listRecipes = async (req, res) => {
   const recipes = await DB.getAllRecipes();
@@ -9,7 +9,7 @@ const listRecipes = async (req, res) => {
 
 const show = async (req, res) => {
   const { id } = req.params;
-  console.log('id', id);
+  // console.log('id', id);
   const recipeArray = await DB.getOneRecipe(id);
   const recipe = recipeArray[0]; //  To improve!!
   // console.log('one Recipe from controller', recipeArray, req.user, recipe);
@@ -55,10 +55,8 @@ const deleteRecipe = async (req, res) => {
   if (!password) {
     return res.render('delete', {
       message: 'Preencha a senha',
-      redirect: null,
-      user: req.user,
-      recipeUserID: recipe.user_id,
-      recipeID: req.params.id,
+      redirect: null, user: req.user,
+      recipeUserID: recipe.user_id, recipeID: req.params.id,
     });
   }
 

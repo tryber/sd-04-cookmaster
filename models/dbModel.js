@@ -22,22 +22,22 @@ const getSearchedRecipes = async (query) =>
     .then((results) => results.fetchAll())
     .then((recipes) => recipes.map(([id, name, user]) => ({ id, name, user })));
 
-const getOneRecipe = async (id) =>
+const getOneRecipe = async (idUser) =>
   connection
     .connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .where('id = :id')
-        .bind('id', id)
+        .where('id = :idUser')
+        .bind('idUser', idUser)
         .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
         id,
-        user_id,
+        userId,
         user,
         name,
         ingredients,
@@ -45,14 +45,14 @@ const getOneRecipe = async (id) =>
       })),
     );
 
-const insertRecipe = async (user_id, user, name, allIngredients, instructions) =>
+const insertRecipe = async (userId, user, name, allIngredients, instructions) =>
   connection
     .connection()
     .then((db) =>
       db
         .getTable('recipes')
         .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .values(user_id, user, name, allIngredients, instructions)
+        .values(userId, user, name, allIngredients, instructions)
         .execute(),
     );
 
@@ -60,25 +60,26 @@ const deleteFromDB = (recipeID) =>
   connection
     .connection()
     .then((data) =>
-      data.getTable('recipes').delete().where('id = :id').bind('id', recipeID).execute(),
+      data.getTable('recipes').delete().where('id = :id').bind('id', recipeID)
+      .execute(),
     );
 
-const getAllRecipesByUserID = async (id) =>
+const getAllRecipesByUserID = async (idUser) =>
   connection
     .connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .where('user_id = :id')
-        .bind('id', id)
+        .where('user_id = :idUser')
+        .bind('idUser', idUser)
         .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
         id,
-        user_id,
+        userId,
         user,
         name,
         ingredients,

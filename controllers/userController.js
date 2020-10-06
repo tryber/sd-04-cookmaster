@@ -34,7 +34,7 @@ const login = async (req, res) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  return res.redirect(redirect || '/admin');
+  return res.redirect(redirect || '/'); // alterado para / ao invés de /admin
 };
 
 const logout = (req, res) => {
@@ -69,7 +69,7 @@ const validName = (name, lastName) => {
 };
 
 const renderCadastro = (_req, res) => {
-  res.render('admin/cadastro', { message: null });
+  res.render('admin/signup', { message: null });
 };
 
 const addUser = async (req, res) => {
@@ -77,7 +77,7 @@ const addUser = async (req, res) => {
   // console.log(email, password, name, lastName);
 
   if (!email || !password || !confirmPassword || !name || !lastName) {
-    res.render('admin/cadastro', { message: 'Preencha todos os campos' });
+    res.render('admin/signup', { message: 'Preencha todos os campos' });
   }
 
   const vEmail = validEmail(email);
@@ -85,11 +85,11 @@ const addUser = async (req, res) => {
   const vPassword = validPassword(password, confirmPassword);
 
   if (vEmail || vName || vPassword) {
-    res.render('admin/cadastro', { message: vEmail || vName || vPassword });
+    res.render('admin/signup', { message: vEmail || vName || vPassword });
   } else {
     const insertUser = await userModel.newUser(email, password, name, lastName);
     if (!insertUser)
-      res.render('admin/cadastro', { message: 'Erro ao cadastrar usuário no banco de dados' });
+      res.render('admin/signup', { message: 'Erro ao cadastrar usuário no banco de dados' });
     return res.render('admin/login', { message: 'Cadastrado com sucesso', redirect: null });
   }
 };

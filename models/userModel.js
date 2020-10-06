@@ -26,10 +26,12 @@ const findByEmail = async (userEmail) => {
     .where('email = :email')
     .bind('email', userEmail)
     .execute();
-  const infoUser = await results.fetchOne();
-  const [id, email, password] = infoUser;
-
-  return { id, email, password };
+  const infoUser = await results.fetchAll();
+  return infoUser.map(([id, email, password]) => ({
+    id,
+    email,
+    password,
+  }))[0];
 };
 
 /**
@@ -44,11 +46,14 @@ const findById = async (userId) => {
     .where('id = :id')
     .bind('id', userId)
     .execute();
-  const infoUser = await results.fetchOne();
-
-  const [id, email, password, name, lastName] = infoUser;
-
-  return { id, email, password, name, lastName };
+  const infoUser = await results.fetchAll();
+  return infoUser.map(([id, email, password, name, lastName]) => ({
+    id,
+    email,
+    password,
+    name,
+    lastName,
+  }))[0];
 };
 
 module.exports = {

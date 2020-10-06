@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Login</title>
+    <title>Cookmaster SignUp</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -16,9 +16,9 @@
     <div class="message"><%= message %></div>
     <% } %>
     <div class="d-flex flex-column align-items-center mt-5 border">
-      <h2>Login</h2>
+      <h2>Cookmaster Cadastro</h2>
       <div class="d-flex justify-content-center">
-        <form action="/login" method="POST" class="form-horizontal">
+        <form action="/signup" method="POST" class="form-horizontal">
           <div class="form-group">
             <div>
               <label for="emailInput">Email: </label>
@@ -40,11 +40,40 @@
                 id="passwordInput"
               /><br />
             </div>
-            <% if (redirect) { %>
-            <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
-            <% } %>
-            <a href="/signup" class="btn btn-primary" data-testid="cadastrar">Cadastre-se</a>
-            <button class="btn btn-primary" data-testid="entrar" type="submit">Login</button>
+            <div>
+              <label for="confirmPasswordInput">Confirmar Senha:</label>
+              <input
+                data-testid="confirmar-senha"
+                class="form-control"
+                type="password"
+                name="confirmPassword"
+                id="confirmPasswordInput"
+              /><br />
+            </div>
+            <div>
+              <label for="nameInput">Nome: </label>
+              <input
+                data-testid="nome"
+                class="form-control"
+                type="name"
+                name="name"
+                id="nameInput"
+              /><br />
+            </div>
+            <div>
+              <label for="lnameInput">Sobrenome: </label>
+              <input
+                data-testid="sobrenome"
+                class="form-control"
+                type="lname"
+                name="lname"
+                id="lnameInput"
+              /><br />
+            </div>
+            <a href="/login" class="btn btn-primary" data-testid="login">Fazer login</a>
+            <button class="btn btn-primary" data-testid="cadastrar" type="submit">
+              Cadastrar-se
+            </button>
           </div>
         </form>
       </div>

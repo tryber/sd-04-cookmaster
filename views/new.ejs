@@ -59,6 +59,7 @@
         const removeButton = document.createElement('input');
         removeButton.type = 'button';
         removeButton.value = 'Excluir Ingrediente';
+        removeButton.innerText = 'Excluir Ingrediente';
         removeButton.onclick = function () {
           this.parentNode.parentNode.removeChild(this.parentNode);
         };

@@ -5,7 +5,14 @@ const getRecipes = async () => {
   const table = await db.getTable('recipes');
   const results = await table.select([]).execute();
   const recipes = results.fetchAll();
-  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({ id, userId, user, name, ingredients, instructions }));
+  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
 };
 
 module.exports = {

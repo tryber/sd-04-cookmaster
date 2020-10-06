@@ -7,16 +7,27 @@
   </head>
   <body>
     <header>
-      <div>
-        <h1>Cookmaster</h1>
-        <button>Login</button>
-      </div>
+      <h1>Cookmaster</h1>
+      <a data-testid="login" href="">Login</a>
+
     </header>
-    
-    <% recipes.map(({user, name, id}) =>{ %>
-      <li>
-        <%=`${name} ${user}`%>
-      </li>
-    <% }) %>
+
+    <h3>Receitas</h3>
+
+    <% if (token) { %>
+        <a  href="">Minhas Receitas</a>
+        <a data-testid="buscar-receita" href="">Buscar Receitas</a>
+        <a data-testid="nova-receita" href="">Nova Receita</a>
+        <a href="">Minha Conta</a>
+    <% } %>
+
+    <div class="container">
+      <% recipes.map(({user, name, id}) =>{ %>
+        <li>
+          <%=`${name} ${user}`%>
+          <a href=<%=`recipes/${id}`%> >Ver mais<a/>
+        </li>
+      <% }) %>
+    </div>
   </body>
 </html>

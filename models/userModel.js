@@ -25,9 +25,9 @@ const findByEmail = async (email) => {
       .where('email = :email')
       .bind('email', email)
       .execute();
-
-    const [id, email, password, name, lastName] = await results.fetchOne();
-    return { id, email, password, name, lastName };
+    const user = {};
+    [user.id, user.email, user.password, user.name, user.lastName] = await results.fetchOne();
+    return user;
   } catch (err) {
     return err;
   }
@@ -48,6 +48,7 @@ const findById = async (id) => {
       .execute();
 
     const [id, email, password, name, lastName] = await results.fetchOne();
+    console.log({ id, email, password, name, lastName });
     return { id, email, password, name, lastName };
   } catch (err) {
     return err;

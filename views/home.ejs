@@ -30,11 +30,10 @@
       <h3>Receitas</h3>
 
       <a data-testid="buscar-receita" href="" class="btn btn-success">Buscar Receitas</a>
+      <% if (token) { %>
+        <a data-testid="nova-receita" href="">Nova Receita</a>
+      <% } %>
     </div>
-
-    <% if (token) { %>
-      <a data-testid="nova-receita" href="">Nova Receita</a>
-    <% } %>
 
     <div class="">
       <% recipes.map(({user, name, id}) =>{ %>

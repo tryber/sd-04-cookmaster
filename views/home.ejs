@@ -15,12 +15,7 @@
     <% } %>
     <button data-testid="buscar-receita">Buscar Receita</button>
     <div>
-      <ul>
-        <% recipes.forEach((recipe) => { %>
-          <li><%= recipe.user %> - <%= recipe.name %></li>
-          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
-        <% }) %>
-      </ul>
+      <%- include('./components/recipeCard.ejs', { recipes }) %>
     </div>
   </body>
 </html>

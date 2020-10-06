@@ -11,10 +11,10 @@
         <h3>Cookmaster</h3>
       </div>
       <div>
-        <% if (!user_) { %>
-          <a data-testid="login" href="login">Login</a>          
+        <% if (!usuario) { %>
+        <a data-testid="login" href="login">Login</a>
         <% } else { %>
-          <a data-testid="logout" href="logout">Logout</a>        
+        <a data-testid="logout" href="logout">Logout</a>
         <% } %>
       </div>
     </header>
@@ -29,10 +29,10 @@
       </div>
       <div>
         <div>
-          <% if(user_) { %>
-            <a data-testid="nova-receita" href="buscar">Nova Receita</a>
-            <% } %>
-        </div>       
+          <% if(usuario) { %>
+          <a data-testid="nova-receita" href="buscar">Nova Receita</a>
+          <% } %>
+        </div>
         <div>
           <a data-testid="buscar-receita" href="buscar">Buscar Receita</a>
         </div>
@@ -40,11 +40,11 @@
     </section>
     <section>
       <% receitas.forEach((receita) => { %>
-        <div>
-          <h4><%= receita.name %></h4>
-          <h5><%= receita.user %></h5>
-          <a href="Link">Ver mais</a>
-        </div>
+      <div>
+        <h4><%= receita.name %></h4>
+        <h5><%= receita.user %></h5>
+        <a href="Link">Ver mais</a>
+      </div>
       <% }) %>
     </section>
   </body>

@@ -32,7 +32,11 @@ const searchRecipeController = async (req, res) => {
 
   const recipes = await recipesModel.searchRecipes(q);
 
-  return res.render('search', { recipes });
+  try {
+    res.status(200).render('search', { recipes });
+  } catch (err) {
+    res.status(500).send('<h2>Não foi possivel realizar essa operação</h2>');
+  }
 };
 
 module.exports = {

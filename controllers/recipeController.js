@@ -50,12 +50,13 @@ const create = async (req, res) => {
   const { id, firstName, lastName } = req.user;
 
   if (!recipesModel.isValid(nameRecipe, task, instrucoes)) {
-    return res.status(400).render('newReceita', { user: req.user, message: 'dados invalidos' })};
+    return res.status(400).render('newReceita', { user: req.user, message: 'dados invalidos' });
+  } else {
+    const user = await `${firstName} ${lastName}`;
+    await recipesModel.createRecipe(id, user, nameRecipe, task, instrucoes);
 
-  const user = await `${firstName} ${lastName}`;
-  await recipesModel.createRecipe(id, user, nameRecipe, task, instrucoes);
-
-  res.redirect('/recipes');
+    return res.redirect('/recipes');
+  }
 };
 
 module.exports = {

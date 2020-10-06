@@ -12,6 +12,9 @@ recipeRouter.post('/', middlewares.auth(), controllers.recipesController.createR
 
 recipeRouter.get('/:id/edit', middlewares.auth(), controllers.recipesController.editRecipe);
 
+recipeRouter.get('/:id/delete', middlewares.auth(), controllers.recipesController.deleteRecipe);
+recipeRouter.post('/:id/delete', middlewares.auth(), controllers.recipesController.confirmDelete);
+
 recipeRouter.get('/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
 recipeRouter.post('/:id', middlewares.auth(false), controllers.recipesController.editSucess);
 

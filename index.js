@@ -23,7 +23,8 @@ app.get('/logout', controllers.userController.logout);
 app.get('/register', controllers.userController.registerForm);
 app.post('/login', controllers.userController.login);
 app.post('/register', controllers.userController.register);
-
+// a ordem importa
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipess);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.seeRecipe);
 
 // app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);

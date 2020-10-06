@@ -27,6 +27,25 @@ const recipeById = async (id) =>
       instructions,
     }));
 
+const searchRecipes = async (search) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user', 'name'])
+        .where('name like :name')
+        .bind('name', `%${search}%`)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    );
+
 // const addNewRecipe = async (userId, user, name, ingredients, instructions) =>
 //   connection().then((db) =>
 //     db
@@ -39,5 +58,6 @@ const recipeById = async (id) =>
 module.exports = {
   findAll,
   recipeById,
+  searchRecipes,
   // addNewRecipe,
 };

@@ -14,6 +14,16 @@ const seeRecipe = async (req, res) => {
   res.render('seerecipe', { ...recipe, user: req.user });
 };
 
+const searchRecipess = async (req, res) => {
+  // No backend o valor do input de texto deverá estar acessível através da prop q do objeto req.query.
+  const { q } = req.query;
+
+  if (q === '') return res.render('searchRecipe', { recipes: null, user: req.user });
+
+  const recipes = await recipeModel.searchRecipes(q);
+
+  return res.render('searchRecipe', { recipes, user: req.user });
+};
 // const newRecipe = async (req, res) => {
 //   const { recipeName, ingredients, instructions } = req.body;
 //   const { name, lastName, id } = req.user;
@@ -27,5 +37,6 @@ const seeRecipe = async (req, res) => {
 module.exports = {
   showRecipes,
   seeRecipe,
+  searchRecipess,
   // newRecipe,
 };

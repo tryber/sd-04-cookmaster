@@ -12,27 +12,54 @@
     />
   </head>
   <body>
-    <h2>Recipe Details</h2>
+    <header class="card d-flex flex-row align-items-center justify-content-between mb-3 bg-info">
+      <h3 class="m-2">Cookmaster</h3>
 
-    <h3><%= recipe[2] %></h3>
+      <% if (!user) { %>
 
-    <h6>Enviado por <%= recipe[1].toUpperCase() %></h6>
+      <a class="btn btn-dark btn-sm m-2" href="/login" data-testid="login">Login</a>
 
-    <h3>Ingredientes</h3>
+      <% } else {%>
 
-    <p><%= recipe[3] %></p>
+      <a class="btn btn-dark btn-sm m-2" href="/logout" data-testid="logout">Logout</a>
 
-    <h3>Modo de preparo</h3>
+      <% } %>
+    </header>
 
-    <p><%= recipe[4] %></p>
+    <div class="card w-75 mx-auto">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h3 class="card-title"><%= recipe[2] %></h3>
 
-    <% if (user) { %>
-    <a class="btn btn-dark" href="/recipes/<%= recipe[0] %>/edit" data-testid="editar-receita"
-      >Editar Receita</a
-    >
-    <a class="btn btn-dark" href="/recipes/<%= recipe[0] %>/delete" data-testid="excluir-receita"
-      >Excluir Receita</a
-    >
-    <% } %>
+        <p class="card-text">Enviado por <%= recipe[1].toUpperCase() %></p>
+      </div>
+
+      <div class="card-body">
+        <h3 class="card-title">Ingredientes</h3>
+
+        <p class="card-text"><%= recipe[3] %></p>
+      </div>
+
+      <div class="card-body">
+        <h3 class="card-title">Modo de preparo</h3>
+
+        <p class="card-text"><%= recipe[4] %></p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <% if (user) { %>
+        <a class="btn btn-dark" href="/recipes/<%= recipe[0] %>/edit" data-testid="editar-receita"
+          >Editar Receita</a
+        >
+        <a
+          class="btn btn-dark"
+          href="/recipes/<%= recipe[0] %>/delete"
+          data-testid="excluir-receita"
+          >Excluir Receita</a
+        >
+        <% } %>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end m-2">
+      <a class="btn btn-dark" href="/">Voltar</a>
+    </div>
   </body>
 </html>

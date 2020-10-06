@@ -12,7 +12,6 @@
         <h1><%= recipe.name %></h1>
         <h4>Enviada por <%= recipe.user %></h4>
       </div>
-      <% console.log(user) %>
       <div>
         <% if (user) { %>
           <button data-testid="editar-receita" onclick="window.location.pathname='/recipes/<%= recipe.id %>/edit'">
@@ -27,9 +26,7 @@
     <div>
       <h3>Ingredientes</h3>
       <ul>
-        <% recipe.ingredients.forEach((ing) => { %>
-          <li><%= ing %></li>
-        <% }) %>
+          <li><%= recipe.ingredients %></li>
       </ul>
     </div>
     <div>

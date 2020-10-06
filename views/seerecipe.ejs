@@ -3,32 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - seerecipe</title>
+    <title>Cookmaster - Details</title>
   </head>
   <body>
     <%- include('navbar', { user }); %>
     <div>
-      <% if (user && user.id === recipe.id) {%>
+      <% if (user && user.id === userId) {%>
       <div>
-        <a href="/recipes/<%= recipe.id %>/edit">
+        <a href="/recipes/<%= recipeId %>/edit">
           <button data-testid="editar-receita">Editar Receita</button>
         </a>
-        <a href="/recipes/<%= recipe.id %>/delete">
+        <a href="/recipes/<%= recipeId %>/delete">
           <button data-testid="excluir-receita">Excluir Receita</button>
         </a>
       </div>
       <%}%>
       <div>
-        <h2><%= recipe.name %></h2>
-        <span>Enviada por <%= recipe.user %> </span>
+        <h2><%= name %></h2>
+        <span>Enviada por <%= user %> </span>
         <h3>Ingredientes</h3>
         <ul>
-          <% recipe.ingredients.map(ingredient => { %>
+          <% ingredients.split(',').map(ingredient => { %>
           <li><%= ingredient %></li>
           <%})%>
         </ul>
         <h3>Modo de Preparo</h3>
-        <p><%= recipe.instructions %></p>
+        <p><%= instructions %></p>
       </div>
     </div>
     <a href="/">

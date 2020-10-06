@@ -48,7 +48,18 @@ const findById = async (id) =>
       lastName,
     }));
 
+// Um pessoa usuária precisa ter preenchido os campos ID, E-mail, Senha, Nome e Sobrenome
+const registerUser = async ({ email, password, name, lastName }) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password, name, lastName)
+      .execute(),
+  ); //  O ID deve ser gerado automaticamente
+
 module.exports = {
   findByEmail,
   findById,
+  registerUser,
 };

@@ -88,8 +88,9 @@ const addUser = async (req, res) => {
     res.render('admin/cadastro', { message: vEmail || vName || vPassword });
   } else {
     const insertUser = await userModel.newUser(email, password, name, lastName);
-    if (!insertUser) res.render('admin/cadastro', { message: "Erro ao cadastrar usuário no banco de dados" })
-    return res.render('admin/login', { message: "Cadastrado com sucesso", redirect: null });
+    if (!insertUser)
+      res.render('admin/cadastro', { message: 'Erro ao cadastrar usuário no banco de dados' });
+    return res.render('admin/login', { message: 'Cadastrado com sucesso', redirect: null });
   }
 };
 

@@ -65,5 +65,5 @@ const newUser = async (email, password, name, lastName) => {
 module.exports = {
   findByEmail,
   findById,
-  newUser
+  newUser,
 };

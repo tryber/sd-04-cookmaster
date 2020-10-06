@@ -8,13 +8,13 @@
   </head>
   <body>
     <div class="container">
-      <h1>Receitas</h1>    
+      <h1>Receitas</h1> 
       <ul>
         <% recipes.forEach(recipe => { %>
           <li><%= recipe.user %> - <%= recipe.name %> - <a class="btn btn-sm btn-secondary" href="/recipes/<%= recipe.id %>">Ver mais</a></li>
         <% }) %>
       </ul>
-      <% if (!user) {%> 
+      <% if (!user) {%>
         <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>
       <% }  else { %>
         <a href="/" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>

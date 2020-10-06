@@ -17,6 +17,7 @@ const recipeDetails = async (req, res) => {
 const searchRecipe = async (req, res) => {
   const searchFor = req.query;
   console.log(searchFor)
+  console.log('to fudendo o trem aqui!')
 
   const recipes = [];
   res.render('search', { recipes, user: req.user})

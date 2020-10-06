@@ -6,7 +6,7 @@
     <title>Cookmaster - Search</title>
   </head>
   <body>
-    <%- include('./components/header.ejs') %>
+    <%- include('./components/header.ejs', { user }) %>
     <h1>Buscar Receitas</h1>
     <div>
       <input type="text" name="search" data-testid="receita"/><br />

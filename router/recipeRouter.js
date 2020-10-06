@@ -16,6 +16,7 @@ recipeRouter.get('/:id/delete', middlewares.auth(), controllers.recipesControlle
 recipeRouter.post('/:id/delete', middlewares.auth(), controllers.recipesController.confirmDelete);
 
 recipeRouter.get('/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
+
 recipeRouter.post('/:id', middlewares.auth(false), controllers.recipesController.editSucess);
 
 module.exports = recipeRouter;

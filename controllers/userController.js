@@ -57,10 +57,28 @@ const newUser = async (req, res) => {
   res.status(200).render('admin/signup', { ...isValid });
 };
 
+const editUserRender = (req, res) => {
+  return res.render('my-recipes/myRegister', { message: null, user: req.user })
+}
+
+const editUser = async (req, res) => {
+  const { id } = req.user;
+  const { email, password, passwordConfirmation, first_name, last_name } = req.body;
+  const isValid = await validation({ ...req.body });
+
+  if(isValid) {
+    await userModel.editUser(id, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('my-recipes/myRegister', { ...isValid, user: req.user })
+}
+
 module.exports = {
   login,
   loginForm,
   logout,
   signup,
   newUser,
+  editUserRender,
+  editUser
 };

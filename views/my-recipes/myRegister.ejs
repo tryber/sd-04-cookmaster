@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action='/me' method='POST'>
+    <label for="email">Email: </label>
+    <input type='email' id='email' value='<%=user.email%>' name='email' data-testid="email" />
+    <label for="password">Senha: </label>
+    <input type='password' id='password' name='password' data-testid="senha" />
+    <label for="confirmPassword">Confirmar Senha: </label>
+    <input type='password' id='confirmPassword' name="passwordConfirmation" data-testid="confirmar-senha" />
+    <% if(message) { %>
+    <div><%=message %></div>
+    <% } %>
+    <label for="name">Nome: </label>
+    <input type='text' id="name" value='<%=user.firstName%>' name='first_name' data-testid="nome" />
+    <label for="sobrenome">Sobrenome: </label>
+    <input type='text' id="sobrenome" value='<%=user.lastName%>' name='last_name' data-testid="sobrenome" />
+    <button type="submit" data-testid="salvar">Salvar</button>
+  </form>
+  <a href='/me/recipes'><button type="button">Cancelar</button></a>
+</body>
+</html>

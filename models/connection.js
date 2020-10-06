@@ -7,5 +7,16 @@ const config = {
   password: process.env.MYSQL_PASSWORD,
   host: process.env.HOSTNAME,
   port: 33060,
-  socketPath: '/var/run/mysqld/mysqld.sock',
+  //socketPath: '/var/run/mysqld/mysqld.sock', => não é necessário?
 };
+
+const connection = () => {
+  return mysqlx
+    .getSession(config)
+    .then( async (session) => session.getSchema('cookmaster'))
+    .catch((err) => {
+      throw err
+    })
+}
+
+module.exports = connection;

@@ -23,8 +23,8 @@ const arrayToObj = (arr = [], columns) => arr.reduce(
 const arrayOfObjects = (arr, columns) => arr.map((item) => arrayToObj(item, columns));
 // realiza a query e o fetch One/All
 // retorna o resultado em formato de objeto
-const getTableObj = async (tableName, query, method) => {
-  const queryResult = await getTable(tableName).then(query);
+const getTableObj = async (queryPromise, method) => {
+  const queryResult = await queryPromise;
   const columns = getColumns(queryResult);
   const all = {
     fetchOne: (t) => arrayToObj(t.fetchOne(), columns),
@@ -35,12 +35,14 @@ const getTableObj = async (tableName, query, method) => {
 };
 // poderia ter utilizado um simples deconstruct no array e montado o objeto,
 // porém prefiro não deixar coisas hard coded,
-// por mais que seria mais viável nesse projeto com apenas 2 tabelas,
-// esse código é totalmente flexível e se adapta a qualquer tabela
+// seria mais viável nesse projeto com apenas 2 tabelas,
+// porém gosto como esse código é totalmente flexível e se adapta a qualquer tabela
 module.exports = {
   config,
   tables: {
-    recipes: (query, method) => getTableObj('recipes', query, method),
-    users: (query, method) => getTableObj('users', query, method),
+    recipes: (query) => getTable('recipes').then(query),
+    users: (query) => getTable('users').then(query),
   },
+  connect,
+  getTableObj,
 };

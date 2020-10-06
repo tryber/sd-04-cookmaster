@@ -1,4 +1,4 @@
-<form action=<%=`/recipes${recipe.id}`%> method='POST'>
+<form action=<%=`/recipes${recipe.id ? `/${recipe.id}` : ''}`%> method='POST'>
   <label for="name">
     Nome da Receita
     <input data-testid="nome-receita" type="text" name="name" value="<%-recipe.name%>">

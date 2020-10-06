@@ -13,13 +13,13 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.userData }));
+app.get('/recipes/:id/edit', middlewares.auth(), recipesController.editRecipe);
+app.post('/recipes/:id', middlewares.auth(), recipesController.postRecipe);
 
 app.get('/login', userController.loginForm);
 app.get('/logout', userController.logout);
 app.get('/register', userController.register);
 app.post('/login', userController.login);
-
-app.get('/recipes/:id/edit', middlewares.auth(), recipesController.editRecipe);
 
 app.use(middlewares.auth(false));
 

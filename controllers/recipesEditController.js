@@ -3,7 +3,6 @@ const recipeEditModel = require('../models/recipeEditModel');
 
 const recipeEditForm = async (req, res) => {
   const recipe = await recipeModel(req.params.id);
-  if (recipe[0][1] !== req.user.id) return res.redirect(`/recipes/${req.params.id}`);
   return res.render('recipeEdit', { recipe, user: req.user });
 };
 

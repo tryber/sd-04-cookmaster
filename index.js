@@ -20,9 +20,9 @@ app.get('/recipes/new', middlewares.auth(), controllers.recipesNewController.rec
 
 app.post('/recipes', middlewares.auth(), controllers.recipesNewController.recipesNew);
 
-app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesEditController.recipeEditForm);
+app.get('/recipes/:id/edit', middlewares.auth(), middlewares.checkUserRecipe, controllers.recipesEditController.recipeEditForm);
 
-app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesDeleteController.recipeDeleteForm);
+app.get('/recipes/:id/delete', middlewares.auth(), middlewares.checkUserRecipe, controllers.recipesDeleteController.recipeDeleteForm);
 
 app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesDeleteController.recipeDelete);
 

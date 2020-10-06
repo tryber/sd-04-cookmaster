@@ -15,7 +15,7 @@ const seeRecipe = async (req, res) => {
 };
 
 const searchRecipess = async (req, res) => {
-  // No backend o valor do input de texto deverá estar acessível através da prop q do objeto req.query.
+  // valor do input de texto deverá estar acessível através da prop q do objeto req.query.
   const { q } = req.query;
 
   if (q === '') return res.render('searchRecipe', { recipes: null, user: req.user });

@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../style/login.css" type="text/css"/>
     <title>Cookmaster - Login</title>
   </head>
   <body>
@@ -11,11 +14,11 @@
       <%= message %>
     </div>
     <% } %>
-    <form action="/login" method="POST">
+    <form caction="/login" method="POST">
       <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" /><br />
+      <input data-testid="email" type="text" name="email" id="emailInput" /><br />
       <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
+      <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
       <% if (redirect) { %>
       <input
         type="hidden"
@@ -23,7 +26,7 @@
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button type="submit">Entrar</button>
+      <button data-testid="entrar" type="submit">Entrar</button>
     </form>
   </body>
 </html>

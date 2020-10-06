@@ -60,7 +60,7 @@ const findById = async (id) => {
 
 const createUser = async (user) => {
   // console.log('usuario criado', user);
-  return await connection().then((db) =>
+  return connection().then((db) =>
     db
       .getTable('users')
       .insert(['email', 'first_name', 'last_name', 'password'])

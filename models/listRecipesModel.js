@@ -32,8 +32,17 @@ const searchRecipeModel = async (q) => {
   return results.map(([id, user, name]) => ({ id, user, name }));
 };
 
+const newRecipeInsert = async ({ id, name }, { nameRec, ingredients, instructions }) => {
+  const db = await connection();
+  await db.getTable('recipes')
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, name, nameRec, ingredients, instructions)
+    .execute()
+};
+
 module.exports = {
   getAll,
   getRecipeById,
   searchRecipeModel,
+  newRecipeInsert,
 };

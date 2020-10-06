@@ -25,7 +25,10 @@ app.post('/login', controllers.userController.login);
 app.get('/register', controllers.userController.register);
 app.post('/register', controllers.userController.registerForm);
 
-app.get('/recipes/search', controllers.listAllControler.searchRecipe);
+app.get('/recipes/new', middlewares.auth(), controllers.listAllControler.NewRecipe);
+app.post('/recipes/new', middlewares.auth(), controllers.listAllControler.newRecipeForm);
+
+app.get('/recipes/search', middlewares.auth(false), controllers.listAllControler.searchRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.listAllControler.recipeDetails);
 

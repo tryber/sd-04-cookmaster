@@ -44,7 +44,7 @@ const logout = (req, res) => {
 };
 
 const register = (req, res) => {
-  res.render('admin/register', { message: null });
+  return res.render('admin/register', { message: null });
 };
 
 const registerForm = async (req, res) => {
@@ -54,7 +54,7 @@ const registerForm = async (req, res) => {
     userModel.register(data);
     message.push('Cadastro efetuado com sucesso!');
   }
-  res.render('admin/register', { message });
+  return res.render('admin/register', { message });
 };
 
 module.exports = {

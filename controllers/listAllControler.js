@@ -1,9 +1,9 @@
-const { getAll, getRecipeById, searchRecipeModel } = require('../models/listRecipesModel');
+const { getAll, getRecipeById, searchRecipeModel, newRecipeInsert } = require('../models/listRecipesModel');
 
 const listRecipes = async (req, res) => {
   const recipes = await getAll();
 
-  res.render('home', { recipes, user: req.user });
+  return res.render('home', { recipes, user: req.user });
 };
 
 const recipeDetails = async (req, res) => {
@@ -11,7 +11,7 @@ const recipeDetails = async (req, res) => {
 
   const recipe = await getRecipeById(id);
 
-  res.render('recipeDetails', { recipe, user: req.user });
+  return res.render('recipeDetails', { recipe, user: req.user });
 };
 
 const searchRecipe = async (req, res) => {
@@ -23,8 +23,21 @@ const searchRecipe = async (req, res) => {
   return res.render('search', { recipes, user: req.user });
 };
 
+const NewRecipe = async (req, res) => {
+  return res.render('newRecipe', { message: null, user: req.user })
+};
+
+const newRecipeForm = async (req, res) => {
+  const formInfo = req.body;
+  const message = "Receita salva com sucesso";
+  await newRecipeInsert(req.user, formInfo);
+  return res.render('newRecipe', { message, user: req.user });
+};
+
 module.exports = {
   listRecipes,
   recipeDetails,
   searchRecipe,
+  NewRecipe,
+  newRecipeForm
 };

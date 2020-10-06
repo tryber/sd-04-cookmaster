@@ -32,7 +32,7 @@ const recipesByUserId = async (userId) => {
     .execute();
   const recipes = await stmt.fetchAll();
   // console.log(recipes);
-  return recipes.map(([ id, user, name ]) => ({ id, user, name }));
+  return recipes.map(([id, user, name]) => ({ id, user, name }));
 };
 
 module.exports = {

@@ -15,7 +15,7 @@ const recipesNew = async (req, res) => {
   }
 
   registerNewRecipe(userId, userName, recipeName, ingredientsString, recipeInstructions)
-    .then(() => res.redirect('/recipes/new'));
+    .then(() => res.redirect('/'));
 };
 
 module.exports = {

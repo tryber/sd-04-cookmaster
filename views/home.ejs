@@ -21,11 +21,11 @@
     <% }) %>
     <% } %>
   </ul>
-  <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">Buscar Receitas</button>
+  <a data-testid="buscar-receita" href='/recipes/search'>Buscar Receitas</a>
   <% if (user) { %>
-  <button data-testid="nova-receita" onclick="window.location.pathname='/recipes/new'">Nova Receita</button>
-  <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
-  <button data-testid="minhas-receitas" onclick="window.location.pathname='/me/recipes'">Minhas Receitas</button>
+  <a data-testid="nova-receita" href="/recipes/new" >Nova Receita</a>
+  <a data-testid="logout" href='/logout'>Logout</a>
+  <a data-testid="minhas-receitas" href='/me/recipes'>Minhas Receitas</a>
   <% } %>
   <% if (!user) { %>
   <a data-testid="login" href="/login">Login</a>

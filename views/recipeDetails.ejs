@@ -14,14 +14,14 @@
     <% } %>
     <% if (user) { %>
       <p><%= `${user.firstName} ${user.lastName}` %></p>
-      <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+      <a data-testid="logout" href='/logout'>Logout</a>
     <% } %>
    </div>
  </header>
  <div>
   <% if (user && user.id === parseInt(recipe[0][1])) { %>
-    <button data-testid="editar-receita" onclick="window.location.pathname='/recipes/<%= recipe[0][0] %>/edit'">Editar Receita</button>
-    <button data-testid="excluir-receita" onclick="window.location.pathname='/recipes/<%= recipe[0][0] %>/delete'">Excluir Receita</button>
+    <a data-testid="editar-receita" href='/recipes/<%= recipe[0][0] %>/edit'>Editar Receita</a>
+    <a data-testid="excluir-receita" href='/recipes/<%= recipe[0][0] %>/delete'>Excluir Receita</a>
   <% } %>
    <h1><%= recipe[0][3] %></h1>
    <p>Enviada por <%= recipe[0][2] %></p>

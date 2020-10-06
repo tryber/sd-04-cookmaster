@@ -40,7 +40,7 @@ const deleteRecipeForm = async (req, res) => {
   // console.log('Delete Recipe from controller', recipeArray, req.user, recipe);
   res.render('delete', {
     user: req.user,
-    recipeUserID: recipe.user_id,
+    recipeUserID: recipe.userId,
     recipeID: req.params.id,
     message: null,
   });
@@ -62,7 +62,7 @@ const deleteRecipe = async (req, res) => {
   }
   if (user.password !== password) {
     return res.render('delete', {
-      message: 'Senha incorretos',
+      message: 'Senha Incorreta.',
       redirect: null,
       user: req.user,
       recipeUserID: recipe.user_id,

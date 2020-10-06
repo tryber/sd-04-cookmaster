@@ -12,7 +12,7 @@
     <% if (message) {%>
     <div class="message"><%= message %></div>
     <% } %> <% if (user) { %>
-    <p>Usuário atual: <%= `${user[0].name} ${user[0].lastName} ${user[0].id}` %></p>
+    <p>Usuário atual: <%= `${user[0].name} ${user[0].lastName} ${user[0].id} ${recipeUserID}` %></p>
     <% if (recipeUserID === user[0].id) { %>
     <p>same player</p>
     <form action="/recipes/<%= recipeID %>/delete" method="POST">

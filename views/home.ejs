@@ -18,7 +18,7 @@
       <ul>
         <% recipes.forEach((recipe) => { %>
           <li><%= recipe.user %> - <%= recipe.name %></li>
-          <a href=<%= `/recipe/${recipe.id}` %>>Ver mais</a>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
         <% }) %>
       </ul>
     </div>

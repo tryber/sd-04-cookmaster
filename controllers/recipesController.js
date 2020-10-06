@@ -1,3 +1,4 @@
+const recipesModel = require('../models/recipesModel');
 const Recipe = require('../models/recipesModel');
 
 const recipeController = async (req, res) => {
@@ -26,7 +27,16 @@ const recipeDetailsController = async (req, res) => {
   }
 };
 
+const searchRecipeController = async (req, res) => {
+  const { q } = req.query;
+
+  const recipes = await recipesModel.searchRecipes(q);
+
+  return res.render('search', { recipes });
+};
+
 module.exports = {
   recipeController,
   recipeDetailsController,
+  searchRecipeController,
 };

@@ -1,5 +1,6 @@
 const connection = require('./connection');
 
+// BUSCA TODAS AS RECEITAS -----------------------------------------------------
 const findAll = async () =>
   connection()
     .then((db) =>
@@ -20,13 +21,8 @@ const findAll = async () =>
       })),
     );
 
+// PAGINA DA RECEITA PELO ID -----------------------------------------------------
 const getRecipeById = async (idInput) =>
-  // const db = await connection();
-  // const table = await db.getTable('recipes');
-  // const result = await table.select().where('id = :idInput').bind('idInput', idInput).execute();
-  // const [id, userId, user, name, ingredients, instructions] = await result.fetchAll()[0];
-  // return { id, userId, user, name, ingredients, instructions };
-  // };
   connection()
     .then((db) =>
       db
@@ -46,4 +42,22 @@ const getRecipeById = async (idInput) =>
       instructions,
     }));
 
-module.exports = { findAll, getRecipeById };
+// BUSCA RECEITA -----------------------------------------------------
+const searchRecipes = async (q) => {
+  const db = await connection();
+  const results = await db
+    .getTable('recipes')
+    .select(['id', 'name', 'user'])
+    .where('name like :q')
+    .bind('q', `%${q}%`)
+    .execute();
+
+  const recipes = await results.fetchAll();
+  const recipeList = await recipes.map(([id, name, user]) => ({ id, name, user }));
+
+  return recipeList;
+};
+
+// CRIA RECEITA -----------------------------------------------------
+
+module.exports = { findAll, getRecipeById, searchRecipes };

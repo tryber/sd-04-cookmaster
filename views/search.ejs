@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Search</title>
+  </head>
+  <body>
+    <div>
+      <h1>Buscar Receitas</h1>
+
+      <form action="/recipes/search" method="GET">
+        <input data-testid="receita" type="text" name="q" />
+        <button data-testid="buscar" type="submit">Buscar</button>
+      </form>
+
+      <div>
+        <% if(recipes) { recipes.map(({user, name, id}) => {%>
+            <div>
+              <span><%= user %></span>
+              <span><%= name %></span>
+              <a href=<%= `/recipes/${id}` %>>Ver mais</a>
+            </div>
+        <% })} %>
+      </div>
+    </div>
+  </body>
+</html>

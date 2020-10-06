@@ -10,8 +10,8 @@
   <body>
     <div>
       <% if (token) { %>
-        <button data-testid="editar-receita" onclick="window.location.pathname='/editar'">Editar Receita</button>
-        <button data-testid="excluir-receita" onclick="window.location.pathname='/delete'">Excluir Receita</button>
+        <a href=<%=`/recipes/${recipe.id}/edit` %> ><button data-testid="editar-receita">Editar Receita</button> </a>
+        <a href=<%=`/recipes/${recipe.id}/delete` %> > <button data-testid="excluir-receita">Excluir Receita</button></a>
       <% } %>
     </div>
     <div>

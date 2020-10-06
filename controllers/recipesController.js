@@ -18,7 +18,7 @@ const editRecipe = async ({ params: { id }, userData }, res) => {
 
 const postRecipe = async ({ params: { id }, body }, res) => updateRecipe(id, body)
   .then(() => res.redirect('/'))
-  .catch((err) => console.log(err));
+  .catch((err) => res.send(err));
 
 module.exports = {
   homeRecipes,

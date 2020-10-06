@@ -1,4 +1,4 @@
-const { getAll, getRecipeById } = require('../models/listRecipesModel');
+const { getAll, getRecipeById, searchRecipeModel } = require('../models/listRecipesModel');
 
 const listRecipes = async (req, res) => {
   const recipes = await getAll();
@@ -15,11 +15,11 @@ const recipeDetails = async (req, res) => {
 };
 
 const searchRecipe = async (req, res) => {
-  const searchFor = req.query;
-  console.log(searchFor)
-  console.log('to fudendo o trem aqui!')
+  const { q } = req.query;
 
-  const recipes = [];
+  if ( q === '' ) return res.render('search', { recipes: null, user: req.user });
+
+  const recipes = await searchRecipeModel(q);
   res.render('search', { recipes, user: req.user})
 }
 

@@ -20,7 +20,21 @@ const getRecipeById = async (Id) => {
   return { id, user, name, ingredients, instructions };
 };
 
+const searchRecipeModel = async (q) => {
+  const db = await connection();
+  const allTable = await db.getTable('recipes')
+    .select(['id', 'user', 'name'])
+    .where('name like :name')
+    .orderBy(['name'])
+    .bind('name', `%${q}%`)
+    .execute();
+
+  const results = allTable.fetchAll();
+  return results.map(([id, user, name]) => ({ id, user, name }));
+}
+
 module.exports = {
   getAll,
   getRecipeById,
+  searchRecipeModel,
 };

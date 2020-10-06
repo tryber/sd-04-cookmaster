@@ -9,11 +9,16 @@
     <%- include('./components/header.ejs', { user }) %>
     <h1>Buscar Receitas</h1>
     <div>
-      <input type="text" name="search" data-testid="receita"/><br />
-      <button data-testid="buscar">Buscar</button>
+      <form action="/recipes/search" method="GET">
+        <input type="text" name="q" data-testid="receita"/><br />
+        <button type="submit" data-testid="buscar">Buscar</button>
+      </form>
     </div>
     <div>
       <%- include('./components/recipeCard.ejs', { recipes }) %>
     </div>
+    <script>
+
+    </script>
   </body>
 </html>

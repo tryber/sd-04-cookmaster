@@ -13,30 +13,40 @@
   </head>
   <body>
     <% if (message) {%>
-    <div><%= message %></div>
+    <h3 class="card text-center mx-auto bg-warning w-25 m-3"><%= message %></h3>
     <% } %>
-    <form class="w-75 ml-3" action="/login" method="POST">
-      <div class="form-group">
-        <label for="email">Email: </label>
-        <input class="form-control" data-testid="email" type="text" name="email" id="email" /><br />
-      </div>
-      <div class="form-group">
-        <label for="password">Senha: </label>
-        <input
-          class="form-control"
-          data-testid="senha"
-          type="password"
-          name="password"
-          id="password"
-        /><br />
-      </div>
-      <% if (redirect) { %>
-      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
-      <% } %>
 
-      <button class="btn btn-dark mr-2" data-testid="entrar" type="submit">Login</button>
-      <a class="btn btn-secondary mr-2" href="/cadastro" data-testid="cadastrar">Cadastre-se</a>
-      <a class="btn btn-secondary" href="/" data-testid="cadastrar">Home</a>
+    <form action="/login" method="POST">
+      <div class="card mx-auto w-50 m-4">
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="email">Email: </label>
+          <input
+            class="form-control"
+            data-testid="email"
+            type="text"
+            name="email"
+            id="email"
+          /><br />
+        </div>
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="password">Senha: </label>
+          <input
+            class="form-control"
+            data-testid="senha"
+            type="password"
+            name="password"
+            id="password"
+          /><br />
+        </div>
+        <% if (redirect) { %>
+        <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+        <% } %>
+        <div class="d-flex justify-content-around m-2">
+          <button class="btn btn-dark mr-2" data-testid="entrar" type="submit">Login</button>
+          <a class="btn btn-secondary mr-2" href="/cadastro" data-testid="cadastrar">Cadastre-se</a>
+          <a class="btn btn-secondary" href="/" data-testid="cadastrar">Home</a>
+        </div>
+      </div>
     </form>
   </body>
 </html>

@@ -63,10 +63,10 @@ const editUser = async (id, email, password, firstName, lastName) => {
     .where('id = :id')
     .bind('id', id)
     .execute();
-}
+};
 
 module.exports = {
   findByEmail,
   findById,
-  editUser
+  editUser,
 };

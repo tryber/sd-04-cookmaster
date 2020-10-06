@@ -52,14 +52,13 @@ app.get('/recipes/:id/delete', (_req, res) => {
 
 // página de minhas receitas (ainda nao implementada) --------------------
 meRouter.get('/recipes', (_req, res) => {
-  res.send('Minhas Receitas')
-})
+  res.send('Minhas Receitas');
+});
 
 // página editar conta (ainda nao implementada) ---------------------------
 meRouter.get('/edit', (_req, res) => {
-  res.send('Minha Conta')
-})
-
+  res.send('Minha Conta');
+});
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

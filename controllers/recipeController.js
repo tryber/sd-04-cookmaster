@@ -48,10 +48,9 @@ const newRecipe = async (req, res) => {
 const create = async (req, res) => {
   const { nameRecipe, task, instrucoes } = req.body;
   const { id, firstName, lastName } = req.user;
-  console.log(req.user);
 
-  if (!recipesModel.isValid(nameRecipe, task, instrucoes))
-    return res.status(400).render('newReceita', { user: req.user, message: 'dados invalidos' });
+  if (!recipesModel.isValid(nameRecipe, task, instrucoes)) {
+    return res.status(400).render('newReceita', { user: req.user, message: 'dados invalidos' })};
 
   const user = await `${firstName} ${lastName}`;
   await recipesModel.createRecipe(id, user, nameRecipe, task, instrucoes);

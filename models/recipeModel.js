@@ -59,9 +59,7 @@ const getRecipesByName = async (q) =>
       })),
     );
 
-const isValid = (nameRecipe, task, instrucoes) => {
-  return nameRecipe && task && instrucoes;
-};
+const isValid = (nameRecipe, task, instrucoes) => nameRecipe && task && instrucoes;
 
 const createRecipe = async (userId, userName, nameRecipe, task, instrucoes) =>
   connection().then((db) =>

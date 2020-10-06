@@ -26,6 +26,6 @@ app.post('/register', controllers.userController.register);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.seeRecipe);
 
-// app.post('/reipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
+// app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
 
 app.listen(3000, () => console.log('Listening on 3000'));

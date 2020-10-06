@@ -7,7 +7,7 @@ const findAll = async () =>
     .then((results) => results.fetchAll())
     .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })));
 
-const recipeById = async ({ id }) =>
+const recipeById = async (id) =>
   connection()
     .then((db) =>
       db

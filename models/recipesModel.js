@@ -27,9 +27,15 @@ const insertRecipe = (
   .values([userId, `${first} ${last}`, name, ingredients, instructions])
   .execute());
 
+const searchByName = (name) => getTableObj(
+  tables.recipes((r) => r.select([]).where('name LIKE :name').bind('name', `%${name}%`).execute()),
+  'fetchAll',
+);
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   updateRecipe,
   insertRecipe,
+  searchByName,
 };

@@ -15,18 +15,10 @@
       <% if (userData) { %>
       <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
       <% } %>
-      <button data-testid="buscar-receita">Buscar Receita</button>
+      <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
     </div>
   </div>
-  <div>
-    <% recipes.forEach(r => { %>
-    <div>
-      <p><%=r.name%></p>
-      <p><%=r.user%></p>
-      <a href="/recipes/<%=r.id%>">Ver mais</a>
-    </div>
-    <% }); %>
-  </div>
+  <%- include('recipes/recipesList', {recipes}) %>
 </body>
 
 </html>

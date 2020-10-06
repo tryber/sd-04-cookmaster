@@ -29,6 +29,12 @@ const insertUser = ({
     .values([email, password, firstName, lastName])
     .execute(),
 );
+
+const validatePassword = async (pass, id) => {
+  const { password } = await findById(id);
+  return pass === password;
+};
+
 // Gambi do CC confesso que senti falta :D
 const comparePassword = (message, password, password2) => {
   if (password.length < 6) message.passwordMsg = 'A senha deve ter pelo menos 6 caracteres';
@@ -54,6 +60,7 @@ const validateNewUser = ({
 module.exports = {
   findByEmail,
   findById,
+  validatePassword,
   validateNewUser,
   insertUser,
 };

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookmaster - Search</title>
+</head>
+
+<body>
+  <%-include('header', {userData})%>
+  <h1>Buscar Receita</h1>
+  <form action="/recipes/search" method="GET">
+    <input data-testid="receita" type="text" name="q">
+    <button data-testid="buscar" type="submit">Search</button>
+  </form>
+  <%- include('recipes/recipesList', {recipes}) %>
+</body>
+
+</html>

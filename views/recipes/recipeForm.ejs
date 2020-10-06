@@ -11,7 +11,7 @@
       <li class="ingredient-item">
         <%-ing%>
         <button type="button" onClick="delIngredient(event)">Excluir
-          ingrediente</button>
+          Ingrediente</button>
       </li>
       <%});%>
       <%}%>
@@ -42,7 +42,7 @@
     li.className = 'ingredient-item'
     button.type = 'button';
     button.onclick = (event) => delIngredient(event, ul.children.length);
-    button.innerText = 'Excluir ingrediente';
+    button.innerText = 'Excluir Ingrediente';
     li.appendChild(button);
     ul.appendChild(li);
   }

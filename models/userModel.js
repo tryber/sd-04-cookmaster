@@ -29,7 +29,7 @@ const insertUser = ({
     .values([email, password, firstName, lastName])
     .execute(),
 );
-
+// Gambi do CC confesso que senti falta :D
 const comparePassword = (message, password, password2) => {
   if (password.length < 6) message.passwordMsg = 'A senha deve ter pelo menos 6 caracteres';
   if (password !== password2) message.password2Msg = 'As senhas tem que ser iguais';

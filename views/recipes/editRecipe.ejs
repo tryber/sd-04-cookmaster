@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Nova Receita</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs', {user}) %> <% if (recipe) {%>
+    <form action="/recipes/<%= recipe.id %>" method="POST">
+      <div>
+        <h1>Editar Receita</h1>
+        <label for="nameRecipe">Nome da Receita:</label>
+        <input
+          type="text"
+          name="name"
+          id="nameRecipe"
+          value="<%= recipe.name %>"
+          data-testid="nome-receita"
+        />
+        <h3>Ingredientes:</h3>
+        <div>
+          <input type="hidden" id="ingredients" name="ingredients" />
+          <ul id="listIngredients">
+            <% recipe.ingredients.forEach(item => { %>
+            <li class="ingredientItem"><%= item %></li>
+            <%})%>
+          </ul>
+        </div>
+        <div>
+          <input id="ingredientsInput" type="text" data-testid="ingredientes" />
+          <button for="ingredients" type="button" id="add" data-testid="adicionar-ingrediente">
+            Adicionar Ingrediente
+          </button>
+        </div>
+        <div>
+          <label for="nameRecipe">Modo de Preparo</label>
+          <input
+            type="text"
+            name="instructions"
+            id="nameRecipe"
+            value="<%= recipe.instructions %>"
+            data-testid="modo-de-preparo"
+          />
+        </div>
+      </div>
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <% } %>
+    <a href="/">Voltar</a>
+  </body>
+  <script>
+    const input = document.querySelector('#ingredientsInput');
+    const ul = document.querySelector('#listIngredients');
+    const liExists = document.querySelectorAll('.ingredientItem');
+    const ingredients = document.querySelector('#ingredients');
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    let arrayIngredients = [];
+
+    const addItensExist = () => {
+      '<%= recipe.ingredients %>'.split(',').forEach((item) => {
+        arrayIngredients.push(item);
+      });
+      liExists.forEach((li) => {
+        btn.innerText = 'Excluir Ingrediente';
+
+        li.appendChild(btn);
+
+        btn.addEventListener('click', () => {
+          const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
+          arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
+          ingredients.value = arrayIngredients.join(',');
+          li.remove();
+          btn.remove();
+        });
+      });
+    };
+
+    document.querySelector('#add').addEventListener('click', () => {
+      li.innerText = input.value;
+      li.className = 'ingredientItem';
+      btn.innerText = 'Excluir Ingrediente';
+
+      arrayIngredients.push(input.value);
+      ingredients.value = arrayIngredients.join(','); // para salvar no banco de dados
+
+      ul.appendChild(li);
+      ul.appendChild(btn);
+      input.value = null;
+
+      btn.addEventListener('click', (e) => {
+        const deleteIngredient = arrayIngredients.filter((item) => item == li.innerText);
+        arrayIngredients.splice(arrayIngredients.indexOf(deleteIngredient), 1);
+        ingredients.value = arrayIngredients.join(',');
+        li.remove();
+        btn.remove();
+      });
+    });
+
+    window.onload = () => addItensExist();
+  </script>
+</html>

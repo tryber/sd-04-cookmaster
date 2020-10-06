@@ -1,0 +1,63 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "config": {
+      "name": "config",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "controllers": {
+      "name": "controllers",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "cypress": {
+      "name": "cypress",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "middlewares": {
+      "name": "middlewares",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "migrations": {
+      "name": "migrations",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "models": {
+      "name": "models",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "public": {
+      "name": "public",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "views": {
+      "name": "views",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "router": {
+      "name": "router",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "README": 0
+  }
+}

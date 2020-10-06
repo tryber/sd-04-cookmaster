@@ -2,6 +2,7 @@ const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
+const { validation, createUser } = require('../models/signUpModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -34,7 +35,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,40 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signup = (_req, res) => {
+  res.render('admin/signup', { message: null });
+};
+
+const newUser = async (req, res) => {
+  const isValid = await validation({ ...req.body });
+
+  if (!isValid) return res.status(400).render('admin/signup', { ...isValid });
+
+  await createUser({ ...req.body });
+  res.status(200).render('admin/signup', { ...isValid });
+};
+
+const editUserRender = (req, res) =>
+  res.render('my-recipes/myRegister', { message: null, user: req.user });
+
+const editUser = async (req, res) => {
+  const { id } = req.user;
+  const { email, password, first_name, last_name } = req.body;
+  const isValid = await validation({ ...req.body });
+
+  if (isValid) {
+    await userModel.editUser(id, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('my-recipes/myRegister', { ...isValid, user: req.user });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signup,
+  newUser,
+  editUserRender,
+  editUser,
 };

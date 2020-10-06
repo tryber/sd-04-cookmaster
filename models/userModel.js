@@ -44,7 +44,12 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   const db = await connection();
-  const stmt = await db.getTable('users').select([]).where('id = :id').bind('id', id).execute();
+  const stmt = await db
+    .getTable('users')
+    .select([])
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
   const rows = await stmt.fetchOne();
   const users = toObject(rows);
   // console.log(users);

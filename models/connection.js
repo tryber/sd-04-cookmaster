@@ -19,6 +19,6 @@ function connection() {
           schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
           return schema; /* E retornamos o schema de dentro da Promise */
         })
-        .catch((err) => err);
+        .catch((_err) => process.exit(1));
 }
 module.exports = connection;

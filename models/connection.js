@@ -11,7 +11,7 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
-
+/*
 const connection = () => {
   return schema
     ? Promise.resolve(schema)
@@ -26,5 +26,20 @@ const connection = () => {
           process.exit(1);
         });
 };
+*/
+function connection() {
+  return schema
+    ? Promise.resolve(schema)
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          schema = session.getSchema('cookmaster');
+          return schema;
+        })
+        .catch((err) => {
+          alert(err);
+          process.exit(1);
+        });
+}
 
 module.exports = connection;

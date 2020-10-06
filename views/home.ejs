@@ -25,7 +25,9 @@
         </div>
       <% }) %>
     </div>
-    <button hidden data-testid="nova-receita">Nova Receita</button>
+    <% if (user) { %>
+      <a data-testid="nova-receita">Nova Receita</a>
+    <% } %>
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>
 </html>

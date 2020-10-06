@@ -30,19 +30,24 @@ const insertUser = ({
     .execute(),
 );
 
+const comparePassword = (message, password, password2) => {
+  if (password.length < 6) message.passwordMsg = 'A senha deve ter pelo menos 6 caracteres';
+  if (password !== password2) message.password2Msg = 'As senhas tem que ser iguais';
+};
+
 const validateNewUser = ({
   email, password, password2, firstName, lastName,
 }) => {
   const message = {};
 
+  comparePassword(message, password, password2);
+
   if (!EMAIL_REGEX.test(email)) message.emailMsg = 'O email deve ter o formato email@mail.com';
-  if (password.length < 6) message.passwordMsg = 'A senha deve ter pelo menos 6 caracteres';
-  if (password !== password2) message.password2Msg = 'As senhas tem que ser iguais';
   if (!NAME_REGEX.test(firstName)) message.nameMsg = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   if (!NAME_REGEX.test(lastName)) message.lastNameMsg = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
 
   if (Object.keys(message).length === 0) message.confirmMsg = 'Cadastro efetuado com sucesso!';
-  console.log(message);
+
   return message;
 };
 

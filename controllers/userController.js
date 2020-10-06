@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const { validateNewUser, insertUser } = require('../models/userModel');
+const { validateNewUser, insertUser, findByEmail } = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -24,7 +24,7 @@ const login = async (req, res) => {
     });
   }
 
-  const user = await userModel.findByEmail(email);
+  const user = await findByEmail(email);
   if (!user || user.password !== password) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',

@@ -9,7 +9,7 @@
     <h4>Header</h4>
     <% if (user) { %>
     <p>Usuário atual: <%= `${user[0].name} ${user[0].lastName} ${user[0].id}` %></p>
-    <% if (recipe.user_id === user[0].id) { %>
+    <% if (recipe.userId === user[0].id) { %>
     <p>same player</p>
     <a data-testid="editar-receita" href="/recipes/edit">editar-receita</a>
     <a data-testid="excluir-receita" href="/recipes/<%= recipe.id %>/delete">excluir-receita</a>

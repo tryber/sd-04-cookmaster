@@ -8,16 +8,16 @@ const listRecipes = async () => {
   return recipes;
 };
 
-const recipesById = async (recipe_id) => {
+const recipesById = async (recipeId) => {
   const db = await connection();
   const stmt = await db
     .getTable('recipes')
     .select([])
     .where('id = :id')
-    .bind('id', recipe_id)
+    .bind('id', recipeId)
     .execute();
-  const [id, user_id, user, name, ingredients, instructions] = await stmt.fetchOne();
-  const recipe = { id, user_id, user, name, ingredients, instructions };
+  const [id, userId, user, name, ingredients, instructions] = await stmt.fetchOne();
+  const recipe = { id, userId, user, name, ingredients, instructions };
   // console.log(recipe);
   return recipe;
 };
@@ -32,7 +32,7 @@ const recipesByUserId = async (userId) => {
     .execute();
   const recipes = await stmt.fetchAll();
   // console.log(recipes);
-  return recipes.map(([id, user, name]) => ({id, user, name}));
+  return recipes.map(([ id, user, name ]) => ({ id, user, name }));
 };
 
 module.exports = {

@@ -9,12 +9,14 @@
   <body>
     <div class="container">
       <h1>Receita detalhada</h1>
-      <% if (user.id === recipe.id) { %>
-        <a class="btn btn-sm btn-primary" data-testid="editar-receita" href=<%= `${recipe.id}/edit` %>>Editar Receita</a>
-        <a class="btn btn-sm btn-danger" data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %>>Excluir Receita</a>
+      <% if (user) { %>
+        <% if (user.id === recipe.id) { %>
+          <a class="btn btn-sm btn-primary" data-testid="editar-receita" href=<%= `${recipe.id}/edit` %>>Editar Receita</a>
+          <a class="btn btn-sm btn-danger" data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %>>Excluir Receita</a>
+        <% } %>
       <% } %>
        <div>
         <%= recipe.name%>, <%= recipe.user %>, <%= recipe.ingredients %>, <%= recipe.instructions %>
-      </div>                  
+      </div>
   </body>
 </html>

@@ -10,7 +10,7 @@ const config = {
   host: process.env.HOSTNAME,
   port: 33060,
   schema: 'cookmaster',
-}
+};
 
 function connection() {
   return schema /* Se schema já existir: */

@@ -13,10 +13,12 @@ const recipesDetails = async (req, res) => {
 
 const userRecipes = async (req, res) => {
   const recipes = await Recipes.recipesByUserId(req.user.id);
-  console.log(recipes);
-}
+  // console.log(recipes);
+  res.render('/');
+};
 
 module.exports = {
   index,
   recipesDetails,
+  userRecipes,
 };

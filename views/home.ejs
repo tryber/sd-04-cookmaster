@@ -15,11 +15,11 @@
         <% }) %>
       </ul>
       <% if (user) {%>
-        <span>Hello, <%= user.name %></span> 
+        <span>Hello, <%= user.name %></span>
         <a href="/" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
         <a href="/logout" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
       <% }  else { %>
-        <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>        
+        <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>
       <% } %>
       <a href="/" data-testid="buscar-receita" class="btn btn-sm btn-primary">Buscar Receita</a>
     </div>

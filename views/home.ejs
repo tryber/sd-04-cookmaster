@@ -8,11 +8,23 @@
   <body>
     <header>
       <p>Cookmaster</p>
-      <button onclick="window.location.href='/login'" data-testid="login">Login</button>
-      <button hidden data-testid="logout">Logout</button>
+      <% if (user) { %>
+        <a href="/logout" data-testid="logout">Logout</a>
+      <% } else { %>
+        <a href="/login" data-testid="login">Login</a>
+      <% } %>
     </header>
     <h1>Receitas</h1>
-    <a href="Link">Ver mais</a>
+    <div>
+      Colocar as receitas aqui
+      <% recipes.forEach((recipe) => { %>
+        <div>
+          <h3><%= recipe.name %></h3>
+          <p><%= recipe.user %></p>
+          <a href="Link">Ver mais</a>
+        </div>
+      <% }) %>
+    </div>
     <button hidden data-testid="nova-receita">Nova Receita</button>
     <button data-testid="buscar-receita">Buscar Receita</button>
   </body>

@@ -1,4 +1,5 @@
 const mysqlx = require('@mysql/xdevapi');
+let schema;
 require('dotenv').config();
 
 const config = {
@@ -8,30 +9,19 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
-/*
-const connection = async () => {
-  return mysqlx
-    .getSession(config)
+
+const connection = () => {
+  return schema ?
+    Promise.resolve(schema) :
+    mysqlx.getSession(config)
     .then((session) => {
-      const schema = session.getSchema('cookmaster');
+      schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => {
-      // console.log(err);
-      process.exit(err);
+      console.log(err);
+      process.exit(1);
     });
 };
-*/
-function connection() {
-  return mysqlx
-    .getSession(config)
-    .then((session) => {
-      const schema = session.getSchema('cookmaster');
-      return schema;
-    })
-    .catch((err) => {
-      process.exit(err);
-    });
-}
 
 module.exports = connection;

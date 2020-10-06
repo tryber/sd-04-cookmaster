@@ -22,7 +22,7 @@ app.post('/login', userController.login);
 app.get('/recipes/new', middlewares.auth(), recipesController.newPage);
 
 app.get('/', middlewares.auth(false), recipesController.homeRecipes);
-app.get('/recipes/search', middlewares.auth(false), recipesController.searchRecipe)
+app.get('/recipes/search', middlewares.auth(false), recipesController.searchRecipe);
 app.get('/recipes/:id', middlewares.auth(false), recipesController.oneRecipe);
 
 app.use(middlewares.auth());

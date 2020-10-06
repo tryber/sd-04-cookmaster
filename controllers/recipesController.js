@@ -2,7 +2,7 @@ const { tables } = require('../models/connection');
 const {
   getAllRecipes, getRecipeById, updateRecipe, insertRecipe, searchByName,
 } = require('../models/recipesModel');
-const { findById, validatePassword } = require('../models/userModel');
+const { validatePassword } = require('../models/userModel');
 
 const homeRecipes = async ({ userData = false }, res) => {
   const recipes = await getAllRecipes();

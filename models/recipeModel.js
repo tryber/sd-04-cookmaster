@@ -19,7 +19,6 @@ const getAll = async () => {
         instructions,
       })),
     );
-  console.log(data);
   return data;
 };
 

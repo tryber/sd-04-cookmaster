@@ -19,8 +19,6 @@ const findByEmail = async (email) => {
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
-
-  console.log(data);
   return data;
 };
 

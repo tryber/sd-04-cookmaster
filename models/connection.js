@@ -3,7 +3,8 @@ const mysqlx = require('@mysql/xdevapi');
 require('dotenv/config');
 
 let schema;
-const connection = () => {
+
+function connection() {
   return schema
     ? Promise.resolve(schema)
     : mysqlx
@@ -22,6 +23,6 @@ const connection = () => {
         .catch(() => {
           process.exit(1);
         });
-};
+}
 
 module.exports = connection;

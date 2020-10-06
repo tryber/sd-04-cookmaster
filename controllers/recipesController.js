@@ -14,7 +14,7 @@ const recipesDetails = async (req, res) => {
 const userRecipes = async (req, res) => {
   const recipes = await Recipes.recipesByUserId(req.user.id);
   // console.log(recipes);
-  res.render('/', {recipes});
+  res.render('/', { recipes });
 };
 
 module.exports = {

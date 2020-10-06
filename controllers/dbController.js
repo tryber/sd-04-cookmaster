@@ -55,11 +55,12 @@ const deleteRecipe = async (req, res) => {
   if (!password) {
     return res.render('delete', {
       message: 'Preencha a senha',
-      redirect: null, user: req.user,
-      recipeUserID: recipe.user_id, recipeID: req.params.id,
+      redirect: null,
+      user: req.user,
+      recipeUserID: recipe.user_id,
+      recipeID: req.params.id,
     });
   }
-
   if (user.password !== password) {
     return res.render('delete', {
       message: 'Senha incorretos',

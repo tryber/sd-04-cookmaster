@@ -15,7 +15,7 @@ const getRecipeById = async (Id) => {
     .bind('id', Id)
     .execute();
   const results = await table.fetchOne();
-  const [id, user, name, ingredients,instructions] = results;
+  const [id, user, name, ingredients, instructions] = results;
   // const ingredients = await results[3].slice(',');
   return { id, user, name, ingredients, instructions };
 };

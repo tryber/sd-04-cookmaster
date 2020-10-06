@@ -11,7 +11,7 @@ const recipeDetails = async (req, res) => {
 
   const recipe = await getRecipeById(id);
 
-  res.render('recipeDetails', { recipe, user: req.user })
+  res.render('recipeDetails', { recipe, user: req.user });
 }
 
 module.exports = {

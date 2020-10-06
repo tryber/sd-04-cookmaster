@@ -12,15 +12,16 @@
     />
   </head>
   <body>
-    <% if (message) {%>
-    <h3 class="card text-center mx-auto bg-warning w-25 m-3"><%= message %></h3>
+    <% if (success) {%>
+    <h3 class="card text-center mx-auto bg-success w-75 m-3"><%= success %></h3>
+    <h6 class="text-center">faça login...</h6>
     <% } %>
     <form class="m-4" action="/cadastro" method="POST">
       <div class="card w-50 mx-auto">
         <h2 class="text-center m-2">Cookmaster cadastro</h2>
         <div class="form-group w-75 mx-auto m-2">
-          <% if (message) {%>
-          <p><%= message %></p>
+          <% if (isEmail) {%>
+          <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= isEmail %></h6>
           <% } %>
           <label for="email">Email: </label>
           <input
@@ -33,8 +34,8 @@
           />
         </div>
         <div class="form-group w-75 mx-auto">
-          <% if (message) {%>
-          <p><%= message %></p>
+          <% if (isName) {%>
+          <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= isName %></h6>
           <% } %>
           <label for="nome">Nome: </label>
           <input
@@ -42,40 +43,51 @@
             class="form-control"
             data-testid="nome"
             type="text"
-            name="nome"
+            name="firstName"
             id="nome"
           />
         </div>
         <div class="form-group w-75 mx-auto">
+          <% if (isLastName) {%>
+          <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= isLastName %></h6>
+          <% } %>
           <label for="sobrenome">Sobrenome: </label>
           <input
             required
             class="form-control"
             data-testid="sobrenome"
             type="text"
-            name="sobrenome"
+            name="lastName"
             id="sobrenome"
           />
         </div>
         <div class="form-group w-75 mx-auto">
+          <% if (isPassword) {%>
+          <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= isPassword %></h6>
+          <% } %>
           <label for="senha">Senha: </label>
           <input
             required
             class="form-control"
             data-testid="senha"
             type="password"
-            name="senha"
+            name="password"
             id="senha"
           />
         </div>
         <div class="form-group w-75 mx-auto">
+          <% if (isConfirmPassword) {%>
+          <h6 class="card text-center text-white mx-auto bg-danger m-3">
+            <%= isConfirmPassword %>
+          </h6>
+          <% } %>
           <label for="confirmar-passwordInput">Confirmar senha: </label>
           <input
             required
             class="form-control"
             data-testid="confirmar-senha"
             type="password"
-            name="confirmar-senha"
+            name="confirmPassword"
             id="confirmar-senha"
           />
         </div>

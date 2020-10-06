@@ -8,13 +8,35 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
+let schema;
+// const connection1 = () => {
+//   return schema
+//     ? Promise.resolve(schema)
+//     : mysqlx
+//         .getSession(config)
+//         .then(async (session) => {
+//           schema = session.getSchema('cookmaster');
+//         })
+//         .catch((err) => {
+//           throw err;
+//         });
+// };
 
-const connection = () =>
-  mysqlx
-    .getSession(config)
-    .then(async (session) => session.getSchema('cookmaster'))
-    .catch((err) => {
-      throw err;
-    });
+const connection = () => {
+  return schema /* Se schema já existir: */
+    ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          /* Quando terminamos de abrir a conexão: */
+          schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
+          return schema; /* E retornamos o schema de dentro da Promise */
+        })
+        .catch((err) => {
+          /* Caso um erro ocorra: */
+          console.error(err); /* Exibimos o erro no console */
+          process.exit(1); /* E encerramos o processo */
+        });
+};
 
 module.exports = connection;

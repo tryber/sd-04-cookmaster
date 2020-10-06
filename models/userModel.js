@@ -58,27 +58,32 @@ const findById = async (id) => {
   );
 };
 
-const createUser = async (id, email, user, firstName, lastName, password) =>
+const createUser = async (email, firstName, lastName, password) => {
+  console.log(email);
   connection().then((db) =>
     db
       .getTable('users')
-      .insert(['id', 'email', 'user', 'firstName', 'lastName', 'password'])
-      .values((id, email, user, firstName, lastName, password))
+      .insert(['email', 'firstName', 'lastName', 'password'])
+      .values((email, firstName, lastName, password))
       .execute(),
   );
+};
 
-const isEmailValid = (email) => {
+const isEmailValid2 = (email = '') => {
   const reg = '[A-Z0-9]{1,}@[A-Z0-9]{2,}.[A-Z0-9]{2,}';
   return reg.test(email);
 };
 
-const isPasswordValid = (password) => password.length >= 6;
+const isEmailValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);
 
-const isCounterPasswordValid = (password, counterPassword) => counterPassword === password;
+const isPasswordValid = (password = '') => password.length >= 6;
 
-const isUserNameValid = (name) => typeof name === 'string' && name.length >= 3;
+const isCounterPasswordValid = (password = '', counterPassword = '') =>
+  counterPassword === password;
 
-const isUserLastNameValid = (lastName) => typeof lastName === 'string' && lastName.length >= 3;
+const isUserNameValid = (name = '') => name.length >= 3;
+
+const isUserLastNameValid = (lastName = '') => lastName.length >= 3;
 
 module.exports = {
   findByEmail,

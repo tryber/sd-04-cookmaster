@@ -19,8 +19,11 @@
       <a class="btn btn-dark btn-sm m-3" href="/login" data-testid="login">Login</a>
 
       <% } else {%>
+      <div class="d-flex align-items-center">
+        <h4><%= user.firstName %> <%= user.lastName %> | </h4>
 
-      <a class="btn btn-dark btn-sm m-3" href="/logout" data-testid="logout">Logout</a>
+        <a class="btn btn-dark btn-sm m-3" href="/logout" data-testid="logout">Logout</a>
+      </div>
 
       <% } %>
     </nav>

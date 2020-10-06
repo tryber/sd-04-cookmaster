@@ -1,12 +1,92 @@
 const DB = require('../models/dbModel');
-
+const userModel = require('../models/userModel');
 
 const listRecipes = async (req, res) => {
   const recipes = await DB.getAllRecipes();
-  console.log("recipes dbControler", recipes);
-  res.render('home', { recipes });
+  // console.log('recipes dbControler', req.user[0], recipes);
+  res.render('home', { user: req.user, recipes });
+};
+
+const show = async (req, res) => {
+  const { id } = req.params;
+  console.log('id', id);
+  const recipeArray = await DB.getOneRecipe(id);
+  const recipe = recipeArray[0]; //To improve!!
+  console.log('one Recipe from controller', recipeArray, req.user, recipe);
+  res.render('show', { user: req.user, recipe });
+};
+
+const search = async (req, res) => {
+  const { q } = req.query;
+  console.log('searchedWord', q);
+  const recipes = await DB.getSearchedRecipes(q);
+  res.render('search', { user: req.user, recipes });
+};
+
+const createRecipe = async (req, res) => {
+  const { name, allIngredients, instructions } = req.body;
+  const user_id = req.user[0].id;
+  const user = req.user[0].name + ' ' + req.user[0].lastName;
+  console.log('from req.body', req.body, user_id, user, req.user);
+  await DB.insertRecipe(user_id, user, name, allIngredients, instructions);
+  res.redirect('/?insertedRecipe=true');
+};
+
+const deleteRecipeForm = async (req, res) => {
+  const { id } = req.params;
+  console.log('id', id);
+  const recipeArray = await DB.getOneRecipe(id);
+  const recipe = recipeArray[0]; //To improve!!
+  console.log('Delete Recipe from controller', recipeArray, req.user, recipe);
+  res.render('delete', {
+    user: req.user,
+    recipeUserID: recipe.user_id,
+    recipeID: req.params.id,
+    message: null,
+  });
+};
+
+const deleteRecipe = async (req, res, next) => {
+  const { password } = req.body;
+  const { id } = req.params;
+  const user = req.user[0];
+  const recipeArray = await DB.getOneRecipe(id);
+  const recipe = recipeArray[0]; //To improve!!
+  if (!password)
+    return res.render('delete', {
+      message: 'Preencha a senha',
+      redirect: null,
+      user: req.user,
+      recipeUserID: recipe.user_id,
+      recipeID: req.params.id,
+    });
+
+  if (user.password !== password)
+    return res.render('delete', {
+      message: 'Senha incorretos',
+      redirect: null,
+      user: req.user,
+      recipeUserID: recipe.user_id,
+      recipeID: req.params.id,
+    });
+  await DB.deleteFromDB(req.params.id);
+
+  res.redirect('/');
+};
+
+const myRecipes = async (req, res) => {
+  const recipes = await DB.getAllRecipesByUserID(req.user[0].id);
+  console.log('myRecipes dbControler', req.user[0], recipes);
+
+  res.render('myrecipes', { user: req.user, recipes });
 };
 
 module.exports = {
-  listRecipes
+  listRecipes,
+  show,
+  search,
+  createRecipe,
+  deleteRecipe,
+  deleteRecipeForm,
+  myRecipes,
 };

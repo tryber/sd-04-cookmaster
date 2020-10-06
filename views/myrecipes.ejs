@@ -3,24 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>My recipes</title>
   </head>
   <body>
     <header>
       <h4>Header</h4>
-
-      <a data-testid="buscar-receita" href="/recipes/search">buscar-receita</a>
-      <a data-testid="login" href="/login">Login</a>
       <a data-testid="logout" href="/logout">Logout</a>
     </header>
-    <h1>Boas vindas ao Cookmaster! Receitas</h1>
+    <h1>Boas vindas as minhas Receitas</h1>
     <section>
       <% if (user) { %>
-      <button data-testid="nova-receita"><a href="/recipes/new">Nova Receita</a></button>
-      <button data-testid="minhas-receitas">
-        <a href="/me/recipes">Minhas Receitas</a>
-      </button>
-
+      <button data-testid="nova-receita" href="/recipes/new">Nova Receita</button>
       <% } %> <% if (recipes) { %>
       <ul>
         <li>

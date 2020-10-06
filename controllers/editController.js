@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipeModel');
+
 const ingredients = [];
 // const setIngredients = (req, res) => {
 //     const { q } = req.query;
@@ -10,11 +11,9 @@ const ingredients = [];
 const editRecipe = (req, res) => {
   const user = req.user;
   const { ing } = req.query;
-  console.log('ing', ing);
   if (ing) {
     ingredients.push(ing);
   }
-  console.log('array', ingredients);
   res.render('edit', { user, ingredients });
 };
 

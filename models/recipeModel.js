@@ -36,14 +36,14 @@ const searchRecipe = async (recipe) =>
     .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })))
     .then((res) => res.find((food) => food.name === recipe));
 
-const createRecipe = (user_id, user, name, ingredients, instructions) => {
+const createRecipe = (id, user, name, ingredients, instructions) => {
   conn
     .connection()
     .then((db) =>
       db
         .getTable('recipes')
         .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .values(user_id, user, name, ingredients, instructions)
+        .values(id, user, name, ingredients, instructions)
         .execute(),
     );
 };

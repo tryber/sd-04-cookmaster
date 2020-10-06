@@ -12,7 +12,7 @@ const recipeDelete = async (req, res) => {
   const user = await userModel.findById(req.user.id);
   const { password } = req.body;
   if (password !== user.password) return res.render('recipeDelete', { recipe, message: 'Senha Incorreta.' });
-  recipeDeleteModel(req.params.id)
+  return recipeDeleteModel(req.params.id)
     .then(() => res.redirect('/'));
 };
 

@@ -80,6 +80,15 @@ const myRecipes = async (req, res) => {
   res.render('myrecipes', { user: req.user, recipes });
 };
 
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  // console.log('id', id);
+  const recipeArray = await DB.getOneRecipe(id);
+  const recipe = recipeArray[0]; //  To improve!!
+  // console.log('one Recipe from controller', recipeArray, req.user, recipe);
+  res.render('edit', { user: req.user, recipe });
+};
+
 module.exports = {
   listRecipes,
   show,
@@ -88,4 +97,5 @@ module.exports = {
   deleteRecipe,
   deleteRecipeForm,
   myRecipes,
+  editRecipe,
 };

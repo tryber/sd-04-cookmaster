@@ -11,7 +11,7 @@
     <p>Usuário atual: <%= `${user[0].name} ${user[0].lastName} ${user[0].id}` %></p>
     <% if (recipe.userId === user[0].id) { %>
     <p>same player</p>
-    <a data-testid="editar-receita" href="/recipes/edit">editar-receita</a>
+    <a data-testid="editar-receita" href="/recipes/<%= recipe.id %>/edit">editar-receita</a>
     <a data-testid="excluir-receita" href="/recipes/<%= recipe.id %>/delete">excluir-receita</a>
     <% } %> <% } %>
   </header>

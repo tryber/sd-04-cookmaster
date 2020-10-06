@@ -25,6 +25,7 @@
   <% if (user) { %>
   <button data-testid="nova-receita" onclick="window.location.pathname='/recipes/new'">Nova Receita</button>
   <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+  <button data-testid="minhas-receitas" onclick="window.location.pathname='/me/recipes'">Minhas Receitas</button>
   <% } %>
   <% if (!user) { %>
   <a data-testid="login" href="/login">Login</a>

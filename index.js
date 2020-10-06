@@ -50,4 +50,6 @@ app.post('/register',
   controllers.registerUserController.register,
 );
 
+app.get('/me/recipes', middlewares.auth(), controllers.meRecipesController);
+
 app.listen(3000, () => console.log('Listening on 3000'));

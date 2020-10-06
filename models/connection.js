@@ -11,12 +11,17 @@ const config = {
 
 let schema;
 
-const connection = () =>
-  schema ? Promise.resolve(schema) : mysqlx.getSession(config)
+const connection = () => {
+  if (schema) {
+    return Promise.resolve(schema);
+  }
+  return mysqlx.getSession(config)
     .then((session) => {
       schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch((err) => err);
+};
+
 
 module.exports = connection;

@@ -17,7 +17,7 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return connection.connection().then((db) =>
+  return connection().then((db) =>
     db
       .getTable('users')
       .select([])
@@ -40,7 +40,7 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return connection.connection().then((db) =>
+  return connection().then((db) =>
     db
       .getTable('users')
       .select([])
@@ -58,6 +58,15 @@ const findById = async (id) => {
   );
 };
 
+const createUser = async (id, email, user, firstName, lastName, password) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['id', 'email', 'user', 'firstName', 'lastName', 'password'])
+      .values((id, email, user, firstName, lastName, password))
+      .execute(),
+  );
+
 const isEmailValid = (email) => {
   const reg = '[A-Z0-9]{1,}@[A-Z0-9]{2,}.[A-Z0-9]{2,}';
   return reg.test(email);
@@ -65,7 +74,7 @@ const isEmailValid = (email) => {
 
 const isPasswordValid = (password) => password.length >= 6;
 
-const isCounterPasswordValid = (counterPassword, password) => counterPassword === password;
+const isCounterPasswordValid = (password, counterPassword) => counterPassword === password;
 
 const isUserNameValid = (name) => typeof name === 'string' && name.length >= 3;
 
@@ -79,4 +88,5 @@ module.exports = {
   isPasswordValid,
   isCounterPasswordValid,
   isEmailValid,
+  createUser,
 };

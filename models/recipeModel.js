@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAllRecipes = async () =>
-  connection.connection().then((db) =>
+  connection().then((db) =>
     db
       .getTable('recipes')
       .select(['id', 'user', 'name', 'ingredients', 'instructions'])
@@ -19,7 +19,7 @@ const getAllRecipes = async () =>
   );
 
 const getRecipeById = async (id) =>
-  connection.connection().then((db) =>
+  connection().then((db) =>
     db
       .getTable('recipes')
       .select(['id', 'user', 'name', 'ingredients', 'instructions'])
@@ -34,15 +34,13 @@ const getRecipeById = async (id) =>
 //   return id && user && name && ingredients && instructions;
 // };
 
-const create = async (id, user, name, ingredients, instructions) =>
-  connection
-    .connection()
-    .then((db) =>
-      db
-        .getTable('recipes')
-        .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
-        .values(id, user, name, ingredients, instructions)
-        .execute(),
-    );
+const createRecipe = async (id, user, name, ingredients, instructions) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(id, user, name, ingredients, instructions)
+      .execute(),
+  );
 
-module.exports = { getAllRecipes, getRecipeById, create };
+module.exports = { getAllRecipes, getRecipeById, createRecipe };

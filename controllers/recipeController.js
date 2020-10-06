@@ -16,9 +16,15 @@ const recipeDetails = async (req, res) => {
   res.render('recipes', { recipe, user: req.user });
 };
 
+const addRecipe = (req, res) => {
+  res.render('newRecipe');
+};
+
 const createRecipe = async (req, res) => {
   const { id, user, name, ingredients, instructions } = await req.body;
-  const newRecipeCreated = await Recipes.create(id, user, name, ingredients, instructions);
+  const newRecipeCreated = await Recipes.createRecipe(id, user, name, ingredients, instructions);
+
+  console.log(newRecipeCreated);
 
   res.render('newRecipe', { newRecipeCreated });
 };

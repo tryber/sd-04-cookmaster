@@ -43,6 +43,26 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const addUser = async (req, res) => {
+  const user = req.body;
+  const validName = userModel.isUserNameValid(user.firstName);
+  const validEmail = userModel.isPasswordValid(user.password);
+
+  const allValid = validName && validEmail;
+
+  if (!validName) {
+    return res.render('cadastro', { validName: 'errado' });
+  }
+  if (!validEmail) {
+    return res.render('cadastro', { validName: 'errado' });
+  }
+
+  console.log(user);
+
+  userModel.createUser(user);
+  res.render('cadastro', { validName: 'Ola' });
+};
+
 module.exports = {
   login,
   loginForm,

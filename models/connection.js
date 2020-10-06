@@ -17,4 +17,4 @@ const connection = () =>
       throw err;
     });
 
-module.exports = { connection };
+module.exports = connection;

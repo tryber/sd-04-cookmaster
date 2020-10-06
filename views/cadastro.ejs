@@ -12,20 +12,44 @@
     />
   </head>
   <body>
+    <% if (message) {%>
+    <h3 class="card text-center mx-auto bg-warning w-25 m-3"><%= message %></h3>
+    <% } %>
     <form class="m-4" action="/cadastro" method="POST">
       <div class="card w-50 mx-auto">
         <h2 class="text-center m-2">Cookmaster cadastro</h2>
         <div class="form-group w-75 mx-auto m-2">
+          <% if (message) {%>
+          <p><%= message %></p>
+          <% } %>
           <label for="email">Email: </label>
-          <input class="form-control" data-testid="email" type="text" name="email" id="email" />
+          <input
+            required
+            class="form-control"
+            data-testid="email"
+            type="text"
+            name="email"
+            id="email"
+          />
         </div>
         <div class="form-group w-75 mx-auto">
+          <% if (message) {%>
+          <p><%= message %></p>
+          <% } %>
           <label for="nome">Nome: </label>
-          <input class="form-control" data-testid="nome" type="text" name="nome" id="nome" />
+          <input
+            required
+            class="form-control"
+            data-testid="nome"
+            type="text"
+            name="nome"
+            id="nome"
+          />
         </div>
         <div class="form-group w-75 mx-auto">
           <label for="sobrenome">Sobrenome: </label>
           <input
+            required
             class="form-control"
             data-testid="sobrenome"
             type="text"
@@ -35,11 +59,19 @@
         </div>
         <div class="form-group w-75 mx-auto">
           <label for="senha">Senha: </label>
-          <input class="form-control" data-testid="senha" type="password" name="senha" id="senha" />
+          <input
+            required
+            class="form-control"
+            data-testid="senha"
+            type="password"
+            name="senha"
+            id="senha"
+          />
         </div>
         <div class="form-group w-75 mx-auto">
           <label for="confirmar-passwordInput">Confirmar senha: </label>
           <input
+            required
             class="form-control"
             data-testid="confirmar-senha"
             type="password"
@@ -48,10 +80,8 @@
           />
         </div>
         <div class="d-flex justify-content-around m-3">
-          <button class="btn btn-secondary" type="submit" data-testid="cadastrar">
-            Cadastre-se
-          </button>
-          <a class="btn btn-dark" href="/login" data-testid="login">Login</a>
+          <button class="btn btn-dark" type="submit" data-testid="cadastrar">Cadastre-se</button>
+          <a class="btn btn-secondary" href="/login" data-testid="login">Login</a>
         </div>
       </div>
     </form>

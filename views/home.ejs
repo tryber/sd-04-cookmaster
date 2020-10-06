@@ -3,31 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../style/home.css" type="text/css"/>
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <header>
+    <header class="header-container p-2">
       <h1>Cookmaster</h1>
-      <a data-testid="login" href="">Login</a>
 
+      <div class="login-container p-2">
+        <% if (!token) { %>
+          <a data-testid="login" href="login" class="btn btn-primary">Login</a>
+        <% } else { %>
+          <a data-testid="logout" href="logout" class="btn btn-danger">Logout</a>
+        <% } %>
+      </div>
+      
     </header>
 
-    <h3>Receitas</h3>
+
+    <section class="container">
+
+    <div class="second-header-container mt-2">
+      <h3>Receitas</h3>
+
+      <a data-testid="buscar-receita" href="" class="btn btn-success">Buscar Receitas</a>
+    </div>
 
     <% if (token) { %>
-        <a  href="">Minhas Receitas</a>
-        <a data-testid="buscar-receita" href="">Buscar Receitas</a>
-        <a data-testid="nova-receita" href="">Nova Receita</a>
-        <a href="">Minha Conta</a>
+      <a data-testid="nova-receita" href="">Nova Receita</a>
     <% } %>
 
-    <div class="container">
+    <div class="">
       <% recipes.map(({user, name, id}) =>{ %>
-        <li>
-          <%=`${name} ${user}`%>
-          <a href=<%=`recipes/${id}`%> >Ver mais<a/>
-        </li>
+        <div class="card mt-2">
+          <li class="card-body">
+            <%=`${name} ${user}`%>
+            <a href=<%=`recipes/${id}` %> >Ver mais<a/>
+          </li>
+        </div>
       <% }) %>
     </div>
+    </section>
+    
   </body>
 </html>

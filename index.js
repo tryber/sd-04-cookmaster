@@ -6,6 +6,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -13,9 +14,11 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // recipes router
-app.get('/recipes/new', (req, res) => {
-  res.render('newReceita');
-});
+app.get('/recipes/new', middlewares.auth(false), controllers.recipesController.newRecipe);
+
+app.post('/recipes/', middlewares.auth(false), controllers.recipesController.create);
+app.get('/recipes/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
+
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.buscaReceita);
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);

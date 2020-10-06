@@ -57,13 +57,19 @@ const findById = async (userId) => {
   const db = await connection();
   const results = await db
     .getTable('users')
-    .select(['id', 'email', 'password'])
+    .select(['id', 'email', 'password', 'first_name', 'last_name'])
     .where('id = :id')
     .bind('id', userId)
     .execute();
 
   const listing = await results.fetchAll();
-  const list = await listing.map(([id, email, password]) => ({ id, email, password }))[0];
+  const list = await listing.map(([id, email, password, firstName, lastName]) => ({
+    id,
+    email,
+    password,
+    firstName,
+    lastName,
+  }))[0];
 
   return list;
 };

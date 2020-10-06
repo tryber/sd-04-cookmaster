@@ -59,8 +59,23 @@ const getRecipesByName = async (q) =>
       })),
     );
 
+const isValid = (nameRecipe, task, instrucoes) => {
+  return nameRecipe && task && instrucoes;
+};
+
+const createRecipe = async (userId, userName, nameRecipe, task, instrucoes) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values([userId, userName, nameRecipe, task, instrucoes])
+      .execute(),
+  );
+
 module.exports = {
   getRecipes,
   find,
   getRecipesByName,
+  createRecipe,
+  isValid,
 };

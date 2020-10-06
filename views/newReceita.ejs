@@ -4,6 +4,127 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Nova Receita</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
-  <body></body>
+  <body>
+    <navbar> <%- include('navbar')%> </navbar>
+    <h1 class="mb-2">Nova Receita</h1>
+    <% if (message) { %>
+    <p class="alert alert-danger"><%= message %></p>
+    <% } %>
+    <div id="formulario">
+      <div class="col-md">
+        <form action="/recipes" method="POST" id="form">
+          <div class="col-md-12 mb-3">
+            <label for="recipeName">Nome da Receita</label>
+            <input data-testid="nome-receita" type="text" class="form-control" name="nameRecipe" />
+            <br />
+            <div>
+              <ul id="myList"></ul>
+            </div>
+            <p>Ingredientes</p>
+            <div style="display: flex">
+              <input
+                data-testid="ingredientes"
+                type="text"
+                class="form-control col-md-9"
+                name="task"
+                id="task"
+              />
+              <input
+                type="button"
+                style="margin-left: 15px"
+                name=""
+                class="btn btn-success col-md-3"
+                data-testid="adicionar-ingrediente"
+                value="Adicionar Ingrediente"
+                onclick="addTask()"
+              />
+            </div>
+            <br /><br />
+            <div class="form-group">
+              <label for="modoPreparo">Modo de preparo</label>
+              <textarea
+                class="form-control"
+                rows="10"
+                data-testid="modo-de-preparo"
+                name="instrucoes"
+              ></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: space-between">
+              <div>
+                <a href="#" class="btn btn-primary" type="submit" id="myInput">Voltar</a>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary" data-testid="postar-receita">
+                  Salvar Receita
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <style>
+    /* CSS ESTA AQUI*/
+
+    /*     #ingrediente {
+      max-width: 50%;
+    } */
+    #formulario {
+      margin: 10px;
+    }
+
+    .botaoExcluir {
+      margin-left: 15px;
+    }
+  </style>
+
+  <script>
+    var ul = document.getElementById('myList');
+    var li;
+    var itemId;
+    var item;
+
+    addTask = function () {
+      document.getElementById('task').value;
+      item = document.getElementById('task');
+      if (item.value == '') {
+        alert('Escreva alguma coisa');
+      } else {
+        itemId = ul.childElementCount;
+        li = createItemEl(item.value, itemId);
+        li.appendChild(createRemoveTaskBtn(itemId));
+        ul.appendChild(li);
+      }
+    };
+    removeTask = function (itemId) {
+      for (i = 0; i < ul.children.length; i++) {
+        if (ul.children[i].getAttribute('index') == itemId) {
+          ul.children[i].remove();
+        }
+      }
+    };
+    createItemEl = function (itemValue, itemId) {
+      let li = document.createElement('li');
+      li.setAttribute('index', itemId);
+      li.appendChild(document.createTextNode(itemValue));
+
+      return li;
+    };
+    createRemoveTaskBtn = function () {
+      let btn = document.createElement('button');
+      btn.setAttribute('onclick', 'removeTask(' + itemId + ')');
+      btn.className = 'btn btn-primary botaoExcluir';
+      btn.innerHTML = 'Excluir Ingrediente';
+      return btn;
+    };
+  </script>
 </html>

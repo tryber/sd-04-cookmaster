@@ -33,17 +33,30 @@ const deleteRecipe = async (req, res) => {
   res.render('recipe', { recipes, user: req.user });
 };
 
-// const searchRecipe = async (req, res) => {
-
-// res.render('search', { recipes, user: req.user });
-// };
-
 const buscaReceita = async (req, res) => {
   const { q } = req.query;
 
   const recipes = await recipesModel.getRecipesByName(q);
 
   res.render('search', { recipes, user: req.user });
+};
+
+const newRecipe = async (req, res) => {
+  res.render('newReceita', { user: req.user, message: null });
+};
+
+const create = async (req, res) => {
+  const { nameRecipe, task, instrucoes } = req.body;
+  const { id, firstName, lastName } = req.user;
+  console.log(req.user);
+
+  if (!recipesModel.isValid(nameRecipe, task, instrucoes))
+    return res.status(400).render('newReceita', { user: req.user, message: 'dados invalidos' });
+
+  const user = await `${firstName} ${lastName}`;
+  await recipesModel.createRecipe(id, user, nameRecipe, task, instrucoes);
+
+  res.redirect('/recipes');
 };
 
 module.exports = {
@@ -53,4 +66,6 @@ module.exports = {
   editRecipe,
   deleteRecipe,
   buscaReceita,
+  newRecipe,
+  create,
 };

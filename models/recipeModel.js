@@ -7,6 +7,26 @@ const findAll = async () =>
     .then((results) => results.fetchAll())
     .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })));
 
+const recipeById = async ({ id }) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+    .then((result) => result.fetchAll()[0])
+    .then(([recipeId, userId, user, name, ingredients, instructions]) => ({
+      recipeId,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
+
 // const addNewRecipe = async (userId, user, name, ingredients, instructions) =>
 //   connection().then((db) =>
 //     db
@@ -18,5 +38,6 @@ const findAll = async () =>
 // métodos exportados para o controller
 module.exports = {
   findAll,
+  recipeById,
   // addNewRecipe,
 };

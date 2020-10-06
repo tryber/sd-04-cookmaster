@@ -7,6 +7,13 @@ const showRecipes = async (req, res) => {
   // tem q colocar tb o user para acessar na home e na navbar
 };
 
+const seeRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipesModel.recipeById(id);
+
+  res.render('seerecipe', { ...recipe, user: req.user });
+};
+
 // const newRecipe = async (req, res) => {
 //   const { recipeName, ingredients, instructions } = req.body;
 //   const { name, lastName, id } = req.user;
@@ -19,5 +26,6 @@ const showRecipes = async (req, res) => {
 
 module.exports = {
   showRecipes,
+  seeRecipe,
   // newRecipe,
 };

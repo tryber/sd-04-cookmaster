@@ -29,10 +29,13 @@
     <div class="second-header-container mt-2">
       <h3>Receitas</h3>
 
-      <a data-testid="buscar-receita" href="" class="btn btn-success">Buscar Receitas</a>
-      <% if (token) { %>
-        <button data-testid="nova-receita">Nova Receita</button>
-      <% } %>
+      <div class="btn-panel">
+        <% if (token) { %>
+          <button data-testid="nova-receita" class="btn btn-success">Nova Receita</button>
+        <% } %>
+        <a data-testid="buscar-receita" href="" class="btn btn-primary">Buscar Receitas</a>
+      </div>
+
     </div>
 
     <div class="">

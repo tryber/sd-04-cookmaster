@@ -14,7 +14,7 @@
       <%= message %>
     </div>
     <% } %>
-    <form caction="/login" method="POST">
+    <form caction="/login" method="POST" class="form-container d-flex flex-column justify-content-center">
       <label for="emailInput">Email: </label>
       <input data-testid="email" type="text" name="email" id="emailInput" /><br />
       <label for="passwordInput">Senha: </label>
@@ -26,7 +26,11 @@
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button data-testid="entrar" type="submit">Entrar</button>
+      <div class="d-flex justify-content-center">
+        <button data-testid="entrar" type="submit" class="btn btn-primary mr-2">Entrar</button>
+        <a data-testid="cadastrar" href="/register" class="btn btn-success ml-2">Cadastre-se</a>
+      </div>
+
     </form>
   </body>
 </html>

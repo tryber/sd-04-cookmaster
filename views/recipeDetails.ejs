@@ -12,13 +12,17 @@
     <h3>Ingredientes: <%= recipeDetails.ingredients %></h3>
     <h3>Modo de preparo: <%= recipeDetails.instructions %></h3>
     <% if(user !== undefined && user.id == recipeDetails.userID) { %>
-    <button type="button" data-testid="editar-receita" onclick="window.location.pathname='/edit'">
+    <button
+      type="button"
+      data-testid="editar-receita"
+      onclick="window.location.pathname='/recipes/<%=id%>/edit'"
+    >
       Editar Receita
     </button>
     <button
       type="button"
       data-testid="excluir-receita"
-      onclick="window.location.pathname='/delete'"
+      onclick="window.location.pathname='/recipes/<%=id%>/delete'"
     >
       Excluir Receita
     </button>

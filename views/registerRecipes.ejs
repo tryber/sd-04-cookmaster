@@ -4,9 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register Recipes</title>
+    <!-- <script>
+      const teste = () => alert('clicado');
+
+      let ingredients = [];
+
+      const addIngredient = (ing) => {
+        ingredients.push(ing);
+        return ingredients;
+      };
+    </script> -->
   </head>
   <body>
-    <%- include('navbar', {user}) %>
+    <%- include('navbar', {user}) %> <% if (ingredients && ingredients.length) { %>
+    <div>
+      <% ingredients.forEach((ingredient) => { %>
+      <p><%= ingredient %></p>
+      <% }) %>
+    </div>
+    <% } %>
     <h1>Nova Receita</h1>
     <form action="/recipes" method="POST">
       <label for="recipeName">Nome da Receita</label>

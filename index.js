@@ -38,12 +38,14 @@ app.post(
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
 
 app.get('/recipes/new', middlewares.auth(), controllers.recipesController.registerRecipes);
+app.post('/recipes', middlewares.auth(), controllers.recipesController.newRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.details);
 
-app.get('/edit', controllers.recipesController.editRecipe);
+app.get('/recipes/:id/edit', controllers.recipesController.editRecipe);
 
-app.get('/delete', controllers.recipesController.deleteRecipe);
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.deleteRecipe);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.checkPassword);
 
 app.listen(3000, () => console.log('Listening on 3000'));
 

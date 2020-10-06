@@ -48,9 +48,8 @@ const deleteRecipeForm = async (req, res) => {
 
 const deleteRecipe = async (req, res) => {
   const { password } = req.body;
-  const { id } = req.params;
   const user = req.user[0];
-  const recipeArray = await DB.getOneRecipe(id);
+  const recipeArray = await DB.getOneRecipe(req.params.id);
   const recipe = recipeArray[0]; //  To improve!!
   if (!password) {
     return res.render('delete', {

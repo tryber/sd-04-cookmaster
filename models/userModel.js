@@ -58,20 +58,15 @@ const findById = async (id) => {
   );
 };
 
-const createUser = async (email, firstName, lastName, password) => {
-  console.log(email);
-  connection().then((db) =>
+const createUser = async (user) => {
+  // console.log('usuario criado', user);
+  return await connection().then((db) =>
     db
       .getTable('users')
-      .insert(['email', 'firstName', 'lastName', 'password'])
-      .values((email, firstName, lastName, password))
+      .insert(['email', 'first_name', 'last_name', 'password'])
+      .values((user.email, user.firstName, user.lastName, user.password))
       .execute(),
   );
-};
-
-const isEmailValid2 = (email = '') => {
-  const reg = '[A-Z0-9]{1,}@[A-Z0-9]{2,}.[A-Z0-9]{2,}';
-  return reg.test(email);
 };
 
 const isEmailValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);

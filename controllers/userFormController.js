@@ -49,8 +49,6 @@ const userForm = async (_req, res) => {
 const newUser = async (req, res) => {
   const user = req.body;
 
-  // console.log(req.body);
-
   const isName = validateName(user.firstName);
   const isLastName = validateLastName(user.lastName);
   const isEmail = validadeEmail(user.email);

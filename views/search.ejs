@@ -15,7 +15,7 @@
       </form>
 
       <div>
-        <% if(recipes) { recipes.map(({user, name, id}) => {%>
+        <% if(recipes) { recipes.forEach(({user, name, id}) => {%>
             <div>
               <span><%= user %></span>
               <span><%= name %></span>

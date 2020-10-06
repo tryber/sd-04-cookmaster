@@ -12,12 +12,20 @@
     <main class="main-content">
       <div class="top-bar">
         <h1>Receitas</h1>
-        <button
-          class="search-btn"
-          data-testid="buscar-receita"
-        >
-          Buscar Receita
-        </button>
+        <nav class="nav-content">
+            <button class="search-btn" data-testid="buscar-receita">
+              Minhas Receitas
+            </button>
+            <button class="search-btn" data-testid="nova-receita">
+              Nova Receita
+            </button>
+            <button class="search-btn" data-testid="buscar-receita">
+              Minha Conta
+            </button>
+          <button class="search-btn" data-testid="buscar-receita" >
+            Buscar Receita
+          </button>
+        </nav>
       </div>
       <div class="recipes-container">
         <% recipes.map((recipe) => { %>
@@ -44,10 +52,6 @@
       padding: 40px 60px;
     }
 
-    .top-bar:only-child {
-      padding: 50px 150px 10px;
-    }
-
     .cabecalho {
       align-items: center;
       background-color: #c4c4c4;
@@ -66,6 +70,14 @@
       color: white;
       height: 42px;
       width: 174px;
+    }
+
+    .search-btn:first-child {
+      background-color: #9b51e0;
+    }
+
+    .search-btn:nth-child(3) {
+      background-color: #828282;
     }
 
     .recipes-container {

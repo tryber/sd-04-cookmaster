@@ -10,7 +10,7 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
-
+// got cry
 const connection = () =>
   mysqlx
     .getSession(config)

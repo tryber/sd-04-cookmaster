@@ -1,4 +1,8 @@
 const { tables, getTableObj } = require('./connection');
+// email regex retirado do stackOverFlow
+// link: pt.stackoverflow.com/questions/1386/expressão-regular-para-validação-de-e-mail
+const EMAIL_REGEX = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+const NAME_REGEX = /[a-zA-Z]{3,}/;
 
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
@@ -18,7 +22,33 @@ const findById = async (id) => getTableObj(
   'fetchOne',
 );
 
+const insertUser = ({
+  email, password, firstName, lastName,
+}) => tables.users(
+  (u) => u.insert(['email', 'password', 'first_name', 'last_name'])
+    .values([email, password, firstName, lastName])
+    .execute(),
+);
+
+const validateNewUser = ({
+  email, password, password2, firstName, lastName,
+}) => {
+  const message = {};
+
+  if (!EMAIL_REGEX.test(email)) message.emailMsg = 'O email deve ter o formato email@mail.com';
+  if (password.length < 6) message.passwordMsg = 'A senha deve ter pelo menos 6 caracteres';
+  if (password !== password2) message.password2Msg = 'As senhas tem que ser iguais';
+  if (!NAME_REGEX.test(firstName)) message.nameMsg = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  if (!NAME_REGEX.test(lastName)) message.lastNameMsg = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+
+  if (Object.keys(message).length === 0) message.confirmMsg = 'Cadastro efetuado com sucesso!';
+  console.log(message);
+  return message;
+};
+
 module.exports = {
   findByEmail,
   findById,
+  validateNewUser,
+  insertUser,
 };

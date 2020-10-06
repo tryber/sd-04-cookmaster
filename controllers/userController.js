@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const userModel = require('../models/userModel');
+const { validateNewUser, insertUser } = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -45,11 +45,18 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
-const register = (_req, res) => res.render('admin/registerUser');
+const registerPage = (_req, res) => res.render('admin/registerUser', { message: {}, data: {} });
+
+const registerNew = ({ body }, res) => {
+  const message = validateNewUser(body);
+  if (message.confirmMsg) insertUser(body);
+  res.render('admin/registerUser', { message, data: message.confirmMsg ? {} : body });
+};
 
 module.exports = {
   login,
   loginForm,
   logout,
-  register,
+  registerPage,
+  registerNew,
 };

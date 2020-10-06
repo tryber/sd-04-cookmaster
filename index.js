@@ -14,7 +14,9 @@ app.set('views', './views');
 
 app.get('/login', userController.loginForm);
 app.get('/logout', userController.logout);
-app.get('/register', userController.register);
+app.get('/register', userController.registerPage);
+
+app.post('/register', userController.registerNew);
 app.post('/login', userController.login);
 
 app.get('/recipes/new', middlewares.auth(), recipesController.newPage);

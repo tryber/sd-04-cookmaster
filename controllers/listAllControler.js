@@ -14,7 +14,16 @@ const recipeDetails = async (req, res) => {
   res.render('recipeDetails', { recipe, user: req.user });
 };
 
+const searchRecipe = async (req, res) => {
+  const searchFor = req.query;
+  console.log(searchFor)
+
+  const recipes = [];
+  res.render('search', { recipes, user: req.user})
+}
+
 module.exports = {
   listRecipes,
   recipeDetails,
+  searchRecipe,
 };

@@ -13,7 +13,9 @@
         Nova Receita
       </button>
     <% } %>
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">
+      Buscar Receita
+    </button>
     <div>
       <%- include('./components/recipeCard.ejs', { recipes }) %>
     </div>

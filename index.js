@@ -17,6 +17,8 @@ app.get('/logout', userController.logout);
 app.get('/register', userController.register);
 app.post('/login', userController.login);
 
+app.get('/recipes/new', middlewares.auth(), recipesController.newPage);
+
 app.get('/', middlewares.auth(false), recipesController.homeRecipes);
 app.get('/recipes/:id', middlewares.auth(false), recipesController.oneRecipe);
 
@@ -26,6 +28,7 @@ app.get('/admin', (req, res) => res.render('admin/home', { user: req.userData })
 app.get('/recipes/:id/edit', recipesController.editRecipe);
 app.get('/recipes/:id/delete', recipesController.deletePage);
 
+app.post('/recipes', recipesController.postNew);
 app.post('/recipes/:id/delete', recipesController.deleteRecipe);
 app.post('/recipes/:id', recipesController.postRecipe);
 

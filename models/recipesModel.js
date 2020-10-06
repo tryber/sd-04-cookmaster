@@ -20,8 +20,16 @@ const updateRecipe = (id, { name, ingredients, instructions }) => tables.recipes
     .execute(),
 );
 
+const insertRecipe = (
+  { name, ingredients, instructions },
+  { id: userId, first_name: first, last_name: last },
+) => tables.recipes((r) => r.insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+  .values([userId, `${first} ${last}`, name, ingredients, instructions])
+  .execute());
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   updateRecipe,
+  insertRecipe,
 };

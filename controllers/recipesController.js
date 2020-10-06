@@ -1,5 +1,5 @@
 const { tables } = require('../models/connection');
-const { getAllRecipes, getRecipeById, updateRecipe } = require('../models/recipesModel');
+const { getAllRecipes, getRecipeById, updateRecipe, insertRecipe } = require('../models/recipesModel');
 const { findById } = require('../models/userModel');
 
 const homeRecipes = async ({ userData = false }, res) => {
@@ -12,11 +12,21 @@ const oneRecipe = async ({ params: { id }, userData = false }, res) => {
   res.render('recipes/showOne', { ...recipe, userData });
 };
 
+const newPage = ({ userData }, res) => res.render('recipes/new', { userData });
+
+const postNew = ({ userData, body }, res) => insertRecipe(body, userData)
+  .then(() => res.redirect('/'))
+  .catch((err) => res.send(err));
+
 const editRecipe = async ({ params: { id }, userData }, res) => {
   const recipe = await getRecipeById(id);
   if (recipe.user_id !== userData.id) res.redirect(`/recipes/${id}`);
   return res.render('recipes/edit', { recipe, userData });
 };
+
+const postRecipe = async ({ params: { id }, body }, res) => updateRecipe(id, body)
+  .then(() => res.redirect('/'))
+  .catch((err) => res.send(err));
 
 const deletePage = ({ params: { id } }, res) => res.render('recipes/delete', { id, message: '' });
 
@@ -34,10 +44,6 @@ const deleteRecipe = async ({ params: { id }, userData, body }, res) => {
     .catch((err) => res.send(err));
 };
 
-const postRecipe = async ({ params: { id }, body }, res) => updateRecipe(id, body)
-  .then(() => res.redirect('/'))
-  .catch((err) => res.send(err));
-
 module.exports = {
   homeRecipes,
   oneRecipe,
@@ -45,4 +51,6 @@ module.exports = {
   postRecipe,
   deletePage,
   deleteRecipe,
+  newPage,
+  postNew,
 };

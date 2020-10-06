@@ -4,7 +4,7 @@ const { SESSIONS } = require('../middlewares/auth');
 const userModel = require('../models/userModel');
 
 const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const passwordRegex = /^(\d|\w){6,}$/;
+// const passwordRegex = /^(\d|\w){6,}$/;
 const namesRegex = /\w{3,}/;
 
 const loginForm = (req, res) => {
@@ -58,7 +58,7 @@ const register = async (req, res) => {
       message: 'O email deve ter o formato email@mail.com',
     });
 
-  if (!passwordRegex.test(password))
+  if (password.length < 5)
     res.render('register', {
       message: 'A senha deve ter pelo menos 6 caracteres',
     });

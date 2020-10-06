@@ -22,6 +22,10 @@ app.post('/recipes', middlewares.auth(), controllers.recipesNewController.recipe
 
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesEditController.recipeEditForm);
 
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesDeleteController.recipeDeleteForm);
+
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesDeleteController.recipeDelete);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesDetailsController);
 
 app.post('/recipes/:id', controllers.recipesEditController.recipeEdit);

@@ -31,9 +31,11 @@ app.get('/admin', (req, res) => res.render('admin/home', { user: req.userData })
 app.get('/recipes/:id/edit', recipesController.editRecipe);
 app.get('/recipes/:id/delete', recipesController.deletePage);
 app.get('/me/recipes', recipesController.myRecipes);
+app.get('/me/edit', userController.editPage);
 
 app.post('/recipes', recipesController.postNew);
 app.post('/recipes/:id/delete', recipesController.deleteRecipe);
 app.post('/recipes/:id', recipesController.postRecipe);
+app.post('/me/edit', userController.confirmEdit);
 
 app.listen(3000, () => console.log('Listening on 3000'));

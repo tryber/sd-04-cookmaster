@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <%-include('header', {userData})%>
+  <%-include('components/header', {userData})%>
   <div>
     <h1>Receitas</h1>
     <div>
@@ -19,7 +19,7 @@
       <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
     </div>
   </div>
-  <%- include('recipes/recipesList', {recipes}) %>
+  <%- include('components/recipesList', {recipes}) %>
 </body>
 
 </html>

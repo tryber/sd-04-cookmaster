@@ -1,7 +1,9 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const { validateNewUser, insertUser, findByEmail } = require('../models/userModel');
+const {
+  insertUser, findByEmail, validateUser, updateUser,
+} = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -47,10 +49,18 @@ const logout = (req, res) => {
 
 const registerPage = (_req, res) => res.render('admin/registerUser', { message: {}, data: {} });
 
-const registerNew = ({ body }, res) => {
-  const message = validateNewUser(body);
-  if (message.confirmMsg) insertUser(body);
+const registerNew = async ({ body }, res) => {
+  const message = validateUser(body);
+  if (message.confirmMsg) await insertUser(body);
   res.render('admin/registerUser', { message, data: message.confirmMsg ? {} : body });
+};
+
+const editPage = ({ userData }, res) => res.render('admin/editUser', { data: userData, message: {} });
+
+const confirmEdit = ({ body, userData }, res) => {
+  const message = validateUser(body);
+  if (!message.confirmMsg) return res.render('admin/editUser', { message, data: userData });
+  return updateUser(body, userData.id).then(() => res.redirect('/'));
 };
 
 module.exports = {
@@ -59,4 +69,6 @@ module.exports = {
   logout,
   registerPage,
   registerNew,
+  editPage,
+  confirmEdit,
 };

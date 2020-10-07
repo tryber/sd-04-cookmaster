@@ -23,7 +23,7 @@ const findById = async (id) => getTableObj(
 );
 
 const insertUser = ({
-  email, password, firstName, lastName,
+  email, password, first_name: firstName, last_name: lastName,
 }) => tables.users(
   (u) => u.insert(['email', 'password', 'first_name', 'last_name'])
     .values([email, password, firstName, lastName])
@@ -41,8 +41,8 @@ const comparePassword = (message, password, password2) => {
   if (password !== password2) message.password2Msg = 'As senhas tem que ser iguais';
 };
 
-const validateNewUser = ({
-  email, password, password2, firstName, lastName,
+const validateUser = ({
+  email, password, password2, first_name: firstName, last_name: lastName,
 }) => {
   const message = {};
 
@@ -57,10 +57,23 @@ const validateNewUser = ({
   return message;
 };
 
+const updateUser = ({
+  email, password, first_name: firstName,
+  last_name: lastName,
+}, id) => tables.users((u) => u.update()
+  .set('email', email)
+  .set('password', password)
+  .set('first_name', firstName)
+  .set('last_name', lastName)
+  .where('id = :id')
+  .bind('id', id)
+  .execute());
+
 module.exports = {
   findByEmail,
   findById,
   validatePassword,
-  validateNewUser,
+  validateUser,
   insertUser,
+  updateUser,
 };

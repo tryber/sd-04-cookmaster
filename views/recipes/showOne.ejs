@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <%-include('../header', {userData})%>
+  <%-include('../components/header', {userData})%>
   <% if (userData && userData.id === user_id) { %>
   <a data-testid="editar-receita" href=<%=`/recipes/${id}/edit`%>>editar receita</a>
   <a data-testid="excluir-receita" href=<%=`/recipes/${id}/delete`%>>excluir receita</a>

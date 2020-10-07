@@ -1,6 +1,6 @@
 const { tables } = require('../models/connection');
 const {
-  getAllRecipes, getRecipeById, updateRecipe, insertRecipe, searchByName, searchByUser
+  getAllRecipes, getRecipeById, updateRecipe, insertRecipe, searchByName, searchByUser,
 } = require('../models/recipesModel');
 const { validatePassword } = require('../models/userModel');
 

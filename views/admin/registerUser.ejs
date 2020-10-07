@@ -3,40 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookmaster - Cadastro</title>
+  <title>Cookmaster - Editar Cadastro</title>
 </head>
 
 <body>
-  <form action="/register" method="POST">
-    <label for="emailInput">Email:
-      <input data-testid="email" type="text" name="email" id="emailInput" required
-        value="<%- data.email %>" />
-      <%= message.emailMsg %>
-    </label> <br>
-    <label for="passwordInput">Senha:
-      <input data-testid="senha" type="password" name="password" id="passwordInput" required
-        value="<%- data.password %>" />
-      <%= message.passwordMsg %>
-    </label> <br>
-    <label for="passwordInput2">Confirmar senha:
-      <input data-testid="confirmar-senha" type="password" name="password2" id="passwordInput2"
-        required value="<%- data.password2 %>" />
-      <%= message.password2Msg %>
-    </label> <br>
-    <label for="nameInput">Nome:
-      <input data-testid="nome" type="text" name="firstName" id="nameInput" required
-        value="<%- data.firstName %>" />
-      <%= message.nameMsg %>
-    </label> <br>
-    <label for="lastNameInput">Sobrenome:
-      <input data-testid="sobrenome" type="text" name="lastName" id="lastNameInput" required
-        value="<%- data.lastName %>" />
-      <%= message.lastNameMsg %>
-    </label> <br>
-    <a data-testid="login" href="/login">Efetuar Login</a>
-    <button data-testid="cadastrar" type="submit">Cadastrar-se</button>
-    <%= message.confirmMsg %>
-  </form>
+  <h1>Cadastre-se</h1>
+  <%- include('../components/userForm', {data, message, 
+    action: '/register', method: 'POST', button: 'Cadastrar-se', dataTest: 'cadastrar'}) %>
+  <a data-testid="login" href="/login">Efetuar Login</a>
 </body>
 
 </html>

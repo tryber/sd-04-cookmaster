@@ -8,13 +8,13 @@
 </head>
 
 <body>
-  <%-include('header', {userData})%>
+  <%-include('components/header', {userData})%>
   <h1>Buscar Receita</h1>
   <form action="/recipes/search" method="GET">
     <input data-testid="receita" type="text" name="q">
     <button data-testid="buscar" type="submit">Search</button>
   </form>
-  <%- include('recipes/recipesList', {recipes}) %>
+  <%- include('components/recipesList', {recipes}) %>
 </body>
 
 </html>

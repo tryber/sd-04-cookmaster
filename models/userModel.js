@@ -7,7 +7,7 @@
 //   lastName: 'Doe',
 // };
 
-const connection = require("./connection");
+const connection = require('./connection');
 
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
@@ -18,17 +18,16 @@ de fato, realize a busca no banco de dados */
 //  */
 
 const findByEmail = async (email) => {
-  connection()
-  .then((db) => 
-  db
-    .getTable('users')
-    .select(['id", "email'])
-    .where('email = :email')
-    .bind('email', email)
-    .execute()
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .select(['id", "email'])
+      .where('email = :email')
+      .bind('email', email)
+      .execute()
       .then((results) => results.fetchAll()[0])
-      .then((user) => user.map((firstName) => firstName))
-    );
+      .then((user) => user.map((firstName) => firstName)),
+  );
 };
 
 /**
@@ -36,17 +35,16 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  connection()
-  .then((db) => 
-  db
-    .getTable('users')
-    .select(['id", "firstName'])
-    .where('id = :id')
-    .bind('id', id)
-    .execute()
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .select(['id", "firstName'])
+      .where('id = :id')
+      .bind('id', id)
+      .execute()
       .then((results) => results.fetchAll()[0])
-      .then((recipes) => recipes.map((name) => name))
-    );
+      .then((recipes) => recipes.map((name) => name)),
+  );
 };
 
 module.exports = {

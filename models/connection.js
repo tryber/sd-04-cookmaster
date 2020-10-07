@@ -13,10 +13,10 @@ const config = {
 const connection = () => {
   return mysqlx
     .getSession(config)
-    .then( async (session) => session.getSchema('cookmaster'))
+    .then(async (session) => session.getSchema('cookmaster'))
     .catch((err) => {
-      throw err
-    })
-}
+      throw err;
+    });
+};
 
 module.exports = connection;

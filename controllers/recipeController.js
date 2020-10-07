@@ -24,15 +24,6 @@ const searchRecipess = async (req, res) => {
 
   return res.render('searchRecipe', { recipes, user: req.user });
 };
-// const newRecipe = async (req, res) => {
-//   const { recipeName, ingredients, instructions } = req.body;
-//   const { name, lastName, id } = req.user;
-//   const userFullName = `${name} ${lastName}`;
-
-//   await recipeModel.addNewRecipe(id, userFullName, recipeName, ingredients, instructions);
-
-//   return res.redirect('/');
-// };
 
 module.exports = {
   showRecipes,

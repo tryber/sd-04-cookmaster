@@ -10,7 +10,7 @@
     <div class="container">
       <h1>Receita detalhada</h1>
       <% if (user) { %>
-        <% if (user.id === recipe.id) { %>
+        <% if (user.id === recipe.userId) { %>
           <a class="btn btn-sm btn-primary" data-testid="editar-receita" href=<%= `${recipe.id}/edit` %>>Editar Receita</a>
           <a class="btn btn-sm btn-danger" data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %>>Excluir Receita</a>
         <% } %>

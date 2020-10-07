@@ -54,7 +54,7 @@ const validEmail = (email) => {
 
 const validPassword = (password, confirmPass) => {
   let message = '';
-  if (password < 6) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
   if (password !== confirmPass) message = 'As senhas tem que ser iguais';
   return message;
 };
@@ -90,7 +90,7 @@ const addUser = async (req, res) => {
     const insertUser = await userModel.newUser(email, password, name, lastName);
     if (!insertUser)
       res.render('admin/signup', { message: 'Erro ao cadastrar usuário no banco de dados' });
-    return res.render('admin/login', { message: 'Cadastrado com sucesso', redirect: null });
+    return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
   }
 };
 

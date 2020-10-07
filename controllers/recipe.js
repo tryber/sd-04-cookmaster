@@ -24,15 +24,14 @@ const getRecipe = async (req, res) => {
     : res.render('home', { message: 'Recipe found.' });
 };
 
-/** Recipe search page render */
-const searchForm = (_req, res) => res.render('search', { messages: null });
-
 /**
  * Search recipe by given string.
  * @param {string} req.query.p - Search Input | GET Query
  */
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
+  /** Recipe search page render */
+  if (!q) return res.render('search', { recipes: null, messages: null });
 
   const recipes = await recipeModel.recipes(q);
 
@@ -54,7 +53,6 @@ const createRecipe = async (req, res) => {
 module.exports = {
   getRecipes,
   getRecipe,
-  searchForm,
   searchRecipe,
   createRecipe,
 };

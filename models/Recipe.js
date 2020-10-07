@@ -62,7 +62,7 @@ const recipe = async (id) => {
  * Get all recipes
  */
 const recipes = async (searchQuery) => {
-  const search = searchQuery || null;
+  const search = `name LIKE "%${searchQuery}%"` || null;
 
   const recipesData = await connection()
     .then((schema) =>

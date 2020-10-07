@@ -11,5 +11,13 @@
       <input data-testid="receita" type="text" name="q" id="recipeInput" />
       <button data-testid="buscar" type="submit">Buscar</button>
     </form>
+
+    <% if (recipes) { recipes.forEach((recipe) => { %>
+    <ul>
+      <li><%= recipe[3] %></li>
+      <li><%= recipe[1] %></li>
+      <li><a href="/recipe/<%= recipe[0] %>">Ver mais</a></li>
+    </ul>
+    <% })} %>
   </body>
 </html>

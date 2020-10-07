@@ -57,8 +57,6 @@ const addUser = async (email, password, name, lastName) => {
     .insert(['email', 'password', 'first_name', 'last_name'])
     .values(email, password, name, lastName)
     .execute();
-
-  return;
 };
 
 module.exports = {

@@ -4,8 +4,6 @@ const EMAIL = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 const SENHA = /^.{6,}$/;
 const NAME = /[a-zA-Z]{3,}/;
 
-// const isEmailValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);
-
 const validaString = (string = '', regex) => string.match(regex);
 const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
 

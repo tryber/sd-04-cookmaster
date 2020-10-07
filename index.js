@@ -18,7 +18,7 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
-app.get('/', middlewares.auth(false), recipeControlle.index);
+app.get('/', middlewares.auth(false), recipeControlle.home);
 
 app.get('/login', userController.loginForm);
 app.get('/logout', userController.logout);
@@ -26,5 +26,7 @@ app.post('/login', userController.login);
 
 app.get('/cadastro', userController.cadastro);
 app.post('/cadastro', userController.add);
+
+app.get('/details/:id', middlewares.auth(false), recipeControlle.detailsRecipe);
 
 app.listen(3000, () => console.log('Listening on 3000'));

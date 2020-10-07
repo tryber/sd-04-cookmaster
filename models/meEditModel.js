@@ -24,7 +24,7 @@ const meEditModel = (id, email, password, firstName, lastName) =>
             .where('user_id = :id')
             .bind('id', id)
             .execute(),
-        )
+        ),
     );
 
 module.exports = meEditModel;

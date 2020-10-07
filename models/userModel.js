@@ -12,7 +12,6 @@ const connection = require('./connection');
 de fato, realize a busca no banco de dados */
 
 /**
- * 
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */

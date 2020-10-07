@@ -7,5 +7,25 @@
   </head>
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
+    <% if (recipes.user) { %>
+    <span>Usuário logado: <%=user.name %></span>
+    <button data-testid="logout">Logout</button>
+    <% } else { %>
+    <button data-testid="login">Login</button>
+    <% } %>
+
+    <button data-testid="buscar-receita">Buscar Receita</button>
+
+    <p>Receitas:</p>
+    <ul>
+      <% recipes.forEach(recipe => { %>
+      <li><%= recipe.name %></li>
+      <span><%= recipe.user %></span>
+      <a>Ver mais</a>
+      <% }) %>
+    </ul>
+    <% if (recipes.user) { %>
+    <button data-testid="nova-receita">Nova receita</button>
+    <% } else { %> <% } %>
   </body>
 </html>

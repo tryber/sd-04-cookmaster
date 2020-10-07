@@ -11,7 +11,7 @@
     <span>Usuário logado: <%=user.name %></span>
     <button data-testid="logout">Logout</button>
     <% } else { %>
-    <button data-testid="login">Login</button>
+    <a href="/login" data-testid="login">Login</a>
     <% } %>
 
     <button data-testid="buscar-receita">Buscar Receita</button>

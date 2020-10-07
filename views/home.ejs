@@ -7,14 +7,17 @@
   </head>
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
-    <% if (recipes.user) { %>
+    <% if (user) { %>
     <span>Usuário logado: <%=user.name %></span>
-    <button data-testid="logout">Logout</button>
+    <a data-testid="logout">Logout</a>
     <% } else { %>
     <a href="/login" data-testid="login">Login</a>
     <% } %>
+    <% if (user) { %>
+      <a data-testid="nova-receita">Nova Receita</a>
+      <% } else { %> <% } %>
 
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <a data-testid="buscar-receita">Buscar Receita</a>
 
     <p>Receitas:</p>
     <ul>
@@ -24,8 +27,5 @@
       <a>Ver mais</a>
       <% }) %>
     </ul>
-    <% if (recipes.user) { %>
-    <button data-testid="nova-receita">Nova receita</button>
-    <% } else { %> <% } %>
   </body>
 </html>

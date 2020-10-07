@@ -11,8 +11,8 @@ const passwordValidation = (password, verifyPassword) => {
 const regexValidation = (email, name, lastname) => {
   let message = '';
   // Espressão regex consultada externamente (https://regex101.com/library/SOgUIV)
-  regexEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
-  regexNumber = /[0-9]/;
+  const regexEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+  const regexNumber = /[0-9]/;
 
   if (!regexEmail.test(email)) message = 'O email deve ter o formato email@mail.com';
 
@@ -28,7 +28,9 @@ const regexValidation = (email, name, lastname) => {
 };
 
 const registerUser = async (req, res) => {
-  const { email, password, verifyPassword, name, lastName } = req.body;
+  const {
+    email, password, verifyPassword, name, lastName,
+  } = req.body;
 
   if (!email || !password || !verifyPassword || !name || !lastName) {
     return res.render('cadastro', { message: 'Preeencha todos os campos' });

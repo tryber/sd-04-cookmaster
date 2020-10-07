@@ -14,22 +14,23 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
-  if (!email || !password)
+  if (!email || !password) {
     return res.render('admin/login', {
       message: 'Preencha o email e a senha',
       redirect: null,
     });
-
+  }
   const user = await userModel.findByEmail(email);
-  if (!user || user.password !== password)
+
+  if (!user || user.password !== password) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
       redirect: null,
     });
-
+  }
   const token = uuid();
   SESSIONS[token] = user.id;
 
@@ -40,7 +41,7 @@ const login = async (req, res, next) => {
 const logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
-  return res.redirect(redirect || '/');
+  return res.redirect('/');
 };
 
 module.exports = {

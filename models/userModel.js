@@ -17,7 +17,9 @@ const findByEmail = async (mail) => {
 
   const [id, email, password, name, lastName] = user;
 
-  return { id, email, password, name, lastName };
+  return {
+    id, email, password, name, lastName,
+  };
 };
 
 const findById = async (userId) => {
@@ -25,7 +27,9 @@ const findById = async (userId) => {
   const table = await db.getTable('users');
   const result = await table.select([]).where('id = :id').bind('id', userId).execute();
   const [id, email, password, name, lastName] = await result.fetchOne();
-  return { id, email, password, name, lastName };
+  return {
+    id, email, password, name, lastName,
+  };
 };
 
 module.exports = {

@@ -1,27 +1,18 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["prettier"],
+  "extends": "airbnb",
   "rules": {
     "no-alert": "off",
     "prefer-arrow-callback": "off",
     "func-names": "off",
-    "arrow-parens": [
-      2,
-      "always"
-    ],
-    "no-param-reassign": "off",
-    "prettier/prettier": "error"
+    "arrow-parens": [2, "always"],
+    "no-param-reassign": "off"
   },
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
-    "globals": {
-      "cy": true
-    }
-  
+  "globals": {
+    "cy": true
+  }
 }

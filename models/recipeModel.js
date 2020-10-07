@@ -21,7 +21,9 @@ const getRecipeById = async (recipeId) => {
   const result = await table.select([]).where('id = :id').bind('id', recipeId).execute();
   const [id, userId, user, title, ingredientsArray, instructions] = await result.fetchOne();
   const ingredients = ingredientsArray.split(',');
-  return { id, userId, user, title, ingredients, instructions };
+  return {
+    id, userId, user, title, ingredients, instructions,
+  };
 };
 
 module.exports = { getRecipes, getRecipeById };

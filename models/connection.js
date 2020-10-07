@@ -12,16 +12,18 @@ const config = {
 let schema;
 
 function connection() {
-  return schema
-    ? Promise.resolve(schema)
+  return schema /* Se schema já existir: */
+    ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
     : mysqlx
         .getSession(config)
         .then((session) => {
-          schema = session.getSchema('cookmaster');
-          return schema;
+          /* Quando terminamos de abrir a conexão: */
+          schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
+          return schema; /* E retornamos o schema de dentro da Promise */
         })
         .catch(() => {
-          process.exit(1);
+          /* Caso um erro ocorra: */
+          process.exit(1); /* encerramos o processo */
         });
 }
 module.exports = connection;

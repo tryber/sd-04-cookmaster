@@ -30,9 +30,11 @@ app.post('/login', controllers.userController.login);
 app.post('/register', controllers.userController.register);
 // a ordem importa
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipess);
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipeForm);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.seeRecipe);
+app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
 
-// app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
 app.get('/me/recipes', middlewares.auth(), controllers.recipeController.myRecipe);
 
 app.listen(3000, () => console.log('Listening on 3000'));

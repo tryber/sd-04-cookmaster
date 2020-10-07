@@ -75,10 +75,17 @@ const myRecipeByUserId = async (userId) =>
 //       .execute(),
 // );
 // métodos exportados para o controller
+
+const deleteRecipe = async (id) =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+  );
+
 module.exports = {
   findAll,
   recipeById,
   searchRecipes,
   myRecipeByUserId,
+  deleteRecipe,
   // addNewRecipe,
 };

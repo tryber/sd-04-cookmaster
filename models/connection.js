@@ -12,8 +12,8 @@ const config = {
 let schema;
 
 const connection = () =>
-  schema /* Se schema já existir: */
-    ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
+  schema
+    ? Promise.resolve(schema)
     : mysqlx
         .getSession(config)
         .then((session) => (schema = session.getSchema('cookmaster')))

@@ -8,10 +8,10 @@ const connection = require('./connection');
 
 const findAll = async () => {
   const db = await connection();
-  const results = await db.getTable('recipes').select(['name', 'user']).execute();
+  const results = await db.getTable('recipes').select(['id', 'name', 'user']).execute();
   const recipes = await results.fetchAll();
   // fetchAll busca todas as linhas do resultado do banco
-  return recipes.map(([name, user]) => ({ name, user }));
+  return recipes.map(([id, name, user]) => ({ id, name, user }));
 };
 
 module.exports = {

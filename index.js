@@ -24,7 +24,6 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipesController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
-  console.log(req.user);
   return res.render('admin/home', { user: req.user });
 });
 
@@ -35,5 +34,7 @@ app.post('/login', controllers.userController.login);
 app.get('/signup', controllers.signUpController.signUpForm);
 
 app.post('/signup', controllers.signUpController.signUpController);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeDetailsController.showDetails);
 
 app.listen(3000, () => console.log('Listening on 3000'));

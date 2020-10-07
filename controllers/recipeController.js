@@ -3,7 +3,7 @@ const Recipes = require('../models/recipeModel');
 const listAllRecipes = async (req, res) => {
   const recipes = await Recipes.getAllRecipes();
 
-  res.render('home', { recipes, user: req.user });
+  res.status(200).render('home', { recipes, user: req.user });
 };
 
 const recipeDetails = async (req, res) => {
@@ -13,7 +13,7 @@ const recipeDetails = async (req, res) => {
 
   if (!id) res.status(404).render('notFound');
 
-  res.render('recipes', { recipe, user: req.user });
+  res.status(200).render('recipes', { recipe, user: req.user });
 };
 
 const addRecipe = (req, res) => {

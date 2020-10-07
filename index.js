@@ -18,7 +18,7 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.re
 
 // app.get('recipes/search');
 
-// app.get('/recipes/search', controllers.recipeController.listAllRecipes);
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.listAllRecipes);
 
 app.get('/recipes/new', middlewares.auth(true), controllers.recipeController.createRecipe);
 // app.post('/recipes/new', controllers.recipeController.createRecipe);

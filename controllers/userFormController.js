@@ -36,7 +36,7 @@ const validateConfirmPassword = (password, cPassword) => {
 };
 
 const userForm = async (_req, res) => {
-  res.render('cadastro', {
+  res.status(200).render('cadastro', {
     isName: null,
     isLastName: null,
     isEmail: null,

@@ -59,12 +59,13 @@ const findById = async (id) => {
 };
 
 const createUser = async (email, firstName, lastName, password) => {
-  // console.log('usuario criado', user);
+  console.log('usuario criado', email);
+
   return connection().then((db) =>
     db
       .getTable('users')
-      .insert(['email', 'first_name', 'last_name', 'password'])
-      .values((email, firstName, lastName, password))
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values((email, password, firstName, lastName))
       .execute(),
   );
 };

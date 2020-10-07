@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Search</title>
-</head>
-<body>
- <h1>Hello World!</h1>
- 
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Search</title>
+  </head>
+  <body>
+    <h1>Buscar Receitas</h1>
+    <form action="/recipe/search" method="GET">
+      <input data-testid="receita" type="text" name="q" id="recipeInput" />
+      <button data-testid="buscar" type="submit">Buscar</button>
+    </form>
+  </body>
 </html>

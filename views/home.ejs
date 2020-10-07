@@ -12,9 +12,13 @@
 <body>
   <div class="container">
     <h1>Cookmaster</h1>
-    <a href="/login">Login</a>
+    <a data-testid="login" href="/login">Login</a>
+    <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
   </div>
   <div>
+    <% if (user) { %>
+      <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+    <% } %>
     <h1>Receitas</h1>
     <button>Buscar Receitas</button>
   </div>

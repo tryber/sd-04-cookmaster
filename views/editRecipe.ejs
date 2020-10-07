@@ -7,7 +7,7 @@
   </head>
   <body>
     <%- include('./components/header.ejs', { user }) %>
-    <form action="/recipes/:id" method="PUT" name="form">
+    <form action="/recipes/<%= recipe.id %>" method="POST" name="form">
       <label for="nameInput">Nome da Receita</label>
       <input type="text" name="nameRec" id="nameInput" value="<%= recipe.name %>" data-testid="nome-receita" required/><br />
       <div>

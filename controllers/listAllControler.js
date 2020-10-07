@@ -1,4 +1,4 @@
-const { getAll, getRecipeById, searchRecipeModel, newRecipeInsert } = require('../models/listRecipesModel');
+const { getAll, getRecipeById, searchRecipeModel, newRecipeInsert, updateRecipeModel } = require('../models/listRecipesModel');
 
 const listRecipes = async (req, res) => {
   const recipes = await getAll();
@@ -40,6 +40,14 @@ const editRecipe = async (req, res) => {
   res.render('editRecipe', { recipe, user: req.user });
 }
 
+const updateRecipe = async (req, res) => {
+  const { nameRec, ingredients, instructions } = req.body;
+  const { id } = req.params;
+
+  await updateRecipeModel(id, nameRec, ingredients, instructions);
+  res.redirect('/')
+}
+
 module.exports = {
   listRecipes,
   recipeDetails,
@@ -47,4 +55,5 @@ module.exports = {
   NewRecipe,
   newRecipeForm,
   editRecipe,
+  updateRecipe,
 };

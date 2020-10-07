@@ -32,20 +32,20 @@ const findByEmail = async (emails) => {
  * @param {string} id ID do usuário
  */
 
-const findById = async (id) => {
+const findById = async (ids) => {
   return connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :id_param')
-        .bind('id_param', id)
+        .bind('id_param', ids)
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, user_id, user, name, ingredients, instructions]) => ({
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
       id,
-      user_id,
+      userId,
       user,
       name,
       ingredients,

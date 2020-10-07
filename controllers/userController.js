@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const validation = require('../utils/cadastroValidator');
 
 const userModel = require('../models/userModel');
 
@@ -45,56 +46,22 @@ const logout = (req, res) => {
 
 const createUser = async (req, res) => {
   const { email, password, confirmPass, name, lastName } = req.body;
-  const valid = (email && password && confirmPass && name && lastName) && true;
-
-  if (name.length < 3 || !(/^[A-Za-z]+$/.test(name))) {
-    return res.render('cadastro', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      redirect: null,
-    });
-  }
-
-  if (lastName.length < 3 || !(/^[A-Za-z]+$/.test(lastName))) {
-    return res.render('cadastro', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      redirect: null,
-    });
-  }
-
-  if (password.length < 6) {
-    return res.render('cadastro', {
-      message: 'A senha deve ter pelo menos 6 caracteres',
-      redirect: null,
-    });
-  }
-
-  if (password !== confirmPass) {
-    return res.render('cadastro', {
-      message: 'As senhas tem que ser iguais',
-      redirect: null,
-    });
-  }
+  const valid = email && password && confirmPass && name && lastName && true;
+  const resposta = await validation(req.body);
 
   if (!valid) {
     return res.render('cadastro', {
       message: 'Preencha todos campos!',
-      redirect: null,
     });
   }
 
-  if (!(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/.test(email))) {
-    return res.render('cadastro', {
-      message: 'O email deve ter o formato email@mail.com',
-      redirect: null,
-    });
+  if (!resposta.message.includes('sucesso')) {
+    return res.render('cadastro', resposta);
   }
 
   await userModel.addUser(email, password, name, lastName);
 
-  res.status(201).render('cadastro', {
-    message: "Cadastro efetuado com sucesso!",
-    redirect: null,
-  });
+  return res.status(201).render('cadastro', resposta);
 };
 
 module.exports = {

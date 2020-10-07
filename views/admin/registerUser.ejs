@@ -8,7 +8,7 @@
 
 <body>
   <h1>Cadastre-se</h1>
-  <%- include('../components/userForm', {data, message, 
+  <%- include('../components/userForm', {data, message,
     action: '/register', method: 'POST', button: 'Cadastrar-se', dataTest: 'cadastrar'}) %>
   <a data-testid="login" href="/login">Efetuar Login</a>
 </body>

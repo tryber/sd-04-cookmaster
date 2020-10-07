@@ -30,17 +30,20 @@ const getRecipe = async (req, res) => {
  */
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
+  const { user } = req;
+
   /** Recipe search page render */
-  if (!q) return res.render('search', { recipes: null, messages: null });
+  if (!q) return res.render('search', { user, recipes: null, messages: null });
 
   const recipes = await recipeModel.recipes(q);
 
-  return res.render(
-    'search',
-    recipes
-      ? { recipes, messages: null }
-      : { recipes: null, messages: 'Nenhuma receita encontrada.' },
-  );
+  const response = {
+    user,
+    recipes: recipes || null,
+    messages: (recipes) ? null : 'Nenhuma receita encontrada.',
+  };
+
+  return res.render('search', response);
 };
 
 const createRecipe = async (req, res) => {

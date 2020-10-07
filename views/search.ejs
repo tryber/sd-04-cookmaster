@@ -6,6 +6,9 @@
     <title>Recipe Search</title>
   </head>
   <body>
+
+    <%- include('./includes/header.ejs', { user }) %>
+
     <h1>Buscar Receitas</h1>
     <form action="/recipes/search" method="GET">
       <input data-testid="receita" type="text" name="q" id="recipeInput" />

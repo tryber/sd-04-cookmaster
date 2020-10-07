@@ -30,6 +30,7 @@ app.use(middlewares.auth());
 app.get('/admin', (req, res) => res.render('admin/home', { user: req.userData }));
 app.get('/recipes/:id/edit', recipesController.editRecipe);
 app.get('/recipes/:id/delete', recipesController.deletePage);
+app.get('/me/recipes', recipesController.myRecipes);
 
 app.post('/recipes', recipesController.postNew);
 app.post('/recipes/:id/delete', recipesController.deleteRecipe);

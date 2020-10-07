@@ -5,11 +5,6 @@ const getAllRecipes = () => getTableObj(
   'fetchAll',
 );
 
-const getRecipeById = (id) => getTableObj(
-  tables.recipes((r) => r.select([]).where('id = :id').bind('id', id).execute()),
-  'fetchOne',
-);
-
 const updateRecipe = (id, { name, ingredients, instructions }) => tables.recipes(
   (r) => r.update()
     .set('name', name)
@@ -27,15 +22,16 @@ const insertRecipe = (
   .values([userId, `${first} ${last}`, name, ingredients, instructions])
   .execute());
 
-const searchByName = (name) => getTableObj(
-  tables.recipes((r) => r.select([]).where('name LIKE :name').bind('name', `%${name}%`).execute()),
-  'fetchAll',
+const selectOnRecipes = (where, param, method) => getTableObj(
+  tables.recipes((r) => r.select([]).where(`${where} :bind`).bind('bind', param).execute()),
+  method,
 );
 
 module.exports = {
   getAllRecipes,
-  getRecipeById,
+  getRecipeById: (id) => selectOnRecipes('id =', id, 'fetchOne'),
   updateRecipe,
   insertRecipe,
-  searchByName,
+  searchByName: (name) => selectOnRecipes('name LIKE', `%${name}%`, 'fetchAll'),
+  searchByUser: (userId) => selectOnRecipes('user_id =', userId, 'fetchAll'),
 };

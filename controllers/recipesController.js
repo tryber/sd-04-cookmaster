@@ -1,6 +1,6 @@
 const { tables } = require('../models/connection');
 const {
-  getAllRecipes, getRecipeById, updateRecipe, insertRecipe, searchByName,
+  getAllRecipes, getRecipeById, updateRecipe, insertRecipe, searchByName, searchByUser
 } = require('../models/recipesModel');
 const { validatePassword } = require('../models/userModel');
 
@@ -54,6 +54,11 @@ const searchRecipe = async ({ userData, query: { q } }, res) => {
   return res.render('search', { userData, recipes: [] });
 };
 
+const myRecipes = async ({ userData }, res) => {
+  const recipes = await searchByUser(userData.id);
+  res.render('recipes/myRecipes', { userData, recipes });
+};
+
 module.exports = {
   homeRecipes,
   oneRecipe,
@@ -64,4 +69,5 @@ module.exports = {
   newPage,
   postNew,
   searchRecipe,
+  myRecipes,
 };

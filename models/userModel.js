@@ -50,7 +50,19 @@ const findById = async (id) => {
   }
 };
 
+const addUser = async (user) => {
+  try {
+    const db = await connection();
+    const results = await db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values();
+  } catch (err) {
+  }
+};
+
 module.exports = {
   findByEmail,
   findById,
+  addUser,
 };

@@ -43,8 +43,34 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const createUser = async (req, res) => {
+  const { email, password, confirmPass, name, lastName } = req.body;
+  const valid = (email && password && confirmPass && name && lastName) && true;
+
+  if (password !== confirmPass) {
+    return res.render('cadastro', {
+      message: 'Suas senhas não correspondem!',
+      redirect: null,
+    });
+  }
+
+  if (!valid) {
+    return res.render('cadastro', {
+      message: 'Preencha todos campos!',
+      redirect: null,
+    });
+  }
+
+  console.log("Chegou");
+  console.log(valid);
+  await userModel.addUser(email, password, confirmPass, name, lastName);
+
+  res.status(201).render();
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  createUser,
 };

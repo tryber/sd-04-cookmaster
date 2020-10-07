@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <h1>Nova Receita</h1>
   <form class="recipesAddForm" action="/recipes" method="POST">
     <input type="hidden" name="userId" value='<%= user.id %>' />
     <input type="hidden" name="userName" value='<%= `${user.firstName} ${user.lastName}`  %>' />
@@ -49,7 +50,7 @@
       });
       const itemInputHidden = document.createElement('input');
       itemInputHidden.type = 'hidden';
-      itemInputHidden.name = 'ingredients';
+      itemInputHidden.name = 'ingredients[]';
       itemInputHidden.value = recipeIngredientsInput.value;
       const recipesAddForm = document.querySelector('.recipesAddForm');
       ingredientsListItem.appendChild(itemInputHidden);

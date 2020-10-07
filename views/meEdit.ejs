@@ -12,7 +12,7 @@
     <label for="passwordInput">Senha: </label>
     <input type="password" name="password" id="passwordInput" data-testid="senha" value="<%= user.password %>"/><br />
     <label for="confirmPasswordInput">Confirmar Senha: </label>
-    <input type="password" name="confirmPassword" id="confirmPasswordInput" data-testid="confirmar-senha" value="<%= user.password %>"/><br />
+    <input type="password" name="confirmPassword" id="confirmPasswordInput" data-testid="confirmar-senha" /><br />
     <% if (message) { %>
       <p><%= message %></p>
     <% } %>

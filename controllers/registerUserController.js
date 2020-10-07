@@ -22,18 +22,9 @@ const verifyEmail = (req, res, next) => {
   return next();
 };
 
-const verifyExistEmail = async (req, res, next) => {
-  const { email } = req.body;
-  const user = await userModel.findByEmail(email);
-  if (user) {
-    return res.render('register', { message: 'Esse email já está cadastrado' });
-  }
-  return next();
-};
-
 const verifyPasswordLength = (req, res, next) => {
   const { password } = req.body;
-  if (password.length < 6) {
+  if (password.length <= 6) {
     return res.render('register', { message: 'A senha deve ter pelo menos 6 caracteres' });
   }
   return next();
@@ -79,7 +70,6 @@ module.exports = {
   registerForm,
   verifyEmpty,
   verifyEmail,
-  verifyExistEmail,
   verifyPasswordLength,
   verifyPasswordEqual,
   verifyFirstName,

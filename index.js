@@ -42,7 +42,6 @@ app.get('/register', controllers.registerUserController.registerForm);
 app.post('/register',
   controllers.registerUserController.verifyEmpty,
   controllers.registerUserController.verifyEmail,
-  controllers.registerUserController.verifyExistEmail,
   controllers.registerUserController.verifyPasswordLength,
   controllers.registerUserController.verifyPasswordEqual,
   controllers.registerUserController.verifyFirstName,

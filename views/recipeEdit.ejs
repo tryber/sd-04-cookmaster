@@ -14,7 +14,7 @@
     <ul class="ingredientsListBox">
       <% recipe[0][4].split(',').forEach((ingredient) => {%>
         <li class="ingredientsListItem">
-          <input type="hidden" name="ingredients" value='<%= ingredient %>' />
+          <input type="hidden" name="ingredients[]" value='<%= ingredient %>' />
           <%= ingredient %>
           <button class="btnRemoveIngredient">Excluir Ingrediente</button>
         </li>
@@ -52,6 +52,7 @@
       const ingredientsListItem = document.createElement('li');
       ingredientsListItem.classList.add('ingredientsListItem');
       ingredientsListItem.innerText = recipeIngredientsInput.value;
+      
       ingredientsListBox.appendChild(ingredientsListItem);
       const btnRemoveIngredient = document.createElement('button');
       btnRemoveIngredient.classList.add('btnRemoveIngredient');
@@ -63,7 +64,7 @@
       });
       const itemInputHidden = document.createElement('input');
       itemInputHidden.type = 'hidden';
-      itemInputHidden.name = 'ingredients';
+      itemInputHidden.name = 'ingredients[]';
       itemInputHidden.value = recipeIngredientsInput.value;
       const recipesAddForm = document.querySelector('.recipesAddForm');
       ingredientsListItem.appendChild(itemInputHidden);

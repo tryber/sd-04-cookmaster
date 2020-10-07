@@ -8,10 +8,11 @@ const recipeEditForm = async (req, res) => {
 
 const recipeEdit = async (req, res) => {
   const { recipeName, ingredients, recipeInstructions } = req.body;
+
   const ingredientsString = ingredients.join(',');
 
   recipeEditModel(req.params.id, recipeName, ingredientsString, recipeInstructions)
-    .then(() => res.redirect(`/recipes/${req.params.id}`));
+    .then(() => res.redirect(`/`));
 };
 
 module.exports = {

@@ -20,8 +20,8 @@
  </header>
  <div>
   <% if (user && user.id === parseInt(recipe[0][1])) { %>
-    <a data-testid="editar-receita" href='/recipes/<%= recipe[0][0] %>/edit'>Editar Receita</a>
     <a data-testid="excluir-receita" href='/recipes/<%= recipe[0][0] %>/delete'>Excluir Receita</a>
+    <a data-testid="editar-receita" href='/recipes/<%= recipe[0][0] %>/edit'>Editar Receita</a>
   <% } %>
    <h1><%= recipe[0][3] %></h1>
    <p>Enviada por <%= recipe[0][2] %></p>

@@ -54,7 +54,8 @@ const validEmail = (email) => {
 
 const validPassword = (password, confirmPass) => {
   let message = '';
-  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
+  const regex = /^(\d|\w){6,}$/;
+  if (regex.test(password)) message = 'A senha deve ter pelo menos 6 caracteres';
   if (password !== confirmPass) message = 'As senhas tem que ser iguais';
   return message;
 };

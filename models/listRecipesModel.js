@@ -37,7 +37,7 @@ const newRecipeInsert = async ({ id, name }, { nameRec, ingredients, instruction
   await db.getTable('recipes')
     .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
     .values(id, name, nameRec, ingredients, instructions)
-    .execute()
+    .execute();
 };
 
 module.exports = {

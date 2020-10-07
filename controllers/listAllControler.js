@@ -23,13 +23,12 @@ const searchRecipe = async (req, res) => {
   return res.render('search', { recipes, user: req.user });
 };
 
-const NewRecipe = async (req, res) => {
-  return res.render('newRecipe', { message: null, user: req.user })
-};
+const NewRecipe = async (req, res) =>
+  res.render('newRecipe', { message: null, user: req.user });
 
 const newRecipeForm = async (req, res) => {
   const formInfo = req.body;
-  const message = "Receita salva com sucesso";
+  const message = 'Receita salva com sucesso';
   await newRecipeInsert(req.user, formInfo);
   return res.render('newRecipe', { message, user: req.user });
 };
@@ -39,5 +38,5 @@ module.exports = {
   recipeDetails,
   searchRecipe,
   NewRecipe,
-  newRecipeForm
+  newRecipeForm,
 };

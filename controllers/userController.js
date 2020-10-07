@@ -43,9 +43,8 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const register = (req, res) => {
-  return res.render('admin/register', { message: null });
-};
+const register = (req, res) =>
+  res.render('admin/register', { message: null });
 
 const registerForm = async (req, res) => {
   const data = req.body;

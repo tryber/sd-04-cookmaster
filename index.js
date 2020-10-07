@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
-const controllers = require('./controllers');
 
 const recipeControlle = require('./controllers/recipeController');
+const userController = require('./controllers/userController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,8 +20,11 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 app.get('/', middlewares.auth(false), recipeControlle.index);
 
-app.get('/login', controllers.userController.loginForm);
-app.get('/logout', controllers.userController.logout);
-app.post('/login', controllers.userController.login);
+app.get('/login', userController.loginForm);
+app.get('/logout', userController.logout);
+app.post('/login', userController.login);
+
+app.get('/cadastro', userController.cadastro);
+app.post('/cadastro', userController.add);
 
 app.listen(3000, () => console.log('Listening on 3000'));

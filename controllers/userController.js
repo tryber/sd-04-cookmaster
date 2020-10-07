@@ -24,6 +24,7 @@ const login = async (req, res, next) => {
     });
 
   const user = await userModel.findByEmail(email);
+
   if (!user || user.password !== password)
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
@@ -43,7 +44,24 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const cadastro = async (_req, res) => {
+  res.render('admin/cadastro', {});
+};
+
+const add = async (req, res) => {
+  const { email, password, nome, sobrenome } = req.body;
+  const validaMessage = userModel.validaAll(req.body);
+
+  if (validaMessage) return res.send(validaMessage);
+
+  return userModel
+    .createUser(email, password, nome, sobrenome)
+    .then(() => res.send('Cadastro efetuado com sucesso!'));
+};
+
 module.exports = {
+  add,
+  cadastro,
   login,
   loginForm,
   logout,

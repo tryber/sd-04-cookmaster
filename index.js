@@ -30,6 +30,9 @@ app.post('/recipes/new', middlewares.auth(), controllers.listAllControler.newRec
 
 app.get('/recipes/search', middlewares.auth(false), controllers.listAllControler.searchRecipe);
 
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.listAllControler.editRecipe);
+//app.get('/recipes/:id/edit', );
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.listAllControler.recipeDetails);
 
 app.listen(3000, () => console.log('Listening on 3000'));

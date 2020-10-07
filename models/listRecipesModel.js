@@ -10,26 +10,26 @@ const getAll = async () => {
 const getRecipeById = async (Id) => {
   const db = await connection();
   const table = await db.getTable('recipes')
-    .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+    .select(['id', 'user', 'user_id', 'name', 'ingredients', 'instructions'])
     .where('id = :id')
     .bind('id', Id)
     .execute();
   const results = await table.fetchOne();
-  const [id, user, name, ingredients, instructions] = results;
+  const [id, user, user_id, name, ingredients, instructions] = results;
   // const ingredients = await results[3].slice(',');
-  return { id, user, name, ingredients, instructions };
+  return { id, user, user_id, name, ingredients, instructions };
 };
 
 const searchRecipeModel = async (q) => {
   const db = await connection();
   const allTable = await db.getTable('recipes')
-    .select(['id', 'user', 'name'])
+    .select(['id', 'user_id', 'user', 'name'])
     .where('name like :name')
     .bind('name', `%${q}%`)
     .execute();
 
   const results = allTable.fetchAll();
-  return results.map(([id, user, name]) => ({ id, user, name }));
+  return results.map(([id, user_id, user, name]) => ({ id, user_id, user, name }));
 };
 
 const newRecipeInsert = async ({ id, name }, { nameRec, ingredients, instructions }) => {

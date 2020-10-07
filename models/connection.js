@@ -10,11 +10,19 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
-// got cry
-const connection = () =>
-  mysqlx
-    .getSession(config)
-    .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => err);
+
+let schema;
+
+const connection = () => {
+  return schema
+    ? Promise.resolve(schema)
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          schema = session.getSchema('real_state');
+          return schema;
+        })
+        .catch((err) => process.exit(1));
+};
 
 module.exports = connection;

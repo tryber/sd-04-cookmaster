@@ -11,7 +11,7 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const connection = async () =>
+async function connection() {
   schema
     ? Promise.resolve(schema)
     : mysqlx
@@ -23,6 +23,7 @@ const connection = async () =>
         .catch(() => {
           process.exit(1);
         });
+}
 
 module.exports = {
   connection,

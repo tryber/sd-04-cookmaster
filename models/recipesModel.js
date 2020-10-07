@@ -36,9 +36,21 @@ const deleteRecipeById = async (idInput) => {
   return result.getWarningsCount();
 };
 
+const insertRecipe = async (id, user, name, ingredients, instructions) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table.insert([
+    'user_id', 'user', 'name', 'ingredients', 'instructions',
+  ])
+  .values(id, user, name, ingredients, instructions)
+  .execute();
+  return result.getWarningsCount();
+};
+
 module.exports = {
   getRecipes,
   findRecipeById,
   getRecipesByName,
   deleteRecipeById,
+  insertRecipe,
 };

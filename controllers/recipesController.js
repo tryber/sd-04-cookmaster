@@ -1,4 +1,4 @@
-const { getRecipes, findRecipeById, getRecipesByName, deleteRecipeById } = require('../models/recipesModel');
+const { getRecipes, findRecipeById, getRecipesByName, deleteRecipeById, insertRecipe } = require('../models/recipesModel');
 const { findById } = require('../models/userModel');
 
 const getAllRecipes = async (req, res) => {
@@ -38,9 +38,19 @@ const deleteRecipe = async (req, res) => {
   return res.status(200).redirect('/');
 };
 
+const createRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { user } = req;
+  const userName = `${user.name} ${user.lastName}`;
+  await insertRecipe(user.id, userName, name, ingredients.join(), instructions);
+
+  res.redirect('/')
+}
+
 module.exports = {
   getAllRecipes,
   getRecipe,
   searchRecipe,
   deleteRecipe,
+  createRecipe,
 };

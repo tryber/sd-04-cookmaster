@@ -7,8 +7,8 @@ de fato, realize a busca no banco de dados */
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */
-const findByEmail = async (emails) => {
-  return connection()
+const findByEmail = async (emails) =>
+  connection()
     .then((db) =>
       db
         .getTable('users')
@@ -25,15 +25,14 @@ const findByEmail = async (emails) => {
       firstName,
       lastName,
     }));
-};
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
 
-const findById = async (ids) => {
-  return connection()
+const findById = async (ids) =>
+  connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -51,7 +50,6 @@ const findById = async (ids) => {
       ingredients,
       instructions,
     }));
-};
 
 module.exports = {
   findByEmail,

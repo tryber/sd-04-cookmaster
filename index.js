@@ -52,4 +52,8 @@ app.post('/register',
 
 app.get('/me/recipes', middlewares.auth(), controllers.meRecipesController);
 
+app.get('/me/edit', middlewares.auth(), controllers.meEditController.meEditForm);
+
+app.post('/me/edit', middlewares.auth(), controllers.meEditController.meEdit);
+
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -14,5 +14,4 @@ const recipeEditModel = async (id, name, ingredients, instructions) =>
         .execute(),
     );
 
-
 module.exports = recipeEditModel;

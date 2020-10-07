@@ -44,8 +44,8 @@ const createRecipe = async (req, res) => {
   const userName = `${user.name} ${user.lastName}`;
   await insertRecipe(user.id, userName, name, ingredients.join(), instructions);
 
-  res.redirect('/')
-}
+  res.redirect('/');
+};
 
 module.exports = {
   getAllRecipes,

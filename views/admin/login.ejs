@@ -12,6 +12,7 @@
     </div>
     <% } %>
     <form action="/login" method="POST">
+      <h1 class="form-title">Cookmaster - Login</h1>
       <label for="emailInput">Email: </label>
       <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
@@ -24,6 +25,7 @@
       />
       <% } %>
       <button type="submit" data-testid="entrar">Entrar</button>
+      <a href="" class="link-cadastro">Cadastre-se</a>
     </form>
     <style>
       form {
@@ -42,6 +44,12 @@
         width: 549px;
       }
 
+      .form-title {
+        font-family: sans-serif;
+        font-size: 16pt;
+        margin-bottom: 25px;
+      }
+
       input {
         font-size: 12pt;
         height: 30px;
@@ -54,6 +62,10 @@
         color: white;
         height: 42px;
         width: 174px;
+      }
+
+      .link-cadastro {
+        margin-top: 20px;
       }
     </style>
   </body>

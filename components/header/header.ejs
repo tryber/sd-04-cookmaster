@@ -1,6 +1,11 @@
 <header class="cabecalho">
   <span class="header-element">Cookmaster</span>
-    <!-- <span>user.name | </span> -->
-    <!-- <a class="header-element" data-testid="logout" href="/logout">Logout</a> -->
-    <a class="header-element" data-testid="login" href="/login">Login</a>
+  <div>
+    <% if (user) { %>
+      <span class="header-element"><%= user.name %></span> |
+      <a class="header-element" data-testid="logout" href="/logout">Logout</a>
+    <% } else { %>
+      <a class="header-element" data-testid="login" href="/login">Login</a>
+    <% } %>
+  </div>
 </header>

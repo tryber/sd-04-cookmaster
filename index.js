@@ -15,7 +15,6 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 });
 
 
-
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.get('/register', controllers.userController.registerForm);

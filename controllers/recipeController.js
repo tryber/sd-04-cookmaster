@@ -13,7 +13,7 @@ const seeRecipe = async (req, res) => {
   res.render('seerecipe', { ...recipe, user: req.user });
 };
 
-//créditos a explicação de Tereza
+// créditos a explicação de Tereza
 const searchRecipess = async (req, res) => {
   const { q } = req.query;
   if (q === '') return res.render('searchRecipe', { recipes: null, user: req.user });

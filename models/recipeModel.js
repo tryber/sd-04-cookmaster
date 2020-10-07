@@ -1,4 +1,4 @@
-const connection = require('./connection'); //importar arquivo conexao
+const connection = require('./connection'); // importar arquivo conexao
 
 const getRecipes = async () => {
   const db = await connection();

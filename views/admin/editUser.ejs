@@ -1,0 +1,16 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookmaster - Editar Cadastro</title>
+</head>
+
+<body>
+  <h1>Editar Usuário</h1>
+  <%- include('../components/userForm', {data, message,
+     action: '/me/edit', method: 'POST', button: 'Salvar', dataTest: 'salvar'}) %>
+  <a href="/">Cancelar</a>
+</body>
+
+</html>

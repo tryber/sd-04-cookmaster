@@ -1,0 +1,9 @@
+<div>
+  <% recipes.forEach(r => { %>
+  <div>
+    <p><%=r.name%></p>
+    <p><%=r.user%></p>
+    <a href="/recipes/<%=r.id%>">Ver mais</a>
+  </div>
+  <% }); %>
+</div>

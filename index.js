@@ -1,27 +1,41 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
 const middlewares = require('./middlewares');
-const controllers = require('./controllers');
+const { userController, recipesController } = require('./controllers');
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
-});
+app.get('/login', userController.loginForm);
+app.get('/logout', userController.logout);
+app.get('/register', userController.registerPage);
 
-app.get('/admin', middlewares.auth(), (req, res) => {
-  return res.render('admin/home', { user: req.user });
-});
+app.post('/register', userController.registerNew);
+app.post('/login', userController.login);
 
-app.get('/login', controllers.userController.loginForm);
-app.get('/logout', controllers.userController.logout);
-app.post('/login', controllers.userController.login);
+app.get('/recipes/new', middlewares.auth(), recipesController.newPage);
+
+app.get('/', middlewares.auth(false), recipesController.homeRecipes);
+app.get('/recipes/search', middlewares.auth(false), recipesController.searchRecipe);
+app.get('/recipes/:id', middlewares.auth(false), recipesController.oneRecipe);
+
+app.use(middlewares.auth());
+
+app.get('/admin', (req, res) => res.render('admin/home', { user: req.userData }));
+app.get('/recipes/:id/edit', recipesController.editRecipe);
+app.get('/recipes/:id/delete', recipesController.deletePage);
+app.get('/me/recipes', recipesController.myRecipes);
+app.get('/me/edit', userController.editPage);
+
+app.post('/recipes', recipesController.postNew);
+app.post('/recipes/:id/delete', recipesController.deleteRecipe);
+app.post('/recipes/:id', recipesController.postRecipe);
+app.post('/me/edit', userController.confirmEdit);
 
 app.listen(3000, () => console.log('Listening on 3000'));

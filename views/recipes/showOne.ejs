@@ -1,0 +1,23 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Recipe</title>
+</head>
+
+<body>
+  <%-include('../components/header', {userData})%>
+  <% if (userData && userData.id === user_id) { %>
+  <a data-testid="editar-receita" href=<%=`/recipes/${id}/edit`%>>editar receita</a>
+  <a data-testid="excluir-receita" href=<%=`/recipes/${id}/delete`%>>excluir receita</a>
+  <% } %>
+  <h1><%=name%></h1>
+  <h5><%=user%></h5>
+  <h3>Ingredientes</h3>
+  <p><%=ingredients%></p>
+  <h3>Modo de preparo</h3>
+  <p><%=instructions%></p>
+</body>
+
+</html>

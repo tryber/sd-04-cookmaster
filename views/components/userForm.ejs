@@ -1,0 +1,29 @@
+<form action='<%- action %>' method=<%- method %>>
+  <label for="emailInput">Email:
+    <input data-testid="email" type="text" name="email" id="emailInput" required
+      value="<%- data.email %>" />
+    <%= message.emailMsg %>
+  </label> <br>
+  <label for="passwordInput">Senha:
+    <input data-testid="senha" type="password" name="password" id="passwordInput" required
+      value="<%- data.password %>" />
+    <%= message.passwordMsg %>
+  </label> <br>
+  <label for="passwordInput2">Confirmar senha:
+    <input data-testid="confirmar-senha" type="password" name="password2" id="passwordInput2"
+      required value="<%- data.password2 %>" />
+    <%= message.password2Msg %>
+  </label> <br>
+  <label for="nameInput">Nome:
+    <input data-testid="nome" type="text" name="first_name" id="nameInput" required
+      value="<%- data.first_name %>" />
+    <%= message.nameMsg %>
+  </label> <br>
+  <label for="lastNameInput">Sobrenome:
+    <input data-testid="sobrenome" type="text" name="last_name" id="lastNameInput" required
+      value="<%- data.last_name %>" />
+    <%= message.lastNameMsg %>
+  </label> <br>
+  <button data-testid='<%- dataTest %>' ype="submit"><%- button %></button>
+  <%= message.confirmMsg %>
+</form>

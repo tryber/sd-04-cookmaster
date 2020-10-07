@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-  </head>
-  <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Home</title>
+</head>
+
+<body>
+  <%-include('components/header', {userData})%>
+  <div>
+    <h1>Receitas</h1>
+    <div>
+      <% if (userData) { %>
+      <a data-testid="minhas-receitas" href="/me/recipes">Minhas Receitas</a>
+      <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+      <% } %>
+      <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+    </div>
+  </div>
+  <%- include('components/recipesList', {recipes}) %>
+</body>
+
 </html>

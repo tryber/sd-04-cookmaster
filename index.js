@@ -6,7 +6,6 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipesController');
 const signUpController = require('./controllers/signUpController');
-const userModel = require('./models/userModel');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,10 +31,6 @@ app.get('/recipes/search', middlewares.auth(false), recipeController.searchRecip
 
 // app.get('/recipes/new', middlewares.auth(false), recipeController.newRecipe);
 // app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
-
-// tentativa de tratar o erro do findByEmail
-// const user = () => userModel.findByEmail('bruno.batista@gmail.com').then(u => console.log(u.name)).catch(e => {console.log(e)});
-// user();
 app.get('/me/recipes', middlewares.auth(true), recipeController.myRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), recipeController.recipeDetails);

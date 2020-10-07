@@ -1,4 +1,5 @@
-// depois de muita tentativa entramos em call Orlando, Tereza e Mathieu e esse código abaixo foi reescrito
+// depois de muita tentativa entramos em call Orlando,
+// Tereza e Mathieu e esse código abaixo foi reescrito
 // baseado no código do Orlando
 
 const conn = require('./connection');

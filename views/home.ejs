@@ -3,9 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <div class="navbar">
+      <h1>Cookmaster!</h1>
+      <% if(user) { %>
+      <a href="/">
+        <h3 data-testid="logout">Logout</h3>
+      </a>
+      <%} else{ %>
+      <a href="/login">
+        <h3 data-testid="login">Login</h3>
+      </a>
+
+      <%}%>
+    </div>
+    <h1>Receitas</h1>
+
+    <a href="">Ver mais</a>
+
+    <button data-testid="nova-receita">Nova Receita</button>
+    <button data-testid="buscar-receita">Buscar Receita</button>
+
+    <% recipes.forEach(recipe => { %>
+    <h3><%= recipe.user + recipe.name%></h3>
+
+    <% })%>
   </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"
+  ></script>
+  <script src="/js/bootstrap.min.js"></script>
 </html>

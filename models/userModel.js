@@ -17,22 +17,26 @@ de fato, realize a busca no banco de dados */
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (email) => {
-  return connection().then((db) =>
-    db
-      .getTable('users')
-      .select([])
-      .where('email = :email')
-      .bind('email', email)
-      .execute()
-      .then((results) => results.fetchOne())
-      .then(([id, eMail, password, firstName, lastName]) => ({
-        id,
-        eMail,
-        password,
-        firstName,
-        lastName,
-      })),
-  );
+  return connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select([])
+        .where('email = :email')
+        .bind('email', email)
+        .execute()
+        .then((results) => results.fetchOne())
+        .then(([id, eMail, password, firstName, lastName]) => ({
+          id,
+          eMail,
+          password,
+          firstName,
+          lastName,
+        })),
+    )
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**
@@ -40,22 +44,26 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  return connection().then((db) =>
-    db
-      .getTable('users')
-      .select([])
-      .where('id = :id')
-      .bind('id', id)
-      .execute()
-      .then((results) => results.fetchOne())
-      .then(([iD, email, password, firstName, lastName]) => ({
-        iD,
-        email,
-        password,
-        firstName,
-        lastName,
-      })),
-  );
+  return connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select([])
+        .where('id = :id')
+        .bind('id', id)
+        .execute()
+        .then((results) => results.fetchOne())
+        .then(([iD, email, password, firstName, lastName]) => ({
+          iD,
+          email,
+          password,
+          firstName,
+          lastName,
+        })),
+    )
+    .catch((err) => {
+      throw err;
+    });
 };
 
 const createUser = async (email, firstName, lastName, password) => {

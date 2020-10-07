@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,16 +14,24 @@
   <body>
     <%- include('headerCook') %>
 
-    <h3>Buscar Receitas</h3>
+    <div class="card w-75 mx-auto m-4">
+      <h3 class="m-3">Buscar Receitas</h3>
 
-    <div>
-      <form action="">
-        <input required class="form-control" data-testid="receita" type="text" name="q" id="q" />
-        <button data-testid="buscar">Buscar</button>
+      <form action="" class="d-flex">
+        <input
+          placeholder="receita de ..."
+          required
+          class="form-control m-3"
+          data-testid="receita"
+          type="text"
+          name="q"
+          id="q"
+        />
+        <button class="btn btn-dark m-3" data-testid="buscar">Buscar</button>
       </form>
     </div>
     <div class="container">
-      <!-- <div class="row justify-content-around">
+      <div class="row justify-content-around">
         <% recipes.forEach((recipe) => { %>
 
         <div class="card col-5 mb-3 text-white text-center mx-auto w-50 bg-secondary">
@@ -32,15 +40,22 @@
           <a class="btn btn-info w-50 mx-auto mb-2" href="/recipes/<%= recipe.id %>">Ver mais</a>
         </div>
         <% }) %>
-      </div> -->
+      </div>
     </div>
 
-    <% if (user) { %>
+    <div class="d-flex justify-content-between mt-4">
+      <div>
+        <% if (user) { %>
 
-    <a class="btn btn-dark" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+        <a class="btn btn-dark m-3" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
 
-    <% } %>
+        <% } %>
 
-    <a class="btn btn-dark" data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+        <a class="btn btn-dark m-3" data-testid="buscar-receita" href="/recipes/search"
+          >Buscar Receita</a
+        >
+      </div>
+      <a class="btn btn-secondary m-3" href="/">Voltar</a>
+    </div>
   </body>
 </html>

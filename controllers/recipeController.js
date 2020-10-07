@@ -17,7 +17,8 @@ const recipeDetails = async (req, res) => {
 };
 
 const searchRecipe = async (req, res) => {
-  res.status(200).render('searchRecipe', { recipes: ['oi'], user: req.body });
+  const recipes = await Recipes.getAllRecipes();
+  res.status(200).render('searchRecipe', { recipes, user: req.user });
 };
 
 const addRecipe = (req, res) => {

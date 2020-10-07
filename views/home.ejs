@@ -14,7 +14,7 @@
   <body>
     <%- include('headerCook') %>
 
-    <h3>Receitas</h3>
+    <h3 class="text-center m-3">Receitas</h3>
     <div class="container">
       <div class="row justify-content-around">
         <% recipes.forEach((recipe) => { %>
@@ -30,10 +30,12 @@
 
     <% if (user) { %>
 
-    <a class="btn btn-dark" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+    <a class="btn btn-dark m-3" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
 
     <% } %>
 
-    <a class="btn btn-dark" data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+    <a class="btn btn-dark m-3" data-testid="buscar-receita" href="/recipes/search"
+      >Buscar Receita</a
+    >
   </body>
 </html>

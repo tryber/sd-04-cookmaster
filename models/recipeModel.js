@@ -41,12 +41,16 @@ const getRecipeById = async (id) =>
 // };
 
 const createRecipe = async (id, user, name, ingredients, instructions) =>
-  connection().then((db) =>
-    db
-      .getTable('recipes')
-      .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
-      .values(id, user, name, ingredients, instructions)
-      .execute(),
-  );
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
+        .values(id, user, name, ingredients, instructions)
+        .execute(),
+    )
+    .catch((err) => {
+      throw err;
+    });
 
 module.exports = { getAllRecipes, getRecipeById, createRecipe };

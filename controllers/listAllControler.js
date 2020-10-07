@@ -38,15 +38,15 @@ const editRecipe = async (req, res) => {
   const recipe = await getRecipeById(id);
 
   res.render('editRecipe', { recipe, user: req.user });
-}
+};
 
 const updateRecipe = async (req, res) => {
   const { nameRec, ingredients, instructions } = req.body;
   const { id } = req.params;
 
   await updateRecipeModel(id, nameRec, ingredients, instructions);
-  res.redirect('/')
-}
+  res.redirect('/');
+};
 
 module.exports = {
   listRecipes,

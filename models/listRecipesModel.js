@@ -15,9 +15,9 @@ const getRecipeById = async (Id) => {
     .bind('id', Id)
     .execute();
   const results = await table.fetchOne();
-  const [id, user, user_id, name, ingredients, instructions] = results;
+  const [id, user, name, ingredients, instructions] = results;
   // const ingredients = await results[3].slice(',');
-  return { id, user, user_id, name, ingredients, instructions };
+  return { id, user, name, ingredients, instructions };
 };
 
 const searchRecipeModel = async (q) => {
@@ -41,7 +41,6 @@ const newRecipeInsert = async ({ id, name, lastName }, { nameRec, ingredients, i
 };
 
 const updateRecipeModel = async (Id, nameRec, ingredients, instructions) => {
-  console.log(Id, nameRec, ingredients, instructions)
   const db = await connection();
   await db.getTable('recipes')
     .update()
@@ -51,7 +50,7 @@ const updateRecipeModel = async (Id, nameRec, ingredients, instructions) => {
     .where('id = :id')
     .bind('id', Id)
     .execute();
-}
+};
 
 module.exports = {
   getAll,

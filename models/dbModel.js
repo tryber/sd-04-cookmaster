@@ -60,8 +60,7 @@ const deleteFromDB = (recipeID) =>
   connection
     .connection()
     .then((data) =>
-      data.getTable('recipes').delete().where('id = :id').bind('id', recipeID)
-      .execute(),
+      data.getTable('recipes').delete().where('id = :id').bind('id', recipeID).execute(),
     );
 
 const getAllRecipesByUserID = async (idUser) =>
@@ -87,6 +86,23 @@ const getAllRecipesByUserID = async (idUser) =>
       })),
     );
 
+const updateRecipe = async (recipeID, user, name, allIngredients, instructions) => {
+  console.log('test', recipeID, name);
+  connection
+    .connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .update()
+        .set('name', name)
+        .set('ingredients', allIngredients)
+        .set('instructions', instructions)
+        .where('id = :id')
+        .bind('id', recipeID)
+        .execute(),
+    ).then((results) => console.log(results));
+};
+
 module.exports = {
   getAllRecipes,
   getOneRecipe,
@@ -94,4 +110,5 @@ module.exports = {
   insertRecipe,
   deleteFromDB,
   getAllRecipesByUserID,
+  updateRecipe,
 };

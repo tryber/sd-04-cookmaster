@@ -82,11 +82,22 @@ const myRecipes = async (req, res) => {
 
 const editRecipe = async (req, res) => {
   const { id } = req.params;
-  // console.log('id', id);
+  console.log('editRecipe : id_', id);
   const recipeArray = await DB.getOneRecipe(id);
   const recipe = recipeArray[0]; //  To improve!!
-  // console.log('one Recipe from controller', recipeArray, req.user, recipe);
+  console.log('one Recipe from controller', recipe);
   res.render('edit', { user: req.user, recipe });
+};
+
+const saveEditedRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { name, allIngredients, instructions } = req.body;
+  const userId = req.user[0].id;
+  const user = `${req.user[0].name} ${req.user[0].lastName}`;
+  console.log('from saveEditedRecipe', id, req.params);
+  DB.updateRecipe(id, user, name, allIngredients, instructions).then((_) => {
+    return res.redirect('/');
+  });
 };
 
 module.exports = {
@@ -98,4 +109,5 @@ module.exports = {
   deleteRecipeForm,
   myRecipes,
   editRecipe,
+  saveEditedRecipe,
 };

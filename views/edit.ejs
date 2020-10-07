@@ -6,15 +6,20 @@
     <title>Insert new Recipe</title>
   </head>
 
-  <body>
+  <body onload="testInsert();">
     <h1>EDIT RECIPE</h1>
     <button data-testid="adicionar-ingrediente" onclick="addIngredient()">
       Adicionar Ingrediente
     </button>
-    <form action="/" method="POST">
+    <form action="/recipes/<%= recipe.id %>" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
-        <input data-testid="nome-receita" class="form-control" name="name" value="<%= recipe.name %>"/>
+        <input
+          data-testid="nome-receita"
+          class="form-control"
+          name="name"
+          value="<%= recipe.name %>"
+        />
       </div>
       <div class="form-group">
         <label for="ingredients">Ingredientes</label>
@@ -28,8 +33,13 @@
       </div>
       <ul id="container-ingredients"></ul>
       <div class="form-group">
-        <label for="TotalIngredients">Total ingredientes</label>
-        <input id="allIngredients" class="form-control" name="allIngredients" placeholder="Total" />
+        <input
+          type="hidden"
+          id="allIngredients"
+          class="form-control"
+          name="allIngredients"
+          placeholder="Total"
+        />
       </div>
       <div class="form-group">
         <label for="instructions">Modo de Preparo</label>
@@ -51,6 +61,30 @@
       <a href="/" class="btn btn-success">Voltar</a>
     </form>
     <script>
+      const ingredientsList = '<%=recipe.ingredients%>';
+      const ingredients = ingredientsList.split(',');
+
+      function testInsert(recipe) {
+        // console.log(' inside tesinsert', ingredients);
+        const containerTest = document.getElementById('container-test');
+        ingredients.map((ingredient) => {
+          const container = document.getElementById('container-ingredients');
+          const newIngredient = document.createElement('li');
+          const ingredientInput = document.getElementById('ingredient-input');
+          const removeButton = document.createElement('input');
+          removeButton.type = 'button';
+          removeButton.value = 'Excluir Ingrediente';
+          removeButton.innerText = 'Excluir Ingrediente';
+          removeButton.onclick = function () {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+          };
+          newIngredient.className = 'ingredient';
+          // console.log('test inside map', ingredient);
+          newIngredient.innerText = ingredient;
+          newIngredient.appendChild(removeButton);
+          container.appendChild(newIngredient);
+        });
+      }
       function addIngredient() {
         console.log('here addingredient');
         const container = document.getElementById('container-ingredients');

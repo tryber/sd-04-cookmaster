@@ -27,6 +27,7 @@ app.post('/recipes/:id/delete', middlewares.auth(), controllers.dbController.del
 
 app.post('/', middlewares.auth(), controllers.dbController.createRecipe);
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.dbController.editRecipe);
+app.post('/recipes/:id/', middlewares.auth(), controllers.dbController.saveEditedRecipe);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

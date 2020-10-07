@@ -1,4 +1,3 @@
-const userModel = require('../models/userModel');
 const registerUserModel = require('../models/registerUserModel');
 
 const registerForm = (_req, res) =>

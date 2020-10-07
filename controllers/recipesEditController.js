@@ -12,7 +12,7 @@ const recipeEdit = async (req, res) => {
   const ingredientsString = ingredients.join(',');
 
   recipeEditModel(req.params.id, recipeName, ingredientsString, recipeInstructions)
-    .then(() => res.redirect(`/`));
+    .then(() => res.redirect('/'));
 };
 
 module.exports = {

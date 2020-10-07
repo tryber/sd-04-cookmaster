@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Receita</title>
+</head>
+<body>
+    <h1></h1>
+    <% if (isRecipeOwner) {%>
+      <a data-testid="editar-receita" href=<%= `/recipes/${recipe.id}/edit` %> >Editar Receita</a>
+      <a data-testid="excluir-receita" href=<%= `/recipes/${recipe.id}/delete` %> >Excluir Receita</a>
+    <% } %>
+  <h1><%= recipe.title %></h1>
+  <ul>
+    <h2>Ingredientes</h2>
+    <% recipe.ingredients.forEach((e) => { %>
+      <li>
+        <%= e %>
+      </li>
+    <% }) %>
+  </ul>
+  <h3>Modo de Preparo</h3>
+  <p><%= recipe.instructions %></p>
+</body>
+</html>

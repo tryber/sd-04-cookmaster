@@ -51,16 +51,14 @@ const findById = async (id) => {
 };
 
 const addUser = async (email, password, name, lastName) => {
-  try {
-    const db = await connection();
-    await db
-      .getTable('users')
-      .insert(['email', 'password', 'first_name', 'last_name'])
-      .values(email, password, name, lastName)
-      .execute();
-  } catch (err) {
-    return err;
-  }
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, name, lastName)
+    .execute();
+
+  return;
 };
 
 module.exports = {

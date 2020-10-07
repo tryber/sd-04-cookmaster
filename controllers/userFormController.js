@@ -47,13 +47,13 @@ const userForm = async (_req, res) => {
 };
 
 const newUser = async (req, res) => {
-  const user = req.body;
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
 
-  const isName = validateName(user.firstName);
-  const isLastName = validateLastName(user.lastName);
-  const isEmail = validadeEmail(user.email);
-  const isPassword = validatePassword(user.password);
-  const isConfirmPassword = validateConfirmPassword(user.password, user.confirmPassword);
+  const isName = validateName(firstName);
+  const isLastName = validateLastName(lastName);
+  const isEmail = validadeEmail(email);
+  const isPassword = validatePassword(password);
+  const isConfirmPassword = validateConfirmPassword(password, confirmPassword);
 
   if (isName || isLastName || isEmail || isPassword || isConfirmPassword) {
     res.render('cadastro', {
@@ -66,7 +66,7 @@ const newUser = async (req, res) => {
     });
   }
 
-  await userModel.createUser(user);
+  await userModel.createUser(email, firstName, lastName, password);
 
   res.render('cadastro', {
     isName,

@@ -8,19 +8,8 @@ const config = {
   port: 33060,
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
+
 let schema;
-// const connection1 = () => {
-//   return schema
-//     ? Promise.resolve(schema)
-//     : mysqlx
-//         .getSession(config)
-//         .then(async (session) => {
-//           schema = session.getSchema('cookmaster');
-//         })
-//         .catch((err) => {
-//           throw err;
-//         });
-// };
 
 const connection = () => {
   return schema /* Se schema já existir: */

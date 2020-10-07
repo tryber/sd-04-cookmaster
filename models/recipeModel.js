@@ -35,8 +35,6 @@ const getRecipesByName = async (q) => {
   }));
 };
 
-
-
 module.exports = {
   getAllRecipes,
   getRecipeById,

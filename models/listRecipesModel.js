@@ -29,7 +29,7 @@ const searchRecipeModel = async (q) => {
     .execute();
 
   const results = allTable.fetchAll();
-  return results.map(([id, user_id, user, name]) => ({ id, userId: user_id, user, name }));
+  return results.map(([id, userId, user, name]) => ({ id, userId, user, name }));
 };
 
 const newRecipeInsert = async ({ id, name, lastName }, { nameRec, ingredients, instructions }) => {

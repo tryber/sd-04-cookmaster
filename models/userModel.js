@@ -61,7 +61,7 @@ const addUser = async (email, password, name, lastName) => {
 
     return;
   } catch (err) {
-    return err;
+    return process.exit(1);
   }
 };
 

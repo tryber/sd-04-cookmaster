@@ -11,11 +11,11 @@ const connection = require('./connection');
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 
-// /**
-//  * Busca um usuário através do seu email e, se encontrado, retorna-o.
-//  * @param {string} email Email do usuário a ser encontrado
-//  */
-const findByEmail = async (email) => {
+/**
+ * Busca um usuário através do seu email e, se encontrado, retorna-o.
+ * @param {string} email Email do usuário a ser encontrado
+ */
+const findByEmail = async (userMail) => {
   // return TEMP_USER;
   return connection()
   .then((db) =>
@@ -23,18 +23,18 @@ const findByEmail = async (email) => {
       .getTable('users')
       .select(['id', 'email', 'password', 'first_name', 'last_name'])
       .where('email = :email_param')
-      .bind('email_param', email)
+      .bind('email_param', userMail)
       .execute(),
   )
   .then((results) => results.fetchOne())
   .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
-// /**
-//  * Busca um usuário através do seu ID
-//  * @param {string} id ID do usuário
-//  */
-const findById = async (id) => {
+/**
+ * Busca um usuário através do seu ID
+ * @param {string} id ID do usuário
+ */
+const findById = async (userId) => {
   // return TEMP_USER;
   return connection()
   .then((db) =>
@@ -42,7 +42,7 @@ const findById = async (id) => {
       .getTable('users')
       .select(['id', 'email', 'password', 'first_name', 'last_name'])
       .where('id = :id_param')
-      .bind('id_param', id)
+      .bind('id_param', userId)
       .execute(),
   )
   .then((results) => results.fetchOne())

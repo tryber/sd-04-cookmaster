@@ -15,9 +15,9 @@ const getRecipeById = async (Id) => {
     .bind('id', Id)
     .execute();
   const results = await table.fetchOne();
-  const [id, user, name, ingredients, instructions] = results;
+  const [id, user, userId, name, ingredients, instructions] = results;
   // const ingredients = await results[3].slice(',');
-  return { id, user, name, ingredients, instructions };
+  return { id, user, userId, name, ingredients, instructions };
 };
 
 const searchRecipeModel = async (q) => {
@@ -29,7 +29,7 @@ const searchRecipeModel = async (q) => {
     .execute();
 
   const results = allTable.fetchAll();
-  return results.map(([id, user_id, user, name]) => ({ id, user_id, user, name }));
+  return results.map(([id, user_id, user, name]) => ({ id, userId: user_id, user, name }));
 };
 
 const newRecipeInsert = async ({ id, name, lastName }, { nameRec, ingredients, instructions }) => {

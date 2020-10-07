@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-  </head>
-  <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Home</title>
+</head>
+
+<body>
+  <h1>Boas vindas ao Cookmaster!</h1>
+  <h2>Receitas</h2>
+  <a data-testid="buscar-receita" href='/recipes/search'>Buscar Receitas</a>
+  <% if (user) { %>
+  <a data-testid="nova-receita" href="/recipes/new" >Nova Receita</a>
+  <a data-testid="logout" href='/logout'>Logout</a>
+  <a data-testid="minhas-receitas" href='/me/recipes'>Minhas Receitas</a>
+  <a data-testid="minha-conta" href="/me/edit">Minha Conta</a>
+  <% } %>
+  <% if (!user) { %>
+  <a data-testid="login" href="/login">Login</a>
+  <% } %>
+  <% if (recipes.length > 0) { %>
+  <ul>
+    <% recipes.forEach((recipe) => { %>
+    <li>
+      <p><%= recipe[2] %></p>
+      <p><%= recipe[3] %></p>
+    </li>
+    <a href='/recipes/<%= recipe[0] %>'>Ver mais</a>
+    <% }) %>
+    <% } %>
+  </ul>
+</body>
 </html>

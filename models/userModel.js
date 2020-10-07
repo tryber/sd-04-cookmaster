@@ -1,6 +1,5 @@
 const connection = require('./connection');
 
-
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */
 

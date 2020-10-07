@@ -5,5 +5,5 @@ const signUpController = require('./singUpController');
 module.exports = {
   userController,
   recipeController,
-  signUpController
+  signUpController,
 };

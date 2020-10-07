@@ -1,4 +1,4 @@
-const connection = require('./connection') //importar arquivo conexao
+const connection = require('./connection'); //importar arquivo conexao
 
 const getRecipes = async () => {
   const db = await connection();
@@ -6,7 +6,12 @@ const getRecipes = async () => {
   const results = await table.select([]).execute();
   const recipes = await results.fetchAll();
   return recipes.map(([id, userId, user, recipe, ingredients, instructions]) => ({
-    id, userId, user, recipe, ingredients, instructions,
+    id,
+    userId,
+    user,
+    recipe,
+    ingredients,
+    instructions,
   }));
 };
 
@@ -18,6 +23,5 @@ const getRecipeById = async (recipeId) => {
   const ingredients = ingredientsArray.split(',');
   return { id, userId, user, title, ingredients, instructions };
 };
-
 
 module.exports = { getRecipes, getRecipeById };

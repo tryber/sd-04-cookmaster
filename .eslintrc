@@ -1,5 +1,8 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "no-alert": "off",
     "prefer-arrow-callback": "off",
@@ -8,8 +11,10 @@
       2,
       "always"
     ],
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "prettier/prettier": "error"
   },
+  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "node": true,

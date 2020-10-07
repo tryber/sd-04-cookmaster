@@ -2,19 +2,19 @@ const { signUpUserModel } = require('../models/signUpModel');
 
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
-  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres'
+  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
   if (password !== verifyPassword) message = 'As senhas tem que ser iguais';
 
-  return message
+  return message;
 };
 
 const regexValidation = (email, name, lastname) => {
   let message = '';
-  // Espressão regex consultada externamente (https://regex101.com/library/SOgUIV)  
+  // Espressão regex consultada externamente (https://regex101.com/library/SOgUIV)
   regexEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   regexNumber = /[0-9]/;
 
-  if (!regexEmail.test(email)) message = 'O email deve ter o formato email@mail.com'
+  if (!regexEmail.test(email)) message = 'O email deve ter o formato email@mail.com';
 
   if (lastname.length < 3 || regexNumber.test(lastname)) {
     message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';

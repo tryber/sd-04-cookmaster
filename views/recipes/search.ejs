@@ -10,16 +10,16 @@
 
 <body>
   <div>
-    <div class="title">
-      <nav class="navbar">
-        <h2>Cookmaster</h2></span>
-        <% if (!user) { %>
-          <span><a href='/login' data-testid="login">Login</a></span>
-        <% } else { %>
-          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
-        <% } %>
-      </nav>
-    </div>
+    <nav>
+      <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
+        <a data-testid="logout" href="/logout">Logout</a>
+      <% } %>
+      <% if (!user) { %>
+        <a data-testid="login" href="/login" >Login</a>
+      <% } %>
+    </nav>
     <div>
       <form method="GET">
         <div>
@@ -28,7 +28,7 @@
         </div>
       </form>
     </div>
-    <div class="box">
+    <div>
       <% if (recipes) { %>
         <% recipes.forEach(recipe => { %>
           <div>

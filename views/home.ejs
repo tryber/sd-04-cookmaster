@@ -7,10 +7,10 @@
     <title>Cookmaster</title>
   </head>
   <body>
-    <nav class="navbar">
+    <nav>
       <h1>Cookmaster</h1>
       <% if (user) { %>
-        <p><%= `${user.name} ${user.lastName}` %></p>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
         <a data-testid="logout" href="/logout">Logout</a>
       <% } %>
       <% if (!user) { %>
@@ -19,9 +19,9 @@
     </nav>
     <h2>Receitas</h2>
     <div>
-      <a href="/recipe/search" data-testid="buscar-receita">Buscar Receitas</a>
+      <a href="/recipes/search" data-testid="buscar-receita">Buscar Receitas</a>
       <% if (user) { %>
-        <a data-testid="nova-receita" href="/recipe/new">Nova Receita</a>
+        <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
         <a data-testid="minhas-receitas" href="/user/recipe">Minhas Receitas</a>
         <a data-testid="minha-conta" href="/user/edit">Minha Conta</a>
       <% } %>

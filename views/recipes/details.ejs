@@ -13,7 +13,7 @@
     <nav class="navbar">
       <h1>Cookmaster</h1>
       <% if (user) { %>
-        <p><%= `${user.name} ${user.lastName}` %></p>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
         <a data-testid="logout" href="/logout">Logout</a>
       <% } %>
       <% if (!user) { %>

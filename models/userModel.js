@@ -50,14 +50,18 @@ const findById = async (id) => {
   }
 };
 
-const addUser = async (user) => {
+const addUser = async (email, password, name, lastName) => {
   try {
     const db = await connection();
-    const results = await db
+    await db
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
-      .values();
+      .values(email, password, name, lastName)
+      .execute();
+
+    return;
   } catch (err) {
+    return err;
   }
 };
 

@@ -61,11 +61,12 @@ const createUser = async (req, res) => {
     });
   }
 
-  console.log("Chegou");
-  console.log(valid);
-  await userModel.addUser(email, password, confirmPass, name, lastName);
+  await userModel.addUser(email, password, name, lastName);
 
-  res.status(201).render();
+  res.status(201).render('cadastro', {
+    message: "Usuário cadastrado com sucesso!",
+    redirect: null,
+  });
 };
 
 module.exports = {

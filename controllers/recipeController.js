@@ -1,4 +1,3 @@
-const { getRecipes } = require('../models/recipeModel');
 const recipesModel = require('../models/recipeModel');
 
 const showAllRecipes = async (req, res) => {
@@ -10,9 +9,7 @@ const showAllRecipes = async (req, res) => {
 // minhas receitas
 const showUserRecipes = async (req, res) => {
   const { id } = req.user;
-  console.log(id);
   const recipes = await recipesModel.getRecipes();
-  console.log(recipes);
 
   res.render('userRecipes', { recipes, user: req.user });
 };
@@ -34,7 +31,6 @@ const editRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  console.log(recipes);
   res.render('updateRecipe', { recipes, user: req.user, message: null });
 };
 

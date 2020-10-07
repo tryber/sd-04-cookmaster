@@ -61,12 +61,16 @@ const recipe = async (id) => {
 /**
  * Get all recipes
  */
-const recipes = async () => {
+const recipes = async (searchQuery) => {
+  const search = searchQuery || null;
+
   const recipesData = await connection()
     .then((schema) =>
       schema
         .getTable('recipes')
         .select(['id', 'user', 'user_id', 'name', 'ingredients', 'instructions'])
+        .where(search)
+        .bind('name', search)
         .execute())
     .then((results) => results.fetchAll())
     .then((data) => data);

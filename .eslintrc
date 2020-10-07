@@ -3,6 +3,7 @@
     "airbnb",
     "plugin:prettier/recommended"
   ],
+  "plugins": ["prettier"],
   "rules": {
     "no-alert": "off",
     "prefer-arrow-callback": "off",
@@ -14,7 +15,6 @@
     "no-param-reassign": "off",
     "prettier/prettier": "error"
   },
-  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "node": true,

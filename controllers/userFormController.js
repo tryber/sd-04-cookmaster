@@ -65,10 +65,13 @@ const newUser = async (req, res) => {
       success: null,
     });
   }
+  console.log('alguma coisa 68');
 
   await userModel.createUser(email, firstName, lastName, password);
 
-  res.render('cadastro', {
+  console.log('teste 72');
+
+  return res.render('cadastro', {
     isName,
     isLastName,
     isEmail,

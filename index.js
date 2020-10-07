@@ -14,14 +14,14 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipeController.listAllRecipes);
 
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetails);
-
 // app.get('recipes/search');
 
-app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.listAllRecipes);
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipe);
 
 app.get('/recipes/new', middlewares.auth(true), controllers.recipeController.createRecipe);
 // app.post('/recipes/new', controllers.recipeController.createRecipe);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetails);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

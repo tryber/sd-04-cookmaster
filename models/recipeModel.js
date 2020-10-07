@@ -15,7 +15,10 @@ const getAllRecipes = async () =>
           ingredients,
           instructions,
         })),
-      ),
+      )
+      .catch((err) => {
+        throw err;
+      }),
   );
 
 const getRecipeById = async (id) =>
@@ -27,7 +30,10 @@ const getRecipeById = async (id) =>
       .bind('id', id)
       .execute()
       .then((results) => results.fetchOne())
-      .then((recipes) => recipes.map((name) => name)),
+      .then((recipes) => recipes.map((name) => name))
+      .catch((err) => {
+        throw err;
+      }),
   );
 
 // const isValidCreatedRecipe = (id, user, name, ingredients, instructions) => {

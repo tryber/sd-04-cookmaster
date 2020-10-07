@@ -16,6 +16,10 @@ const recipeDetails = async (req, res) => {
   res.status(200).render('recipes', { recipe, user: req.user });
 };
 
+const searchRecipe = async (req, res) => {
+  res.status(200).render('searchRecipe', { recipes: ['oi'], user: req.body });
+};
+
 const addRecipe = (req, res) => {
   res.render('newRecipe');
 };
@@ -27,4 +31,4 @@ const createRecipe = async (req, res) => {
   res.render('newRecipe', { newRecipeCreated });
 };
 
-module.exports = { recipeDetails, listAllRecipes, createRecipe, addRecipe };
+module.exports = { recipeDetails, listAllRecipes, createRecipe, addRecipe, searchRecipe };

@@ -59,15 +59,15 @@ const findById = async (id) => {
 };
 
 const createUser = async (email, firstName, lastName, password) => {
-  console.log('usuario criado', email);
-
-  return connection().then((db) =>
-    db
+  console.log('usuario criado', email, firstName, lastName, password);
+  const db = await connection().then((dataBase) =>
+    dataBase
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
-      .values((email, password, firstName, lastName))
+      .values([email, password, firstName, lastName])
       .execute(),
   );
+  return db;
 };
 
 const isEmailValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);

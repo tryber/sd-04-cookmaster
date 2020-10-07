@@ -9,6 +9,7 @@ const config = {
 };
 
 let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
+
 const connection = () =>
   schema /* Se schema já existir: */
     ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
@@ -21,7 +22,7 @@ const connection = () =>
         })
         .catch((err) => {
           /* Caso um erro ocorra: */
-          console.error(err); /* Exibimos o erro no console */
+          // console.error(err); /* Exibimos o erro no console */
           process.exit(1); /* E encerramos o processo */
         });
 

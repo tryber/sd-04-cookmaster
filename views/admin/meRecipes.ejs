@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Minhas Receitas</title>
+  </head>
+  <body>
+    <%- include('../navbar', {user}); %>
+    <div>
+      <h1>Minhas Receitas</h1>
+      <% if (recipes) {%>
+      <div>
+        <% recipes.map(recipe => { %>
+        <div>
+          <p>Receita: <%= recipe.name %></p>
+          <p>Autor: <%= recipe.user %></p>
+          <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+        </div>
+        <%})%>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

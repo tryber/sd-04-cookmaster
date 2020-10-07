@@ -46,6 +46,26 @@ const searchRecipes = async (search) =>
       })),
     );
 
+// encontrar as receitas do UserLogado (minhas receitas)
+const myRecipeByUserId = async (userId) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user', 'name'])
+        .where('user_id = :user_id')
+        .bind('user_id', userId)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([recipeId, user, name]) => ({
+        id: recipeId,
+        user,
+        name,
+      })),
+    );
+
 // const addNewRecipe = async (userId, user, name, ingredients, instructions) =>
 //   connection().then((db) =>
 //     db
@@ -59,5 +79,6 @@ module.exports = {
   findAll,
   recipeById,
   searchRecipes,
+  myRecipeByUserId,
   // addNewRecipe,
 };

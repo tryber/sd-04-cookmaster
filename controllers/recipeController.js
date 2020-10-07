@@ -25,9 +25,26 @@ const searchRecipess = async (req, res) => {
   return res.render('searchRecipe', { recipes, user: req.user });
 };
 
+const myRecipe = async (req, res) => {
+  const { id } = req.user;
+  const recipes = await recipeModel.myRecipeByUserId(id);
+  return res.render('admin/meRecipes', { recipes, user: req.user });
+};
+
+// const newRecipe = async (req, res) => {
+//   const { recipeName, ingredients, instructions } = req.body;
+//   const { name, lastName, id } = req.user;
+//   const userFullName = `${name} ${lastName}`;
+
+//   await recipeModel.addNewRecipe(id, userFullName, recipeName, ingredients, instructions);
+
+//   return res.redirect('/');
+// };
+
 module.exports = {
   showRecipes,
   seeRecipe,
   searchRecipess,
+  myRecipe,
   // newRecipe,
 };

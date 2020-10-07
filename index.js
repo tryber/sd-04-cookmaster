@@ -12,9 +12,11 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
-});
+// app.get('/', (_req, res) => {
+//   return res.render('home');
+// });
+
+app.get('/', middlewares.auth(false), controllers.cookmasterControl.index);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

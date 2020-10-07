@@ -4,8 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <div class="container-fluid">
+      <h1>Cookmaster!</h1>
+      <h2>Receitas</h2>
+
+      <% if (user) { %> Usuário logado: <%=user.name %>
+      <a data-testid="logout" class="m-2" href="/logout">Logout</a>
+      <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
+      <% } else { %>
+      <div class="d-flex justify-content-around">
+        <button type="button" class="btn btn-primary">
+          <a data-testid="login" class="m-2" href="/login">Login</a>
+          <a data-testid="nova-receita" class="m-2" href="/new">Nova Receita</a>
+          <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
+        </button>
+      </div>
+      <% } %> <% recipes.forEach((recipe) => { %>
+      <div class="card w-75 m-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.name %></h5>
+          <p class="card-text"><%= recipe.user %></p>
+          <a href="/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
+        </div>
+      </div>
+
+      <% }) %>
+    </div>
   </body>
 </html>

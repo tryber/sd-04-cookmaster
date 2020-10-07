@@ -24,6 +24,20 @@ const getRecipe = async (req, res) => {
     : res.render('home', { message: 'Recipe found.' });
 };
 
+/**
+ * Search recipe by given string.
+ * @param {string} req.query.p - Search Input | GET Query
+ */
+const searchRecipe = async (req, res) => {
+  const { q } = req.query;
+
+  const recipes = await recipeModel.recipes(q);
+
+  return recipes
+    ? res.render('search', { recipes })
+    : res.render('search', { message: 'Nenhuma receita encontrada.' });
+};
+
 const createRecipe = async (req, res) => {
   const { recipe } = req.body;
 
@@ -37,5 +51,6 @@ const createRecipe = async (req, res) => {
 module.exports = {
   getRecipes,
   getRecipe,
+  searchRecipe,
   createRecipe,
 };

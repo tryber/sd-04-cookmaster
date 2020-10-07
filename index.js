@@ -35,6 +35,8 @@ app.get('/signup', controllers.signUpController.signUpForm);
 
 app.post('/signup', controllers.signUpController.signUpController);
 
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipeDetailsController.showDetails);
+app.get('/recipe/:id', middlewares.auth(false), controllers.recipeDetailsController.showDetails);
+
+app.get('/recipes/search', middlewares.auth(false), controllers.searchController.searchController);
 
 app.listen(3000, () => console.log('Listening on 3000'));

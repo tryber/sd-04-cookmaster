@@ -58,10 +58,8 @@ const addUser = async (email, password, name, lastName) => {
       .insert(['email', 'password', 'first_name', 'last_name'])
       .values(email, password, name, lastName)
       .execute();
-
-    return;
   } catch (err) {
-    return process.exit(1);
+    return err;
   }
 };
 

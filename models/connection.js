@@ -12,7 +12,7 @@ const config = {
 };
 
 async function connection() {
-  schema
+  return schema
     ? Promise.resolve(schema)
     : mysqlx
         .getSession(config)

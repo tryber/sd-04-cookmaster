@@ -42,7 +42,7 @@ const connection = async () => {
 //         })
 //         .then((session) => {
 //           /* Quando terminamos de abrir a conexão: */
-//           schema = session.getSchema('cookmaster'); 
+//           schema = session.getSchema('cookmaster');
 //           return schema; /* E retornamos o schema de dentro da Promise */
 //         })
 //         .catch(() => {

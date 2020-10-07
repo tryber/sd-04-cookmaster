@@ -6,8 +6,8 @@ const signUpUserModel = async (email, password, first_name, last_name) => {
   const result = await table.insert([
     'email', 'password', 'first_name', 'last_name'
   ])
-  .values(email, password, first_name, last_name)
-  .execute();
+    .values(email, password, first_name, last_name)
+    .execute();
   result.getWarningsCount();
 };
 

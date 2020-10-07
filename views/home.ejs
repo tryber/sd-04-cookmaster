@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="ho"
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Cookmaster - Home</title>
-  </head>
-  <body>
-    <div class="container">
-          <h1>Cookmaster</h1>
-          <a href="/login">Login</a>
-    </div>
-    <div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="ho" <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Cookmaster - Home</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Cookmaster</h1>
+    <a href="/login">Login</a>
+  </div>
+  <div>
+    <h1>Receitas</h1>
+    <button>Buscar Receitas</button>
+  </div>
+  <div>
+    <p>foreach de cards aqui</p>
+    <ul>
       <h1>Receitas</h1>
-      <button>Buscar Receitas</button>
-    </div>
-    <div>
-      <p>foreach de cards aqui</p>
-      <ul>
-        <h1>Receitas</h1>
-        <% recipes.forEach(({user, recipe, id}) => { %>
-          <li>
-            <%=`${recipe} ${user}`%>
-            <a href=<%= `recipes/${id}` %> >Ver mais</a>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-  </body>
+      <% recipes.forEach(({user, recipe, id}) => { %>
+      <li>
+        <%=`${recipe} ${user}`%>
+        <a href=<%= `recipes/${id}` %>>Ver mais</a>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+
 </html>

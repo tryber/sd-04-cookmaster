@@ -18,19 +18,35 @@ const config = {
  * return schema - Schema connection session
  * return error - Schema connection error
  */
-const connection = async () => {
-  let schema = null;
+// const connection = async () => {
+//   let schema = null;
 
-  return schema || mysqlx
+//   return schema || mysqlx
+//     .getSession(config)
+//     .then((session) => {
+//       schema = session.getSchema(config.database);
+
+//       return schema;
+//     })
+//     .catch(() => {
+//       process.exit(1);
+//     });
+// };
+
+// module.exports = connection;
+
+let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
+const connection = () => (schema /* Se schema já existir: */
+  ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
+  : mysqlx
     .getSession(config)
     .then((session) => {
-      schema = session.getSchema(config.database);
-
-      return schema;
+      /* Quando terminamos de abrir a conexão: */
+      schema = session.getSchema(config.database); /* Armazenamos a conexão na variável `schema` */
+      return schema; /* E retornamos o schema de dentro da Promise */
     })
     .catch(() => {
-      process.exit(1);
-    });
-};
-
+      /* Caso um erro ocorra: */
+      process.exit(1); /* E encerramos o processo */
+    }));
 module.exports = connection;

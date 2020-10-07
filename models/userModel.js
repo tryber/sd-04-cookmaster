@@ -1,11 +1,10 @@
-const connection = require('./connection');
+// depois de muita tentativa entramos em call Orlando, Tereza e Mathieu e esse código abaixo foi reescrito
+// baseado no código do Orlando
 
-/**
- * Busca um usuário através do seu email e, se encontrado, retorna-o.
- * @param {string} email Email do usuário a ser encontrado
- */
+const conn = require('./connection');
+
 const findByEmail = async (emailInput) => {
-  const db = await connection();
+  const db = await conn();
   const result = await db
     .getTable('users')
     .select([])
@@ -16,30 +15,40 @@ const findByEmail = async (emailInput) => {
   return { id, email, password, name, lastName };
 };
 
-/**
- * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
- */
 const findById = async (idInput) => {
-  const db = await connection();
+  const db = await conn();
   const table = await db.getTable('users');
   const result = await table.select([]).where('id = :id').bind('id', idInput).execute();
   const [id, email, password, name, lastName] = await result.fetchOne();
   return { id, email, password, name, lastName };
 };
 
-const createNewUser = async ({ email, password, name, lastName }) => {
-  const db = await connection();
-  const createUser = await db
+const addUser = async (email, password, firstName, lastName) => {
+  const db = await conn();
+  return db
     .getTable('users')
     .insert(['email', 'password', 'first_name', 'last_name'])
-    .values(email, password, name, lastName)
+    .values(email, password, firstName, lastName)
     .execute();
-  return createUser;
+};
+
+const updateUser = async (id, email, password, firstName, lastName) => {
+  const db = await conn();
+  return db
+    .getTable('users')
+    .update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', firstName)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
 };
 
 module.exports = {
   findByEmail,
   findById,
-  createNewUser,
+  addUser,
+  updateUser,
 };

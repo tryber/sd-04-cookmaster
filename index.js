@@ -6,6 +6,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipesController');
 const signUpController = require('./controllers/signUpController');
+const userModel = require('./models/userModel');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,14 +25,18 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 app.get('/signUp', signUpController.signUpForm);
 app.post('/signUp', signUpController.signUp);
-// app.get('/user/edit', middlewares.auth(true), signUpController.renderEditUser);
-// app.post('/user', middlewares.auth(true), signUpController.editUser);
+// app.get('/me/edit', middlewares.auth(true), signUpController.renderEditUser);
+// app.post('/me', middlewares.auth(true), signUpController.editUser);
 
 app.get('/recipes/search', middlewares.auth(false), recipeController.searchRecipes);
 
 // app.get('/recipes/new', middlewares.auth(false), recipeController.newRecipe);
 // app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
-// app.get('/me/recipes', middlewares.auth(true), recipeController.myRecipes);
+
+// tentativa de tratar o erro do findByEmail
+// const user = () => userModel.findByEmail('bruno.batista@gmail.com').then(u => console.log(u.name)).catch(e => {console.log(e)});
+// user();
+app.get('/me/recipes', middlewares.auth(true), recipeController.myRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), recipeController.recipeDetails);
 // app.post('/recipes/:id', middlewares.auth(false), recipeController.updateRecipe);

@@ -28,15 +28,24 @@ const getRecipesByName = async (q) => {
     .bind('q', `%${q}%`)
     .execute();
   const recipes = await results.fetchAll();
-  return recipes.map(([id, user, name]) => ({
-    id,
-    user,
-    name,
-  }));
+  return recipes.map(([id, user, name]) => ({ id, user, name }));
+};
+
+const getRecipeByUserId = async (userId) => {
+  const db = await connection();
+  const results = await db
+    .getTable('recipes')
+    .select(['id', 'user', 'name'])
+    .where('user_id = :userId')
+    .bind('userId', userId)
+    .execute();
+  const recipes = await results.fetchAll();
+  return recipes.map(([recipeId, user, name]) => ({ id: recipeId, user, name }));
 };
 
 module.exports = {
   getAllRecipes,
   getRecipeById,
   getRecipesByName,
+  getRecipeByUserId,
 };

@@ -3,9 +3,9 @@ require('dotenv').config();
 
 let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
 
-const connection = async () =>
-  schema /* Se schema já existir: */
-    ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
+const connection = async () => {
+  return schema
+    ? Promise.resolve(schema)
     : mysqlx
         .getSession({
           /* Se não, criamos uma nova conexão */ user: process.env.MYSQL_USER,
@@ -17,7 +17,7 @@ const connection = async () =>
         })
         .then((session) => {
           /* Quando terminamos de abrir a conexão: */
-          schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
+          schema = session.getSchema('cookmaster');
           return schema; /* E retornamos o schema de dentro da Promise */
         })
         .catch(() => {
@@ -25,6 +25,7 @@ const connection = async () =>
           // console.error(err); /* Exibimos o erro no console */
           process.exit(1); /* E encerramos o processo */
         });
+};
 
 // const connection = () => {
 //   return schema /* Se schema já existir: */

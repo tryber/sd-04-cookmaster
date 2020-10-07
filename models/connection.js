@@ -14,7 +14,7 @@ const config = {
 
 const connection = () => (
   schema
-    ? Promisse.resolve(schema)
+    ? Promise.resolve(schema)
     : mysqlx
         .getSession(config)
         .then((session) => {

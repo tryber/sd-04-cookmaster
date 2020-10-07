@@ -19,8 +19,12 @@ const recipeDetails = async (req, res) => {
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
   const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
+  let message;
+  if (!recipes || recipes === []) message = 'Nada encontrado...';
+  // console.log(recipes);
+  // console.log(message);
 
-  res.status(200).render('searchRecipe', { recipes, user: req.user });
+  res.status(200).render('searchRecipe', { recipes, user: req.user, message });
 };
 
 const addRecipe = (req, res) => {

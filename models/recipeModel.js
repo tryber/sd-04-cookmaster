@@ -30,8 +30,8 @@ const getRecipeById = async (id) =>
       .bind('id', id)
       .execute()
       .then((results) => results.fetchOne())
-      .then(([id, userId, user, name, ingredients, instructions]) => ({
-        id,
+      .then(([iD, userId, user, name, ingredients, instructions]) => ({
+        iD,
         userId,
         user,
         name,
@@ -53,11 +53,11 @@ const searchRecipeByName = async (name) =>
       .execute()
       .then((results) => results.fetchAll())
       .then((recipes) =>
-        recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        recipes.map(([id, userId, user, namE, ingredients, instructions]) => ({
           id,
           userId,
           user,
-          name,
+          namE,
           ingredients,
           instructions,
         })),

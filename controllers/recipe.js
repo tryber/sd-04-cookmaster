@@ -21,7 +21,7 @@ const getRecipe = async (req, res) => {
 
   return recipe
     ? res.render('recipe', { user, recipe })
-    : res.render('home', { message: 'Recipe found.' });
+    : res.render('home', { message: 'Recipe not found.' });
 };
 
 /**
@@ -35,9 +35,12 @@ const searchRecipe = async (req, res) => {
 
   const recipes = await recipeModel.recipes(q);
 
-  return recipes
-    ? res.render('search', { recipes })
-    : res.render('search', { message: 'Nenhuma receita encontrada.' });
+  return res.render(
+    'search',
+    recipes
+      ? { recipes, messages: null }
+      : { recipes: null, messages: 'Nenhuma receita encontrada.' },
+  );
 };
 
 const createRecipe = async (req, res) => {

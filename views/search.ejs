@@ -7,10 +7,16 @@
   </head>
   <body>
     <h1>Buscar Receitas</h1>
-    <form action="/recipe/search" method="GET">
+    <form action="/recipes/search" method="GET">
       <input data-testid="receita" type="text" name="q" id="recipeInput" />
       <button data-testid="buscar" type="submit">Buscar</button>
     </form>
+
+    <% if (messages) { %>
+      <div class="message">
+        <%= messages %>
+      </div>
+    <% } %>
 
     <% if (recipes) { recipes.forEach((recipe) => { %>
     <ul>

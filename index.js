@@ -15,8 +15,8 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.homeController.indexHome);
 
 app.get('/cadastrar', (req, res) => {
-  res.render('cadastro')
-})
+  res.render('cadastro');
+});
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

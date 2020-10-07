@@ -22,7 +22,7 @@ app.get('/recipes/', middlewares.auth(false), controllers.recipesController.show
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.buscaReceita);
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
-app.post('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
+app.get('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
 app.post(
   '/recipes/:id/delete',
   middlewares.auth(false),
@@ -33,6 +33,7 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.s
 // user router
 app.get('/cadastro', controllers.userController.cadastrar);
 app.post('/cadastro', controllers.userController.newUser);
+app.get('/me/recipes', middlewares.auth(), controllers.recipesController.showUserRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

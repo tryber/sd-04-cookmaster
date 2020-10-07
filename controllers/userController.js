@@ -53,6 +53,7 @@ const newUser = async (req, res) => {
   if (isValid) return res.status(400).render('cadastro', { ...isValid });
 };
 
+
 module.exports = {
   login,
   loginForm,

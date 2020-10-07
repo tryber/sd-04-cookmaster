@@ -1,9 +1,20 @@
+const { getRecipes } = require('../models/recipeModel');
 const recipesModel = require('../models/recipeModel');
 
 const showAllRecipes = async (req, res) => {
   const recipes = await recipesModel.getRecipes();
 
   res.render('home', { recipes, user: req.user });
+};
+
+// minhas receitas
+const showUserRecipes = async (req, res) => {
+  const { id } = req.user;
+  console.log(id);
+  const recipes = await recipesModel.getRecipes();
+  console.log(recipes);
+
+  res.render('userRecipes', { recipes, user: req.user });
 };
 
 const showRecipeDetails = async (req, res) => {
@@ -23,7 +34,8 @@ const editRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user });
+  console.log(recipes);
+  res.render('updateRecipe', { recipes, user: req.user, message: null });
 };
 
 const deleteRecipe = async (req, res) => {
@@ -62,6 +74,7 @@ const create = async (req, res) => {
 
 module.exports = {
   showAllRecipes,
+  showUserRecipes,
   showRecipeDetails,
   showRecipe,
   editRecipe,

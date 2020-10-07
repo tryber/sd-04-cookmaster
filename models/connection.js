@@ -22,7 +22,9 @@ const connection = () => {
           schema = session.getSchema('real_state');
           return schema;
         })
-        .catch((err) => process.exit(1));
+        .catch((_err) => {
+          process.exit(1);
+        });
 };
 
 module.exports = connection;

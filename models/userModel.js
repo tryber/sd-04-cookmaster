@@ -10,13 +10,19 @@ const validaString = (string = '', regex) => string.match(regex);
 const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
 
 const validaAll = ({ email, password, passwordConfirm, nome, sobrenome }) => {
-  if (!validaString(email, EMAIL)) return 'O email deve ter o formato email@mail.com';
-  if (!validaString(password, SENHA)) return 'A senha deve ter pelo menos 6 caracteres';
-  if (!validaString(nome, NAME))
-    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  if (!confirmSenha(password, passwordConfirm)) return 'As senhas tem que ser iguais';
-  if (!validaString(sobrenome, NAME))
-    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  let message = '';
+
+  if (!validaString(email, EMAIL)) message = 'O email deve ter o formato email@mail.com';
+  if (!validaString(password, SENHA)) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (!validaString(nome, NAME)) {
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  if (!confirmSenha(password, passwordConfirm)) message = 'As senhas tem que ser iguais';
+  if (!validaString(sobrenome, NAME)) {
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+
+  return message;
 };
 
 const createUser = async (email, password, nome, sobrenome) =>
@@ -51,7 +57,8 @@ const findByEmail = async (emailInput) => {
 const findById = async (idInput) => {
   return connection()
     .then((db) =>
-      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
+      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((result) => result.fetchOne())
     .then(([id, email, password, firstName, lastName]) => ({

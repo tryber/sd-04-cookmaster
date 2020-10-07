@@ -25,7 +25,7 @@ const searchRecipes = async (req, res) => {
 };
 
 const registerRecipes = async (req, res) => {
-  res.render('registerRecipes', { user: req.user, ingredients: ['farinha', 'ovo'] });
+  res.render('registerRecipes', { user: req.user });
 };
 
 const newRecipe = async (req, res) => {

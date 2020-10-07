@@ -15,7 +15,7 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => {
-      schema = session.getSchema('real_state');
+      schema = session.getSchema('cookmaster');
       return schema;
     })
     .catch(() => {

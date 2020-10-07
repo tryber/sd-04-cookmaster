@@ -9,9 +9,33 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-const connection = () => mysqlx.getSession(config).then((session) => session.getSchema('cookmaster')).catch(() => {
-  // console.error(err);
-  process.exit(1);
-});
+// let schema;
+// const connection = () => {
+//   return schema ? Promise.resolve(schema)
+//     : mysqlx.getSession(config)
+//     .then((session) => {
+//       const schema = session.getSchema('cookmaster');
+//       return schema;
+//     })
+//     .catch(() => {
+//       // console.error(err);
+//       process.exit(1);
+//     });
+// }
+// module.exports = connection;
 
-module.exports = connection;
+let schema;
+const connection = () => {
+  return schema ?
+    Promise.resolve(schema) :
+    mysqlx.getSession(config)
+    .then((session) => {
+      schema = session.getSchema('cookmaster');
+      return schema;
+    })
+    .catch((err) => {
+      // console.error(err);
+      process.exit(1); 
+    });
+};
+module.exports = connection;  

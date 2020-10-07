@@ -16,30 +16,30 @@
 
     <div class="card w-75 mx-auto">
       <div class="card-header d-flex align-items-center justify-content-between">
-        <h3 class="card-title"><%= recipe[2] %></h3>
+        <h3 class="card-title"><%= recipe.name %></h3>
 
-        <p class="card-text">Enviado por <%= recipe[1].toUpperCase() %></p>
+        <p class="card-text">Enviado por <%= recipe.user.toUpperCase() %></p>
       </div>
 
       <div class="card-body">
         <h3 class="card-title">Ingredientes</h3>
 
-        <p class="card-text"><%= recipe[3] %></p>
+        <p class="card-text"><%= recipe.ingredients %></p>
       </div>
 
       <div class="card-body">
         <h3 class="card-title">Modo de preparo</h3>
 
-        <p class="card-text"><%= recipe[4] %></p>
+        <p class="card-text"><%= recipe.instructions %></p>
       </div>
       <div class="card-footer d-flex justify-content-between">
         <% if (user) { %>
-        <a class="btn btn-dark" href="/recipes/<%= recipe[0] %>/edit" data-testid="editar-receita"
+        <a class="btn btn-dark" href="/recipes/<%= recipe.id %>/edit" data-testid="editar-receita"
           >Editar Receita</a
         >
         <a
           class="btn btn-dark"
-          href="/recipes/<%= recipe[0] %>/delete"
+          href="/recipes/<%= recipe.id %>/delete"
           data-testid="excluir-receita"
           >Excluir Receita</a
         >

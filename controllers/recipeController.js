@@ -17,7 +17,9 @@ const recipeDetails = async (req, res) => {
 };
 
 const searchRecipe = async (req, res) => {
-  const recipes = await Recipes.getAllRecipes();
+  const { q } = req.query;
+  const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
+
   res.status(200).render('searchRecipe', { recipes, user: req.user });
 };
 
@@ -32,4 +34,10 @@ const createRecipe = async (req, res) => {
   res.render('newRecipe', { newRecipeCreated });
 };
 
-module.exports = { recipeDetails, listAllRecipes, createRecipe, addRecipe, searchRecipe };
+module.exports = {
+  recipeDetails,
+  listAllRecipes,
+  createRecipe,
+  addRecipe,
+  searchRecipe,
+};

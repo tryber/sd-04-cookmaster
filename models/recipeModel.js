@@ -25,20 +25,47 @@ const getRecipeById = async (id) =>
   connection().then((db) =>
     db
       .getTable('recipes')
-      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
       .where('id = :id')
       .bind('id', id)
       .execute()
       .then((results) => results.fetchOne())
-      .then((recipes) => recipes.map((name) => name))
+      .then(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      }))
       .catch((err) => {
         throw err;
       }),
   );
 
-// const isValidCreatedRecipe = (id, user, name, ingredients, instructions) => {
-//   return id && user && name && ingredients && instructions;
-// };
+const searchRecipeByName = async (name) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .select([])
+      .where('name LIKE :name')
+      .bind('name', `%${name}%`)
+      .execute()
+      .then((results) => results.fetchAll())
+      .then((recipes) =>
+        recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+          id,
+          userId,
+          user,
+          name,
+          ingredients,
+          instructions,
+        })),
+      )
+      .catch((err) => {
+        throw err;
+      }),
+  );
 
 const createRecipe = async (id, user, name, ingredients, instructions) =>
   connection()
@@ -53,4 +80,4 @@ const createRecipe = async (id, user, name, ingredients, instructions) =>
       throw err;
     });
 
-module.exports = { getAllRecipes, getRecipeById, createRecipe };
+module.exports = { getAllRecipes, getRecipeById, createRecipe, searchRecipeByName };

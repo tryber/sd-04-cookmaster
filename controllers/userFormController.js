@@ -48,13 +48,11 @@ const userForm = async (_req, res) => {
 
 const newUser = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
-
   const isName = validateName(firstName);
   const isLastName = validateLastName(lastName);
   const isEmail = validadeEmail(email);
   const isPassword = validatePassword(password);
   const isConfirmPassword = validateConfirmPassword(password, confirmPassword);
-
   if (isName || isLastName || isEmail || isPassword || isConfirmPassword) {
     res.render('cadastro', {
       isName,
@@ -65,12 +63,7 @@ const newUser = async (req, res) => {
       success: null,
     });
   }
-  console.log('alguma coisa 68');
-
   await userModel.createUser(email, firstName, lastName, password);
-
-  console.log('teste 72');
-
   return res.render('cadastro', {
     isName,
     isLastName,

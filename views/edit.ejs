@@ -23,7 +23,7 @@
     </div>
     <h2 class="mt-5 text-center">Nova Receita</h2>
     <div class="m-5 p-8">
-      <form class="form-signin" action="/recipes/new" method="GET">
+      <form class="form-signin" action="/recipes/new" method="POST">
         <label for="nameInput">Nome da Receita</label>
         <input
           class="mb-3 form-control"
@@ -34,35 +34,28 @@
         />
         <div>
           <label for="ingredienteInput">Ingredientes </label>
-          <% if (ingredients.length == 0) { %>
-          <p>vazio</p>
-          <%} else { ingredients.map((zoo) => { %>
-          <div id="list-ingredients" class = 'mb-3 d-flex' >
-            <p class="mr-5"><%=zoo%></p>
-            <a class="btn btn-danger btn-sm align-self-center" href="/recipes/new">Excluir Ingrediente</a>
-          </div>
-          <% })}%>
+          <div id="list-ingredients" class="mb-3 d-flex flex-column"></div>
           <input
             class="mb-3 form-control"
             data-testid="ingredientes"
             type="text"
-            name="ing"
+            name="ingredients"
             id="ingredienteInput"
           />
-          <button
+          <a
+            id="add-ingredient"
             class="mb-3 btn btn-success align-self-center"
             data-testid="adicionar-ingrediente"
           >
             Adicionar Ingrediente
-          </button>
+          </a>
         </div>
         <label for="preparoInput">Modo de Preparo</label>
         <input
-          data-testid="nome"
           class="mb-3 form-control"
           data-testid="modo-de-preparo"
           type="text"
-          name="modo-preparo"
+          name="instructions"
           id="preparoInput"
         />
         <a class="btn btn-lg btn-primary" href="/">Voltar</a>
@@ -72,4 +65,33 @@
       </form>
     </div>
   </body>
+  <script>
+    const addBtn = document.querySelector('#add-ingredient');
+    const inputIng = document.querySelector('#ingredienteInput');
+    const listIng = document.querySelector('#list-ingredients');
+
+    addBtn.addEventListener('click', () => {
+      if (inputIng.value === '') {
+      } else {
+        const cont = document.createElement('div');
+        const item = document.createElement('li');
+        const btn = document.createElement('a');
+        item.className = 'mr-5';
+        item.innerHTML = inputIng.value;
+        ingredients.push(inputIng.value);
+        btn.className = 'btn btn-danger btn-sm align-self-center';
+        btn.innerText = 'Excluir Ingrediente';
+        btn.id = 'del-ing';
+        listIng.appendChild(cont);
+        cont.appendChild(item);
+        cont.appendChild(btn);
+        inputIng.value = '';
+
+        const rmvBtn = document.querySelector('#del-ing');
+        rmvBtn.addEventListener('click', (e) => {
+          e.target.parentNode.remove();
+        });
+      }
+    });
+  </script>
 </html>

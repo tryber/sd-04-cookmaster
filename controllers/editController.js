@@ -1,25 +1,14 @@
 const Recipe = require('../models/recipeModel');
 
-const ingredients = [];
-// const setIngredients = (req, res) => {
-//     const { q } = req.query;
-//     foo.push(q);
-//     console.log(foo);
-//     res.render('edit', { foo });
-//   };
-
 const editRecipe = (req, res) => {
-  const user = req.user;
-  const { ing } = req.query;
-  if (ing) {
-    ingredients.push(ing);
-  }
-  res.render('edit', { user, ingredients });
+  const user = req.user; 
+  res.render('edit', { user });
 };
 
 const registerRecipe = async (req, res) => {
   const user = req.user;
-  const { name, instructions } = req.body;
+  const { name, ingredients, instructions } = req.body;
+  console.log(name, ingredients, instructions);
   await Recipe.createRecipe(
     user.id,
     `${user.name} ${user.lastName}`,

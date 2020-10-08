@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Recipe Details</title>
+  </head>
+  <body>
+    <%- include('./components/header.ejs', { user }) %>
+    <div>
+      <div>
+        <h1><%= recipe.name %></h1>
+        <h4>Enviada por <%= recipe.user %></h4>
+      </div>
+      <div>
+        <% if (user && recipe.userId === user.id) { %>
+          <button data-testid="editar-receita" onclick="window.location.pathname='/recipes/<%= recipe.id %>/edit'">
+            Editar Receita
+          </button>
+          <button data-testid="excluir-receita" onclick="window.location.pathname='/recipes/<%= recipe.id %>/delete'">
+            Excluir Receita
+          </button>
+        <% } %>
+      </div>
+    </div>
+    <div>
+      <h3>Ingredientes</h3>
+      <ul>
+          <li><%= recipe.ingredients %></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Modo de Preparo</h3>
+      <p><%= recipe.instructions %></p>
+    </div>
+  </body>
+</html>

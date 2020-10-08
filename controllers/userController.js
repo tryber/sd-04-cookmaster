@@ -53,7 +53,7 @@ const signup = async (req, res) => {
     case !userModel.isValidEmail(email):
       message = 'O email deve ter o formato email@mail.com';
       break;
-  
+
     default:
       break;
   }

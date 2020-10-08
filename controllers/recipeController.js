@@ -27,7 +27,7 @@ const searchRecipe = async (req, res) => {
 
 const addRecipe = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
-  console.log(name, instructions);
+  // console.log(name, instructions);
 
   await Recipes.createRecipe(req.id, req.user, name, ingredients, instructions);
   res.render('newRecipe');

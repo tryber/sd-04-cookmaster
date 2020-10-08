@@ -64,8 +64,26 @@ const newUser = async (email, password, firstName, lastName) => {
   );
 };
 
+// Editar os dados de um usuário
+
+const editUser = async (userID, email, password, firstName, lastName) => {
+  await connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', firstName)
+      .set('last_name', lastName)
+      .where('id = :userID')
+      .bind('userID', userID)
+      .execute(),
+  );
+};
+
 module.exports = {
   findByEmail,
   findById,
   newUser,
+  editUser,
 };

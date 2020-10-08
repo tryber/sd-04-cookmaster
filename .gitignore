@@ -42,7 +42,7 @@
 # *.iml
 # *.ipr
 
-/public
+
 
 # CMake
 cmake-build-*/

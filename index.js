@@ -34,5 +34,7 @@ app.get('/recipes/:id/edit', middlewares.auth(false), controllers.editController
 app.put('/recipes/:id/edit', middlewares.auth(false), controllers.editController.updateRecipe);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showDetails);
 
+app.get('/me/recipes', middlewares.auth(true), controllers.myRecipesController.showMyRecipes);
+
 
 app.listen(3000, () => console.log('Listening on 3000'));

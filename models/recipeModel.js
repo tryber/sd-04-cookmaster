@@ -3,9 +3,9 @@ const conn = require('./connection');
 const getAllRecipes = async () =>
   conn
     .connection()
-    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
+    .then((db) => db.getTable('recipes').select(['id', 'user_id', 'user', 'name']).execute())
     .then((results) => results.fetchAll())
-    .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })));
+    .then((recipes) => recipes.map(([id, userId, user, name]) => ({ id, userId, user, name })));
 
 const getRecipeById = async (item) =>
   conn

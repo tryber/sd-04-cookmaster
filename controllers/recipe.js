@@ -49,11 +49,11 @@ const searchRecipe = async (req, res) => {
 const createRecipe = async (req, res) => {
   const { recipe } = req.body;
 
-  if (recipe) return res.render('new-recipe', { messages: null });
+  if (!recipe) return res.render('new-recipe', { messages: null });
 
   const result = await recipeModel.create(recipe);
 
-  return res.render('/new-recipe', {
+  return res.render('new-recipe', {
     message: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
   });
 };

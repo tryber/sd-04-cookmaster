@@ -66,7 +66,7 @@ const updateUser = async (req, res) => {
   if (message.length === 0) {
     userModel.updateUser(req.user.id, data);
     message.push('Cadastro salvo com sucesso!');
-    return res.redirect('/')
+    return res.redirect('/');
   }
   return res.render('admin/editUser', { message, user: req.user });
 };

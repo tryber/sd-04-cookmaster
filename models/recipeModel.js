@@ -7,7 +7,7 @@ const getAllRecipes = async () =>
     .then((results) => results.fetchAll())
     .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })));
 
-const getRecipeById = async (id) =>
+const getRecipeById = async (item) =>
   conn
     .connection()
     .then((db) =>
@@ -15,14 +15,14 @@ const getRecipeById = async (id) =>
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :id')
-        .bind('id', id)
+        .bind('id', item)
         .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
         id,
-        user_id,
+        userId,
         user,
         name,
         ingredients,
@@ -50,7 +50,7 @@ const createRecipe = async (id, user, name, ingredients, instructions) => {
     );
 };
 
-const updateRecipe = async (id) =>
+const updateRecipe = async (id, name, ingredients, instructions) =>
   conn
     .connection()
     .then((db) =>

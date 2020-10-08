@@ -31,8 +31,9 @@ const editRecipe = async (req, res) => {
 
 const updateRecipe = async (req, res) => {
   const user = req.user;
+  const { id } = req.params;
   const { name, ingredients, instructions } = req.body;
-  await Recipe.updateRecipe(name, ingredients, instructions);
+  await Recipe.updateRecipe(id, name, ingredients, instructions);
   res.render('/', { user });
 };
 

@@ -38,5 +38,5 @@ const getRecipeById = async (idRecipe) => {
 
 module.exports = {
   getAllRecipes,
-  getRecipeById
+  getRecipeById,
 };

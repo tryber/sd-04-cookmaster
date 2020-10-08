@@ -19,13 +19,9 @@ const showRecipeById = async (req, res) => {
   }
 };
 
-const editRecipe = async (req, res) => {
-  return res.render('admin/editRecipe');
-};
+const editRecipe = async (req, res) => res.render('admin/editRecipe');
 
-const deleteRecipe = async (req, res) => {
-  return res.render('admin/editRecipe');
-};
+const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
 module.exports = {
   listRecipes,

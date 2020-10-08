@@ -20,19 +20,19 @@ app.get('/cadastro', middlewares.auth(false), (_req, res) => {
 app.get(
   '/recipes/:id',
   middlewares.auth(false),
-  controllers.recipeController.showRecipeById
+  controllers.recipeController.showRecipeById,
 );
 
 app.get(
   '/recipes/:id/edit',
   middlewares.auth(),
-  controllers.recipeController.editRecipe
+  controllers.recipeController.editRecipe,
 );
 
 app.get(
   '/recipes/:id/delete',
   middlewares.auth(),
-  controllers.recipeController.deleteRecipe
+  controllers.recipeController.deleteRecipe,
 );
 
 app.get('/admin', middlewares.auth(), (req, res) => {

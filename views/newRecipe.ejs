@@ -3,33 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Nova Receita</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h3>Nova Receita</h3>
+    <%- include('headerCook') %>
 
-    <form action="/recipes" method="POST">
-      <label for="nome-receita">Nome da Receita</label>
-      <input data-testid="nome-receita" name="nome-receita" id="nome-receita" type="text" />
+    <h3 class="text-center">Nova Receita</h3>
+    <div class="card w-75 mx-auto">
+      <form action="/recipes" method="POST">
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="nome-receita">Nome da Receita</label>
+          <input
+            data-testid="nome-receita"
+            name="name"
+            id="nome-receita"
+            type="text"
+            class="form-control"
+            value=""
+          />
+        </div>
 
-      <button
-        testid="adicionar-ingrediente"
-        name="adicionar-ingrediente"
-        id="adicionar-ingrediente"
-        type="text"
-      >
-        Adicionar Ingrediente
-      </button>
+        <div class="form-group w-75 mx-auto m-2">
+          <div class="d-flex align-items-center">
+            <input
+              placeholder="ingrediente aqui..."
+              type="text"
+              id="inputIngredient"
+              class="form-control"
+            />
+            <button
+              onclick="createIngredient()"
+              type="button"
+              id="addIng"
+              class="btn btn-dark btn-sm m-3"
+              data-testid="adicionar-ingrediente"
+            >
+              Adicionar Ingrediente
+            </button>
+          </div>
+          <div>
+            <h6 class="text-center" id="ingTitle">Ingredientes</h6>
+            <ul class="d-flex flex-column" id="ing-list"></ul>
+          </div>
+        </div>
 
-      <label for="nome-receita">Modo de Preparo</label>
-      <input
-        data-testid="modo-de-preparo"
-        name="modo-de-preparo"
-        id="modo-de-preparo"
-        type="text"
-      />
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="modo-de-preparo">Modo de Preparo</label>
+          <textarea
+            class="form-control"
+            data-testid="modo-de-preparo"
+            name="instructions"
+            id="modo-de-preparo"
+          >
+          </textarea>
+        </div>
+        <div class="d-flex justify-content-around m-3">
+          <button class="btn btn-dark" type="submit" data-testid="postar-receita">
+            Salvar Receita
+          </button>
+          <a class="btn btn-secondary" href="/">Voltar</a>
+        </div>
+      </form>
+    </div>
+    <script>
+      const buttonAddIngredient = document.getElementById('addIng');
+      const ingredientsUL = document.getElementById('ing-list');
+      const inputIngredient = document.getElementById('inputIngredient');
 
-      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
-    </form>
+      let inputValues = [];
+
+      const createIngredient = () => {
+        const li = document.createElement('li');
+        const btnRemove = document.createElement('button');
+
+        btnRemove.textContent = 'x';
+
+        li.textContent = inputIngredient.value;
+
+        inputValues.push(inputIngredient.value);
+        console.log(inputValues);
+
+        inputIngredient.value = '';
+
+        ingredientsUL.appendChild(li);
+        ingredientsUL.appendChild(btnRemove);
+        ingredientsUL.className += 'd-flex justify-content-around m-3';
+
+        btnRemove.className += 'btn btn-danger btn-sm';
+        btnRemove.type = 'button';
+        btnRemove.addEventListener('click', () => {
+          inputvalues = inputValues.map((value) => value !== inputIngredient.value);
+          ingredientsUL.removeChild(li);
+          ingredientsUL.removeChild(btnRemove);
+          console.log(inputValues);
+        });
+      };
+    </script>
   </body>
 </html>

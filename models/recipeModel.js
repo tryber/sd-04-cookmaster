@@ -67,13 +67,13 @@ const searchRecipeByName = async (name) =>
       }),
   );
 
-const createRecipe = async (id, user, name, ingredients, instructions) =>
+const createRecipe = async (userId, user, name, ingredients, instructions) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
-        .insert(['id', 'user', 'name', 'ingredients', 'instructions'])
-        .values(id, user, name, ingredients, instructions)
+        .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .values(userId, user, name, ingredients, instructions)
         .execute(),
     )
     .catch((err) => {

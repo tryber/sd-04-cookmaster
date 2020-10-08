@@ -21,27 +21,26 @@ const searchRecipe = async (req, res) => {
   const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
   let message;
   if (!recipes || recipes === []) message = 'Nada encontrado...';
-  // console.log(recipes);
-  // console.log(message);
 
   res.status(200).render('searchRecipe', { recipes, user: req.user, message });
 };
 
-const addRecipe = (req, res) => {
+const addRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  console.log(name, instructions);
+
+  await Recipes.createRecipe(req.id, req.user, name, ingredients, instructions);
   res.render('newRecipe');
 };
 
-const createRecipe = async (req, res) => {
-  const { id, user, name, ingredients, instructions } = await req.body;
-  const newRecipeCreated = await Recipes.createRecipe(id, user, name, ingredients, instructions);
-
-  res.render('newRecipe', { newRecipeCreated });
+const newRecipe = async (req, res) => {
+  res.render('newRecipe', { user: req.user });
 };
 
 module.exports = {
   recipeDetails,
   listAllRecipes,
-  createRecipe,
+  newRecipe,
   addRecipe,
   searchRecipe,
 };

@@ -32,6 +32,7 @@ const myRecipe = async (req, res) => {
   return res.render('admin/meRecipes', { recipes, user: req.user });
 };
 
+// controller para o post(pegar informaçao que o usuario fornece no caso a senha pra excluir)
 const deleteRecipeForm = async (req, res) => {
   const { id } = req.user;
   const { userId } = await recipeModel.recipeById(req.params.id);
@@ -57,15 +58,18 @@ const deleteRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
-// const newRecipe = async (req, res) => {
-//   const { recipeName, ingredients, instructions } = req.body;
-//   const { name, lastName, id } = req.user;
-//   const userFullName = `${name} ${lastName}`;
+// controller para o post(pegar informaçao que o usuario fornece)
+const newRecipeForm = async (req, res) => res.render('admin/new', { user: req.user });
 
-//   await recipeModel.addNewRecipe(id, userFullName, recipeName, ingredients, instructions);
+const newRecipe = async (req, res) => {
+  const { recipeName, ingredients, instructions } = req.body;
+  const { name, lastName, id } = req.user;
+  const userFullName = `${name} ${lastName}`;
 
-//   return res.redirect('/');
-// };
+  await recipeModel.addNewRecipe(id, userFullName, recipeName, ingredients, instructions);
+
+  return res.redirect('/');
+};
 
 module.exports = {
   showRecipes,
@@ -74,5 +78,6 @@ module.exports = {
   myRecipe,
   deleteRecipeForm,
   deleteRecipe,
-  // newRecipe,
+  newRecipe,
+  newRecipeForm,
 };

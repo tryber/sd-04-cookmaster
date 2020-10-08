@@ -66,15 +66,14 @@ const myRecipeByUserId = async (userId) =>
       })),
     );
 
-// const addNewRecipe = async (userId, user, name, ingredients, instructions) =>
-//   connection().then((db) =>
-//     db
-//       .getTable('recipes')
-//       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-//       .values(userId, user, name, ingredients, instructions)
-//       .execute(),
-// );
-// métodos exportados para o controller
+const addNewRecipe = async (userId, user, name, ingredients, instructions) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(userId, user, name, ingredients, instructions)
+      .execute(),
+  );
 
 const deleteRecipe = async (id) =>
   connection().then((db) =>
@@ -87,5 +86,7 @@ module.exports = {
   searchRecipes,
   myRecipeByUserId,
   deleteRecipe,
-  // addNewRecipe,
+  addNewRecipe,
 };
+
+// métodos exportados para o controller

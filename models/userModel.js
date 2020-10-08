@@ -1,6 +1,6 @@
 /* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
 
-const { connect } = require('mysql2');
+//const { connect } = require('mysql2');
 const connection = require('./connection');
 
 /* Substitua o código das funções abaixo para que ela,
@@ -16,12 +16,12 @@ const findByEmail = async (email) => {
       db
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        .where('email = :email_var')
-        .bind('email_var', email)
+        .where('email = :email')
+        .bind('email', email)
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([idUser, email, password, name, lastName]) => ({ idUser, email, password, name, lastName }));
 };
 
 /**

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const listRecipes = require('./controllers/recipeController');
+// const listRecipes = require('./controllers/recipeController');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
@@ -19,26 +19,6 @@ app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
-});
-
-app.get('/receita/:id', (req, res) => {
-  /*   var id = req.params.id;
-    listRecipes.findOne({
-      where: { id }
-    }).then(user => {
-      if (user) {
-        listRecipes.findAll({
-          where: { id: user.id }
-        }).then(result => {
-          res.render('receita', {
-            user,
-            name
-          })
-        })
-      } else {
-        res.redirect('/');
-      }
-    }) */
 });
 
 app.get('/login', controllers.userController.loginForm);

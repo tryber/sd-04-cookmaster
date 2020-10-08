@@ -4,19 +4,18 @@ async function getAllRecipes() {
   const dbcookmaster = await connection();
   const result = await dbcookmaster.getTable('recipes').select(['user', 'name']).execute();
   const data = await result.fetchAll();
-  console.log(data);
 
   return data.map(([user, name]) => ({ user, name }));
 }
 
-async function getRecipesByUserId(userId) {
+async function getRecipesByUserId(user_id) {
   return connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('user_id = :user_id')
-        .bind('user_id', userId)
+        .bind('user_id', user_id)
         .execute(),
     )
     .then((results) => results.fetchAll())

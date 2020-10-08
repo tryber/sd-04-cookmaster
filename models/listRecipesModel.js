@@ -70,7 +70,7 @@ const deleteModel = async (recipeId) => {
     .where('id = :id')
     .bind('id', recipeId)
     .execute();
-}
+};
 
 module.exports = {
   getAll,

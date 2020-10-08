@@ -59,8 +59,8 @@ const myRecipes = async (req, res) => {
 const deleteRecipePage = async (req, res) => {
   const recipeId = req.params;
 
-  res.render('delereRecipe', { message: null, recipeId , user: req.user})
-}
+  res.render('delereRecipe', { message: null, recipeId, user: req.user });
+};
 
 const deleteRecipe = async (req, res) => {
   const { confirmPassword } = req.body;
@@ -69,7 +69,7 @@ const deleteRecipe = async (req, res) => {
   const { password } = req.user;
 
   if (password !== confirmPassword) {
-    res.render('delereRecipe', { message: 'Senha incorreta.' , recipeId , user: req.user});
+    res.render('delereRecipe', { message: 'Senha incorreta.', recipeId, user: req.user });
   }
 
   await deleteModel(recipeId);

@@ -63,6 +63,15 @@ const getRecipeByUser = async (userId) => {
   return results.map(([id, user, name]) => ({ id, user, name }));
 };
 
+const deleteModel = async (recipeId) => {
+  const db = await connection();
+  await db.getTable('recipes')
+    .delete()
+    .where('id = :id')
+    .bind('id', recipeId)
+    .execute();
+}
+
 module.exports = {
   getAll,
   getRecipeById,
@@ -70,4 +79,5 @@ module.exports = {
   newRecipeInsert,
   updateRecipeModel,
   getRecipeByUser,
+  deleteModel,
 };

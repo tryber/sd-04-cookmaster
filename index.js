@@ -30,6 +30,9 @@ app.post('/recipes/new', middlewares.auth(), controllers.listAllControler.newRec
 
 app.get('/recipes/search', middlewares.auth(false), controllers.listAllControler.searchRecipe);
 
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.listAllControler.deleteRecipePage);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.listAllControler.deleteRecipe);
+
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.listAllControler.editRecipe);
 app.post('/recipes/:id', middlewares.auth(), controllers.listAllControler.updateRecipe);
 

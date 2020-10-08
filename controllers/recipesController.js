@@ -80,22 +80,17 @@ const recipeUserId = async (req, res) => {
 };
 
 const deleteRecipeGET = async (req, res) => {
-  console.log('get', req.user, req.params);
-
   const { id } = req.params;
   const { userId } = await recipesModel.recipeDetailsByID(id);
 
-  if(userId !== req.user.id) return res.redirect('/');
+  if (userId !== req.user.id) return res.redirect('/');
   return res.render('excludeRecipe', { id, message: null });
 };
 
 const deleteRecipePOST = async (req, res) => {
   try {
-    console.log('post', req.params);
-
     const { password } = req.body;
     const { id } = req.params;
-
     const userID = await userModel.findById(req.user.id);
 
     if (userID.password === password) {

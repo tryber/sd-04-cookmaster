@@ -137,7 +137,11 @@ const selectRecipeByUserId = async (idInp) => {
 const deleteRecipeModel = async (id) => {
   try {
     const db = await connection();
-    return await db.getTable('recipes').delete().where('id = :id').bind('id', id).execute();
+    return await db.getTable('recipes')
+      .delete()
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
   } catch (error) {
     return error;
   }

@@ -8,20 +8,20 @@ async function getAllRecipes() {
   return data.map(([user, name]) => ({ user, name }));
 }
 
-async function getRecipesByUserId(user_id) {
+async function getRecipesByUserId(userId) {
   return connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('user_id = :user_id')
-        .bind('user_id', user_id)
+        .bind('user_id', userId)
         .execute(),
     )
     .then((results) => results.fetchAll())
-    .then(([id, userId, user, name, ingredients, instructions]) => ({
+    .then(([id, idUser, user, name, ingredients, instructions]) => ({
       id,
-      userId,
+      idUser,
       user,
       name,
       ingredients,

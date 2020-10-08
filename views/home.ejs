@@ -3,9 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <h1>Cookmaster</h1>
+    <% if (user) { %>
+    <p class="text-center">Usuário logado: <%=user.first_name %></p>
+    <hr />
+    <nav>
+      <button type="button" class="btn btn-primary" data-testid="nova-receita">Nova Receita</button>
+
+      <button type="button" class="btn btn-secondary" data-testid="buscar-receita">
+        Buscar Receita
+      </button>
+      <button type="button" class="btn btn-dark" data-testid="login">Login</button>
+      <button type="button" class="btn btn-danger" data-testid="logout">Logout</button>
+      <% }else { %>
+      <p class="text-center">Usuário deslogado:</p>
+      <hr />
+      <button type="button" class="btn btn-secondary" data-testid="buscar-receita">
+        Buscar Receita
+      </button>
+      <button type="button" class="btn btn-dark" data-testid="login">Login</button>
+      <button type="button" class="btn btn-danger" data-testid="logout">Logout</button>
+
+      <% } %>
+    </nav>
+    <hr />
+    <ul>
+      <h2>Receitas</h2>
+      <% recipesAuthor.forEach((recipe) => { %>
+      <li><%= recipe.name %></li>
+      <li><%= recipe.user %></li>
+      <li><a href="url">Ver mais</a></li>
+      <% }) %>
+    </ul>
   </body>
 </html>

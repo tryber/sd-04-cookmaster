@@ -8,29 +8,32 @@
     </style>
   </head>
   <body>
+
     <header>
       <nav>
         <h1>Cookmaster</h1>
-
         <% if (token) { %>
           <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
           <% } else { %>
-        <a href="/login" data-testid="login">login</a>
+        <button data-testid="login" onclick="window.location.pathname='/login'">Login</button>
         <% } %>
-
       </nav>
     </header>
+
     <div>
       <h1>Receitas</h1>
+    </div>
 
+    <nav>
+      <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'" >Buscar Receita</button>
+    <!-- BOTÕES APENAS LOGADO -->
       <% if (token) { %>
-        <button onclick="window.location.pathname='recipes/new'" data-testid="nova-receita" >Nova Receita</button>
         <button onclick="window.location.pathname='me/recipes'" data-testid="minhas-receitas" >Minhas Receitas</button>
+        <button  data-testid="nova-receita"  onclick="window.location.pathname='recipes/new'">Nova Receita</button>
         <button onclick="window.location.pathname='me/edit'" data-testid="minha-conta" >Minha Conta</button>
       <% } %>
+    </nav>
 
-   <button onclick="window.location.pathname='recipes/search'" data-testid="buscar-receita">Buscar Receita</button>
-    </div>
     <ul>
       <% recipes.forEach(({name, user, id}) => { %>
         <li>
@@ -39,5 +42,6 @@
         </li>
      <% }) %>
     </ul>
+
   </body>
 </html>

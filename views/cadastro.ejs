@@ -10,30 +10,24 @@
     <% if (message) {%>
     <div><%= message %></div>
     <% } %>
-
     <form action="/cadastro" method="POST">
       <label for="email">Email </label>
-      <input data-testid="email" type="text" name="email" id="email" /><br />
+      <input data-testid="email" type="text" name="email" id="email" />
 
       <label for="password">Senha </label>
-      <input data-testid="senha" type="password" name="password" id="password" /><br />
+      <input data-testid="senha" type="password" name="password" id="password" />
 
       <label for="password">Confirmar Senha </label>
-      <input
-        data-testid="confirmar-senha"
-        type="password"
-        name="confirmPassword"
-        id="password"
-      /><br />
+      <input data-testid="confirmar-senha" type="password" name="confirmPassword" id="password" />
 
       <label for="first_name">Nome </label>
-      <input data-testid="nome" type="text" name="firstName" id="first_name" /><br />
+      <input data-testid="nome" type="text" name="firstName" id="first_name" />
 
       <label for="last_name">Sobrenome </label>
-      <input data-testid="sobrenome" type="text" name="lastName" id="last_name" /><br />
+      <input data-testid="sobrenome" type="text" name="lastName" id="last_name" />
 
       <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
-      <a href="/login"><button type="button" data-testid="login">Fazer Login</button></a>
     </form>
+    <a href="/login"><button type="button" data-testid="login">Fazer Login</button></a>
   </body>
 </html>

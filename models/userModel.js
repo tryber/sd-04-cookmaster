@@ -1,23 +1,31 @@
 const connection = require('./connection');
 
 const findByEmail = async (emailInput) => {
-  const db = await connection();
-  const table = await db.getTable('users');
-  const result = await table
-    .select()
-    .where('email = :emailInput')
-    .bind('emailInput', emailInput)
-    .execute();
-  const [id, email, password, name, lastName] = await result.fetchAll()[0];
-  return { id, email, password, name, lastName };
+  return connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select()
+        .where('email = :userEmail')
+        .bind('userEmail', emailInput)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
-const findById = async (idInput) => {
-  const db = await connection();
-  const table = await db.getTable('users');
-  const result = await table.select().where('id = :idInput').bind('idInput', idInput).execute();
-  const [id, email, password, name, lastName] = await result.fetchAll()[0];
-  return { id, email, password, name, lastName };
+const findById = async (id) => {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select()
+        .where('id = :id_param')
+        .bind('id_param', id)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
 // -------------------------------------------------
@@ -33,6 +41,9 @@ const createUser = (email, password, firstName, lastName) => {
       .execute(),
   );
 };
+
+// // -------------------------------------------------
+// // -------------------------------------------------
 
 module.exports = {
   findByEmail,

@@ -19,46 +19,34 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use('/recipes/', recipeRouter);
+app.use('/recipes', recipeRouter);
 app.use('/me/', meRouter);
 
 // -------------------------------------------------
 
-// home OK ---------------------------------------------------------------
-app.get('/', RecipesController.recipeController);
+// home  ---------------------------------------------------------------
+app.get('/', RecipesController.allRecipesController);
 
-// página de cadastro OK -------------------------------------------------
-app.get('/cadastro', UserController.newUser);
-app.post('/cadastro', UserController.newUser);
+// página de cadastro de usuário ------------------------------------
+app.get('/cadastro', UserController.createUserController);
+app.post('/cadastro', UserController.createUserController);
 
-// página para criar receita ---------------------------------------------
-recipeRouter.get('/new', (req, res) => {
-  res.send('criar receita');
-});
+// página para buscar receitas  -------------------------------------
+recipeRouter.get('/search', middlewares.auth(false), RecipesController.searchRecipesController);
 
-// página para buscar receitas OK ----------------------------------------
-recipeRouter.get('/search', RecipesController.searchRecipeController);
+// página para exclusão de receita -------------------------------------
+recipeRouter.get('/:d/delete', middlewares.auth(), RecipesController.deleteRecipeController);
+// recipeRouter.get('/:d/delete', middlewares.auth(), (req, res) => {
+//   res.send('deletar receita');
+// })
 
-// página de detalhes da receita OK --------------------------------------
-recipeRouter.get('/:id', RecipesController.recipeDetailsController);
+// página de detalhes da receita  -----------------------------------
+recipeRouter.get('/:id', middlewares.auth(false), RecipesController.recipeByIdController);
 
-// páginas excluir e editar (ainda nao implementadas) --------------------
-app.get('/recipes/:id/edit', (_req, res) => {
-  res.send('página para editar receita');
-});
-app.get('/recipes/:id/delete', (_req, res) => {
-  res.send('página para excluir receita');
-});
+// página de minhas receitas -------------------------------------------
+meRouter.get('/recipes', middlewares.auth(), RecipesController.userRecipesController);
 
-// página de minhas receitas (ainda nao implementada) --------------------
-meRouter.get('/recipes', (_req, res) => {
-  res.send('Minhas Receitas');
-});
-
-// página editar conta (ainda nao implementada) ---------------------------
-meRouter.get('/edit', (_req, res) => {
-  res.send('Minha Conta');
-});
+// -------------------------------------------------
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

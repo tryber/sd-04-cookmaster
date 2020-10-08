@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const userModel = require('../models/userModel');
+const UserModel = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -13,6 +13,7 @@ const loginForm = (req, res) => {
     redirect: req.query.redirect,
   });
 };
+
 // -------------------------------------------------
 // -------------------------------------------------
 
@@ -26,7 +27,7 @@ const login = async (req, res, next) => {
       redirect: null,
     });
 
-  const user = await userModel.findByEmail(email);
+  const user = await UserModel.findByEmail(email);
   if (!user || user.password !== password)
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
@@ -70,7 +71,7 @@ const emailAndNameValidation = (email, password, confirmPassword, firstName, las
   return message;
 };
 
-const newUser = async (req, res) => {
+const createUserController = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   if (!email || !password || !confirmPassword || !firstName || !lastName)
@@ -95,15 +96,18 @@ const newUser = async (req, res) => {
     return res.render('cadastro', { message: returnMessage });
   }
 
-  await userModel.createUser(email, password, firstName, lastName);
+  await UserModel.createUser(email, password, firstName, lastName);
   return res.render('cadastro', {
     message: 'Cadastro efetuado com sucesso!',
   });
 };
 
+// -------------------------------------------------
+// -------------------------------------------------
+
 module.exports = {
   login,
   loginForm,
   logout,
-  newUser,
+  createUserController,
 };

@@ -1,4 +1,5 @@
 const { recipesModel } = require('../models');
+const userModel = require('../models/userModel');
 
 const listAllRecipes = async (req, res) => {
   try {
@@ -49,7 +50,7 @@ const createNewRecipe = async (req, res) => {
 const enterEditRecipe = async (req, res) => {
   try {
     const { id } = req.params;
-    const recipeDetailsEdit = await recipesModel.recipeDetailsEdit(id);
+    const recipeDetailsEdit = await recipesModel.recipeDetailsByID(id);
 
     if (recipeDetailsEdit.userId !== req.user.id) return res.redirect(`/recipes/${id}`);
 
@@ -78,6 +79,35 @@ const recipeUserId = async (req, res) => {
   }
 };
 
+const deleteRecipeGET = async (req, res) => {
+  console.log('get', req.user, req.params);
+
+  const { id } = req.params;
+  const { userId } = await recipesModel.recipeDetailsByID(id);
+
+  if(userId !== req.user.id) return res.redirect('/');
+  return res.render('excludeRecipe', { id, message: null });
+};
+
+const deleteRecipePOST = async (req, res) => {
+  try {
+    console.log('post', req.params);
+
+    const { password } = req.body;
+    const { id } = req.params;
+
+    const userID = await userModel.findById(req.user.id);
+
+    if (userID.password === password) {
+      await recipesModel.deleteRecipeModel(id);
+      return res.redirect('/');
+    }
+    return res.render('excludeRecipe', { id, message: 'Senha Incorreta.' });
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetailsController,
@@ -87,4 +117,6 @@ module.exports = {
   editRecipeController,
   enterEditRecipe,
   recipeUserId,
+  deleteRecipePOST,
+  deleteRecipeGET,
 };

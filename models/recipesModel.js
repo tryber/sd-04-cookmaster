@@ -89,7 +89,7 @@ const editRecipeModel = async (id, name, ingredients, instructions) => {
   }
 };
 
-const recipeDetailsEdit = async (idInp) => {
+const recipeDetailsByID = async (idInp) => {
   try {
     const db = await connection();
     const dbSelectId = await db
@@ -112,7 +112,7 @@ const recipeDetailsEdit = async (idInp) => {
   }
 };
 
-//  Model para devolver receitas do usuario logado, ao clicar em 'Minhas Receitas'
+//  Model para devolver receitas do usuario logado, ao clicar em 'Minhas Receitas'.
 const selectRecipeByUserId = async (idInp) => {
   try {
     const db = await connection();
@@ -133,12 +133,23 @@ const selectRecipeByUserId = async (idInp) => {
   }
 };
 
+//  Deletar receita no banco.
+const deleteRecipeModel = async (id) => {
+  try {
+    const db = await connection();
+    return await db.getTable('recipes').delete().where('id = :id').bind('id', id).execute();
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllRecipes,
   recipeDetails,
   recipeSearchByName,
   createRecipeModel,
   editRecipeModel,
-  recipeDetailsEdit,
+  recipeDetailsByID,
   selectRecipeByUserId,
+  deleteRecipeModel,
 };

@@ -7,6 +7,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const userController = require('./controllers/userController');
 
+const PORT = process.env.PORT;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -47,8 +48,16 @@ app.get(
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.enterEditRecipe);
 app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.editRecipeController);
 
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.deleteRecipeGET);
+app.post(
+  '/recipes/:id/delete',
+  middlewares.auth(),
+  // controllers.userController.validatePassword,
+  controllers.recipesController.deleteRecipePOST,
+);
+
 // app.get('/me/edit', middlewares.auth(), controllers.);
 app.get('/me/recipes', middlewares.auth(), controllers.recipesController.recipeUserId);
 // app.post('/me', middlewares.auth(), controllers.);
 
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));

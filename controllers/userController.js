@@ -60,12 +60,11 @@ const getEditUser = async (req, res) => {
     const { id } = req.user;
     const userId = await userModel.findById(id);
 
-    return res.render('editUser', { userId, message: null })
-
-  } catch(error) {
+    return res.render('editUser', { userId, message: null });
+  } catch (error) {
     return error;
   }
-}
+};
 
 module.exports = {
   login,

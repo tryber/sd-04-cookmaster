@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
-const { recipesController, userController } = require('./controllers');
+const { recipesController, userController, registerController } = require('./controllers');
 
 const { loginForm, logout, login } = userController;
 const { home } = recipesController;
@@ -23,5 +23,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 app.get('/login', loginForm);
 app.get('/logout', logout);
 app.post('/login', login);
+
+app.get('/cadastro', (_req, res) => res.render('register', { msg: null }));
+app.post('/cadastro', registerController);
 
 app.listen(3000, () => console.log('Listening on 3000'));

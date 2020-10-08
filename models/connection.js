@@ -9,10 +9,19 @@ const config = {
   // socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
+let schema;
 const connection = () =>
-  mysqlx
-    .getSession(config)
-    .then((session) => session.getSchema('cookmaster'))
-    .catch(() => process.exit(1));
+  schema
+    ? Promise.resolve(schema)
+    : mysqlx
+        .getSession(config)
+        .then((session) => {
+          schema = session.getSchema('cookmaster');
+          return schema;
+        })
+        .catch(() => {
+          // console.error(err);
+          process.exit(1);
+        });
 
 module.exports = { connection };

@@ -13,14 +13,13 @@ let schema;
 const connection = () => {
   if (schema) {
     return Promise.resolve(schema);
-  } else {
-    return mysqlx
-      .getSession(config)
-      .then((session) => (schema = session.getSchema('cookmaster')))
-      .catch((err) => {
-        throw err;
-      });
   }
+  return mysqlx
+    .getSession(config)
+    .then((session) => (schema = session.getSchema('cookmaster')))
+    .catch((err) => {
+      throw err;
+    });
 };
 
 module.exports = connection;

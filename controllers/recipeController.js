@@ -18,7 +18,7 @@ const buscarRecipe = async (req, res) => {
   const { q } = req.query;
 
   if (!q) {
-    res.render('recipes/buscar', { recipe = {}, user: req.user });
+    res.render('recipes/buscar', { user: req.user });
   } else {
     recipeModel
       .findByName(q)

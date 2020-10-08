@@ -35,9 +35,19 @@ const createRecipe = async (userID, userName, recipeName, ingredients, instructi
   );
 };
 
-// const editRecipe = async () => {
-//   await connection().then((db) => db.getTable('recipes').update());
-// };
+const editRecipe = async (recipeID, recipeName, ingredients, instructions) => {
+  await connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', recipeName)
+      .set('ingredients', ingredients)
+      .set('instructions', instructions)
+      .where('id = :recipeID')
+      .bind('recipeID', recipeID)
+      .execute(),
+  );
+};
 
 const removeRecipe = async (id) => {
   await connection().then((db) =>
@@ -45,4 +55,4 @@ const removeRecipe = async (id) => {
   );
 };
 
-module.exports = { getRecipes, getRecipeDetails, createRecipe, removeRecipe };
+module.exports = { getRecipes, getRecipeDetails, createRecipe, editRecipe, removeRecipe };

@@ -38,22 +38,31 @@ const newRecipe = async (req, res) => {
 };
 
 const editRecipe = async (req, res) => {
-  const { id } = req.params;
-  const recipeDetails = await recipesModel.getRecipeDetails(id);
-  res.render('editRecipe', { user: req.user, recipeDetails, id });
+  const recipeID = req.params.id;
+  const recipeDetails = await recipesModel.getRecipeDetails(recipeID);
+  res.render('editRecipe', { user: req.user, recipeDetails, id: recipeID });
 };
 
 const confirmUpdate = async (req, res) => {
-  console.log(req.user);
-  console.log(req.params);
-  // se editada com sucesso
-  // const recipes = await recipesModel.getRecipes();
-  res.render('home', { recipes, user: req.user });
+  const { recipeName, ingredients, instructions } = req.body;
+  const recipeID = req.params.id;
+
+  const recipeDetails = await recipesModel.getRecipeDetails(recipeID);
+
+  const userID = req.user.id;
+
+  if (userID === recipeDetails.userID) {
+    await recipesModel.editRecipe(recipeID, recipeName, ingredients, instructions);
+    const recipes = await recipesModel.getRecipes();
+    res.render('home', { recipes, user: req.user });
+  }
+
+  return res.redirect(`/recipes/${recipeID}`);
 };
 
 const deleteRecipe = async (req, res) => {
-  const id = req.params.id;
-  res.render('deleteRecipe', { user: req.user, message: null, id });
+  const recipeID = req.params.id;
+  res.render('deleteRecipe', { user: req.user, message: null, id: recipeID });
 };
 
 const checkPassword = async (req, res) => {

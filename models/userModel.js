@@ -25,12 +25,11 @@ const insertUser = async (email, password, first_name, last_name) => {
   const table = await db.getTable('users');
   try {
     await table
-      .insert(['email', 'password', 'first_name', 'last_name'])
-      .values(email, password, first_name, last_name)
+      .insert(['email', 'password', 'firstName', 'lastName'])
+      .values(email, password, firstName, lastName)
       .execute();
     return true;
-  } catch (err) {
-    console.warn(err);
+  } catch (_) {
     return false;
   }
 };

@@ -2,22 +2,9 @@ const connection = require('./connection');
 
 const getAll = async () =>
   connection()
-    .then((db) =>
-      db
-        .getTable('recipes')
-        .select(['id', 'user_Id', 'user', 'name', 'ingredients', 'instructions'])
-        .execute(),
-    )
+    .then((db) => db.getTable('recipes').select(['user', 'name']).execute())
     .then((results) => results.fetchAll())
-    .then((recipes) =>
-      recipes.map(([id, user, name, ingredients, instructions]) => ({
-        id,
-        user,
-        name,
-        ingredients,
-        instructions,
-      })),
-    );
+    .then((recipes) => recipes.map(([user, name]) => ({ user, name })));
 
 const getAllByUserId = async (userId) =>
   connection()
@@ -31,8 +18,9 @@ const getAllByUserId = async (userId) =>
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, name, ingredients, instruction]) => ({
+      recipes.map(([id, user_id, name, ingredients, instruction]) => ({
         id,
+        user_id,
         name,
         ingredients,
         instruction,
@@ -50,8 +38,9 @@ const getById = async (id) =>
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([name, ingredients, instruction]) => ({
+    .then(([user_Id, name, ingredients, instruction]) => ({
       id,
+      user_Id,
       name,
       ingredients,
       instruction,

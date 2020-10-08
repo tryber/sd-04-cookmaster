@@ -19,7 +19,7 @@ app.get('/', middlewares.auth(false), controllers.recipeController.listAllRecipe
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipe);
 
 app.get('/recipes/new', middlewares.auth(true), controllers.recipeController.newRecipe);
-app.post('/recipes', controllers.recipeController.addRecipe);
+app.post('/recipes/new', controllers.recipeController.addRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetails);
 

@@ -73,7 +73,7 @@ const createRecipe = async (userId, user, name, ingredients, instructions) =>
       db
         .getTable('recipes')
         .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .values(userId, user, name, ingredients, instructions)
+        .values([userId, user, name, ingredients, instructions])
         .execute(),
     )
     .catch((err) => {

@@ -23,8 +23,8 @@ const userTable = async () => {
  */
 const findByEmail = async (emailInp) => {
   try {
-    const tab = await userTable();
-    const userSelect = await tab
+    const db = await userTable();
+    const userSelect = await db
       .select([])
       .where('email = :email')
       .bind('email', emailInp)
@@ -49,8 +49,8 @@ const findByEmail = async (emailInp) => {
  */
 const findById = async (idInp) => {
   try {
-    const tab = await userTable();
-    const userSelect = await tab.select([]).where('id = :id').bind('id', idInp).execute();
+    const db = await userTable();
+    const userSelect = await db.select([]).where('id = :id').bind('id', idInp).execute();
 
     const [id, email, password, name, lastName] = await userSelect.fetchOne();
     return {
@@ -67,9 +67,8 @@ const findById = async (idInp) => {
 
 const createUserModel = async (email, password, name, lastName) => {
   try {
-    const db = connection('cookmaster');
+    const db = await userTable();
     const createUsers = await db
-      .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
       .values(email, password, name, lastName)
       .execute();
@@ -79,8 +78,26 @@ const createUserModel = async (email, password, name, lastName) => {
   }
 };
 
+// const editUserModel = async (id, email, password, name, lastName) => {
+//   try {
+//     const db = await userTable();
+//     const editUsers = await db
+//       .update()
+//       .set('email', email)
+//       .set('password', password)
+//       .set('first_name', name)
+//       .set('last_name', lastName)
+//       .where('id = :id')
+//       .bind('id', id)
+//       .execute();
+//   } catch (error) {
+//     return error;
+//   }
+// };
+
 module.exports = {
   findByEmail,
   findById,
   createUserModel,
+  // editUserModel,
 };

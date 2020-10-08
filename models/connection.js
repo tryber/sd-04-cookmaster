@@ -9,14 +9,14 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-let schema;
+let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
 
 const connection = async () => {
-  if (schema) return Promise.resolve(schema);
+  if (schema) return Promise.resolve(schema); /* Retorna o schema numa Promise: */
   try {
     const session = await mysqlx.getSession(config);
-    schema = await session.getSchema('cookmaster');
-    return schema;
+    schema = await session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
+    return schema; /* E retornamos o schema de dentro da Promise */
   } catch (error) {
     return process.exit(1);
   }

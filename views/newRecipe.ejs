@@ -20,7 +20,7 @@
         /><br /><br />
         <label>Ingredientes</label>
         <ul id="ingredients-list"></ul>
-        <input type="text" name="ingredientInp" id="ingredientInp" data-testid="ingredientes" />
+        <input type="text" name="ingredients" id="ingredients" data-testid="ingredientes" />
         <button type="button" id="add-ingredient" data-testid="adicionar-ingrediente">
           Adicionar Ingrediente</button
         ><br /><br />
@@ -28,42 +28,44 @@
         <textarea
           name="instructions"
           id="instructionsInput"
-          cols="50"
-          rows="30"
+          cols="25"
+          rows="50"
           data-testid="modo-de-preparo"
           required
         ></textarea
         ><br /><br />
         <button type="button" onclick="window.location.pathname='/'">Voltar</button>
-        <button type="submit" id='postarReceita' data-testid="postar-receita">Salvar Receita</button>
+        <button type="submit" id="salvarReceita" data-testid="postar-receita">
+          Salvar Receita
+        </button>
       </form>
     </div>
   </body>
   <script>
-    let ingredients = [];
+    let arrIngredients = [];
     let addIngredient = document.getElementById('add-ingredient');
-    let inputValue = document.getElementById('ingredientInp');
+    let inputValue = document.getElementById('ingredients');
 
     addIngredient.addEventListener('click', () => {
       const li = document.createElement('li');
       li.classList = 'li-ingredients';
       li.innerText = inputValue.value;
       document.getElementById('ingredients-list').appendChild(li);
-      document.getElementById('ingredientInp').value = '';
 
       const addButtonDelete = document.createElement('button');
       addButtonDelete.innerText = 'Excluir Ingrediente';
       document.getElementById('ingredients-list').appendChild(addButtonDelete);
 
       addButtonDelete.addEventListener('click', () => {
-        ingredients = ingredients.filter((item) => item !== li.innerText);
+        arrIngredients = arrIngredients.filter((item) => item !== li.innerText);
         addButtonDelete.remove();
         li.remove();
       });
-
-      postarReceita.addEventListener('click', () => {
-        inputValue.value = ingredients.join()
-      })
+      arrIngredients.push(inputValue.value);
+      inputValue.value = '';
+    });
+    salvarReceita.addEventListener('click', () => {
+      inputValue.value = arrIngredients.join(',');
     });
   </script>
 </html>

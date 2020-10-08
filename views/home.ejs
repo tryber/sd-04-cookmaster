@@ -12,15 +12,9 @@
       <h1>Receitas</h1>
       <!-- These buttons should only appear if the user is logged in. -->
       <% if(user) {%>
-        <button onclick="window.location.pathname='/recipes/new'" data-testid="nova-receita" >
-          Nova Receita
-        </button>
-        <button onclick="window.location.pathname='/my/recipes'" data-testid="minhas-receitas" >
-          Minhas Receitas
-        </button>
-        <button onclick="window.location.pathname='/my/edit'" data-testid="minha-conta" >
-          Minha Conta
-        </button>
+        <a href='/me/edit' data-testid="minha-conta">Minha Conta</a>
+        <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
+        <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
       <% } %>
       <!-- Showing recipes and database user-->
       <% getAllRecipes.forEach(item => { %>

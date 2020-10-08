@@ -30,22 +30,49 @@ const searchByNameController = async (req, res) => {
 };
 
 const enterNewRecipe = async (req, res) => {
-  try {
-    res.render('newRecipe', { user: req.user });
-  } catch (error) {
-    return error;
-  }
-  return null; // Satisfazer CC
+  res.render('newRecipe', { user: req.user });
 };
 
 const createNewRecipe = async (req, res) => {
   try {
-    const { id, user } = req.user;
+    const { user } = req;
     const { name, ingredients, instructions } = req.body;
 
-    await recipesModel.createRecipeModel(id, user, name, ingredients, instructions);
+    await recipesModel.createRecipeModel(user.id, user.name, name, ingredients, instructions);
 
     return res.redirect('/');
+  } catch (error) {
+    return error;
+  }
+};
+
+const enterEditRecipe = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const recipeDetailsEdit = await recipesModel.recipeDetailsEdit(id);
+
+    if (recipeDetailsEdit.userId !== req.user.id) return res.redirect(`/recipes/${id}`);
+
+    return res.render('editRecipe', { recipeDetailsEdit, user: req.user });
+  } catch (error) {
+    return error;
+  }
+};
+
+const editRecipeController = async (req, res) => {
+  const { id } = req.params;
+  const { name, ingredients, instructions } = req.body;
+
+  await recipesModel.editRecipeModel(id, name, ingredients, instructions);
+  return res.redirect('/');
+};
+
+//  Controller da tela de Minhas Receitas.
+const recipeUserId = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const recipesUserId = await recipesModel.selectRecipeByUserId(id);
+    return res.render('myRecipes', { recipesUserId: recipesUserId || [], user: req.user });
   } catch (error) {
     return error;
   }
@@ -57,4 +84,7 @@ module.exports = {
   searchByNameController,
   enterNewRecipe,
   createNewRecipe,
+  editRecipeController,
+  enterEditRecipe,
+  recipeUserId,
 };

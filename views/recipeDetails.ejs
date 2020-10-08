@@ -10,7 +10,7 @@
     <div>
       <% if(user) { %>
         <div>
-          <button type="button" data-testid="editar-receita" onclick="window.location.pathname='/recipes/<%= recipeDetails.id %>/edit'">Editar receita</button>
+          <a href="/recipes/<%= recipeDetails.id %>/edit" data-testid="editar-receita">Editar Receita</a>
           <button type="button" data-testid="excluir-receita" onclick="window.location.pathname='/recipes/<%= recipeDetails.id %>/delete'">Excluir receita</button>
         </div>
         <% } %>

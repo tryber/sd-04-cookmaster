@@ -27,11 +27,9 @@ app.post('/login', controllers.userController.login);
 app.get('/register', (_req, res) => {
   res.render('registerUser', { message: null });
 });
-
 app.post('/register', middlewares.validatedRegister, userController.registerUser);
 
 app.get('/recipes/new', middlewares.auth(), controllers.recipesController.enterNewRecipe);
-
 app.post('/recipes', middlewares.auth(), controllers.recipesController.createNewRecipe);
 
 app.get(
@@ -45,5 +43,12 @@ app.get(
   middlewares.auth(false),
   controllers.recipesController.recipeDetailsController,
 );
+
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.enterEditRecipe);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.editRecipeController);
+
+// app.get('/me/edit', middlewares.auth(), controllers.);
+app.get('/me/recipes', middlewares.auth(), controllers.recipesController.recipeUserId);
+// app.post('/me', middlewares.auth(), controllers.);
 
 app.listen(3000, () => console.log('Listening on 3000'));

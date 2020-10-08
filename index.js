@@ -22,6 +22,13 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.dbController.show);
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
+app.get('/registration', middlewares.auth(false), (req, res) => {
+  return res.render('userRegistration', {message: 'Cadastre seus dados'} );
+}); 
+app.get('/registredSucess', middlewares.auth(false), (req, res) => {
+  return res.render('userRegistration', {message: 'Sucess'} );
+}); 
+app.post('/registration', middlewares.auth(false), controllers.userController.registrationForm)
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.dbController.deleteRecipeForm);
 app.post('/recipes/:id/delete', middlewares.auth(), controllers.dbController.deleteRecipe);
 

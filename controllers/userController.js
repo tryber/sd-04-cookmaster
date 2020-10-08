@@ -1,3 +1,4 @@
+const nodemon = require('nodemon');
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
@@ -44,8 +45,41 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const registrationForm = async (req, res) => {
+  const { email, password, passwordConfirmation, name, lastName } = req.body;
+  if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
+    // RegEx from regexr.com
+    return res.render('userRegistration', {
+      message: 'O email deve ter o formato email@mail.com',
+    });
+  }
+  if (password.length < 6) {
+    return res.render('userRegistration', {
+      message: 'A senha deve ter pelo menos 6 caracteres',
+    });
+  }
+  if (password !== passwordConfirmation) {
+    return res.render('userRegistration', {
+      message: 'As senhas tem que ser iguais',
+    });
+  }
+  if (name.length < 3) {
+    return res.render('userRegistration', {
+      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  }
+  if (lastName.length < 3) {
+    return res.render('userRegistration', {
+      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  }
+  await userModel.createUser(email, password, name, lastName);
+  return res.status(201).render('registeredSuccess', { message: 'Cadastro efetuado com sucesso!' });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  registrationForm,
 };

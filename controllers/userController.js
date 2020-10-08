@@ -47,30 +47,34 @@ const logout = (req, res) => {
 
 const registrationForm = async (req, res) => {
   const { email, password, passwordConfirmation, name, lastName } = req.body;
+  let messageErrorLogin = '';
+  let userDataError = 0;
+
   if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
-    // RegEx from regexr.com
-    return res.render('userRegistration', {
-      message: 'O email deve ter o formato email@mail.com',
-    });
+    userDataError = 1;
+    messageErrorLogin = 'O email deve ter o formato email@mail.com';
   }
   if (password.length < 6) {
-    return res.render('userRegistration', {
-      message: 'A senha deve ter pelo menos 6 caracteres',
-    });
+    userDataError = 1;
+    messageErrorLogin = 'A senha deve ter pelo menos 6 caracteres';
   }
-  if (password !== passwordConfirmation) {
-    return res.render('userRegistration', {
-      message: 'As senhas tem que ser iguais',
-    });
+  if (password !== passwordConfirmation && password.length > 5) {
+    userDataError = 1;
+    messageErrorLogin = 'As senhas tem que ser iguais';
   }
   if (name.length < 3) {
-    return res.render('userRegistration', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    });
+    userDataError = 1;
+    messageErrorLogin =
+      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
   if (lastName.length < 3) {
+    userDataError = 1;
+    messageErrorLogin =
+      'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  if (userDataError === 1) {
     return res.render('userRegistration', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+      message: messageErrorLogin,
     });
   }
   await userModel.createUser(email, password, name, lastName);

@@ -22,8 +22,13 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/cadastro', controllers.userController.renderCadastro);
-app.post('/cadastro', controllers.userController.addUser);
+app.get('/signup', controllers.userController.renderCadastro);
+app.post('/signup', controllers.userController.addUser);
+
+app.get('/recipes/search', controllers.recipesController.findRecipesByName);
+
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.newRecipe);
+app.post('/recipes/new', middlewares.auth(), controllers.recipesController.addRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.recipesDetails);
 

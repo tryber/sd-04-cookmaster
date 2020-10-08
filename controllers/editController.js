@@ -1,8 +1,8 @@
 const Recipe = require('../models/recipeModel');
 
-const editRecipe = (req, res) => {
+const newRecipe = (req, res) => {
   const user = req.user;
-  res.render('edit', { user });
+  res.render('newRecipe', { user });
 };
 // ver depois a questao de ingredients
 const registerRecipe = async (req, res) => {
@@ -15,10 +15,30 @@ const registerRecipe = async (req, res) => {
     ingredients,
     instructions,
   );
-  res.render('edit', { user });
+  res.render('newRecipe', { user });
+};
+
+const editRecipe = async (req, res) => {
+  const user = req.user;
+  const { id } = req.params;
+  const recipes = await Recipe.getRecipeById(id);
+  const recipe = recipes[0];
+  if (user.id === recipe.id) {
+    res.render('editRecipe', { recipe, user });
+  }
+  res.redirect(`/recipes/${id}`);
+};
+
+const updateRecipe = async (req, res) => {
+  const user = req.user;
+  const { name, ingredients, instructions } = req.body;
+  await Recipe.updateRecipe(name, ingredients, instructions);
+  res.render('/', { user });
 };
 
 module.exports = {
-  editRecipe,
+  newRecipe,
   registerRecipe,
+  editRecipe,
+  updateRecipe,
 };

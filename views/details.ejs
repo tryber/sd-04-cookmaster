@@ -37,12 +37,14 @@
       <p><%= recipe.user %></p>
       <div class="mb-3">
         <% if (user != null) { %>
-        <a class="btn btn-primary" data-testid="editar-receita" href="/edit">Editar Receita</a>
+        <a class="btn btn-primary" data-testid="editar-receita" href="/recipes/<%= recipe.id %>/edit">Editar Receita</a>
         <a class="btn btn-primary" data-testid="excluir-receita" href="/delete">Excluir Receita</a>
         <%} %>
       </div>
       <h3>Ingredientes</h3>
-      <p><%= recipe.ingredients %></p>
+      <% recipe.ingredients.split(',').forEach((food) => { %>
+        <p><%= food %></p>
+      <% }) %>
       <h3>Modo de Preparo</h3>
       <p><%= recipe.instructions %></p>
     </div>

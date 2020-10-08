@@ -9,7 +9,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <title>Cookmaster - Cadastro de Receita</title>
+    <title>Cookmaster - Editar Receita</title>
   </head>
   <body>
     <div class="text-light navbar navbar-dark bg-dark">
@@ -21,9 +21,9 @@
       <a data-testid="logout" class="text-light nav-link col text-right" href="/logout"> Logout</a>
       <%}%>
     </div>
-    <h2 class="mt-5 text-center">Nova Receita</h2>
+    <h2 class="mt-5 text-center">Editar Receita</h2>
     <div class="m-5 p-8">
-      <form class="form-signin" action="/recipes/new" method="POST">
+      <form class="form-signin" action="/recipes/<%= recipe.id %>" method="POST">
         <label for="nameInput">Nome da Receita</label>
         <input
           class="mb-3 form-control"
@@ -31,10 +31,17 @@
           type="text"
           name="name"
           id="nameInput"
+          placeholder="<%= recipe.name %>"
         />
         <div>
           <label for="ingredienteInput">Ingredientes </label>
           <div id="list-ingredients" class="mb-3 d-flex flex-column"></div>
+          <% recipe.ingredients.split(',').forEach((food) => { %>
+          <div>
+            <p><%= food %></p>
+            <a id="del-ing" class="btn btn-danger btn-sm align-self-center">Excluir Ingrediente</a>
+          </div>
+          <% }) %>
           <input
             class="mb-3 form-control"
             data-testid="ingredientes"
@@ -57,11 +64,12 @@
           type="text"
           name="instructions"
           id="preparoInput"
+          placeholder="<%= recipe.instructions %>"
         />
         <a class="btn btn-lg btn-primary" href="/">Voltar</a>
-        <button data-testid="postar-receita" class="btn btn-lg btn-primary" type="submit">
+        <a data-testid="postar-receita" class="btn btn-lg btn-primary" type="submit" href="/">
           Salvar Receita
-        </button>
+        </a>
       </form>
     </div>
   </body>
@@ -70,11 +78,18 @@
     const inputIng = document.querySelector('#ingredienteInput');
     const listIng = document.querySelector('#list-ingredients');
 
+    const removeIngredient = () => {
+      const rmvBtn = document.querySelector('#del-ing');
+      rmvBtn.addEventListener('click', (e) => {
+        e.target.parentNode.remove();
+      });
+    };
+
     addBtn.addEventListener('click', () => {
       if (inputIng.value === '') {
       } else {
         const cont = document.createElement('div');
-        const item = document.createElement('li');
+        const item = document.createElement('p');
         const btn = document.createElement('a');
         item.className = 'mr-5';
         item.innerHTML = inputIng.value;
@@ -85,12 +100,9 @@
         cont.appendChild(item);
         cont.appendChild(btn);
         inputIng.value = '';
-
-        const rmvBtn = document.querySelector('#del-ing');
-        rmvBtn.addEventListener('click', (e) => {
-          e.target.parentNode.remove();
-        });
       }
+      removeIngredient();
     });
+    removeIngredient();
   </script>
 </html>

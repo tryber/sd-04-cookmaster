@@ -13,14 +13,16 @@ const getRecipeById = async (id) =>
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['user', 'name', 'ingredients', 'instructions'])
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :id')
         .bind('id', id)
         .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([user, name, ingredients, instructions]) => ({
+      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+        id,
+        user_id,
         user,
         name,
         ingredients,
@@ -36,7 +38,7 @@ const searchRecipe = async (recipe) =>
     .then((recipes) => recipes.map(([id, user, name]) => ({ id, user, name })))
     .then((res) => res.find((food) => food.name === recipe));
 
-const createRecipe = (id, user, name, ingredients, instructions) => {
+const createRecipe = async (id, user, name, ingredients, instructions) => {
   conn
     .connection()
     .then((db) =>
@@ -48,9 +50,25 @@ const createRecipe = (id, user, name, ingredients, instructions) => {
     );
 };
 
+const updateRecipe = async (id) =>
+  conn
+    .connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .update()
+        .set('name', name)
+        .set('ingredients', ingredients)
+        .set('instructions', instructions)
+        .where('id = :id_param')
+        .bind('id_param', id)
+        .execute(),
+    );
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   searchRecipe,
   createRecipe,
+  updateRecipe,
 };

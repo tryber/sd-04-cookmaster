@@ -66,10 +66,26 @@ const getEditUser = async (req, res) => {
   }
 };
 
+const postEditUser = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { password, email, name, lastName } = req.body;
+    const userId = await userModel.findById(id);
+
+    if (userId.id === id) {
+      await userModel.editUserModel(id, email, password, name, lastName);
+      return res.redirect('/');
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   registerUser: registerUsersController,
   getEditUser,
+  postEditUser,
 };

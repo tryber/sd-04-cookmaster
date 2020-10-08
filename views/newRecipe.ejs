@@ -18,7 +18,7 @@
     <div class="card w-75 mx-auto">
       <form action="/recipes/new" method="POST">
         <div class="form-group w-75 mx-auto m-2">
-          <label for="nome-receita">Nome da Receita</label>
+          <label for="nome-receita">Nome da Receita:</label>
           <input
             data-testid="nome-receita"
             name="name"
@@ -29,14 +29,14 @@
           />
         </div>
 
-        <div class="form-group w-75 mx-auto m-2">
+        <div class="card form-group w-75 mx-auto m-2">
           <div class="d-flex align-items-center">
             <input
               data-testid="ingredientes"
               placeholder="ingrediente aqui..."
               type="text"
               id="inputIngredient"
-              class="form-control"
+              class="form-control m-2"
             />
             <button
               data-testid="adicionar-ingrediente"
@@ -48,21 +48,23 @@
               Adicionar Ingrediente
             </button>
           </div>
-          <div>
-            <h6 class="text-center" id="ingTitle">Ingredientes</h6>
-            <ul class="d-flex flex-column" id="ing-list"></ul>
-          </div>
+
+          <h6 class="text-center" id="ingTitle">Ingredientes:</h6>
+
+          <ul class="d-flex">
+            <div id="ing-list"></div>
+          </ul>
         </div>
 
         <div class="form-group w-75 mx-auto m-2">
-          <label for="modo-de-preparo">Modo de Preparo</label>
+          <label for="modo-de-preparo">Modo de Preparo:</label>
           <textarea
             data-testid="modo-de-preparo"
             class="form-control"
             name="instructions"
             id="modo-de-preparo"
-          >
-          </textarea>
+            value=""
+          ></textarea>
         </div>
         <div class="d-flex justify-content-around m-3">
           <button class="btn btn-dark" type="submit" data-testid="postar-receita">
@@ -70,12 +72,15 @@
           </button>
           <a class="btn btn-secondary" href="/">Voltar</a>
         </div>
+        <input type="hidden" name="ingredientList" id="inputHidden" />
       </form>
     </div>
     <script>
       const buttonAddIngredient = document.getElementById('addIng');
       const ingredientsUL = document.getElementById('ing-list');
       const inputIngredient = document.getElementById('inputIngredient');
+
+      const inputHidden = document.getElementById('inputHidden');
 
       let inputValues = [];
 
@@ -88,22 +93,25 @@
         li.textContent = inputIngredient.value;
 
         inputValues.push(inputIngredient.value);
-        console.log(inputValues);
+        console.log('linha 95', inputValues);
 
         inputIngredient.value = '';
 
         ingredientsUL.appendChild(li);
         ingredientsUL.appendChild(btnRemove);
-        ingredientsUL.className += 'd-flex justify-content-around m-3';
 
         btnRemove.className += 'btn btn-danger btn-sm';
         btnRemove.type = 'button';
         btnRemove.addEventListener('click', () => {
-          inputvalues = inputValues.map((value) => value !== inputIngredient.value);
+          inputValues = inputValues.filter((value) => value !== li.textContent);
+
           ingredientsUL.removeChild(li);
           ingredientsUL.removeChild(btnRemove);
-          console.log(inputValues);
+          inputHidden.value = inputValues.join();
+          console.log('linha 110', inputValues);
         });
+
+        inputHidden.value = inputValues.join();
       };
     </script>
   </body>

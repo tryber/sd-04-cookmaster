@@ -80,4 +80,15 @@ const createRecipe = async (userId, user, name, ingredients, instructions) =>
       throw err;
     });
 
-module.exports = { getAllRecipes, getRecipeById, createRecipe, searchRecipeByName };
+const deleteRecipe = async (id) =>
+  connection()
+    .then((db) => db.getTable('recipes'))
+    .delete()
+    .where('id = :id')
+    .bind('id', id)
+    .execute()
+    .catch((err) => {
+      throw err;
+    });
+
+module.exports = { getAllRecipes, getRecipeById, createRecipe, searchRecipeByName, deleteRecipe };

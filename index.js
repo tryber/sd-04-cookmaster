@@ -17,10 +17,13 @@ app.get('/', middlewares.auth(false), controllers.recipeController.listAllRecipe
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipe);
 
 app.get('/recipes/new', middlewares.auth(true), controllers.recipeController.newRecipe);
-app.post('/recipes/new', controllers.recipeController.addRecipe);
+app.post('/recipes/new', middlewares.auth(true), controllers.recipeController.addRecipe);
 
 // app.get('/recipes/:id/edit', middlewares.auth());
 // app.post('/recipes/:id', authMiddleware.auth());
+
+app.get('/recipes/:id/delete', controllers.recipeController.removeRecipe);
+// app.post('/recipes/:id/delete');
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetails);
 
@@ -34,5 +37,7 @@ app.post('/cadastro', controllers.userFormController.newUser);
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.use('*', (_req, res) => res.status(404).json({ message: 'Página não encontrada' }));
 
 app.listen(3000, () => console.log('Running server on port 3000'));

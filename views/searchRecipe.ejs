@@ -12,17 +12,19 @@
     />
   </head>
   <body>
-    <%- include('headerCook') %>
+    <%- include('headerCook') %> <% if (message) {%>
+    <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= message %></h6>
+    <% } %>
 
     <div class="card w-75 mx-auto m-4">
       <h3 class="m-3">Buscar Receitas</h3>
 
       <form action="/recipes/search" class="d-flex">
         <input
+          data-testid="receita"
           placeholder="receita de ..."
           required
           class="form-control m-3"
-          data-testid="receita"
           type="text"
           name="q"
           id="q"
@@ -30,9 +32,7 @@
         <button class="btn btn-dark m-3" data-testid="buscar">Buscar</button>
       </form>
     </div>
-    <% if (message) {%>
-    <h6 class="card text-center text-white mx-auto bg-danger m-3"><%= message %></h6>
-    <% } %>
+
     <div class="container">
       <div class="row justify-content-around">
         <% recipes.forEach((recipe) => { %>
@@ -53,10 +53,6 @@
         <a class="btn btn-dark m-3" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
 
         <% } %>
-
-        <a class="btn btn-dark m-3" data-testid="buscar-receita" href="/recipes/search"
-          >Buscar Receita</a
-        >
       </div>
       <a class="btn btn-secondary m-3" href="/">Voltar</a>
     </div>

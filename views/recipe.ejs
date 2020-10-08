@@ -10,8 +10,16 @@
       <%- include('../components/header/header', { user }); %>
       <main class="main-content">
         <div class="top-bar">
-          <h1><%= recipeResult.title %></h1>
-          <span>Enviada por <%= recipeResult.user %></span>
+          <div>
+            <h1><%= recipeResult.title %></h1>
+            <span>Enviada por <%= recipeResult.user %></span>
+          </div>
+          <div class="btn-group">
+            <% if (user) { %>
+              <a href="/recipes/<%= recipeResult.id %>/edit" class="btn" data-testid="editar-receita">Editar Receita</a>
+              <a href="/recipes/<%= recipeResult.id %>/delete" class="btn danger-btn" data-testid="excluir-receita">Excluir Receita</a>
+            <% } %>
+          </div>
         </div>
         <div class="recipe-body">
           <h2>Ingredientes</h2>
@@ -32,7 +40,7 @@
   
       .top-bar {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
         padding: 40px 60px;
       }
 
@@ -66,21 +74,24 @@
       .header-element {
         padding: 30px;
       }
+
+      .btn-group {
+        padding: 10px 0;
+      }
   
-      .search-btn {
+      .btn {
         background: #2d9cdb;
         border: none;
+        box-sizing: border-box;
         color: white;
         height: 42px;
+        padding: 15px 20px;
+        text-decoration: none;
         width: 174px;
       }
-  
-      .search-btn:first-child {
-        background-color: #9b51e0;
-      }
-  
-      .search-btn:nth-child(3) {
-        background-color: #828282;
+    
+      .danger-btn {
+        background-color: #eb5757;
       }
   
       .recipes-container {

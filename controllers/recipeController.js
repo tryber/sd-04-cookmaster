@@ -13,14 +13,23 @@ const showRecipeById = async (req, res) => {
   const { id } = req.params;
   try {
     const recipeResult = await recipe.getRecipeById(Number(id));
-    console.log(recipeResult);
     return res.render('recipe', { recipeResult, user: req.user });
   } catch (error) {
     return error;
   }
 };
 
+const editRecipe = async (req, res) => {
+  return res.render('admin/editRecipe');
+};
+
+const deleteRecipe = async (req, res) => {
+  return res.render('admin/editRecipe');
+};
+
 module.exports = {
   listRecipes,
-  showRecipeById
+  showRecipeById,
+  editRecipe,
+  deleteRecipe,
 };

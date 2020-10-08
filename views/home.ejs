@@ -2,13 +2,13 @@
     <div class="receitas">
       <a class="navbar-brand">Receitas</a>
       <% if( !user ) { %>
-      <button class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
+      <a href="/recipes/search" class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
         Buscar Receita
-      </button>
+      </a>
       <% } else { %>
-      <button class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
+      <a href="/recipes/search" class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
         Buscar Receita
-      </button>
+      </a>
       <button class="btn btn-outline-primary my-2 my-sm-0" data-testid="nova-receita">
         Nova Receita
       </button>

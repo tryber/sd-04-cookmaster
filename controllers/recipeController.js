@@ -9,12 +9,27 @@ const home = async (req, res) => {
 const detailsRecipe = async (req, res) => {
   const { id } = req.params;
 
-  const recipe = await recipeModel.findOne(id);
+  const recipe = await recipeModel.findById(id);
 
   res.render('recipes/details', { recipe, user: req.user });
 };
 
+const buscarRecipe = async (req, res) => {
+  const { q } = req.query;
+  let recipe = {};
+
+  if (!q) {
+    res.render('recipes/buscar', { recipe, user: req.user });
+  } else {
+    recipeModel
+      .findByName(q)
+      .then((recipe) => res.render('recipes/buscar', { recipe, user: req.user }))
+      .catch(() => res.send('Receita não existe'));
+  }
+};
+
 module.exports = {
+  buscarRecipe,
   detailsRecipe,
   home,
 };

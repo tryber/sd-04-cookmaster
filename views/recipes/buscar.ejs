@@ -1,0 +1,21 @@
+<%- include('../header'); -%>
+    <div class="receitas">
+      <a class="navbar-brand">Buscar Receitas</a>
+      <form class="form-inline" action="/recipes/search" method="GET">
+        <div class="form-group mb-2">
+          <input class="form-control" name="q" type="text" data-testid="receita" placeholder="Pesquisar receita">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" data-testid="buscar">Buscar Receita</button>
+      </form>      
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.name %></h5>
+          <p class="card-text"><%= recipe.user %></p>
+          <a href="details/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

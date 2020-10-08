@@ -28,5 +28,6 @@ app.get('/cadastro', userController.cadastro);
 app.post('/cadastro', userController.add);
 
 app.get('/details/:id', middlewares.auth(false), recipeControlle.detailsRecipe);
+app.get('/recipes/search', middlewares.auth(false), recipeControlle.buscarRecipe);
 
 app.listen(3000, () => console.log('Listening on 3000'));

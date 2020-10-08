@@ -34,7 +34,8 @@ const newRecipe = async (req, res) => {
   const userID = req.user.id;
 
   await recipesModel.createRecipe(userID, userName, recipeName, ingredients, instructions);
-  res.render('recipes');
+  const recipes = await recipesModel.getRecipes();
+  res.render('home', { recipes, user: req.user });
 };
 
 const editRecipe = async (req, res) => {
@@ -78,6 +79,12 @@ const checkPassword = async (req, res) => {
   return res.render('deleteRecipe', { message: 'Senha Incorreta.', id: recipeID });
 };
 
+const myRecipes = async (req, res) => {
+  const userID = req.user.id;
+  const recipes = await recipesModel.getRecipesByUserId(userID);
+  res.render('myRecipes', { recipes, user: req.user });
+};
+
 module.exports = {
   listRecipes,
   details,
@@ -88,4 +95,5 @@ module.exports = {
   confirmUpdate,
   deleteRecipe,
   checkPassword,
+  myRecipes,
 };

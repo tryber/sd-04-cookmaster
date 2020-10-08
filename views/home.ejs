@@ -8,7 +8,6 @@
   <body>
     <%- include('navbar', {user}) %>
     <h1>Cookmaster</h1>
-    <h3>Receitas</h3>
     <button
       type="button"
       data-testid="buscar-receita"
@@ -24,13 +23,13 @@
     >
       Nova Receita
     </button>
-    <% } %>
-    <div>
-      <% recipes.forEach((recipe) => { %>
-      <p><%= recipe.recipeName %></p>
-      <p><%= recipe.userName %></p>
-      <a href="/recipes/<%= recipe.recipeID %>">Ver mais</a>
-      <% }) %>
-    </div>
+    <button
+      type="button"
+      data-testid="minhas-receitas"
+      onclick="window.location.pathname='/me/recipes'"
+    >
+      Minhas Receitas
+    </button>
+    <% } %> <%- include('recipesList', {recipes}) %>
   </body>
 </html>

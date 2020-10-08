@@ -78,26 +78,26 @@ const createUserModel = async (email, password, name, lastName) => {
   }
 };
 
-// const editUserModel = async (id, email, password, name, lastName) => {
-//   try {
-//     const db = await userTable();
-//     const editUsers = await db
-//       .update()
-//       .set('email', email)
-//       .set('password', password)
-//       .set('first_name', name)
-//       .set('last_name', lastName)
-//       .where('id = :id')
-//       .bind('id', id)
-//       .execute();
-//   } catch (error) {
-//     return error;
-//   }
-// };
+const editUserModel = async (id, email, password, name, lastName) => {
+  try {
+    const db = await userTable();
+    return await db
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', name)
+      .set('last_name', lastName)
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
+  } catch (error) {
+    return error;
+  }
+};
 
 module.exports = {
   findByEmail,
   findById,
   createUserModel,
-  // editUserModel,
+  editUserModel,
 };

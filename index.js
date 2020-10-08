@@ -56,8 +56,8 @@ app.post(
   controllers.recipesController.deleteRecipePOST,
 );
 
-// app.get('/me/edit', middlewares.auth(), controllers.);
 app.get('/me/recipes', middlewares.auth(), controllers.recipesController.recipeUserId);
-// app.post('/me', middlewares.auth(), controllers.);
+app.get('/me/edit', middlewares.auth(), controllers.userController.getEditUser);
+app.post('/me', middlewares.auth());
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

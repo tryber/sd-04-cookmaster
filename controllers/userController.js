@@ -44,8 +44,37 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signup = async (req, res) => {
+  const { email, password, repeatPassword, name, lastName } = req.body;
+  // chamar as validações
+  if (!userModel.isValidEmail(email)) {
+    return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
+  }
+  if (!userModel.isValidPassword(password)) {
+    return res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
+  }
+  if (!userModel.isValidRepeatPassword(password, repeatPassword)) {
+    return res.render('signup', { message: 'As senhas tem que ser iguais' });
+  }
+  if (!name || !userModel.isValidName(name)) {
+    return res.render('signup', {
+      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  }
+  if (!lastName || !userModel.isValidLastName(lastName)) {
+    return res.render('signup', {
+      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  }
+
+  await userModel.add(email, password, repeatPassword, name, lastName);
+  res.render('signup', { message: 'Cadastro efetuado com sucesso!' });
+  //res.redirect(redirect || '/login')
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signup,
 };

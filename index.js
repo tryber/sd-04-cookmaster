@@ -19,6 +19,10 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 */
+app.get('/signup', (req, res) => {
+  return res.render('signup', { message: null });
+});
+app.post('/signup', controllers.userController.signup);
 
 app.get('/admin', middlewares.auth(), controllers.recipeController.show);
 

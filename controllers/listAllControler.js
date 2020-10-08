@@ -68,13 +68,13 @@ const deleteRecipe = async (req, res) => {
   const recipe = req.params;
   const { id } = req.user;
 
-  const completeUser = await findById(id)
+  const completeUser = await findById(id);
   const { password } = completeUser;
 
   if (password !== confirmPassword) {
     res.render('deleteRecipe', { message: 'Senha incorreta.', recipe, user: req.user });
   }
-  console.log(recipe)
+
   await deleteModel(recipe.id);
   res.redirect('/');
 };

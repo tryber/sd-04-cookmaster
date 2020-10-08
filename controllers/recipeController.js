@@ -26,14 +26,14 @@ const searchRecipe = async (req, res) => {
 };
 
 const addRecipe = async (req, res) => {
-  const { name, ingredients, instructions } = req.body;
+  const { ingredients, instructions } = req.body;
   // console.log('linha 30, formRecipe', name, ingredients, instructions);
   // console.log(typeof ingredients);
 
   // console.log('linha 32, req.user: ', req.user);
 
   const { iD, email, firstName, lastName } = req.user;
-  const fullName = firstName + ' ' + lastName;
+  const fullName = `${firstName} ${lastName}`;
   await Recipes.createRecipe(iD, email, fullName, ingredients, instructions);
   res.render('newRecipe', { user: req.user });
 };

@@ -13,7 +13,7 @@
         <h4>Enviada por <%= recipe.user %></h4>
       </div>
       <div>
-        <% if (user && recipe.user_id === user.id) { %>
+        <% if (user && recipe.userId === user.id) { %>
           <button data-testid="editar-receita" onclick="window.location.pathname='/recipes/<%= recipe.id %>/edit'">
             Editar Receita
           </button>

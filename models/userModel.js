@@ -80,27 +80,33 @@ const createUser = async (email, password, name, lastName) =>
         .execute(),
     );
 
-const validationRegistrationData = (email, password, passwordConfirmation, name, lastName) => {
+const passwordValidation = (password, passwordConfirmation) => {
   let messageErrorLogin = 'ok';
-  if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
-    userDataError = 1;
-    messageErrorLogin = 'O email deve ter o formato email@mail.com';
-  }
   if (password.length < 6) {
-    userDataError = 1;
     messageErrorLogin = 'A senha deve ter pelo menos 6 caracteres';
   }
   if (password !== passwordConfirmation && password.length > 5) {
-    userDataError = 1;
     messageErrorLogin = 'As senhas tem que ser iguais';
   }
+  return messageErrorLogin;
+};
+
+const validationRegistrationData = (email, password, passwordConfirmation, name, lastName) => {
+  let messageErrorLogin = passwordValidation(password, passwordConfirmation);
+  if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
+    messageErrorLogin = 'O email deve ter o formato email@mail.com';
+  }
+  // if (password.length < 6) {
+  //   messageErrorLogin = 'A senha deve ter pelo menos 6 caracteres';
+  // }
+  // if (password !== passwordConfirmation && password.length > 5) {
+  //   messageErrorLogin = 'As senhas tem que ser iguais';
+  // }
   if (name.length < 3) {
-    userDataError = 1;
     messageErrorLogin =
       'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
   if (lastName.length < 3) {
-    userDataError = 1;
     messageErrorLogin =
       'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }

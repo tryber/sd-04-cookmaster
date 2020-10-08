@@ -11,7 +11,7 @@
     <% if (message) { %>
     <h4><%= message %></h4>
     <% } %>
-    <form action="/recipes/:id/delete" method="POST">
+    <form action="/recipes/<%= id %>/delete" method="POST">
       <label for="password">Senha</label>
       <input type="password" name="password" id="password" data-testid="senha" />
       <button type="submit" data-testid="confirmar">Confirmar</button>

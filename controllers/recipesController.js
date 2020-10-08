@@ -37,24 +37,36 @@ const newRecipe = async (req, res) => {
   res.render('recipes');
 };
 
-const editRecipe = async (_req, res) => {
-  res.render('editRecipe');
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipeDetails = await recipesModel.getRecipeDetails(id);
+  res.render('editRecipe', { user: req.user, recipeDetails, id });
+};
+
+const confirmUpdate = async (req, res) => {
+  console.log(req.user);
+  console.log(req.params);
+  // se editada com sucesso
+  // const recipes = await recipesModel.getRecipes();
+  res.render('home', { recipes, user: req.user });
 };
 
 const deleteRecipe = async (req, res) => {
-  const { user } = req.user;
-  res.render('deleteRecipe', { user, message: null });
+  const id = req.params.id;
+  res.render('deleteRecipe', { user: req.user, message: null, id });
 };
 
 const checkPassword = async (req, res) => {
   const { password } = req.body;
-  const { id } = req.user;
+  const userID = req.user.id;
+  const recipeID = req.params.id;
 
-  const userData = await findById(id);
+  const userData = await findById(userID);
   if (password === userData.password) {
+    await recipesModel.removeRecipe(recipeID);
     return res.redirect('/');
   }
-  return res.render('deleteRecipe', { message: 'Senha Incorreta.' });
+  return res.render('deleteRecipe', { message: 'Senha Incorreta.', id: recipeID });
 };
 
 module.exports = {
@@ -64,6 +76,7 @@ module.exports = {
   newRecipe,
   registerRecipes,
   editRecipe,
+  confirmUpdate,
   deleteRecipe,
   checkPassword,
 };

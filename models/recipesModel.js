@@ -20,7 +20,6 @@ const getAllByUserId = async (userId) =>
     .then((recipes) =>
       recipes.map(([id, name, ingredients, instruction]) => ({
         id,
-        user_id,
         name,
         ingredients,
         instruction,
@@ -38,7 +37,7 @@ const getById = async (id) =>
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([ name, ingredients, instruction]) => ({
+    .then(([name, ingredients, instruction]) => ({
       id,
       name,
       ingredients,

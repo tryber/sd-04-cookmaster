@@ -53,8 +53,8 @@ const myRecipes = async (req, res) => {
 
   const recipes = await getRecipeByUser(id);
 
-  res.render('myRecipes', { recipes, user: req.user })
-}
+  res.render('myRecipes', { recipes, user: req.user });
+};
 
 module.exports = {
   listRecipes,

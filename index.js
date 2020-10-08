@@ -17,6 +17,12 @@ app.get('/cadastro', middlewares.auth(false), (_req, res) => {
   return res.render('cadastro');
 });
 
+app.get(
+  '/recipes/:id',
+  middlewares.auth(false),
+  controllers.recipeController.showRecipeById
+);
+
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });

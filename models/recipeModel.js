@@ -1,21 +1,12 @@
 const connection = require('./connection');
 
-// const getAllRecipes = async () => {
-//   try {
-//     connection()
-//     .then((db) => db.getTable('recipes').select(['user', 'name']).execute())
-//     .then((resultSet) => resultSet.fetchAll())
-//     .then((recipes) => recipes.map(([user, name]) => ({ user, name })));
-//   } catch (error) {
-//     return error.message;
-//   }
-// };
 const getAllRecipes = async () => {
   try {
     const db = await connection();
-    const resultSet = await db.getTable('recipes').select(['user', 'name']).execute();
+    const resultSet = await db.getTable('recipes').select(['id', 'user', 'name']).execute();
     const data = await resultSet.fetchAll();
-    return data.map(([user, name]) => ({
+    return data.map(([id, user, name]) => ({
+      id,
       user,
       name,
     }));
@@ -24,6 +15,28 @@ const getAllRecipes = async () => {
   }
 };
 
+const getRecipeById = async (idRecipe) => {
+  try {
+    const db = await connection();
+    const resultSet = await db.getTable('recipes')
+      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .where('id = :id')
+      .bind('id', idRecipe)
+      .execute();
+    const [id, user, title, ingredients, instructions] = await resultSet.fetchOne();
+    return {
+      id,
+      user,
+      title,
+      ingredients,
+      instructions,
+    };
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   getAllRecipes,
+  getRecipeById
 };

@@ -35,20 +35,19 @@ const findById = async (ids) =>
   connection()
     .then((db) =>
       db
-        .getTable('recipes')
-        .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .getTable('users')
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
         .where('id = :id_param')
         .bind('id_param', ids)
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, userId, user, name, ingredients, instructions]) => ({
+    .then(([id, email, password, first_name, last_name]) => ({
       id,
-      userId,
-      user,
-      name,
-      ingredients,
-      instructions,
+      email,
+      password,
+      first_name,
+      last_name,
     }));
 
 module.exports = {

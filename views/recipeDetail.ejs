@@ -12,14 +12,14 @@
         <small>Enviado por <%= recipe.user %> </small>
       </div>
       <div>
-        <% if (user) { %>
+        <% if (user && user.id === recipe.userId) { %>
         <div class="d-flex justify-content-around">
-          <a href="/recipe/:id/editar">
+          <a href="/recipe/:id/edit">
             <button data-testid="editar-receita" type="button" class="btn btn-primary">
               Editar Receita
             </button>
           </a>
-          <a href="/recipe/:id/excluir">
+          <a href="/recipe/:id/delete">
             <button data-testid="excluir-receita" type="button" class="btn btn-primary">
               Excluir Receita
             </button>

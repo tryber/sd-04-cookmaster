@@ -16,16 +16,14 @@
       <h1>Cookmaster!</h1>
       <h2>Receitas</h2>
 
-      <% if (user) { %> Usuário logado: <%=user.name %>
+      <% if (user) { %> Usuário logado: <%=user.first_name %>
       <a data-testid="logout" class="m-2" href="/logout">Logout</a>
       <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
       <a data-testid="nova-receita" class="m-2" href="/new">Nova Receita</a>
       <% } else { %>
       <div class="d-flex justify-content-around">
-        <button type="button" class="btn btn-primary">
-          <a data-testid="login" class="m-2" href="/login">Login</a>
-          <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
-        </button>
+        <a data-testid="login" class="btn btn-primary" href="/login"> Login </a>
+        <a data-testid="buscar-receita" class="btn btn-primary" href="/search">Buscar Receita</a>
       </div>
       <% } %> <% recipes.forEach((recipe) => { %>
       <div class="card w-75 m-3">

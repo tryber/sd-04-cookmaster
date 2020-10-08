@@ -13,8 +13,6 @@ const cadastroForm = async (req, res) => res.render('cadastro', { message: null 
 
 const cadastro = async (req, res, redirect) => {
   const isValid = await validation({ ...req.body });
-
-  console.log(isValid);
   if (isValid.status === 'ok') {
     res.render('cadastro', { message: isValid.message });
   } else {
@@ -23,12 +21,15 @@ const cadastro = async (req, res, redirect) => {
 };
 
 // Recipe Details Controllers
-
 const recipeDetails = async (req, res) => {
   const recipe = await recipesModels.findRecipeById(req.params.id);
-  console.log(recipe);
-
+  console.log(req.user, recipe);
   res.render('recipeDetail', { recipe, user: req.user });
+};
+
+const search = async (req, res) => {
+  console.log(req.query);
+  res.render('search', { user: req.user });
 };
 
 module.exports = {
@@ -36,4 +37,5 @@ module.exports = {
   cadastro,
   cadastroForm,
   recipeDetails,
+  search,
 };

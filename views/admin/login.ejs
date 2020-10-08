@@ -11,7 +11,7 @@
     <% } %>
     <form action="/login" method="POST">
       <label for="emailInput">Email: </label>
-      <input type="text" name="email" data-testid="email" /><br />
+      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
       <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
       <% if (redirect) { %>

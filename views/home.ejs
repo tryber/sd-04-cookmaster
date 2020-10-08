@@ -17,22 +17,15 @@
     <p class="text-center">Usuário logado: <%=user.firstName %></p>
     <hr />
     <nav>
-      <button type="button" class="btn btn-primary" data-testid="nova-receita">Nova Receita</button>
+      <a href="" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
 
-      <button type="button" class="btn btn-secondary" data-testid="buscar-receita">
-        Buscar Receita
-      </button>
-      <button type="button" class="btn btn-dark" data-testid="login">Login</button>
-      <button type="button" class="btn btn-danger" data-testid="logout">Logout</button>
+      <a href="" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/logout" class="btn btn-danger" data-testid="logout">Logout</a>
       <% }else { %>
       <p class="text-center">Usuário deslogado:</p>
       <hr />
-      <button type="button" class="btn btn-secondary" data-testid="buscar-receita">
-        Buscar Receita
-      </button>
-      <button type="button" class="btn btn-dark" data-testid="login">Login</button>
-      <button type="button" class="btn btn-danger" data-testid="logout">Logout</button>
-
+      <a href="" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/login" class="btn btn-dark" data-testid="login">Login</a>
       <% } %>
     </nav>
     <hr />

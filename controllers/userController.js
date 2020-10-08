@@ -67,7 +67,7 @@ const updateUser = async (req, res) => {
     userModel.updateUser(req.user.id, data);
     message.push('Cadastro salvo com sucesso!');
   }
-  return res.render('admin/register', { message, user: req.user });
+  return res.render('admin/editUser', { message, user: req.user });
 };
 
 module.exports = {

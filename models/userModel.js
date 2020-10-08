@@ -64,7 +64,7 @@ const isValid = async (data) => {
 const register = async ({ email, password, name, lastName }) => {
   const db = await connection();
   await db.getTable('users')
-    .insert(['email', 'password', 'name', 'lastName'])
+    .insert(['email', 'password', 'first_name', 'last_name'])
     .values(email, password, name, lastName)
     .execute();
 };
@@ -75,8 +75,8 @@ const updateUser = async (Id, { name, lastName, password, email }) => {
     .update()
     .set('password', password)
     .set('email', email)
-    .set('name', name)
-    .set('lastName', lastName)
+    .set('first_name', name)
+    .set('last_name', lastName)
     .where('id = :id')
     .bind('id', Id)
     .execute();

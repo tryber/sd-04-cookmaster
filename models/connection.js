@@ -12,7 +12,7 @@ const config = {
 let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
 
 function connection() {
-  schema /* Se schema já existir: */
+  return schema /* Se schema já existir: */
     ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
     : mysqlx
         .getSession(config)

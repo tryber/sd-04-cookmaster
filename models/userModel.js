@@ -20,7 +20,7 @@ const findById = async (idInput) => {
   return { id, email, password, name, lastName };
 };
 
-const insertUser = async (email, password, first_name, last_name) => {
+const insertUser = async (email, password, firstName, lastName) => {
   const db = await connection();
   const table = await db.getTable('users');
   try {

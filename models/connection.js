@@ -13,8 +13,7 @@ let schema;
 const connection = () => {
   return schema
     ? Promise.resolve(schema)
-    : mysqlx
-        .getSession(config)
+    : mysqlx.getSession(config)
         .then((session) => {
           schema = session.getSchema('cookmaster');
           return schema;

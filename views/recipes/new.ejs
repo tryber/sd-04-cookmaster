@@ -9,17 +9,17 @@
 
 <body>
   <div>
-    <div class="title">
-      <nav class="navbar">
-        <h2>Cookmaster</h2></span>
-        <% if (!user) { %>
-          <span><a href='/login' data-testid="login">Login</a></span>
-        <% } else { %>
-          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
-        <% } %>
-      </nav>
-    </div>
-    <form action="/recipe" method="POST" name="recipeForm">
+    <nav>
+      <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
+        <a data-testid="logout" href="/logout">Logout</a>
+      <% } %>
+      <% if (!user) { %>
+        <a data-testid="login" href="/login" >Login</a>
+      <% } %>
+    </nav>
+    <form action="/recipes" method="POST" name="recipeForm">
       <h3>Nova Receita</h3>
       <div>
         <div>

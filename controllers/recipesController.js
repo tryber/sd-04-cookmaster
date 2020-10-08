@@ -24,9 +24,34 @@ const myRecipes = async (req, res) => {
   res.status(200).render('me/recipes', { recipes, message: null, user: req.user });
 };
 
+const newRecipe = async (req, res) => {
+  res.status(201).render('recipes/new', {
+    user: req.user,
+    nameMessage: null,
+    ingredientsMessage: null,
+    instructionsMessage: null,
+    successMessage: null,
+  });
+};
+
+const addRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  await recipeModel.addRecipe(
+    `${req.user.name} ${req.user.lastName}`,
+    req.user.id,
+    name,
+    ingredients,
+    instructions,
+  );
+
+  res.redirect('/');
+};
+
 module.exports = {
   listRecipes,
   recipeDetails,
   searchRecipes,
   myRecipes,
+  newRecipe,
+  addRecipe,
 };

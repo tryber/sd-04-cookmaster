@@ -29,8 +29,8 @@ app.post('/signUp', signUpController.signUp);
 
 app.get('/recipes/search', middlewares.auth(false), recipeController.searchRecipes);
 
-// app.get('/recipes/new', middlewares.auth(false), recipeController.newRecipe);
-// app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
+app.get('/recipes/new', middlewares.auth(false), recipeController.newRecipe);
+app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
 app.get('/me/recipes', middlewares.auth(true), recipeController.myRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), recipeController.recipeDetails);

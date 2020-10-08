@@ -2,10 +2,10 @@
 // Tereza e Mathieu e esse código abaixo foi reescrito
 // baseado no código do Orlando
 
-const conn = require('./connection');
+const connection = require('./connection');
 
 const findByEmail = async (emailInput) => {
-  const db = await conn();
+  const db = await connection();
   const result = await db
     .getTable('users')
     .select([])
@@ -17,7 +17,7 @@ const findByEmail = async (emailInput) => {
 };
 
 const findById = async (idInput) => {
-  const db = await conn();
+  const db = await connection();
   const table = await db.getTable('users');
   const result = await table.select([]).where('id = :id').bind('id', idInput).execute();
   const [id, email, password, name, lastName] = await result.fetchOne();
@@ -25,7 +25,7 @@ const findById = async (idInput) => {
 };
 
 const addUser = async (email, password, firstName, lastName) => {
-  const db = await conn();
+  const db = await connection();
   return db
     .getTable('users')
     .insert(['email', 'password', 'first_name', 'last_name'])
@@ -34,7 +34,7 @@ const addUser = async (email, password, firstName, lastName) => {
 };
 
 const updateUser = async (id, email, password, firstName, lastName) => {
-  const db = await conn();
+  const db = await connection();
   return db
     .getTable('users')
     .update()

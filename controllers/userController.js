@@ -47,6 +47,18 @@ const logout = (req, res) => {
 const signup = async (req, res) => {
   const { email, password, repeatPassword, name, lastName } = req.body;
   // chamar as validações
+  /*
+  let message;
+  switch (email, password, repeatPassword, name, lastName) {
+    case !userModel.isValidEmail(email):
+      message = 'O email deve ter o formato email@mail.com';
+      break;
+  
+    default:
+      break;
+  }
+  */
+
   if (!userModel.isValidEmail(email)) {
     return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
   }
@@ -69,7 +81,7 @@ const signup = async (req, res) => {
 
   await userModel.add(email, password, repeatPassword, name, lastName);
   res.render('signup', { message: 'Cadastro efetuado com sucesso!' });
-  //res.redirect(redirect || '/login')
+  // res.redirect(redirect || '/login')
 };
 
 module.exports = {

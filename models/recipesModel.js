@@ -45,7 +45,13 @@ const recipesByName = async (recipeName) => {
     .execute();
   const recipes = await stmt.fetchAll();
   // console.log(recipes);
-  return recipes.map(([id, user, name, ingredients, instructions]) => ({ id, user, name, ingredients, instructions }));
+  return recipes.map(([id, user, name, ingredients, instructions]) => ({
+    id,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
 };
 
 const newRecipe = async (userId, nameUser, name, ingredients, instructions) => {

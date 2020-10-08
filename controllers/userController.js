@@ -54,8 +54,8 @@ const validEmail = (email) => {
 
 const validPassword = (password, confirmPass) => {
   let message = '';
-  if (password.length <= 5) return 'A senha deve ter pelo menos 6 caracteres';
-  if (password.length > 5 && password !== confirmPass) return 'As senhas tem que ser iguais';
+  if (password.length <= 5) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (password.length > 5 && password !== confirmPass) message = 'As senhas tem que ser iguais';
   return message;
 };
 

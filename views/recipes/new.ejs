@@ -25,7 +25,7 @@
       <label for="ingredientsInput">Ingredientes: </label>
       <input data-testid="ingredientes" type="text" name="ingredientsInput" id="ingredientsInput" />
       <button data-testid="adicionar-ingrediente" type="button" id="addRecipe" class="btn btn-sm btn-success">Adicionar Ingrediente</button><br />
-      
+
       <!-- A hidden field let web developers include data that cannot be seen or modified by users when a form is submitted. -->
       <!-- https://www.w3schools.com/tags/att_input_type_hidden.asp -->
       <input type="hidden" id="ingredients" name="ingredients">
@@ -54,13 +54,13 @@
 
       list.appendChild(li);
       list.appendChild(btnDel);
-      ingredients.value = arrayIngredients.join(',');    
+      ingredients.value = arrayIngredients.join(',');
       inputIngredients.value = '';
 
       btnDel.addEventListener('click', (e) => {
         ingredients.value = arrayIngredients.filter(ingredient => ingredient !== li.innerHTML);
         li.remove();
-        btnDel.remove();          
+        btnDel.remove();
       })
     });
   </script>

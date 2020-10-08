@@ -32,12 +32,14 @@ const addRecipe = async (req, res) => {
   // console.log(fullName);
 
   if (!name || !ingredients || !instructions || !fullName) {
-    return res.status('500').render('recipes/new', { user: req.user, message: 'Todos os campos devem ser preenchidos' })
+    return res
+      .status('500')
+      .render('recipes/new', { user: req.user, message: 'Todos os campos devem ser preenchidos' });
   }
- 
+
   await Recipes.newRecipe(user.id, fullName, name, ingredients, instructions);
 
-  return res.render('recipes/new', { user: req.user, message: 'Receita cadastrada com sucesso!'})
+  return res.render('recipes/new', { user: req.user, message: 'Receita cadastrada com sucesso!' });
 };
 
 module.exports = {

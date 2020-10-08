@@ -52,10 +52,22 @@ const updateRecipeModel = async (Id, nameRec, ingredients, instructions) => {
     .execute();
 };
 
+const getRecipeByUser = async (id) => {
+  const db = await connection();
+  const allTable = await db.getTable('recipes')
+    .select(['id', 'user', 'name', 'user_id'])
+    .where('user_id = :user_id')
+    .bind('user_id', id)
+    .execute();
+  const results = allTable.fetchAll();
+  return results.map(([id, user, name]) => ({ id, user, name }));
+};
+
 module.exports = {
   getAll,
   getRecipeById,
   searchRecipeModel,
   newRecipeInsert,
   updateRecipeModel,
+  getRecipeByUser,
 };

@@ -11,12 +11,12 @@
     <% console.log(user) %>
     <% if (user && user.id === recipe.userID) { %>
       <button type="button" data-testid="editar-receita">
-        <a href="<%- `/recipe/${recipe.id}/edit` %>">
+        <a href="<%- `/recipes/${recipe.id}/edit` %>">
           Editar Receita
         </a>
       </button>
       <button type="button" data-testid="excluir-receita">
-        <a href="<%- `/recipe/${recipe.id}/delete` %>">
+        <a href="<%- `/recipes/${recipe.id}/delete` %>">
           Exluir Receita
         </a>
       </button>

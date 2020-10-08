@@ -20,7 +20,7 @@ app.get('/cadastro', middlewares.auth(false), (_req, res) => {
 app.get(
   '/recipes/search',
   middlewares.auth(false),
-  controllers.recipeController.searchRecipes
+  controllers.recipeController.searchRecipes,
 );
 
 app.get(

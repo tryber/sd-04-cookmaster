@@ -3,39 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe Details</title>
+    <title>Buscar Receitas</title>
   </head>
   <body>
     <div class="main-container">
-      <%- include('../components/header/header', { user }); %>
+      <%- include('../../components/header/header', { user }); %>
       <main class="main-content">
         <div class="top-bar">
-          <div>
-            <h1><%= recipeResult.title %></h1>
-            <span>Enviada por <%= recipeResult.user %></span>
-          </div>
-          <div class="btn-group">
-            <% if (user) { %>
-            <a href="/recipes/<%= recipeResult.id %>/edit" class="btn" data-testid="editar-receita"
-              >Editar Receita</a
-            >
-            <a
-              href="/recipes/<%= recipeResult.id %>/delete"
-              class="btn danger-btn"
-              data-testid="excluir-receita"
-              >Excluir Receita</a
-            >
-            <% } %>
-          </div>
+          <h1>Buscar Receitas</h1>
         </div>
         <div class="recipe-body">
-          <h2>Ingredientes</h2>
-          <% recipeResult.ingredients && recipeResult.ingredients.split(',').forEach((ingredient) =>
-          { %>
-            <p><%= ingredient %></p>
+          <form action="/recipes/search">
+            <input class="search-bar" data-testid="receita" type="text" name="q">
+            <button type="submit" data-testid="buscar">Buscar</button>
+          </form>
+        </div>
+        <div class="recipes-container">
+          <% recipes.map((recipe) => { %>
+            <div class="recipe-card">
+              <span><%= recipe.name %></span>
+              <span><%= recipe.user %></span>
+              <div>
+                <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+              </div>
+            </div>
           <% }) %>
-          <h2>Mode de Preparo</h2>
-          <p><%= recipeResult.instructions %></p>
         </div>
       </main>
     </div>
@@ -62,13 +54,20 @@
         padding: 5px 50px;
       }
 
-      .recipe-body h2 {
-        margin: 20px 0 15px;
+      .search-bar {
+        font-size: 12pt;
+        height: 30px;
+        text-indent: 10px;
+        width: 70%;
       }
 
-      .recipe-body p {
-        font-size: 14pt;
-        margin: 5px 0;
+      button {
+        background-color: #2d9cdb;
+        border: none;
+        color: white;
+        cursor: pointer;
+        height: 30px;
+        width: 100px;
       }
 
       .cabecalho {
@@ -83,25 +82,6 @@
         padding: 30px;
       }
 
-      .btn-group {
-        padding: 10px 0;
-      }
-
-      .btn {
-        background: #2d9cdb;
-        border: none;
-        box-sizing: border-box;
-        color: white;
-        height: 42px;
-        padding: 15px 20px;
-        text-decoration: none;
-        width: 174px;
-      }
-
-      .danger-btn {
-        background-color: #eb5757;
-      }
-
       .recipes-container {
         box-sizing: border-box;
         padding: 50px;
@@ -114,7 +94,7 @@
         align-items: flex-start;
         background-color: #c4c4c4;
         box-sizing: border-box;
-        display: flex;
+        display: flex ;
         flex-direction: column;
         height: 117px;
         margin: 10px 10px;

@@ -23,9 +23,20 @@ const editRecipe = async (req, res) => res.render('admin/editRecipe');
 
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
+const searchRecipes = async (req, res) => {
+  const { q } = req.query;
+  try {
+    const recipes = await recipe.getRecipesByQuery(q);
+    return res.render('admin/searchRecipes', { recipes, user: req.user });
+  } catch (err) {
+    return err;
+  }
+};
+
 module.exports = {
   listRecipes,
   showRecipeById,
   editRecipe,
   deleteRecipe,
+  searchRecipes,
 };

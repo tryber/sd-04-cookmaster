@@ -14,19 +14,19 @@
         <h1>Receitas</h1>
         <nav class="nav-content">
           <% if (user) { %>
-            <button class="search-btn" data-testid="buscar-receita">
+            <a href="" class="search-btn" data-testid="">
               Minhas Receitas
-            </button>
-            <button class="search-btn" data-testid="nova-receita">
+            </a>
+            <a href="" class="search-btn" data-testid="nova-receita">
               Nova Receita
-            </button>
-            <button class="search-btn" data-testid="buscar-receita">
+            </a>
+            <a href="" class="search-btn" data-testid="">
               Minha Conta
-            </button>
+            </a>
           <% } %>
-          <button class="search-btn" data-testid="buscar-receita" >
+          <a href="/recipes/search" class="search-btn" data-testid="buscar-receita" >
             Buscar Receita
-          </button>
+          </a>
         </nav>
       </div>
       <div class="recipes-container">
@@ -71,6 +71,9 @@
       border: none;
       color: white;
       height: 42px;
+      margin: 0 10px;
+      padding: 15px 25px;
+      text-decoration: none;
       width: 174px;
     }
 

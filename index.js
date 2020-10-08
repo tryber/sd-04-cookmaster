@@ -18,6 +18,12 @@ app.get('/cadastro', middlewares.auth(false), (_req, res) => {
 });
 
 app.get(
+  '/recipes/search',
+  middlewares.auth(false),
+  controllers.recipeController.searchRecipes
+);
+
+app.get(
   '/recipes/:id',
   middlewares.auth(false),
   controllers.recipeController.showRecipeById,

@@ -32,17 +32,18 @@
         <div class="form-group w-75 mx-auto m-2">
           <div class="d-flex align-items-center">
             <input
+              data-testid="ingredientes"
               placeholder="ingrediente aqui..."
               type="text"
               id="inputIngredient"
               class="form-control"
             />
             <button
+              data-testid="adicionar-ingrediente"
               onclick="createIngredient()"
               type="button"
               id="addIng"
               class="btn btn-dark btn-sm m-3"
-              data-testid="adicionar-ingrediente"
             >
               Adicionar Ingrediente
             </button>
@@ -56,8 +57,8 @@
         <div class="form-group w-75 mx-auto m-2">
           <label for="modo-de-preparo">Modo de Preparo</label>
           <textarea
-            class="form-control"
             data-testid="modo-de-preparo"
+            class="form-control"
             name="instructions"
             id="modo-de-preparo"
           >

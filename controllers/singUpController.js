@@ -1,4 +1,4 @@
-const { signUpUserModel } = require('../models/signUpModel');
+const UserModel = require('../models/userModel');
 
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
@@ -42,8 +42,7 @@ const registerUser = async (req, res) => {
   if (regexMessage || passwordMessage) {
     return res.render('cadastro', { message: passwordMessage || regexMessage });
   }
-
-  const warningCount = await signUpUserModel(email, password, name, lastName);
+  const warningCount = await UserModel.signUpUserModel(email, password, name, lastName);
   if (warningCount > 0) {
     return res.render('cadastro', { message: 'erro ao inserir usuario no banco de dados' });
   }

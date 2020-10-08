@@ -1,0 +1,12 @@
+<div>
+  <h1>Cookmaster</h1>
+  <% if (!user) { %>
+    <a href="/login" data-testid="login">
+      login
+    </a>
+  <% } else { %>
+    <a href="/logout" data-testid="logout">
+      logout
+    </a>
+  <% } %>
+</div>

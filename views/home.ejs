@@ -10,29 +10,23 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Cookmaster</h1>
-    <a data-testid="login" href="/login">Login</a>
-    <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
-  </div>
-  <div>
-    <% if (user) { %>
-      <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
-    <% } %>
+  <%- include('./components/header.ejs', { user }) %>
     <h1>Receitas</h1>
-    <button>Buscar Receitas</button>
-  </div>
-  <div>
-    <p>foreach de cards aqui</p>
-    <ul>
-      <h1>Receitas</h1>
-      <% recipes.forEach(({user, recipe, id}) => { %>
-      <li>
-        <%=`${recipe} ${user}`%>
-        <a href=<%= `recipes/${id}` %>>Ver mais</a>
-      </li>
-      <% }) %>
-    </ul>
-  </div>
+    <% if (user) { %>
+      <button data-testid="nova-receita"><a href="/recipes/new">
+        Nova Receita
+      </a></button>
+      <button data-testid="minhas-receitas"><a href="/me/recipes">
+        Minhas Receitas
+      </a></button>
+      <button data-testid="minha-conta"><a href="/me/edit">
+        Minha Conta
+      </a></button>
+    <% } %>
+    <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">
+      Buscar Receita
+    </button>
+    <div>
+      <%- include('./components/recipesCard.ejs', { recipes }) %>
 </body>
 </html>

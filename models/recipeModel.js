@@ -1,21 +1,21 @@
 const connection = require('./connection'); // importar arquivo conexao
 
-const getRecipes = async () => {
+const findAllRecipes = async () => {
   const db = await connection();
   const table = await db.getTable('recipes');
   const results = await table.select([]).execute();
   const recipes = await results.fetchAll();
-  return recipes.map(([id, userId, user, recipe, ingredients, instructions]) => ({
+  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
     id,
     userId,
     user,
-    recipe,
+    name,
     ingredients,
     instructions,
   }));
 };
 
-const getRecipeById = async (recipeId) => {
+const findRecipeById = async (recipeId) => {
   const db = await connection();
   const table = await db.getTable('recipes');
   const result = await table.select([]).where('id = :id').bind('id', recipeId).execute();
@@ -26,4 +26,17 @@ const getRecipeById = async (recipeId) => {
   };
 };
 
-module.exports = { getRecipes, getRecipeById };
+const searchRecipeByName = async (q) => {
+  const db = await connection();
+  const allTable = await db.getTable('recipes')
+    .select(['id', 'user_id', 'user', 'name'])
+    .where('name like :name')
+    .bind('name', `%${q}%`)
+    .execute();
+
+  const results = allTable.fetchAll();
+  const recipes = results.map(([id, userId, user, name]) => ({ id, userId, user, name }));
+  return recipes;
+};
+
+module.exports = { findAllRecipes, findRecipeById, searchRecipeByName };

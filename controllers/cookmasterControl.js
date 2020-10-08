@@ -27,9 +27,16 @@ const recipeDetails = async (req, res) => {
   res.render('recipeDetail', { recipe, user: req.user });
 };
 
+// Search Bar
+
 const search = async (req, res) => {
-  console.log(req.query);
-  res.render('search', { user: req.user });
+  const { q } = req.query;
+  if (!q) return res.render('search', { search: [] });
+  console.log(q);
+
+  const search = await recipesModels.findRecipeByName(q);
+
+  res.render('search', { search, user: req.user });
 };
 
 module.exports = {

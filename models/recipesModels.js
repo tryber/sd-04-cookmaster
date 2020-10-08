@@ -31,20 +31,13 @@ const findRecipeByName = async (recipeName) =>
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .where('name = :name_param')
-        .bind('name_param', recipeName)
+        .select(['id', 'user', 'name'])
+        .where('name like :name')
+        .bind('name', `%${recipeName}%`)
         .execute(),
     )
-    .then((results) => results.fetchOne())
-    .then(([id, userId, user, name, ingredients, instructions]) => ({
-      id,
-      userId,
-      user,
-      name,
-      ingredients,
-      instructions,
-    }));
+    .then((results) => results.fetchAll())
+    .then((data) => data.map(([id, user, name]) => ({ id, user, name })));
 
 module.exports = {
   getAllRecipes,

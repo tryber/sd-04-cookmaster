@@ -4,10 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CookMaster</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <div>
-      <h1>Buscar</h1>
+    <div class="container-sm mt-5">
+      <form action="/recipes/search" method="GET">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Digite sua busca..."
+            data-testid="receita"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" data-testid="buscar">
+              Buscar Receitas
+            </button>
+          </div>
+        </div>
+      </form>
+      <div>
+        <% search.forEach((recipe) => { %>
+        <div class="card w-75 m-3">
+          <div class="card-body">
+            <h5 class="card-title"><%= recipe.name %></h5>
+            <p class="card-text"><%= recipe.user %></p>
+            <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
+          </div>
+        </div>
+
+        <% }) %>
+      </div>
     </div>
   </body>
 </html>

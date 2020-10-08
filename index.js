@@ -29,11 +29,11 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+// Rota Buscar Receita
+app.get('/recipes/search', middlewares.auth(false), controllers.cookmasterControl.search);
+
 // Rotas para Receita Detail
 app.get('/recipes/:id', middlewares.auth(false), controllers.cookmasterControl.recipeDetails);
-
-// Rota Buscar Receita
-app.get('/search', middlewares.auth(false), controllers.cookmasterControl.search);
 
 // APP LISTEN
 app.listen(3000, () => console.log('Listening on 3000'));

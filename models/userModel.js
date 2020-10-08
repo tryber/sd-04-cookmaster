@@ -77,6 +77,21 @@ const createUser = async (email, firstName, lastName, password) => {
   return db;
 };
 
+const updateUser = (id, email, firstName, lastName, password) => {
+  return connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('firstName', firstName)
+      .set('lastName', lastName)
+      .set('password', password)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+};
+
 const isEmailValid = (email = '') => email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i);
 
 const isPasswordValid = (password = '') => password.length >= 6;
@@ -97,4 +112,5 @@ module.exports = {
   isCounterPasswordValid,
   isEmailValid,
   createUser,
+  updateUser,
 };

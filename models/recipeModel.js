@@ -8,7 +8,7 @@ async function getAllRecipes() {
   return data.map(([user, name]) => ({ user, name }));
 }
 
-async function getRecipesByUserId(userId) {
+async function getRecipesByUserId(user_id) {
   return connection()
     .then((db) =>
       db

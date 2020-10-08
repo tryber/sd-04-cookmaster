@@ -19,11 +19,11 @@
       <% if (user) { %> Usuário logado: <%=user.name %>
       <a data-testid="logout" class="m-2" href="/logout">Logout</a>
       <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
+      <a data-testid="nova-receita" class="m-2" href="/new">Nova Receita</a>
       <% } else { %>
       <div class="d-flex justify-content-around">
         <button type="button" class="btn btn-primary">
           <a data-testid="login" class="m-2" href="/login">Login</a>
-          <a data-testid="nova-receita" class="m-2" href="/new">Nova Receita</a>
           <a data-testid="buscar-receita" class="m-2" href="/search">Buscar Receita</a>
         </button>
       </div>
@@ -32,7 +32,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= recipe.name %></h5>
           <p class="card-text"><%= recipe.user %></p>
-          <a href="/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
+          <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
         </div>
       </div>
 

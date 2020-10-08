@@ -56,10 +56,26 @@ const registerForm = async (req, res) => {
   return res.render('admin/register', { message });
 };
 
+const updateUserPage = async (req, res) => {
+  res.render('admin/editUser', { user: req.user, message: null });
+};
+
+const updateUser = async (req, res) => {
+  const data = req.body;
+  const message = await userModel.isValid(data);
+  if (message.length === 0) {
+    userModel.updateUser(req.user.id, data);
+    message.push('Cadastro salvo com sucesso!');
+  }
+  return res.render('admin/register', { message, user: req.user });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   register,
   registerForm,
+  updateUserPage,
+  updateUser,
 };

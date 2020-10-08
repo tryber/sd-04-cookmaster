@@ -69,9 +69,23 @@ const register = async ({ email, password, name, lastName }) => {
     .execute();
 };
 
+const updateUser = async (Id, { name, lastName, password, email }) => {
+  const db = await connection();
+  await db.getTable('users')
+    .update()
+    .set('password', password)
+    .set('email', email)
+    .set('first_name',name)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', Id)
+    .execute();
+};
+
 module.exports = {
   findByEmail,
   findById,
   isValid,
   register,
+  updateUser,
 };

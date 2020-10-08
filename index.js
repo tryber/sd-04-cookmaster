@@ -40,6 +40,9 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.listAllControler.re
 
 app.get('/me/recipes', middlewares.auth(), controllers.listAllControler.myRecipes);
 
+app.get('/me/edit', middlewares.auth(), controllers.userController.updateUserPage);
+app.post('/me/edit', middlewares.auth(), controllers.userController.updateUser);
+
 app.use('*', (_req, res) => res.status(404).json({ message: 'Página não encontrada' }));
 
 app.listen(3000, () => console.log('A mãe tá ON na porta 3000'));

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="container-sm mt-5">
+        <h2>Cookmaster - Cadastro</h2>
+
+        <form action="/cadastro" method="POST">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input name="email" data-testid="email" type="email" class="form-control" />
+            <% if (messageEmail) {%>
+            <p class="message"><%= messageEmail %></p>
+            <% } %>
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input required data-testid="senha" type="password" class="form-control" name="senha" />
+            <% if (messagePass) {%>
+            <p class="message"><%= messagePass %></p>
+            <% } %>
+          </div>
+          <div class="form-group">
+            <label for="confirmarSenha">Confirma Senha</label>
+            <input
+              required
+              name="confirmarSenha"
+              data-testid="confirmar-senha"
+              type="password"
+              class="form-control"
+              id="confirmarSenha"
+            />
+            <% if (messagePassAgain) {%>
+            <p class="message"><%= messagePassAgain %></p>
+            <% } %>
+          </div>
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input required data-testid="nome" name="nome" type="text" class="form-control" />
+            <% if (messageNome) {%>
+            <p class="message"><%= messageNome %></p>
+            <% } %>
+          </div>
+          <div class="form-group">
+            <label for="Sobrenome">Sobrenome</label>
+            <input
+              required
+              data-testid="sobrenome"
+              name="sobrenome"
+              type="text"
+              class="form-control"
+            />
+            <% if (messageSobrenome) {%>
+            <p class="message"><%= messageSobrenome %></p>
+            <% } %>
+          </div>
+          <a href="/login">Fazer Login</a>
+          <button class="float-right" type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

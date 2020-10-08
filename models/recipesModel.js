@@ -70,7 +70,12 @@ const editRecipe = async (recipeID, recipeName, ingredients, instructions) => {
 
 const removeRecipe = async (id) => {
   await connection().then((db) =>
-    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+    db
+      .getTable('recipes')
+      .delete()
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
   );
 };
 

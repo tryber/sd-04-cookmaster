@@ -14,11 +14,11 @@
       <%= message %>
     </div>
     <% } %>
-    <form caction="/login" method="POST" class="form-container d-flex flex-column justify-content-center">
+    <form caction="/login" method="POST" class="form-container form d-flex flex-column justify-content-center">
       <label for="emailInput">Email: </label>
-      <input data-testid="email" type="text" name="email" id="emailInput" /><br />
+      <input data-testid="email" type="text" name="email" id="emailInput" class="form-group" /><br />
       <label for="passwordInput">Senha: </label>
-      <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
+      <input data-testid="senha" type="password" name="password" id="passwordInput" class="form-group" /><br />
       <% if (redirect) { %>
       <input
         type="hidden"

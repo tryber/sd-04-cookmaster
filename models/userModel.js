@@ -1,6 +1,6 @@
 /* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
 
-//const { connect } = require('mysql2');
+// const { connect } = require('mysql2');
 const connection = require('./connection');
 
 /* Substitua o código das funções abaixo para que ela,
@@ -21,7 +21,13 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([idUser, email, password, name, lastName]) => ({ idUser, email, password, name, lastName }));
+    .then(([idUser, emailUser, password, name, lastName]) => ({
+      idUser,
+      emailUser,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 /**
@@ -39,7 +45,13 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([idUser, email, password, name, lastName]) => ({
+      idUser,
+      email,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 module.exports = {

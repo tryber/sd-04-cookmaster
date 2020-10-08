@@ -22,19 +22,22 @@
 
       <%}%>
     </div>
+
     <h1>Receitas</h1>
 
-    <a href="">Ver mais</a>
-    <% if(user) { %>
-    <button data-testid="nova-receita">Nova Receita</button>
+       <% if(user) { %>
+    <a <a href="<%="/recipes/new" %> data-testid="nova-receita">Nova Receita</a>
 
     <%}%>
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <a data-testid="buscar-receita">Buscar Receita</a>
 
     <% recipes.forEach(recipe => { %>
     <h3><%= recipe.user + recipe.name%></h3>
+    <a href=`/receita/${receita.id}` %> >Ver mais</a>
+
 
     <% })%>
+    
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"

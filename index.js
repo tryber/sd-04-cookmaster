@@ -40,4 +40,4 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.listAllControler.re
 
 app.get('/me/recipes', middlewares.auth(), controllers.listAllControler.myRecipes);
 
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(3000, () => console.log('A mãe tá ON na porta 3000'));

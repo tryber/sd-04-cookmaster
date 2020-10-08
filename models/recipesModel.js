@@ -5,15 +5,15 @@ const getAll = async () =>
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .select(['id', 'user_Id', 'user', 'name', 'ingredients', 'instructions'])
         .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, user_Id, user, name, ingredients, instructions]) => ({
         id,
         user,
-        user_id,
+        user_Id,
         name,
         ingredients,
         instructions,
@@ -32,9 +32,9 @@ const getAllByUserId = async (userId) =>
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_id, name, ingredients, instruction]) => ({
+      recipes.map(([id, user_Id, name, ingredients, instruction]) => ({
         id,
-        user_id,
+        user_Id,
         name,
         ingredients,
         instruction,
@@ -52,9 +52,9 @@ const getById = async (id) =>
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, user_id, name, ingredients, instruction]) => ({
+    .then(([user_Id, name, ingredients, instruction]) => ({
       id,
-      user_id,
+      user_Id,
       name,
       ingredients,
       instruction,

@@ -23,7 +23,7 @@ const buscarRecipe = async (req, res) => {
   } else {
     recipeModel
       .findByName(q)
-      .then((recipe) => res.render('recipes/buscar', { recipe, user: req.user }))
+      .then((sucesso) => res.render('recipes/buscar', { recipe: sucesso, user: req.user }))
       .catch(() => res.send('Receita não existe'));
   }
 };

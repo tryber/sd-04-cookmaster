@@ -75,7 +75,7 @@ const updateUser = async (Id, { name, lastName, password, email }) => {
     .update()
     .set('password', password)
     .set('email', email)
-    .set('first_name',name)
+    .set('first_name', name)
     .set('last_name', lastName)
     .where('id = :id')
     .bind('id', Id)

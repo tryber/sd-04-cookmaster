@@ -40,7 +40,7 @@ const searchRecipe = async (req, res) => {
   const response = {
     user,
     recipes: recipes || null,
-    messages: (recipes) ? null : 'Nenhuma receita encontrada.',
+    messages: recipes ? null : 'Nenhuma receita encontrada.',
   };
 
   return res.render('search', response);
@@ -49,11 +49,13 @@ const searchRecipe = async (req, res) => {
 const createRecipe = async (req, res) => {
   const { recipe } = req.body;
 
-  if (!recipeModel.isRecipeValid(recipe)) res.render('/', { message: 'Invalid recipe data.' });
+  if (recipe) return res.render('new-recipe', { messages: null });
 
   const result = await recipeModel.create(recipe);
 
-  return result ? res.redirect('/') : res.render('/', { message: 'Recipe could not be added.' });
+  return res.render('/new-recipe', {
+    message: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
+  });
 };
 
 module.exports = {

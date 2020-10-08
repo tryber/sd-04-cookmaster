@@ -8,7 +8,7 @@
         <button type="submit" class="btn btn-primary mb-2" data-testid="buscar">Buscar Receita</button>
       </form>
 
-      <% if ( recipe ) { %>
+
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= recipe.name %></h5>
@@ -16,7 +16,7 @@
             <a href="details/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
           </div>
         </div>
-      <% } %>
+
     </div>
   </body>
 </html>

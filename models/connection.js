@@ -10,7 +10,7 @@ const config = {
 };
 
 let schema;
-const connection = () => {
+function connection (){
   return schema
     ? Promise.resolve(schema)
     : mysqlx.getSession(config)

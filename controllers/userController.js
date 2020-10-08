@@ -47,38 +47,54 @@ const logout = (req, res) => {
 
 const registrationForm = async (req, res) => {
   const { email, password, passwordConfirmation, name, lastName } = req.body;
-  let messageErrorLogin = '';
-  let userDataError = 0;
+  // let messageErrorLogin = '';
+  // let userDataError = 0;
 
-  if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
-    userDataError = 1;
-    messageErrorLogin = 'O email deve ter o formato email@mail.com';
-  }
-  if (password.length < 6) {
-    userDataError = 1;
-    messageErrorLogin = 'A senha deve ter pelo menos 6 caracteres';
-  }
-  if (password !== passwordConfirmation && password.length > 5) {
-    userDataError = 1;
-    messageErrorLogin = 'As senhas tem que ser iguais';
-  }
-  if (name.length < 3) {
-    userDataError = 1;
-    messageErrorLogin =
-      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  if (lastName.length < 3) {
-    userDataError = 1;
-    messageErrorLogin =
-      'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  if (userDataError === 1) {
+  // if (!/([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/gim.test(email)) {
+  //   userDataError = 1;
+  //   messageErrorLogin = 'O email deve ter o formato email@mail.com';
+  // }
+  // if (password.length < 6) {
+  //   userDataError = 1;
+  //   messageErrorLogin = 'A senha deve ter pelo menos 6 caracteres';
+  // }
+  // if (password !== passwordConfirmation && password.length > 5) {
+  //   userDataError = 1;
+  //   messageErrorLogin = 'As senhas tem que ser iguais';
+  // }
+  // if (name.length < 3) {
+  //   userDataError = 1;
+  //   messageErrorLogin =
+  //     'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  // }
+  // if (lastName.length < 3) {
+  //   userDataError = 1;
+  //   messageErrorLogin =
+  //     'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  // }
+  // if (userDataError === 1) {
+  //   return res.render('userRegistration', {
+  //     message: messageErrorLogin,
+  //   });
+  // }
+
+  const validationReturn = userModel.validationRegistrationData(
+    email,
+    password,
+    passwordConfirmation,
+    name,
+    lastName,
+  );
+  if (validationReturn === 'ok') {
+    await userModel.createUser(email, password, name, lastName);
+    return res
+      .status(201)
+      .render('registeredSuccess', { message: 'Cadastro efetuado com sucesso!' });
+  } else {
     return res.render('userRegistration', {
-      message: messageErrorLogin,
+      message: validationReturn,
     });
   }
-  await userModel.createUser(email, password, name, lastName);
-  return res.status(201).render('registeredSuccess', { message: 'Cadastro efetuado com sucesso!' });
 };
 
 module.exports = {

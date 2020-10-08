@@ -10,10 +10,9 @@ const getAll = async () =>
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_Id, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, user, name, ingredients, instructions]) => ({
         id,
         user,
-        user_Id,
         name,
         ingredients,
         instructions,
@@ -32,9 +31,8 @@ const getAllByUserId = async (userId) =>
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, user_Id, name, ingredients, instruction]) => ({
+      recipes.map(([id, name, ingredients, instruction]) => ({
         id,
-        user_Id,
         name,
         ingredients,
         instruction,
@@ -52,9 +50,8 @@ const getById = async (id) =>
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([user_Id, name, ingredients, instruction]) => ({
+    .then(([name, ingredients, instruction]) => ({
       id,
-      user_Id,
       name,
       ingredients,
       instruction,

@@ -21,7 +21,7 @@ function connection() {
           schema = session.getSchema('cookmaster');
           return schema;
         })
-        .catch((_err) => {
+        .catch(() => {
           process.exit(1);
         });
 }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Cookmaster - Home</title>
   </head>
-  <body class="text-center">    
+  <body class="text-center">
     <header class="bg-dark d-flex justify-content-between">
     </header>
     <div class="container">
@@ -19,7 +19,7 @@
             <span>Hello, <%= user.name %></span>
             <a href="/recipes/new" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
             <a href="/logout" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
-          <% }  else { %>            
+          <% }  else { %>
             <a href="/login" data-testid="login" class="btn btn-sm btn-primary">Login</a>
           <% } %>
           <a href="/recipes/search" data-testid="buscar-receita" class="btn btn-sm btn-primary">Buscar Receita</a>

@@ -46,9 +46,23 @@ const addRecipe = async ({ id, name, lastName }, { recipeName, ingredients, inst
     .values(id, `${name} ${lastName}`, recipeName, ingredients, instructions)
     .execute();
 };
+
+const updateRecipe = async (Id, recipeName, ingredients, instructions) => {
+  const db = await connection();
+  await db.getTable('recipes')
+    .update()
+    .set('name', recipeName)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :id')
+    .bind('id', Id)
+    .execute();
+};
+
 module.exports = {
   findAllRecipes,
   findRecipeById,
   searchRecipeByName,
   addRecipe,
+  updateRecipe,
 };

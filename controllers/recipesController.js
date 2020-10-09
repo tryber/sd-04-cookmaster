@@ -1,4 +1,5 @@
-const { findAllRecipes, findRecipeById, searchRecipeByName, addRecipe } = require('../models/recipeModel');
+const { findAllRecipes,findRecipeById, searchRecipeByName,
+  addRecipe, updateRecipe} = require('../models/recipeModel');
 
 const index = async (req, res) => {
   const recipes = await findAllRecipes();
@@ -23,7 +24,7 @@ const searchRecipe = async (req, res) => {
   return res.render('search', { recipes, user: req.user });
 };
 
-const NewRecipe = async (req, res) => res.render('newRecipe', { message: null, user: req.user });
+const newRecipe = async (req, res) => res.render('newRecipe', { message: null, user: req.user });
 
 const newRecipeForm = async (req, res) => {
   const formData = req.body;
@@ -31,10 +32,27 @@ const newRecipeForm = async (req, res) => {
   res.redirect('/');
 };
 
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await findRecipeById(id);
+
+  res.render('editRecipe', { recipe, user: req.user });
+};
+
+const recipeUpdate = async (req, res) => {
+  const { recipeName, ingredients, instructions } = req.body;
+  const { id } = req.params;
+
+  await updateRecipe(id, recipeName, ingredients, instructions);
+  res.redirect('/');
+};
+
 module.exports = {
   index,
   findRecipeDetails,
   searchRecipe,
-  NewRecipe,
+  newRecipe,
   newRecipeForm,
+  editRecipe,
+  recipeUpdate,
 };

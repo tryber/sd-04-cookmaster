@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Login</title>
+    <title>Cookmaster - Deletar Receita</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -13,25 +13,15 @@
   </head>
   <body>
     <% if (message) {%>
-    <div class="message"><%= message %></div>
-    <% } %>
+      <div class="message"><%= message %></div>
+      <% } %>
     <div class="d-flex flex-column align-items-center mt-5 border">
-      <h2>Login</h2>
+      <h2>Corfirme a exclusão da receita</h2>
       <div class="d-flex justify-content-center">
-        <form action="/login" method="POST">
+        <form action="/recipes/<%= id %>/delete" method="POST">
           <div class="form-group">
             <div>
-              <label for="emailInput">Email: </label>
-              <input
-                data-testid="email"
-                class="form-control"
-                type="text"
-                name="email"
-                id="emailInput"
-              /><br />
-            </div>
-            <div>
-              <label for="passwordInput">Senha: </label>
+              <label for="passwordInput">Digite sua senha: </label>
               <input
                 data-testid="senha"
                 class="form-control"
@@ -40,11 +30,8 @@
                 id="passwordInput"
               /><br />
             </div>
-            <% if (redirect) { %>
-            <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
-            <% } %>
-            <a href="/signup" class="btn btn-primary" data-testid="cadastrar">Cadastre-se</a>
-            <button class="btn btn-primary" data-testid="entrar" type="submit">Login</button>
+            <a href="/" class="btn btn-primary" data-testid="cancelar">Cancelar</a>
+            <button class="btn btn-primary" data-testid="confirmar" type="submit">Confirmar</button>
           </div>
         </form>
       </div>

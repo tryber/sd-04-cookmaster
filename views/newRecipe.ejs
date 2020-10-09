@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Nova Receita</title>
+  </head>
+  <body>
+    <div><%- include('./header.ejs', { user }); %></div>
+    <div>
+      <h1>Nova Receita</h1>
+      <form action="/recipes" method="POST">
+        <div class="form-group">
+          <div>
+            <label for="nameRecipe">Nome da Receita </label>
+            <input
+              data-testid="nome-receita"
+              class="form-control"
+              type="text"
+              name="nameRecipe"
+              id="nameRecipe"
+            /><br />
+          </div>
+          <div>
+            <label for="ingredients">Ingredientes </label>
+            <ul id="ingredientsList"></ul>
+            <div class="d-flex">
+              <input
+                data-testid="ingredientes"
+                class="form-control"
+                type="text"
+                name="ingredients"
+                id="ingredients"
+              /><br />
+              <input
+                class="btn btn-primary"
+                data-testid="adicionar-ingrediente"
+                value="Adicionar Ingrediente"
+                type="button"
+                id="ingredientButton"
+              />
+            </div>
+            <label for="modoPreparo">Modo de preparo</label>
+            <textarea
+              class="form-control"
+              data-testid="modo-de-preparo"
+              name="modoPreparo"
+            ></textarea>
+            <button class="btn btn-primary" data-testid="postar-receita" type="submit">
+              Salvar Receita
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      const addButton = document.getElementById('ingredientButton');
+      const ingredientsList = document.getElementById('ingredientsList');
+
+      const insertIngredient = () => {
+        const ingredientToInsert = document.getElementById('ingredients').value;
+        const list = document.createElement('li');
+        const input = document.createElement('input');
+        input.value = ingredientToInsert;
+        input.name = 'item[]';
+        const btnRemove = document.createElement('input');
+        btnRemove.value = 'Excluir Ingrediente';
+        btnRemove.className = 'btn btn-primary';
+        btnRemove.addEventListener('click', () => {
+          btnRemove.parentNode.remove();
+        });
+        list.appendChild(input);
+        list.appendChild(btnRemove);
+        ingredientsList.appendChild(list);
+        document.getElementById('ingredients').value = '';
+      };
+
+      addButton.addEventListener('click', insertIngredient);
+    </script>
+  </body>
+</html>

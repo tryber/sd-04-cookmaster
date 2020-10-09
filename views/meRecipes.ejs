@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Minhas Receitas</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -15,17 +15,11 @@
     <div><%- include('./header.ejs', { user }); %></div>
     <div>
       <div class="d-flex justify-content-between align-items-center p-3">
-        <h1>Receitas</h1>
-        <div>
-          <% if (user) { %>
-          <a href="/me/recipes" data-testid="minhas-receitas" class="btn btn-primary">Minhas Receitas</a>
-          <a href="/recipes/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
-          <% } %>
-          <a href="/recipes/search" class="btn btn-primary" data-testid="buscar-receita"
-            >Buscar Receita</a
-          >
-        </div>
+        <h1>Minhas Receitas</h1>
       </div>
+      <% if (recipes.length === 0) { %>
+      <h3>Você ainda não tem receitas cadastradas</h3>
+      <% } else { %>
       <div class="d-flex justify-content-around flex-wrap">
         <% recipes.forEach((recipe) => { %>
         <div class="container-md card mb-4" style="width: 18rem">
@@ -35,7 +29,7 @@
             <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
           </div>
         </div>
-        <% }) %>
+        <% }) %> <% } %>
       </div>
     </div>
   </body>

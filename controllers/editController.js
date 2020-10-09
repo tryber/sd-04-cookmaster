@@ -12,7 +12,7 @@ const registerRecipe = async (req, res) => {
     user.id,
     `${user.name} ${user.lastName}`,
     name,
-    ingredients,
+    ingredients.join(','),
     instructions,
   );
   res.redirect('/');
@@ -32,7 +32,7 @@ const editRecipe = async (req, res) => {
 const updateRecipe = async (req, res) => {
   const { id } = req.params;
   const { name, ingredients, instructions } = req.body;
-  await Recipe.updateRecipe(id, name, ingredients, instructions);
+  await Recipe.updateRecipe(id, name, ingredients.join(','), instructions);
   res.redirect('/');
 };
 

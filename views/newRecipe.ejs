@@ -39,7 +39,7 @@
             class="mb-3 form-control"
             data-testid="ingredientes"
             type="text"
-            name="ingredients"
+            name="ingredientsInput"
             id="ingredienteInput"
           />
           <a
@@ -79,10 +79,11 @@
       if (inputIng.value === '') {
       } else {
         const cont = document.createElement('div');
-        const item = document.createElement('p');
+        const item = document.createElement('input');
         const btn = document.createElement('a');
         item.className = 'mr-5';
-        item.innerHTML = inputIng.value;
+        item.value = inputIng.value;
+        item.name = 'ingredients[]';
         btn.className = 'btn btn-danger btn-sm align-self-center';
         btn.innerText = 'Excluir Ingrediente';
         btn.id = 'del-ing';

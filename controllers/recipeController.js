@@ -76,9 +76,13 @@ const removeRecipe = async (req, res) => {
 const editRecipe = async (req, res) => {
   const userActual = req.user;
   const isUser = User.findById(req.user.iD);
-  res.status(200).render('home');
+  const recipe =
+  res.status(200).render('editRecipes', { user: userActual });
 };
 
+const myRecipes = async (req, res) => {
+  res.status(200).render('myRecipes', { user: req.user });
+};
 module.exports = {
   recipeDetails,
   listAllRecipes,
@@ -87,4 +91,6 @@ module.exports = {
   searchRecipe,
   removeRecipe,
   renderRemoveRecipe,
+  editRecipe,
+  myRecipes,
 };

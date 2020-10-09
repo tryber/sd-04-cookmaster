@@ -19,9 +19,9 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipeController
 app.get('/recipes/new', middlewares.auth(true), controllers.recipeController.newRecipe);
 app.post('/recipes/new', middlewares.auth(true), controllers.recipeController.addRecipe);
 
-app.get('/me/recipes', middlewares.auth());
+app.get('/me/recipes', middlewares.auth(), controllers.recipeController.myRecipes);
 
-app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.listAllRecipes);
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editRecipe);
 // app.put('/recipes/:id', authMiddleware.auth());
 
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.renderRemoveRecipe);

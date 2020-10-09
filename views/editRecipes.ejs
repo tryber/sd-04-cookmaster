@@ -14,7 +14,7 @@
   <body>
     <%- include('headerCook') %>
 
-    <h3 class="text-center">Nova Receita</h3>
+    <h3 class="text-center">Editar Receita</h3>
     <div class="card w-75 mx-auto">
       <form action="/recipes/new" method="POST">
         <div class="form-group w-75 mx-auto m-2">
@@ -37,8 +37,6 @@
               type="text"
               id="inputIngredient"
               class="form-control m-2"
-              name="ingredients"
-              required
             />
             <button
               data-testid="adicionar-ingrediente"
@@ -50,11 +48,20 @@
               Adicionar Ingrediente
             </button>
           </div>
-          <div id="message"></div>
 
           <h6 class="text-center" id="ingTitle">Ingredientes:</h6>
 
-          <ul class="d-flex align-items-center" id="ing-list"></ul>
+          <ul class="d-flex">
+            <div id="ing-list"></div>
+            <!-- <% recipe.ingredients.split(',').forEach((ingredient) => { %>
+            <li>
+              <input type="text" name="ingredient[]" value="<%= ingredient %>" />
+              <button onclick="dropList('<%= ingredient %>')" type="button">
+                Excluir Ingrediente
+              </button>
+            </li>
+            <% }) %> -->
+          </ul>
         </div>
 
         <div class="form-group w-75 mx-auto m-2">
@@ -77,27 +84,21 @@
       </form>
     </div>
     <script>
+      function dropList(id) {
+        const deleteee = document.getElementById(id);
+        deleteee.parentElement.remove();
+      }
+    </script>
+    <!-- <script>
       const buttonAddIngredient = document.getElementById('addIng');
       const ingredientsUL = document.getElementById('ing-list');
       const inputIngredient = document.getElementById('inputIngredient');
 
       const inputHidden = document.getElementById('inputHidden');
 
-      const div = document.getElementById('message');
-
       let inputValues = [];
 
       const createIngredient = () => {
-        if (inputIngredient.value === '') {
-          // const message = document.createElement('span');
-
-          // div.appendChild(message);
-
-          // message.textContent = 'Digite algo...';
-
-          return null;
-        }
-
         const li = document.createElement('li');
         const btnRemove = document.createElement('button');
 
@@ -113,7 +114,7 @@
         ingredientsUL.appendChild(li);
         ingredientsUL.appendChild(btnRemove);
 
-        btnRemove.className += 'btn btn-danger btn-sm m-1';
+        btnRemove.className += 'btn btn-danger btn-sm';
         btnRemove.type = 'button';
         btnRemove.addEventListener('click', () => {
           inputValues = inputValues.filter((value) => value !== li.textContent);
@@ -126,6 +127,7 @@
 
         inputHidden.value = inputValues.join();
       };
-    </script>
+
+    </script> -->
   </body>
 </html>

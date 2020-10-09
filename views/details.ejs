@@ -38,7 +38,7 @@
       <div class="mb-3">
         <% if (user != null) { %>
         <a class="btn btn-primary" data-testid="editar-receita" href="/recipes/<%= recipe.id %>/edit">Editar Receita</a>
-        <a class="btn btn-primary" data-testid="excluir-receita" href="/delete">Excluir Receita</a>
+        <a class="btn btn-primary" data-testid="excluir-receita" href="/recipes/<%= recipe.id %>/delete">Excluir Receita</a>
         <%} %>
       </div>
       <h3>Ingredientes</h3>

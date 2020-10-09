@@ -23,7 +23,7 @@
     </div>
     <h2 class="mt-5 text-center">Editar Receita</h2>
     <div class="m-5 p-8">
-      <form class="form-signin" action="/recipes/<%= recipe.id %>" method="POST">
+      <form action="/recipes/<%= recipe.id %>" method="POST">
         <label for="nameInput">Nome da Receita</label>
         <input
           class="mb-3 form-control"
@@ -31,7 +31,7 @@
           type="text"
           name="name"
           id="nameInput"
-          placeholder="<%= recipe.name %>"
+          value="<%= recipe.name %>"
         />
         <div>
           <label for="ingredienteInput">Ingredientes </label>
@@ -64,10 +64,10 @@
           type="text"
           name="instructions"
           id="preparoInput"
-          placeholder="<%= recipe.instructions %>"
+          value="<%= recipe.instructions %>"
         />
         <a class="btn btn-lg btn-primary" href="/">Voltar</a>
-        <button data-testid="postar-receita" class="btn btn-lg btn-primary" type="submit" href="/">
+        <button data-testid="postar-receita" class="btn btn-lg btn-primary" type="submit">
           Salvar Receita
         </button>
       </form>

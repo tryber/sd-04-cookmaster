@@ -25,6 +25,9 @@ app.post('/login', controllers.userController.login);
 app.get('/cadastro', (_req, res) => res.render('cadastro', { message: null }));
 app.post('/cadastro', controllers.signUpController);
 
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.excludeRecipeView);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.excludeRecipe);
+
 app.get('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
 app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipeForm);
 

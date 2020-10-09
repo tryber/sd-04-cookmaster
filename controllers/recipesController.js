@@ -1,7 +1,9 @@
 const {
   findAllRecipes, findRecipeById, searchRecipeByName,
-  addRecipe, updateRecipe,
+  addRecipe, updateRecipe, deleteRecipe,
 } = require('../models/recipeModel');
+
+const { findById } = require('../models/userModel');
 
 const index = async (req, res) => {
   const recipes = await findAllRecipes();
@@ -49,6 +51,28 @@ const recipeUpdate = async (req, res) => {
   res.redirect('/');
 };
 
+const excludeRecipeView = async (req, res) => {
+  const recipe = req.params;
+
+  res.render('deleteRecipe', { message: null, recipe, user: req.user });
+};
+
+const excludeRecipe = async (req, res) => {
+  const recipe = req.params;
+  const { id } = req.user;
+  const { confirmPassword } = req.body;
+
+  const realUser = await findById(id);
+  const { password } = realUser;
+
+  if (confirmPassword !== password) {
+    res.render('deleteRecipe', { message: 'Senha Incorreta.', recipe, user: req.user });
+  }
+
+  await deleteRecipe(recipe.id);
+  res.redirect('/');
+};
+
 module.exports = {
   index,
   findRecipeDetails,
@@ -57,4 +81,6 @@ module.exports = {
   newRecipeForm,
   editRecipe,
   recipeUpdate,
+  excludeRecipeView,
+  excludeRecipe,
 };

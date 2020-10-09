@@ -16,14 +16,14 @@ const findByEmail = async (email) => {
       db
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        .where('email = :email')
-        .bind('email', email)
+        .where('email = :email_param')
+        .bind('email_param', email)
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([idUser, emailUser, password, name, lastName]) => ({
-      idUser,
-      emailUser,
+    .then(([id, email, password, name, lastName]) => ({
+      id,
+      email,
       password,
       name,
       lastName,
@@ -45,8 +45,8 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([idUser, email, password, name, lastName]) => ({
-      idUser,
+    .then(([id, email, password, name, lastName]) => ({
+      id,
       email,
       password,
       name,

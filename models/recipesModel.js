@@ -53,17 +53,17 @@ const searchRecipes = async (q) =>
 
 // DELETA RECEITA -----------------------------------------------------
 
-const deleteRecipe = (id) => 
+const deleteRecipe = (id) =>
   connection().then((db) =>
     db.getTable('recipes').delete().where('id = :id').bind('id', id)
     .execute(),
   );
 
 // // MINHAS RECEITAS ----------------------------------------------------
-const getAllByUserId = async (userId) =>
+const getAllByUserId = async (userIdInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select().where('user_id = :userId').bind('userId', userId)
+      db.getTable('recipes').select().where('user_id = :userIdInput').bind('userIdInput', userIdInput)
       .execute(),
     )
     .then((results) => results.fetchAll())

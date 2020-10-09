@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <style>
+      .my-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .my-box {
+        border: 2px solid black;
+        width: 25%;
+      }
+    </style>
+    <title>Cookmaster - Minhas Receitas</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Confirme a exclusão da receita</h2>
+      <% if (message) {%>
+        <div class="mt-5 message"><%= message %></div>
+        <% } %>
+      <form action="/recipes/<%= recipe.id %>/delete" method="POST">
+        <label for="passwordInput">Senha</label>
+        <input
+          class="mb-3 form-control"
+          data-testid="senha"
+          type="password"
+          name="password"
+          id="passwordInput"
+        />
+        <a href="/recipes/<%= recipe.id %>" data-testid="cancelar">Cancelar</a>
+        <button data-testid="confirmar">Confirmar</button>
+      </form>
+    </div>
+  </body>
+</html>

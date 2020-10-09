@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Cookmaster - Cadastro</title>
+  </head>
+  <body class="text-center">
+      <h2 class="mt-5">Cookmaster - Cadastro</h2>
+    <% if (message) {%>
+    <div class="mt-5 message"><%= message %></div>
+    <% } %>
+    <div class="m-5 p-8">
+      <form class="form-signin" action="/cadastro" method="POST">
+        <label class="sr-only" for="emailInput">Email </label>
+        <input
+          class="mb-3 form-control"
+          data-testid="email"
+          type="text"
+          name="email"
+          id="emailInput"
+          placeholder="Email"
+        />
+        <label class="sr-only" for="passwordInput">Senha </label>
+        <input
+          class="mb-3 form-control"
+          data-testid="senha"
+          type="password"
+          name="password"
+          id="passwordInput"
+          placeholder="Senha"
+        />
+        <label class="sr-only" for="passwordConfirmInput">Confirmar Senha </label>
+        <input
+        data-testid="confirmar-senha"
+          class="mb-3 form-control"
+          data-testid="senha"
+          type="password"
+          name="passconfirm"
+          id="passwordConfirmInput"
+          placeholder="Confirmar Senha"
+        />
+        <label class="sr-only" for="nomeInput">Nome </label>
+        <input
+        data-testid="nome"
+          class="mb-3 form-control"
+          data-testid="senha"
+          type="text"
+          name="name"
+          id="nomeInput"
+          placeholder="Nome"
+        />
+        <label class="sr-only" for="sobrenomeInput">Sobrenome </label>
+        <input
+        data-testid="sobrenome"
+          class="mb-3 form-control"
+          data-testid="senha"
+          type="text"
+          name="lastName"
+          id="sobrenomeInput"
+          placeholder="Sobrenome"
+        />
+        <a data-testid="login" href="/login">Fazer Login</a>
+        <button data-testid="cadastrar" class="btn btn-lg btn-primary" data-testid="entrar" type="submit">Cadastrar-se</button>
+      </form>
+    </div>
+  </body>
+</html>

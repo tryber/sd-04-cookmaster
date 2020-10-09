@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <style>
+      .my-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .my-box {
+        border: 2px solid black;
+        width: 25%;
+      }
+    </style>
+    <title>Cookmaster - Receita</title>
+  </head>
+  <body>
+    <div class="text-light navbar navbar-dark bg-dark">
+      <h5 class="col">Cookmaster</h5>
+      <% if (user == null) { %>
+      <a data-testid="login" class="nav-link col text-light text-right" href="/login">Login</a>
+      <%} else {%>
+      <p class="col text-center"><%= `${user.name} ${user.lastName}` %></p>
+      <a data-testid="logout" class="text-light nav-link col text-right" href="/logout"> Logout</a>
+      <%}%>
+    </div>
+    <div class="container">
+      <h2><%= recipe.name %></h2>
+      <p><%= recipe.user %></p>
+      <div class="mb-3">
+        <% if (user != null) { %>
+        <a class="btn btn-primary" data-testid="editar-receita" href="/recipes/<%= recipe.id %>/edit">Editar Receita</a>
+        <a class="btn btn-primary" data-testid="excluir-receita" href="/recipes/<%= recipe.id %>/delete">Excluir Receita</a>
+        <%} %>
+      </div>
+      <h3>Ingredientes</h3>
+      <% recipe.ingredients.split(',').forEach((food) => { %>
+        <p><%= food %></p>
+      <% }) %>
+      <h3>Modo de Preparo</h3>
+      <p><%= recipe.instructions %></p>
+    </div>
+  </body>
+</html>

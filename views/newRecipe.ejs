@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Cookmaster - Cadastro de Receita</title>
+  </head>
+  <body>
+    <div class="text-light navbar navbar-dark bg-dark">
+      <h5 class="col">Cookmaster</h5>
+      <% if (user == null) { %>
+      <a data-testid="login" class="nav-link col text-light text-right" href="/login">Login</a>
+      <%} else {%>
+      <p class="col text-center"><%= `${user.name} ${user.lastName}` %></p>
+      <a data-testid="logout" class="text-light nav-link col text-right" href="/logout"> Logout</a>
+      <%}%>
+    </div>
+    <h2 class="mt-5 text-center">Nova Receita</h2>
+    <div class="m-5 p-8">
+      <form class="form-signin" action="/recipes" method="POST">
+        <label for="nameInput">Nome da Receita</label>
+        <input
+          class="mb-3 form-control"
+          data-testid="nome-receita"
+          type="text"
+          name="name"
+          id="nameInput"
+        />
+        <div>
+          <label for="ingredienteInput">Ingredientes </label>
+          <div id="list-ingredients" class="mb-3 d-flex flex-column"></div>
+          <input
+            class="mb-3 form-control"
+            data-testid="ingredientes"
+            type="text"
+            name="ingredientsInput"
+            id="ingredienteInput"
+          />
+          <a
+            id="add-ingredient"
+            class="mb-3 btn btn-success align-self-center"
+            data-testid="adicionar-ingrediente"
+          >
+            Adicionar Ingrediente
+          </a>
+        </div>
+        <label for="preparoInput">Modo de Preparo</label>
+        <input
+          class="mb-3 form-control"
+          data-testid="modo-de-preparo"
+          type="text"
+          name="instructions"
+          id="preparoInput"
+        />
+        <a class="btn btn-lg btn-primary" href="/">Voltar</a>
+        <button
+          onclick="window.location.pathname='/'"
+          data-testid="postar-receita"
+          class="btn btn-lg btn-primary"
+          type="submit"
+        >
+          Salvar Receita
+        </button>
+      </form>
+    </div>
+  </body>
+  <script>
+    const addBtn = document.querySelector('#add-ingredient');
+    const inputIng = document.querySelector('#ingredienteInput');
+    const listIng = document.querySelector('#list-ingredients');
+
+    addBtn.addEventListener('click', () => {
+      if (inputIng.value === '') {
+      } else {
+        const cont = document.createElement('div');
+        const item = document.createElement('input');
+        const btn = document.createElement('a');
+        item.className = 'mr-5';
+        item.value = inputIng.value;
+        item.name = 'ingredients[]';
+        btn.className = 'btn btn-danger btn-sm align-self-center';
+        btn.innerText = 'Excluir Ingrediente';
+        btn.id = 'del-ing';
+        listIng.appendChild(cont);
+        cont.appendChild(item);
+        cont.appendChild(btn);
+        inputIng.value = '';
+
+        const rmvBtn = document.querySelector('#del-ing');
+        rmvBtn.addEventListener('click', (e) => {
+          e.target.parentNode.remove();
+        });
+      }
+    });
+  </script>
+</html>

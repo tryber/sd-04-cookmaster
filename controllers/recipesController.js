@@ -1,4 +1,5 @@
 const Recipes = require('../models/recipesModel');
+const User = require('../models/userModel');
 
 const index = async (req, res) => {
   const recipes = await Recipes.listRecipes();
@@ -39,7 +40,36 @@ const addRecipe = async (req, res) => {
 
   await Recipes.newRecipe(user.id, fullName, name, ingredients, instructions);
 
-  return res.render('recipes/new', { user: req.user, message: 'Receita cadastrada com sucesso!' });
+  return res.redirect('/');
+};
+
+const showEditRecipe = async (req, res) => {
+  const user = req.user;
+  const recipe = await Recipes.recipesById(req.params.id);
+  // console.log(recipe);
+  res.render('recipes/edit', { user, recipe, message: null });
+};
+
+const showDeleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+  const { userId } = await Recipes.recipesById(id);
+
+  if (userId !== user.id) res.redirect('/');
+  return res.render('recipes/delete', { user, id, message: null });
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+  const user = await User.findById(req.user.id);
+
+  if (user.password === password) {
+    await Recipes.deleteRecipe(id);
+    return res.redirect('/');
+  } else {
+    return res.render('recipes/delete', { user, id, message: 'Senha Incorreta.' });
+  }
 };
 
 module.exports = {
@@ -49,4 +79,7 @@ module.exports = {
   findRecipesByName,
   newRecipe,
   addRecipe,
+  showEditRecipe,
+  showDeleteRecipe,
+  deleteRecipe,
 };

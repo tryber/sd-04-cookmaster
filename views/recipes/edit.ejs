@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Cookmaster - Edit recipe</title>
+  </head>
+  <body>
+    <h1>Editar Receita</h1>
+    <% if (user) { %>
+      Olá, <%= user.name %>
+    <% } else { %>
+      <h3>cade o usuário?</h3>
+    <% } %>
+    <% if (message) { %>
+      <span><%= message %></span>
+    <% } %>
+
+    <% if(recipe) { %>
+      <%= recipe.name %>
+    <% } %>
+  </body>
+  <script>
+    const inputIngredients = document.getElementById('ingredientsInput');
+    const list = document.getElementById('ingredientsList');
+    const btn = document.getElementById('addRecipe');
+    const ingredients = document.getElementById('ingredients');
+    let arrayIngredients = [];
+
+    btn.addEventListener('click', () => {
+      const li = document.createElement('li');
+      const btnDel = document.createElement('button');
+
+      li.innerHTML = inputIngredients.value;
+      arrayIngredients.push(inputIngredients.value);
+      btnDel.className = 'btn btn-sm btn-danger';
+      btnDel.innerHTML = 'Excluir Ingrediente';
+
+      list.appendChild(li);
+      list.appendChild(btnDel);
+      ingredients.value = arrayIngredients.join(',');
+      inputIngredients.value = '';
+
+      btnDel.addEventListener('click', (e) => {
+        ingredients.value = arrayIngredients.filter(ingredient => ingredient !== li.innerHTML);
+        li.remove();
+        btnDel.remove();
+      })
+    });
+  </script>
+</html>

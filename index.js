@@ -15,10 +15,8 @@ app.set('views', './views');
 // Roda Inicial
 app.get('/', middlewares.auth(false), controllers.cookmasterControl.index);
 
-//Rotas de Admin
-app.get('/admin', middlewares.auth(), (req, res) => {
-  return res.render('admin/home', { user: req.user });
-});
+// Rotas de Admin
+app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
 // Rotas para Cadastro
 app.get('/cadastro', middlewares.auth(false), controllers.cookmasterControl.cadastroForm);
@@ -31,6 +29,9 @@ app.post('/login', controllers.userController.login);
 
 // Rota Buscar Receita
 app.get('/recipes/search', middlewares.auth(false), controllers.cookmasterControl.search);
+
+// Rota Nova Receita
+app.get('/recipes/new', middlewares.auth(true), controllers.cookmasterControl.newRecipe);
 
 // Rotas para Receita Detail
 app.get('/recipes/:id', middlewares.auth(false), controllers.cookmasterControl.recipeDetails);

@@ -11,45 +11,51 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com:tryber/sd-04-cookmaster.git`.
-  * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-04-cookmaster`
+
+- `git clone https://github.com:tryber/sd-04-cookmaster.git`.
+- Entre na pasta do repositório que você acabou de clonar:
+  - `cd sd-04-cookmaster`
 
 2. Instale as dependências [**Caso existam**]
-  * `npm install`
+
+- `npm install`
 
 3. Crie uma branch a partir da branch `master`
-  * Verifique que você está na branch `master`
-    * Exemplo: `git branch`
-  * Se não estiver, mude para a branch `master`
-    * Exemplo: `git checkout master`
-  * Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
-    * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    * Exemplo: `git checkout -b joaozinho-cookmaster`
+
+- Verifique que você está na branch `master`
+  - Exemplo: `git branch`
+- Se não estiver, mude para a branch `master`
+  - Exemplo: `git checkout master`
+- Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
+  - Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
+  - Exemplo: `git checkout -b joaozinho-cookmaster`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
-  * Verifique que as mudanças ainda não estão no _stage_
-    * Exemplo: `git status` (deve aparecer listada a pasta _joaozinho_ em vermelho)
-  * Adicione o novo arquivo ao _stage_ do Git
-      * Exemplo:
-        * `git add .` (adicionando todas as mudanças - _que estavam em vermelho_ - ao stage do Git)
-        * `git status` (deve aparecer listado o arquivo _joaozinho/README.md_ em verde)
-  * Faça o `commit` inicial
-      * Exemplo:
-        * `git commit -m 'iniciando o projeto x'` (fazendo o primeiro commit)
-        * `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
+
+- Verifique que as mudanças ainda não estão no _stage_
+  - Exemplo: `git status` (deve aparecer listada a pasta _joaozinho_ em vermelho)
+- Adicione o novo arquivo ao _stage_ do Git
+  - Exemplo:
+    - `git add .` (adicionando todas as mudanças - _que estavam em vermelho_ - ao stage do Git)
+    - `git status` (deve aparecer listado o arquivo _joaozinho/README.md_ em verde)
+- Faça o `commit` inicial
+  - Exemplo:
+    - `git commit -m 'iniciando o projeto x'` (fazendo o primeiro commit)
+    - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  * Usando o exemplo anterior: `git push -u origin joaozinho-cookmaster`
+
+- Usando o exemplo anterior: `git push -u origin joaozinho-cookmaster`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-04-cookmaster/pulls)
-  * Clique no botão verde _"New pull request"_
-  * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
-  * Clique no botão verde _"Create pull request"_
-  * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
-  * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-04-cookmaster/pulls) e confira que o seu _Pull Request_ está criado
+
+- Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-04-cookmaster/pulls)
+- Clique no botão verde _"New pull request"_
+- Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
+- Clique no botão verde _"Create pull request"_
+- Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
+- **Não se preocupe em preencher mais nada por enquanto!**
+- Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-04-cookmaster/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
@@ -80,6 +86,7 @@ Para realizar qualquer tipo de alteração no banco de dados (como cadastro, edi
 O código para cadastro de usuários deve ser criado por você utilizando os conhecimentos adiquiridos nesse bloco.
 
 ⚠️ **Dicas Importantes** ⚠️:
+
 - No código deste repositório, utilizamos o middleware `cookie-parser` para realizar a leitura do cookie contendo o token de autenticação. Ele é necessário para que o sistema de login / logout funcione. **Não o remova**!
 
 - Você não precisa alterar a lógica de gerenciamento de sessões (login / logout de usuários).
@@ -89,6 +96,7 @@ O código para cadastro de usuários deve ser criado por você utilizando os con
 - O arquivo `models/userModel.js` está criado, mas não contém código para conexão com o banco. As funções existentes nele servem para _guardar lugar_ para algumas das funções que você deve criar. O papel de cada uma dessas funções está descrito nos comentários acima delas.
 
 - O middleware `authMiddleware`, presente em `middlewares/auth.js` pode ser usado nas rotas que exigem autenticação.
+
   - Quando você utiliza o `authMiddleware` em uma rota, ele cria a propriedade `req.user`, que contém as informações do usuário atual, conforme retornadas pelo `userModel`.
   - O `authMiddleware` está disponível no `index.js` da aplicação através de `middlewares.auth`.
 
@@ -160,8 +168,8 @@ Haverá um arquivo no caminho: `sd-04-cookmaster/cypress/plugins/index.js`. Nest
 module.exports = {
   "development": {
     "username": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD, 
-    "database": 'cookmaster', 
+    "password": process.env.MYSQL_PASSWORD,
+    "database": 'cookmaster',
     "host": process.env.HOSTNAME,
     "dialect": 'mysql',
   },
@@ -212,9 +220,9 @@ Variáveis:
 
 > As páginas abaixo podem ser acessadas sem login:
 
-* Listagem de receitas
-* Tela para visualizar uma receita específica
-* Página de cadastro de pessoas usuárias
+- Listagem de receitas
+- Tela para visualizar uma receita específica
+- Página de cadastro de pessoas usuárias
 
 ### 1 - Crie uma tela de listagem de receitas.
 
@@ -235,16 +243,16 @@ Um botão "Nova receita" deve ser exibido **apenas quando houver um usuário log
 - O link 'Ver mais' deverá estar num elemento `<a>` com o texto `Ver mais`. Algo na linha de: `<a href="Link">Ver mais</a>`
 
 - O botão 'Nova Receita' deverá conter o `data-testid="nova-receita"`
-(Esse botão deverá ficar visível na tela apenas estando logado).
+  (Esse botão deverá ficar visível na tela apenas estando logado).
 
 - O botão 'Buscar Receita' deverá conter o `data-testid="buscar-receita"`
-(Esse botão deverá ficar visível na tela **estando logado ou não**).
+  (Esse botão deverá ficar visível na tela **estando logado ou não**).
 
 - O 'Login' deverá conter a tag `data-testid="login"`
-(Esse elemento deverá ficar visível na tela apenas **não** estando logado).
+  (Esse elemento deverá ficar visível na tela apenas **não** estando logado).
 
 - O 'Logout' deverá conter a tag `data-testid="logout"`
-(Esse elemento deverá ficar visível na tela apenas estando logado).
+  (Esse elemento deverá ficar visível na tela apenas estando logado).
 
 ![Tela Home](./public/home_nao_autenticado.png)
 
@@ -396,10 +404,10 @@ O botão 'Buscar Receitas' ficará sempre visível na tela home, estando a pesso
 
 > As páginas abaixo só podem ser acessadas fazendo login:
 
-* Cadastro de Receitas
-* Edição de Receitas
-* Exclusão de Receitas
-* Minhas Receitas
+- Cadastro de Receitas
+- Edição de Receitas
+- Exclusão de Receitas
+- Minhas Receitas
 
 > Páginas que **não** podem ser acessadas sem login. Para essas páginas, utilize o `authMiddleware` sem passar parâmetro algum.
 
@@ -571,11 +579,11 @@ Na Tela inicial('/'), acidione o botão 'Minha Conta', que deverá conter a tag 
 
 ### DURANTE O DESENVOLVIMENTO
 
-* Faça `commits` das alterações que você fizer no código regularmente
+- Faça `commits` das alterações que você fizer no código regularmente
 
-* Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
+- Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
 
-* Os comandos que você utilizará com mais frequência são:
+- Os comandos que você utilizará com mais frequência são:
   1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
   2. `git add` _(para adicionar arquivos ao stage do Git)_
   3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
@@ -588,13 +596,13 @@ Na Tela inicial('/'), acidione o botão 'Minha Conta', que deverá conter a tag 
 
 Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
 
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
+- Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
 
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
+  - No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
 
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
+  - No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
 
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-04`.
+  - No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-04`.
 
 Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
 

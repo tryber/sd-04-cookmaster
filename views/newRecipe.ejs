@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Nova Receita</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <script>
+      const arrIngre = ['arroz', 'feijão'];
+      const
+    </script>
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Cookmaster!</h1>
-      <h2>Receitas</h2>
-
       <nav class="navbar navbar-dark bg-dark">
         <% if (user) { %>
         <a data-testid="buscar-receita" class="m-2" href="/recipes/search">Buscar Receita</a>
@@ -31,16 +32,31 @@
         </div>
         <% } %>
       </nav>
-      <% recipes.forEach((recipe) => { %>
-      <div class="card w-75 m-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= recipe.name %></h5>
-          <p class="card-text"><%= recipe.user %></p>
-          <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Ver mais</a>
-        </div>
-      </div>
+    </div>
+    <div class="container-sm">
+      <h1>Nova Receita</h1>
 
-      <% }) %>
+      <form method="POST" action="/recipes/new">
+        <div class="form-group">
+          <label for="nome">Nome da Receita</label>
+          <input data-testid="nome-receita" type="text" class="form-control" name="nome" />
+        </div>
+
+        <div>
+          <p>Ingredientes</p>
+          <ul id="ul"></ul>
+        </div>
+
+        <div class="form-group">
+          <label for="nome">Nome da Receita</label>
+          <input data-testid="ingredientes" type="text" class="form-control" name="nome" value="" />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Modo de Preparo</label>
+          <textarea data-testid="modo-de-preparo" class="form-control" rows="3"></textarea>
+        </div>
+      </form>
     </div>
   </body>
 </html>

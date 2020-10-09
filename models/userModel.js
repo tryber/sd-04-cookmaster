@@ -47,29 +47,29 @@ const findById = async (idUser) => {
 // https://www.w3resource.com/javascript/form/email-validation.php
 const isValidEmail = (email) => {
   const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if (!email || !regexEmail.test(email)) return false;
-  return true;
+  if (!email || !regexEmail.test(email)) return 'O email deve ter o formato email@mail.com';
+  return null;
 };
 
 // password
 const isValidPassword = (password) => {
-  if (!password || password.length < 6) return false;
-  return true;
+  if (!password || password.length < 6) return 'A senha deve ter pelo menos 6 caracteres';
+  return null;
 };
 
 // repeatPassword
 const isValidRepeatPassword = (password, repeatPassword) => {
-  if (!repeatPassword || password !== repeatPassword) return false;
-  return true;
+  if (!repeatPassword || password !== repeatPassword) return 'As senhas tem que ser iguais';
+  return null;
 };
 // name and lastName
 // Referência regex para apenas letras
 // https://www.w3resource.com/javascript/form/all-letters-field.php#:~:text=To%20get%20a%20string%20contains,is%20the%20complete%20web%20document.
 // O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras
-const isValidName = (name) => {
+const isValidName = (name, text) => {
   const regexLetters = /^[A-Za-z]+$/;
-  if (name.length < 3 || !regexLetters.test(name)) return false;
-  return true;
+  if (name.length < 3 || !regexLetters.test(name)) return text
+  return null;
 };
 
 const add = async (email, password, name, lastName) => {

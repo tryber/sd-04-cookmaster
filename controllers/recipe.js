@@ -46,10 +46,19 @@ const searchRecipe = async (req, res) => {
   return res.render('search', response);
 };
 
+/** Recipe creation section */
+const addIngredient = () => {
+  console.log('teste ok')
+  const ingredient = document.querySelector('.ingredient').textContent;
+  console.log(ingredient);
+};
+
 const createRecipe = async (req, res) => {
-  const { recipe } = req.body;
+  const recipe = req.body;
 
   if (!recipe) return res.render('new-recipe', { messages: null });
+
+  if (recipe.ingredient) return addIngredient();
 
   const result = await recipeModel.create(recipe);
 
@@ -58,9 +67,12 @@ const createRecipe = async (req, res) => {
   });
 };
 
+/** EOS */
+
 module.exports = {
   getRecipes,
   getRecipe,
   searchRecipe,
   createRecipe,
+  addIngredient,
 };

@@ -10,9 +10,14 @@ const renderDeleteRecipe = (req, res) => {
 const postDeleteRecipe = async (req, res) => {
   const { user, body, params } = req;
   const { id } = params;
-  const message = 'Senha Incorreta.';
+  let message = 'Senha Incorreta.';
 
-  const userPassword = await deleteModel.findById(user.id);
+  const UserOfRecipe = await deleteModel.findUserOfRecipe(id);
+  const userPassword = await deleteModel.findById(UserOfRecipe.userId);
+  if (UserOfRecipe.userId !== user.id) {
+    message = 'Você não tem autorização para excluir esta receita';
+    return res.render('deleteRecipe', { user, id, message });
+  }
   if (userPassword.password === body.password) {
     await deleteModel.deleteRecipe(id);
     return res.redirect('/');

@@ -20,7 +20,15 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 });
 */
 app.get('/signup', (req, res) => {
-  return res.render('signup', { message: null });
+  let text = {
+    email: null,
+    password: null,
+    repeatPassword: null,
+    name: null,
+    lastName: null,
+    success: null,
+  };
+  return res.render('signup', { message: text });
 });
 app.post('/signup', controllers.userController.signup);
 

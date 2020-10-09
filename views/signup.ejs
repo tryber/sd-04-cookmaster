@@ -6,23 +6,52 @@
     <title>Cookmaster - SignUp</title>
   </head>
   <body>
-    <% if (message) {%>
+    <% if (message.success) {%>
       <div class="message">
-        <%= message %>
+        <%= message.success %>
       </div>
     <% } %>
     <p>Cookmaster - Cadastro</p>
     <form action="/signup" method="POST">
       <label for="emailInput">Email: </label>
       <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+      <% if (message.email) {%>
+        <div class="message">
+          <%= message.email %>
+        </div>
+      <% } %>
+
       <label for="passwordInput">Senha: </label>
       <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+      <% if (message.password) {%>
+        <div class="message">
+          <%= message.password %>
+        </div>
+      <% } %>
+
       <label for="repeatPasswordInput">Confirmar Senha: </label>
       <input type="password" name="repeatPassword" id="repeatPasswordInput" data-testid="confirmar-senha" /><br />
+      <% if (message.repeatPassword) {%>
+        <div class="message">
+          <%= message.repeatPassword %>
+        </div>
+      <% } %>
+
       <label for="nameInput">Nome: </label>
       <input type="text" name="name" id="nameInput" data-testid="nome"></input><br />
+      <% if (message.name) {%>
+        <div class="message">
+          <%= message.name %>
+        </div>
+      <% } %>
+
       <label for="lastNameInput">Sobrenome: </label>
       <input type="text" name="lastName" id="lastNameInput" data-testid="sobrenome"></input><br />
+      <% if (message.lastName) {%>
+        <div class="message">
+          <%= message.lastName %>
+        </div>
+      <% } %>
 
       <button type="submit" data-testid="cadastrar">Cadastar-se</button>
     </form>

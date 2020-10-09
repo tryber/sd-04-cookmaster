@@ -44,11 +44,8 @@ const findById = async (idUser) => {
 // Validações
 // email
 // Referência regex do email
-// https://emailregex.com/
 // https://www.w3resource.com/javascript/form/email-validation.php
 const isValidEmail = (email) => {
-  // const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]
-  // {1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (!email || !regexEmail.test(email)) return false;
   return true;
@@ -65,19 +62,13 @@ const isValidRepeatPassword = (password, repeatPassword) => {
   if (!repeatPassword || password !== repeatPassword) return false;
   return true;
 };
-// name
+// name and lastName
 // Referência regex para apenas letras
 // https://www.w3resource.com/javascript/form/all-letters-field.php#:~:text=To%20get%20a%20string%20contains,is%20the%20complete%20web%20document.
 // O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras
 const isValidName = (name) => {
   const regexLetters = /^[A-Za-z]+$/;
   if (name.length < 3 || !regexLetters.test(name)) return false;
-  return true;
-};
-// lastName
-const isValidLastName = (lastName) => {
-  const regexLetters = /^[A-Za-z]+$/;
-  if (lastName.length < 3 || !regexLetters.test(lastName)) return false;
   return true;
 };
 
@@ -98,6 +89,5 @@ module.exports = {
   isValidPassword,
   isValidRepeatPassword,
   isValidName,
-  isValidLastName,
   add,
 };

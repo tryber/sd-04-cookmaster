@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
+const { authMiddleware } = require('./middlewares/auth');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +26,7 @@ app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.re
 // app.put('/recipes/:id', authMiddleware.auth());
 
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.renderRemoveRecipe);
-app.delete('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.removeRecipe);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.removeRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetails);
 
@@ -40,6 +41,6 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.use('*', (_req, res) => res.status(404).json({ message: 'Página não encontrada' }));
+app.use('*', (req, res) => res.status(404).render('notFound'));
 
 app.listen(3000, () => console.log('Running server on port 3000'));

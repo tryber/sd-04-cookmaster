@@ -18,19 +18,23 @@ const recipeDetails = async (req, res) => {
 };
 
 const searchRecipe = async (req, res) => {
-  const { q } = req.query;
+  try {
+    const { q } = req.query;
 
-  const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
-  let message;
+    const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
 
-  if (recipes === []) {
-    message = 'Nada encontrado...';
-    console.log('linha 28', message);
-    res.status(200).render('searchRecipe', { recipes, user: req.user, message });
+    if (recipes.length === 0) {
+      const message = 'Nada encontrado...';
+      console.log('linha 29', message);
+      return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
+    }
+
+    console.log('linha 33', recipes);
+    res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
+  } catch (err) {
+    console.log('catch', err.name);
+    console.log('catch', err.message);
   }
-
-  console.log('linha 29', recipes);
-  res.status(200).render('searchRecipe', { recipes, user: req.user, message });
 };
 
 const addRecipe = async (req, res) => {
@@ -50,12 +54,15 @@ const newRecipe = async (req, res) => {
 };
 
 const renderRemoveRecipe = async (req, res) => {
-  console.log('linha 48 req.user', req.user);
+  const recipe = await Recipes.getRecipeById(req.params.id);
 
-  const userActual = await User.findById(req.user.iD);
-  console.log('linha 51, userActual ', userActual.iD);
+  console.log('linha 59, recipe userID', recipe.userId);
 
-  if (userActual.iD !== req.user.iD)
+  const userDB = await User.findById(req.user.iD);
+  console.log('linha 62, userActual, iD ', userDB.iD);
+  console.log('linha 63, userActual, senha ', userDB.password);
+
+  if (userDB.iD !== recipe.userId)
     return res.status(200).render('deleteRecipe', {
       user: req.user,
       message: 'Você não tem autorização para excluir essa receita...',
@@ -65,21 +72,29 @@ const renderRemoveRecipe = async (req, res) => {
 
 const removeRecipe = async (req, res) => {
   const { password } = req.body;
-  const validatePassword = Recipes.isPasswordValid(req.user.password, senha);
+  const userData = await User.findById(req.user.iD);
+  const validatePassword = await Recipes.isPasswordValid(userData.password, password);
 
-  console.log('linha 65 senha digitada', senha);
-  console.log('linha 66', validatePassword);
-  console.log('linha 67', req.user);
-  // await Recipes.deleteRecipe(req.user.iD);
+  console.log('linha 78 password input', password);
+  console.log('linha 79, user password', userData.password);
+  console.log('linha 80', validatePassword);
 
-  res.status(200).render('home', { message: null, user: req.user });
+  if (validatePassword) {
+    await Recipes.deleteRecipe(req.params.id);
+    res.redirect('/');
+  }
+
+  res.redirect('/');
 };
 
 const renderEditRecipe = async (req, res) => {
-  const userActual = req.user;
-  const isUser = User.findById(req.user.iD);
-  const recipe =
-  res.status(200).render('editRecipes', { user: userActual });
+  // const isUser = await User.findById(req.user.iD);
+  console.log('linha 92 is User', req.user);
+  console.log('linha 93 req.params', req.params);
+  const recipe = await Recipes.getRecipeById(req.params.id);
+  console.log('linha 95', recipe);
+
+  res.status(200).render('editRecipes', { user: req.user, recipe });
 };
 
 const myRecipes = async (req, res) => {

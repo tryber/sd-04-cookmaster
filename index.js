@@ -25,6 +25,9 @@ app.post('/login', controllers.userController.login);
 app.get('/cadastro', (_req, res) => res.render('cadastro', { message: null }));
 app.post('/cadastro', controllers.signUpController);
 
+app.get('/recipes/new', middlewares.auth(), controllers.recipeController.NewRecipe);
+app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipeForm);
+
 app.get('/recipes/search', controllers.recipeController.searchRecipe);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.findRecipeDetails);
 app.listen(3000, () => console.log('Listening on 3000'));

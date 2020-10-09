@@ -39,4 +39,16 @@ const searchRecipeByName = async (q) => {
   return recipes;
 };
 
-module.exports = { findAllRecipes, findRecipeById, searchRecipeByName };
+const addRecipe = async ({ id, name, lastName }, { recipeName, ingredients, instructions }) => {
+  const db = await connection();
+  await db.getTable('recipes')
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, `${name} ${lastName}`, recipeName, ingredients, instructions)
+    .execute();
+};
+module.exports = {
+  findAllRecipes,
+  findRecipeById,
+  searchRecipeByName,
+  addRecipe,
+};

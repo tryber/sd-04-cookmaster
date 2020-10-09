@@ -35,7 +35,9 @@ const searchRecipeByName = async (q) => {
     .execute();
 
   const results = allTable.fetchAll();
-  const recipes = results.map(([id, userId, user, name]) => ({ id, userId, user, name }));
+  const recipes = results.map(([id, userId, user, name]) => ({
+    id, userId, user, name,
+  }));
   return recipes;
 };
 

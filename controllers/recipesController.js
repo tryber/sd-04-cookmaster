@@ -1,5 +1,7 @@
-const { findAllRecipes,findRecipeById, searchRecipeByName,
-  addRecipe, updateRecipe} = require('../models/recipeModel');
+const {
+  findAllRecipes, findRecipeById, searchRecipeByName,
+  addRecipe, updateRecipe,
+} = require('../models/recipeModel');
 
 const index = async (req, res) => {
   const recipes = await findAllRecipes();

@@ -22,11 +22,13 @@ const searchRecipe = async (req, res) => {
 
   const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
   let message;
+
   if (recipes === []) {
     message = 'Nada encontrado...';
     console.log('linha 28', message);
     res.status(200).render('searchRecipe', { recipes, user: req.user, message });
   }
+
   console.log('linha 29', recipes);
   res.status(200).render('searchRecipe', { recipes, user: req.user, message });
 };
@@ -73,7 +75,7 @@ const removeRecipe = async (req, res) => {
   res.status(200).render('home', { message: null, user: req.user });
 };
 
-const editRecipe = async (req, res) => {
+const renderEditRecipe = async (req, res) => {
   const userActual = req.user;
   const isUser = User.findById(req.user.iD);
   const recipe =
@@ -91,6 +93,6 @@ module.exports = {
   searchRecipe,
   removeRecipe,
   renderRemoveRecipe,
-  editRecipe,
+  renderEditRecipe,
   myRecipes,
 };

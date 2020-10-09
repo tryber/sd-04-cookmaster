@@ -26,6 +26,7 @@
             type="text"
             class="form-control"
             value=""
+            required
           />
         </div>
 
@@ -38,23 +39,23 @@
               id="inputIngredient"
               class="form-control m-2"
               name="ingredients"
-              required
             />
             <button
               data-testid="adicionar-ingrediente"
               onclick="createIngredient()"
               type="button"
               id="addIng"
-              class="btn btn-dark btn-sm m-3"
+              class="btn btn-info btn-sm m-3"
             >
               Adicionar Ingrediente
             </button>
           </div>
-          <div id="message"></div>
+
+          <!-- <div id="message"></div> -->
 
           <h6 class="text-center" id="ingTitle">Ingredientes:</h6>
 
-          <ul class="d-flex align-items-center" id="ing-list"></ul>
+          <ul class="d-flex flex-column align-items-center" id="ing-list"></ul>
         </div>
 
         <div class="form-group w-75 mx-auto m-2">
@@ -65,6 +66,7 @@
             name="instructions"
             id="modo-de-preparo"
             value=""
+            required
           ></textarea>
         </div>
         <div class="d-flex justify-content-around m-3">
@@ -83,21 +85,19 @@
 
       const inputHidden = document.getElementById('inputHidden');
 
-      const div = document.getElementById('message');
+      // const div = document.getElementById('message');
 
       let inputValues = [];
 
       const createIngredient = () => {
         if (inputIngredient.value === '') {
           // const message = document.createElement('span');
-
           // div.appendChild(message);
-
           // message.textContent = 'Digite algo...';
-
           return null;
         }
 
+        const div = document.createElement('div');
         const li = document.createElement('li');
         const btnRemove = document.createElement('button');
 
@@ -106,22 +106,23 @@
         li.textContent = inputIngredient.value;
 
         inputValues.push(inputIngredient.value);
-        console.log('linha 95', inputValues);
+        // console.log('linha 95', inputValues);
 
         inputIngredient.value = '';
-
-        ingredientsUL.appendChild(li);
-        ingredientsUL.appendChild(btnRemove);
+        ingredientsUL.appendChild(div);
+        div.appendChild(li);
+        div.appendChild(btnRemove);
+        div.className += 'd-flex align-items-center';
 
         btnRemove.className += 'btn btn-danger btn-sm m-1';
         btnRemove.type = 'button';
         btnRemove.addEventListener('click', () => {
           inputValues = inputValues.filter((value) => value !== li.textContent);
 
-          ingredientsUL.removeChild(li);
-          ingredientsUL.removeChild(btnRemove);
+          ingredientsUL.removeChild(div);
+          // ingredientsUL.removeChild(btnRemove);
           inputHidden.value = inputValues.join();
-          console.log('linha 110', inputValues);
+          // console.log('linha 110', inputValues);
         });
 
         inputHidden.value = inputValues.join();

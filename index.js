@@ -20,7 +20,7 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 });
 */
 app.get('/signup', (req, res) => {
-  let text = {
+  const text = {
     email: null,
     password: null,
     repeatPassword: null,

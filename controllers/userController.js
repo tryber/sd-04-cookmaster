@@ -47,7 +47,7 @@ const logout = (req, res) => {
 const signup = async (req, res) => {
   const { email, password, repeatPassword, name, lastName } = req.body;
   // chamar as validações
-  let text = {
+  const text = {
     email: null,
     password: null,
     repeatPassword: null,
@@ -58,27 +58,18 @@ const signup = async (req, res) => {
 
   if (!userModel.isValidEmail(email)) {
     text.email = 'O email deve ter o formato email@mail.com';
-    // return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
   }
   if (!userModel.isValidPassword(password)) {
     text.password = 'A senha deve ter pelo menos 6 caracteres';
-    // return res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
   }
   if (!userModel.isValidRepeatPassword(password, repeatPassword)) {
     text.repeatPassword = 'As senhas tem que ser iguais';
-    // return res.render('signup', { message: 'As senhas tem que ser iguais' });
   }
   if (!userModel.isValidName(name)) {
     text.name = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-    // return res.render('signup', {
-    //  message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    // });
   }
   if (!userModel.isValidName(lastName)) {
     text.lastName = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-    // return res.render('signup', {
-    //  message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    // });
   }
 
   if (Object.values(text).some((text) => text !== null)) {
@@ -87,8 +78,8 @@ const signup = async (req, res) => {
   text.success = 'Cadastro efetuado com sucesso!';
   await userModel.add(email, password, repeatPassword, name, lastName);
   res.render('signup', { message: text });
-  // res.redirect(redirect || '/login')
 };
+// res.redirect(redirect || '/login')
 
 module.exports = {
   login,

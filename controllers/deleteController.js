@@ -1,12 +1,11 @@
 const Recipe = require('../models/recipeModel');
-const User = require('../models/userModel')
+const User = require('../models/userModel');
 
 const getDeletePage = async (req, res) => {
   const user = req.user;
   const { id } = req.params;
   const recipes = await Recipe.getRecipeById(id);
   const recipe = recipes[0];
-  console.log(recipe.userId);
   if (user.id === recipe.userId) {
     res.render('deletePage', { recipe, message: null });
   }
@@ -14,17 +13,17 @@ const getDeletePage = async (req, res) => {
 };
 
 const deleteRecipe = async (req, res) => {
-    const { password } = req.body;
-    const { id } = req.params;
-    const recipes = await Recipe.getRecipeById(id);
-    const recipe = recipes[0];
-    const usuario = await User.findById(recipe.userId);
-    if (password === usuario.password) {
-        await Recipe.deleteRecipe(id)
-        res.redirect('/');
-    }
-    res.render('deletePage', {recipe, message: 'Senha Incorreta.'})
-}
+  const { password } = req.body;
+  const { id } = req.params;
+  const recipes = await Recipe.getRecipeById(id);
+  const recipe = recipes[0];
+  const usuario = await User.findById(recipe.userId);
+  if (password === usuario.password) {
+    await Recipe.deleteRecipe(id);
+    res.redirect('/');
+  }
+  res.render('deletePage', { recipe, message: 'Senha Incorreta.' });
+};
 
 module.exports = {
   getDeletePage,

@@ -63,9 +63,11 @@ const signup = async (req, res) => {
     success: null,
   };
 
-  if (Object.values(text).some((text) => text !== null)) {
+  textValues = Object.values(text).some((text) => text !== null);
+  if (textValues) {
     return res.render('signup', { message: text });
   }
+
   text.success = 'Cadastro efetuado com sucesso!';
   await userModel.add(email, password, repeatPassword, name, lastName);
   res.render('signup', { message: text });

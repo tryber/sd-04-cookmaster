@@ -68,7 +68,7 @@ const isValidRepeatPassword = (password, repeatPassword) => {
 // O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras
 const isValidName = (name, text) => {
   const regexLetters = /^[A-Za-z]+$/;
-  if (name.length < 3 || !regexLetters.test(name)) return text
+  if (name.length < 3 || !regexLetters.test(name)) return text;
   return null;
 };
 

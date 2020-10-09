@@ -13,20 +13,21 @@
   </head>
   <body>
     <% if (message) {%>
-    <h3 class="card text-center mx-auto bg-warning w-25 m-3"><%= message %></h3>
+    <h3 class="card text-center mx-auto bg-warning w-50 m-3"><%= message %></h3>
     <% } %>
 
     <h3 class="text-center m-3">Confirme a exclusão da receita</h3>
-    <form action="/recipes/:id/delete" method="POST">
+    <form action="/recipes/<%= user.iD %>/delete" method="POST">
       <div class="card mx-auto w-50 m-4">
         <div class="form-group w-75 mx-auto m-2">
           <label for="password">Senha</label>
           <input
-            class="form-control"
             data-testid="senha"
+            class="form-control"
             type="password"
             name="password"
             id="password"
+            required
           />
         </div>
 

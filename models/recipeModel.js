@@ -91,4 +91,13 @@ const deleteRecipe = async (id) =>
       throw err;
     });
 
-module.exports = { getAllRecipes, getRecipeById, createRecipe, searchRecipeByName, deleteRecipe };
+const isPasswordValid = async (userPassword, inputPassword) => userPassword === inputPassword;
+
+module.exports = {
+  getAllRecipes,
+  getRecipeById,
+  createRecipe,
+  searchRecipeByName,
+  deleteRecipe,
+  isPasswordValid,
+};

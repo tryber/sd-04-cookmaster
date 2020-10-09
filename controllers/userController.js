@@ -63,8 +63,7 @@ const signup = async (req, res) => {
     success: null,
   };
 
-  textValues = Object.values(text).some((text) => text !== null);
-  if (textValues) {
+  if (Object.values(text).some((content) => content !== null)) {
     return res.render('signup', { message: text });
   }
 

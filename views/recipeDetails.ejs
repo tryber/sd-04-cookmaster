@@ -18,8 +18,8 @@
       <div>
         <div>
           <% if (user) { %>
-          <a href="/recipe/<%= details.id%>/edit" data-testid="editar-receita" class="btn btn-primary">Editar Receita</a>
-          <a href="/recipe/<%= details.id%>/delete" class="btn btn-primary" data-testid="excluir-receita">Excluir Receita</a>
+          <a href="/recipes/<%= details.id%>/edit" data-testid="editar-receita" class="btn btn-primary">Editar Receita</a>
+          <a href="/recipes/<%= details.id%>/delete" class="btn btn-primary" data-testid="excluir-receita">Excluir Receita</a>
           <% } %>
           <h5 class="card-title"><%= details.name %></h5>
           <p class="card-text">Enviada por <%= details.user %></p>

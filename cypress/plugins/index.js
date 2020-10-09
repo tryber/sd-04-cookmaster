@@ -14,14 +14,6 @@
 const  my = require('mysql2');
 require('dotenv/config');
 
-const config = {
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  host: process.env.HOSTNAME,
-  port: 33060,
-  socketPath: '/var/run/mysqld/mysqld.sock',
-};
-
 function queryTestDb(query, config) {
   const connection = my.createConnection({host: process.env.HOSTNAME, user: process.env.MYSQL_USER, password: process.env.MYSQL_PASSWORD})
   connection.connect()

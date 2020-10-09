@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
-const findByEmail = async (emailInput) => {
-  return connection()
+const findByEmail = async (emailInput) =>
+  connection()
     .then((db) =>
       db
         .getTable('users')
@@ -12,27 +12,21 @@ const findByEmail = async (emailInput) => {
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
-};
 
-const findById = async (id) => {
-  return connection()
+const findById = async (idInput) =>
+  connection()
     .then((db) =>
-      db
-        .getTable('users')
-        .select()
-        .where('id = :id_param')
-        .bind('id_param', id)
-        .execute(),
+      db.getTable('users').select().where('id = :id_param').bind('id_param', idInput)
+      .execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
-};
 
 // -------------------------------------------------
 // -------------------------------------------------
 
 // Criar novo usuário
-const createUser = (email, password, firstName, lastName) => {
+const createUser = (email, password, firstName, lastName) =>
   connection().then((db) =>
     db
       .getTable('users')
@@ -40,7 +34,6 @@ const createUser = (email, password, firstName, lastName) => {
       .values(email, password, firstName, lastName)
       .execute(),
   );
-};
 
 // // -------------------------------------------------
 // // -------------------------------------------------

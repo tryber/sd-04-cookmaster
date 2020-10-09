@@ -61,7 +61,6 @@ const excludeRecipe = async (req, res) => {
   const recipe = req.params;
   const { id } = req.user;
   const { confirmPassword } = req.body;
-
   const realUser = await findById(id);
   const { password } = realUser;
 

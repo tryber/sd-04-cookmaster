@@ -7,7 +7,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const userController = require('./controllers/userController');
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

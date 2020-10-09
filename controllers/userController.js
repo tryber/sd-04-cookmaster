@@ -68,9 +68,7 @@ const validName = (name, lastName) => {
   return message;
 };
 
-const renderCadastro = (_req, res) => {
-  return res.render('admin/signup', { message: null });
-};
+const renderCadastro = (_req, res) => res.render('admin/signup', { message: null });
 
 const addUser = async (req, res) => {
   const { email, password, confirmPassword, name, lastName } = req.body;

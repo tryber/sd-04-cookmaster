@@ -47,7 +47,7 @@ const showEditRecipe = async (req, res) => {
   const user = req.user;
   const recipe = await Recipes.recipesById(req.params.id);
   // console.log(recipe);
-  res.render('recipes/edit', { user, recipe, message: null });
+  return res.render('recipes/edit', { user, recipe, message: null });
 };
 
 const showDeleteRecipe = async (req, res) => {
@@ -66,7 +66,7 @@ const deleteRecipe = async (req, res) => {
 
   if (user.password === password) {
     await Recipes.deleteRecipe(id);
-    res.redirect('/');
+    return res.redirect('/');
   }
   return res.render('recipes/delete', { user, id, message: 'Senha Incorreta.' });
 };

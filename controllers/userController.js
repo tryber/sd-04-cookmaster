@@ -40,7 +40,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
-  res.render('admin/logout');
+  return res.render('admin/logout');
 };
 
 // Funções criadas
@@ -69,7 +69,7 @@ const validName = (name, lastName) => {
 };
 
 const renderCadastro = (_req, res) => {
-  res.render('admin/signup', { message: null });
+ return res.render('admin/signup', { message: null });
 };
 
 const addUser = async (req, res) => {
@@ -77,7 +77,7 @@ const addUser = async (req, res) => {
   // console.log(email, password, name, lastName);
 
   if (!email || !password || !confirmPassword || !name || !lastName) {
-    res.render('admin/signup', { message: 'Preencha todos os campos' });
+    return res.render('admin/signup', { message: 'Preencha todos os campos' });
   }
 
   const vEmail = validEmail(email);
@@ -85,7 +85,7 @@ const addUser = async (req, res) => {
   const vPassword = validPassword(password, confirmPassword);
 
   if (vEmail || vName || vPassword) {
-    res.render('admin/signup', { message: vEmail || vName || vPassword });
+    return res.render('admin/signup', { message: vEmail || vName || vPassword });
   } else {
     const insertUser = await userModel.newUser(email, password, name, lastName);
     if (!insertUser)

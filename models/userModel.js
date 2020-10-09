@@ -42,12 +42,12 @@ const findById = async (ids) =>
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, first_name, last_name]) => ({
+    .then(([id, email, password, firstName, lastName]) => ({
       id,
       email,
       password,
-      first_name,
-      last_name,
+      firstName,
+      lastName,
     }));
 
 const addUser = ({ email, senha, nome, sobrenome }) => {

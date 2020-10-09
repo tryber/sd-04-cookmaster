@@ -33,7 +33,7 @@ const search = async (req, res) => {
   const { q } = req.query;
   if (!q) return res.render('search', { recipes: [] });
   const recipes = await recipesModels.findRecipeByName(q);
-  res.render('search', { recipes, user: req.user });
+  return res.render('search', { recipes, user: req.user });
 };
 
 const newRecipe = async (req, res) => {

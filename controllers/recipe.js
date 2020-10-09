@@ -47,18 +47,10 @@ const searchRecipe = async (req, res) => {
 };
 
 /** Recipe creation section */
-const addIngredient = () => {
-  console.log('teste ok')
-  const ingredient = document.querySelector('.ingredient').textContent;
-  console.log(ingredient);
-};
-
 const createRecipe = async (req, res) => {
   const recipe = req.body;
 
-  if (!recipe) return res.render('new-recipe', { messages: null });
-
-  if (recipe.ingredient) return addIngredient();
+  if (!recipe.name) return res.render('new-recipe', { messages: null });
 
   const result = await recipeModel.create(recipe);
 
@@ -74,5 +66,4 @@ module.exports = {
   getRecipe,
   searchRecipe,
   createRecipe,
-  addIngredient,
 };

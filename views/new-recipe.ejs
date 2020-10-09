@@ -10,18 +10,19 @@
 
     <form action="/recipes" method="POST">
       <label for="nameInput">Nome da Receita</label>
-      <input data-testid="nome-receita" type="text" name="name" id="nameInput" />
+      <input data-testid="nome-receita" type="text" name="name" id="nameInput" required/>
       <br />
-      <label for="ingredientInput">Ingredientes</label>
-      <input data-testid="ingredientes" type="text" name="ingredient" id="ingredientInput" />
-      <button data-testid="adicionar-ingrediente" type="submit">Adicionar Ingrediente</button>
+      <label for="ingredientsInput">Ingredientes</label>
+      <input data-testid="ingredientes" type="text" name="ingredients" id="ingredientsInput" required/>
+      <button data-testid="adicionar-ingrediente" type="button">Adicionar Ingrediente</button>
       <br />
       <label for="methodInput">Modo de preparo: </label>
-      <textarea data-testid="modo-de-preparo" name="method" id="methodInput"></textarea>
+      <textarea data-testid="modo-de-preparo" name="method" id="methodInput" required></textarea>
       <br />
       <br />
       <button data-testid="postar-receita" type="submit">Postar Receita</button>
     </form>
 
+  <script src="../scripts/newRecipe.js" />
   </body>
 </html>

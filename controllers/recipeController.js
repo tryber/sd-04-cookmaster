@@ -23,7 +23,15 @@ const editRecipe = async (req, res) => res.render('admin/editRecipe');
 
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
-const newRecipe = async (req, res) => res.render('admin/newRecipe', { user: req.user });
+const newRecipe = async (req, res) => {
+  const recipe = req.body;
+  console.log(recipe);
+  try {
+    return res.render('admin/newRecipe', { user: req.user })
+  } catch (err) {
+    return err;
+  }
+};
 
 const searchRecipes = async (req, res) => {
   const { q } = req.query;

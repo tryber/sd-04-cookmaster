@@ -12,7 +12,7 @@
         <h1>Nova Receita</h1>
       </div>
       <div class="recipe-body">
-        <form action="" method="POST">
+        <!-- <form action="/recipes" method="POST"> -->
           <label for="recipeName">
             <p>Nome da Receita</p>
             <input type="text" name="recipeName" id="recipeName" data-testid="nome-receita" />
@@ -20,8 +20,15 @@
           <label for="ingredient">
             <p>Ingredientes</p>
           </label>
-          <input type="text" name="ingredientName" id="ingredient" />
-          <button data-testid="ingredientes">Adicionar ingrediente</button>
+          <ul id="ingredient-list">
+          </ul>
+          <input type="text" name="ingredientName" id="ingredient" data-testid="ingredientes" />
+          <button
+            data-testid="adicionar-ingrediente"
+            onclick="addIngredient()"
+          >
+            Adicionar ingrediente
+          </button>
           <label for="prepareMode">
             <p>Modo de preparo</p>
             <textarea
@@ -34,9 +41,44 @@
             <button>Voltar</button>
             <button type="submit" data-testid="postar-receita">Salvar Receita</button>
           </div>
-        </form>
+        <!-- </form> -->
       </div>
     </main>
+    <script>
+      const ingredientes = [];
+
+      function removeIngredient({ target: { id } }) {
+        const lista = document.getElementById('ingredient-list');
+        // lista.innerHTML = "";
+        // const idx = lista.childNodes.filter((element) => element.id === id);
+        // console.log(idx);
+        ingredientes.slice(id, 1);
+        // console.log(ingredientes);
+        // console.log(lista.childNodes);
+        // lista.removeChild(lista.childNodes[Number(id)]);
+      }
+
+      function renderList() {
+        const lista = document.getElementById('ingredient-list');
+        lista.innerHTML = "";
+        ingredientes.forEach((element, idx) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.innerHTML = 'Excluir';
+          btn.id = `${idx}`;
+          btn.addEventListener('click', removeIngredient);
+          li.innerHTML = element;
+          li.appendChild(btn)
+          lista.appendChild(li);
+        });
+      }
+
+      function addIngredient() {
+        const ing = document.getElementById('ingredient').value;
+        ingredientes.push(ing);
+        renderList();
+      }
+    </script>
     <style>
       * {
         font-family: sans-serif;

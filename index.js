@@ -57,4 +57,6 @@ app.post('/login', controllers.userController.login);
 
 app.post('/cadastro', controllers.userController.createUser);
 
+app.post('/recipes', controllers.recipeController.newRecipe);
+
 app.listen(3000, () => console.log('Listening on 3000'));

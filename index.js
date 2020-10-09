@@ -24,6 +24,12 @@ app.get(
 );
 
 app.get(
+  '/recipes/new',
+  middlewares.auth(),
+  controllers.recipeController.newRecipe,
+);
+
+app.get(
   '/recipes/:id',
   middlewares.auth(false),
   controllers.recipeController.showRecipeById,

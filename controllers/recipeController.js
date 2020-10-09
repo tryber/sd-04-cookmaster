@@ -23,6 +23,8 @@ const editRecipe = async (req, res) => res.render('admin/editRecipe');
 
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
+const newRecipe = async (req, res) => res.render('admin/newRecipe', { user: req.user });
+
 const searchRecipes = async (req, res) => {
   const { q } = req.query;
   try {
@@ -39,4 +41,5 @@ module.exports = {
   editRecipe,
   deleteRecipe,
   searchRecipes,
+  newRecipe,
 };

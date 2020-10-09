@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Receita</title>
+  </head>
+  <body>
+    <%- include('../../components/header/header', { user }); %>
+    <main class="main-content">
+      <div class="top-bar">
+        <h1>Nova Receita</h1>
+      </div>
+      <div class="recipe-body">
+        <form action="" method="POST">
+          <label for="recipeName">
+            <p>Nome da Receita</p>
+            <input type="text" name="recipeName" id="recipeName" data-testid="nome-receita" />
+          </label>
+          <label for="ingredient">
+            <p>Ingredientes</p>
+          </label>
+          <input type="text" name="ingredientName" id="ingredient" />
+          <button data-testid="ingredientes">Adicionar ingrediente</button>
+          <label for="prepareMode">
+            <p>Modo de preparo</p>
+            <textarea
+              name="prepareMode"
+              id="prepareMode"
+              data-testid="modo-de-preparo"
+            ></textarea>
+          </label>
+          <div>
+            <button>Voltar</button>
+            <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <style>
+      * {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .cabecalho {
+        align-items: center;
+        background-color: #c4c4c4;
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+      }
+
+      .header-element {
+        padding: 30px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 60px;
+      }
+
+      .recipe-body {
+        padding: 5px 50px;
+      }
+    </style>
+  </body>
+</html>

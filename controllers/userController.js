@@ -69,7 +69,7 @@ const validName = (name, lastName) => {
 };
 
 const renderCadastro = (_req, res) => {
- return res.render('admin/signup', { message: null });
+  return res.render('admin/signup', { message: null });
 };
 
 const addUser = async (req, res) => {
@@ -86,12 +86,11 @@ const addUser = async (req, res) => {
 
   if (vEmail || vName || vPassword) {
     return res.render('admin/signup', { message: vEmail || vName || vPassword });
-  } else {
-    const insertUser = await userModel.newUser(email, password, name, lastName);
-    if (!insertUser)
-      res.render('admin/signup', { message: 'Erro ao cadastrar usuário no banco de dados' });
-    return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
   }
+  const insertUser = await userModel.newUser(email, password, name, lastName);
+  if (!insertUser)
+    return res.render('admin/signup', { message: 'Erro ao cadastrar usuário no banco de dados' });
+  return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
 };
 
 module.exports = {

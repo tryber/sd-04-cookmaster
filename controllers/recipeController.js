@@ -28,7 +28,7 @@ const newRecipe = async (req, res) => {
   const userInfo = req.user;
   try {
     await recipe.addNewRecipe(recipeInfo, userInfo);
-    return res.render('admin/newRecipe', { actStatus, user: req.user })
+    return res.render('admin/newRecipe', { user: req.user });
   } catch (err) {
     return err;
   }

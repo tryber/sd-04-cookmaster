@@ -18,8 +18,7 @@ const connection = () => {
       schema = session.getSchema('cookmaster');
       return schema;
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       process.exit(1);
     });
 };

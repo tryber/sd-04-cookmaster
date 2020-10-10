@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Minhas Receitas</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -14,29 +14,6 @@
   <body>
     <navbar> <%- include('navbar')%> </navbar>
 
-    <div class="header">
-      <section>
-        <nav>
-          <h1>Receitas</h1>
-          <% if (user) { %>
-          <a href= <%= `/me/recipes` %> class="btn btn-primary" data-testid="minhas-receitas">Minhas Receitas</a>
-          <a href= <%= `/recipes/new` %> class="btn btn-primary btn-small" data-testid="nova-receita">Nova Receita</a>
-          <a href= <%= `/me/edit` %> class="btn btn-primary" data-testid="minha-conta">Minha Conta</a>
-          <% } %>
-        </nav>
-      </section>
-      <div class="col-lg" style="text-align: right">
-        <a href= <%= `/recipes/search` %> class="btn btn-primary btn-small" data-testid="buscar-receita">Buscar Receitas</a>
-      </div>
-    </div>
-
-    <!--     <div class="card">
-      <% recipes.forEach(recipe => { %>
-      <p class="card-title"><%= recipe.user %></p>
-      <p class="card-text"><%= recipe.name %></p>
-      <a href="link" class="btn btn-primary">Ver mais</a>
-      <% }) %>
-    </div> -->
     <div class="conteudo">
       <% recipes.forEach(recipe => { %>
       <div class="card w-75" style="margin: 10px; background-color: rgb(167, 191, 192)">

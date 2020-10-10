@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Nova Receita</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <navbar> <%- include('navbar')%> </navbar>
+    <h1 class="mb-2">Nova Receita</h1>
+    <% if (message) { %>
+    <p class="alert alert-danger"><%= message %></p>
+    <% } %>
+    <div id="formulario">
+      <div class="col-md">
+
+        <form action="/recipes/<%= recipes[0] %>" method="POST" id="form">
+          <div class="col-md-12 mb-3">
+            <label for="recipeName">Nome da Receita</label>
+            <input data-testid="nome-receita" type="text" class="form-control" name="nameRecipe" value= "<%= recipes[1] %>"  />
+            <br />
+            <div>
+              <ul id="myList">
+              <% ingredients.forEach((element, index) => { %>
+                <li index=<%=`${index}` %>><input name="item[]" value="<%= element %>" />
+                <a onClick=<%= `removeTask(${index})` %> class="btn btn-primary">Excluir Receita</a></li>
+                <% }) %>
+              </ul>
+            </div>
+            <br>
+
+            <p>Ingredientes</p>
+            <div style="display: flex">
+              <input
+                data-testid="ingredientes"
+                type="text"
+                class="form-control col-md-9"
+                name="task"
+                id="task"
+                value=" "
+              />
+              <input
+                type="button"
+                style="margin-left: 15px"
+                name=""
+                class="btn btn-success col-md-3"
+                data-testid="adicionar-ingrediente"
+                value="Adicionar Ingrediente"
+                onclick="addTask()"
+              />
+            </div>
+            <br /><br />
+            <div class="form-group">
+              <label for="modoPreparo">Modo de preparo</label>
+              <textarea
+                class="form-control"
+                rows="10"
+                data-testid="modo-de-preparo"
+                name="instrucoes"
+              ><%= recipes[3] %></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: space-between">
+              <div>
+                <a href="#" class="btn btn-primary" type="submit" id="myInput">Voltar</a>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary" data-testid="postar-receita">
+                  Salvar Receita
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <style>
+    /* CSS ESTA AQUI*/
+
+    /*     #ingrediente {
+      max-width: 50%;
+    } */
+    #formulario {
+      margin: 10px;
+    }
+
+    .botaoExcluir {
+      margin-left: 15px;
+    }
+  </style>
+
+  <script>
+    var ul = document.getElementById('myList');
+    var li;
+    var itemId;
+    var item;
+/*     let botaoRemover = document.querySelector('.botaoRemove')
+
+    botaoRemover.addEventListener('click', () => {
+      console.log(ul.nextElementSibling.innerHTML)
+      ul.nextElementSibling.remove();
+    }) */
+
+
+    addTask = function () {
+      document.getElementById('task').value;
+      ingredientInput = document.getElementById('task');
+      if (ingredientInput.value == '') {
+        alert('Escreva alguma coisa');
+      } else {
+        itemId = ul.childElementCount;
+        console.log(itemId)
+        li = createItemEl(ingredientInput.value, itemId);
+        console.log(li)
+        li.appendChild(createRemoveTaskBtn(itemId));
+        ul.appendChild(li);
+      }
+    };
+
+    removeTask = function (itemId) {
+      for (i = 0; i < ul.children.length; i++) {
+        if (ul.children[i].getAttribute('index') == itemId) {
+          ul.children[i].remove();
+        }
+      }
+    };
+    createItemEl = function (itemValue, itemId) {
+      let li = document.createElement('li');
+      const input = document.createElement('input');
+      input.value = itemValue;
+      input.name = 'item[]';
+      li.setAttribute('index', itemId);
+      li.appendChild(input);
+
+      return li;
+    };
+    createRemoveTaskBtn = function () {
+      let btn = document.createElement('button');
+      btn.setAttribute('onclick', 'removeTask(' + itemId + ')');
+      btn.className = 'btn btn-primary botaoExcluir';
+      btn.innerHTML = 'Excluir Ingrediente';
+      return btn;
+    };
+  </script>
+</html>

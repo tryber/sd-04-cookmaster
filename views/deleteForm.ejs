@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm - Delete</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <% if(message) { %>
+    <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+    <form action="/recipes/<%= id %>/delete" method="POST">
+      <div class="teste">
+        <p><b>Confirme a exclusão da receita</b></p>
+        <label>Senha</label><br />
+        <input type="password" name="confirmPass" data-testid="senha" />
+        <br />
+        <div class="botoes">
+          <a href="/" class="btn btn-primary btn-sm" data-testid="cancelar">Cancelar</a>
+          <button class="btn btn-danger btn-sm" data-testid="confirmar">Confirmar</button>
+        </div>
+      </div>
+    </form>
+  </body>
+  <style>
+    .teste {
+      margin: 10% 40%;
+    }
+    .botoes {
+      display: flex;
+    }
+    label {
+      margin-bottom: 0px;
+    }
+    input {
+      width: 300px;
+    }
+  </style>
+</html>

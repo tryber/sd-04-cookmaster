@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { validation } = require('../models/cadastroModel');
 
 const userModel = require('../models/userModel');
 
@@ -34,7 +35,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,41 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const cadastrar = (_, res) => {
+  res.render('cadastro', { message: null });
+};
+
+const newUser = async (req, res) => {
+  const isValid = await validation({ ...req.body });
+
+  if (isValid) {
+    await userModel.createUser({ ...req.body });
+    return res.status(200).render('cadastro', { ...isValid });
+  }
+};
+
+const editUser = async (req, res) => {
+  res.render('editUser', { user: req.user, message: null });
+};
+
+const confirmEdit = async (req, res) => {
+  const { id } = req.user;
+  const { email, password, first_name, last_name } = req.body;
+  const isValid = await validation({ ...req.body });
+
+  if (isValid) {
+    await userModel.editUser(id, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('editUser', { ...isValid, user: req.user });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  cadastrar,
+  newUser,
+  editUser,
+  confirmEdit,
 };

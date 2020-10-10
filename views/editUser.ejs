@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de cadastro - usuario</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <% if (message) { %>
+    <p class="alert alert-success"><%= message %></p>
+
+    <% } %>
+    <div id="formulario">
+      <div class="col-md">
+        <h3 class="mb-2">Cookmaster - Editar Usuario</h3>
+
+        <form action="/me/edit" method="POST">
+          <div class="col-md-12 mb-3">
+            <label for="firstName">Nome</label>
+            <input
+              data-testid="nome"
+              type="text"
+              class="form-control"
+              id="inputName"
+              name="first_name"
+              value="<%=user.firstName%>"
+            />
+            <div class="invalid-feedback">Valid first name is required.</div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <label for="lastName">Sobrenome</label>
+            <input
+              data-testid="sobrenome"
+              type="text"
+              class="form-control"
+              id="inputLastName"
+              name="last_name"
+              value="<%=user.lastName%>"
+            />
+            <div class="invalid-feedback">Valid last name is required.</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label for="lastName">Senha</label>
+            <input
+              data-testid="senha"
+              type="text"
+              class="form-control"
+              id="inputPassword"
+              name="password"
+            />
+            <div class="invalid-feedback">Valid last name is required.</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label for="lastName">Confirmar Senha</label>
+            <input
+              data-testid="confirmar-senha"
+              type="text"
+              class="form-control"
+              id="inputPasswordConfirm"
+              name="passwordConfirmation"
+            />
+            <div class="invalid-feedback">Valid last name is required.</div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <label for="email">Email</label>
+            <input
+              data-testid="email"
+              type="email"
+              class="form-control"
+              id="inputEmail"
+              name="email"
+              value="<%=user.email%>"
+            />
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+          </div>
+
+          <hr />
+          <div class="col-lg" style="display: flex"></div>
+          <a href="/" class="btn btn-danger">Cancelar</a>
+
+          <button data-testid="salvar" class="btn btn-success" type="submit">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <style>
+    #formulario {
+      max-width: 700px;
+      margin: 50px 20%;
+    }
+  </style>
+</html>

@@ -20,4 +20,4 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.listen(3005, () => console.log('Listening on 3005'));
+app.listen(3000, () => console.log('Listening on 3000'));

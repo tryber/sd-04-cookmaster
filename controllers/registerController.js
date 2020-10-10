@@ -34,12 +34,12 @@ const register = async (req, res) => {
     return res.render('register', { message: 'As senhas tem que ser iguais' });
   }
 
-  if (!regexVerification === '') {
-    res.render('register', { message: 'Não sei como você chegou a esse erro, mas é um erro aí...' });
+  if (regexVerification === '') {
+    await registerUser(email, password, firstName, lastName);
+    return res.render('register', { message: 'Usuário cadastrado com sucesso!' });
   }
 
-  await registerUser(email, password, firstName, lastName);
-  return res.render('register', { message: 'Usuário cadastrado com sucesso!' });
+  return res.render('register', { message: regexVerification });
 };
 
 module.exports = {

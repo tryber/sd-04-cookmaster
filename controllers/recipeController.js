@@ -19,7 +19,15 @@ const showRecipeById = async (req, res) => {
   }
 };
 
-const editRecipe = async (req, res) => res.render('admin/editRecipe');
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipeToEdit = await recipe.getRecipeById(id);
+    res.render('admin/editRecipe', { recipeToEdit, user: req.user });
+  } catch (error) {
+    return error
+  }
+};
 
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 

@@ -3,9 +3,184 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Nova Receita</title>
   </head>
   <body>
-    <h1>Olá</h1>
+    <%- include('../../components/header/header', { user }); %>
+    <main class="main-content">
+      <div class="top-bar">
+        <h1>Editar Receita</h1>
+      </div>
+      <div class="recipe-body">
+        <form action="/recipes" method="POST" id="form-cadastro">
+          <label for="recipeName">
+            <p>Nome da Receita</p>
+            <input
+              class="txt-input"
+              type="text"
+              name="recipeName"
+              required
+              id="recipeName"
+              data-testid="nome-receita"
+              value="<%= recipeToEdit.title %>"
+            />
+          </label>
+
+          <label for="ingredient">
+            <p>Ingredientes</p>
+          </label>
+
+          <ul id="ingredient-list">
+            <% recipeToEdit.ingredients.split(',').forEach((element) => { %>
+              <li>
+                <input type="text" value="<%= element %>" name="ingredientes[]">
+                <button type="button" onclick="removeIngredient(e)">Excluir Ingrediente</button>
+              </li>
+            <% }) %>
+          </ul>
+          <input
+            class="txt-input ingredient-input"
+            type="text"
+            id="ingredient"
+            data-testid="ingredientes"
+          />
+          <button
+            class="add-ingredient"
+            data-testid="adicionar-ingrediente"
+            onclick="addIngredient()"
+            type="button"
+          >
+            Adicionar ingrediente
+          </button>
+          <label for="prepareMode">
+            <p>Modo de preparo</p>
+            <textarea
+              name="prepareMode"
+              id="prepareMode"
+              data-testid="modo-de-preparo"
+              class="prepare-area"
+              required
+            ></textarea>
+          </label>
+          <div class="buttons">
+            <a href="/" class="btn btn-link">Voltar</a>
+            <button class="btn" type="submit" data-testid="postar-receita">Salvar Receita</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script>
+      const ingredientInput = document.getElementById('ingredient');
+      const lista = document.getElementById('ingredient-list');
+
+      function btnAddIngredientFocus() {
+        ingredientInput.value = "";
+        ingredientInput.focus();
+      }
+
+      function removeIngredient(e) {
+        e.target.parentElement.remove();
+      }
+
+      function addIngredient() {
+        const li = document.createElement('li');
+        const input = document.createElement('input');
+        const btn = document.createElement('button');
+        input.value = ingredientInput.value;
+        input.name = 'ingredientes[]';
+        btn.innerHTML = 'Excluir Ingrediente';
+        btn.type = 'button'
+        btn.addEventListener('click', removeIngredient);
+        li.appendChild(input);
+        li.appendChild(btn);
+        lista.appendChild(li);
+        btnAddIngredientFocus();
+      }
+    </script>
+    <style>
+      * {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .cabecalho {
+        align-items: center;
+        background-color: #c4c4c4;
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+      }
+
+      .header-element {
+        padding: 30px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 60px;
+      }
+
+      .recipe-body {
+        padding: 5px 50px;
+      }
+
+      p {
+        font-size: 14pt;
+        margin: 10px 0 5px;
+      }
+
+      .txt-input {
+        font-size: 15pt;
+        height: 40px;
+        text-indent: 10px;
+        width: 90%;
+      }
+
+      .ingredient-input {
+        width: 50%;
+      }
+
+      .add-ingredient {
+        background-color: #32cd32;
+        border: none;
+        color: white;
+        height: 43px;
+        width: 220px;
+      }
+
+      .prepare-area {
+        box-sizing: border-box;
+        font-size: 14pt;
+        height: 130px;
+        padding: 7px;
+        resize: none;
+        width: 90%;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+      }
+
+      .btn {
+        background-color: #828282;
+        border: 1px solid black;
+        box-sizing: border-box;
+        color: white;
+        height: 42px;
+        width: 174px;
+      }
+
+      .btn-link {
+        align-items: center;
+        display: flex;
+        font-size: 10pt;
+        justify-content: center;
+        text-decoration: none;
+      }
+    </style>
   </body>
 </html>

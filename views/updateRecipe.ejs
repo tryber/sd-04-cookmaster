@@ -19,31 +19,22 @@
     <% } %>
     <div id="formulario">
       <div class="col-md">
+        
         <form action="/recipes/<%= recipes[0] %>" method="POST" id="form">
           <div class="col-md-12 mb-3">
             <label for="recipeName">Nome da Receita</label>
-            <input
-              data-testid="nome-receita"
-              type="text"
-              class="form-control"
-              name="nameRecipe"
-              value="<%= recipes[1] %>"
-            />
+            <input data-testid="nome-receita" type="text" class="form-control" name="nameRecipe" value= "<%= recipes[1] %>"  />
             <br />
             <div>
               <ul id="myList">
-                <% ingredients.forEach((element, index) => { %>
-                <li index="<%" ="`${index}`" %>
-                  ><input name="item[]" value="<%= element %>" />
-                  <a onClick="<%" ="`removeTask(${index})`" %>
-                    class="btn btn-primary">Excluir Receita</a
-                  >
-                </li>
+              <% ingredients.forEach((element, index) => { %>
+                <li index=<%=`${index}` %>><input name="item[]" value="<%= element %>" />
+                <a onClick=<%= `removeTask(${index})` %> class="btn btn-primary">Excluir Receita</a></li>
                 <% }) %>
               </ul>
             </div>
-            <br />
-
+            <br>
+            
             <p>Ingredientes</p>
             <div style="display: flex">
               <input
@@ -72,9 +63,7 @@
                 rows="10"
                 data-testid="modo-de-preparo"
                 name="instrucoes"
-              >
-<%= recipes[3] %></textarea
-              >
+              ><%= recipes[3] %></textarea>
             </div>
 
             <div style="display: flex; justify-content: space-between">
@@ -112,12 +101,13 @@
     var li;
     var itemId;
     var item;
-    /*     let botaoRemover = document.querySelector('.botaoRemove')
+/*     let botaoRemover = document.querySelector('.botaoRemove')
 
     botaoRemover.addEventListener('click', () => {
       console.log(ul.nextElementSibling.innerHTML)
       ul.nextElementSibling.remove();
     }) */
+
 
     addTask = function () {
       document.getElementById('task').value;
@@ -126,9 +116,9 @@
         alert('Escreva alguma coisa');
       } else {
         itemId = ul.childElementCount;
-        console.log(itemId);
+        console.log(itemId)
         li = createItemEl(ingredientInput.value, itemId);
-        console.log(li);
+        console.log(li)
         li.appendChild(createRemoveTaskBtn(itemId));
         ul.appendChild(li);
       }

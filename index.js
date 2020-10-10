@@ -23,12 +23,15 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipesControlle
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
 app.get('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.editRecipe);
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.deleteRecipe);
+
 app.post(
   '/recipes/:id/delete',
   middlewares.auth(false),
-  controllers.recipesController.deleteRecipe,
+  controllers.recipesController.validaDelete,
 );
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showRecipe);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.update);
 
 // user router
 app.get('/cadastro', controllers.userController.cadastrar);

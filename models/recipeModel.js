@@ -70,10 +70,25 @@ const createRecipe = async (userId, userName, nameRecipe, task, instrucoes) =>
       .execute(),
   );
 
+// fazer update do banco
+const updateRecipe = async (recipeId, name, ingredients, instructions) => {
+  const db = await connection();
+  await db
+    .getTable('recipes')
+    .update()
+    .set('name', name)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :id')
+    .bind('id', recipeId)
+    .execute();
+};
+
 module.exports = {
   getRecipes,
   find,
   getRecipesByName,
   createRecipe,
   isValid,
+  updateRecipe,
 };

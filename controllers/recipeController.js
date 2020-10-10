@@ -1,4 +1,5 @@
 const recipesModel = require('../models/recipeModel');
+const userModel = require('../models/userModel');
 
 const showAllRecipes = async (req, res) => {
   const recipes = await recipesModel.getRecipes();
@@ -23,21 +24,8 @@ const showRecipe = async (req, res) => {
   const { id } = req.params;
 
   const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user });
-};
-
-const editRecipe = async (req, res) => {
-  const { id } = req.params;
-
-  const recipes = await recipesModel.find(id);
-  res.render('updateRecipe', { recipes, user: req.user, message: null });
-};
-
-const deleteRecipe = async (req, res) => {
-  const { id } = req.params;
-
-  const recipes = await recipesModel.find(id);
-  res.render('recipe', { recipes, user: req.user });
+  const ingTrat = recipes[2].replace('[', '').replace(']', '').replace('" ', '');
+  res.render('recipe', { recipes, ingTrat, user: req.user });
 };
 
 const buscaReceita = async (req, res) => {
@@ -67,6 +55,44 @@ const create = async (req, res) => {
   }
 };
 
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+
+  const recipes = await recipesModel.find(id);
+
+  const ingredients = recipes[2].split(',');
+
+  res.render('updateRecipe', { recipes, ingredients, user: req.user, message: null });
+};
+
+const update = async (req, res) => {
+  const { nameRecipe, item, instrucoes } = req.body;
+  const { id } = req.params;
+  await recipesModel.updateRecipe(id, nameRecipe, item, instrucoes);
+
+  return res.redirect('/me/recipes');
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  res.render('deleteForm', { id, user: req.user, message: null });
+};
+
+const validaDelete = async (req, res) => {
+  const { id } = req.user;
+  const { confirm_pass } = req.body;
+  const user = await userModel.findById(id);
+  console.log('confirm_pass: ', confirm_pass);
+  console.log('user: ', user.password);
+
+  if (confirm_pass === user.password) {
+    res.redirect('/');
+  } else {
+    const { id } = req.params;
+    res.render('deleteForm', { id, user: req.user, message: 'Senha Incorreta.' });
+  }
+};
+
 module.exports = {
   showAllRecipes,
   showUserRecipes,
@@ -77,4 +103,6 @@ module.exports = {
   buscaReceita,
   newRecipe,
   create,
+  update,
+  validaDelete,
 };

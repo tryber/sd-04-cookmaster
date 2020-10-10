@@ -54,8 +54,9 @@ const newUser = async (req, res) => {
   if (isValid) {
     await userModel.createUser({ ...req.body });
     return res.status(200).render('cadastro', { ...isValid });
-  } else {
-    res.status(400).render('admin/signup', { ...isValid });
+  }
+  {
+    return res.status(400).render('admin/signup', { ...isValid });
   }
 };
 

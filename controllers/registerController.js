@@ -35,7 +35,7 @@ const register = async (req, res) => {
   }
 
   if (!regexVerification === '') {
-    res.render('register', { message: 'Some error' });
+    res.render('register', { message: 'Não sei como você chegou a esse erro, mas é um erro aí...' });
   }
 
   await registerUser(email, password, firstName, lastName);

@@ -2,9 +2,9 @@
   <nav style="display: flex; justify-content: space-between;">
     <h1>Cookmaster</h1>
     <% if (user) { %>
-      <a href='/logout'">Logout</a>
+      <a data-testid="logout" href='/logout'">Logout</a>
       <% } else { %>
-      <a href='/login'>Login</a>
+      <a data-testid="login" href='/login'>Login</a>
       <% } %>
   </nav>
 </header>

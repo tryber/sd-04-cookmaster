@@ -65,14 +65,13 @@ const isValidRepeatPassword = (password, repeatPassword) => {
 // name and lastName
 // Referência regex para apenas letras
 // https://www.w3resource.com/javascript/form/all-letters-field.php#:~:text=To%20get%20a%20string%20contains,is%20the%20complete%20web%20document.
-// O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras
 const isValidName = (name, text) => {
   const regexLetters = /^[A-Za-z]+$/;
   if (name.length < 3 || !regexLetters.test(name)) return text;
   return null;
 };
 
-const add = async (email, password, name, lastName) => {
+const add = (email, password, name, lastName) => {
   connection().then((db) =>
     db
       .getTable('users')

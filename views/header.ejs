@@ -1,0 +1,9 @@
+<header>
+  <p>Cookmaster</p>
+    <% if (user) { %>
+      <p><%= user.name %></p>
+      <a href="/logout" data-testid="logout">Logout</a>
+    <% } else { %>
+      <a href="/login" data-testid="login">Login</a>
+    <% } %>
+</header>

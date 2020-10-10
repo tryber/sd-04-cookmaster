@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // recipes router
-app.get('/recipes/new', middlewares.auth(false), controllers.recipesController.newRecipe);
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.newRecipe);
 
 app.post('/recipes/', middlewares.auth(false), controllers.recipesController.create);
 app.get('/recipes/', middlewares.auth(false), controllers.recipesController.showAllRecipes);
@@ -37,6 +37,8 @@ app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.updat
 app.get('/cadastro', controllers.userController.cadastrar);
 app.post('/cadastro', controllers.userController.newUser);
 app.get('/me/recipes', middlewares.auth(), controllers.recipesController.showUserRecipes);
+app.get('/me/edit', middlewares.auth(), controllers.userController.editUser);
+app.post('/me/edit', middlewares.auth(), controllers.userController.confirmEdit);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

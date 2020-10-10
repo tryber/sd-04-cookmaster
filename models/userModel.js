@@ -16,19 +16,6 @@ de fato, realize a busca no banco de dados */
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
  * @param {string} email Email do usuário a ser encontrado
  */
-/* const findByEmail = async (userEmail) => {
-  connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select(['id', 'email', 'password'])
-        .where('email = :email')
-        .bind('email', userEmail)
-        .execute(),
-    )
-    .then((results) => results.fetchAll())
-    .then((recipeList) => recipeList.map(([id, email, password]) => ({ id, email, password })))[0];
-}; */
 
 const findByEmail = async (userEmail) => {
   const db = await connection();
@@ -74,7 +61,32 @@ const findById = async (userId) => {
   return list;
 };
 
+const createUser = async ({ email, password, first_name, last_name }) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, first_name, last_name)
+    .execute();
+};
+
+const editUser = async (id, email, password, firstName, lastName) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', firstName)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 module.exports = {
   findByEmail,
   findById,
+  createUser,
+  editUser,
 };

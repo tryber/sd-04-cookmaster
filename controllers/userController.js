@@ -50,9 +50,30 @@ const cadastrar = (_, res) => {
 
 const newUser = async (req, res) => {
   const isValid = await validation({ ...req.body });
-  if (isValid) return res.status(400).render('cadastro', { ...isValid });
+
+  if (isValid) {
+    await userModel.createUser({ ...req.body });
+    return res.status(200).render('cadastro', { ...isValid });
+  } else {
+    res.status(400).render('admin/signup', { ...isValid });
+  }
 };
 
+const editUser = async (req, res) => {
+  res.render('editUser', { user: req.user, message: null });
+};
+
+const confirmEdit = async (req, res) => {
+  const { id } = req.user;
+  const { email, password, first_name, last_name } = req.body;
+  const isValid = await validation({ ...req.body });
+
+  if (isValid) {
+    await userModel.editUser(id, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('editUser', { ...isValid, user: req.user });
+};
 
 module.exports = {
   login,
@@ -60,4 +81,6 @@ module.exports = {
   logout,
   cadastrar,
   newUser,
+  editUser,
+  confirmEdit,
 };

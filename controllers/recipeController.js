@@ -83,7 +83,8 @@ const validaDelete = async (req, res) => {
   const user = await userModel.findById(req.user.id);
 
   if (confirmPass === user.password) {
-    res.redirect('/');
+    await recipesModel.deleteRecipeModel(req.params.id);
+    return res.redirect('/');
   } else {
     const { id } = req.params;
     res.render('deleteForm', { id, user: req.user, message: 'Senha Incorreta.' });

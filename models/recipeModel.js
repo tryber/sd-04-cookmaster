@@ -86,7 +86,8 @@ const updateRecipe = async (recipeId, name, ingredients, instructions) => {
 
 const deleteRecipeModel = async (id) => {
   const db = await connection();
-  await db.getTable('recipes').delete().where('id = :id').bind('id', id).execute();
+  await db.getTable('recipes').delete().where('id = :id').bind('id', id)
+  .execute();
 };
 
 module.exports = {

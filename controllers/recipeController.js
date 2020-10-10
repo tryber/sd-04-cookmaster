@@ -79,13 +79,10 @@ const deleteRecipe = async (req, res) => {
 };
 
 const validaDelete = async (req, res) => {
-  const { id } = req.user;
-  const { confirm_pass } = req.body;
-  const user = await userModel.findById(id);
-  console.log('confirm_pass: ', confirm_pass);
-  console.log('user: ', user.password);
+  const { confirmPass } = req.body;
+  const user = await userModel.findById(req.user.id);
 
-  if (confirm_pass === user.password) {
+  if (confirmPass === user.password) {
     res.redirect('/');
   } else {
     const { id } = req.params;

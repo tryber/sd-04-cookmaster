@@ -31,10 +31,15 @@
           </label>
 
           <ul id="ingredient-list">
-            <% recipeToEdit.ingredients.split(',').forEach((element) => { %>
+            <% recipeToEdit.ingredients.split(',').forEach((element, idx) => { %>
               <li>
-                <input type="text" value="<%= element %>" name="ingredientes[]">
-                <button type="button" onclick="removeIngredient(e)">Excluir Ingrediente</button>
+                <input type="text" id="element<%= idx %>" value="<%= element %>" name="ingredientes[]">
+                <button
+                  type="button"
+                  onclick="removeIngredient('<%= idx %>')"
+                >
+                  Excluir Ingrediente
+                </button>
               </li>
             <% }) %>
           </ul>
@@ -60,7 +65,7 @@
               data-testid="modo-de-preparo"
               class="prepare-area"
               required
-            ></textarea>
+            ><%= recipeToEdit.instructions %></textarea>
           </label>
           <div class="buttons">
             <a href="/" class="btn btn-link">Voltar</a>
@@ -78,8 +83,9 @@
         ingredientInput.focus();
       }
 
-      function removeIngredient(e) {
-        e.target.parentElement.remove();
+      function removeIngredient(id) {
+        const element = document.getElementById(`element${id}`);
+        element.parentElement.remove();
       }
 
       function addIngredient() {
@@ -90,7 +96,9 @@
         input.name = 'ingredientes[]';
         btn.innerHTML = 'Excluir Ingrediente';
         btn.type = 'button'
-        btn.addEventListener('click', removeIngredient);
+        btn.addEventListener('click', (e) =>
+          e.target.parentElement.remove()
+        );
         li.appendChild(input);
         li.appendChild(btn);
         lista.appendChild(li);

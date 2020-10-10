@@ -76,6 +76,7 @@ const addNewRecipe = async ({ recipeName, ingredientes, prepareMode }, userInfo)
       ingredientesJoined,
       prepareMode,
     ).execute(); // 'Receita Cadastrada com Sucesso!';
+    return;
   } catch (error) {
     return error.message;
   }

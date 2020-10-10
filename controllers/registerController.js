@@ -19,26 +19,29 @@ const validation = (email, firstName, lastName) => {
 };
 
 const register = async (req, res) => {
-  console.log(res)
   const { email, password, confirmPassword, firstName, lastName } = req.body;
-
+  console.log(email, password, confirmPassword, firstName, lastName);
   const regexVerification = validation(email, firstName, lastName);
-
-  console.log(regexVerification);
+  console.log('Regex Result:',regexVerification);
 
   if (!email || !password || !confirmPassword || !firstName || !lastName) {
     return res.render('register', { message: 'Você deve preencher todos os campos' });
-  };
+  }
 
   if (password.length < 6) {
     return res.render('register', { message: 'A senha deve ter pelo menos 6 caracteres' });
-  };
+  }
 
   if (password !== confirmPassword) {
     return res.render('register', { message: 'As senhas tem que ser iguais' });
-  };
+  }
 
-  return res.redirect('/', );
+  if (!regexVerification === '') {
+    res.render('register', { message: 'Some error' });
+  }
+
+  await registerUser(email, password, firstName, lastName);
+  res.render('register', { message: 'Usuário cadastrado com sucesso!' });
 };
 
 module.exports = {

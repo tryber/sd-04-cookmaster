@@ -12,20 +12,21 @@
         <h1>Nova Receita</h1>
       </div>
       <div class="recipe-body">
-        <form action="/recipes" method="POST">
+        <form action="/recipes" method="POST" id="form-cadastro">
           <label for="recipeName">
             <p>Nome da Receita</p>
-            <input type="text" name="recipeName" id="recipeName" data-testid="nome-receita" />
+            <input class="txt-input" type="text" name="recipeName" required id="recipeName" data-testid="nome-receita" />
           </label>
+
           <label for="ingredient">
             <p>Ingredientes</p>
           </label>
+
           <ul id="ingredient-list">
           </ul>
           <input
-            class="ingredient-input"
+            class="txt-input ingredient-input"
             type="text"
-            name="ingredientName"
             id="ingredient"
             data-testid="ingredientes"
           />
@@ -33,6 +34,7 @@
             class="add-ingredient"
             data-testid="adicionar-ingrediente"
             onclick="addIngredient()"
+            type="button"
           >
             Adicionar ingrediente
           </button>
@@ -42,10 +44,12 @@
               name="prepareMode"
               id="prepareMode"
               data-testid="modo-de-preparo"
+              class="prepare-area"
+              required
             ></textarea>
           </label>
           <div class="buttons">
-            <button class="btn">Voltar</button>
+            <a href="/" class="btn btn-link">Voltar</a>
             <button class="btn" type="submit" data-testid="postar-receita">Salvar Receita</button>
           </div>
         </form>
@@ -53,30 +57,36 @@
     </main>
     <script>
       const ingredientes = [];
+      const ingredientInput = document.getElementById('ingredient');
+      const lista = document.getElementById('ingredient-list');
 
-      function removeIngredient({ target: { id } }) {
-        const lista = document.getElementById('ingredient-list');
-        ingredientes.slice(id, 1);
+      function btnAddIngredientFocus() {
+        ingredientInput.value = "";
+        ingredientInput.focus();
       }
 
       function renderList() {
-        const lista = document.getElementById('ingredient-list');
-        lista.innerHTML = "";
         ingredientes.forEach((element, idx) => {
           const li = document.createElement('li');
+          const input = document.createElement('input');
           const btn = document.createElement('button');
+          input.value = `${element}`;
+          input.name = 'ingredientes[]';
           btn.innerHTML = 'Excluir';
-          btn.id = `${idx}`;
-          btn.addEventListener('click', removeIngredient);
-          li.innerHTML = element;
-          li.appendChild(btn)
+          btn.type = 'button'
+          btn.addEventListener('click', (e) =>
+            e.target.parentElement.remove()
+          );
+          li.appendChild(input);
+          li.appendChild(btn);
           lista.appendChild(li);
         });
+        btnAddIngredientFocus();
       }
 
       function addIngredient() {
-        const ing = document.getElementById('ingredient').value;
-        ingredientes.push(ing);
+        ingredientes.push(ingredientInput.value);
+        lista.innerHTML = "";
         renderList();
       }
     </script>
@@ -114,7 +124,7 @@
         margin: 10px 0 5px;
       }
 
-      input {
+      .txt-input {
         font-size: 15pt;
         height: 40px;
         text-indent: 10px;
@@ -133,17 +143,36 @@
         width: 220px;
       }
 
+      .prepare-area {
+        box-sizing: border-box;
+        font-size: 14pt;
+        height: 130px;
+        padding: 7px;
+        resize: none;
+        width: 90%;
+      }
+
       .buttons {
         display: flex;
         justify-content: space-between;
+        width: 90%;
       }
 
       .btn {
         background-color: #828282;
-        border: none;
+        border: 1px solid black;
+        box-sizing: border-box;
         color: white;
         height: 42px;
         width: 174px;
+      }
+
+      .btn-link {
+        align-items: center;
+        display: flex;
+        font-size: 10pt;
+        justify-content: center;
+        text-decoration: none;
       }
     </style>
   </body>

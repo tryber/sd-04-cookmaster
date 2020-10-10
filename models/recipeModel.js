@@ -55,8 +55,36 @@ const getRecipesByQuery = async (query) => {
   }
 };
 
+const addNewRecipe = async ({ recipeName, ingredientes, prepareMode }, userInfo) => {
+  const { id, name, lastName } = userInfo;
+  try {
+    const ingredientesJoined = ingredientes.join(',');
+
+    const db = await connection();
+    const tableReference = await db.getTable('recipes');
+    tableReference.insert([
+      'user_id',
+      'user',
+      'name',
+      'ingredients',
+      'instructions',
+    ])
+    .values(
+      id,
+      `${name} ${lastName}`,
+      recipeName,
+      ingredientesJoined,
+      prepareMode,
+    ).execute();
+    return; //'Receita Cadastrada com Sucesso!';
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   getRecipesByQuery,
+  addNewRecipe,
 };

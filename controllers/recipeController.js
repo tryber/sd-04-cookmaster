@@ -24,10 +24,11 @@ const editRecipe = async (req, res) => res.render('admin/editRecipe');
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
 const newRecipe = async (req, res) => {
-  const recipe = req.body;
-  console.log(recipe);
+  const recipeInfo = req.body;
+  const userInfo = req.user;
   try {
-    return res.render('admin/newRecipe', { user: req.user })
+    await recipe.addNewRecipe(recipeInfo, userInfo);
+    return res.render('admin/newRecipe', { actStatus, user: req.user })
   } catch (err) {
     return err;
   }

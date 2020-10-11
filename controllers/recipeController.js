@@ -29,6 +29,19 @@ const editRecipe = async (req, res) => {
   }
 };
 
+const modifyRecipe = async (req, res) => {
+  const recipeData = req.body; // dados da receita.
+  const { id } = req.params; // id da receita.
+  const loggedUserId = req.user.id; // id do usuário logado.
+  const { userId } = await recipe.getRecipeById(Number(id)); // id de quem criou a receita.
+
+  if (loggedUserId === userId) {
+    await recipe.updateRecipe(Number(id), recipeData);
+    return res.redirect('/');
+  }
+  return res.redirect(`/recipes/${id}`);
+};
+
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
 const newRecipe = async (req, res) => {
@@ -54,11 +67,23 @@ const searchRecipes = async (req, res) => {
   }
 };
 
+const myRecipesList = async (req, res) => {
+  const { id } = req.user;
+  try {
+    const recipes = await recipe.getRecipesByUserId(Number(id));
+    return res.render('admin/myRecipes', { recipes, user: req.user });
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   listRecipes,
   showRecipeById,
   editRecipe,
+  modifyRecipe,
   deleteRecipe,
   searchRecipes,
   newRecipe,
+  myRecipesList,
 };

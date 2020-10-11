@@ -18,6 +18,12 @@ app.get('/cadastro', middlewares.auth(false), (_req, res) => {
 });
 
 app.get(
+  '/recipes',
+  middlewares.auth(),
+  controllers.recipeController.myRecipesList,
+);
+
+app.get(
   '/recipes/search',
   middlewares.auth(false),
   controllers.recipeController.searchRecipes,
@@ -61,6 +67,12 @@ app.post(
   '/recipes',
   middlewares.auth(),
   controllers.recipeController.newRecipe,
+);
+
+app.post(
+  '/recipes/:id',
+  middlewares.auth(),
+  controllers.recipeController.modifyRecipe,
 );
 
 app.listen(3000, () => console.log('Listening on 3000'));

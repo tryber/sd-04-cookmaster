@@ -19,13 +19,14 @@ const getRecipeById = async (idRecipe) => {
   try {
     const db = await connection();
     const resultSet = await db.getTable('recipes')
-      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
       .where('id = :id')
       .bind('id', idRecipe)
       .execute();
-    const [id, user, title, ingredients, instructions] = await resultSet.fetchOne();
+    const [id, userId, user, title, ingredients, instructions] = await resultSet.fetchOne();
     return {
       id,
+      userId,
       user,
       title,
       ingredients,
@@ -77,9 +78,44 @@ const addNewRecipe = async ({ recipeName, ingredientes, prepareMode }, userInfo)
   ).execute(); // 'Receita Cadastrada com Sucesso!';
 };
 
+const updateRecipe = async (recipeId, { recipeName, ingredientes, prepareMode }) => {
+  const ingredientesJoined = ingredientes.join(',');
+
+  const db = await connection();
+  await db.getTable('recipes')
+    .update()
+    .set('name', recipeName)
+    .set('ingredients', ingredientesJoined)
+    .set('instructions', prepareMode)
+    .where('id = :recipeId')
+    .bind('recipeId', recipeId)
+    .execute(); // 'Receita atualizada com Sucesso!';
+};
+
+const getRecipesByUserId = async (userId) => {
+  try {
+    const db = await connection();
+    const resultSet = await db.getTable('recipes')
+      .select(['id', 'user', 'name'])
+      .where('user_id = :id')
+      .bind('id', userId)
+      .execute();
+    const recipes = await resultSet.fetchAll();
+    return recipes.map(([id, user, name]) => ({
+      id,
+      user,
+      name,
+    }));
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   getRecipesByQuery,
   addNewRecipe,
+  updateRecipe,
+  getRecipesByUserId
 };

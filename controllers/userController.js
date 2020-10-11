@@ -1,4 +1,3 @@
-const { response } = require('express');
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 

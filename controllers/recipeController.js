@@ -1,4 +1,5 @@
 const recipe = require('../models/recipeModel');
+const userModel = require('../models/userModel');
 
 const listRecipes = async (req, res) => {
   try {
@@ -42,7 +43,27 @@ const modifyRecipe = async (req, res) => {
   return res.redirect(`/recipes/${id}`);
 };
 
-const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
+const deleteRecipe = async (req, res) => {
+  const loggedUserId = req.user.id; // id do usuário logado.
+  const recipeId = req.params.id; // id da receita.
+  const { userId } = await recipe.getRecipeById(Number(recipeId)); // id de quem criou a receita.
+  if (loggedUserId === userId) {
+    return res.render('admin/deleteRecipe', { recipeId, message: '' });
+  }
+  return res.redirect(`/recipes/${recipeId}`);
+};
+
+const executeDeleteRecipe = async (req, res) => {
+  const recipeId = req.params.id;
+  const userPassword = req.body.pass;
+  const loggedUserId = req.user.id;
+  const { password } = await userModel.findById(Number(loggedUserId));
+  if (userPassword === password) {
+    await recipe.deleteRecipeById(Number(recipeId));
+    return res.redirect('/recipes');
+  }
+  return res.render('admin/deleteRecipe', { recipeId, message: 'Senha Incorreta.' });
+};
 
 const newRecipeRender = async (req, res) => res.render('admin/newRecipe', { user: req.user });
 
@@ -85,6 +106,7 @@ module.exports = {
   editRecipe,
   modifyRecipe,
   deleteRecipe,
+  executeDeleteRecipe,
   searchRecipes,
   addAndReturnToHome,
   newRecipeRender,

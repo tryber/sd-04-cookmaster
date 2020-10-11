@@ -70,6 +70,12 @@ app.post(
 );
 
 app.post(
+  '/recipes/:id/delete',
+  middlewares.auth(),
+  controllers.recipeController.executeDeleteRecipe,
+);
+
+app.post(
   '/recipes/:id',
   middlewares.auth(),
   controllers.recipeController.modifyRecipe,

@@ -1,4 +1,5 @@
 const RecipesModel = require('../models/recipesModel');
+const UserModel = require('../models/userModel');
 
 const allRecipesController = async (req, res) => {
   const recipes = await RecipesModel.allRecipes();
@@ -17,7 +18,7 @@ const allRecipesController = async (req, res) => {
 
 const recipeByIdController = async (req, res) => {
   const { id } = req.params;
-  const user = req.user;
+  const { user } = req;
 
   const recipe = await RecipesModel.getRecipeById(id);
 
@@ -47,15 +48,31 @@ const searchRecipesController = async (req, res) => {
 // -------------------------------------------------------------------------------
 
 const deleteRecipeController = async (req, res) => {
-  // const {user} = req;
+  const { user } = req;
+  const { id } = req.params;
+  const { userId } = await RecipesModel.getRecipeById(id);
 
-  // const recipe = await RecipesModel.getRecipeById(id);
+  console.log(user);
+  // console.log(id);
+  console.log(userId);
 
-  try {
-    res.status(200).render('deleteRecipe');
-  } catch (err) {
-    res.status(500).send('<h2>Não foi possivel realizar essa operação</h2>');
+  userId === user.id
+    ? res.status(200).render('deleteRecipe', { message: null, id })
+    : res.status(301).redirect('/');
+};
+
+const confirmDeleteController = async (req, res) => {
+  const { user } = req;
+  const { id } = req.params;
+  const { password } = req.body;
+
+  const usuario = await UserModel.findById(user.id);
+
+  if (usuario.password !== password) {
+    return res.status(200).render('deleteRecipe', { message: 'Senha incorreta', id });
   }
+  await RecipesModel.deleteRecipe(id);
+  return res.status(301).redirect('/');
 };
 
 // -------------------------------------------------------------------------------
@@ -66,7 +83,31 @@ const userRecipesController = async (req, res) => {
 
   const recipes = await RecipesModel.getAllByUserId(user.id);
 
-  res.render('myRecipes', { recipes, user });
+  res.status(200).render('myRecipes', { recipes, user });
+};
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
+const showRecipeCreateForm = async (req, res) => {
+  const { user } = req;
+  res.status(200).render('createRecipe', { user });
+};
+
+const postNewRecipeController = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { user } = req;
+  console.log(user);
+
+  await RecipesModel.createRecipe(
+    user.id,
+    `${user.name} ${user.lastName}`,
+    name,
+    ingredients,
+    instructions,
+  );
+
+  return res.status(201).redirect('/');
 };
 
 module.exports = {
@@ -75,4 +116,7 @@ module.exports = {
   searchRecipesController,
   deleteRecipeController,
   userRecipesController,
+  showRecipeCreateForm,
+  postNewRecipeController,
+  confirmDeleteController,
 };

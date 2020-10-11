@@ -105,9 +105,28 @@ const createUserController = async (req, res) => {
 // -------------------------------------------------
 // -------------------------------------------------
 
+const showEditUserForm = async (req, res) => {
+  const { user } = req;
+
+  // const usuario = await UserModel.findById(user.id);
+  console.log(user);
+
+  res.render('editUser', { user });
+};
+
+const editUserController = async (req, res) => {
+  const { user } = req;
+  const { email, password, first_name, last_name } = req.body;
+
+  await UserModel.editUser(user.id, email, password, first_name, last_name);
+  return res.redirect('/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   createUserController,
+  showEditUserForm,
+  editUserController,
 };

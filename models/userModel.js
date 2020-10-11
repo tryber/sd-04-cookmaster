@@ -16,8 +16,7 @@ const findByEmail = async (emailInput) =>
 const findById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('users').select().where('id = :id_param').bind('id_param', idInput)
-      .execute(),
+      db.getTable('users').select().where('id = :id_param').bind('id_param', idInput).execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
@@ -38,8 +37,23 @@ const createUser = (email, password, firstName, lastName) =>
 // // -------------------------------------------------
 // // -------------------------------------------------
 
+const editUser = (id, email, password, firstName, lastName) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', firstName)
+      .set('last_name', lastName)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+
 module.exports = {
   findByEmail,
   findById,
   createUser,
+  editUser,
 };

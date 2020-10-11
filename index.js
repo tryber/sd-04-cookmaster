@@ -7,6 +7,7 @@ const controllers = require('./controllers');
 
 const RecipesController = require('./controllers/recipesController');
 const UserController = require('./controllers/userController');
+const { authMiddleware } = require('./middlewares/auth');
 
 const app = express();
 
@@ -34,8 +35,13 @@ app.post('/cadastro', UserController.createUserController);
 // página para buscar receitas  -------------------------------------
 recipeRouter.get('/search', middlewares.auth(false), RecipesController.searchRecipesController);
 
+// página para criar receita  ---------------------------------------
+recipeRouter.get('/new', middlewares.auth(), RecipesController.showRecipeCreateForm);
+recipeRouter.post('/', middlewares.auth(), RecipesController.postNewRecipeController);
+
 // página para exclusão de receita -------------------------------------
-recipeRouter.get('/:d/delete', middlewares.auth(), RecipesController.deleteRecipeController);
+recipeRouter.get('/:id/delete', middlewares.auth(), RecipesController.deleteRecipeController);
+recipeRouter.post('/:id/delete', middlewares.auth(), RecipesController.confirmDeleteController);
 // recipeRouter.get('/:d/delete', middlewares.auth(), (req, res) => {
 //   res.send('deletar receita');
 // })
@@ -45,6 +51,11 @@ recipeRouter.get('/:id', middlewares.auth(false), RecipesController.recipeByIdCo
 
 // página de minhas receitas -------------------------------------------
 meRouter.get('/recipes', middlewares.auth(), RecipesController.userRecipesController);
+
+// página de editar usuário --------------------------------------------
+meRouter.get('/edit', middlewares.auth(), UserController.showEditUserForm);
+app.post('/', middlewares.auth(), UserController.editUserController);
+
 
 // -------------------------------------------------
 

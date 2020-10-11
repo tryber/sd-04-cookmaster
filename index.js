@@ -32,7 +32,7 @@ app.get(
 app.get(
   '/recipes/new',
   middlewares.auth(),
-  controllers.recipeController.newRecipe,
+  controllers.recipeController.newRecipeRender,
 );
 
 app.get(
@@ -66,7 +66,7 @@ app.post('/cadastro', controllers.userController.createUser);
 app.post(
   '/recipes',
   middlewares.auth(),
-  controllers.recipeController.newRecipe,
+  controllers.recipeController.returnToHome,
 );
 
 app.post(

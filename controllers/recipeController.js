@@ -44,17 +44,11 @@ const modifyRecipe = async (req, res) => {
 
 const deleteRecipe = async (req, res) => res.render('admin/editRecipe');
 
-const newRecipe = async (req, res) => {
-  const recipeInfo = req.body;
-  const userInfo = req.user;
-  try {
-    if (Object.keys(recipeInfo).length) {
-      await recipe.addNewRecipe(recipeInfo, userInfo);
-    }
-    return res.render('admin/newRecipe', { user: req.user });
-  } catch (err) {
-    return err;
-  }
+const newRecipeRender = async (req, res) => res.render('admin/newRecipe', { user: req.user });
+
+const returnToHome = async (_req, res) => {
+  
+  res.redirect('/');
 };
 
 const searchRecipes = async (req, res) => {
@@ -84,6 +78,7 @@ module.exports = {
   modifyRecipe,
   deleteRecipe,
   searchRecipes,
-  newRecipe,
+  returnToHome,
+  newRecipeRender,
   myRecipesList,
 };

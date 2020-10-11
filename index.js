@@ -66,7 +66,7 @@ app.post('/cadastro', controllers.userController.createUser);
 app.post(
   '/recipes',
   middlewares.auth(),
-  controllers.recipeController.returnToHome,
+  controllers.recipeController.addAndReturnToHome,
 );
 
 app.post(

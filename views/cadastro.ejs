@@ -3,29 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Login</title>
+    <title>Cadastro</title>
   </head>
   <body>
-    <% if (message) {%>
-    <div class="message">
-      <%= message %>
-    </div>
-    <% } %>
-    <form action="/login" method="POST">
-      <h1 class="form-title">Cookmaster - Login</h1>
-      <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
-      <% if (redirect) { %>
-      <input
-        type="hidden"
-        name="redirect"
-        value="<%= decodeURIComponent(redirect) %>"
-      />
+    <form action="/cadastro" method="POST">
+      <% if (typeof message !== 'undefined') { %>
+        <div class="message">
+          <%= message %>
+        </div>
       <% } %>
-      <button type="submit" data-testid="entrar">Entrar</button>
-      <a href="/cadastro" data-testid="cadastrar" class="link-cadastro">Cadastre-se</a>
+      <h1 class="form-title">Cookmaster - Cadastro</h1>
+
+      <label for="emailInput">Email</label>
+      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+
+      <label for="passwordInput">Senha</label>
+      <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+
+      <label for="confirmPassInput">Confirmar Senha</label>
+      <input type="password" name="confirmPass" id="confirmPassInput" data-testid="confirmar-senha" /><br />
+
+      <label for="nomeInput">Nome</label>
+      <input type="text" name="name" id="nomeInput" data-testid="nome" /><br />
+
+      <label for="sobrenomeInput">Sobrenome</label>
+      <input type="text" name="lastName" id="sobrenomeInput" data-testid="sobrenome" /><br />
+
+      <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
+      <a href="/login" class="link-cadastro" data-testid="login">Fazer Login</a>
     </form>
     <style>
       form {
@@ -34,7 +39,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        height: 407px;
+        height: 721px;
         justify-content: center;
         left: 50%;
         padding: 20px;

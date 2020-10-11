@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Recipe</title>
+  </head>
+  <body>
+    <main class="delete-container-option">
+      <form action="/recipes/<%= recipeId %>/delete" method="POST" class="delete-panel">
+        <span>Confirme a exclusão da receita</span>
+        <label for="delete-input-txt">
+          Senha
+        </label>
+        <input type="password" id="delete-input-txt" name="pass" data-testid="senha">
+        <div class="choice-buttons">
+          <a href="" class="btn btn-link" data-testid="cancelar">Cancelar</a>
+          <button class="btn" data-testid="confirmar">Confirmar</button>
+        </div>
+        <% if (message) { %>
+          <span class="message"><%= message %></span>
+        <% } %>
+      </form>
+    </main>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .delete-container-option {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+      }
+
+      .delete-panel {
+        align-items: flex-start;
+        background-color: #f2f2f2;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 35%;
+        padding: 20px;
+        width: 40%;
+      }
+
+      span {
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      input {
+        font-size: 14pt;
+        height: 15%;
+        text-indent: 10px;
+        width: 100%;
+      }
+
+      .choice-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        width: 100%;
+      }
+
+      .btn {
+        background-color: #eb5757;
+        color: white;
+        cursor: pointer;
+        border: none;
+        font-size: 12pt;
+        height: 42px;
+        text-decoration: none;
+        width: 174px;
+      }
+
+      .btn-link {
+        align-items: center;
+        background-color: #2f80ed;
+        display: flex;
+        justify-content: center;
+      }
+
+      .btn:hover {
+        box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .message {
+        margin-top: 10px;
+      }
+    </style>
+  </body>
+</html>

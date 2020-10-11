@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const validation = require('../utils/cadastroValidator');
 
 const userModel = require('../models/userModel');
 
@@ -34,7 +35,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,29 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const createUser = async (req, res) => {
+  const { email, password, confirmPass, name, lastName } = req.body;
+  const valid = email && password && confirmPass && name && lastName && true;
+  const resposta = await validation(req.body);
+
+  if (!valid) {
+    return res.render('cadastro', {
+      message: 'Preencha todos campos!',
+    });
+  }
+
+  if (!resposta.message.includes('sucesso')) {
+    return res.render('cadastro', resposta);
+  }
+
+  await userModel.addUser(email, password, name, lastName);
+
+  return res.status(201).render('cadastro', resposta);
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  createUser,
 };

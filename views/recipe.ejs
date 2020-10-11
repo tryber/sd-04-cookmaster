@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Details</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <%- include('../components/header/header', { user }); %>
+      <main class="main-content">
+        <div class="top-bar">
+          <div>
+            <h1><%= recipeResult.title %></h1>
+            <span>Enviada por <%= recipeResult.user %></span>
+          </div>
+          <div class="btn-group">
+            <% if (user) { %>
+            <a href="/recipes/<%= recipeResult.id %>/edit" class="btn" data-testid="editar-receita"
+              >Editar Receita</a
+            >
+            <a
+              href="/recipes/<%= recipeResult.id %>/delete"
+              class="btn danger-btn"
+              data-testid="excluir-receita"
+              >Excluir Receita</a
+            >
+            <% } %>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <h2>Ingredientes</h2>
+          <% recipeResult.ingredients && recipeResult.ingredients.split(',').forEach((ingredient) =>
+          { %>
+            <p><%= ingredient %></p>
+          <% }) %>
+          <h2>Mode de Preparo</h2>
+          <p><%= recipeResult.instructions %></p>
+        </div>
+      </main>
+    </div>
+    <style>
+      * {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 60px;
+      }
+
+      .top-bar span {
+        color: #828282;
+        font-size: 14pt;
+        margin-top: 10px;
+      }
+
+      .recipe-body {
+        padding: 5px 50px;
+      }
+
+      .recipe-body h2 {
+        margin: 20px 0 15px;
+      }
+
+      .recipe-body p {
+        font-size: 14pt;
+        margin: 5px 0;
+      }
+
+      .cabecalho {
+        align-items: center;
+        background-color: #c4c4c4;
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+      }
+
+      .header-element {
+        padding: 30px;
+      }
+
+      .btn-group {
+        padding: 10px 0;
+      }
+
+      .btn {
+        background: #2d9cdb;
+        border: none;
+        box-sizing: border-box;
+        color: white;
+        height: 42px;
+        padding: 15px 20px;
+        text-decoration: none;
+        width: 174px;
+      }
+
+      .danger-btn {
+        background-color: #eb5757;
+      }
+
+      .recipes-container {
+        box-sizing: border-box;
+        padding: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 1302px;
+      }
+
+      .recipe-card {
+        align-items: flex-start;
+        background-color: #c4c4c4;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 117px;
+        margin: 10px 10px;
+        padding: 30px;
+        width: 343px;
+      }
+
+      .recipe-card span:first-child {
+        font-size: 18pt;
+      }
+
+      .recipe-card div {
+        display: flex;
+        justify-content: flex-end;
+        width: 270px;
+      }
+    </style>
+  </body>
+</html>

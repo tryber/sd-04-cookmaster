@@ -3,29 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookmaster Home</title>
+  <title>Minhas Receitas</title>
   <link rel="stylesheet" href="./index.css">
 </head>
 <body>
   <div class="main-container">
-    <%- include('../components/header/header', { user }); %>
+    <%- include('../../components/header/header', { user }); %>
     <main class="main-content">
       <div class="top-bar">
-        <h1>Receitas</h1>
+        <h1>Minhas Receitas</h1>
         <nav class="nav-content">
-          <% if (user) { %>
-            <a href="/recipes" class="search-btn" data-testid="minhas-receitas">
-              Minhas Receitas
-            </a>
-            <a href="/recipes/new" class="search-btn" data-testid="nova-receita">
-              Nova Receita
-            </a>
-            <a href="" class="search-btn" data-testid="">
-              Minha Conta
-            </a>
-          <% } %>
-          <a href="/recipes/search" class="search-btn" data-testid="buscar-receita" >
-            Buscar Receita
+          <a href="/recipes/new" class="search-btn" data-testid="nova-receita">
+            Nova Receita
           </a>
         </nav>
       </div>

@@ -9,7 +9,7 @@
     <h1>Boas vindas ao Cookmaster!</h1>
     <% if (user) { %>
     <span>Usuário logado: <%=user.name %></span>
-    <a data-testid="logout">Logout</a>
+    <a href="logout" data-testid="logout">Logout</a>
     <% } else { %>
     <a href="/login" data-testid="login">Login</a>
     <% } %>
@@ -24,7 +24,7 @@
       <% recipes.forEach(recipe => { %>
       <li><%= recipe.name %></li>
       <span><%= recipe.user %></span>
-      <a>Ver mais</a>
+      <a href="/recipes/<%=recipe.id%>">Ver mais</a>
       <% }) %>
     </ul>
   </body>

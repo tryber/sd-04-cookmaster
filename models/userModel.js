@@ -50,24 +50,27 @@ const findById = async (userId) => {
 };
 
 const isValidName = (name, res) => {
-  if (!name || name.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || name.length < 3)
+  if (!name || name.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || name.length < 3) {
     res.render('signUp', {
       message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
+  }
 };
 const isValidLastname = (lastname, res) => {
-  if (!lastname || lastname.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || lastname.length < 3)
+  if (!lastname || lastname.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || lastname.length < 3) {
     res.render('signUp', {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
+  }
 };
 const isValidMail = (mail, res) => {
   if (!mail) res.render('signUp', { message: 'O email deve ter o formato email@mail.com' });
 };
 
 const isvalidPass = (password, res) => {
-  if (!password || password.length < 6)
+  if (!password || password.length < 6) {
     res.render('signUp', { message: 'A senha deve ter pelo menos 6 caracteres' });
+  }
 };
 const isValidCheck = (password, passwordCheck, res) => {
   if (password !== passwordCheck) res.render('signUp', { message: 'As senhas tem que ser iguais' });

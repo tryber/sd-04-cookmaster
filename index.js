@@ -31,4 +31,6 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.g
 app.get('/recipes/:id/delete', middlewares.auth(), (req, res) => res.render('admin/confirmPassword', { id: req.params.id, message: '' }));
 app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.deleteRecipe);
 
+app.get('/me/recipes', middlewares.auth(), controllers.recipesController.getUserRecipe);
+
 app.listen(3000, () => console.log('Listening on 3000'));

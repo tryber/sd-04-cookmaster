@@ -1,4 +1,4 @@
-const { getRecipes, findRecipeById, getRecipesByName, deleteRecipeById, insertRecipe } = require('../models/recipesModel');
+const { getRecipes, findRecipeById, findRecipeByUserId, getRecipesByName, deleteRecipeById, insertRecipe } = require('../models/recipesModel');
 const { findById } = require('../models/userModel');
 
 const getAllRecipes = async (req, res) => {
@@ -14,6 +14,12 @@ const getRecipe = async (req, res) => {
 
   return res.render('recipeDetails', { recipe, isRecipeCreator });
 };
+
+const getUserRecipe = async (req, res) => {
+  const { user } = req;
+  const recipes = await findRecipeByUserId(user.id);
+  return res.render('admin/myRecipes', { recipes, user });
+}
 
 const searchRecipe = async (req, res) => {
   const { q } = req.query;
@@ -50,6 +56,7 @@ const createRecipe = async (req, res) => {
 module.exports = {
   getAllRecipes,
   getRecipe,
+  getUserRecipe,
   searchRecipe,
   deleteRecipe,
   createRecipe,

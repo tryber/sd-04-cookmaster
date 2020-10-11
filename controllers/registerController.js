@@ -32,7 +32,7 @@ const register = async (req, res) => {
 
   if (regexVerification === '') {
     await registerUser(email, password, firstName, lastName);
-    return res.render('register', { message: 'Usuário cadastrado com sucesso!' });
+    return res.render('register', { message: 'Cadastro efetuado com sucesso!' });
   }
 
   return res.render('register', { message: regexVerification });

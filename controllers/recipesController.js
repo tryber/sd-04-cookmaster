@@ -66,7 +66,7 @@ const confirmDeleteController = async (req, res) => {
   const usuario = await UserModel.findById(user.id);
 
   if (usuario.password !== password) {
-    return res.status(200).render('deleteRecipe', { message: 'Senha incorreta', id });
+    return res.status(200).render('deleteRecipe', { message: 'Senha Incorreta.', id });
   }
   await RecipesModel.deleteRecipe(id);
   return res.status(301).redirect('/');

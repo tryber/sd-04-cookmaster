@@ -40,4 +40,8 @@ describe('4 - Cria uma página de buscar de receitas.', () => {
     clickButton('[data-testid="buscar"]');
     verifyNotContainsText('Receita de que não existe');
   })
+
+  after(() => {
+    createAndInsertsDataBase();
+  })
 });

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Delete Recipe</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1>confirme a exclusão da receita</h1>
+      </nav>
+    </header>
+
+    <% if(message) { %>
+    <h4><%= message %></h4>
+    <% } %>
+    <form action="/recipes/<%= id %>/delete" method="POST">
+      <label for="senha">Senha</label>
+      <input data-testid="senha" type="password" name="password" id="senha" />
+      <button data-testid="confirmar" type="submit">Confirmar</button>
+    </form>
+    <button data-testid="cancelar" type="button" onclick="window.location.pathname='/'">
+      Cancelar
+    </button>
+  </body>
+</html>

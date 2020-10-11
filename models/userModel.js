@@ -18,16 +18,16 @@ de fato, realize a busca no banco de dados */
 const findByEmail = async (userMail) => {
   // return TEMP_USER;
   return connection()
-  .then((db) =>
-    db
-      .getTable('users')
-      .select(['id', 'email', 'password', 'first_name', 'last_name'])
-      .where('email = :userMail_param')
-      .bind('userMail_param', userMail)
-      .execute(),
-  )
-  .then((results) => results.fetchOne())
-  .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then((db) =>
+      db
+        .getTable('users')
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('email = :userMail_param')
+        .bind('userMail_param', userMail)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
 /**
@@ -37,19 +37,45 @@ const findByEmail = async (userMail) => {
 const findById = async (userId) => {
   // return TEMP_USER;
   return connection()
-  .then((db) =>
+    .then((db) =>
+      db
+        .getTable('users')
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('id = :userId_param')
+        .bind('userId_param', userId)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+};
+
+const isValid = (name, lastname, mail, password, passwordCheck, res) => {
+  if (!name || name.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || name.length < 3)
+    res.render('signUp', {
+      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  if (!lastname || lastname.includes(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) || lastname.length < 3)
+    res.render('signUp', {
+      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+  if (!mail) res.render('signUp', { message: 'O email deve ter o formato email@mail.com' });
+  if (!password || password.length < 6)
+    res.render('signUp', { message: 'A senha deve ter pelo menos 6 caracteres' });
+  if (password !== passwordCheck) res.render('signUp', { message: 'As senhas tem que ser iguais' });
+};
+
+const addUser = async (name, lastname, mail, password) =>
+  connection().then((db) =>
     db
       .getTable('users')
-      .select(['id', 'email', 'password', 'first_name', 'last_name'])
-      .where('id = :userId_param')
-      .bind('userId_param', userId)
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(mail, password, name, lastname)
       .execute(),
-  )
-  .then((results) => results.fetchOne())
-  .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
-};
+  );
 
 module.exports = {
   findByEmail,
   findById,
+  isValid,
+  addUser,
 };

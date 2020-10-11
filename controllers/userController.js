@@ -1,3 +1,4 @@
+const { response } = require('express');
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
@@ -43,8 +44,24 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signUp = (_, res) => {
+  res.render('signUp', {message: ''});
+};
+
+const create = async (req, res) => {
+  const { name, password, passwordCheck, mail, lastname} = req.body;
+  if(!userModel.isValid(name, lastname, mail, password, passwordCheck, res))
+
+  await userModel.addUser(name, lastname, mail, password);
+
+  res.render('signUp', {message: "Cadastro efetuado com sucesso!"});
+  res.redirect('/login')
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signUp,
+  create,
 };

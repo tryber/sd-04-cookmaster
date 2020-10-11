@@ -45,17 +45,22 @@ const logout = (req, res) => {
 };
 
 const signUp = (_, res) => {
-  res.render('signUp', {message: ''});
+  res.render('signUp', { message: '' });
 };
 
 const create = async (req, res) => {
-  const { name, password, passwordCheck, mail, lastname} = req.body;
-  if(!userModel.isValid(name, lastname, mail, password, passwordCheck, res))
+  const { name, password, passwordCheck, mail, lastname } = req.body;
+  if (
+    !userModel.isValidName(name, res) ||
+    !userModel.isValidLastname(lastname, res) ||
+    !userModel.isValidMail(mail, res) ||
+    !userModel.isvalidPass(password, res) ||
+    !userModel.isValidCheck(passwordCheck, res)
+  )
+    await userModel.addUser(name, lastname, mail, password);
 
-  await userModel.addUser(name, lastname, mail, password);
-
-  res.render('signUp', {message: "Cadastro efetuado com sucesso!"});
-  res.redirect('/login')
+  res.render('signUp', { message: 'Cadastro efetuado com sucesso!' });
+  res.redirect('/login');
 };
 
 module.exports = {

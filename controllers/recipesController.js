@@ -52,13 +52,10 @@ const deleteRecipeController = async (req, res) => {
   const { id } = req.params;
   const { userId } = await RecipesModel.getRecipeById(id);
 
-  console.log(user);
-  // console.log(id);
-  console.log(userId);
-
-  userId === user.id
-    ? res.status(200).render('deleteRecipe', { message: null, id })
-    : res.status(301).redirect('/');
+  if (userId === user.id) {
+    return res.status(200).render('deleteRecipe', { message: null, id });
+  }
+  return res.status(301).redirect('/');
 };
 
 const confirmDeleteController = async (req, res) => {
@@ -97,7 +94,6 @@ const showRecipeCreateForm = async (req, res) => {
 const postNewRecipeController = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
   const { user } = req;
-  console.log(user);
 
   await RecipesModel.createRecipe(
     user.id,

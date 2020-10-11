@@ -108,9 +108,6 @@ const createUserController = async (req, res) => {
 const showEditUserForm = async (req, res) => {
   const { user } = req;
 
-  // const usuario = await UserModel.findById(user.id);
-  console.log(user);
-
   res.render('editUser', { user });
 };
 

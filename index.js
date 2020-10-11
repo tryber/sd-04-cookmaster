@@ -7,7 +7,6 @@ const controllers = require('./controllers');
 
 const RecipesController = require('./controllers/recipesController');
 const UserController = require('./controllers/userController');
-const { authMiddleware } = require('./middlewares/auth');
 
 const app = express();
 
@@ -42,9 +41,7 @@ recipeRouter.post('/', middlewares.auth(), RecipesController.postNewRecipeContro
 // página para exclusão de receita -------------------------------------
 recipeRouter.get('/:id/delete', middlewares.auth(), RecipesController.deleteRecipeController);
 recipeRouter.post('/:id/delete', middlewares.auth(), RecipesController.confirmDeleteController);
-// recipeRouter.get('/:d/delete', middlewares.auth(), (req, res) => {
-//   res.send('deletar receita');
-// })
+
 
 // página de detalhes da receita  -----------------------------------
 recipeRouter.get('/:id', middlewares.auth(false), RecipesController.recipeByIdController);

@@ -20,7 +20,8 @@ const allRecipes = async () =>
 const getRecipeById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select().where('id = :idInput').bind('idInput', idInput).execute(),
+      db.getTable('recipes').select().where('id = :idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((results) => results.fetchAll()[0])
     .then(([id, userId, user, name, ingredients, instructions]) => ({
@@ -37,7 +38,8 @@ const getRecipeById = async (idInput) =>
 const searchRecipes = async (q) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select().where('name like :q').bind('q', `%${q}%`).execute(),
+      db.getTable('recipes').select().where('name like :q').bind('q', `%${q}%`)
+      .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
@@ -55,7 +57,8 @@ const searchRecipes = async (q) =>
 
 const deleteRecipe = async (id) =>
   connection().then((db) =>
-    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+    db.getTable('recipes').delete().where('id = :id').bind('id', id)
+    .execute(),
   );
 
 // MINHAS RECEITAS ----------------------------------------------------

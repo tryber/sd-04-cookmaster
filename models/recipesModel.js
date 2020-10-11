@@ -2,7 +2,7 @@ const connection = require('./connection');
 
 const findAll = async () =>
   connection()
-    .then((db) => db.getTable('recipes').select(['name', 'user', 'id' ]).execute())
+    .then((db) => db.getTable('recipes').select(['name', 'user', 'id']).execute())
     .then((results) => results.fetchAll())
     .then((recipes) => recipes.map(([name, user, id]) => ({ name, user, id })));
 

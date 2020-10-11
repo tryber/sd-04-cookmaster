@@ -50,11 +50,11 @@ const signUp = (_, res) => {
 const create = async (req, res) => {
   const { name, password, passwordCheck, mail, lastname } = req.body;
   if (
-    !userModel.isValidName(name, res) ||
-    !userModel.isValidLastname(lastname, res) ||
-    !userModel.isValidMail(mail, res) ||
-    !userModel.isvalidPass(password, res) ||
-    !userModel.isValidCheck(passwordCheck, res)
+    !userModel.isValidName(name, res) &&
+    !userModel.isValidLastname(lastname, res) &&
+    !userModel.isValidMail(mail, res) &&
+    !userModel.isvalidPass(password, res) &&
+    !userModel.isValidCheck(password, passwordCheck, res)
   )
     await userModel.addUser(name, lastname, mail, password);
 

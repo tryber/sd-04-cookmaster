@@ -23,9 +23,9 @@ const editRecipe = async (req, res) => {
   const { id } = req.params;
   try {
     const recipeToEdit = await recipe.getRecipeById(id);
-    res.render('admin/editRecipe', { recipeToEdit, user: req.user });
+    return res.render('admin/editRecipe', { recipeToEdit, user: req.user });
   } catch (error) {
-    return error
+    return error;
   }
 };
 
@@ -53,8 +53,7 @@ const addAndReturnToHome = async (req, res) => {
     if (Object.keys(recipeInfo).length) {
       await recipe.addNewRecipe(recipeInfo, userInfo);
     }
-    // return res.render('home', { user: req.user });
-    res.redirect('/');
+    return res.redirect('/');
   } catch (err) {
     return err;
   }

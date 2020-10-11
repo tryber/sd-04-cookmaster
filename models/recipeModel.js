@@ -117,5 +117,5 @@ module.exports = {
   getRecipesByQuery,
   addNewRecipe,
   updateRecipe,
-  getRecipesByUserId
+  getRecipesByUserId,
 };

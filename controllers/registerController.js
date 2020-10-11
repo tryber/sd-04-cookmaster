@@ -30,9 +30,7 @@ const register = async (req, res) => {
     return res.render('register', { message: 'A senha deve ter pelo menos 6 caracteres' });
   }
 
-  if (password !== confirmPassword) {
-    return res.render('register', { message: 'As senhas tem que ser iguais' });
-  }
+  if (password !== confirmPassword) return res.render('register', { message: 'As senhas tem que ser iguais' });
 
   if (regexVerification === '') {
     await registerUser(email, password, firstName, lastName);

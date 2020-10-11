@@ -19,7 +19,7 @@ const getUserRecipe = async (req, res) => {
   const { user } = req;
   const recipes = await findRecipeByUserId(user.id);
   return res.render('admin/myRecipes', { recipes, user });
-}
+};
 
 const searchRecipe = async (req, res) => {
   const { q } = req.query;

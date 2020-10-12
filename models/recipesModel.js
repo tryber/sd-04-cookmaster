@@ -5,11 +5,12 @@ const getAllRecipes = async () =>
     .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
     .then((results) => results.fetchAll());
 
-const getRecipeById = async (id) =>
+const getRecipeById = async (recipeId) =>
   connection()
-    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', recipeId)
+      .execute())
     .then((result) => result.fetchOne())
-    .then(([id, userId, user, title, ingredientsString, instructions]) => {
+    .then(([id, userId, user, title, ingredientsString, instructions]) => {git s
       const ingredients = ingredientsString.split(',');
       return { id, userId, user, title, ingredients, instructions };
     });
@@ -29,5 +30,5 @@ const getRecipesByUserId = async (userId) =>
 module.exports = {
   getAllRecipes,
   getRecipeById,
-  getRecipesByUserId
+  getRecipesByUserId,
 };

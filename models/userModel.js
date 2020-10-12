@@ -18,10 +18,12 @@ const findByEmail = async (email) => {
 // listar todos os usuarios
 // const FindAll = async () => {
 //   return connection()
-//     .then((db) => db.getTable('user'.select(['id', 'email', 'first_name', 'last_name']).execute()))
+//     .then((db) =>
+//   db.getTable('user'.select(['id', 'email', 'first_name', 'last_name']).execute()))
 //     .then((results) => results.fetchAll())
 //     .then((user) =>
-//       user.map(([id, email, /*first_name, last_name*/]) => ({ id, email, /*firtsName, lastName*/ })),
+//       user.map(([id, email, /*first_name, last_name*/]) =>
+//  ({ id, email, /*firtsName, lastName*/ })),
 //     );
 // };
 

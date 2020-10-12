@@ -20,7 +20,7 @@ const FindAll = async () => {
     .then((db) => db.getTable('user'.select(['id', 'email', 'first_name', 'last_name']).execute()))
     .then((results) => results.fetchAll())
     .then((user) =>
-      user.map(([id, email, first_name, last_name]) => ({ id, email, firtsName, lastName })),
+      user.map(([id, email, /*first_name, last_name*/]) => ({ id, email, /*firtsName, lastName*/ })),
     );
 };
 
@@ -34,7 +34,7 @@ de fato, realize a busca no banco de dados */
 
 /**
  * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
+//  * @param {string} id ID do usuário
  */
 
 const findById = async (id) => {
@@ -47,7 +47,7 @@ const findById = async (id) => {
         .bind('id', id)
         .execute(),
     )
-    .then((results) =>  results.fetchOne())
+    .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 

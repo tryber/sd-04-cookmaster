@@ -10,7 +10,7 @@ const getRecipeById = async (recipeId) =>
     .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', recipeId)
       .execute())
     .then((result) => result.fetchOne())
-    .then(([id, userId, user, title, ingredientsString, instructions]) => {git s
+    .then(([id, userId, user, title, ingredientsString, instructions]) => {
       const ingredients = ingredientsString.split(',');
       return { id, userId, user, title, ingredients, instructions };
     });

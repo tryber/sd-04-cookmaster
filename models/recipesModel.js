@@ -18,7 +18,20 @@ const findById = async (id) =>
       .then((recipe) => recipe),
   );
 
+const findByName = async (name) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .select()
+      .where('name = :nameBind')
+      .bind('nameBind', name)
+      .execute()
+      .then((result) => result.fetchAll())
+      .then((recipes) => recipes),
+  );
+
 module.exports = {
   findAll,
   findById,
+  findByName,
 };

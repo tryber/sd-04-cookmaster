@@ -10,7 +10,14 @@ const recipeDetails = async (req, res) => {
   res.render('recipes', { recipes, user: req.user });
 };
 
+const search = async (req, res) => {
+  const param = req.query.q;
+  const recipes = await Recipe.findByName(param);
+  res.render('search', { param, recipes });
+};
+
 module.exports = {
   home,
   recipeDetails,
+  search,
 };

@@ -2,7 +2,7 @@ const recipesModel = require('../models/cooksModel');
 
 const listarReceitas = async (req, res) => {
   const cooks = await recipesModel.listCook();
-  console.log(cooks);
+  // console.log(cooks);
   return res.render('home', { cooks, user: req.user });
 };
 

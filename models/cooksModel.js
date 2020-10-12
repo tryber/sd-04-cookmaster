@@ -9,7 +9,6 @@ const listCook = async () => {
         .execute(),
     )
     .then((results) => results.fetchAll())
-    // .then((resultado) => resultado.map(el=>el.resultado))
     .then((resul)=> resul.map(([id, user, name]) => ({ id, user, name})))
 };
 

@@ -11,9 +11,9 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com:tryber/sd-04-cookmaster.git`.
+  * `git clone https://github.com:tryber/sd-03-project-cookmaster.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-04-cookmaster`
+    * `cd sd-03-project-cookmaster`
 
 2. Instale as dependências [**Caso existam**]
   * `npm install`
@@ -43,13 +43,13 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   * Usando o exemplo anterior: `git push -u origin joaozinho-cookmaster`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-04-cookmaster/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-03-project-cookmaster/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-04-cookmaster/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-03-project-cookmaster/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
@@ -146,7 +146,7 @@ Isso fará com que abra o terminal do MySQL se abra. Depois, basta executar o co
 
 Assim já irá criar o banco e terá alguns dados inseridos. **É essencial seguir esses passos!**
 
-Haverá um arquivo no caminho: `sd-04-cookmaster/cypress/plugins/index.js`. Neste arquivo, na linha 17, Haverá a seguinte comando:
+Haverá um arquivo no caminho: `sd-03-project-cookmaster/cypress/plugins/index.js`. Neste arquivo, na linha 17, Haverá a seguinte comando:
 
 `const connection = my.createConnection({host: process.env.HOSTNAME, user: process.env.MYSQL_USER, password: process.env.MYSQL_PASSWORD});`
 
@@ -154,7 +154,7 @@ Haverá um arquivo no caminho: `sd-04-cookmaster/cypress/plugins/index.js`. Nest
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivos:**
 
-`sd-04-cookmaster/config/config.js`
+`sd-03-project-cookmaster/config/config.js`
 
 ```
 module.exports = {
@@ -184,7 +184,7 @@ module.exports = {
 
 **(Neste arquivo e obrigatório deixar o nome do database como `"database": 'cookmaster'`)**
 
-`sd-04-cookmaster/models/connection.js`
+`sd-03-project-cookmaster/models/connection.js`
 
 ```
 const config = {
@@ -272,7 +272,7 @@ Um botão "Nova receita" deve ser exibido **apenas quando houver um usuário log
 
 ### 2 - Crie uma página de cadastro de usuários.
 
-Um pessoa usuária precisa ter preenchido os campos `ID`, `E-mail`, `Senha`, `Nome` e `Sobrenome`. Todos os campos são obrigatórios. O `ID` deve ser gerado automaticamente, não devendo ser preenchido pela pessoa usuária no momento do cadastro.
+Um pessoa usuária precisa ter preenchido os campos `E-mail`, `Senha`, `Nome` e `Sobrenome`. Todos os campos são obrigatórios. O `ID` deve ser gerado automaticamente, não devendo ser preenchido pela pessoa usuária no momento do cadastro.
 
 A validação dos campos deve acontecer no back-end, e uma mensagem deve ser enviada ao front-end através de uma propriedade passada para o EJS, da mesma forma que acontece com a view `users/login`.
 
@@ -437,13 +437,13 @@ Na Tela inicial('/') acidione o botão 'Nova Receita' deverá conter a tag `data
 
 ### 6 - Crie uma página de edição de receitas.
 
-A página deve ser acessível através do endpoint `/recipes/:id/edit`, formulário deve ser enviado para o endpoint `POST /recipes/:id`.
+A página deve ser acessível através do endpoint `/recipes/:id/edit`, e o formulário deve ser enviado para o endpoint `POST /recipes/:id`.
 
 Ao carregar, a página já deve conter as informações atuais daquela receita. Você pode utilizar o atributo `value` dos inputs no HTML para preencher esses campos.
 
 Apenas a pessoa que criou a receita deve ter permissão para edita-la. Para verificar isso, você pode utilizar a propriedade `id` localizada em `req.user` (que é criada pelo `authMiddleware`) e compará-la ao ID de quem criou a receita. Caso os IDs não sejam idênticos, a pessoa deve ser redirecionada à página de visualizar receita utilizando o método `res.redirect` no controller.
 
-Caso a edição aconteça com sucesso, a pessoa deve ser redirecionada para a página home `/`.
+Caso a edição aconteça com sucesso, a pessoa deve ser redirecionada para a página de visualização daquela receita, já com os dados atualizados.
 
 A validação dos campos deve ser realizada no backend.
 
@@ -531,7 +531,7 @@ O link para acessar essa página só deve estar visível para pessoas logadas.
 
 Cada pessoa só deve poder editar o próprio perfil. Para isso, o backend deve extrair o ID do usuário a ser atualizado da propriedade `req.user`, e não do corpo da request. Esse deve ser o ID enviado ao model para realizar a atualização do usuário.
 
-Esta página deve estar acessível através do endpoint `/me/edit`, e ao editar com sucesso ser redirecionado para o endpoint `/`.
+Esta página deve estar acessível através do endpoint `/me/edit`, e o formulário deve ser enviado para o endpoint `POST /me`.
 
 Caso uma pessoa não logada tente acessar a página, ela deve ser redirecionada para o login. (O middleware `authMiddleware` já implementa essa funcionalidade, então não se esqueça de utilizá-lo aqui.)
 
@@ -594,7 +594,7 @@ Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus co
 
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
 
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-04`.
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-03`.
 
 Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
 

@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-  </head>
-  <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Home</title>
+</head>
+
+<body>
+  <header>
+    <span>Cookmaster</span>
+
+    <% if(user) { %>
+      <button type="button" data-testid="nova-receita">
+        <a href="/recipes/new">
+          Nova Receita
+        </a>
+      </button>
+      <button type="button" data-testid="logout">
+        <a href="/logout">
+          Logout
+        </a>
+      </button>
+    <% } else { %>
+      <button type=" button" data-testid="log">
+        <a href="/login">
+          Login
+        </a>
+      </button>
+    <% } %>
+
+    <button type=" button" data-testid="buscar-receita">
+      <a href="/recipes/search">
+        Buscar Receita :)
+      </a>
+    </button>
+  </header>
+  <h1>Receitas</h1>
+  <% recipes.forEach(([id, user, name]) => { %>
+  <h2><%= name %></h2>
+  <p><%= user %></p>
+  <a href=<%= `/${id}` %>>Ver mais</a>
+  <% }); %>
+</body>
+
 </html>

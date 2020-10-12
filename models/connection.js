@@ -12,9 +12,6 @@ const config = {
 };
 
 const connection = async () =>
-  mysqlx
-    .getSession(config)
-    .then((session) => session.getSchema('cookmaster'))
-    .catch((err) => console.log(err.message));
+  mysqlx.getSession(config).then((session) => session.getSchema('cookmaster'));
 
 module.exports = connection;

@@ -13,7 +13,6 @@ const recipeDetails = async (req, res) => {
 const search = async (req, res) => {
   const param = req.query.q;
   const recipes = await Recipe.findByName(param);
-  console.log(recipes)
   res.render('search', { param, recipes });
 };
 

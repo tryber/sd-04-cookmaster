@@ -8,18 +8,11 @@
   <body>
     <%- include('header') %>
     <h1>Receitas</h1>
-    <div>
-      <% recipes.forEach((recipe) => { %>
-        <div>
-          <h3><%= recipe.name %></h3>
-          <p><%= recipe.user %></p>
-          <a href="/recipes/<%= recipe.id %>">Ver mais</a>
-        </div>
-      <% }) %>
-    </div><br />
+    <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
+    <%- include('recipesCards') %>
+
     <% if (user) { %>
       <a data-testid="nova-receita">Nova Receita</a>
     <% } %>
-    <button data-testid="buscar-receita">Buscar Receita</button>
   </body>
 </html>

@@ -25,8 +25,7 @@ const getAll = async () => {
 const findById = async (idRecipe) => {
   const data = await connection()
     .then((db) =>
-      db.getTable('recipes').select().where('id = :idBind').bind('idBind', idRecipe)
-      .execute(),
+      db.getTable('recipes').select().where('id = :idBind').bind('idBind', idRecipe).execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, userId, user, name, ingredients, instructions]) => ({
@@ -40,7 +39,36 @@ const findById = async (idRecipe) => {
   return data;
 };
 
+const findByName = async (nameRecipe) => {
+  /*
+    .where('name like :filter')
+    .bind('filter', `%${filter}%`)
+  */
+  const data = await connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select()
+        .where('name like :nameBind')
+        .bind('nameBind', `%${nameRecipe}%`)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    );
+  return data;
+};
+
 module.exports = {
   getAll,
   findById,
+  findByName,
 };

@@ -15,14 +15,14 @@ const findByEmail = async (email) => {
 };
 
 // listar todos os usuarios
-const FindAll = async () => {
-  return connection()
-    .then((db) => db.getTable('user'.select(['id', 'email', 'first_name', 'last_name']).execute()))
-    .then((results) => results.fetchAll())
-    .then((user) =>
-      user.map(([id, email, /*first_name, last_name*/]) => ({ id, email, /*firtsName, lastName*/ })),
-    );
-};
+// const FindAll = async () => {
+//   return connection()
+//     .then((db) => db.getTable('user'.select(['id', 'email', 'first_name', 'last_name']).execute()))
+//     .then((results) => results.fetchAll())
+//     .then((user) =>
+//       user.map(([id, email, /*first_name, last_name*/]) => ({ id, email, /*firtsName, lastName*/ })),
+//     );
+// };
 
 /* Substitua o código das funções abaixo para que ela,
 de fato, realize a busca no banco de dados */

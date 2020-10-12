@@ -30,8 +30,24 @@ const findByName = async (name) =>
       .then((recipes) => recipes),
   );
 
+const nRecipe = async (items, user) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(
+        user.id,
+        user.name + ' ' + user.lastName,
+        items.name,
+        items.secret,
+        items.setting,
+      )
+      .execute(),
+  );
+
 module.exports = {
   findAll,
   findById,
   findByName,
+  nRecipe,
 };

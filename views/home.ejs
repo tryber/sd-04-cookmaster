@@ -12,10 +12,9 @@
     <a href="logout" data-testid="logout">Logout</a>
     <% } else { %>
     <a href="/login" data-testid="login">Login</a>
-    <% } %>
-    <% if (user) { %>
-      <a data-testid="nova-receita">Nova Receita</a>
-      <% } else { %> <% } %>
+    <% } %> <% if (user) { %>
+    <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+    <% } else { %> <% } %>
 
     <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
 

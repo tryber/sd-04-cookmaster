@@ -16,8 +16,19 @@ const search = async (req, res) => {
   res.render('search', { param, recipes });
 };
 
+const newRecipe = async (_, res) => {
+  res.render('newRecipe');
+};
+
+const recipes = async (req, res) => {
+  await Recipe.nRecipe(req.body, req.user);
+  res.redirect('/');
+};
+
 module.exports = {
   home,
   recipeDetails,
   search,
+  newRecipe,
+  recipes,
 };

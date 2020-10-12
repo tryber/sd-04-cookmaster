@@ -12,35 +12,40 @@
     <span>Cookmaster</span>
 
     <% if(user) { %>
+    <a href="/recipes/new">
       <button type="button" data-testid="nova-receita">
-        <a href="/recipes/new">
-          Nova Receita
-        </a>
+        Nova Receita
       </button>
+    </a>
+    <a href="/me/recipes">
+      <button type="button" data-testid="minhas-receitas">
+        Minhas Receitas
+      </button>
+    </a>
+    <a href="/logout">
       <button type="button" data-testid="logout">
-        <a href="/logout">
-          Logout
-        </a>
+        Logout
       </button>
+    </a>
     <% } else { %>
-      <button type=" button" data-testid="log">
-        <a href="/login">
-          Login
-        </a>
+    <a href="/login">
+      <button type=" button" data-testid="login">
+        Login
       </button>
+    </a>
     <% } %>
 
-    <button type=" button" data-testid="buscar-receita">
-      <a href="/recipes/search">
-        Buscar Receita :)
-      </a>
-    </button>
+    <a href="/recipes/search">
+      <button type=" button" data-testid="buscar-receita">
+        Buscar Receita
+      </button>
+    </a>
   </header>
   <h1>Receitas</h1>
   <% recipes.forEach(([id, user, name]) => { %>
   <h2><%= name %></h2>
   <p><%= user %></p>
-  <a href=<%= `/${id}` %>>Ver mais</a>
+  <a href=<%= `recipes/${id}` %>>Ver mais</a>
   <% }); %>
 </body>
 

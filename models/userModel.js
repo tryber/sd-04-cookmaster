@@ -11,7 +11,7 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([id, email_db, password, name, lastName]) => ({ id, email_db, password, name, lastName }));
 };
 
 // listar todos os usuarios
@@ -48,7 +48,7 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([idDb, email, password, name, lastName]) => ({ idDb, email, password, name, lastName }));
 };
 
 module.exports = {

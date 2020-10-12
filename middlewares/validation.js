@@ -1,3 +1,4 @@
+const { validation } = require('.');
 const userModel = require('../models/userModel');
 
 const message = {
@@ -7,39 +8,26 @@ const message = {
   name: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
 };
 
+const validationMessage = (validationBool, type) => (validationBool ? null : message[type]);
+
 const validationMiddleware = (req, res, next) => {
-  const {
-    email,
-    password,
-    passwordConfirm,
-    firstName,
-  } = req.body;
-  const {
-    emailCheck,
-    passwordCheck,
-    confirmPassCheck,
-    nameCheck,
-  } = userModel.isValid;
+  const { email, password, passwordConfirm, firstName } = req.body;
+  const { emailCheck, passwordCheck, confirmPassCheck, nameCheck } = userModel.isValid;
 
   const emailValidation = emailCheck(email);
   const passValidation = passwordCheck(password);
   const confirmPassValidation = confirmPassCheck(password, passwordConfirm);
   const nameValidation = nameCheck(firstName);
 
-  if (
-    emailValidation
-    && passValidation
-    && confirmPassValidation
-    && nameValidation
-  ) {
+  if (emailValidation && passValidation && confirmPassValidation && nameValidation) {
     req.isValid = true;
   } else req.isValid = false;
 
   req.messages = {
-    email: emailValidation ? null : message.email,
-    password: passValidation ? null : message.password,
-    confirmPassword: confirmPassValidation ? null : message.confirmPass,
-    name: nameValidation ? null : message.name,
+    email: validationMessage(emailValidation, message.email),
+    password: validationMessage(passValidation, message.password),
+    confirmPassword: validationMessage(confirmPassValidation, message.confirmPass),
+    name: validationMessage(nameValidation, message.name),
   };
   return next();
 };

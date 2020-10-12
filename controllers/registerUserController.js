@@ -21,11 +21,13 @@ const regexValidations = (email, name, lastName) => {
 
   if (!emailRegex.test(email)) message = 'O email deve ter o formato email@mail.com';
 
-  if (!regexName.test(name))
+  if (!regexName.test(name)) {
     message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
 
-  if (!regexName.test(lastName))
+  if (!regexName.test(lastName)) {
     message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
 
   return message;
 };

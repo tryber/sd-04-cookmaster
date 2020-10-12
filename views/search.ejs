@@ -7,9 +7,9 @@
   </head>
   <body>
     <form action="/recipes/search" method="GET">
-      <label for="search">Item de busca: </label>
-      <input data-testid="receita" type="text" name="search" />
-      <button type="button" onclick="clicked()" data-testid="buscar">Buscar</button>
+      <label for="q">Item de busca: </label>
+      <input data-testid="receita" type="text" name="q" />
+      <button data-testid="buscar">Buscar</button>
     </form>
     <% if(param !== '' || param !== undefined) { %>
     <ul>
@@ -20,10 +20,4 @@
       <% }) %> %> <%} %>
     </ul>
   </body>
-  <script>
-    function clicked() {
-      const value = document.querySelector('input').value;
-      location.href = 'http://localhost:3000/recipes/search' + '?q=' + value;
-    }
-  </script>
 </html>

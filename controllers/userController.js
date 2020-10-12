@@ -45,8 +45,22 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const renderSignup = (_req, res) => {
+  res.render('admin/signup', { messages: null, done: false });
+};
+
+const signUp = async (req, res) => {
+  if (!req.isValid) {
+    return res.status(400).render('admin/signup', { messages: req.messages, done: false });
+  }
+  await userModel.addUser({ ...req.body });
+  return res.status(200).render('admin/signup', { messages: req.messages, done: true });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  renderSignup,
+  signUp,
 };

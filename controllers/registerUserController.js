@@ -1,7 +1,7 @@
 const registerUserModel = require('../models/registerUserModel');
 
 const getCadastro = (_req, res) => {
-  res.render('cadastro', { message: null });
+  res.render('signup', { message: null });
 };
 
 const passwordValidation = (password, verifyPassword) => {
@@ -36,19 +36,19 @@ const registerUser = async (req, res) => {
   const { email, password, verifyPassword, name, lastName } = req.body;
 
   if (!email || !password || !verifyPassword || !name || !lastName) {
-    return res.render('cadastro', { message: 'Preeencha todos os campos' });
+    return res.render('signup', { message: 'Preeencha todos os campos' });
   }
 
   const regexMessage = regexValidations(email, name, lastName);
   const passwordMessage = passwordValidation(password, verifyPassword);
 
   if (passwordMessage || regexMessage) {
-    return res.render('cadastro', { message: passwordMessage || regexMessage });
+    return res.render('signup', { message: passwordMessage || regexMessage });
   }
 
   const warningCount = await registerUserModel(email, password, name, lastName);
   if (warningCount > 0) {
-    return res.render('cadastro', { message: 'erro ao inserir usuario no banco de dados' });
+    return res.render('signup', { message: 'erro ao inserir usuario no banco de dados' });
   }
 
   return res.render('admin/login', {

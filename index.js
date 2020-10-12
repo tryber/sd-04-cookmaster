@@ -24,7 +24,7 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/cadastro', controllers.registerUserController.getCadastro);
-app.post('/cadastro', controllers.registerUserController.registerUser);
+app.get('/signup', controllers.registerUserController.getCadastro);
+app.post('/signup', controllers.registerUserController.registerUser);
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

@@ -1,5 +1,9 @@
 const registerUserModel = require('../models/registerUserModel');
 
+const getCadastro = (_req, res) => {
+  res.render('cadastro', { message: null });
+};
+
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
 
@@ -26,7 +30,7 @@ const regexValidations = (email, name, lastName) => {
   return message;
 };
 
-const registerUserController = async (req, res) => {
+const registerUser = async (req, res) => {
   const { email, password, verifyPassword, name, lastName } = req.body;
 
   if (!email || !password || !verifyPassword || !name || !lastName) {
@@ -51,4 +55,4 @@ const registerUserController = async (req, res) => {
   });
 };
 
-module.exports = registerUserController;
+module.exports = { getCadastro, registerUser };

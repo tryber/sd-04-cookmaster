@@ -1,4 +1,3 @@
-const { validation } = require('.');
 const userModel = require('../models/userModel');
 
 const message = {

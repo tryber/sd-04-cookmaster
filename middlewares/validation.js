@@ -23,10 +23,10 @@ const validationMiddleware = (req, res, next) => {
   } else req.isValid = false;
 
   req.messages = {
-    email: validationMessage(emailValidation, message.email),
-    password: validationMessage(passValidation, message.password),
-    confirmPassword: validationMessage(confirmPassValidation, message.confirmPass),
-    name: validationMessage(nameValidation, message.name),
+    email: validationMessage(emailValidation, 'email'),
+    password: validationMessage(passValidation, 'password'),
+    confirmPassword: validationMessage(confirmPassValidation, 'confirmPass'),
+    name: validationMessage(nameValidation, 'name'),
   };
   return next();
 };

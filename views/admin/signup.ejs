@@ -43,11 +43,18 @@
       <input type="text" name="firstName" id="fNameInput" data-testid="nome" /><br />
       <% if (messages) { %>
       <div>
-        <span><%= messages.name %></span>
+        <span><%= messages.firstName %></span>
       </div>
       <% } %>
-      <label for="passwordInput">Sobrenome</label>
-      <input type="text" name="lastName" id="lNameInput" data-testid="sobrenome" /><br />
+      <label for="passwordInput"
+        >Sobrenome
+        <input type="text" name="lastName" id="lNameInput" data-testid="sobrenome" /><br />
+        <% if (messages) { %>
+        <div>
+          <span><%= messages.lastName %></span>
+        </div>
+        <% } %>
+      </label>
       <a data-testid="login" href="/login">Fazer Login</a>
       <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
       <% if (done) { %>

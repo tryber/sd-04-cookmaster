@@ -23,8 +23,8 @@ const findByName = async (name) =>
     db
       .getTable('recipes')
       .select()
-      .where('name = :nameBind')
-      .bind('nameBind', name)
+      .where('name like :nameBind')
+      .bind('nameBind', `%${name}%`)
       .execute()
       .then((result) => result.fetchAll())
       .then((recipes) => recipes),

@@ -29,7 +29,7 @@ const validationMiddleware = (req, res, next) => {
     password: validationMessage(passV, 'password'),
     confirmPassword: validationMessage(confirmPassV, 'confirmPass'),
     firstName: validationMessage(fNameV, 'firstName'),
-    lastName: validationMessage(fNameV, 'lastName'),
+    lastName: validationMessage(lNameV, 'lastName'),
   };
   return next();
 };

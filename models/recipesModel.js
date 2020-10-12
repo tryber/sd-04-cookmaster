@@ -30,14 +30,14 @@ const findByName = async (name) =>
       .then((recipes) => recipes),
   );
 
-const nRecipe = async (items, user, userName) =>
+const nRecipe = async (items, user) =>
   connection().then((db) =>
     db
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
       .values(
         user.id,
-        userName,
+        user.name,
         items.name,
         items.secret,
         items.setting,

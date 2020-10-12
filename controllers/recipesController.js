@@ -21,8 +21,7 @@ const newRecipe = async (_, res) => {
 };
 
 const recipes = async (req, res) => {
-  const userName = req.user.name + " " + req.user.lastName;
-  await Recipe.nRecipe(req.body, req.user, userName);
+  await Recipe.nRecipe(req.body, req.user);
   res.redirect('/');
 };
 

@@ -2,22 +2,19 @@ const connection = require('./connection');
 
 const receitaById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('recipes')
-      .select([]).where('id = :id')
-      .bind('id', id)
-      .execute())
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
     .then((results) => results.fetchAll());
 
-  const recipe = {};
+  const receita = {};
   [
-    recipe.id,
-    recipe.user_id,
-    recipe.user,
-    recipe.name,
-    recipe.ingredients,
-    recipe.instructions,
+    receita.id,
+    receita.user_id,
+    receita.user,
+    receita.name,
+    receita.ingredients,
+    receita.instructions,
   ] = idData[0];
-  return recipe;
+  return receita;
 };
 
 module.exports = {

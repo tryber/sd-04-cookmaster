@@ -7,8 +7,7 @@ const findByEmail = async (email) => {
       .select([])
       .where('email = :email')
       .bind('email', email)
-      .execute(),
-    )
+      .execute())
     .then((results) => results.fetchAll());
 
   const user = {};

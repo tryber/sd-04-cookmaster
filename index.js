@@ -28,6 +28,13 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+app.get('/recipes/:id/edit', (req, res) => {
+  return res.render('edit');
+});
+
+app.get('/recipes/:id/delete', (req, res) => {
+  return res.render('edit');
+});
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.index);
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -37,8 +37,8 @@ const recipeEdition = async (req, res) => {
 };
 
 const deleteRecipe = async (req, res) => {
-  let id = req.params.id;
-  let pass = await userModel.getPass(req.user.id);
+  const id = req.params.id;
+  const pass = await userModel.getPass(req.user.id);
   let message = req.query.message;
   if (message) message = decodeURIComponent(message);
   res.render('deleteRecipe', { pass, message, id });

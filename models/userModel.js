@@ -86,15 +86,17 @@ const addUser = async (name, lastname, mail, password) =>
   );
 
 const getPass = async (id) => {
-  return connection().then((db) =>
-    db
+  return connection()
+    .then((db) =>
+      db
       .getTable('users')
       .select('password')
       .where('id = :idBind')
       .bind('idBind', id)
       .execute(),
-  )
-  .then((results) => results.fetchOne())};
+    )
+    .then((results) => results.fetchOne());
+};
 
 module.exports = {
   findByEmail,

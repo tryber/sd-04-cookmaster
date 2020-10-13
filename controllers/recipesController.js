@@ -33,7 +33,7 @@ const newRecipe = async (req, res) => {
   const userName = `${req.user.name} ${req.user.lastName}`;
   const userID = req.user.id;
 
-  await recipesModel.createRecipe(userID, userName, recipeName, ingredients, instructions);
+  await recipesModel.createRecipe(userID, userName, recipeName, ingredients.join(), instructions);
   const recipes = await recipesModel.getRecipes();
   res.render('home', { recipes, user: req.user });
 };
@@ -41,6 +41,7 @@ const newRecipe = async (req, res) => {
 const editRecipe = async (req, res) => {
   const recipeID = req.params.id;
   const recipeDetails = await recipesModel.getRecipeDetails(recipeID);
+  console.log(recipeDetails);
   res.render('editRecipe', { user: req.user, recipeDetails, id: recipeID });
 };
 
@@ -53,7 +54,7 @@ const confirmUpdate = async (req, res) => {
   const userID = req.user.id;
 
   if (userID === recipeDetails.userID) {
-    await recipesModel.editRecipe(recipeID, recipeName, ingredients, instructions);
+    await recipesModel.editRecipe(recipeID, recipeName, ingredients.join(), instructions);
     const recipes = await recipesModel.getRecipes();
     res.render('home', { recipes, user: req.user });
   }

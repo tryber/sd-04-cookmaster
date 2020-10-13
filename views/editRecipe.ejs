@@ -8,8 +8,6 @@
   <body>
     <%- include('navbar', {user}) %>
     <h1>Editar Receita</h1>
-    <label for="ingredientsList">Lista de Ingredientes</label>
-    <ul id="ingredientsList"></ul>
     <form action="/recipes/<%= id %>" method="POST">
       <label for="recipeName">Nome da Receita</label>
       <input
@@ -18,15 +16,22 @@
         name="recipeName"
         data-testid="nome-receita"
         value="<%= recipeDetails.name %>"
-      />
-      <label for="ingredients">Ingredientes</label>
+      /><br /><br />
+      <label for="ingredients">Novo Ingrediente</label>
       <input
         type="text"
         id="ingredients"
-        name="ingredients"
         data-testid="ingredientes"
-        value="<%= recipeDetails.ingredients %>"
-      />
+      /><br /><br />
+      <label for="ingredientsList">Lista de Ingredientes</label>
+      <ul id="ingredientsList">
+        <% recipeDetails.ingredients.split(',').forEach((ingredient) => {
+          %> <li>
+            <input type="text" name="ingredients[]" value="<%= ingredient %>" />
+            <button type="button" onclick="removeIngredient(event)">Excluir Ingrediente</button>
+          </li>
+        <%}) %>
+      </ul>
       <button type="button" data-testid="adicionar-ingrediente" onclick="addIngredient()">
         Adicionar Ingrediente
       </button>
@@ -42,10 +47,16 @@
 
       const createItem = (ingredient) => {
         let liElement = document.createElement('li');
-        let itemText = document.createTextNode(ingredient);
-        liElement.appendChild(itemText);
         return liElement;
       };
+
+      const createInput = (ingredient) => {
+        let inputElement = document.createElement('input');
+        inputElement.id = ingredient;
+        inputElement.value = ingredient;
+        inputElement.name = 'ingredients[]';
+        return inputElement;
+      }
 
       const createRemoveButton = () => {
         let btn = document.createElement('button');
@@ -57,11 +68,19 @@
       };
 
       const addIngredient = () => {
-        id = list.childElementCount;
-        item = createItem(document.getElementById('ingredients').value, id);
-        item.appendChild(createRemoveButton());
-        list.appendChild(item);
+        let inputIngredient = document.getElementById('ingredients');
+
+        if (inputIngredient.value !== '') {
+          item = createItem(inputIngredient.value);
+
+          item.appendChild(createInput(inputIngredient.value));
+          item.appendChild(createRemoveButton());
+
+          list.appendChild(item);
+        }
       };
+
+      const removeIngredient = (event) => event.target.parentNode.remove();
     </script>
   </body>
 </html>

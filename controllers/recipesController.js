@@ -14,7 +14,6 @@ const showOne = async (req, res) => {
 
 const searchQuery = async (req, res) => {
   const searchedRecipes = await Recipes.getByName(req.query.q);
-  console.log(searchedRecipes);
 
   res.render('recipesSearch', { searchedRecipes, user: req.user });
 };

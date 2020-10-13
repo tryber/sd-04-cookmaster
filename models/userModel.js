@@ -3,7 +3,11 @@ const connection = require('./connection');
 const findByEmail = async (email) => {
   const emailData = await connection()
     .then((db) =>
-      db.getTable('users').select([]).where('email = :email').bind('email', email).execute(),
+      db.getTable('users')
+      .select([])
+      .where('email = :email')
+      .bind('email', email)
+      .execute(),
     )
     .then((results) => results.fetchAll());
 
@@ -14,7 +18,12 @@ const findByEmail = async (email) => {
 
 const findById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', id).execute())
+    .then((db) =>
+      db.getTable('users')
+      .select([])
+      .where('id = :id')
+      .bind('id', id)
+      .execute())
     .then((results) => results.fetchAll());
 
   const user = {};

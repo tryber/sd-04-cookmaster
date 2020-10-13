@@ -76,7 +76,7 @@ const cadastrar = async (req, res) => {
     // console.log('results dentro do try');
     const { email, senha, nome, sobrenome } = req.body;
     await userModel.cadastrarUsuario(email, senha, nome, sobrenome);
-    const cadastroValido = true;
+    const cadastroValido = results;
     const usuario = req.body;
     return res.render('home', { cadastroValido, usuario, receitas });
   } catch (error) {

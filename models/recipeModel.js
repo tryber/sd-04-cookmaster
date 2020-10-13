@@ -2,7 +2,12 @@ const connection = require('./connection');
 
 const receitaById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
+    .then((db) =>
+      db.getTable('recipes')
+      .select([])
+      .where('id = :id')
+      .bind('id', id)
+      .execute())
     .then((results) => results.fetchAll());
 
   const receita = {};

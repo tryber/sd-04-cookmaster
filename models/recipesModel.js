@@ -35,13 +35,20 @@ const nRecipe = async (items, user) =>
     db
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-      .values(
-        user.id,
-        user.name,
-        items.name,
-        items.secret,
-        items.setting,
-      )
+      .values(user.id, user.name, items.name, items.secret, items.setting)
+      .execute(),
+  );
+
+const editRecipe = async (id, name, ingredients, instructions) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', name)
+      .set('ingredients', ingredients)
+      .set('instructions', instructions)
+      .where('id = :idBind')
+      .bind('idBind', id)
       .execute(),
   );
 
@@ -50,4 +57,5 @@ module.exports = {
   findById,
   findByName,
   nRecipe,
+  editRecipe,
 };

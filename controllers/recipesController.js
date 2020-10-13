@@ -26,13 +26,14 @@ const recipes = async (req, res) => {
 };
 
 const editRecipe = async (req, res) => {
-  let recipe = await Recipe.findById(req.params.id)
+  const recipe = await Recipe.findById(req.params.id);
   res.render('editRecipe', { recipe });
-}
+};
 
 const recipeEdition = async (req, res) => {
-  res.send('ok');
-}
+  await Recipe.editRecipe(req.params.id, req.body.name, req.body.items, req.body.setting);
+  res.redirect('/');
+};
 
 module.exports = {
   home,

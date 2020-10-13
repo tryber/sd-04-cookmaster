@@ -60,7 +60,82 @@ const findById = async (Id) => {
     }));
 };
 
+// Faz o cadastro do usuário na tabela (users)
+const addUser = async (email, passWord, firstName, lastName) => {
+  await connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, passWord, firstName, lastName)
+      .execute(),
+  );
+};
+
+/** Formulário validações
+ *
+ *Valida email
+ *@param {email}
+ */
+const isValidEmail = (email) => {
+  let ver = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (!ver.test(email)) {
+    return false;
+  }
+  return true;
+};
+
+/**Valida name
+ * @param {name}
+ */
+const isValidName = (name) => {
+  const checkNumber = /[0-9]/; //verifica numeros
+
+  if (name.length < 3 || checkNumber.test(name)) {
+    return false;
+  }
+  return true;
+};
+
+/**Valida lastName
+ * @param {lastName}
+ */
+const isValidLastName = (lastName) => {
+  const checkNumber = /[0-9]/; //verifica numeros
+
+  if (lastName.length < 3 || checkNumber.test(lastName)) {
+    return false;
+  }
+  return true;
+};
+
+/**Valida senha
+ * @param {password}
+ */
+const isValidPassWord = (password) => {
+  if (password.length < 6) {
+    return false;
+  }
+  return true;
+};
+
+/**Compara senhas
+ * @param {*} password
+ * @param {*} confirmPassWord
+ */
+const comparPassword = (password, confirmPassWord) => {
+  if (password != confirmPassWord) {
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
   findByEmail,
   findById,
+  addUser,
+  isValidEmail,
+  isValidPassWord,
+  isValidName,
+  isValidLastName,
+  comparPassword,
 };

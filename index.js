@@ -5,15 +5,23 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipeController');
+const userController = require('./controllers/userController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.json());
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', middlewares.auth(false), recipeController.listRecipes);
+
+//Renderiza o formulário de cadastro
+app.get('/register', userController.formRegister);
+
+//Rota com os dados do formulário para cadastro
+app.post('/registerUser', userController.userRegister);
 
 app.get('/admin', middlewares.auth(true), (req, res) => {
   return res.render('admin/home', { user: req.user });

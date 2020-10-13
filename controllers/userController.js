@@ -51,14 +51,14 @@ const schema = yup.object().shape({
     .email('O email deve ter o formato email@mail.com')
     .required('O email deve ter o formato email@mail.com'),
   senha: yup
-    .number('A senha deve ter pelo menos 6 caracteres')
+    .string('A senha deve ter pelo menos 6 caracteres')
     .min(6, 'A senha deve ter pelo menos 6 caracteres')
     .required(),
   confirma: yup
-    .number()
-    .min(6, 'As senhas tem que ser iguais')
-    .when('senha', (senha, field) => (senha ? field.required().oneOf([yup.ref('senha')]) : field))
-    .required('As senhas tem que ser iguais'),
+    .string()
+    .min(6)
+    .when('senha', (senha, field) => (senha ? field.required().oneOf([yup.ref('senha'), 'As senhas tem que ser iguais']) : field))
+    .required(),
   nome: yup
     .string()
     .min(3, 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras')

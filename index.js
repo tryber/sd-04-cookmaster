@@ -13,10 +13,12 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.homeController.indexHome);
-
-app.get('/cadastrar', (req, res) => {
-  res.render('cadastro');
+// /registrar renderiza a tela de cadastro e /cadastrar faz as operacoes de cadastro
+app.get('/registrar', (req, res) => {
+  const erroData = null;
+  return res.render('cadastro', { erroData });
 });
+app.post('/cadastrar', controllers.userController.cadastrar);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
@@ -25,5 +27,7 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.index);
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -6,12 +6,20 @@
     <title>Cookmaster - Login</title>
   </head>
   <body>
-    <form action="/login" method="POST">
+    <div>
+      <% if (erroData) { %> <% erroData.forEach((erro) => { %>
+      <div>
+        <p>Erro no campo <%= erro.nome %></p>
+        <p><%= erro.msg %></p>
+      </div>
+      <% }) %> <% } %>
+    </div>
+    <form action="/cadastrar" method="POST">
       <label for="emailInput">Email: </label>
       <input type="text" name="email" id="emailInput" data-testid="email" /><br />
 
       <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+      <input type="password" name="senha" id="passwordInput" data-testid="senha" /><br />
 
       <label for="confirmaInput">Confirmar Senha : </label>
       <input
@@ -27,7 +35,6 @@
       <label for="sobrenomeInput">Sobrenome: </label>
       <input type="text" name="sobrenome" id="sobrenomeInput" data-testid="sobrenome" /><br />
 
-      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <a data-testid="login" href="login">Fazer Login</a>
       <button type="submit" data-testid="cadastrar">Cadastrar</button>
     </form>

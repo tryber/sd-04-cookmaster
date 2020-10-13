@@ -11,7 +11,12 @@
         <h3>Cookmaster</h3>
       </div>
       <div>
-        <% if (!usuario) { %>
+        <a href="registrar"> Cadastrar novo Usuario</a>
+      </div>
+      <div>
+        <% if (cadastroValido) { %>
+        <span>Cadastro efetuado com sucesso!</span>
+        <% } %> <% if (!usuario) { %>
         <a data-testid="login" href="login">Login</a>
         <% } else { %>
         <a data-testid="logout" href="logout">Logout</a>
@@ -43,7 +48,7 @@
       <div>
         <h4><%= receita.name %></h4>
         <h5><%= receita.user %></h5>
-        <a href="Link">Ver mais</a>
+        <a href="/recipes/<%= receita.id %>">Ver mais</a>
       </div>
       <% }) %>
     </section>

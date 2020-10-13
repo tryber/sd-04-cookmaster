@@ -18,9 +18,9 @@ const getById = async (recipeId) => {
     .bind('id', recipeId)
     .execute();
   const fetchResult = await results.fetchOne();
-  console.log(fetchResult);
-  const [_, userId, user, name, ingredients, instructions] = fetchResult;
+  const [id, userId, user, name, ingredients, instructions] = fetchResult;
   return {
+    id,
     userId,
     user,
     name,

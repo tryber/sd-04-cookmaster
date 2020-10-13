@@ -54,7 +54,19 @@ const findById = async (id) => {
     }));
 };
 
+/* CRIAR A FUNÇÃO DE CRIAR O USUÁRIO NO BANCO */
+
+const createUser = async ({ email, password, first_name, last_name }) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, first_name, last_name)
+    .execute();
+};
+
 module.exports = {
   findByEmail,
   findById,
+  createUser,
 };

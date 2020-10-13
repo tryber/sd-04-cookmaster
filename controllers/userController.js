@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { validationModel } = require('../models/validationModel');
 
 const userModel = require('../models/userModel');
 
@@ -43,8 +44,26 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signUp = (_, res) => {
+  res.render('cadastro', { message: null });
+};
+
+/* CONTROLLER QUE É SOLICITADO APÓS O USUÁRIO ENVIAR O FORMS DE CADASTRO
+CHAMA A FUNÇÃO NEWUSER PARA CRIAR UM NOVO USUÁRIO NO BANCO DE ACORDO COM O RESULTADO
+DA FUNÇÃO DE VALIDAÇÃO */
+const newUser = async (req, res) => {
+  const isValid = await validationModel({ ...req.body });
+
+  if (isValid) {
+    await userModel.createUser({ ...req.body });
+    return res.render('cadastro', { ...isValid });
+  }
+};
+
 module.exports = {
-  login,
+  login,  
   loginForm,
   logout,
+  signUp,
+  newUser,
 };

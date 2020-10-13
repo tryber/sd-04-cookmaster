@@ -17,10 +17,12 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
 
-
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
+
+app.get('/cadastro', controllers.userController.signUp);
+app.post('/cadastro', controllers.userController.newUser);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

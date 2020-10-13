@@ -26,7 +26,7 @@
         <h3 style="margin-top: 0;">Receita: <%= recipe.name %></h3>
         <div>
           <h4 style="margin: 0;">Autor: <%= recipe.user %></h4>
-          <a style="color: whitesmoke;" href="link">Ver mais</a>
+          <a style="color: whitesmoke;" href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
         </div>
       </div>
 

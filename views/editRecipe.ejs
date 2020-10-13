@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Receita</title>
+  </head>
+  <body>
+    <h1>Editar Receita</h1>
+    <form action="/recipes/<%=recipe.id%>" method="POST">
+      <label for="name">Nome da Receita</label>
+      <input data-testid="nome-receita" type="text" name="name" value="<%=recipe[3]%>" />
+      <div>
+        <p>Ingredientes</p>
+        <ul>
+          <% recipe[4].split(",").forEach(item => { %>
+          <li data-testid="ingredientes">
+            <%= item %><button onclick="del(event)">Excluir ingrediente</button>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+      <input id="item" type="text" />
+      <button data-testid="adicionar-ingrediente" onclick="add()">Adicionar ingrediente</button>
+      <label for="setting">Modo de preparo</label>
+      <input data-testid="modo-de-preparo" type="text" name="setting" value="<%=recipe[5]%>" />
+      <button data-testid="postar-receita">Salvar Receita</button>
+    </form>
+  </body>
+  <script>
+    function del(event) {
+      event.target.parentElement.remove();
+    }
+    function add() {
+      let ul = document.querySelector('ul');
+      let item = document.querySelector('#item').value;
+      let li = document.createElement('LI');
+      let xButton = document.createElement('BUTTON');
+      xButton.setAttribute('type', 'button');
+      xButton.setAttribute('onclick', 'del(event)');
+      xButton.innerText = 'Excluir ingrediente';
+      li.innerText = item;
+      li.appendChild(xButton);
+      ul.appendChild(li);
+    }
+  </script>
+</html>

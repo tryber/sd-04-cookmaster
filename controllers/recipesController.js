@@ -25,10 +25,21 @@ const recipes = async (req, res) => {
   res.redirect('/');
 };
 
+const editRecipe = async (req, res) => {
+  let recipe = await Recipe.findById(req.params.id)
+  res.render('editRecipe', { recipe });
+}
+
+const recipeEdition = async (req, res) => {
+  res.send('ok');
+}
+
 module.exports = {
   home,
   recipeDetails,
   search,
   newRecipe,
   recipes,
+  editRecipe,
+  recipeEdition,
 };

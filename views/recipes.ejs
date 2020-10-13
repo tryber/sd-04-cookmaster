@@ -8,8 +8,8 @@
   <body>
     <h1><%=recipes[3]%></h1>
     <% if(user) { if(user.name + ' ' + user.lastName === recipes[2]) { %>
-    <a href="/editRecipe" data-testid="editar-receita">Editar receita</a>
-    <a href="/deleteRecipe" data-testid="excluir-receita">Excluir receita</a>
+    <a href="/recipes/<%=recipes[0]%>/edit" data-testid="editar-receita">Editar receita</a>
+    <a href="/recipes/<%=recipes[0]%>/delete" data-testid="excluir-receita">Excluir receita</a>
     <% }} %>
     <span>Enviada por <%=recipes[2]%></span>
     <h2>Ingredientes</h2>

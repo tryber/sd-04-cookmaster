@@ -4,7 +4,7 @@ const mysqlx = require('@mysql/xdevapi');
 
 let schema = null;
 
-const connection = async () => (schema
+const connect = async () => (schema
   ? Promise.resolve(schema)
   : mysqlx.getSession({
     user: process.env.MYSQL_USER,
@@ -18,4 +18,4 @@ const connection = async () => (schema
     return schema;
   }));
 
-module.exports = connection;
+module.exports = connect;

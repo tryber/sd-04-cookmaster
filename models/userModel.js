@@ -3,8 +3,7 @@ const connection = require('./connection');
 const findByEmail = async (email) => {
   const emailData = await connection()
     .then((db) =>
-      db.getTable('users').select([]).where('email = :email').bind('email', email)
-      .execute(),
+      db.getTable('users').select([]).where('email = :email').bind('email', email).execute(),
     )
     .then((results) => results.fetchAll());
 
@@ -15,8 +14,7 @@ const findByEmail = async (email) => {
 
 const findById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', id)
-    .execute())
+    .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', id).execute())
     .then((results) => results.fetchAll());
 
   const user = {};
@@ -25,10 +23,13 @@ const findById = async (id) => {
 };
 
 const cadastrarUsuario = async (email, senha, nome, sobrenome) =>
-  await connection().then((db) =>
-    db.getTable('users').insert(['email', 'password', 'first_name', 'last_name']).values(email, senha, nome, sobrenome).execute(),
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, senha, nome, sobrenome)
+      .execute(),
   );
-
 
 module.exports = {
   findByEmail,

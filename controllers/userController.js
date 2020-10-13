@@ -73,7 +73,7 @@ const cadastrar = async (req, res) => {
   const receitas = await receita.acharReceitas();
   try {
     const results = await schema.validate(req.body, { abortEarly: false });
-    console.log('results dentro do try');
+    // console.log('results dentro do try');
     const { email, senha, nome, sobrenome } = req.body;
     await userModel.cadastrarUsuario(email, senha, nome, sobrenome);
     const cadastroValido = true;
@@ -81,7 +81,7 @@ const cadastrar = async (req, res) => {
     return res.render('home', { cadastroValido, usuario, receitas });
   } catch (error) {
     const erroData = error.inner.map((e) => ({ nome: e.path, msg: e.errors[0] }));
-    console.log('results dentro do catch', erroData);
+    // console.log('results dentro do catch', erroData);
     return res.render('cadastro', { erroData });
   }
 

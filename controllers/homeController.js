@@ -5,7 +5,7 @@ const indexHome = async (req, res) => {
   const usuario = req.user;
   const erroData = null;
   const cadastroValido = null;
-  console.log('usuario', usuario, receitas);
+  // console.log('usuario', usuario, receitas);
 
   res.render('home', { receitas, usuario, erroData, cadastroValido });
 };

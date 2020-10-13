@@ -54,11 +54,11 @@ const schema = Joi.object({
     .max(18)
     .required()
     .messages({
-    'string.base': 'A senha deve ter pelo menos 6 caracteres',
-    'string.empty': 'A senha deve ter pelo menos 6 caracteres',
-    'string.min': 'A senha deve ter pelo menos 6 caracteres',
-    'any.required': 'A senha deve ter pelo menos 6 caracteres',
-  }),
+      'string.base': 'A senha deve ter pelo menos 6 caracteres',
+      'string.empty': 'A senha deve ter pelo menos 6 caracteres',
+      'string.min': 'A senha deve ter pelo menos 6 caracteres',
+      'any.required': 'A senha deve ter pelo menos 6 caracteres',
+    }),
 
   confirmPassWord: Joi.string()
     .required()

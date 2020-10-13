@@ -12,4 +12,11 @@ const showOne = async (req, res) => {
   res.render('recipeDetails', { recipeDetails, user: req.user });
 };
 
-module.exports = { showAll, showOne };
+const searchQuery = async (req, res) => {
+  const searchedRecipes = await Recipes.getByName(req.query.q);
+  console.log(searchedRecipes);
+
+  res.render('recipesSearch', { searchedRecipes, user: req.user });
+};
+
+module.exports = { showAll, showOne, searchQuery };

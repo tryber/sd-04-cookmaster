@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const schema = require('@hapi/joi');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
@@ -17,10 +18,10 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
-//Renderiza o formulário de cadastro
+// Renderiza o formulário de cadastro
 app.get('/register', userController.formRegister);
 
-//Rota com os dados do formulário para cadastro
+// Rota com os dados do formulário para cadastro
 app.post('/registerUser', userController.userRegister);
 
 app.get('/admin', middlewares.auth(true), (req, res) => {

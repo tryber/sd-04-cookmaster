@@ -1,6 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 const userModel = require('../models/userModel');
+const checkInputs = require('./validInputs');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -42,45 +43,34 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-//Renderiza formulário cadastro
+// Renderiza formulário cadastro
 const formRegister = (req, res) => {
-  //const { email, passWord, firstName, lastName } = req.body;
+  // const { email, passWord, firstName, lastName } = req.body;
   res.render('users/register');
 };
 
-//Add usuário aparti do formulário cadastro
-const userRegister = (req, res) => {
-  //console.log(req.body);
+// Add usuário aparti do formulário cadastro
+const userRegister = async (req, res) => {
   const { email, passWord, confirmPassWord, firstName, lastName } = req.body;
-  console.log({ email, passWord, confirmPassWord, firstName, lastName });
 
-  if (!userModel.isValidEmail(email)) {
-    return res.status(400).send('O email deve ter o formato email@mail.com');
+  // Recebe os inputs do body e valida com a função checkInputs
+  const validator = checkInputs.validate({
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    passWord: passWord,
+    confirmPassWord: confirmPassWord,
+  });
+
+  // Retorna o erro do input não validado
+  if (validator.error) {
+    return res.status(400).send(validator.error.message);
+  } else {
+    // Efetua o cadastro do usuário no banco e renderiza a pagina de sucesso
+    userModel
+      .addUser(email, passWord, firstName, lastName)
+      .then(() => res.status(200).render('users/success'));
   }
-
-  if (!userModel.isValidName(firstName)) {
-    return res
-      .status(400)
-      .send('O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
-  }
-
-  if (!userModel.isValidLastName(lastName)) {
-    return res
-      .status(400)
-      .send('O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');
-  }
-
-  if (!userModel.isValidPassWord(passWord)) {
-    return res.status(400).send('A senha deve ter pelo menos 6 caracteres');
-  }
-
-  if (!userModel.comparPassword(passWord, confirmPassWord)) {
-    return res.status(400).send('As senhas tem que ser iguais');
-  }
-
-  userModel
-    .addUser(email, passWord, firstName, lastName)
-    .then((sucess) => res.status(200).render('users/success'));
 };
 
 module.exports = {

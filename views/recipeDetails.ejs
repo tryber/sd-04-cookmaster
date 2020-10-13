@@ -19,8 +19,8 @@
     <article><%= recipeDetails.instructions %></article>
     <div>
       <% if (user && user.id === recipeDetails.userId) { %>
-        <a data-testid="editar-receita" href=<%= `${recipe.id}/edit` %>>Editar Receita</a>
-        <a data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %>>Excluir Receita</a>
+        <a data-testid="editar-receita" href=<%= `${recipeDetails.id}/edit` %>>Editar Receita</a>
+        <a data-testid="excluir-receita" href=<%= `${recipeDetails.id}/delete` %>>Excluir Receita</a>
       <% } %>
     </div>
   </body>

@@ -54,23 +54,16 @@ const userRegister = async (req, res) => {
   const { email, passWord, confirmPassWord, firstName, lastName } = req.body;
 
   // Recebe os inputs do body e valida com a função checkInputs
-  const validator = checkInputs.validate({
-    email: email,
-    firstName: firstName,
-    lastName: lastName,
-    passWord: passWord,
-    confirmPassWord: confirmPassWord,
-  });
+  const validator = checkInputs.validate({ email, passWord, confirmPassWord, firstName, lastName });
 
   // Retorna o erro do input não validado
   if (validator.error) {
     return res.status(400).send(validator.error.message);
-  } else {
-    // Efetua o cadastro do usuário no banco e renderiza a pagina de sucesso
-    userModel
-      .addUser(email, passWord, firstName, lastName)
-      .then(() => res.status(200).render('users/success'));
   }
+  // Efetua o cadastro do usuário no banco e renderiza a pagina de sucesso
+  userModel
+    .addUser(email, passWord, firstName, lastName)
+    .then(() => res.status(200).render('users/success'));
 };
 
 module.exports = {

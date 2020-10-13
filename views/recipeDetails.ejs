@@ -18,7 +18,7 @@
     <h3>Modo de preparo</h3>
     <article><%= recipeDetails.instructions %></article>
     <div>
-      <% if (user.id === recipeDetails.userId) { %>
+      <% if (user && user.id === recipeDetails.userId) { %>
         <a data-testid="editar-receita" href=<%= `${recipe.id}/edit` %>>Editar Receita</a>
         <a data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %>>Excluir Receita</a>
       <% } %>

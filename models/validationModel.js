@@ -3,7 +3,6 @@ const passwordValidator = /^(\d|\w){6,}$/;
 const namesValidator = /\w{3,}/;
 
 const validationModel = ({ email, password, passwordConfirmed, first_name, last_name }) => {
-  console.log(email, password, first_name, last_name);
   switch (true) {
     case !emailValidator.test(email):
       return { message: 'O email deve ter o formato email@mail.com' };

@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipesModel');
+const userModel = require('../models/userModel');
 
 const home = async (req, res) => {
   const recipes = await Recipe.findAll();
@@ -35,6 +36,19 @@ const recipeEdition = async (req, res) => {
   res.redirect('/');
 };
 
+const deleteRecipe = async (req, res) => {
+  let id = req.params.id;
+  let pass = await userModel.getPass(req.user.id);
+  let message = req.query.message;
+  if (message) message = decodeURIComponent(message);
+  res.render('deleteRecipe', { pass, message, id });
+};
+
+const recipeDelete = async (req, res) => {
+  await Recipe.deleteRecipe(req.params.id);
+  res.redirect('/');
+};
+
 module.exports = {
   home,
   recipeDetails,
@@ -43,4 +57,6 @@ module.exports = {
   recipes,
   editRecipe,
   recipeEdition,
+  deleteRecipe,
+  recipeDelete,
 };

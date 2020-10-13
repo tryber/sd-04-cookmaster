@@ -85,6 +85,17 @@ const addUser = async (name, lastname, mail, password) =>
       .execute(),
   );
 
+const getPass = async (id) => {
+  return connection().then((db) =>
+    db
+      .getTable('users')
+      .select('password')
+      .where('id = :idBind')
+      .bind('idBind', id)
+      .execute(),
+  )
+  .then((results) => results.fetchOne())};
+
 module.exports = {
   findByEmail,
   findById,
@@ -94,4 +105,5 @@ module.exports = {
   isvalidPass,
   isValidCheck,
   addUser,
+  getPass,
 };

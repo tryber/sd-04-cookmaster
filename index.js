@@ -19,9 +19,21 @@ app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
 // Renderiza o formulário de cadastro
 app.get('/register', userController.formRegister);
-
 // Rota com os dados do formulário para cadastro
 app.post('/registerUser', userController.userRegister);
+
+// Renderiza receitas pelo usuario Id
+app.get('/recipes/:id', middlewares.auth(false), userController.recipesUser);
+
+// Renderiza editar receitas
+app.get('/edit', (req, res) => {
+  return res.render('users/recipesEdit');
+});
+
+// Renderiza editar receitas
+app.get('/remove', (req, res) => {
+  return res.render('users/recipesRemove');
+});
 
 app.get('/admin', middlewares.auth(true), (req, res) => {
   return res.render('admin/home', { user: req.user });

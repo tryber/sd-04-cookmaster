@@ -66,10 +66,16 @@ const userRegister = async (req, res) => {
     .then(() => res.status(200).render('users/success'));
 };
 
+const recipesUser = async (req, res) => {
+  const userId = await userModel.recipesId(req.params.id);
+  res.status(200).render('users/recipesId', { userId, user: req.user });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   userRegister,
   formRegister,
+  recipesUser,
 };

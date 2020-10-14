@@ -71,8 +71,31 @@ const addUser = async (email, passWord, firstName, lastName) => {
   );
 };
 
+// Busca receita por usuário
+const recipesId = async (userId) => {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .where('id = :idBind')
+        .bind('idBind', userId)
+        .execute(),
+    )
+    .then((result) => result.fetchOne())
+    .then(([id, user_id, user, name, ingredients, instructions]) => ({
+      id,
+      user_id,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
+};
+
 module.exports = {
   findByEmail,
   findById,
   addUser,
+  recipesId,
 };

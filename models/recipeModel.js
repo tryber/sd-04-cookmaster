@@ -42,11 +42,12 @@ async function getRecipeByName(q) {
     )
     .then((results) => results.fetchAll())
     .then((data) =>
-     data.map(([id, user, name]) => ({
-      id,
-      user,
-      name,
-    })))
+      data.map(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    );
 }
 
 module.exports = { getAllRecipes, getRecipe, getRecipeByName };

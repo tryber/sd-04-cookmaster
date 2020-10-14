@@ -18,7 +18,7 @@ const search = async (req, res) => {
 };
 
 const newRecipe = async (req, res) => {
-  let user = req.user;
+  const user = req.user;
   res.render('newRecipe', { user });
 };
 
@@ -28,7 +28,7 @@ const recipes = async (req, res) => {
 };
 
 const editRecipe = async (req, res) => {
-  let user = req.user;
+  const user = req.user;
   const recipe = await Recipe.findById(req.params.id);
   res.render('editRecipe', { recipe, user });
 };
@@ -39,7 +39,7 @@ const recipeEdition = async (req, res) => {
 };
 
 const deleteRecipe = async (req, res) => {
-  let user = req.user;
+  const user = req.user;
   const id = req.params.id;
   const pass = await userModel.getPass(req.user.id);
   let message = req.query.message;
@@ -53,10 +53,9 @@ const recipeDelete = async (req, res) => {
 };
 
 const myRecipes = async (req, res) => {
-  let recipes = await Recipe.findByUserId(req.user.id);
-  console.log(recipes)
-  let user = req.user;
-  res.render('myRecipes', { user, recipes });
+  const recipesCC = await Recipe.findByUserId(req.user.id);
+  const user = req.user;
+  res.render('myRecipes', { user, recipesCC });
 };
 
 module.exports = {

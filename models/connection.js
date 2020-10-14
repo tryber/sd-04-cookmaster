@@ -10,7 +10,7 @@ const config = {
 };
 
 let schema;
-const connection = () => {
+async function connection (){
   return schema /* Se schema já existir: */
     ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
     : mysqlx
@@ -20,8 +20,7 @@ const connection = () => {
           schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
           return schema; /* E retornamos o schema de dentro da Promise */
         })
-        .catch((_err) => {
-          /* Caso um erro ocorra: */
+        .catch(() => {
           process.exit(1); /* E encerramos o processo */
         });
 };

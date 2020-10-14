@@ -15,13 +15,12 @@ app.set('views', './views');
 
 app.use(express.json());
 // app.get('/', async (_req, res) => {
-  //   await recipeModel.getAllRecipes().then((hey)=> console.log(hey));
-  //   return res.render('home');
-  // });
+//   await recipeModel.getAllRecipes().then((hey)=> console.log(hey));
+//   return res.render('home');
+// });
 
 app.use(express.static('./public'));
-app.get('/', middlewares.auth(false), recipeController.listRecipes)
-
+app.get('/', middlewares.auth(false), recipeController.listRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

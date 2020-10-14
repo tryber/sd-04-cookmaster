@@ -19,9 +19,10 @@ const getAllRecipes = async () =>
     .then((results) => results.fetchAll())
     .then((recipes) =>
       recipes.map(([id, user_id, user, name]) => ({
-        id: id,
-        user: user,
-        name: name,
+        id,
+        user_id,
+        user,
+        name,
       })),
     );
 

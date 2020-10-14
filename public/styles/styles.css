@@ -1,5 +1,5 @@
 .Header {
-  display: flex;
   background-color: black;
   color: red;
+  display: flex;
 }

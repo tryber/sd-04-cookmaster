@@ -10,7 +10,7 @@ const config = {
 };
 
 let schema;
-async function connection (){
+async function connection() {
   return schema /* Se schema já existir: */
     ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
     : mysqlx
@@ -23,6 +23,6 @@ async function connection (){
         .catch(() => {
           process.exit(1); /* E encerramos o processo */
         });
-};
+}
 
 module.exports = connection;

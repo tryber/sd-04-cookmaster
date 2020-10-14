@@ -36,7 +36,30 @@ const findById = async (idInput) => {
   return { id, email, password, name, lastName };
 };
 
+const addUser = async (email, password, firstName, lastName) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, firstName, lastName)
+    .execute();
+  return null;
+};
+
+const validateEmail = (email) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(email);
+
+const validatePassword = (pass) => /^(\d|\w){6,}$/.test(pass);
+
+const confirmPass = (firstPassword, secondPassword) => firstPassword === secondPassword;
+
+const validateName = (name) => /\w{3,}/.test(name);
+
 module.exports = {
   findByEmail,
   findById,
+  addUser,
+  validateEmail,
+  validatePassword,
+  confirmPass,
+  validateName
 };

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - SignUp</title>
+    <title>Cookmaster - signUp</title>
   </head>
   <body>
     <h2>Cookmaster - Cadastro</h2>
-    <form action="/signup" method="POST">
+    <form action="/signUp" method="POST">
       <label for="emailInput"
         >Email <input type="text" name="email" id="emailInput" data-testid="email" /><br />
         <% if (messages) { %>
@@ -29,7 +29,7 @@
         >Confirmar Senha
         <input
           type="password"
-          name="passwordConfirm"
+          name="confirmPassword"
           id="passwordConfirmInput"
           data-testid="confirmar-senha"
         /><br />

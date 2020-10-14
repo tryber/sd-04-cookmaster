@@ -23,5 +23,6 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.get('/signUp', controllers.signUpController.signUp);
+app.post('/signUp', middlewares.validation, controllers.signUpController.finishsignUp);
 
 app.listen(3000, () => console.log('Listening on 3000'));

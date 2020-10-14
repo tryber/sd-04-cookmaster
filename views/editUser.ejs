@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+  </head>
+  <body>
+    <h1>Cookmaster - Editar usuário</h1>
+    <form action="/me/edit" method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" data-testid="email" value="<%= user.email %>" />
+      <label for="password">Senha</label>
+      <input type="password" name="password" id="password" data-testid="senha" />
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        id="confirmPassword"
+        data-testid="confirmar-senha"
+      />
+      <label for="firstName">Nome</label>
+      <input
+        type="text"
+        name="firstName"
+        id="firstName"
+        data-testid="nome"
+        value="<%= user.name %>"
+      />
+      <label for="lastName">Sobrenome</label>
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        data-testid="sobrenome"
+        value="<%= user.lastName %>"
+      />
+      <button type="submit" data-testid="salvar">Salvar</button>
+    </form>
+  </body>
+</html>

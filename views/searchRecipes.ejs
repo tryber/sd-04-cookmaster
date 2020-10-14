@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Recipes</title>
+  </head>
+  <body>
+    <%- include('navbar', {user}) %>
+    <h1>Buscar Receitas</h1>
+    <form action="/recipes/search" method="GET">
+      <input type="text" data-testid="receita" name="q" />
+      <button type="submit" data-testid="buscar">Buscar</button>
+    </form>
+    <% if (recipeByName) { %>
+    <div>
+      <p><%= recipeByName.recipeName %></p>
+      <p><%= recipeByName.userName %></p>
+      <a href="/recipes/<%= recipeByName.recipeID %>">Ver mais</a>
+    </div>
+    <% } %>
+  </body>
+</html>

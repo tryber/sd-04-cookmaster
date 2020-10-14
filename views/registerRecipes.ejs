@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Recipes</title>
+  </head>
+  <body>
+    <%- include('navbar', {user}) %>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+      <label for="recipeName">Nome da Receita</label>
+      <input type="text" id="recipeName" name="recipeName" data-testid="nome-receita" /><br /><br />
+      <label for="ingredients">Novo Ingrediente</label>
+      <input type="text" id="ingredients" data-testid="ingredientes" /><br /><br />
+      <label for="ingredientsList">Lista de Ingredientes</label>
+      <ul id="ingredientsList"></ul>
+      <button type="button" data-testid="adicionar-ingrediente" onclick="addIngredient()">
+        Adicionar Ingrediente
+      </button><br /><br />
+      <label for="instructions">Modo de Preparo</label>
+      <textarea id="instructions" name="instructions" data-testid="modo-de-preparo"></textarea>
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <script type="text/javascript">
+      let list = document.getElementById('ingredientsList');
+      let item;
+
+      const createItem = (ingredient) => {
+        let liElement = document.createElement('li');
+        return liElement;
+      };
+
+      const createInput = (ingredient) => {
+        let inputElement = document.createElement('input');
+        inputElement.id = ingredient;
+        inputElement.value = ingredient;
+        inputElement.name = 'ingredients[]';
+        return inputElement;
+      }
+
+      const createRemoveButton = () => {
+        let btn = document.createElement('button');
+        btn.innerHTML = 'Excluir Ingrediente';
+        btn.addEventListener('click', (event) => {
+          event.target.parentNode.remove();
+        });
+        return btn;
+      };
+
+      const addIngredient = () => {
+        let inputIngredient = document.getElementById('ingredients');
+
+        if (inputIngredient.value !== '') {
+          item = createItem(inputIngredient.value);
+
+          item.appendChild(createInput(inputIngredient.value));
+          item.appendChild(createRemoveButton());
+
+          list.appendChild(item);
+        }
+      };
+    </script>
+  </body>
+</html>

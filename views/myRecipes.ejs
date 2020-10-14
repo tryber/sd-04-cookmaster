@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Recipes</title>
+  </head>
+  <body>
+    <%- include('navbar', {user}) %>
+    <h1>Minhas Receitas</h1>
+    <button
+      type="button"
+      data-testid="nova-receita"
+      onclick="window.location.pathname='/recipes/new'"
+    >
+      Nova Receita
+    </button>
+    <%- include('recipesList', {recipes}) %>
+  </body>
+</html>

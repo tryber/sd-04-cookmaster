@@ -1,0 +1,11 @@
+<nav>
+  <p>Cookmaster</p>
+  <% if(user) { %>
+  <p><%= user.name + " " + user.lastName %></p>
+  <a href="/logout" data-testid="logout">Logout</a>
+  <a href="/me/edit" data-testid="minha-conta">Minha Conta</a>
+  <% } else { %>
+  <p>Usuário não autenticado</p>
+  <a href="/login" data-testid="login">Login</a>
+  <% } %>
+</nav>

@@ -8,7 +8,11 @@ const index = async (req, res) => {
   res.render('show', { receita, usuario: req.user });
 };
 
-const buscar = async (req, res) => res.redirect('/recipe/serach');
+const buscar = async (req, res) => {
+  const { q } = req.query;
+  const receita = await recipeModel.receitaByNome(q);
+  res.render('buscar', { usuario: req.user, receita });
+};
 
 module.exports = {
   index,

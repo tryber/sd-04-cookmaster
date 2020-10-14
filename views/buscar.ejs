@@ -18,8 +18,17 @@
       </div>
     </header>
     <section>
-      <input />
-      <a href="">Buscar</a>
+      <form action="/recipes/search" method="GET">
+        <input type="text" name="q" data-testid="receita"></input>
+        <button type="submit" data-testid="buscar">Buscar</button>
+      </form>
+      <% if (receita) { %>
+        <% receita.forEach((receita) => { %>
+          <span><%= receita.name %></span>
+          <span><%= receita.user %></span>
+          <a href="/recipes/<%= receita.id %>">Ver mais</a>
+          <% }) %>
+        <% } %>
     </section>
   </body>
 </html>

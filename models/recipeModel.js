@@ -2,23 +2,23 @@ const connection = require('./connection');
 
 async function getAllRecipes() {
   const dbcookmaster = await connection();
-  const result = await dbcookmaster.getTable('recipes').select(['user', 'name']).execute();
+  const result = await dbcookmaster.getTable('recipes').select(['id', 'user', 'name']).execute();
   const data = await result.fetchAll();
 
-  return data.map(([user, name]) => ({ user, name }));
+  return data.map(([id, user, name]) => ({ id, user, name }));
 }
 
-async function getRecipesByUserId(userId) {
+async function getRecipe(recipeId) {
   return connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
-        .where('user_id = :user_id')
-        .bind('user_id', userId)
+        .where('id = :id')
+        .bind('id', recipeId)
         .execute(),
     )
-    .then((results) => results.fetchAll())
+    .then((results) => results.fetchOne())
     .then(([id, idUser, user, name, ingredients, instructions]) => ({
       id,
       idUser,
@@ -29,4 +29,4 @@ async function getRecipesByUserId(userId) {
     }));
 }
 
-module.exports = { getAllRecipes, getRecipesByUserId };
+module.exports = { getAllRecipes, getRecipe };

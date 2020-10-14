@@ -1,0 +1,52 @@
+<!-- /* JÁ CRIEI O CONTROLLER, QUE POR SUA VEZ, CHAMA A MODEL GETRECIPESBYUSER E ENVIA O RESULTADO PARA A
+VIEW DE RECEITAS POR ID DE USUÁRIO */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="navbar navbar-dark bg-primary">Cookmaster</div>
+    <% if(user) { %>
+    <a href="/recipes/<%= recipes.id %>/edit " data-testid="editar-receita" class="btn btn-primary"
+      >Editar Receita</a
+    >
+    <a
+      href="recipes/<%= recipes.id %>/delete "
+      data-testid="excluir-receita"
+      class="btn btn-primary"
+      >Excluir Receita</a
+    >
+    <% } %>
+    <div class="container">
+      <div class="card">
+        <div class="card-title"><h1><%= recipes.name %></h1></div>
+        <hr />
+        <div class="card-body">
+          <h2>Ingredientes</h2>
+          <% recipes.ingredients.split(',').forEach((ing) => { %>
+
+          <p><%= ing %></p>
+
+          <% }) %>
+          <hr />
+          <h2>Modo de Preparo</h2>
+          <div class="card-text"><%= recipes.instructions %></div>
+        </div>
+      </div>
+    </div>
+
+    /* AGORA PRECISO CRIAR AS PÁGINAS DE EDIÇÃO E DELEÇÃO, TALVEZ NECESSITE CRIAR UM CONTROLLER OU
+    MODEL, POIS NOS PRÓXIMOS REQUISITOS SERÁ NECESSÁRIO */
+  </body>
+</html>

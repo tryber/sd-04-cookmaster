@@ -10,6 +10,7 @@
     <% if (user) { %>
     <span>Usuário logado: <%=user.name %></span>
     <a href="logout" data-testid="logout">Logout</a>
+    <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
     <% } else { %>
     <a href="/login" data-testid="login">Login</a>
     <% } %> <% if (user) { %>

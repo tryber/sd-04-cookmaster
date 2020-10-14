@@ -30,12 +30,12 @@ const findByName = async (name) =>
       .then((recipes) => recipes),
   );
 
-const nRecipe = async (items, user) =>
+const nRecipe = async (items) =>
   connection().then((db) =>
     db
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-      .values(user.id, user.name, items.name, items.secret, items.setting)
+      .values(items.userId, items.user, items.name, items.secret, items.setting)
       .execute(),
   );
 
@@ -62,6 +62,17 @@ const deleteRecipe = async (id) =>
     .execute(),
   );
 
+const findByUserId = async (id) =>
+connection().then((db) =>
+  db
+    .getTable('recipes')
+    .select()
+    .where('user_id = :idBind')
+    .bind('idBind', id)
+    .execute()
+    .then((result) => result.fetchAll()),
+  );
+
 module.exports = {
   findAll,
   findById,
@@ -69,4 +80,5 @@ module.exports = {
   nRecipe,
   editRecipe,
   deleteRecipe,
+  findByUserId,
 };

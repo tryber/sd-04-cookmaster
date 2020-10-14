@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1>Nova Receita</h1>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
     <form action="/recipes" method="POST">
       <label for="name">Nome da Receita</label>
       <input data-testid="nome-receita" name="name" type="text" />
@@ -16,6 +17,8 @@
         Adicionar Ingrediente
       </button>
       <input type="hidden" name="secret" id="secret" />
+      <input type="hidden" name="user" value="<%=user.name + ' ' + user.lastName%>" />
+      <input type="hidden" name="userId" value="<%=user.id%>" />
       <label for="setting">Modo de Preparo</label>
       <input data-testid="modo-de-preparo" name="setting" type="text" />
       <button data-testid="postar-receita">Salvar Receita</button>

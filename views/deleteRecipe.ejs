@@ -6,7 +6,8 @@
     <title>Deletar Receita</title>
   </head>
   <body>
-    <% if (message) %><span><%=message %></span>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
+    <% if (message) %><span><%=message + '.' %></span>
     <h1>Confirme a exclusão da receita</h1>
     <form action="/recipes/<%=id%>/delete" method="POST">
       <label for="password">Senha</label>
@@ -21,7 +22,7 @@
       let word = document.querySelector('#pass').value;
       let check = document.querySelector('#confirm').value;
       if (word === check) document.querySelector('#del').type = 'submit';
-      if (word !== check) location.href = '/recipes/<%=id%>/delete?message=Senha%20incorreta';
+      if (word !== check) location.href = '/recipes/<%=id%>/delete?message=Senha%20Incorreta';
     }
 
     function cancel() {

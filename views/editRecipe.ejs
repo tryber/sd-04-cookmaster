@@ -7,13 +7,13 @@
   </head>
   <body>
     <h1>Editar Receita</h1>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
     <form action="/recipes/<%=recipe[0]%>" method="POST">
       <label for="name">Nome da Receita</label>
       <input data-testid="nome-receita" type="text" name="name" value="<%=recipe[3]%>" />
       <div>
         <label for="items">Ingredientes</label>
         <input
-          type="hidden"
           data-testid="ingredientes"
           id="items"
           name="items"
@@ -21,7 +21,7 @@
         />
         <ul>
           <% recipe[4].split(",").forEach(item => { %>
-          <li><%= item %>, <button onclick="del(event)">Excluir ingrediente</button></li>
+          <li><%= item %>, <button onclick="del(event)">Excluir Ingrediente</button></li>
           <% }) %>
         </ul>
       </div>

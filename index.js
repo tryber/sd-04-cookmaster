@@ -29,14 +29,16 @@ app.post('/signUp', controllers.userController.create);
 
 app.get('/recipes/search', recipesController.search);
 
-app.get('/recipes/new', recipesController.newRecipe);
+app.get('/recipes/new', middlewares.auth(true), recipesController.newRecipe);
 app.post('/recipes', middlewares.auth(true), recipesController.recipes);
 
-app.get('/recipes/:id/edit', recipesController.editRecipe);
+app.get('/recipes/:id/edit', middlewares.auth(true), recipesController.editRecipe);
 app.post('/recipes/:id', middlewares.auth(true), recipesController.recipeEdition);
 
 app.get('/recipes/:id/delete', middlewares.auth(true), recipesController.deleteRecipe);
 app.post('/recipes/:id/delete', recipesController.recipeDelete);
+
+app.get('/me/recipes', middlewares.auth(true), recipesController.myRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetails);
 

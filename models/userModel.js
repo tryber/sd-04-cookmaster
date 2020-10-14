@@ -83,9 +83,9 @@ const recipesId = async (userId) => {
         .execute(),
     )
     .then((result) => result.fetchOne())
-    .then(([id, user_id, user, name, ingredients, instructions]) => ({
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
       id,
-      user_id,
+      userId,
       user,
       name,
       ingredients,

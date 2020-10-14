@@ -112,7 +112,7 @@ O código para cadastro de usuários deve ser criado por você utilizando os con
 
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+O projeto tem até a seguinte data: `16/10/2020 - 14:00h`. Para ser entregue a avaliação final.
 
 ---
 

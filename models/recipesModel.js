@@ -1,0 +1,15 @@
+const connection = require('./connection');
+
+const fetchAllRecipesModel = () => {
+  return connection().then((db) =>
+    db.getTable('recipes')
+      .select([])
+      .execute(),
+  )
+    .then((results) => results.fetchAll())
+    .then((recipes) => recipes.map(([id, userId, user, name, ingredients, instructions]) =>
+      ({ id, userId, user, name, ingredients, instructions }))
+    )
+};
+
+module.exports = { fetchAllRecipesModel };

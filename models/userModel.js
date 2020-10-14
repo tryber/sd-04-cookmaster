@@ -72,14 +72,14 @@ const addUser = async (email, passWord, firstName, lastName) => {
 };
 
 // Busca receita por usuário
-const recipesId = async (userId) => {
+const recipesId = async (idUser) => {
   return connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :idBind')
-        .bind('idBind', userId)
+        .bind('idBind', idUser)
         .execute(),
     )
     .then((result) => result.fetchOne())

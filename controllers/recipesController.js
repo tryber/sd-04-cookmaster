@@ -41,7 +41,6 @@ const newRecipe = async (req, res) => {
 const editRecipe = async (req, res) => {
   const recipeID = req.params.id;
   const recipeDetails = await recipesModel.getRecipeDetails(recipeID);
-  console.log(recipeDetails);
   res.render('editRecipe', { user: req.user, recipeDetails, id: recipeID });
 };
 

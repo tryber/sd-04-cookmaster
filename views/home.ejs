@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link type="text/css" rel="stylesheet" href="/styles/styles.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <header class="Header">
+      <h1 class="Header">Cookmaster - Home</h1>
+      <% if(!user) { %>
+      <button data-testid="login"><a href="/login">Login</a></button>
+      <% } else { %>
+      <button data-testid="logout"><a href="/logout">Logout</a></button>
+      <% } %>
+    </header>
+    <div>
+      <h2>Receitas</h2>
+      <% if(user) { %>
+        <button data-testid="nova-receita">Nova Receita</button>
+        <% }%>
+      <button data-testid="buscar-receita">Buscar Receitas</button>
+    </div>
+    <div>
+      <% recipes.forEach((recipe)=> { %>
+      <div>
+        <p><%= recipe.name %></p>
+        <p><%= recipe.user %></p>
+        <a href="Link">Ver mais</a>
+      </div>
+      <% }) %>
+    </div>
   </body>
 </html>

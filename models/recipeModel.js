@@ -2,7 +2,8 @@ const connection = require('./connection');
 
 const receitaById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id)
+    .execute())
     .then((results) => results.fetchAll());
 
   const receita = {};
@@ -20,7 +21,8 @@ const receitaById = async (id) => {
 const receitaByNome = async (nome) => {
   const nomeData = await connection()
     .then((db) =>
-      db.getTable('recipes').select().where('name = :nome').bind('nome', nome).execute(),
+      db.getTable('recipes').select().where('name = :nome').bind('nome', nome)
+      .execute(),
     )
     .then((resultado) => resultado.fetchAll());
   const receita = {};
@@ -31,7 +33,7 @@ const receitaByNome = async (nome) => {
     receita.name,
     receita.ingredients,
     receita.instructions,
-  ] = idData[0];
+  ] = nomeData[0];
   return receita;
 };
 

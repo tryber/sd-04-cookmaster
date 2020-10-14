@@ -8,10 +8,7 @@ const index = async (req, res) => {
   res.render('show', { receita, usuario: req.user });
 };
 
-const buscar = async (req, res) => {
-
-  return res.redirect('/recipe/serach')
-};
+const buscar = async (req, res) => res.redirect('/recipe/serach');
 
 module.exports = {
   index,

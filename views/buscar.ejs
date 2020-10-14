@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de busca</title>
-</head>
-<body>
-  <header>
-    <div>
-      <h3>Cookmaster</h3>
-      <% if (!usuario) { %>
-      <a data-testid="login" href="login">Login</a>
-      <% } else { %>
-      <a data-testid="logout" href="logout">Logout</a>
-      <span><%= usuario.name %></span>
-      <% } %>
-    </div>
-  </header>
-  <section>
-    <input>
-  </section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela de busca</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h3>Cookmaster</h3>
+        <% if (!usuario) { %>
+        <a data-testid="login" href="login">Login</a>
+        <% } else { %>
+        <a data-testid="logout" href="logout">Logout</a>
+        <span><%= usuario.name %></span>
+        <% } %>
+      </div>
+    </header>
+    <section>
+      <input />
+      <a href="">Buscar</a>
+    </section>
+  </body>
 </html>

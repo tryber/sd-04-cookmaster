@@ -19,6 +19,7 @@ app.get('/registrar', (req, res) => {
   return res.render('cadastro', { erroData });
 });
 app.post('/cadastrar', controllers.userController.cadastrar);
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.buscar);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

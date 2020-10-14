@@ -9,6 +9,7 @@ const connection = () =>
       host: process.env.HOSTNAME,
       port: 33060,
       schema: 'cookmaster',
+      socketPath: '/var/run/mysqld/mysqld.sock',
     })
     .then((session) => session.getSchema('cookmaster'));
 module.exports = connection;

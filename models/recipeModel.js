@@ -29,4 +29,24 @@ async function getRecipe(recipeId) {
     }));
 }
 
-module.exports = { getAllRecipes, getRecipe };
+async function getRecipeByName(q) {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user', 'name'])
+        .where('name like :name')
+        .orderBy(['name'])
+        .bind('name', `%${q}%`)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((data) =>
+     data.map(([id, user, name]) => ({
+      id,
+      user,
+      name,
+    })))
+}
+
+module.exports = { getAllRecipes, getRecipe, getRecipeByName };

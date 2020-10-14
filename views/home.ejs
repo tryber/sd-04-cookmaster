@@ -14,6 +14,7 @@
   <body>
     <div class="navbar">
       <h1>Cookmaster!</h1>
+
       <% if(user) { %>
       <p><%= console.log(user) %></p>
       <a href="/">
@@ -33,7 +34,7 @@
     <button data-testid="nova-receita">Nova Receita</button>
 
     <%}%>
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <button data-testid="buscar-receita"><a href="/recipes/search">Buscar Receitas</a></button>
 
     <% recipes.forEach(recipe => { %>
     <h3><%= recipe.user + ' ' + recipe.name%></h3>

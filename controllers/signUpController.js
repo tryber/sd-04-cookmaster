@@ -8,9 +8,7 @@ const signUp = (req, res) =>
 
 const finishsignUp = async (req, res) => {
   if (req.validated) {
-    const { email, password, firstName, lastName } = req.body;
-
-    await userModel.addUser(email, password, firstName, lastName);
+    await userModel.addUser({ ...req.body });
     return res.status(200).render('admin/signUp', {
       messages: req.messages,
       done: true,

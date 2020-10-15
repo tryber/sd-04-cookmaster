@@ -11,14 +11,14 @@ const message = {
 const validationMessage = (validationBool, type) => (validationBool ? null : message[type]);
 
 const validation = (req, res, next) => {
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const { email, password, passwordConfirm, firstName, lastName } = req.body;
 
   const { validateEmail, validatePassword, confirmPass, validateName } = userModel;
 
   if (
     validateEmail(email) &&
     validatePassword(password) &&
-    confirmPass(password, confirmPassword) &&
+    confirmPass(password, passwordConfirm) &&
     validateName(firstName) &&
     validateName(lastName)
   ) {
@@ -30,7 +30,7 @@ const validation = (req, res, next) => {
   req.messages = {
     email: validationMessage(validateEmail(email), 'email'),
     password: validationMessage(validatePassword(password), 'password'),
-    confirmPassword: validationMessage(confirmPass(password, confirmPassword), 'confirmPassword'),
+    confirmPassword: validationMessage(confirmPass(password, passwordConfirm), 'confirmPassword'),
     firstName: validationMessage(validateName(firstName), 'firstName'),
     lastName: validationMessage(validateName(lastName), 'lastName'),
   };

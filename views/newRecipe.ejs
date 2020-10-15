@@ -10,28 +10,34 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <!-- <script>
-      const arrIngre = ['arroz', 'feijão'];
-    </script> -->
   </head>
+  <script>
+    const addIngrediente = () => {
+      const valor = document.getElementById('add').value;
+      if (!valor) return null;
+      const ul = document.getElementById('ul');
+      const createLi = document.createElement('li');
+      const createInput = document.createElement('input');
+      const button = document.createElement('button');
+
+      createInput.name = 'ingredientes[]';
+      createInput.value = valor;
+      createInput.classList = 'form-control mr-sm-2';
+      button.innerHTML = 'Excluir ingrediente';
+      button.type = 'button';
+      button.classList = 'btn btn-outline-danger my-2 my-sm-0';
+      button.onclick = () => {
+        document.getElementById(valor).remove();
+      };
+      createLi.id = valor;
+      createLi.classList = 'form-inline my-2 my-lg-0';
+      createLi.appendChild(createInput);
+      createLi.appendChild(button);
+      ul.appendChild(createLi);
+      document.getElementById('add').value = '';
+    };
+  </script>
   <body>
-    <div class="container-fluid">
-      <nav class="navbar navbar-dark bg-dark">
-        <% if (user) { %>
-        <a data-testid="buscar-receita" class="m-2" href="/recipes/search">Buscar Receita</a>
-        <a data-testid="nova-receita" class="m-2" href="/recipes/new">Nova Receita</a>
-        Usuário logado: <%=user.first_name %>
-        <a data-testid="logout" class="m-2" href="/logout">Logout</a>
-        <% } else { %>
-        <div class="d-flex justify-content-around">
-          <a data-testid="buscar-receita" class="btn btn-primary" href="/recipes/search"
-            >Buscar Receita</a
-          >
-          <a data-testid="login" class="btn btn-primary" href="/login"> Login </a>
-        </div>
-        <% } %>
-      </nav>
-    </div>
     <div class="container-sm">
       <h1>Nova Receita</h1>
 
@@ -45,15 +51,25 @@
           <p>Ingredientes</p>
           <ul id="ul"></ul>
         </div>
-
-        <div class="form-group">
-          <label for="nome">Nome da Receita</label>
-          <input data-testid="ingredientes" type="text" class="form-control" name="nome" value="" />
+        <div class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" id="add" placeholder="Ingrediente" />
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            onclick="addIngrediente()"
+            type="button"
+          >
+            Adicionar Ingrediente
+          </button>
         </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Modo de Preparo</label>
+        <div class="form-group mt-3">
+          <label for="modeodepreparo">Modo de Preparo</label>
           <textarea data-testid="modo-de-preparo" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="d-flex justify-content-around">
+          <a href="/" class="btn btn-primary" type="button">Voltar</a>
+          <button data-testid="postar-receita" class="btn btn-primary" type="button">
+            Salvar Receita
+          </button>
         </div>
       </form>
     </div>

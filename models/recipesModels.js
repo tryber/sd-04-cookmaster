@@ -39,8 +39,13 @@ const findRecipeByName = async (recipeName) =>
     .then((results) => results.fetchAll())
     .then((data) => data.map(([id, user, name]) => ({ id, user, name })));
 
+const newRecipe = async (data) => {
+  console.log(data);
+};
+
 module.exports = {
   getAllRecipes,
   findRecipeById,
   findRecipeByName,
+  newRecipe,
 };

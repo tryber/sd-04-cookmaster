@@ -8,7 +8,7 @@
   <body>
     <%- include('./header.ejs', {user}); %>
     <h2>Receitas:</h2>
-    <div style="display: flex; flex-wrap: wrap;">
+    <div>
       <% allRecipes.map(recipe => { %>
       <div
         style="
@@ -21,9 +21,9 @@
           padding: 10px;
         "
       >
-        <h3 style="margin-top: 0;">Receita: <%= recipe.name %></h3>
+        <h3>Receita: <%= recipe.name %></h3>
         <div>
-          <h4 style="margin: 0;">Autor: <%= recipe.user %></h4>
+          <h4>Autor: <%= recipe.user %></h4>
           <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
         </div>
       </div>
@@ -32,8 +32,9 @@
     <div>
       <% if (user) { %>
       <button data-testid="nova-receita">Nova Receita</button>
+      <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
       <% } %>
-      <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
+      <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
     </div>
   </body>
 </html>

@@ -14,7 +14,13 @@ const buscar = async (req, res) => {
   res.render('buscar', { usuario: req.user, receita });
 };
 
+const novaReceita = async (req, res) => {
+  const usuario = req.user;
+  res.render('nova', { usuario });
+};
+
 module.exports = {
   index,
   buscar,
+  novaReceita,
 };

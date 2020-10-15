@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova receita</title>
+  </head>
+
+  <body>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+      <label for="nomeInput">Nome da Receita</label>
+      <input type="text" name="nomeReceita" id="nomeInput" data-testid="nome-receita" /><br />
+
+      <div>
+        <span>Ingredientes</span>
+        <ul id="tabela"></ul>
+      </div>
+
+      <label for="ingredienteInput">Ingredientes </label>
+      <input
+        type="text"
+        name="ingredientes[]"
+        id="ingredienteInput"
+        data-testid="ingredientes"
+      /><br />
+      <button type="button" onclick="add" data-testid="adicionar-ingrediente">
+        Adicionar Ingrediente
+      </button>
+
+      <label for="preparoInput">Modo de Preparo</label> <br />
+      <textarea name="preparo" id="preparoInput" data-testid="modo-de-preparo"></textarea><br />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <a href="/">Voltar</a>
+  </body>
+
+  <script>
+    function add() {
+      const lista = document.getElementById('tabela');
+      const ingrediente = document.createElement('li');
+      ingrediente.innerHTML = document.getElementById('ingredienteInput').value;
+      lista.appendChild(ingrediente);
+      console.log('teste');
+    }
+  </script>
+</html>

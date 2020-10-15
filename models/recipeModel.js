@@ -2,8 +2,7 @@ const connection = require('./connection');
 
 const receitaById = async (id) => {
   const idData = await connection()
-    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id)
-    .execute())
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
     .then((results) => results.fetchAll());
 
   const receita = {};
@@ -33,7 +32,17 @@ const receitaByNome = async (nome) => {
   return receita;
 };
 
+const cadastrarReceita = async (email, senha, nome, sobrenome) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, senha, nome, sobrenome)
+      .execute(),
+  );
+
 module.exports = {
   receitaById,
   receitaByNome,
+  cadastrarReceita,
 };

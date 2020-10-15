@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
+const auth = require('./middlewares/auth');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +20,8 @@ app.get('/registrar', (req, res) => {
   return res.render('cadastro', { erroData });
 });
 app.post('/cadastrar', controllers.userController.cadastrar);
+app.get('/recipes/new', middlewares.auth(), controllers.recipeController.novaReceita);
+// app.post('/recipes', controllers.recipeController.cadastrarReceita);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.buscar);
 
 app.get('/admin', middlewares.auth(), (req, res) => {

@@ -38,7 +38,17 @@ const findById = async (id) =>
       lastName,
     }));
 
+const registerUser = async ({ email, password, name, lastName }) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password, name, lastName)
+      .execute(),
+  );
+
 module.exports = {
   findByEmail,
   findById,
+  registerUser,
 };

@@ -3,6 +3,9 @@ const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
 
+const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const namesRegex = /\w{3,}/;
+
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
 
@@ -43,8 +46,45 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const singUpForm = (_req, res) => res.render('singup', { message: null });
+
+const register = async (req, res) => {
+  const { email, password, passwordConfirm, name, lastName } = req.body;
+  if (!emailRegex.test(email))
+    res.render('register', {
+      message: 'O email deve ter o formato email@mail.com',
+    });
+
+  if (password.length < 5)
+    res.render('register', {
+      message: 'A senha deve ter pelo menos 6 caracteres',
+    });
+
+  if (password !== passwordConfirm)
+    res.render('register', {
+      message: 'As senhas tem que ser iguais',
+    });
+
+  if (!namesRegex.test(name))
+    res.render('register', {
+      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+
+  if (!namesRegex.test(lastName))
+    res.render('register', {
+      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    });
+
+  await userModel.registerUser({ ...req.body });
+
+  return res.status(200).render('register', { message: 'Cadastro efetuado com sucesso!' });
+};
+
+
 module.exports = {
   login,
   loginForm,
   logout,
+  singUpForm,
+  register,
 };

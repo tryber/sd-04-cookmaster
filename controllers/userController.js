@@ -34,8 +34,8 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  // return res.redirect(redirect || '/');
-  res.redirect(redirect || '/admin');
+  return res.redirect(redirect || '/');
+  // res.redirect(redirect || '/admin');
 };
 
 const logout = (req, res) => {
@@ -45,6 +45,18 @@ const logout = (req, res) => {
 };
 
 // Cadastro
+const formSignup = (req, res) => {
+  const text = {
+    email: null,
+    password: null,
+    repeatPassword: null,
+    name: null,
+    lastName: null,
+    success: null,
+  };
+  return res.render('signup', { message: text });
+};
+
 const signup = async (req, res) => {
   const { email, password, repeatPassword, name, lastName } = req.body;
   // chama as validações
@@ -68,7 +80,7 @@ const signup = async (req, res) => {
   }
 
   text.success = 'Cadastro efetuado com sucesso!';
-  await userModel.add(email, password, repeatPassword, name, lastName);
+  await userModel.add(email, password, name, lastName);
   res.render('signup', { message: text });
 };
 
@@ -76,5 +88,6 @@ module.exports = {
   login,
   loginForm,
   logout,
+  formSignup,
   signup,
 };

@@ -35,9 +35,15 @@ const update = async (recipe) => {
   const result = await connection().then((schema) =>
     schema
       .getTable('recipes')
-      .update(['name', 'instructions', 'ingredients'])
+      .update()
+      .set('name', name)
+      .set('instructions', instructions)
+      .set('ingredients', ingredients)
       .where('id = :id')
-      .bind('id', recipeId));
+      .bind('id', recipeId)
+      .execute());
+
+  return result || null;
 };
 
 /**
@@ -94,4 +100,5 @@ module.exports = {
   create,
   recipe,
   recipes,
+  update,
 };

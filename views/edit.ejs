@@ -71,18 +71,25 @@
                 type="button"
                 class="btn btn-outline-danger my-2 my-sm-0"
               >
-                Excluir ingrediente
+                Excluir Ingrediente
               </button>
             </li>
             <% }) %>
           </ul>
         </div>
         <div class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" id="add" placeholder="Ingrediente" />
+          <input
+            data-testid="ingredientes"
+            class="form-control mr-sm-2"
+            type="search"
+            id="add"
+            placeholder="Ingrediente"
+          />
           <button
             class="btn btn-outline-success my-2 my-sm-0"
             onclick="addIngrediente()"
             type="button"
+            data-testid="adicionar-ingrediente"
           >
             Adicionar Ingrediente
           </button>

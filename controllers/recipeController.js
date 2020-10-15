@@ -19,8 +19,17 @@ const novaReceita = async (req, res) => {
   res.render('nova', { usuario });
 };
 
+const cadastrarReceita = async (req, res) => {
+  const { nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario } = req.body;
+  // console.log('post', nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario)
+  await recipeModel.cadastrarReceita(nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario);
+  const receitaCadastrada = true;
+  // res.render('home', {receitaCadastrada})
+  res.redirect('/');
+};
 module.exports = {
   index,
   buscar,
   novaReceita,
+  cadastrarReceita,
 };

@@ -21,7 +21,7 @@ app.get('/registrar', (req, res) => {
 });
 app.post('/cadastrar', controllers.userController.cadastrar);
 app.get('/recipes/new', middlewares.auth(), controllers.recipeController.novaReceita);
-// app.post('/recipes', controllers.recipeController.cadastrarReceita);
+app.post('/recipes', controllers.recipeController.cadastrarReceita);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.buscar);
 
 app.get('/admin', middlewares.auth(), (req, res) => {

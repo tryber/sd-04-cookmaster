@@ -7,8 +7,14 @@
   </head>
 
   <body>
-    <h1>Nova Receita</h1>
+    <h1>Nova Receita <%= usuario.id %></h1>
     <form action="/recipes" method="POST">
+      <input
+        type="hidden"
+        name="nomeUsuario"
+        value="<%= usuario.first_name %> <%= usuario.last_name %>"
+      />
+      <input type="hidden" name="idUsuario" value="<%= usuario.id %>" />
       <label for="nomeInput">Nome da Receita</label>
       <input type="text" name="nomeReceita" id="nomeInput" data-testid="nome-receita" /><br />
 
@@ -18,15 +24,11 @@
       </div>
 
       <label for="ingredienteInput">Ingredientes </label>
-      <input
-        type="text"
-        name="ingredientes[]"
-        id="ingredienteInput"
-        data-testid="ingredientes"
-      /><br />
-      <button type="button" onclick="add" data-testid="adicionar-ingrediente">
+      <input type="text" id="ingredienteInput" data-testid="ingredientes" /><br />
+      <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
         Adicionar Ingrediente
       </button>
+      <br />
 
       <label for="preparoInput">Modo de Preparo</label> <br />
       <textarea name="preparo" id="preparoInput" data-testid="modo-de-preparo"></textarea><br />
@@ -38,11 +40,24 @@
 
   <script>
     function add() {
-      const lista = document.getElementById('tabela');
-      const ingrediente = document.createElement('li');
-      ingrediente.innerHTML = document.getElementById('ingredienteInput').value;
-      lista.appendChild(ingrediente);
-      console.log('teste');
+      const idInput = document.getElementById('ingredienteInput').value;
+      if (idInput !== '') {
+        const listaUl = document.getElementById('tabela');
+        const itemLi = document.createElement('li');
+        const input = document.createElement('input');
+        input.id = idInput;
+        input.name = 'ingredientes[]';
+        input.value = idInput;
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.innerText = 'Excluir Ingrediente';
+        botao.onclick = () => document.getElementById(idInput).parentElement.remove();
+        itemLi.appendChild(input);
+        itemLi.appendChild(botao);
+        listaUl.appendChild(itemLi);
+        document.getElementById('ingredienteInput').value = '';
+      }
+      return null;
     }
   </script>
 </html>

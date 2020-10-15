@@ -39,23 +39,25 @@ const search = async (req, res) => {
 
 // Nova receita Controller
 const newRecipe = async (req, res) => {
+  console.log(req.user);
   res.render('newRecipe', { user: req.user });
+};
+
+const postNewRecipe = async (req, res) => {
+  await recipesModels.newRecipe(req.body);
+  return res.redirect('/');
 };
 
 // Edit Recipe Controller
 const edit = async (req, res) => {
-  console.log(req.params.id);
-
   const recipe = await recipesModels.findRecipeById(req.params.id);
-  res.render('edit', { recipe, user: req.user });
+  return res.render('edit', { recipe, user: req.user });
 };
 
 const editPost = async (req, res) => {
-  console.log('chamou o POST');
-  const { id, name, ingredients, instructions } = req.body;
-
-  await updateModels.updateRecipe(id, name, ingredients, instructions);
-
+  const { receita, ingredientes, preparo } = req.body;
+  const id = req.params.id;
+  await updateModels.updateRecipe(id, receita, ingredientes, preparo);
   return res.redirect(`/recipes/${req.params.id}`);
 };
 
@@ -68,4 +70,5 @@ module.exports = {
   newRecipe,
   edit,
   editPost,
+  postNewRecipe,
 };

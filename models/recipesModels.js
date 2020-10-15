@@ -40,7 +40,15 @@ const findRecipeByName = async (recipeName) =>
     .then((data) => data.map(([id, user, name]) => ({ id, user, name })));
 
 const newRecipe = async (data) => {
-  console.log(data);
+  const { id, nome, receita, ingredientes, preparo } = data;
+  const string = ingredientes.toString();
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(id, nome, receita, string, preparo)
+      .execute(),
+  );
 };
 
 module.exports = {

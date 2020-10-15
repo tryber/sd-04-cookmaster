@@ -50,10 +50,10 @@ const getRecipesByUserId = async (userId) => {
     .where('user_id = :user_id')
     .bind('user_id', userId)
     .execute();
-  const infoRecipes = await results.fetchAll();
-  return infoRecipes.map(([id, userId, user, name]) => ({
+  const recipes = await results.fetchAll();
+  return recipes.map(([id, userID, user, name]) => ({
     id,
-    userId,
+    userID,
     user,
     name,
   }));

@@ -49,9 +49,21 @@
        
         // Recreate the ingredient list
         ingredientsList.forEach((ingredient) => {
-          const element = document.createElement('li');
-          element.textContent = ingredient;
-          document.querySelector('#ingredientsList').appendChild(element);
+          const ingredientElement = document.createElement('li');
+
+          const ingredientLabel = document.createElement('span');
+          ingredientLabel.textContent = ingredient;
+
+          const removeBtn = document.createElement('button')
+          removeBtn.textContent = 'Excluir Ingrediente';
+          removeBtn.onclick = () => {
+            removeBtn.parentElement.remove();
+          }
+
+          ingredientElement.appendChild(ingredientLabel);
+          ingredientElement.appendChild(removeBtn);
+
+          document.querySelector('#ingredientsList').appendChild(ingredientElement);
         });
 
         //Clean ingredients input

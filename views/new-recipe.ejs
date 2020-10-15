@@ -6,6 +6,8 @@
     <title>New Recipe</title>
   </head>
   <body>
+    <%- include('./includes/header.ejs', { user }) %>
+
     <h1>Nova Receita</h1>
     <% if (messages) { %>
       <span><%- messages %> </span>

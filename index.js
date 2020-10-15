@@ -33,6 +33,10 @@ app.get('/recipes/search', middlewares.auth(false), controllers.cookmasterContro
 // Rota Nova Receita
 app.get('/recipes/new', middlewares.auth(true), controllers.cookmasterControl.newRecipe);
 
+// Rotas para editar Receita
+app.get('/recipes/:id/edit', middlewares.auth(false), controllers.cookmasterControl.edit);
+app.post('/recipes/:id/edit', middlewares.auth(false), controllers.cookmasterControl.editPost);
+
 // Rotas para Receita Detail
 app.get('/recipes/:id', middlewares.auth(false), controllers.cookmasterControl.recipeDetails);
 

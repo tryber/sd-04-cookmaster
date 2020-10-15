@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Cookmaster - Detalhes da Receita></title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1><%= recipe.name %></h1>
+        <small>Enviado por <%= recipe.user %> </small>
+      </div>
+      <div>
+        <% if (user && user.id === recipe.userId) { %>
+        <div class="d-flex justify-content-around">
+          <a
+            data-testid="editar-receita"
+            class="btn btn-primary m-2"
+            href="/recipes/<%=recipe.id%>/edit"
+          >
+            Editar Receita
+          </a>
+          <a
+            href="/recipes/<%=recipe.id%>/delete"
+            data-testid="excluir-receita"
+            class="btn btn-primary m-2"
+          >
+            Excluir Receita
+          </a>
+        </div>
+        <% } %>
+      </div>
+      <div>
+        <h2>Ingredientes</h2>
+        <ul>
+          <% recipe.ingredients.split(',').forEach(ingrediente => { %>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <input name="game[]" id="<%= ingrediente %>" value="<%= ingrediente %>" />
+            <button type="button" onclick="del('<%= ingrediente %>')">Excluir</button>
+          </li>
+
+          <% }) %>
+        </ul>
+      </div>
+      <div>
+        <h2>Modo de Preparo</h2>
+        <label for="mododeprepraro"></label>
+        <textarea class="form-control" id="mododeprepraro" rows="5">
+          <%= recipe.instructions %>
+        </textarea>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function del(alvo) {
+    const li = document.getElementById(alvo).parentNode;
+    li.remove();
+  }
+</script>

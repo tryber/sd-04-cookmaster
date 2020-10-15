@@ -13,15 +13,17 @@
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Cookmaster!</h1>
-      <h2>Receitas</h2>
-
       <nav class="navbar navbar-dark bg-dark">
+        <h1>Cookmaster!</h1>
         <% if (user) { %>
-        <a data-testid="buscar-receita" class="m-2" href="/recipes/search">Buscar Receita</a>
-        <a data-testid="nova-receita" class="m-2" href="/recipes/new">Nova Receita</a>
+        <a data-testid="buscar-receita" class="btn btn-primary m-2" href="/recipes/search"
+          >Buscar Receita</a
+        >
+        <a data-testid="nova-receita" class="btn btn-primary m-2" href="/recipes/new"
+          >Nova Receita</a
+        >
         Usuário logado: <%=user.first_name %>
-        <a data-testid="logout" class="m-2" href="/logout">Logout</a>
+        <a data-testid="logout" class="btn btn-primary m-2" href="/logout">Logout</a>
         <% } else { %>
         <div class="d-flex justify-content-around">
           <a data-testid="buscar-receita" class="btn btn-primary" href="/recipes/search"
@@ -31,6 +33,7 @@
         </div>
         <% } %>
       </nav>
+      <h2>Receitas</h2>
       <% recipes.forEach((recipe) => { %>
       <div class="card w-75 m-3">
         <div class="card-body">

@@ -1,4 +1,5 @@
 const recipesModels = require('../models/recipesModels');
+const updateModels = require('../models/updateModels');
 const userModel = require('../models/userModel');
 const { validation } = require('../services/isValid');
 
@@ -36,9 +37,28 @@ const search = async (req, res) => {
   return res.render('search', { recipes, user: req.user });
 };
 
+// Nova receita Controller
 const newRecipe = async (req, res) => {
   res.render('newRecipe', { user: req.user });
 };
+
+// Edit Recipe Controller
+const edit = async (req, res) => {
+  console.log(req.params.id);
+
+  const recipe = await recipesModels.findRecipeById(req.params.id);
+  res.render('edit', { recipe, user: req.user });
+};
+
+const editPost = async (req, res) => {
+  console.log('chamou o POST');
+  const { id, name, ingredients, instructions } = req.body;
+
+  await updateModels.updateRecipe(id, name, ingredients, instructions);
+
+  return res.redirect(`/recipes/${req.params.id}`);
+};
+
 module.exports = {
   index,
   cadastro,
@@ -46,4 +66,6 @@ module.exports = {
   recipeDetails,
   search,
   newRecipe,
+  edit,
+  editPost,
 };

@@ -29,7 +29,9 @@
       </div>
       <div>
         <h2>Ingredientes</h2>
-        <%= recipe.ingredients %>
+        <% recipe.ingredients.split(',').forEach(item => { %>
+        <li><%= item %></li>
+        <% }) %>
       </div>
       <div>
         <h2>Modo de Preparo</h2>

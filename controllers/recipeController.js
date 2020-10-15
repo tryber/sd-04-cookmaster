@@ -11,7 +11,7 @@ const seeRecipe = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipeModel.recipeById(id);
 
-  res.render('seerecipe', { ...recipe, user: req.user });
+  res.render('seeRecipe', { ...recipe, user: req.user });
 };
 
 const searchRecipess = async (req, res) => {

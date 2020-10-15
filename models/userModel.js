@@ -37,7 +37,7 @@ const findByEmail = async (emailParam) => {
 const findById = async (idParam) => {
   const db = await connection();
   const table = await db.getTable('users');
-  const result = await table.select([]).where('email = :email').bind('email', idParam).execute();
+  const result = await table.select([]).where('id = :id').bind('id', idParam).execute();
 
   const user = result.fetchOne();
 

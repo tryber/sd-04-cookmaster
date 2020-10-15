@@ -53,16 +53,16 @@
     });
 
     item.appendChild(document.createTextNode(ingredientInput));
-    ingredientsSet.add(ingredientInput)
+    ingredientsSet.add(ingredientInput);
     ingredientsList.appendChild(item);
     ingredientsList.appendChild(deleteButton);
-    
+
     ingredientInput = '';
   });
 
   const submitButton = () => {
     const ingredientInput = document.querySelector('#ingredients').value;
-        ingredientInput.value = [...ingredients].join();
-        document.recipeForm.submit();
-      };
+    ingredientInput.value = [...ingredients].join();
+    document.recipeForm.submit();
+  };
 </script>

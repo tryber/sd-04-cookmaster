@@ -22,8 +22,6 @@ const searchQuery = async (req, res) => {
 const renderNew = (req, res) => res.render('recipes/new', { user: req.user });
 
 const addNew = async (req, res) => {
-  console.log('INICIO ADDNEW');
-  console.log(req.body);
   const { name, ingredients, instructions } = req.body;
   const { name: userName, id } = req.user;
   await recipesModel.addRecipe(id, userName, name, ingredients, instructions);

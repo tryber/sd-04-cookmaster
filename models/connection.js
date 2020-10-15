@@ -13,12 +13,12 @@ const config = {
 
 let schema;
 
-const connection = async () =>
-  schema
-    ? Promise.resolve(schema)
-    : mysqlx.getSession(config).then((session) => {
-        schema = session.getSchema('cookmaster');
-        return schema;
-      });
+const connection = async () => {
+  if (schema) return Promise.resolve(schema);
+  return mysqlx.getSession(config).then((session) => {
+    schema = session.getSchema('cookmaster');
+    return schema;
+  });
+};
 
 module.exports = connection;

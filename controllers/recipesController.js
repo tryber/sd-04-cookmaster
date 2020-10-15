@@ -29,4 +29,30 @@ const addNew = async (req, res) => {
   res.render('recipes/new', { user: req.user });
 };
 
-module.exports = { showAll, showOne, searchQuery, addNew, renderNew };
+const renderEditRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipesModel.getRecipeFromId(id);
+
+  res.status(200).render('recipes/edit', { user: req.user, recipe });
+};
+
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { name, ingredients, instructions } = req.body;
+  try {
+    await recipesModel.editRecipe(id, name, ingredients, instructions);
+    res.redirect('/');
+  } catch (err) {
+    res.redirect('/');
+  }
+};
+
+module.exports = {
+  showAll,
+  showOne,
+  searchQuery,
+  addNew,
+  renderNew,
+  renderEditRecipe,
+  editRecipe,
+};

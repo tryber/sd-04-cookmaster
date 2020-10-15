@@ -52,4 +52,31 @@ const addRecipe = async (id, userName, name, ingredients, instructions) => {
   return true;
 };
 
-module.exports = { getAll, getById, getByName, addRecipe };
+const editRecipe = async (id, name, ingredients, instructions) => {
+  const db = await connection();
+  await db
+    .getTable('recipes')
+    .update()
+    .set('name', name)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+  return true;
+};
+
+const getRecipeFromId = async (recipeId) => {
+  const db = await connection();
+  const results = await db
+    .getTable('recipes')
+    .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .where('id = :id')
+    .bind('id', recipeId)
+    .execute();
+
+  const [userId, user, name, ingredients, instructions] = await results.fetchOne();
+  return { recipeId, userId, user, name, ingredients, instructions };
+};
+
+module.exports = { getAll, getById, getByName, addRecipe, editRecipe, getRecipeFromId };

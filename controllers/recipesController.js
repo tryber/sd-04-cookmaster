@@ -10,7 +10,7 @@ const showAll = async (req, res) => {
 const showOne = async (req, res) => {
   const recipeDetails = await Recipes.getById(req.params.id);
 
-  res.render('recipeDetails', { recipeDetails, user: req.user });
+  res.render('recipes/details', { recipeDetails, user: req.user });
 };
 
 const searchQuery = async (req, res) => {

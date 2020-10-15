@@ -29,6 +29,17 @@ const create = async (recipe) => {
   return result || null;
 };
 
+const update = async (recipe) => {
+  const { recipeId, name, instructions, ingredients } = recipe;
+
+  const result = await connection().then((schema) =>
+    schema
+      .getTable('recipes')
+      .update(['name', 'instructions', 'ingredients'])
+      .where('id = :id')
+      .bind('id', recipeId));
+};
+
 /**
  * Get a recipe by its id
  *

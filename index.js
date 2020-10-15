@@ -1,30 +1,29 @@
+
+// Projeto realizado com ajuda de colegas, arquitetura baseada no curso de nodejs do balta.io
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const middlewares = require('./middlewares');
-const { recipesController, userController, registerController } = require('./controllers');
-
-const { loginForm, logout, login } = userController;
-const { home } = recipesController;
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', home);
+app.use(express.static('./public'));
 
-app.get('/admin', middlewares.auth(), (req, res) => {
-  return res.render('admin/home', { user: req.user });
-});
+// Carregando rotas
+const indexRoute = require("./routes/index-route");
+const meRoute = require("./routes/me-route");
+const signupRoute = require("./routes/me-route");
+const recipesRoute = require("./routes/recipes-route");
 
-app.get('/login', loginForm);
-app.get('/logout', logout);
-app.post('/login', login);
+app.use("/", indexRoute);
+app.use("/me", meRoute);
+app.use("/signup", signupRoute);
+app.use("/recipes", recipesRoute);
 
-app.get('/cadastro', (_req, res) => res.render('register', { msg: null }));
-app.post('/cadastro', registerController);
-
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(3000, () => console.log('Server is running on 3000'));

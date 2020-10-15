@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password)
@@ -34,17 +34,67 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  return res.redirect(redirect || '/'); // alterado para / ao invés de /admin
 };
 
 const logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
-  res.render('admin/logout');
+  return res.render('admin/logout');
+};
+
+// Funções criadas
+
+const validEmail = (email) => {
+  let message = '';
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (!regex.test(email)) message = 'O email deve ter o formato email@mail.com';
+  return message;
+};
+
+const validPassword = (password, confirmPass) => {
+  let message = '';
+  if (password.length <= 5) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (password.length > 5 && password !== confirmPass) message = 'As senhas tem que ser iguais';
+  return message;
+};
+
+const validName = (name, lastName) => {
+  let message = '';
+  if (name.length < 3 || typeof name !== 'string')
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  if (lastName.length < 3 || typeof lastName !== 'string')
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  return message;
+};
+
+const renderCadastro = (_req, res) => res.render('admin/signup', { message: null });
+
+const addUser = async (req, res) => {
+  const { email, password, confirmPassword, name, lastName } = req.body;
+  // console.log(email, password, name, lastName);
+
+  if (!email || !password || !confirmPassword || !name || !lastName) {
+    return res.render('admin/signup', { message: 'Preencha todos os campos' });
+  }
+
+  const vEmail = validEmail(email);
+  const vName = validName(name, lastName);
+  const vPassword = validPassword(password, confirmPassword);
+
+  if (vEmail || vName || vPassword) {
+    return res.render('admin/signup', { message: vEmail || vName || vPassword });
+  }
+  const insertUser = await userModel.newUser(email, password, name, lastName);
+  if (!insertUser)
+    return res.render('admin/signup', { message: 'Erro ao cadastrar usuário no banco de dados' });
+  return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
 };
 
 module.exports = {
   login,
   loginForm,
   logout,
+  renderCadastro,
+  addUser,
 };

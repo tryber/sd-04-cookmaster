@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Cookmaster - Search</title>
+  </head>
+  <body>
+      <h1>Buscar Receita</h1>
+    <form method="GET">
+      <label for="search">Digite o nome da receita: </label>
+      <input data-testid="receita" type="text" name="q" id="search" /><br />
+      <button data-testid="buscar" type="submit">Buscar</button>
+    </form>
+    <div class="row">
+        <% if (recipes) { %>
+        <% recipes.forEach(recipe => { %>
+        <div class="col-sm-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= recipe.name %></h5>
+              <p class="card-text"><%= recipe.user %></p>
+              <a href="/recipes/<%= recipe.id %>" class="btn btn-sm btn-secondary">Ver mais</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        <% } %>
+      </div>
+  </body>
+</html>

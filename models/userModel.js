@@ -61,5 +61,5 @@ module.exports = {
   validateEmail,
   validatePassword,
   confirmPass,
-  validateName
+  validateName,
 };

@@ -1,11 +1,10 @@
 const userModel = require('../models/userModel');
 
-const signUp = (req, res) => {
-  return res.render('admin/signUp', {
+const signUp = (req, res) =>
+  res.render('admin/signUp', {
     messages: null,
     done: false,
   });
-};
 
 const finishsignUp = async (req, res) => {
   if (req.validated) {
@@ -15,12 +14,11 @@ const finishsignUp = async (req, res) => {
       messages: null,
       done: true,
     });
-  } else {
-    return res.status(400).render('admin/signUp', {
-      messages: req.messages,
-      done: false,
-    });
   }
+  return res.status(400).render('admin/signUp', {
+    messages: req.messages,
+    done: false,
+  });
 };
 
 module.exports = { signUp, finishsignUp };

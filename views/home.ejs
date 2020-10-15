@@ -14,20 +14,18 @@
       <div
         style="
           display: flex;
-          border-radius: 5px;
-          color: whitesmoke;
           justify-content: space-between;
           flex-direction: column;
-          background: gray;
+          border: 1px solid blue;
           max-width: 200px;
-          margin: 15px;
-          padding: 15px;
+          margin: 10px;
+          padding: 10px;
         "
       >
         <h3 style="margin-top: 0;">Receita: <%= recipe.name %></h3>
         <div>
           <h4 style="margin: 0;">Autor: <%= recipe.user %></h4>
-          <a style="color: whitesmoke;" href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
         </div>
       </div>
       <%})%>

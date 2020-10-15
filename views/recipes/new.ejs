@@ -39,7 +39,7 @@
   const ingredientsSet = new Set();
   const addButton = document.querySelector('#addButton');
   addButton.addEventListener('click', () => {
-    const ingredientInput = document.querySelector('#ingredients').value;
+    let ingredientInput = document.querySelector('#ingredients').value;
     const ingredientsList = document.querySelector('#ingredientsList');
 
     const item = document.createElement('li');
@@ -59,10 +59,4 @@
 
     ingredientInput = '';
   });
-
-  const submitButton = () => {
-    const ingredientInput = document.querySelector('#ingredients').value;
-    ingredientInput.value = [...ingredients].join();
-    document.recipeForm.submit();
-  };
 </script>

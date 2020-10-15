@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Search</title>
+  </head>
+  <body>
+    <%- include('./header.ejs', {user}); %>
+    <h2>Buscar Receitas</h2>
+    <form method="GET">
+      <input type="text" data-testid="receita" name="q" required/>
+      <button data-testid="buscar" type="submit">Buscar</button>
+    </form>
+    <div>
+      <% recipes.map(recipe => { %>
+      <div
+        style="
+          display: flex;
+          border: 1px solid blue;
+          justify-content: space-between;
+          max-width: 200px;
+          margin: 10px;
+          flex-direction: column;
+          padding: 10px;
+        "
+      >
+        <h3>Receita: <%= recipe.name %></h3>
+        <div>
+          <h4>Autor: <%= recipe.user %></h4>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
+        </div>
+      </div>
+      <%})%>
+    </div>
+  </body>
+</html>

@@ -60,30 +60,34 @@ const findById = async (userId) => {
   };
 };
 
-const addUser = async (email, password, firstName, lastName) => {
+const addUser = async ({ email, password, firstName, lastName }) => {
   const db = await connection();
   await db
     .getTable('users')
     .insert(['email', 'password', 'first_name', 'last_name'])
     .values(email, password, firstName, lastName)
     .execute();
-  return null;
+  return true;
 };
 
-const validateEmail = (email) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(email);
+const emailCheck = (userEmail) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(userEmail);
 
-const validatePassword = (pass) => /^(\d|\w){6,}$/.test(pass);
+const passwordCheck = (userPass) => /^(\d|\w){6,}$/.test(userPass);
 
-const confirmPass = (firstPassword, secondPassword) => firstPassword === secondPassword;
+const confirmPassCheck = (firstpass, secondPass) => firstpass === secondPass;
 
-const validateName = (name) => /\w{3,}/.test(name);
+const nameCheck = (userName) => /\w{3,}/.test(userName);
+
+const isValid = {
+  emailCheck,
+  passwordCheck,
+  confirmPassCheck,
+  nameCheck,
+};
 
 module.exports = {
   findByEmail,
   findById,
   addUser,
-  validateEmail,
-  validatePassword,
-  confirmPass,
-  validateName,
+  isValid,
 };

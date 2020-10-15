@@ -14,16 +14,13 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
 
-app.get('/admin', middlewares.auth(), (req, res) => {
-  return res.render('admin/home', { user: req.user });
-});
+app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
-app.get('/signUp', controllers.signUpController.signUp);
-app.post('/signUp', middlewares.validation, controllers.signUpController.finishsignUp);
+app.get('/signup', controllers.userController.renderSignup);
+app.post('/signup', middlewares.validation, controllers.userController.signUp);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
-
 
 app.listen(3000, () => console.log('Listening on 3000'));

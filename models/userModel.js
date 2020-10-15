@@ -60,7 +60,13 @@ const findById = async (Id) => {
     }));
 };
 
-// Faz o cadastro do usuário na tabela (users)
+/**
+ * Cadastro de usuário
+ * @param {*} email
+ * @param {*} passWord
+ * @param {*} firstName
+ * @param {*} lastName
+ */
 const addUser = async (email, passWord, firstName, lastName) => {
   await connection().then((db) =>
     db
@@ -71,7 +77,11 @@ const addUser = async (email, passWord, firstName, lastName) => {
   );
 };
 
-// Busca receita por usuário
+/**
+ * Busca receita por usuário
+ * @param {*} idUser
+ * @return {*}
+ */
 const recipesId = async (idUser) => {
   return connection()
     .then((db) =>

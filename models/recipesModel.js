@@ -15,4 +15,22 @@ const getAllRecipes = async () =>
       throw err;
     });
 
-module.exports = { getAllRecipes };
+/**
+ * Cadastro de receita
+ * @param {*} userId
+ * @param {*} user
+ * @param {*} name
+ * @param {*} ingredients
+ * @param {*} instructions
+ */
+const addRecipes = async (userId, user, name, ingredients, instructions) => {
+  await connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(userId, user, name, ingredients, instructions)
+      .execute(),
+  );
+};
+
+module.exports = { getAllRecipes, addRecipes };

@@ -6,6 +6,7 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipeController');
 const userController = require('./controllers/userController');
+const recipesModel = require('./models/recipesModel');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,15 +23,19 @@ app.get('/register', userController.formRegister);
 // Rota com os dados do formulário para cadastro
 app.post('/registerUser', userController.userRegister);
 
+// Renderiza formulário nova receita
+app.get('/recipes/new', middlewares.auth(true), recipeController.recipesForm);
+app.post('/recipes', middlewares.auth(true), recipeController.addRecipes);
+
 // Renderiza receitas pelo usuario Id
 app.get('/recipes/:id', middlewares.auth(false), userController.recipesUser);
 
-// Renderiza editar receitas
+// Renderiza pagaina editar receitas
 app.get('/edit', (req, res) => {
   return res.render('users/recipesEdit');
 });
 
-// Renderiza editar receitas
+// Renderiza pagina remove receitas
 app.get('/remove', (req, res) => {
   return res.render('users/recipesRemove');
 });

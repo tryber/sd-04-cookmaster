@@ -77,10 +77,10 @@ const myRecipes = async (req, res) => {
   const { id } = req.user;
   const recipes = await Recipes.recipesByUserId(id);
 
-  if(recipes.length === 0) message = "você não possui receitas ainda."
+  if (recipes.length === 0) message = 'você não possui receitas ainda.';
 
   return res.render('recipes/myRecipes', { recipes, user: req.user, message });
-}
+};
 
 module.exports = {
   index,

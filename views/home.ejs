@@ -8,39 +8,39 @@
 </head>
 
 <body>
-  <header>
-    <h1>Cookmaster</h1>
+  <h1>Cookmaster</h1>
 
-    <% if(user) { %>
-    <a href="/recipes/new">
-      <button type="button" data-testid="nova-receita">
-        Nova Receita
-      </button>
-    </a>
-    <a href="/me/recipes">
-      <button type="button" data-testid="minhas-receitas">
-        Minhas Receitas
-      </button>
-    </a>
-    <a href="/logout">
-      <button type="button" data-testid="logout">
-        Logout
-      </button>
-    </a>
-    <% } else { %>
-    <a href="/login">
-      <button type=" button" data-testid="login">
-        Login
-      </button>
-    </a>
-    <% } %>
+  <% if(user) { %>
+  <a href="/recipes/new">
+    <button type="button" data-testid="nova-receita">
+      Nova Receita
+    </button>
+  </a>
 
-    <a href="/recipes/search">
-      <button type=" button" data-testid="buscar-receita">
-        Buscar Receita
-      </button>
-    </a>
-  </header>
+  <a href="/me/recipes">
+    <button type="button" data-testid="minhas-receitas">
+      Minhas Receitas
+    </button>
+  </a>
+  <a href="/logout">
+    <button type="button" data-testid="logout">
+      Logout
+    </button>
+  </a>
+  <% } else { %>
+  <a href="/login">
+    <button type=" button" data-testid="login">
+      Login
+    </button>
+  </a>
+  <% } %>
+
+  <a href="/recipes/search">
+    <button type=" button" data-testid="buscar-receita">
+      Buscar Receita
+    </button>
+  </a>
+
   <h1>Receitas</h1>
   <% recipes.forEach(([id, user, name]) => { %>
   <h2><%= name %></h2>

@@ -20,6 +20,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/recipes/:id', middlewares.auth(false), recipesController.recipesDtls);
+
 app.get('/register', registerController.registerForm);
 app.post('/register', registerController.register);
 

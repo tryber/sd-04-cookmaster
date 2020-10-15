@@ -6,9 +6,7 @@ const listRecipes = async (req, res) => {
 };
 
 // Formulário receitas
-const recipesForm = async (req, res) => {
-  return res.render('users/recipesNew', { user: req.user });
-};
+const recipesForm = async (req, res) => res.render('users/recipesNew', { user: req.user });
 
 // Cadastra receita
 const addRecipes = async (req, res) => {

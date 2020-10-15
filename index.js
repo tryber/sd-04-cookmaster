@@ -6,7 +6,6 @@ const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 const recipeController = require('./controllers/recipeController');
 const userController = require('./controllers/userController');
-const recipesModel = require('./models/recipesModel');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

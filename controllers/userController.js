@@ -48,36 +48,36 @@ const logout = (req, res) => {
 
 const singUpForm = (_req, res) => res.render('singup', { message: null });
 
-const register = async (req, res) => {
+const singup = async (req, res) => {
   const { email, password, passwordConfirm, name, lastName } = req.body;
   if (!emailRegex.test(email))
-    res.render('register', {
+    res.render('singup', {
       message: 'O email deve ter o formato email@mail.com',
     });
 
   if (password.length < 5)
-    res.render('register', {
+    res.render('singup', {
       message: 'A senha deve ter pelo menos 6 caracteres',
     });
 
   if (password !== passwordConfirm)
-    res.render('register', {
+    res.render('singup', {
       message: 'As senhas tem que ser iguais',
     });
 
   if (!namesRegex.test(name))
-    res.render('register', {
+    res.render('singup', {
       message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
   if (!namesRegex.test(lastName))
-    res.render('register', {
+    res.render('singup', {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
   await userModel.registerUser({ ...req.body });
 
-  return res.status(200).render('register', { message: 'Cadastro efetuado com sucesso!' });
+  return res.status(200).render('singup', { message: 'Cadastro efetuado com sucesso!' });
 };
 
 
@@ -86,5 +86,5 @@ module.exports = {
   loginForm,
   logout,
   singUpForm,
-  register,
+  singup,
 };

@@ -14,27 +14,20 @@
     <% } %>
     <form action="/register" method="POST">
       <label for="emailInput">E-mail: </label>
-      <input required type="text" name="email" id="emailInput" data-testid="email" /><br />
+      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
       <label for="passwordInput">Senha: </label>
-      <input
-        required
-        type="password"
-        name="password"
-        id="passwordInput"
-        data-testid="senha"
-      /><br />
+      <input data-testid="senha" type="password" name="password" id="passwordInput" /><br />
       <label for="passwordConfirm">Confirmar Senha: </label>
       <input
-        required
+        data-testid="confirmar-senha"
         type="password"
         name="passwordConfirm"
         id="passwordConfirm"
-        data-testid="confirmar-senha"
       /><br />
       <label for="name">Nome: </label>
-      <input required type="text" name="name" id="name" data-testid="nome" /><br />
+      <input type="text" name="name" id="name" data-testid="nome" /><br />
       <label for="lastName">Sobrenome: </label>
-      <input required type="text" name="lastName" id="lastName" data-testid="sobrenome" /><br />
+      <input type="text" name="lastName" id="lastName" data-testid="sobrenome" /><br />
       <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
     </form>
     <a href="/login">

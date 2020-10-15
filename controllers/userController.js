@@ -3,7 +3,7 @@ const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
 
-const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;;
+const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const namesRegex = /\w{3,}/;
 
 const loginForm = (req, res) => {

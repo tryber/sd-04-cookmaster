@@ -1,4 +1,4 @@
-  {
+{
   "reporterEnabled": "mochawesome",
   "mochawesomeReporterOptions": {
     "reportDir": "cypress/reports",

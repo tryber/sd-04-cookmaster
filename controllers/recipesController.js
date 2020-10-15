@@ -30,9 +30,7 @@ const addNew = async (req, res) => {
 };
 
 const renderUserRecipes = async (req, res) => {
-  console.log('rodei');
   const recipes = await recipesModel.getUserRecipes(req.user.id);
-  console.log('a função');
   res.status(200).render('me/recipes', { recipes, user: req.user });
 };
 

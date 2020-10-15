@@ -15,6 +15,27 @@ const getAllRecipes = async () =>
       throw err;
     });
 
+const getRecipesId = async (userId) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['user_id', 'user', 'name'])
+        .where('id = :idBind')
+        .bind('idBind', userId)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.forEach(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    )
+    .catch((err) => {
+      throw err;
+    });
 /**
  * Cadastro de receita
  * @param {*} userId
@@ -33,4 +54,4 @@ const addRecipes = async (userId, user, name, ingredients, instructions) => {
   );
 };
 
-module.exports = { getAllRecipes, addRecipes };
+module.exports = { getAllRecipes, addRecipes, getRecipesId };

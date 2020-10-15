@@ -27,7 +27,7 @@ app.get('/recipes/new', middlewares.auth(true), recipeController.recipesForm);
 app.post('/recipes', middlewares.auth(true), recipeController.addRecipes);
 
 // Renderiza receitas pelo usuario Id
-app.get('/recipes/:id', middlewares.auth(false), userController.recipesUser);
+app.get('/recipes/:id', middlewares.auth(true), userController.recipesUser);
 
 // Renderiza pagaina editar receitas
 app.get('/edit', (req, res) => {

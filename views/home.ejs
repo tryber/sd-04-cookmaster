@@ -34,7 +34,7 @@
       <% recipesAuthor.forEach((recipe) => { %>
       <li><%= recipe.name %></li>
       <li><%= recipe.user %></li>
-      <li><a href="url">Ver mais</a></li>
+      <li><a href=<%= `/recipes/${recipe.id}`%>>Ver mais</a></li>
       <% }) %>
     </ul>
   </body>

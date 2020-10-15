@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body>
+    <%- include('../stickers/header.ejs', {user}); %>
+    <h2>Nova Receita</h2>
+    <form action="/recipes" method="POST">
+      <label for="name"
+        >Nome da Receita
+        <input type="text" name="name" id="name" data-testid="nome-receita" /><br />
+      </label>
+      <label for="ingredients"
+        >Ingredientes
+        <input name="ingredients" type="text" id="ingredients" data-testid="ingredientes" /><br />
+      </label>
+      <button type="button" id="addButton" data-testid="adicionar-ingrediente">
+        Adicionar Ingrediente
+      </button>
+      <ul id="ingredientsList"></ul>
+      <label for="instructions"
+        >Modo de preparo
+        <input
+          type="text"
+          name="instructions"
+          id="instructions"
+          data-testid="modo-de-preparo"
+        /><br />
+      </label>
+      <a href="/">Voltar</a>
+      <button type="submit" data-testid="postar-receita">Salvar</button>
+    </form>
+  </body>
+</html>
+<script>
+  const ingredientsSet = new Set();
+  const addButton = document.querySelector('#addButton');
+  addButton.addEventListener('click', () => {
+    const ingredientInput = document.querySelector('#ingredients').value;
+    const ingredientsList = document.querySelector('#ingredientsList');
+
+    const item = document.createElement('li');
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Excluir Ingrediente';
+    deleteButton.type = 'button';
+    deleteButton.addEventListener('click', () => {
+      item.remove();
+      deleteButton.remove();
+    });
+
+    item.appendChild(document.createTextNode(ingredientInput));
+    ingredientsSet.add(ingredientInput)
+    ingredientsList.appendChild(item);
+    ingredientsList.appendChild(deleteButton);
+    
+    ingredientInput = '';
+  });
+
+  const submitButton = () => {
+    const ingredientInput = document.querySelector('#ingredients').value;
+        ingredientInput.value = [...ingredients].join();
+        document.recipeForm.submit();
+      };
+</script>

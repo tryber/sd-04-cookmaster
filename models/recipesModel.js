@@ -42,4 +42,14 @@ const getByName = async (recipeName) => {
   return list;
 };
 
-module.exports = { getAll, getById, getByName };
+const addRecipe = async (id, userName, name, ingredients, instructions) => {
+  const db = await connection();
+  await db
+    .getTable('recipes')
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, userName, name, ingredients, instructions)
+    .execute();
+  return true;
+};
+
+module.exports = { getAll, getById, getByName, addRecipe };

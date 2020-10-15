@@ -1,3 +1,4 @@
+const recipesModel = require('../models/recipesModel');
 const Recipes = require('../models/recipesModel');
 
 const showAll = async (req, res) => {
@@ -15,7 +16,19 @@ const showOne = async (req, res) => {
 const searchQuery = async (req, res) => {
   const searchedRecipes = await Recipes.getByName(req.query.q);
 
-  res.render('recipesSearch', { searchedRecipes, user: req.user });
+  res.render('recipes/search', { searchedRecipes, user: req.user });
 };
 
-module.exports = { showAll, showOne, searchQuery };
+const renderNew = (req, res) => res.render('recipes/new', { user: req.user });
+
+const addNew = async (req, res) => {
+  console.log('INICIO ADDNEW');
+  console.log(req.body);
+  const { name, ingredients, instructions } = req.body;
+  const { name: userName, id } = req.user;
+  await recipesModel.addRecipe(id, userName, name, ingredients, instructions);
+
+  res.render('recipes/new', { user: req.user });
+};
+
+module.exports = { showAll, showOne, searchQuery, addNew, renderNew };

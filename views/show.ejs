@@ -10,9 +10,9 @@
       <div>
         <h3>Cookmaster</h3>
         <% if (!usuario) { %>
-        <a data-testid="login" href="login">Login</a>
+        <a data-testid="login" href="/login">Login</a>
         <% } else { %>
-        <a data-testid="logout" href="logout">Logout</a>
+        <a data-testid="logout" href="/logout">Logout</a>
         <span><%= usuario.name %></span>
         <% } %>
       </div>

@@ -3,9 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit</title>
+    <title>Editar receita</title>
   </head>
+
   <body>
-    <h1>Editar</h1>
+    <h1>Editar Receita</h1>
+    <form action="/recipes/<%= receita.id %>" method="POST">
+      <input
+        type="hidden"
+        name="nomeUsuario"
+        value="<%= usuario.first_name %> <%= usuario.last_name %>"
+      />
+      <input type="hidden" name="idUsuario" value="<%= usuario.id %>" />
+      <label for="nomeInput">Nome da Receita</label>
+      <input
+        type="text"
+        name="nomeReceita"
+        id="nomeInput"
+        data-testid="nome-receita"
+        value="<%= receita.name %>"
+      /><br />
+
+      <div>
+        <span>Ingredientes</span>
+        <ul id="tabela">
+          <% receita.ingredients.split(',').forEach((ing) => { %>
+          <li>
+            <input id="<%= ing %>" name="ingredientes[]" value="<%= ing %>" />
+            <button type="button" onclick="deletar('<%= ing %>')">Excluir Ingrediente</button>
+          </li>
+          <%}) %>
+        </ul>
+      </div>
+
+      <label for="ingredienteInput">Ingredientes </label>
+      <input type="text" id="ingredienteInput" data-testid="ingredientes" /><br />
+      <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
+        Adicionar Ingrediente
+      </button>
+      <br />
+
+      <label for="preparoInput">Modo de Preparo</label> <br />
+      <textarea
+        name="preparo"
+        id="preparoInput"
+        data-testid="modo-de-preparo"
+        value="<%= receita.instructions %>"
+      ></textarea
+      ><br />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <a href="/">Voltar</a>
   </body>
+
+  <script>
+    function add() {
+      const idInput = document.getElementById('ingredienteInput').value;
+      if (idInput !== '') {
+        const listaUl = document.getElementById('tabela');
+        const itemLi = document.createElement('li');
+        const input = document.createElement('input');
+        input.id = idInput;
+        input.name = 'ingredientes[]';
+        input.value = idInput;
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.innerText = 'Excluir Ingrediente';
+        botao.onclick = () => document.getElementById(idInput).parentElement.remove();
+        itemLi.appendChild(input);
+        itemLi.appendChild(botao);
+        listaUl.appendChild(itemLi);
+        document.getElementById('ingredienteInput').value = '';
+      }
+      return null;
+    }
+    const deletar = (valor) => {
+      document.getElementById(valor).parentElement.remove();
+    };
+  </script>
 </html>

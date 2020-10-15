@@ -44,8 +44,24 @@ const cadastrarReceita = async (nomeReceita, preparo, ingredientes, nomeUsuario,
   );
 };
 
+const atualizarBanco = async (nomeReceita, preparo, ingredientes, id) => {
+  const ing = ingredientes.toString();
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', nomeReceita)
+      .set('ingredients', ing)
+      .set('instructions', preparo)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+};
+
 module.exports = {
   receitaById,
   receitaByNome,
   cadastrarReceita,
+  atualizarBanco,
 };

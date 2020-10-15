@@ -14,10 +14,12 @@
         <a href="registrar"> Cadastrar novo Usuario</a>
       </div>
       <div>
-        <% if (cadastroValido) { %>
+        <% if (receitaCadastrada) { %>
+        <span>Receita cadastrada com sucesso!</span>
+        <% } %> <% if (cadastroValido) { %>
         <span>Cadastro efetuado com sucesso!</span>
         <% } %> <% if (!usuario) { %>
-        <a data-testid="login" href="login">Login</a>
+        <br /><a data-testid="login" href="login">Login</a>
         <% } else { %>
         <a data-testid="logout" href="logout">Logout</a>
         <% } %>

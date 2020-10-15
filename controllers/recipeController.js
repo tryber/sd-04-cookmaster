@@ -1,4 +1,5 @@
 const recipeModel = require('../models/recipeModel');
+const receita = require('../models/homeModel');
 
 const index = async (req, res) => {
   const receita = await recipeModel.receitaById(req.params.id);
@@ -20,16 +21,35 @@ const novaReceita = async (req, res) => {
 };
 
 const cadastrarReceita = async (req, res) => {
+  const receitas = await receita.acharReceitas();
   const { nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario } = req.body;
   // console.log('post', nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario)
   await recipeModel.cadastrarReceita(nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario);
   const receitaCadastrada = true;
-  // res.render('home', {receitaCadastrada})
-  res.redirect('/');
+  const cadastroValido = null;
+  const usuario = req.body;
+  res.render('home', { receitaCadastrada, receitas, usuario, cadastroValido });
+  // res.redirect('/');
 };
+
+const editar = async (req, res) => {
+  const usuario = req.user;
+  console.log('req.params', req.params.id);
+  const receita = await recipeModel.receitaById(req.params.id);
+  res.render('edit', { usuario, receita });
+};
+const atualizarReceita = async (req, res) => {
+  const { nomeReceita, preparo, ingredientes } = req.body;
+  const id = req.params.id;
+  await recipeModel.atualizarBanco(nomeReceita, preparo, ingredientes, id);
+  return res.redirect(`/recipes/${id}`);
+};
+
 module.exports = {
   index,
   buscar,
   novaReceita,
   cadastrarReceita,
+  editar,
+  atualizarReceita,
 };

@@ -32,9 +32,8 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/recipes/:id/edit', (req, res) => {
-  return res.render('edit');
-});
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editar);
+app.post('/recipes/:id/', middlewares.auth(), controllers.recipeController.atualizarReceita);
 
 app.get('/recipes/:id/delete', (req, res) => {
   return res.render('edit');

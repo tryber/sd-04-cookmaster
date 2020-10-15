@@ -10,7 +10,7 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 let schema;
-const connection = () => {
+function connection()  {
   return schema
     ? Promise.resolve(schema)
     : mysqlx
@@ -19,8 +19,7 @@ const connection = () => {
           schema = session.getSchema('cookmaster');
           return schema;
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
           process.exit(1);
         });
 };

@@ -10,11 +10,20 @@
 
     <form action="/recipes" method="POST">
       <label for="nameInput">Nome da Receita</label>
-      <input data-testid="nome-receita" type="text" name="name" id="nameInput" required/>
+      <input data-testid="nome-receita" type="text" name="name" id="nameInput" required />
       <br />
       <label for="ingredientsInput">Ingredientes</label>
-      <input data-testid="ingredientes" type="text" name="ingredients" id="ingredientsInput" required/>
-      <button data-testid="adicionar-ingrediente" type="button">Adicionar Ingrediente</button>
+      <input
+      data-testid="ingredientes"
+      type="text"
+      name="ingredients"
+      id="ingredientsInput"
+      value=""
+      required
+      />
+      <button data-testid="adicionar-ingrediente" type="button" onClick="addIngredient()">Adicionar Ingrediente</button>
+      <br />
+      <ul id="ingredientsList"></ul>
       <br />
       <label for="methodInput">Modo de preparo: </label>
       <textarea data-testid="modo-de-preparo" name="method" id="methodInput" required></textarea>
@@ -23,6 +32,31 @@
       <button data-testid="postar-receita" type="submit">Postar Receita</button>
     </form>
 
-  <script src="../scripts/newRecipe.js" />
+    <script>
+      const getIngredientsList = () => {
+        const ingredients = document.querySelectorAll('.ingredient');
+        const ingredientsList = Object.keys(ingredients).map((key) => ingredients[key].innerHTML);
+
+        return ingredientsList;
+      }
+
+      const addIngredient = () => {
+        const ingredientsList = getIngredientsList();
+        const newIngredient = document.querySelector('#ingredientsInput').value;
+
+        // Add new ingredient to the list
+        ingredientsList.push(newIngredient);
+       
+        // Recreate the ingredient list
+        ingredientsList.forEach((ingredient) => {
+          const element = document.createElement('li');
+          element.textContent = ingredient;
+          document.querySelector('#ingredientsList').appendChild(element);
+        });
+
+        //Clean ingredients input
+        document.querySelector('#ingredientsInput').value = null;
+      };
+    </script>
   </body>
 </html>

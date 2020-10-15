@@ -17,13 +17,13 @@ const isRecipeValid = (recipe) => {
  * @param {object} recipe - Object containing recipe data
  */
 const create = async (recipe) => {
-  const { userID, user, name, instructions, ingredientes } = recipe;
+  const { userId, user, name, instructions, ingredients } = recipe;
 
   const result = await connection().then((schema) =>
     schema
       .getTable('recipes')
-      .insert(['user_id', 'user', 'name', 'instructions', 'ingredientes'])
-      .values(userID, user, name, instructions, ingredientes.toString())
+      .insert(['user_id', 'user', 'name', 'instructions', 'ingredients'])
+      .values(userId, user, name, instructions, ingredients)
       .execute());
 
   return result || null;
@@ -62,7 +62,7 @@ const recipe = async (id) => {
  * Get all recipes
  */
 const recipes = async (searchQuery) => {
-  const search = (searchQuery) ? `name LIKE "%${searchQuery}%"` : null;
+  const search = searchQuery ? `name LIKE "%${searchQuery}%"` : null;
 
   const recipesData = await connection()
     .then((schema) =>

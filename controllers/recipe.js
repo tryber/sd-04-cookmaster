@@ -49,14 +49,18 @@ const searchRecipe = async (req, res) => {
 /** Recipe creation section */
 const createRecipe = async (req, res) => {
   const recipe = req.body;
-  const { user } = req.user;
+  const { user } = req;
 
   if (!recipe.name) return res.render('new-recipe', { user, messages: null });
+
+  recipe.userId = user.id;
+  recipe.user = `${user.firstName} ${user.lastName}`;
 
   const result = await recipeModel.create(recipe);
 
   return res.render('new-recipe', {
-    message: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
+    user,
+    messages: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
   });
 };
 

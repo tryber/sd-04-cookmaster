@@ -7,7 +7,9 @@
   </head>
   <body>
     <h1>Nova Receita</h1>
-
+    <% if (messages) { %>
+      <span><%- messages %> </span>
+    <% } %>
     <form action="/recipes" method="POST" id="recipeForm">
       <label for="nameInput">Nome da Receita</label>
       <input data-testid="nome-receita" type="text" name="name" id="nameInput" required />
@@ -27,8 +29,8 @@
       <br />
       <ul id="ingredientsList"></ul>
       <br />
-      <label for="methodInput">Modo de preparo: </label>
-      <textarea data-testid="modo-de-preparo" name="method" id="methodInput" required></textarea>
+      <label for="instructionsInput">Modo de preparo: </label>
+      <textarea data-testid="modo-de-preparo" name="instructions" id="instructionsInput" required></textarea>
       <br />
       <br />
       <button data-testid="postar-receita" type="button" onclick="postRecipe()">

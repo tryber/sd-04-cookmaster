@@ -49,8 +49,9 @@ const searchRecipe = async (req, res) => {
 /** Recipe creation section */
 const createRecipe = async (req, res) => {
   const recipe = req.body;
+  const { user } = req.user;
 
-  if (!recipe.name) return res.render('new-recipe', { messages: null });
+  if (!recipe.name) return res.render('new-recipe', { user, messages: null });
 
   const result = await recipeModel.create(recipe);
 

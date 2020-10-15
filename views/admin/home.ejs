@@ -3,25 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-    <header>
-      <div>
-        Cookmaster
-        <a href="/login" data-testid="login">Login</a>
-      </div>
-    </header>
-    <div></div>
-    <h2>Receitas</h2>
-    <% if (user) { %>
-      <button data-testid="nova-receita">Nova Receita</button>
-    <% } %>
-    <button data-testid="buscar-receita">Buscar Receita</button>
-    <% recipes.forEach((recipe) => { %>
-      <div>
-        <h4><%= recipe.nameRecipe %></h4>
-        <h5><%= recipe.user %></h5>
-        <a href="Link">Ver mais</a>
-      </div>
-    <% }) %>
+    <title>Cookmaster - Admin</title>
+  </head>
+
+  <body>
+    <h1>Painel Administrativo Cookmaster</h1>
+    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+    <pre><%= JSON.stringify(user, null, 4) %></pre>
+    <button onclick="window.location.pathname='/logout'">Logout</button>
   </body>
 </html>

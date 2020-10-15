@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Cookmaster - Home</title>
+</head>
+<body>
+    <header class="mb-1">
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <h1>Cookmaster</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="m-auto text-light">
+                        <% if (user) { %>
+                            <span>Olá, <%= user.name %></span>
+                            <% } %>
+                        </li>
+                        <li class="nav-item">
+                            <a data-testid="buscar-receita" href="/recipes/search" class="m-2 btn btn-sm btn-primary">
+                                Buscar receita
+                            </a>
+                        </li>
+                        <% if(user) { %>
+                        <li class="nav-item">
+                            <a data-testid="nova-receita" class="m-2 btn btn-sm btn-primary" href="/recipes/new">
+                                Nova receita
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-testid="logout" class="m-2 btn btn-sm btn-primary" href="/logout">
+                                Logout
+                            </a>
+                        </li>
+                        <% } else { %>                    
+                        <li class="nav-item">
+                            <a data-testid="login" class="m-2 btn btn-sm btn-primary" href="/login">
+                                Login
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="alert alert-success mb-3" role="alert">
+        <div class="container">A simple success alert—check it out!</div>
+    </div>
+    <main>
+        <div class="container">
+            <h1 class="text-center mb-4">Buscar receitas</h1>
+            <div class="row mb-3">
+                <div class="col-md m-auto">                
+                    <form method="GET">
+                        <div class="row">
+                          <div class="col-10">
+                            <input data-testid="receita" name="q" type="text" class="form-control" placeholder="Buscar receita">
+                          </div>
+                          <div class="col-2">
+                            <button data-testid="buscar" class="btn btn-primary btn-block" type="submit">
+                                Buscar
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+            </div>
+            <div class="row">
+                <% recipes.forEach(recipe => { %>
+                    <div class="col-md-3 mb-3">                
+                        <div class="card shadow-sm text-center">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= recipe.name %></h5>
+                                <p class="card-text"><%= recipe.user %></p>
+                                <a href="/recipes/<%= recipe.id %>" class="btn btn-secondary">Ver mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-dark text-center mt-5 p-3 fixed-bottom">
+        <span class="text-light">Projeto desenvolvido na <a href="#" class="text-light stretched-link">Trybe</a> por <a href="#" class="text-light stretched-link">Leandro Marten</a></span>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -20,8 +20,9 @@ const userRecipes = async (req, res) => {
 
 const findRecipesByName = async (req, res) => {
   const recipes = await Recipes.recipesByName(req.query.q);
+  const user = req.user;
   // console.log(recipes);
-  return res.render('recipes/search', { recipes });
+  return res.render('recipes/search', { recipes, user });
 };
 
 const newRecipe = (req, res) => res.render('recipes/new', { user: req.user, message: null });
@@ -71,6 +72,16 @@ const deleteRecipe = async (req, res) => {
   return res.render('recipes/delete', { user, id, message: 'Senha Incorreta.' });
 };
 
+const myRecipes = async (req, res) => {
+  let message = null;
+  const { id } = req.user;
+  const recipes = await Recipes.recipesByUserId(id);
+
+  if(recipes.length === 0) message = "você não possui receitas ainda."
+
+  return res.render('recipes/myRecipes', { recipes, user: req.user, message });
+}
+
 module.exports = {
   index,
   recipesDetails,
@@ -81,4 +92,5 @@ module.exports = {
   showEditRecipe,
   showDeleteRecipe,
   deleteRecipe,
+  myRecipes,
 };

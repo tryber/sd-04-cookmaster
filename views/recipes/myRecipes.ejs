@@ -4,20 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - minhas receitas</title>
   </head>
   <body class="text-center">
     <header class="bg-dark d-flex justify-content-between">
     </header>
     <div class="container">
       <div class="row justify-content">
-        <h1>Cookmaster - Receitas</h1>
+        <h1>Cookmaster - Minhas receitas</h1>
       </div>
       <div class="row mb-4">
         <div class="col">
           <% if (user) {%>
             <span>Hello, <%= user.name %></span>
-            <a href="/me/recipes" data-testid="minhas-receitas" class="btn btn-sm btn-primary">Minhas Receitas</a>
             <a href="/recipes/new" data-testid="nova-receita" class="btn btn-sm btn-primary">Nova Receita</a>
             <a href="/logout" data-testid="logout" class="btn btn-sm btn-primary">Logout</a>
           <% }  else { %>
@@ -27,6 +26,7 @@
         </div>
       </div>
       <div class="row">
+          <% if(message) { %><p><%= message %></p> <% } %>
         <% recipes.forEach(recipe => { %>
         <div class="col-sm-4 mb-4">
           <div class="card">

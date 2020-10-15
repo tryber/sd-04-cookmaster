@@ -6,4 +6,10 @@ const showAll = async (req, res) => {
   res.render('home', { allRecipes, user: req.user });
 };
 
-module.exports = { showAll };
+const showOne = async (req, res) => {
+  const recipeDetails = await Recipes.getById(req.params.id);
+
+  res.render('recipeDetails', { recipeDetails, user: req.user });
+};
+
+module.exports = { showAll, showOne };

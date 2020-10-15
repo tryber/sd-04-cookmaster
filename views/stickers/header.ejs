@@ -1,8 +1,8 @@
 <header>
-  <nav style="display: flex; justify-content: space-around; align-items: center;">
+  <nav style="display: flex; justify-content: space-around; align-items: center; background: gray;">
     <h1>Cookmaster</h1>
     <% if (user) { %>
-      <a data-testid="logout" href='/logout'"><%= user.name %> | Logout</a>
+      <a data-testid="logout" href='/logout'">Logout</a>
       <% } else { %>
       <a data-testid="login" href='/login'>Login</a>
       <% } %>

@@ -20,12 +20,12 @@ const findById = async (idInput) => {
   return { id, email, password, name, lastName };
 };
 
-const addUser = async (email, password, first_name, last_name) =>
+const addUser = async (email, password, firstName, lastName) =>
   connection().then((bd) =>
     bd
       .getTable('users')
       .insert('email', 'password', 'first_name', 'last_name')
-      .values(email, password, first_name, last_name)
+      .values(email, password, firstName, lastName)
       .execute(),
   );
 

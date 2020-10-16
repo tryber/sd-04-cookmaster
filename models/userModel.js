@@ -50,7 +50,7 @@ const findById = async (ids) =>
       lastName,
     }));
 
-const addUser = ({ email, senha, nome, sobrenome }) => {
+const addUser = ({ email, senha, nome, sobrenome }) =>
   connection().then((db) =>
     db
       .getTable('users')
@@ -58,10 +58,25 @@ const addUser = ({ email, senha, nome, sobrenome }) => {
       .values(email, senha, nome, sobrenome)
       .execute(),
   );
+
+const editUserModel = async ({ id, email, senha, nome, sobrenome }) => {
+  return connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', senha)
+      .set('first_name', nome)
+      .set('last_name', sobrenome)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
 };
 
 module.exports = {
+  addUser,
+  editUserModel,
   findByEmail,
   findById,
-  addUser,
 };

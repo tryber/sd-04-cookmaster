@@ -6,7 +6,6 @@ const { validation } = require('../services/isValid');
 // Pagina Inicial
 const index = async (req, res) => {
   const recipes = await recipesModels.getAllRecipes();
-
   res.render('home', { recipes, user: req.user });
 };
 
@@ -89,7 +88,27 @@ const delPost = async (req, res) => {
   return res.redirect('/');
 };
 
+// Controllers User Edit
+const userEdit = async (req, res) => {
+  const userData = await userModel.findById(req.user.id);
+  console.log('chamou o GET', userData);
+  res.render('editUser', { userData, user: req.user, message: null });
+};
+
+const userEditPost = async (req, res) => {
+  console.log('chamou o Post', req.body);
+  const isValid = await validation({ ...req.body });
+  if (isValid.status === 'ok') {
+    await userModel.editUserModel(req.body);
+    res.redirect('/');
+  } else {
+    res.render('cadastro', { userData: { ...req.body }, user: req.user, message: isValid.message });
+  }
+};
+
 module.exports = {
+  userEditPost,
+  userEdit,
   delPost,
   cadastro,
   cadastroForm,

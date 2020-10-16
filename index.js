@@ -48,5 +48,9 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.cookmasterControl.r
 // Minha Receitas
 app.get('/me/recipes', middlewares.auth(true), controllers.cookmasterControl.myRecipe);
 
+// Rota para Editar Usuario
+app.get('/me/edit', middlewares.auth(true), controllers.cookmasterControl.userEdit);
+app.post('/me/edit', middlewares.auth(true), controllers.cookmasterControl.userEditPost);
+
 // APP LISTEN
 app.listen(3000, () => console.log('Listening on 3000'));

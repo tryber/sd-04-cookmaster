@@ -22,7 +22,7 @@ function createButton() {
 }
 
 // Adicionar ingrediente add
-export function add() {
+function add() {
   const newIngredient = document.getElementById('ingredientInput');
   if (newIngredient.value !== '') {
     const ul = document.querySelector('ul');
@@ -35,3 +35,5 @@ export function add() {
     ul.appendChild(li);
   }
 }
+
+module.exports = { add, };

@@ -9,16 +9,24 @@
     <header>
       <p>Cookmaster</p>
       <% if (!user) { %>
-      <a data-testid="login" href="Login">Login</a>
+      <a href="Login">
+        <button data-testid="login">Login</button>
+      </a>
       <% } %> <% if (user) { %> Olá, <%= user.name %>
-      <a data-testid="logout" href="/logout">Logout</a>
+      <a href="/logout">
+        <button data-testid="logout">Logout</button>
+      </a>
       <% } %>
     </header>
     <h1>Receitas</h1>
     <% if (user) { %>
-    <a data-testid="nova-receita">Nova Receita</a>
+      <a href="/recipes/new">
+        <button data-testid="nova-receita">Nova Receita</button>
+      </a>
     <% } %>
-    <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+    <a href="/recipes/search">
+      <button data-testid="buscar-receita">Buscar Receita</button>
+    </a>
 
     <div>
       <% recipes.forEach(r => { %>

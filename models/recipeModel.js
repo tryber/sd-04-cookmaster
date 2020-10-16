@@ -115,6 +115,19 @@ const update = async (idRecipe, recipeName, ingredients, instructions) => {
 };
 
 // exclusão de receita ou delete
+// .where('id = :idBind', 'user_id = :userIdBind')
+// .bind('idBind', idRecipe, 'userIdBind', userId)
+const remove = async (idRecipe) => {
+  const data = await connection().then((db) =>
+    db
+      .getTable('recipes')
+      .delete()
+      .where('id = :idBind')
+      .bind('idBind', idRecipe)
+      .execute(),
+  );
+  return data;
+};
 
 module.exports = {
   getAll,
@@ -123,4 +136,5 @@ module.exports = {
   findByUserId,
   add,
   update,
+  remove,
 };

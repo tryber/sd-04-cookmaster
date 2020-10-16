@@ -40,7 +40,11 @@ app.post('/recipes', middlewares.auth(), controllers.recipeController.addNewReci
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.updateForm);
 app.post('/recipes/:id', middlewares.auth(), controllers.recipeController.update);
 
-// /me/recipes
+// recipes/:id/delete
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.removeForm);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.remove);
+
+// me/recipes
 app.get('/me/recipes', middlewares.auth(), controllers.recipeController.showUserRecipes);
 
 // recipes/:id

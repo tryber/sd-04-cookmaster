@@ -50,8 +50,22 @@ const getById = async (recipeId) => {
   };
 };
 
+const getByName = async (recipeName) => {
+  const db = await connection();
+  const results = await db
+    .getTable('recipes')
+    .select(['id', 'user', 'name'])
+    .where('name like :name')
+    .bind('name', `%${recipeName}%`)
+    .execute();
+  const fetchList = await results.fetchAll();
+  const list = await fetchList.map(([id, user, name]) => ({ id, user, name }));
+  return list;
+};
+
 module.exports = {
   getAll,
   getAllByUserId,
   getById,
+  getByName,
 };

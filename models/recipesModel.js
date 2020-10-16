@@ -15,15 +15,32 @@ const getRecipes = async () => {
   }));
 };
 
-const getRecipesById = async (id) => {
+const getRecipesById = async (inputId) => {
   const db = await connection();
   const table = await db.getTable('recipes');
-  const results = await table.select(['user_id', 'user', 'name', 'ingredients', 'instructions']).where('id = :id').bind('id', id).execute();
-  const [userId, user, name, ingredients, instructions] = await results.fetchOne();
-  return { userId, user, name, ingredients, instructions };
+  const results = await table.select([]).where('id = :inputId').bind('inputId', inputId).execute();
+  const [id, userId, user, name, ingredients, instructions] = await results.fetchOne();
+  return { id, userId, user, name, ingredients, instructions };
+};
+
+const getRecipesByName = async (q) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const results = await table.select([]).where('name like :q').bind('q', `%${q}%`).execute();
+  const recipes = await results.fetchAll();
+  console.log('Model:', recipes);
+  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
 };
 
 module.exports = {
   getRecipes,
   getRecipesById,
+  getRecipesByName,
 };

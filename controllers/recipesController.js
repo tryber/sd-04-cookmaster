@@ -8,12 +8,20 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  const recipes = recipesModel.getById(req.params.id);
+  const recipeDetails = await recipesModel.getById(req.params.id);
 
-  res.render('recipes/details', { recipes, user: req.user });
+  res.render('recipes/details', { recipeDetails, user: req.user });
+};
+
+const search = async (req, res) => {
+  const searchedRecipes = await recipesModel.getByName(req.query.q);
+  const userRecipes = await recipesModel.getUserRecipes(req.user.id);
+
+  res.render('recipes/search', { searchedRecipes, userRecipes, user: req.user });
 };
 
 module.exports = {
   index,
   show,
+  search,
 };

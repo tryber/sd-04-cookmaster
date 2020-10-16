@@ -11,7 +11,13 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, userEmail, password, name, lastName]) => ({ id, userEmail, password, name, lastName }));
+    .then(([id, userEmail, password, name, lastName]) => ({
+      id,
+      userEmail,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 /**
@@ -22,15 +28,16 @@ const findByEmail = async (email) => {
 const findById = async (id) => {
   return connection()
     .then((db) =>
-      db
-        .getTable('users')
-        .select([])
-        .where('id = :id_param')
-        .bind('id_param', id)
-        .execute(),
+      db.getTable('users').select([]).where('id = :id_param').bind('id_param', id).execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([userId, email, password, name, lastName]) => ({ userId, email, password, name, lastName }));
+    .then(([userId, email, password, name, lastName]) => ({
+      userId,
+      email,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 module.exports = {

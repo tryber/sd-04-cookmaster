@@ -20,9 +20,12 @@
     </header>
     <h1>Receitas</h1>
     <% if (user) { %>
-      <a href="/recipes/new">
-        <button data-testid="nova-receita">Nova Receita</button>
-      </a>
+    <a href="/recipes/new">
+      <button data-testid="nova-receita">Nova Receita</button>
+    </a>
+    <a href="/me/recipes">
+      <button data-testid="minhas-receitas">Minhas Receitas</button>
+    </a>
     <% } %>
     <a href="/recipes/search">
       <button data-testid="buscar-receita">Buscar Receita</button>

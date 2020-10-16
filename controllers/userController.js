@@ -46,45 +46,20 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const registerForm = (_req, res) => res.render('register', { message: null });
+const signupForm = (_req, res) => res.render('register', { message: null, done: false });
 
-const register = async (req, res) => {
-  const { email, password, passwordConfirm, name, lastName } = req.body;
-
-  if (!emailRegex.test(email))
-    res.render('register', {
-      message: 'O email deve ter o formato email@mail.com',
-    });
-
-  if (password.length < 5)
-    res.render('register', {
-      message: 'A senha deve ter pelo menos 6 caracteres',
-    });
-
-  if (password !== passwordConfirm)
-    res.render('register', {
-      message: 'As senhas tem que ser iguais',
-    });
-
-  if (!namesRegex.test(name))
-    res.render('register', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    });
-
-  if (!namesRegex.test(lastName))
-    res.render('register', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    });
-
-  await userModel.registerUser({ ...req.body });
-
-  return res.status(200).render('register', { message: 'Cadastro efetuado com sucesso!' });
+const signUp = async (req, res) => {
+  if (!req.isValid) {
+    return res.status(400).render('admin/signup', { messages: req.messages, done: false });
+  }
+  await userModel.addUser({ ...req.body });
+  return res.status(200).render('admin/signup', { messages: req.messages, done: true });
 };
 
 module.exports = {
   login,
   loginForm,
   logout,
-  registerForm,
-  register,
+  signupForm,
+  signUp,
 };

@@ -6,16 +6,15 @@ const index = async (req, res) => {
   res.render('home', { recipes, user: req.user });
 };
 
-const show = async (req, res) => {
-  const { id } = req.params;
-  const recipe = await recipeModel.recipeById(id);
+const seeRecipe = async (req, res) => {
+  const recipe = await recipeModel.getById(req.params.id);
 
-  res.render('seeRecipe', { ...recipe, user: req.user });
+  res.render('seeRecipe', { recipe, user: req.user });
 };
 
 module.exports = {
   index,
-  show,
+  seeRecipe,
   // userBuildings,
   // add,
   // create

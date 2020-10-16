@@ -31,17 +31,19 @@ const getById = async (id) =>
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['id', 'name', 'ingredients', 'instructions'])
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :id')
         .bind('id', id)
         .execute(),
     )
-    .then((results) => results.fetchOne())
-    .then(([name, ingredients, instruction]) => ({
-      id,
+    .then((result) => result.fetchOne())
+    .then(([recipeId, userId, user, name, ingredients, instructions]) => ({
+      recipeId,
+      userId,
+      user,
       name,
       ingredients,
-      instruction,
+      instructions,
     }));
 
 module.exports = {

@@ -6,33 +6,35 @@
     <title>Cookmaster - Details</title>
   </head>
   <body>
-    <%- include('navbar', { user }); %>
-    <div>
-      <% if (user && user.id === userId) {%>
-      <div>
-        <a href="/recipes/<%= recipeId %>/edit">
-          <button data-testid="editar-receita">Editar Receita</button>
-        </a>
-        <a href="/recipes/<%= recipeId %>/delete">
-          <button data-testid="excluir-receita">Excluir Receita</button>
-        </a>
-      </div>
-      <%}%>
-      <div>
-        <h2><%= name %></h2>
-        <span>Enviada por <%= user %></span>
-        <h3>Ingredientes</h3>
-        <ul>
-          <% ingredients.split(',').map(ingredient => { %>
-          <li><%= ingredient %></li>
-          <%})%>
-        </ul>
-        <h3>Modo de Preparo</h3>
-        <p><%= instructions %></p>
+    <div class="navbar navbar-dark bg-primary">Cookmaster</div>
+    <% if(user) { %>
+    <a href="/recipes/<%= recipes.id %>/edit " data-testid="editar-receita" class="btn btn-primary"
+      >Editar Receita</a
+    >
+    <a
+      href="recipes/<%= recipes.id %>/delete "
+      data-testid="excluir-receita"
+      class="btn btn-primary"
+      >Excluir Receita</a
+    >
+    <% } %>
+    <div class="container">
+      <div class="card">
+        <div class="card-title"><h1><%= recipes.name %></h1></div>
+        <hr />
+        <div class="card-body">
+          <h2>Ingredientes</h2>
+          <% recipes.ingredients.split(',').forEach((ing) => { %>
+          <p><%= ing %></p>
+          <% }) %>
+          <hr />
+          <h2>Modo de Preparo</h2>
+          <div class="card-text"><%= recipes.instructions %></div>
+        </div>
       </div>
     </div>
-    <a href="/">
-      <button type="button">Voltar</button>
-    </a>
+
+    /* AGORA PRECISO CRIAR AS PÁGINAS DE EDIÇÃO E DELEÇÃO, TALVEZ NECESSITE CRIAR UM CONTROLLER OU
+    MODEL, POIS NOS PRÓXIMOS REQUISITOS SERÁ NECESSÁRIO */
   </body>
 </html>

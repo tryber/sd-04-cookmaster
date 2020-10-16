@@ -19,8 +19,6 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('*', (_req, res) => {
-  return res.status(404).json({ message: 'Pagina não encontrada' });
-});
+app.get('*', (_req, res) => res.status(404).json({ message: 'Pagina não encontrada' }));
 
 app.listen(3000);

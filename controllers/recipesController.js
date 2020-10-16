@@ -47,6 +47,55 @@ const addRecipe = async (req, res) => {
   res.redirect('/');
 };
 
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipeModel.getRecipeById(id);
+
+  res.status(201).render('recipes/edit', {
+    user: req.user,
+    nameMessage: null,
+    ingredientsMessage: null,
+    instructionsMessage: null,
+    successMessage: null,
+    recipe,
+  });
+};
+
+const updateRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { id } = req.params;
+  try {
+    await recipeModel.updateRecipe(id, name, ingredients, instructions);
+    res.redirect('/');
+  } catch (err) {
+    res.send(err);
+  }
+};
+
+const deleteForm = async (req, res) => {
+  const { id } = req.params;
+  res.status(201).render('recipes/delete', {
+    user: req.user,
+    message: null,
+    id,
+  });
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+  const auth = await recipeModel.verifyUser(id, req.user.id, password);
+  if (auth) {
+    await recipeModel.deleteRecipeById(id);
+    res.status(202).redirect('/');
+  }
+  res.status(401).render('recipes/delete', {
+    user: req.user,
+    id,
+    message: 'Senha Incorreta.',
+  });
+};
+
 module.exports = {
   listRecipes,
   recipeDetails,
@@ -54,4 +103,8 @@ module.exports = {
   myRecipes,
   newRecipe,
   addRecipe,
+  editRecipe,
+  updateRecipe,
+  deleteForm,
+  deleteRecipe,
 };

@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cookmaster - Editar</title>
+  <title>Cookmaster - Editar Receita</title>
 </head>
 
 <body>
   <div>
-    <div class="title">
-      <nav class="navbar">
-        <h2>Cookmaster</h2></span>
-        <% if (!user) { %>
-          <span><a href='/login' data-testid="login">Login</a></span>
-        <% } else { %>
-          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
-        <% } %>
-      </nav>
-    </div>
+    <nav>
+      <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
+        <a data-testid="logout" href="/logout">Logout</a>
+      <% } %>
+      <% if (!user) { %>
+        <a data-testid="login" href="/login" >Login</a>
+      <% } %>
+    </nav>
     <% if (recipe.userId === user.id) { %>
     <form action=<%=`/recipes/${recipe.id}`%> method="POST" name="recipeForm">
       <h3>Editar Receita</h3>
@@ -61,7 +61,7 @@
         </div>
       </div>
       <div>
-        <div class="row">
+        <div>
           <a href="/">Voltar</a>
           <div>
             <button type="button" data-testid="postar-receita" onclick="submitRecipe()">

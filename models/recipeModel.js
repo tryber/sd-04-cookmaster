@@ -65,6 +65,25 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
     .execute();
 };
 
+const deleteRecipeById = async (recipeId) => {
+  const db = await conn();
+  return db
+    .getTable('recipes')
+    .delete()
+    .where('id = :recipeId')
+    .bind('recipeId', recipeId)
+    .execute();
+};
+
+const verifyUser = async (recipeId, userId, password) => {
+  const recipe = await getRecipeById(recipeId);
+  const recipeUser = await userModel.findById(recipe.userId);
+  if (userId !== recipeUser.id || password !== recipeUser.password) {
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
@@ -72,4 +91,6 @@ module.exports = {
   getRecipeByUserId,
   addRecipe,
   updateRecipe,
+  deleteRecipeById,
+  verifyUser,
 };

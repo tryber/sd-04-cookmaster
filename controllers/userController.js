@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { getAllRecipesByUser } = require('../models/recipeModel');
 
 const userModel = require('../models/userModel');
 
@@ -16,7 +17,6 @@ const loginForm = (req, res) => {
 
 const login = async (req, res, next) => {
   const { email, password, redirect } = req.body;
-
   if (!email || !password)
     return res.render('admin/login', {
       message: 'Preencha o email e a senha',
@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,7 +43,13 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const admin = async (req, res) => {
+  const userRecipes = await getAllRecipesByUser(req.user.id);
+  res.render('admin/home', { user: req.user, userRecipes });
+};
+
 module.exports = {
+  admin,
   login,
   loginForm,
   logout,

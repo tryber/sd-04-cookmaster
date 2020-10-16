@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <link type="text/css" rel="stylesheet" href="/home.css">
+    <title>Cookmaster</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <nav>
+      <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <p><%= `${user.name} ${user.lastName} |` %></p>
+        <a data-testid="logout" href="/logout">Logout</a>
+      <% } %>
+      <% if (!user) { %>
+        <a data-testid="login" href="/login" >Login</a>
+      <% } %>
+    </nav>
+    <h2>Receitas</h2>
+    <div>
+      <a href="/recipes/search" data-testid="buscar-receita">Buscar Receitas</a>
+      <% if (user) { %>
+        <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+        <a data-testid="minhas-receitas" href="/me/recipes">Minhas Receitas</a>
+        <a data-testid="minha-conta" href="/user/edit">Minha Conta</a>
+      <% } %>
+    </div>
+    <div>
+      <% recipes.forEach(recipe => { %>
+        <div>
+          <p><%= recipe.name %></p>
+          <p><%= recipe.user %></p>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
+        </div>
+      <% }) %>
+    </div>
   </body>
 </html>

@@ -6,9 +6,9 @@ const signUpController = require('../controllers/signUpController');
 const middlewares = require('../middlewares');
 
 router.get('/', middlewares.auth(false), recipeController.listRecipes);
-router.get('/admin', middlewares.auth(), (req, res) => {
-  return res.render('admin/home', { user: req.user });
-});
+router.get('/admin', middlewares.auth(), (req, res) =>
+  res.render('admin/home', { user: req.user })
+);
 
 router.get('/login', userController.loginForm);
 router.post('/login', userController.login);

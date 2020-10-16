@@ -8,7 +8,7 @@
   <body>
     <%- include('./header.ejs', {user}); %>
     <h2>Receitas:</h2>
-    <div>
+    <div style="display: flex; flex-wrap: wrap;">
       <% allRecipes.map(recipe => { %>
       <div
         style="
@@ -31,8 +31,8 @@
     </div>
     <div>
       <% if (user) { %>
-        <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
-        <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
+      <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+      <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
       <% } %>
       <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
     </div>

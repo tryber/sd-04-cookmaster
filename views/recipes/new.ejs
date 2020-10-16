@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Nova Receita</title>
+    <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('./header.ejs', {user}); %>
+    <%- include('../header.ejs', {user}); %>
     <h2>Nova Receita</h2>
     <form action="/recipes" method="POST">
       <label for="name"

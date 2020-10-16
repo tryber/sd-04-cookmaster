@@ -6,6 +6,35 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <%- include('./header.ejs', {user}); %>
+    <h2>Receitas:</h2>
+    <div style="display: flex; flex-wrap: wrap;">
+      <% allRecipes.map(recipe => { %>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          border: 1px solid blue;
+          max-width: 200px;
+          margin: 10px;
+          padding: 10px;
+        "
+      >
+        <h3>Receita: <%= recipe.name %></h3>
+        <div>
+          <h4>Autor: <%= recipe.user %></h4>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
+        </div>
+      </div>
+      <%})%>
+    </div>
+    <div>
+      <% if (user) { %>
+      <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+      <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
+      <% } %>
+      <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+    </div>
   </body>
 </html>

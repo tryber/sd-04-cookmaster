@@ -100,10 +100,29 @@ const recipes = async (searchQuery) => {
   return recipesData || null;
 };
 
+/**
+ * Delete a recipe by its id
+ *
+ * @param {number} id - The id of the recipe to delete
+ */
+const deleteRecipe = async (id) => {
+  const result = await connection()
+    .then((schema) =>
+      schema
+        .getTable('recipes')
+        .delete()
+        .where('id = :id')
+        .bind('id', id)
+        .execute());
+
+  return result || null;
+};
+
 module.exports = {
   isRecipeValid,
   create,
   recipe,
   recipes,
   update,
+  deleteRecipe,
 };

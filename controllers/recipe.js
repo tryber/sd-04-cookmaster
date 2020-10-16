@@ -1,4 +1,5 @@
 const recipeModel = require('../models/Recipe.js');
+const userModel = require('../models/user');
 
 const getRecipes = async (req, res) => {
   const { user } = req;
@@ -89,10 +90,33 @@ const updateRecipe = async (req, res) => {
     });
 };
 
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+  const { user } = req;
+
+  /** Render recipe exclusion page */
+  if (!password) return res.render('delete-recipe', { recipeId: id, message: 'null' });
+
+  /** Check if user password is correct */
+  const userData = await userModel.user(user.email, password);
+
+  if (userData.length === 0) {
+    return res.render('delete-recipe', { recipeId: id, message: 'Senha Incorreta.' });
+  }
+
+  /** Exclude the recipe */
+  const result = await recipeModel.deleteRecipe(id);
+  return (result)
+    ? res.redirect('/')
+    : res.render('delete-recipe', { recipeId: id, message: 'Erro ao excluir receita.' });
+};
+
 module.exports = {
   getRecipes,
   getRecipe,
   searchRecipe,
   createRecipe,
   updateRecipe,
+  deleteRecipe,
 };

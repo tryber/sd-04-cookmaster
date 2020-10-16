@@ -14,6 +14,9 @@ router.get('/recipes/:id', middlewares.auth(false), controllers.recipeController
 /** Recipe update */
 router.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.updateRecipe);
 router.post('/recipes/:id', middlewares.auth(), controllers.recipeController.updateRecipe);
+/** Recipe exclusion */
+router.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);
+router.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);
 /** Recipes home */
 router.get('/', middlewares.auth(false), controllers.recipeController.getRecipes);
 

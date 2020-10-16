@@ -64,11 +64,47 @@ const createRecipe = async (req, res) => {
   });
 };
 
-/** EOS */
+/**
+ * Get recipe update page
+ */
+const getRecipeEditor = async (req, res) => {
+  const { id } = req.param;
+  const { user } = req;
+
+  const recipe = await recipeModel.recipe(id);
+
+  if (!recipe) return res.render('home', { user, messages: 'Receita não econtrada' });
+  console.log(recipe);
+  return res.render('update-recipe', { user, recipe, messages: null });
+};
+
+/**
+ * Update a recipe.
+ * @param {recipe} req.body - recipe information to be updated | PUT Param
+ */
+// const updateRecipe = async (req, res) => {
+//   const recipe = req.body;
+//   const { user } = req;
+
+//   if (!recipe) {
+
+//   };
+
+//   recipe.userId = user.id;
+//   recipe.user = `${user.firstName} ${user.lastName}`;
+
+//   const result = await recipeModel.create(recipe);
+
+//   return res.render('new-recipe', {
+//     user,
+//     messages: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
+//   });
+// };
 
 module.exports = {
   getRecipes,
   getRecipe,
   searchRecipe,
   createRecipe,
+  getRecipeEditor,
 };

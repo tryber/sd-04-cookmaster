@@ -50,4 +50,17 @@ async function getRecipeByName(q) {
     );
 }
 
-module.exports = { getAllRecipes, getRecipe, getRecipeByName };
+const verifyData = (recipeName, ingredients, prepare) => recipeName && ingredients && prepare;
+
+async function createRecipe(userId, userName, recipeName, ingredients, prepare) {
+  console.log(userId, userName, recipeName, ingredients, prepare)
+  return connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values([userId, userName, recipeName, ingredients, prepare])
+      .execute(),
+  );
+}
+
+module.exports = { getAllRecipes, getRecipe, getRecipeByName, verifyData, createRecipe };

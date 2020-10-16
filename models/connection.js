@@ -4,7 +4,6 @@ const mysqlx = require('@mysql/xdevapi');
 
 let schema;
 
-
 module.exports = () => {
   if (schema) return Promise.resolve(schema);
   return mysqlx
@@ -18,5 +17,5 @@ module.exports = () => {
     .then(async (session) => {
       schema = await session.getSchema('cookmaster');
       return schema;
-    })
+    });
 };

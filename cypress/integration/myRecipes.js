@@ -36,4 +36,8 @@ describe('8 - Crie uma página de Minhas receitas.', () => {
     cy.visit('http://localhost:3000/me/recipes');
     verifyContainsUrl('/login');
   })
+
+  after(() => {
+    createAndInsertsDataBase();
+  })
 });

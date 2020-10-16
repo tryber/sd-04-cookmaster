@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Recipe</title>
+</head>
+
+<body>
+  <h1>Nova Receita</h1>
+  <form action="/recipes" method="POST">
+    <label for="nameInput">Nome da receita</label><br />
+    <input data-testid="nome-receita" type="text" name="name" id="nameInput" /><br /><br />
+    <h3>Ingredientes</h3>
+    <ul></ul>
+    <input data-testid="ingredientes" type="text" name="ingredients" />
+    <button data-testid="adicionar-ingrediente" type="button"
+      onclick="pushToIngredients()">Adicionar Ingrediente</button><br /><br />
+
+    <label for="preparo">Modo de Preparo</label><br />
+    <textarea data-testid="modo-de-preparo" type="text" name="instructions"
+      id="preparo"></textarea><br />
+
+    <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+  </form>
+  <script>
+    const createLiElement = (ingredientName) => {
+      const li = document.createElement('li');
+      const input = document.createElement('input');
+      input.value = ingredientName;
+      input.name = 'ingredients[]';
+      input.readOnly = true;
+      input.style.border = 'none';
+      input.style.display = 'inline-block';
+      li.appendChild(input);
+      const button = document.createElement('button');
+      button.addEventListener('click', (event) => {
+        event.target.parentNode.remove();
+      });
+      button.innerHTML = 'Excluir Ingrediente';
+      button.type = 'button';
+      li.appendChild(button);
+      return li
+    }
+    const pushToIngredients = () => {
+      const ingredient = document.getElementsByName('ingredients')[0];
+      const ul = document.getElementsByTagName('ul')[0];
+      const li = createLiElement(ingredient.value);
+      ul.appendChild(li);
+      ingredient.value = '';
+    }
+  </script>
+</body>
+
+</html>

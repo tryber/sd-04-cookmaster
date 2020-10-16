@@ -82,7 +82,7 @@ const validateUser = (user) => {
   if (password !== cPassword) {
     return 'As senhas tem que ser iguais';
   }
-  
+
   return validateFullName(nome, sobrenome);
 };
 

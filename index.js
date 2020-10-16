@@ -41,5 +41,8 @@ app.post('/recipes/:id/', middlewares.auth(true), controllers.cookmasterControl.
 // Rotas para Receita Detail
 app.get('/recipes/:id', middlewares.auth(false), controllers.cookmasterControl.recipeDetails);
 
+// Minha Receitas
+app.get('/me/recipes', middlewares.auth(true), controllers.cookmasterControl.myRecipe);
+
 // APP LISTEN
 app.listen(3000, () => console.log('Listening on 3000'));

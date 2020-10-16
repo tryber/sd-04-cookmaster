@@ -60,11 +60,19 @@ const editPost = async (req, res) => {
   return res.redirect(`/recipes/${req.params.id}`);
 };
 
+const myRecipe = async (req, res) => {
+  const id = req.user.id;
+  const recipes = await recipesModels.allByUser(id);
+  console.log(recipes);
+  res.render('myRecipe', { recipes, user: req.user });
+};
+
 module.exports = {
   index,
   cadastro,
   cadastroForm,
   recipeDetails,
+  myRecipe,
   search,
   newRecipe,
   edit,

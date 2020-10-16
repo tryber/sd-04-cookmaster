@@ -51,7 +51,21 @@ const newRecipe = async (data) => {
   );
 };
 
+const allByUser = (id) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name'])
+        .where('user_id like :id')
+        .bind('id', id)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((data) => data.map(([id, userId, user, name]) => ({ id, userId, user, name })));
+
 module.exports = {
+  allByUser,
   getAllRecipes,
   findRecipeById,
   findRecipeByName,

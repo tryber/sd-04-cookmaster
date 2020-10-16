@@ -24,8 +24,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 app.get('/signUp', signUpController.signUpForm);
 app.post('/signUp', signUpController.signUp);
-// app.get('/me/edit', middlewares.auth(true), signUpController.renderEditUser);
-// app.post('/me', middlewares.auth(true), signUpController.editUser);
+app.get('/me/edit', middlewares.auth(true), signUpController.renderEditUser);
+app.post('/me', middlewares.auth(true), signUpController.editUser);
 
 app.get('/recipes/search', middlewares.auth(false), recipeController.searchRecipes);
 
@@ -34,12 +34,12 @@ app.post('/recipes', middlewares.auth(false), recipeController.addRecipe);
 app.get('/me/recipes', middlewares.auth(true), recipeController.myRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), recipeController.recipeDetails);
-// app.post('/recipes/:id', middlewares.auth(false), recipeController.updateRecipe);
+app.post('/recipes/:id', middlewares.auth(false), recipeController.updateRecipe);
 
-// app.get('/recipes/:id/delete', middlewares.auth(false), recipeController.deleteForm);
-// app.post('/recipes/:id/delete', middlewares.auth(false), recipeController.deleteRecipe);
+app.get('/recipes/:id/delete', middlewares.auth(false), recipeController.deleteForm);
+app.post('/recipes/:id/delete', middlewares.auth(false), recipeController.deleteRecipe);
 
-// app.get('/recipes/:id/edit', middlewares.auth(false), recipeController.editRecipe);
+app.get('/recipes/:id/edit', middlewares.auth(false), recipeController.editRecipe);
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

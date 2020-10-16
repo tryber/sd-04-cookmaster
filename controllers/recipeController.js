@@ -49,7 +49,7 @@ const deleteRecipe = async (req, res) => {
     return res.render('admin/confirmPassword', { id: params.id, message: 'Senha Incorreta.' });
   }
 
-  const warningsCount = await deleteRecipeById(params.id);
+  const warningsCount = await recipesModel.deleteRecipe(params.id);
 
   if (warningsCount > 0) {
     return res.render('admin/confirmPassword', {

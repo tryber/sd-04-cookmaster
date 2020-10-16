@@ -22,8 +22,7 @@ function createButton() {
 }
 
 // Adicionar ingrediente add
-/* exported add */
-function add() {
+export function add() {
   const newIngredient = document.getElementById('ingredientInput');
   if (newIngredient.value !== '') {
     const ul = document.querySelector('ul');

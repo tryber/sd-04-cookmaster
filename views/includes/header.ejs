@@ -3,6 +3,9 @@
   <div>
     <% if (user) { %>
       <span><%- `${user.firstName} ${user.lastName} |` %> </span>
+      <button type="button" data-testid="minha-conta">
+        <a href="/me/edit">Minha Conta</a>
+      </button>
       <button type="button" data-testid="logout">
         <a href="/logout">Logout</a>
       </button>

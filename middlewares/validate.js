@@ -45,7 +45,18 @@ const userData = (req, res, next) => {
   return res.render('signup', { messages: normalizedErrors });
 };
 
+const userDataUpdate = (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) return next();
+
+  const normalizedErrors = errors.array().map((error) => error.msg);
+
+  return res.render('admin/edit-user', { user: req.user, messages: normalizedErrors });
+};
+
 module.exports = {
   userDataRules,
   userData,
+  userDataUpdate,
 };

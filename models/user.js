@@ -71,8 +71,27 @@ const create = async ({ email, password, firstName, lastName }) => {
   return result || null;
 };
 
+const update = async (userData) => {
+  const { userId, email, password, firstName, lastName } = userData;
+
+  const result = await connection().then((schema) =>
+    schema
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', firstName)
+      .set('last_name', lastName)
+      .where('id = :id')
+      .bind('id', userId)
+      .execute());
+
+  return result || null;
+};
+
 module.exports = {
   user,
   userById,
   create,
+  update,
 };

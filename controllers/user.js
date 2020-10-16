@@ -49,6 +49,18 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
+const updateProfile = async (req, res) => {
+  const userData = req.body;
+  const { user } = req;
+
+  if (Object.keys(userData).length === 0) return res.render('admin/edit-user', { user, messages: null });
+
+  userData.userId = user.id;
+  await userModel.update(userData);
+
+  return res.redirect('/');
+};
+
 const getUserRecipes = async (req, res) => {
   const { user } = req;
   const recipes = await recipeModel.recipes(user.id);
@@ -63,4 +75,5 @@ module.exports = {
   loginForm,
   logout,
   getUserRecipes,
+  updateProfile,
 };

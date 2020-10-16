@@ -6,9 +6,10 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-      <h1>Cookmaster | </h1>
+    <h1>Cookmaster | </h1>
+    <a data-testid="login" href="/login" >Login</a>
+    <h1>Receitas</h1>
     <ul>
-      <h1>Receitas</h1>
       <% recipes.forEach(({user, recipe, id}) => { %>
         <li>
           <%=`${recipe} ${user}`%>

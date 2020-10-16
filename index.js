@@ -24,8 +24,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 app.get('/signUp', signUpController.signUpForm);
 app.post('/signUp', signUpController.signUp);
-app.get('/me/edit', middlewares.auth(true), signUpController.renderEditUser);
-app.post('/me', middlewares.auth(true), signUpController.editUser);
+// app.get('/me/edit', middlewares.auth(true), signUpController.renderEditUser);
+// app.post('/me', middlewares.auth(true), signUpController.editUser);
 
 app.get('/recipes/search', middlewares.auth(false), recipeController.searchRecipes);
 

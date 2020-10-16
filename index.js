@@ -30,6 +30,10 @@ app.post('/login', controllers.userController.login);
 // Rota Buscar Receita
 app.get('/recipes/search', middlewares.auth(false), controllers.cookmasterControl.search);
 
+// Deletar uma Receita
+app.get('/recipes/:id/delete', middlewares.auth(true), controllers.cookmasterControl.deleteRecipe);
+app.post('/recipes/:id/delete', middlewares.auth(true), controllers.cookmasterControl.delPost);
+
 // Rota Nova Receita
 app.get('/recipes/new', middlewares.auth(true), controllers.cookmasterControl.newRecipe);
 app.post('/recipes', middlewares.auth(true), controllers.cookmasterControl.postNewRecipe);

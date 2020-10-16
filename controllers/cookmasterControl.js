@@ -47,12 +47,13 @@ const postNewRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
-// Edit Recipe Controller
+// Edit Recipe Controller GET
 const edit = async (req, res) => {
   const recipe = await recipesModels.findRecipeById(req.params.id);
   return res.render('edit', { recipe, user: req.user });
 };
 
+// Edit Recipe Controller POST
 const editPost = async (req, res) => {
   const { receita, ingredientes, preparo } = req.body;
   const id = req.params.id;
@@ -60,6 +61,7 @@ const editPost = async (req, res) => {
   return res.redirect(`/recipes/${req.params.id}`);
 };
 
+// Controller com Minhas Receitas
 const myRecipe = async (req, res) => {
   const id = req.user.id;
   const recipes = await recipesModels.allByUser(id);
@@ -67,15 +69,38 @@ const myRecipe = async (req, res) => {
   res.render('myRecipe', { recipes, user: req.user });
 };
 
+const deleteRecipe = async (req, res) => {
+  const id = req.params.id;
+  // const recipe = await recipesModels.findRecipeById(req.params.id);
+  return res.render('delete', { id, message: null });
+};
+
+// Controller com Deletar Receitas
+const delPost = async (req, res) => {
+  console.log('chamou o post');
+  const id = req.params.id;
+  const recipe = await recipesModels.findRecipeById(id);
+  const user = await userModel.findById(recipe.userId);
+  const password = await req.body.password;
+
+  if (user.password !== password)
+    return res.render('delete', { recipe, id, user: req.user, message: 'Senha Incorreta.' });
+
+  await updateModels.deleteRecipe(req.params.id);
+  return res.redirect('/');
+};
+
 module.exports = {
-  index,
+  delPost,
   cadastro,
   cadastroForm,
-  recipeDetails,
-  myRecipe,
-  search,
-  newRecipe,
+  deleteRecipe,
   edit,
   editPost,
+  index,
+  myRecipe,
+  newRecipe,
   postNewRecipe,
+  recipeDetails,
+  search,
 };

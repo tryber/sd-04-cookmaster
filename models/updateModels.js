@@ -15,6 +15,12 @@ const updateRecipe = async (id, receita, ingredientes, preparo) => {
   );
 };
 
+const deleteRecipe = async (id) =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id like :id').bind('id', id).execute(),
+  );
+
 module.exports = {
   updateRecipe,
+  deleteRecipe,
 };

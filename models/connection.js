@@ -13,7 +13,7 @@ const connection = () =>
   mysqlx
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
-    .catch((e) => {
+    .catch(() => {
       // console.error(e);
       process.exit(1);
     });

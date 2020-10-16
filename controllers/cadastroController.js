@@ -3,9 +3,9 @@ const user = require('../models/userModel');
 let message = '';
 
 const cadastroForm = (req, res) => res.render('cadastro', { message });
-const emailRegex = /[^@]+@[^\.]+\..+/;
+const emailRegex = /[^@]+@[^.]+..+/g;
 
-const validarEmailePassword = (email, password, passwordconfirm, name, lastName) => {
+const validarEmailePassword = (email, password, passwordconfirm) => {
   if (!emailRegex.test(email)) {
     return (message = 'O email deve ter o formato email@mail.com');
   } else if (password.length < 6) {
@@ -14,7 +14,7 @@ const validarEmailePassword = (email, password, passwordconfirm, name, lastName)
     return (message = 'As senhas tem que ser iguais');
   } return null;
 };
-validarNomeeSobrenome = (name, lastName) => {
+const validarNomeeSobrenome = (name, lastName) => {
   if (typeof name !== 'string' || name.length <= 3) {
     return (message =
       'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras');

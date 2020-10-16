@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <% if (messages) { %>
+      <div class="message">
+        <%= messages[0] %>
+      </div>
+    <% } %>
+    <form action="/signup" method="post">
+      <label for="emailInput">Email: </label>
+      <input data-testid="email" type="text" name="email" id="emailInput" />
+      <br />
+      <label for="passwordInput">Senha: </label>
+      <input data-testid="senha" type="password" name="password" id="passwordInput" />
+      <br />
+      <label for="passwordInputRetype">Confirmar Senha: </label>
+      <input
+        data-testid="confirmar-senha"
+        type="password"
+        name="passwordRetype"
+        id="passwordInputRetype"
+      />
+      <br />
+      <label for="firstNameInput">Nome: </label>
+      <input data-testid="nome" type="text" name="firstName" id="firstNameInput" />
+      <br />
+      <label for="lastNameInput">Sobrenome: </label>
+      <input data-testid="sobrenome" type="text" name="lastName" id="lastNameInput" />
+      <br />
+      <button data-testid="cadastrar" type="submit">Cadastrar</button>
+    </form>
+    <button data-testid="login" type="button"><a href="/login">Fazer login</a></button>
+  </body>
+</html>

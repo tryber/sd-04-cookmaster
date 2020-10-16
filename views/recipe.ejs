@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= recipe.name %> | coockmaster</title>
+  </head>
+  <body>
+    <!-- App Header -->
+    <%- include('./includes/header.ejs', { user }) %>
+    <% if (user && user.id === recipe.userID) { %>
+      <button type="button" data-testid="editar-receita">
+        <a href="<%- `/recipes/${recipe.id}/edit` %>">
+          Editar Receita
+        </a>
+      </button>
+      <button type="button" data-testid="excluir-receita">
+        <a href="<%- `/recipes/${recipe.id}/delete` %>">
+          Exluir Receita
+        </a>
+      </button>
+    <% } %>
+    <h1><%= recipe.name %></h1>
+    <br />
+    <span>Enviada por <%= recipe.user %> </span>
+    <br /><br />
+
+    <h2>Ingredientes</h2>
+    <ul>
+      <% recipe.ingredients.forEach(ingredient => { %>
+      <li><%- ingredient %></li>
+      <% }) %>
+    </ul>
+    <br /><br />
+
+    <h2>Modo de preparo</h2>
+    <%- recipe.instructions %>
+  </body>
+</html>

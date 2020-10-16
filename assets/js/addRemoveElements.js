@@ -36,4 +36,4 @@ function add() {
   }
 }
 
-add;
+add();

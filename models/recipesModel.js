@@ -54,6 +54,4 @@ module.exports = {
   getAll,
   getAllByUserId,
   getById,
-  // isValid,
-  // create,
 };

@@ -9,7 +9,7 @@
     <%- include('./header.ejs', {user}); %>
     <h2>Receitas:</h2>
     <div>
-      <% allRecipes.map(recipe => { %>
+      <% recipes.map(recipe => { %>
       <div>
         <h3>Receita: <%= recipe.name %></h3>
         <div>

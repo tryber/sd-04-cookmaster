@@ -1,15 +1,16 @@
 const recipesModel = require('../models/recipesModel');
 
-const index = async (req, res) => {
-  const allRecipes = await recipesModel.getAll();
 
-  res.render('home', { allRecipes, user: req.user });
+const index = async (req, res) => {
+  const recipes = await recipesModel.getAll();
+
+  res.render('home', { recipes, user: req.user });
 };
 
 const show = async (req, res) => {
-  const recipeDetails = await recipesModel.getById(req.params.id);
+  const recipes = await recipesModel.getById(req.params.id);
 
-  res.render('recipes/details', { recipeDetails, user: req.user });
+  res.render('recipes/details', { recipes, user: req.user });
 };
 
 module.exports = {

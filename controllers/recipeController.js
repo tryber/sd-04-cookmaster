@@ -18,7 +18,12 @@ const getRecipeById = async (req, res) => {
 const getRecipesByUserID = async (req, res) => {
   const { user = null } = req;
 
+  // console.log(user)
+
   const recipes = await recipesModel.getRecipesByUserId(user.id);
+
+  console.log('recipes', recipes)
+
 
   return res.render('admin/myRecipes', { recipes, user });
 };

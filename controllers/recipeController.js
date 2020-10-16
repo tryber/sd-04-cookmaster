@@ -5,7 +5,7 @@ const listRecipes = async (req, res) => {
   res.render('home', { recipesAuthor, user: req.user });
 };
 
-// Formulário receitas
+// Formulário receitas cadastro
 const recipesForm = async (req, res) => res.render('users/recipesNew', { user: req.user });
 
 // Cadastra receita

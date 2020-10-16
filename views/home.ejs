@@ -1,30 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cookmaster - Home</title>
-</head>
+  <body>
+    <header>
+      <nav class="navbar d-flex flex-row bd-highlight bg-dark text-white">
+        <div>
+          <p class="m-2">
+            <a href="/" class="text-white">Cookmaster</a>
+            <button class="btn-default ml-3" data-testid="buscar-receita">Buscar Receita</button>
+          </p>
+        </div>
+        <div class="p-1 bd-highlight">
+          <div class="container d-flex flex-row bd-highlight justify-content-end">
+            <%if(user){%>
+            <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
+            <a class="m-2 text-white" href="logout" data-testid="logout">Logout</a>
+            <%}else{%>
+            <a class="m-2 text-white" href="login" data-testid="login">Login</a>
+            <%}%>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-<body>
-  <h1>Boas vindas ao Cookmaster!</h1>
-  <%if(user){%>
-  <p>Usuário atual: <%= `${user.firstName} ${user.lastName}` %></p>
-  <pre><%= JSON.stringify(user, null, 4) %></pre>
-  <a href="logout">Logout</a>
-  <%}else{%>
-  <a href="login">login</a>
-  <%}%>
-      <td>
-        <%recipes.forEach((recipe) => {%>
-  <div>
-    <h2><%=recipe.name%></h2>
-    <p>Criado por: <%=recipe.user%></p>
-    <a href=recipes/<%=recipe.id%> >Mais detalhes</a>
-  </div>
-  <%})%>
-  </td>
-</body>
+    <section class="text-center">
+      <h1>Receitas</h1>
+      <div class="row px-5 m-5">
+        <%recipes.forEach((recipe, index) => {%>
+        <div class="col-sm mx-5 mt-2">
+          <div class="card text-center" style="width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title"><%=recipe.name%></h4>
+              <p class="card-text">Criado por: <%=recipe.user%></p>
+              <a class="btn btn-danger text-dark" href="recipes/<%=recipe.id%>">Mais detalhes</a>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+      <%if(user){%>
+      <div>
+        <a class="btn btn-primary mt-5" href="" data-testid="nova-receita">Nova Receita</a>
+      </div>
+      <%}%>
+    </section>
 
+    <footer
+      class="navbar flex-row justify-content-center bg-dark text-white fixed-bottom text-center"
+    >
+      <div>
+        <a href="https://github.com/djonata-dias" target="_blank" rel="noopener noreferrer">
+          <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/djonata-dias/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
+        </a>
+        <a href="https://www.instagram.com/djosouzadias/" target="_blank" rel="noopener noreferrer">
+          <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
+        </a>
+      </div>
+      <h5 id="copyright">
+        Copyright © 2019-2020 Djonata de Souza Dias. Todos os direitos reservados
+      </h5>
+    </footer>
+  </body>
 </html>

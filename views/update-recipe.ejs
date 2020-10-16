@@ -10,11 +10,17 @@
 
     <h1>Editar Receita</h1>
     <% if (messages) { %>
-      <span><%- messages %> </span>
-    <% } %>
+    <span><%- messages %> </span>
+    <% } %> <% console.log(recipe.name) %>
     <form action="/recipes" method="POST" id="recipeForm">
       <label for="nameInput">Nome da Receita</label>
-      <input data-testid="nome-receita" type="text" name="name" id="nameInput" required />
+      <input
+        data-testid="nome-receita"
+        type="text"
+        name="name"
+        id="nameInput"
+        value=<%= recipe.name %>
+        required />
       <br />
       <label for="ingredientsInput">Ingredientes</label>
       <input
@@ -29,10 +35,18 @@
         Adicionar Ingrediente
       </button>
       <br />
-      <ul id="ingredientsList"></ul>
+      <ul id="ingredientsList">
+        <% recipe.ingredients.forEach((ingredient) => addIngredient(ingredient)) %> 
+      </ul>
       <br />
       <label for="instructionsInput">Modo de preparo: </label>
-      <textarea data-testid="modo-de-preparo" name="instructions" id="instructionsInput" required></textarea>
+      <textarea
+        data-testid="modo-de-preparo"
+        name="instructions"
+        id="instructionsInput"
+        required >
+        <%= recipe.instructions %> 
+      </textarea>
       <br />
       <br />
       <button data-testid="postar-receita" type="button" onclick="postRecipe()">
@@ -41,8 +55,11 @@
     </form>
 
     <script>
-      const addIngredient = () => {
-        const newIngredient = document.querySelector('#ingredientsInput').value;
+      window.onload = () => {
+        console.log(recipe);
+      };
+      const addIngredient = (ingredient) => {
+        const newIngredient = ingredient || document.querySelector('#ingredientsInput').value;
 
         const ingredientElement = document.createElement('li');
 
@@ -65,7 +82,7 @@
         document.querySelector('#ingredientsInput').value = null;
       };
 
-      const postRecipe = () => {
+      const updateRecipe = () => {
         const ingredients = document.querySelectorAll('.ingredient');
         const ingredientsList = Object.keys(ingredients).map((key) => ingredients[key].innerHTML);
 

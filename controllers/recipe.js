@@ -68,9 +68,8 @@ const createRecipe = async (req, res) => {
  * Get recipe update page
  */
 const getRecipeEditor = async (req, res) => {
-  const { id } = req.param;
+  const { id } = req.params;
   const { user } = req;
-
   const recipe = await recipeModel.recipe(id);
 
   if (!recipe) return res.render('home', { user, messages: 'Receita não econtrada' });

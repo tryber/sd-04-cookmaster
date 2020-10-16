@@ -1,32 +1,56 @@
-/* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
-const TEMP_USER = {
-  id: 'd2a667c4-432d-4dd5-8ab1-b51e88ddb5fe',
-  email: 'taylor.doe@company.com',
-  password: 'password',
-  name: 'Taylor',
-  lastName: 'Doe',
-};
+const connection = require('./connection');
 
-/* Substitua o código das funções abaixo para que ela,
-de fato, realize a busca no banco de dados */
-
-/**
- * Busca um usuário através do seu email e, se encontrado, retorna-o.
- * @param {string} email Email do usuário a ser encontrado
- */
 const findByEmail = async (email) => {
-  return TEMP_USER;
+  const emailData = await connection()
+    .then((db) =>
+      db.getTable('users').select([]).where('email = :email').bind('email', email)
+      .execute(),
+    )
+    .then((results) => results.fetchAll());
+
+  const user = {};
+  [user.id, user.email, user.password, user.first_name, user.last_name] = emailData[0];
+  return user;
 };
 
-/**
- * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
- */
 const findById = async (id) => {
-  return TEMP_USER;
+  const idData = await connection()
+    .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', id)
+    .execute())
+    .then((results) => results.fetchAll());
+
+  const user = {};
+  [user.id, user.email, user.password, user.first_name, user.last_name] = idData[0];
+  return user;
+};
+
+const cadastrarUsuario = async (email, senha, nome, sobrenome) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, senha, nome, sobrenome)
+      .execute(),
+  );
+
+const atualizarUsuario = (email, senha, nome, sobrenome, id) => {
+  return connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', senha)
+      .set('first_name', nome)
+      .set('last_name', sobrenome)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
 };
 
 module.exports = {
   findByEmail,
   findById,
+  cadastrarUsuario,
+  atualizarUsuario,
 };

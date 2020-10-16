@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Minhas receitas</title>
   </head>
   <body>
     <header>
@@ -11,29 +11,21 @@
         <h3>Cookmaster</h3>
       </div>
       <div>
-        <a href="registrar"> Cadastrar novo Usuario</a>
-      </div>
-      <div>
-        <% if (receitaCadastrada) { %>
-        <span>Receita cadastrada com sucesso!</span>
-        <% } %> <% if (cadastroValido) { %>
-        <span>Cadastro efetuado com sucesso!</span>
-        <% } %> <% if (!usuario) { %>
+        <% if (!usuario) { %>
         <br /><a data-testid="login" href="/login">Login</a>
         <% } else { %>
         <a data-testid="logout" href="/logout">Logout</a>
-        <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
-        <a href="/me/edit" data-testid="minha-conta">Minha Conta</a>
+        <span><%= usuario.first_name %> <%= usuario.last_name %></span>
         <% } %>
       </div>
     </header>
     <section>
       <div>
         <div>
-          <h1>Receitas</h1>
+          <h1>Minhas Receitas</h1>
         </div>
         <div>
-          <span><%= receitas.length %> receitas cadastradas</span>
+          <span>Usuario possui <%= receitas.length %> receitas cadastradas</span>
         </div>
       </div>
       <div>
@@ -42,9 +34,6 @@
           <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
           <% } %>
         </div>
-        <div>
-          <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
-        </div>
       </div>
     </section>
     <section>
@@ -52,7 +41,7 @@
       <div>
         <h4><%= receita.name %></h4>
         <h5><%= receita.user %></h5>
-        <a href="/recipes/<%= receita.id %>">Ver mais</a>
+        <a href="/recipes/<%= receita.ids %>">Ver mais</a>
       </div>
       <% }) %>
     </section>

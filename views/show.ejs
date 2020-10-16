@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>receita</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h3>Cookmaster</h3>
+        <% if (!usuario) { %>
+        <a data-testid="login" href="/login">Login</a>
+        <% } else { %>
+        <a data-testid="logout" href="/logout">Logout</a>
+        <span><%= usuario.name %></span>
+        <% } %>
+      </div>
+    </header>
+    <section>
+      <div>
+        <h2><%= receita.name %></h2>
+        <span>Enviada por <%= receita.user %></span>
+      </div>
+      <div>
+        <% if (usuario && receita.user_id === usuario.id) { %>
+        <a href="/recipes/<%= receita.id %>/edit" data-testid="editar-receita">Editar Receita</a>
+        <a href="/recipes/<%= receita.id %>/delete" data-testid="excluir-receita"
+          >Excluir Receita</a
+        >
+        <% } %>
+      </div>
+    </section>
+    <section>
+      <% if (receita) { %> <% const {id, user_id, user, name, ingredients, instructions } = receita
+      %>
+      <div>
+        <h3>Ingredientes</h3>
+        <% ingredients.split(',').forEach((ing) => { %>
+        <p><%= ing %></p>
+        <% }) %>
+      </div>
+      <div>
+        <h3>Modo de Preparo</h3>
+        <span><%= receita.instructions %></span>
+      </div>
+      <% } %>
+    </section>
+  </body>
+</html>

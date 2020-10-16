@@ -53,7 +53,7 @@ async function getRecipeByName(q) {
 const verifyData = (recipeName, ingredients, prepare) => recipeName && ingredients && prepare;
 
 async function createRecipe(userId, userName, recipeName, ingredients, prepare) {
-  console.log(userId, userName, recipeName, ingredients, prepare)
+  // console.log(userId, userName, recipeName, ingredients, prepare);
   return connection().then((db) =>
     db
       .getTable('recipes')

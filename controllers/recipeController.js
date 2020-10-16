@@ -1,5 +1,5 @@
-//const { in } = require('sequelize/types/lib/operators');
-const { recipeController } = require('.');
+// const { in } = require('sequelize/types/lib/operators');
+// const { recipeController } = require('.');
 const recipeModel = require('../models/recipeModel');
 
 async function listRecipes(req, res) {
@@ -24,7 +24,7 @@ async function recipeRegister(req, res) {
 async function newRecipe(req, res) {
   const { recipeName, ingredients, prepare } = req.body;
   const { idUser, name, lastName } = req.user;
-  console.log(req.user);
+  // console.log(req.user);
 
   if (!recipeModel.verifyData(recipeName, ingredients, prepare)) {
     return res.status(400).render('new', { user: req.user, message: 'Preencha todos os campos' });

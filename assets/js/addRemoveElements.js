@@ -35,3 +35,5 @@ function add() {
     ul.appendChild(li);
   }
 }
+
+add;

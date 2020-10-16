@@ -17,24 +17,26 @@ const loginForm = (req, res) => {
 const login = async (req, res, next) => {
   const { email, password, redirect } = req.body;
 
-  if (!email || !password)
+  if (!email || !password) {
     return res.render('admin/login', {
       message: 'Preencha o email e a senha',
       redirect: null,
     });
+  }
 
   const user = await userModel.findByEmail(email);
-  if (!user || user.password !== password)
+  if (!user || user.password !== password) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
       redirect: null,
     });
+  }
 
   const token = uuid();
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +45,22 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const renderSignup = (_req, res) => {
+  res.render('admin/signup', { messages: null, done: false });
+};
+
+const signUp = async (req, res) => {
+  if (!req.isValid) {
+    return res.status(400).render('admin/signup', { messages: req.messages, done: false });
+  }
+  await userModel.addUser({ ...req.body });
+  return res.status(200).render('admin/signup', { messages: req.messages, done: true });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  renderSignup,
+  signUp,
 };

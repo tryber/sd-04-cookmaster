@@ -53,8 +53,9 @@ const minhas = async (req, res) => {
 };
 
 const deletar = async (req, res) => {
-  console.log('oi')
-}
+  usuario = req.user;
+  res.render('deletar', { usuario });
+};
 
 module.exports = {
   index,

@@ -69,10 +69,13 @@ const receitaByUsuario = async (id) => {
   return receita;
 };
 
+const deletarReceita = async (id) => {}
+
 module.exports = {
   receitaById,
   receitaByNome,
   cadastrarReceita,
   atualizarBanco,
   receitaByUsuario,
+  deletarReceita,
 };

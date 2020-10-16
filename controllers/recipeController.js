@@ -12,6 +12,7 @@ const index = async (req, res) => {
 const buscar = async (req, res) => {
   const { q } = req.query;
   const receita = await recipeModel.receitaByNome(q);
+  console.log('usuario', req.user)
   res.render('buscar', { usuario: req.user, receita });
 };
 
@@ -52,9 +53,15 @@ const minhas = async (req, res) => {
   return res.render('minhas', { usuario, receitas });
 };
 
-const deletar = async (req, res) => {
-  usuario = req.user;
+const deletarGet = async (req, res) => {
+  const usuario = req.user;
   res.render('deletar', { usuario });
+};
+
+const deletar = async (req, res) => {
+  const senha = req.body.senha;
+  const usuario = req.user;
+  if (senha === usuario.password) await recipeModel.deletarReceita(id)
 };
 
 module.exports = {
@@ -65,5 +72,6 @@ module.exports = {
   editar,
   atualizarReceita,
   minhas,
+  deletarGet,
   deletar,
 };

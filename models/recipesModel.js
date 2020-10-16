@@ -8,7 +8,12 @@ const getAllRecipes = async () =>
 const getRecipeById = async (recipeId) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select([]).where('id = :id').bind('id', recipeId).execute(),
+      db
+        .getTable('recipes')
+        .select([])
+        .where('id = :id')
+        .bind('id', recipeId)
+        .execute(),
     )
     .then((result) => result.fetchOne())
     .then(([id, userId, user, title, ingredientsString, instructions]) => {

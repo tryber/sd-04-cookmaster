@@ -1,22 +1,18 @@
 const connection = require('./connection');
 
 const getRecipes = async () => {
-  try {
-    const db = await connection();
-    const table = await db.getTable('recipes');
-    const results = await table.select([]).execute();
-    const recipes = results.fetchAll();
-    return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
-      id,
-      userId,
-      user,
-      name,
-      ingredients,
-      instructions,
-    }));
-  } catch {
-    return null;
-  }
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const results = await table.select([]).execute();
+  const recipes = results.fetchAll();
+  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
 };
 
 const getRecipesById = async (inputId) => {

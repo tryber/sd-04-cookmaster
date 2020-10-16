@@ -43,8 +43,27 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+// Novo
+
+const registerForm = (_, res) => res.status(200).render('register', { message: null });
+
+const addUser = (req, res) => {
+  const { email, password, cPassword, nome, sobrenome } = req.body;
+  const user = { email, password, cPassword, nome, sobrenome };
+  const message = userModel.validateUser(user);
+
+  if (message === 'ok') {
+    userModel.createUser(user);
+    return res.status(200).render('register', { message: 'Cadastro efetuado com sucesso!' });
+  }
+
+  res.status(500).render('register', { message });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  registerForm,
+  addUser,
 };

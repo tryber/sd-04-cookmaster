@@ -58,10 +58,44 @@ const findById = async (uId) => {
       ({ id, email, password, firstName, lastName }))[0];
 };
 
+const validateUser = (user) => {
+  const { email, password, cPassword, nome, sobrenome } = user;
+  const validateEmail = (email) =>
+    /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+
+  if (!validateEmail(email)) {
+    return 'O email deve ter o formato email@mail.com';
+  }
+  if (password.length < 6) {
+    return 'A senha deve ter pelo menos 6 caracteres';
+  }
+  if (password !== cPassword) {
+    return 'As senhas tem que ser iguais';
+  }
+  if (nome.length < 3) {
+    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  if (sobrenome.length < 3) {
+    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return 'ok';
+};
+
+const createUser = async (user) => {
+  const { email, password, nome, sobrenome } = user;
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, nome, sobrenome)
+    .execute();
+};
+
 // === IIFE teste ===
 // (async () => console.log(await findById(3)))();
 
 module.exports = {
   findByEmail,
   findById,
+  createUser,
+  validateUser,
 };

@@ -24,6 +24,10 @@ app.get('/', controllers.recipeController.showRecipes);
 
 app.get('/admin', middlewares.auth(), controllers.recipeController.showRecipes);
 
+app.route('/register')
+  .get(controllers.userController.registerForm)
+  .post(controllers.userController.addUser);
+
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

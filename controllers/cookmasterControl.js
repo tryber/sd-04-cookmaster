@@ -39,7 +39,6 @@ const search = async (req, res) => {
 
 // Nova receita Controller
 const newRecipe = async (req, res) => {
-  console.log(req.user);
   res.render('newRecipe', { user: req.user });
 };
 

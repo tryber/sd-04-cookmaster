@@ -57,9 +57,12 @@ const schema = yup.object().shape({
   confirma: yup
     .string()
     .min(6)
-    .when('senha', (senha, field) =>
-      senha ? field.required().oneOf([yup.ref('senha'), 'As senhas tem que ser iguais']) : field,
-    )
+    .when('senha', (senha, field) => {
+      if (senha) field.required().oneOf([yup.ref('senha'), 'As senhas tem que ser iguais']);
+      return field;
+    })
+    //   senha ? field.required().oneOf([yup.ref('senha'), 'As senhas tem que ser iguais']) : field,
+    // )
     .required(),
   nome: yup
     .string()
@@ -81,7 +84,7 @@ const cadastrar = async (req, res) => {
     const cadastroValido = results;
     const receitaCadastrada = null;
     const usuario = req.body;
-    return res.render('home', { cadastroValido, usuario, receitas });
+    return res.render('home', { cadastroValido, usuario, receitas, receitaCadastrada });
   } catch (error) {
     const erroData = error.inner.map((e) => ({ nome: e.path, msg: e.errors[0] }));
     // console.log('results dentro do catch', erroData);

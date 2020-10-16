@@ -1,5 +1,5 @@
 const recipeModel = require('../models/recipeModel');
-const receita = require('../models/homeModel');
+const homeModel = require('../models/homeModel');
 
 const index = async (req, res) => {
   const receita = await recipeModel.receitaById(req.params.id);
@@ -21,7 +21,7 @@ const novaReceita = async (req, res) => {
 };
 
 const cadastrarReceita = async (req, res) => {
-  const receitas = await receita.acharReceitas();
+  const receitas = await homeModel.acharReceitas();
   const { nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario } = req.body;
   // console.log('post', nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario)
   await recipeModel.cadastrarReceita(nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario);
@@ -34,7 +34,7 @@ const cadastrarReceita = async (req, res) => {
 
 const editar = async (req, res) => {
   const usuario = req.user;
-  console.log('req.params', req.params.id);
+  // console.log('req.params', req.params.id);
   const receita = await recipeModel.receitaById(req.params.id);
   res.render('edit', { usuario, receita });
 };

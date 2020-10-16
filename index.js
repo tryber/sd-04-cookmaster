@@ -20,10 +20,10 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.get('/cadastro', (_req, res) => res.render('cadastro', { message: null }));
+app.get('/cadastro', (req, res) => res.render('cadastro', { message: null }));
 app.post('/cadastro', controllers.registerUserController);
 
-app.get('/recipes/new', middlewares.auth(), (_req, res) => res.render('admin/newRecipe'));
+app.get('/recipes/new', middlewares.auth(), (req, res) => res.render('admin/newRecipe'));
 app.post('/recipes', middlewares.auth(), controllers.recipesController.createRecipe);
 
 app.get('/recipes/search', controllers.recipesController.searchRecipe);

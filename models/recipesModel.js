@@ -50,6 +50,19 @@ const getById = async (recipeId) => {
   };
 };
 
+const getRecipeById = async (id) => {
+  const db = await connection();
+  const results = await db
+    .getTable('recipes')
+    .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+
+  const [userId, user, name, ingredients, instructions] = await results.fetchOne();
+  return { id, userId, user, name, ingredients, instructions };
+};
+
 const getByName = async (recipeName) => {
   const db = await connection();
   const results = await db
@@ -67,5 +80,6 @@ module.exports = {
   getAll,
   getAllByUserId,
   getById,
+  getRecipeById,
   getByName,
 };

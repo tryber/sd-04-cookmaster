@@ -35,5 +35,3 @@ function add() {
     ul.appendChild(li);
   }
 }
-
-module.exports = { add };

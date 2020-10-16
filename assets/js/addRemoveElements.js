@@ -36,4 +36,4 @@ function add() {
   }
 }
 
-module.exports = { add, };
+module.exports = { add };

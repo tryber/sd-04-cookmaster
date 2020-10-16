@@ -65,45 +65,32 @@ const createRecipe = async (req, res) => {
 };
 
 /**
- * Get recipe update page
- */
-const getRecipeEditor = async (req, res) => {
-  const { id } = req.params;
-  const { user } = req;
-  const recipe = await recipeModel.recipe(id);
-
-  if (!recipe) return res.render('home', { user, messages: 'Receita não econtrada' });
-  console.log(recipe);
-  return res.render('update-recipe', { user, recipe, messages: null });
-};
-
-/**
  * Update a recipe.
  * @param {recipe} req.body - recipe information to be updated | PUT Param
  */
-// const updateRecipe = async (req, res) => {
-//   const recipe = req.body;
-//   const { user } = req;
+const updateRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+  const recipe = Object.keys(req.body).length !== 0 ? req.body : await recipeModel.recipe(id);
 
-//   if (!recipe) {
+  if (!recipe) return res.redirect(204, '/');
+  if (recipe.userID !== user.id) res.redirect(302, `/recipes/${recipe.id}`);
+  if (Object.keys(req.body).length === 0) return res.render('update-recipe', { user, recipe, messages: null });
 
-//   };
+  const result = await recipeModel.update(recipe);
 
-//   recipe.userId = user.id;
-//   recipe.user = `${user.firstName} ${user.lastName}`;
-
-//   const result = await recipeModel.create(recipe);
-
-//   return res.render('new-recipe', {
-//     user,
-//     messages: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
-//   });
-// };
+  return result
+    ? res.redirect(200, '/')
+    : res.render('update-recipe', {
+      user,
+      messages: 'Erro ao atualizar receita',
+    });
+};
 
 module.exports = {
   getRecipes,
   getRecipe,
   searchRecipe,
   createRecipe,
-  getRecipeEditor,
+  updateRecipe,
 };

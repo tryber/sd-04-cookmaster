@@ -12,14 +12,14 @@
     <% if (messages) { %>
     <span><%- messages %> </span>
     <% } %> <% console.log(recipe.name) %>
-    <form action="/recipes" method="POST" id="recipeForm">
+    <form action="/recipes" method="PUT" id="recipeEditForm">
       <label for="nameInput">Nome da Receita</label>
       <input
         data-testid="nome-receita"
         type="text"
         name="name"
         id="nameInput"
-        value=<%= recipe.name %>
+        value="<%= recipe.name %>"
         required />
       <br />
       <label for="ingredientsInput">Ingredientes</label>
@@ -35,9 +35,7 @@
         Adicionar Ingrediente
       </button>
       <br />
-      <ul id="ingredientsList">
-        <% recipe.ingredients.forEach((ingredient) => addIngredient(ingredient)) %> 
-      </ul>
+      <ul id="ingredientsList"></ul>
       <br />
       <label for="instructionsInput">Modo de preparo: </label>
       <textarea
@@ -49,15 +47,18 @@
       </textarea>
       <br />
       <br />
-      <button data-testid="postar-receita" type="button" onclick="postRecipe()">
-        Postar Receita
+      <button data-testid="salvar-receita" type="button" onclick="editRecipe()">
+        Salvar Receita
       </button>
     </form>
 
     <script>
       window.onload = () => {
-        console.log(recipe);
+        const ingredients = '<%= recipe.ingredients %>'.split(',');
+
+        ingredients.forEach((ingredient) => addIngredient(ingredient));
       };
+
       const addIngredient = (ingredient) => {
         const newIngredient = ingredient || document.querySelector('#ingredientsInput').value;
 
@@ -82,13 +83,13 @@
         document.querySelector('#ingredientsInput').value = null;
       };
 
-      const updateRecipe = () => {
+      const editRecipe = () => {
         const ingredients = document.querySelectorAll('.ingredient');
         const ingredientsList = Object.keys(ingredients).map((key) => ingredients[key].innerHTML);
 
         document.querySelector('#ingredientsInput').value = ingredientsList.toString();
 
-        document.querySelector('#recipeForm').submit();
+        document.querySelector('#recipeEditForm').submit();
       };
     </script>
   </body>

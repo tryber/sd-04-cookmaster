@@ -28,7 +28,6 @@ const getRecipesByName = async (q) => {
   const table = await db.getTable('recipes');
   const results = await table.select([]).where('name like :q').bind('q', `%${q}%`).execute();
   const recipes = await results.fetchAll();
-  console.log('Model:', recipes);
   return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
     id,
     userId,

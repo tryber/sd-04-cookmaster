@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Recipe</title>
+  </head>
+  <body>
+    <%- include('./includes/header.ejs', { user }) %>
+
+    <h1>Editar Receita</h1>
+    <% if (messages) { %>
+      <span><%- messages %> </span>
+    <% } %>
+    <form action="/recipes" method="POST" id="recipeForm">
+      <label for="nameInput">Nome da Receita</label>
+      <input data-testid="nome-receita" type="text" name="name" id="nameInput" required />
+      <br />
+      <label for="ingredientsInput">Ingredientes</label>
+      <input
+        data-testid="ingredientes"
+        type="text"
+        name="ingredients"
+        id="ingredientsInput"
+        value=""
+        required
+      />
+      <button data-testid="adicionar-ingrediente" type="button" onClick="addIngredient()">
+        Adicionar Ingrediente
+      </button>
+      <br />
+      <ul id="ingredientsList"></ul>
+      <br />
+      <label for="instructionsInput">Modo de preparo: </label>
+      <textarea data-testid="modo-de-preparo" name="instructions" id="instructionsInput" required></textarea>
+      <br />
+      <br />
+      <button data-testid="postar-receita" type="button" onclick="postRecipe()">
+        Postar Receita
+      </button>
+    </form>
+
+    <script>
+      const addIngredient = () => {
+        const newIngredient = document.querySelector('#ingredientsInput').value;
+
+        const ingredientElement = document.createElement('li');
+
+        const ingredientLabel = document.createElement('span');
+        ingredientLabel.classList.add('ingredient');
+        ingredientLabel.textContent = newIngredient;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Excluir Ingrediente';
+        removeBtn.onclick = () => {
+          removeBtn.parentElement.remove();
+        };
+
+        ingredientElement.appendChild(ingredientLabel);
+        ingredientElement.appendChild(removeBtn);
+
+        document.querySelector('#ingredientsList').appendChild(ingredientElement);
+
+        //Clean ingredients input
+        document.querySelector('#ingredientsInput').value = null;
+      };
+
+      const postRecipe = () => {
+        const ingredients = document.querySelectorAll('.ingredient');
+        const ingredientsList = Object.keys(ingredients).map((key) => ingredients[key].innerHTML);
+
+        document.querySelector('#ingredientsInput').value = ingredientsList.toString();
+
+        document.querySelector('#recipeForm').submit();
+      };
+    </script>
+  </body>
+</html>

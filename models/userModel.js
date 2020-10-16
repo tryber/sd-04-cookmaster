@@ -1,54 +1,73 @@
 const connection = require('./connection');
 
-const findByEmail = async (email) =>
-  connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        .where('email = :email')
-        .bind('email', email)
-        .execute(),
-    )
-    .then((result) => result.fetchAll()[0])
-    .then(([userId, userEmail, password, name, lastName]) => ({
-      id: userId,
-      email: userEmail,
-      password,
-      name,
-      lastName,
-    }));
+const findByEmail = async (userEmail) => {
+  const db = await connection();
+  const results = await db
+    .getTable('users')
+    .select(['id', 'email', 'password', 'first_name', 'last_name'])
+    .where('email = :email_param')
+    .bind('email_param', userEmail)
+    .execute();
 
-const findById = async (id) =>
-  connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        .where('id = :id')
-        .bind('id', id)
-        .execute(),
-    )
-    .then((result) => result.fetchAll()[0])
-    .then(([userId, userEmail, password, name, lastName]) => ({
-      id: userId,
-      email: userEmail,
-      password,
-      name,
-      lastName,
-    }));
+  const fetchResults = await results.fetchOne();
+  const [id, email, password, name, lastName] = fetchResults;
+  return {
+    id,
+    email,
+    password,
+    name,
+    lastName,
+  };
+};
 
-const registerUser = async ({ email, password, name, lastName }) =>
-  connection().then((db) =>
-    db
-      .getTable('users')
-      .insert(['email', 'password', 'first_name', 'last_name'])
-      .values(email, password, name, lastName)
-      .execute(),
-  );
+const findById = async (userId) => {
+  const db = await connection();
+  const results = await db
+    .getTable('users')
+    .select(['id', 'email', 'password', 'first_name', 'last_name'])
+    .where('id = :id')
+    .bind('id', userId)
+    .execute();
+
+  const fetchResults = await results.fetchOne();
+  const [id, email, password, name, lastName] = fetchResults;
+  return {
+    id,
+    email,
+    password,
+    name,
+    lastName,
+  };
+};
+
+const addUser = async ({ email, password, firstName, lastName }) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, firstName, lastName)
+    .execute();
+  return true;
+};
+
+const emailCheck = (userEmail) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(userEmail);
+
+const passwordCheck = (userPass) => /^(\d|\w){6,}$/.test(userPass);
+
+const confirmPassCheck = (firstpass, secondPass) => firstpass === secondPass;
+
+const nameCheck = (userName) => /\w{3,}/.test(userName);
+
+const isValid = {
+  emailCheck,
+  passwordCheck,
+  confirmPassCheck,
+  nameCheck,
+};
 
 module.exports = {
   findByEmail,
   findById,
-  registerUser,
+  addUser,
+  isValid,
 };

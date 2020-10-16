@@ -6,39 +6,25 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <header>
-      <p>Cookmaster</p>
-      <% if (!user) { %>
-      <a href="Login">
-        <button data-testid="login">Login</button>
-      </a>
-      <% } %> <% if (user) { %> Olá, <%= user.name %>
-      <a href="/logout">
-        <button data-testid="logout">Logout</button>
-      </a>
-      <% } %>
-    </header>
-    <h1>Receitas</h1>
-    <% if (user) { %>
-    <a href="/recipes/new">
-      <button data-testid="nova-receita">Nova Receita</button>
-    </a>
-    <a href="/me/recipes">
-      <button data-testid="minhas-receitas">Minhas Receitas</button>
-    </a>
-    <% } %>
-    <a href="/recipes/search">
-      <button data-testid="buscar-receita">Buscar Receita</button>
-    </a>
-
+    <%- include('./header.ejs', {user}); %>
+    <h2>Receitas:</h2>
     <div>
-      <% recipes.forEach(r => { %>
+      <% allRecipes.map(recipe => { %>
       <div>
-        <p><%=r.name%></p>
-        <p><%=r.user%></p>
-        <a href="/recipes/<%=r.id%>">Ver mais</a>
+        <h3>Receita: <%= recipe.name %></h3>
+        <div>
+          <h4>Autor: <%= recipe.user %></h4>
+          <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
+        </div>
       </div>
-      <% }); %>
+      <%})%>
+    </div>
+    <div>
+      <% if (user) { %>
+      <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+      <a data-testid="minhas-receitas" href="/me/recipes">Minhas Receitas</a>
+      <% } %>
+      <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
     </div>
   </body>
 </html>

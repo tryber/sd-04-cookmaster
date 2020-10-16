@@ -3,9 +3,6 @@ const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
 
-const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const namesRegex = /\w{3,}/;
-
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
 
@@ -20,18 +17,20 @@ const loginForm = (req, res) => {
 const login = async (req, res, next) => {
   const { email, password, redirect } = req.body;
 
-  if (!email || !password)
+  if (!email || !password) {
     return res.render('admin/login', {
       message: 'Preencha o email e a senha',
       redirect: null,
     });
+  }
 
   const user = await userModel.findByEmail(email);
-  if (!user || user.password !== password)
+  if (!user || user.password !== password) {
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
       redirect: null,
     });
+  }
 
   const token = uuid();
   SESSIONS[token] = user.id;
@@ -46,7 +45,9 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const signupForm = (_req, res) => res.render('register', { message: null, done: false });
+const renderSignup = (_req, res) => {
+  res.render('admin/signup', { messages: null, done: false });
+};
 
 const signUp = async (req, res) => {
   if (!req.isValid) {
@@ -60,6 +61,6 @@ module.exports = {
   login,
   loginForm,
   logout,
-  signupForm,
+  renderSignup,
   signUp,
 };

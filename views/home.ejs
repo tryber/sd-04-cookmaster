@@ -12,7 +12,7 @@
     <title>Cookmaster - Home</title>
   </head>
   <body class="m-4 border border-secondary p-1">
-    <div class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="navbar navbar-expand-lg navbar-light bg-dark rounded m-1">
       <header class="collapse navbar-collapse">
         <h1 class="navbar-brand col text-light">Cookmaster - Home</h1>
         <% if(!user) { %>
@@ -22,7 +22,7 @@
         <% } %>
       </header>
     </div>
-    <div class="navbar navbar-expand-lg navbar-light bg-primary" >
+    <div class="navbar navbar-expand-lg navbar-light bg-primary rounded m-1" >
       <div class="collapse navbar-collapse">
         <h2 class="navbar-brand col text-light">Receitas</h2>
         <% if(user) { %>
@@ -31,17 +31,17 @@
         <a class="btn btn-light" data-testid="buscar-receita">Buscar Receitas</a>
       </div>
     </div>
-    <div class="d-flex flex-column bd-highlight mb-3">
-      <div class="d-flex p-2 bd-highlight flex-row justify-content-around  bd-highlight">
-        <p class="text-dark">Nome da receita</p>
-        <p class="text-dark">Nome do usuario</p>
-        <a class="btn btn-light mr-3 invisible">invicivel</a>
+    <div class="d-flex flex-column bd-highlight mb-1">
+      <div class="mx-auto container row text-center m-1 bd-highlight text-dark rounded">
+        <h3 class="col">Nome da receita</h3>
+        <h3 class="col">Nome do usuario</h3>
+        <a class="m-1 btn btn-light invisible">invisivel</a>
       </div>
       <% recipes.forEach((recipe)=> { %>
-      <div class="d-flex p-2 bd-highlight flex-row justify-content-around m-2 bg-dark">
-        <p class="text-light"><%= recipe.name %></p>
-        <p class="text-light"><%= recipe.user %></p>
-        <a class="btn btn-light" href="Link">Ver mais</a>
+      <div class="mx-auto container row text-center m-1 bg-primary text-light ">
+        <p class="col"><%= recipe.name %></p>
+        <p class="col"><%= recipe.user %></p>
+        <a class="m-1 btn-sm btn-light rounded-pill" href="Link">Ver mais</a>
       </div>
       <% }) %>
     </div>

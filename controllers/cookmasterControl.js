@@ -91,12 +91,10 @@ const delPost = async (req, res) => {
 // Controllers User Edit
 const userEdit = async (req, res) => {
   const userData = await userModel.findById(req.user.id);
-  console.log('chamou o GET', userData);
   res.render('editUser', { userData, user: req.user, message: null });
 };
 
 const userEditPost = async (req, res) => {
-  console.log('chamou o Post', req.body);
   const isValid = await validation({ ...req.body });
   if (isValid.status === 'ok') {
     await userModel.editUserModel(req.body);

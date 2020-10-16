@@ -24,7 +24,7 @@ const authMiddleware = (required = true) => async (req, res, next) => {
 
   const { password, ...userData } = user;
   req.pass = user.password;
-  console.log('pass auth', req.pass);
+  // console.log('pass auth', req.pass);
   req.user = userData;
 
   return next();

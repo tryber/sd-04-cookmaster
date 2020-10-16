@@ -14,7 +14,7 @@ const connection = () =>
     .getSession(config)
     .then((session) => session.getSchema('cookmaster'))
     .catch((e) => {
-      console.error(e);
+      // console.error(e);
       process.exit(1);
     });
 

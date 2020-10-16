@@ -8,12 +8,12 @@ const getAll = async () => {
 
   return registers.fetchAll()
     .map(([id, userId, user, name, ingredients, instructions]) =>
-      ({ id, userId, user, name, ingredients, instructions }))
+      ({ id, userId, user, name, ingredients, instructions }));
 };
 
 // === IIFE teste ===
 // (async () => console.log(await getAll()))();
 
 module.exports = {
-  getAll
+  getAll,
 };

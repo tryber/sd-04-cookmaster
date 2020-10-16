@@ -28,7 +28,7 @@ app.get('/cadastro', controllers.registerUserController.getCadastro);
 app.post('/cadastro', controllers.registerUserController.registerUser);
 
 app.get('/recipes/new', middlewares.auth(), (_req, res) => res.render('admin/newRecipe'));
-app.post('recipes', middlewares.auth(), controllers.recipeController.createRecipe);
+app.post('/recipes', middlewares.auth(), controllers.recipeController.createRecipe);
 
 app.get('/recipes/search', controllers.recipeController.searchRecipes);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.getRecipeById);

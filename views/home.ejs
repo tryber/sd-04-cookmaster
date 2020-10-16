@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link type="text/css" rel="stylesheet" href="/styles/styles.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
   </head>
-  <body>
-    <header class="Header">
-      <h1 class="Header">Cookmaster - Home</h1>
-      <% if(!user) { %>
-      <button data-testid="login"><a href="/login">Login</a></button>
-      <% } else { %>
-      <button data-testid="logout"><a href="/logout">Logout</a></button>
-      <% } %>
-    </header>
-    <div>
-      <h2>Receitas</h2>
-      <% if(user) { %>
-        <button data-testid="nova-receita">Nova Receita</button>
-        <% }%>
-      <button data-testid="buscar-receita">Buscar Receitas</button>
+  <body class="m-4 border border-secondary p-1">
+    <div class="navbar navbar-expand-lg navbar-light bg-dark">
+      <header class="collapse navbar-collapse">
+        <h1 class="navbar-brand col text-light">Cookmaster - Home</h1>
+        <% if(!user) { %>
+        <a data-testid="login" class="btn btn-light"href="/login">Login</a>
+        <% } else { %>
+        <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
+        <% } %>
+      </header>
     </div>
-    <div>
+    <div class="navbar navbar-expand-lg navbar-light bg-primary" >
+      <div class="collapse navbar-collapse">
+        <h2 class="navbar-brand col text-light">Receitas</h2>
+        <% if(user) { %>
+        <a class="btn btn-light mr-3" data-testid="nova-receita">Nova Receita</a>
+        <% }%>
+        <a class="btn btn-light" data-testid="buscar-receita">Buscar Receitas</a>
+      </div>
+    </div>
+    <div class="d-flex flex-column bd-highlight mb-3">
+      <div class="d-flex p-2 bd-highlight flex-row justify-content-around  bd-highlight">
+        <p class="text-dark">Nome da receita</p>
+        <p class="text-dark">Nome do usuario</p>
+        <a class="btn btn-light mr-3 invisible">invicivel</a>
+      </div>
       <% recipes.forEach((recipe)=> { %>
-      <div>
-        <p><%= recipe.name %></p>
-        <p><%= recipe.user %></p>
-        <a href="Link">Ver mais</a>
+      <div class="d-flex p-2 bd-highlight flex-row justify-content-around m-2 bg-dark">
+        <p class="text-light"><%= recipe.name %></p>
+        <p class="text-light"><%= recipe.user %></p>
+        <a class="btn btn-light" href="Link">Ver mais</a>
       </div>
       <% }) %>
     </div>

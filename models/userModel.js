@@ -1,56 +1,36 @@
 const connection = require('./connection');
 
-/* Substitua o código das funções abaixo para que ela,
-de fato, realize a busca no banco de dados */
-
-/**
- * Busca um usuário através do seu email e, se encontrado, retorna-o.
- * @param {string} email Email do usuário a ser encontrado
- */
-const findByEmail = async (email1) =>
-  connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        // .where(`email = ${email1}`)
-        // .bind('email_param', email)
-        .execute(),
-    )
-    .then((results) => results.fetchOne())
-    .then(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    }));
-
-/**
- * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
- */
-const findById = async (id1) => {
-  return connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        // .where('id = :id_param')
-        // .bind('id_param', id)
-        .execute(),
-    )
-    .then((results) => results.fetchOne())
-    .then(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    }));
+const findByEmail = async (emailInput) => {
+  const db = await connection();
+  const result = await db
+    .getTable('users')
+    .select([])
+    .where('email = :email')
+    .bind('email', emailInput)
+    .execute();
+  const [id, email, password, name, lastName] = await result.fetchOne();
+  return { id, email, password, name, lastName };
 };
+
+const findById = async (idInput) => {
+  const db = await connection();
+  const table = await db.getTable('users');
+  const result = await table.select([]).where('id = :id').bind('id', idInput).execute();
+  const [id, email, password, name, lastName] = await result.fetchOne();
+  return { id, email, password, name, lastName };
+};
+
+const addUser = async (email, password, first_name, last_name) =>
+  connection().then((bd) =>
+    bd
+      .getTable('users')
+      .insert('email', 'password', 'first_name', 'last_name')
+      .values(email, password, first_name, last_name)
+      .execute(),
+  );
 
 module.exports = {
   findByEmail,
   findById,
+  addUser,
 };

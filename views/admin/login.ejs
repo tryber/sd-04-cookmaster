@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Login</title>
   </head>
-  <body>
-    <% if (message) {%>
-    <div class="message"><%= message %></div>
-    <% } %>
-    <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" data-testid="email" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
-      <% if (redirect) { %>
-      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+  <body class="m-3">
+    <div class="d-flex justify-content-center">
+      <% if (message) {%>
+      <div class="message"><%= message %></div>
       <% } %>
-      <button data-testid="entrar" type="submit">Entrar</button>
-    </form>
+      <form class="mx-auto" action="/login" method="POST">
+        <div class="form-group mx-auto">
+          <label for="emailInput">Email: </label>
+          <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Senha: </label>
+          <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+        </div>
+        <% if (redirect) { %>
+        <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+        <% } %>
+        <a data-testid="cadastrar" href="/cadastro">cadastrar</a>
+        <button class="btn btn-primary" data-testid="entrar" type="submit">Entrar</button>
+      </form>
+    </div>
   </body>
 </html>

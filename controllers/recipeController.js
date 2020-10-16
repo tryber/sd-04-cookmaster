@@ -12,7 +12,7 @@ const index = async (req, res) => {
 const buscar = async (req, res) => {
   const { q } = req.query;
   const receita = await recipeModel.receitaByNome(q);
-  console.log('usuario', req.user);
+  // console.log('usuario', req.user);
   res.render('buscar', { usuario: req.user, receita });
 };
 

@@ -96,9 +96,23 @@ const cadastrar = async (req, res) => {
   // res.redirect('/');
 };
 
+const editarUsuario = async (req, res) => {
+  const usuario = req.user;
+
+  return res.render('editUser', { usuario });
+};
+
+const editarUsuarioPost = async (req, res) => {
+  const { email, senha, nome, sobrenome, id } = req.body;
+  await userModel.atualizarUsuario(email, senha, nome, sobrenome, id);
+  return res.redirect('/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   cadastrar,
+  editarUsuario,
+  editarUsuarioPost,
 };

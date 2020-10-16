@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atualizar usuario</title>
+  </head>
+  <body>
+    <form action="/me/edit" method="POST">
+      <input type="hidden" name="id" value="<%= usuario.id %>" />
+      <label for="emailInput">Email: </label>
+      <input
+        type="text"
+        name="email"
+        id="emailInput"
+        data-testid="email"
+        value="<%= usuario.email %>"
+      /><br />
+
+      <label for="passwordInput">Senha: </label>
+      <input
+        type="password"
+        name="senha"
+        id="passwordInput"
+        data-testid="senha"
+        value="<%= usuario.password %>"
+      /><br />
+
+      <label for="confirmaInput">Confirmar Senha : </label>
+      <input
+        type="password"
+        name="confirma"
+        id="confirmaInput"
+        data-testid="confirmar-senha"
+      /><br />
+
+      <label for="nomeInput">Nome: </label>
+      <input
+        type="text"
+        name="nome"
+        id="nomeInput"
+        data-testid="nome"
+        value="<%= usuario.first_name %>"
+      /><br />
+
+      <label for="sobrenomeInput">Sobrenome: </label>
+      <input
+        type="text"
+        name="sobrenome"
+        id="sobrenomeInput"
+        data-testid="sobrenome"
+        value="<%= usuario.last_name %>"
+      /><br />
+
+      <button type="submit" data-testid="salvar">Salvar</button>
+    </form>
+    <a href="/">Cancelar</a>
+  </body>
+</html>

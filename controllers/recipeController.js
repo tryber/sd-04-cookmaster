@@ -17,13 +17,7 @@ const getRecipeById = async (req, res) => {
 
 const getRecipesByUserID = async (req, res) => {
   const { user = null } = req;
-
-  // console.log(user)
-
   const recipes = await recipesModel.getRecipesByUserId(user.id);
-
-  console.log('recipes', recipes)
-
 
   return res.render('admin/myRecipes', { recipes, user });
 };
@@ -41,7 +35,13 @@ const createRecipe = async (req, res) => {
   } = req;
 
   const userName = `${user.name} ${user.lastName}`;
-  await recipesModel.insertRecipe(user.id, userName, name, ingredients.join(), instructions);
+  await recipesModel.insertRecipe(
+    user.id,
+    userName,
+    name,
+    ingredients.join(),
+    instructions,
+  );
 
   res.redirect('/');
 };
@@ -51,7 +51,10 @@ const deleteRecipe = async (req, res) => {
   const { password } = await userModel.findById(user.id);
 
   if (password !== body.password) {
-    return res.render('admin/confirmPassword', { id: params.id, message: 'Senha Incorreta.' });
+    return res.render('admin/confirmPassword', {
+      id: params.id,
+      message: 'Senha Incorreta.',
+    });
   }
 
   const warningsCount = await recipesModel.deleteRecipe(params.id);

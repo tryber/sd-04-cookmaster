@@ -23,14 +23,14 @@ const getRecipeById = async (recipeId) =>
       return { id, userId, user, title, ingredients, instructions };
     });
 
-const getRecipesByUserId = async (userId) =>
+const getRecipesByUserId = async (idParam) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select([])
         .where('user_id = :user_id')
-        .bind('user_id', userId)
+        .bind('user_id', idParam)
         .execute(),
     )
     .then((result) => result.fetchAll())

@@ -8,7 +8,7 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  const recipes = await recipesModel.getById(req.params.id);
+  const recipes = recipesModel.getById(req.params.id);
 
   res.render('recipes/details', { recipes, user: req.user });
 };

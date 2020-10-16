@@ -52,6 +52,10 @@ const minhas = async (req, res) => {
   return res.render('minhas', { usuario, receitas });
 };
 
+const deletar = async (req, res) => {
+  console.log('oi')
+}
+
 module.exports = {
   index,
   buscar,
@@ -60,4 +64,5 @@ module.exports = {
   editar,
   atualizarReceita,
   minhas,
+  deletar,
 };

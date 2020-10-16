@@ -29,7 +29,6 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipeController
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
-
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
@@ -37,9 +36,7 @@ app.post('/login', controllers.userController.login);
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editar);
 app.post('/recipes/:id/', middlewares.auth(), controllers.recipeController.atualizarReceita);
 
-app.get('/recipes/:id/delete', (req, res) => {
-  return res.render('edit');
-});
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deletar);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.index);
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -65,7 +65,7 @@ const receitaByUsuario = async (id) => {
     .execute())
     .then((results) => results.fetchAll());
 
-  const receita = idData.map(([id, userId, user, name]) => ({ id, userId, user, name }));
+  const receita = idData.map(([ids, userId, user, name]) => ({ ids, userId, user, name }));
   return receita;
 };
 

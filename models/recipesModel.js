@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getRecipes = async () => {
-  try{
+  try {
     const db = await connection();
     const table = await db.getTable('recipes');
     const results = await table.select([]).execute();
@@ -14,8 +14,7 @@ const getRecipes = async () => {
       ingredients,
       instructions,
     }));
-  }
-  catch {
+  } catch {
     return null;
   }
 };
@@ -27,8 +26,7 @@ const getRecipesById = async (inputId) => {
     const results = await table.select([]).where('id = :inputId').bind('inputId', inputId).execute();
     const [id, userId, user, name, ingredients, instructions] = await results.fetchOne();
     return { id, userId, user, name, ingredients, instructions };
-  }
-  catch {
+  } catch {
     return null;
   }
 };
@@ -47,8 +45,7 @@ const getRecipesByName = async (q) => {
       ingredients,
       instructions,
     }));
-  }
-  catch {
+  } catch {
     return null;
   }
 };

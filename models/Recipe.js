@@ -79,7 +79,13 @@ const recipe = async (id) => {
  * Get all recipes
  */
 const recipes = async (searchQuery) => {
-  const search = searchQuery ? `name LIKE "%${searchQuery}%"` : null;
+  let search = null;
+  if (typeof searchQuery === 'string') {
+    search = `name LIKE "%${searchQuery}%"`;
+  }
+  if (typeof searchQuery === 'number') {
+    search = `id = "%${searchQuery}%"`;
+  }
 
   const recipesData = await connection()
     .then((schema) =>
@@ -87,7 +93,6 @@ const recipes = async (searchQuery) => {
         .getTable('recipes')
         .select(['id', 'user', 'user_id', 'name', 'ingredients', 'instructions'])
         .where(search)
-        .bind('name', search)
         .execute())
     .then((results) => results.fetchAll())
     .then((data) => data);

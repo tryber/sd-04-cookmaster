@@ -2,6 +2,7 @@ const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/user');
+const recipeModel = require('../models/Recipe.js');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -48,8 +49,18 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
+const getUserRecipes = async (req, res) => {
+  const { user } = req;
+  const recipes = await recipeModel.recipes(user.id);
+
+  return recipes
+    ? res.render('my-recipes', { user, recipes })
+    : res.redirect(204, '/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  getUserRecipes,
 };

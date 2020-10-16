@@ -12,7 +12,6 @@
     <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
     <pre><%= JSON.stringify(user, null, 4) %></pre>
     <%}%>
-    <p><%=recipes%></p>
     <button onclick="window.location.pathname='/logout'">Logout</button>
   </body>
 </html>

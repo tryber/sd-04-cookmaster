@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Edit Recipe</title>
+  </head>
+  <body>
+    <%- include('header') %>
+    <h1>Editar Receita</h1>
+    <!-- action="/recipes/:id" ou action="/recipes/<%= recipe.id %>" -->
+    <!--
+      <input type="hidden" name="userId" value="<%= user.id %>" />
+      <input type="hidden" name="user" value="<%= `${user.name} ${user.lastName}` %>" />
+    -->
+    <form action="/recipes/<%= recipe.id %>" method="POST">
+      <label for="nameInput">Nome da Receita</label><br />
+      <input type="hidden" name="recipeId" value="<%= recipe.id %>" />
+      <input
+        type="text"
+        name="recipeName"
+        value="<%= recipe.name %>"
+        id="nameInput"
+        data-testid="nome-receita"
+      /><br />
+
+      <div>
+        <label for="ingredientInput">Ingredientes</label><br />
+        <ul id="ingredientList">
+          <% recipe.ingredients.split(',').forEach((item) => { %>
+          <li>
+            <input name="recipeIngredients[]" value="<%= item %>" id="<%= item %>" />
+            <button type="button" onclick="event.target.parentElement.remove()">
+              Excluir Ingrediente
+            </button>
+          </li>
+          <% }); %>
+        </ul>
+
+        <li>
+          <input type="text" id="ingredientInput" data-testid="ingredientes" />
+          <button type="button" data-testid="adicionar-ingrediente" onclick="add()">
+            Adicionar Ingrediente
+          </button>
+        </li>
+      </div>
+
+      <label for="instructionsInput">Modo de Preparo</label><br />
+      <textarea
+        name="recipeInstructions"
+        id="instructionsInput"
+        rows="20"
+        cols="100"
+        data-testid="modo-de-preparo"
+      ><%= recipe.instructions %></textarea
+      ><br />
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
+    <a href="/">Voltar</a>
+  </body>
+  <script src="/js/addRemoveElements.js"></script>
+</html>

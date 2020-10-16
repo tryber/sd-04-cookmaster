@@ -34,7 +34,8 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  return res.redirect(redirect || '/');
+  // res.redirect(redirect || '/admin');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,50 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+// Cadastro
+const formSignup = (req, res) => {
+  const text = {
+    email: null,
+    password: null,
+    repeatPassword: null,
+    name: null,
+    lastName: null,
+    success: null,
+  };
+  return res.render('signup', { message: text });
+};
+
+const signup = async (req, res) => {
+  const { email, password, repeatPassword, name, lastName } = req.body;
+  // chama as validações
+  const text = {
+    email: userModel.isValidEmail(email),
+    password: userModel.isValidPassword(password),
+    repeatPassword: userModel.isValidRepeatPassword(password, repeatPassword),
+    name: userModel.isValidName(
+      name,
+      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    ),
+    lastName: userModel.isValidName(
+      lastName,
+      'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+    ),
+    success: null,
+  };
+
+  if (Object.values(text).some((content) => content !== null)) {
+    return res.render('signup', { message: text });
+  }
+
+  text.success = 'Cadastro efetuado com sucesso!';
+  await userModel.add(email, password, name, lastName);
+  res.render('signup', { message: text });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  formSignup,
+  signup,
 };

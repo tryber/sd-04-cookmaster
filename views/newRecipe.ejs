@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - New Recipe</title>
+  </head>
+  <body>
+    <%- include('header') %>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+      <input type="hidden" name="userId" value="<%= user.id %>" />
+      <input type="hidden" name="user" value="<%= `${user.name} ${user.lastName}` %>" />
+
+      <label for="nameInput">Nome da Receita</label><br />
+      <input type="text" name="recipeName" id="nameInput" data-testid="nome-receita" /><br />
+
+      <div>
+        <label for="ingredientInput">Ingredientes</label><br />
+        <ul id="ingredientList"></ul>
+
+        <li>
+          <input type="text" id="ingredientInput" data-testid="ingredientes" />
+          <button type="button" data-testid="adicionar-ingrediente" onclick="add()">
+            Adicionar Ingrediente
+          </button>
+        </li>
+      </div>
+
+      <label for="instructionsInput">Modo de Preparo</label><br />
+      <textarea
+        name="recipeInstructions"
+        id="instructionsInput"
+        rows="20"
+        cols="100"
+        data-testid="modo-de-preparo"
+      ></textarea
+      ><br />
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+
+    <a href="/">Voltar</a>
+  </body>
+  <script src="/js/addRemoveElements.js"></script>
+</html>

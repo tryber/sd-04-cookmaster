@@ -3,7 +3,7 @@ const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
 
-const loginForm = (req, res) => {
+exports.loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
 
   if (SESSIONS[token]) return res.redirect('/');
@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+exports.login = async (req, res, next) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password)
@@ -34,17 +34,11 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
-const logout = (req, res) => {
+exports.logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
   res.render('admin/logout');
-};
-
-module.exports = {
-  login,
-  loginForm,
-  logout,
 };

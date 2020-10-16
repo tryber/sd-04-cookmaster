@@ -22,11 +22,10 @@
         <a data-testid="nova-receita" class="btn btn-primary m-2" href="/recipes/new"
           >Nova Receita</a
         >
-        <a data-testid="minha-conta" class="btn btn-primary m-2" href="/me/edit">Minha Conta</a>
         <a data-testid="minhas-receitas" class="btn btn-primary m-2" href="/me/recipes"
           >Minhas Receitas</a
         >
-        Usuário logado: <%=user.firstName %>
+        Usuário logado: <%=user.first_name %>
         <a data-testid="logout" class="btn btn-primary m-2" href="/logout">Logout</a>
         <% } else { %>
         <div class="d-flex justify-content-around">

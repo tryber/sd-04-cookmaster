@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Nova Receita</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <script>
+    const addIngrediente = () => {
+      const valor = document.getElementById('add').value;
+      if (!valor) return null;
+      const ul = document.getElementById('ul');
+      const createLi = document.createElement('li');
+      const createInput = document.createElement('input');
+      const button = document.createElement('button');
+
+      createInput.name = 'ingredientes[]';
+      createInput.value = valor;
+      createInput.classList = 'form-control mr-sm-2';
+      button.innerHTML = 'Excluir ingrediente';
+      button.type = 'button';
+      button.classList = 'btn btn-outline-danger my-2 my-sm-0';
+      button.onclick = () => {
+        document.getElementById(valor).remove();
+      };
+      createLi.id = valor;
+      createLi.classList = 'form-inline my-2 my-lg-0';
+      createLi.appendChild(createInput);
+      createLi.appendChild(button);
+      ul.appendChild(createLi);
+      document.getElementById('add').value = '';
+    };
+
+    const delet = (valor) => {
+      console.log(document.getElementById(valor));
+      document.getElementById(valor).remove();
+    };
+  </script>
+  <body>
+    <div class="container-sm">
+      <h1>Editar Receita</h1>
+
+      <form method="POST" action="/recipes/<%= recipe.id %>">
+        <div class="form-group">
+          <input type="hidden" name="id" value="<%= user.id %> " />
+          <input type="hidden" name="nome" value="<%= user.firstName %> <%= user.lastName %> " />
+          <label for="nome">Nome da Receita</label>
+          <input
+            data-testid="nome-receita"
+            value="<%= recipe.name  %> "
+            type="text"
+            class="form-control"
+            name="receita"
+          />
+        </div>
+
+        <div>
+          <p>Ingredientes</p>
+          <ul id="ul">
+            <% recipe.ingredients.split(',').forEach(item => { %>
+            <li id="<%= item %>" class="form-inline my-2 my-lg-0">
+              <input name="ingredientes[]" class="form-control mr-sm-2" value="<%= item %>" />
+              <button
+                onclick="delet('<%= item %>')"
+                type="button"
+                class="btn btn-outline-danger my-2 my-sm-0"
+              >
+                Excluir Ingrediente
+              </button>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+        <div class="form-inline my-2 my-lg-0">
+          <input
+            data-testid="ingredientes"
+            class="form-control mr-sm-2"
+            type="search"
+            id="add"
+            placeholder="Ingrediente"
+          />
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            onclick="addIngrediente()"
+            type="button"
+            data-testid="adicionar-ingrediente"
+          >
+            Adicionar Ingrediente
+          </button>
+        </div>
+        <div class="form-group mt-3">
+          <label for="modeodepreparo">Modo de Preparo</label>
+          <textarea
+            data-testid="modo-de-preparo"
+            class="form-control"
+            name="preparo"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="d-flex justify-content-around">
+          <button data-testid="postar-receita" class="btn btn-primary" type="submit">
+            Salvar Receita
+          </button>
+          <a href="/" class="btn btn-primary" type="button">Voltar</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

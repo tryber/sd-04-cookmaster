@@ -69,10 +69,10 @@ const findByName = async (nameRecipe) => {
 };
 
 // receitas por usuario
-const findByUserId = async (userId) => {
+const findByUserId = async (idUser) => {
   const data = await connection()
     .then((db) =>
-      db.getTable('recipes').select().where('user_id = :idBind').bind('idBind', userId)
+      db.getTable('recipes').select().where('user_id = :idBind').bind('idBind', idUser)
       .execute(),
     )
     .then((results) => results.fetchAll())
@@ -111,6 +111,7 @@ const update = async (idRecipe, recipeName, ingredients, instructions) => {
       .bind('idBind', idRecipe)
       .execute(),
   );
+  return data;
 };
 
 // exclusão de receita ou delete

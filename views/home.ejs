@@ -11,34 +11,24 @@
   <h1>Cookmaster</h1>
 
   <% if(user) { %>
-  <a href="/recipes/new">
-    <button type="button" data-testid="nova-receita">
-      Nova Receita
-    </button>
+  <a href="/recipes/new" data-testid="nova-receita">
+    Nova Receita
   </a>
 
-  <a href="/me/recipes">
-    <button type="button" data-testid="minhas-receitas">
-      Minhas Receitas
-    </button>
+  <a href="/me/recipes" data-testid="minhas-receitas">
+    Minhas Receitas
   </a>
-  <a href="/logout">
-    <button type="button" data-testid="logout">
-      Logout
-    </button>
+  <a href="/logout" data-testid="logout">
+    Logout
   </a>
   <% } else { %>
-  <a href="/login">
-    <button type=" button" data-testid="login">
-      Login
-    </button>
+  <a href="/login" data-testid="login">
+    Login
   </a>
   <% } %>
 
-  <a href="/recipes/search">
-    <button type=" button" data-testid="buscar-receita">
-      Buscar Receita
-    </button>
+  <a href="/recipes/search" data-testid="buscar-receita">
+    Buscar Receita
   </a>
 
   <h1>Receitas</h1>

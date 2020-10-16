@@ -42,8 +42,8 @@ const findById = async (idRecipe) => {
 
 const findByName = async (nameRecipe) => {
   /*
-    .where('name like :filter')
-    .bind('filter', `%${filter}%`)
+  .where('name like :filter')
+  .bind('filter', `%${filter}%`)
   */
   const data = await connection()
     .then((db) =>
@@ -53,6 +53,27 @@ const findByName = async (nameRecipe) => {
         .where('name like :nameBind')
         .bind('nameBind', `%${nameRecipe}%`)
         .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    );
+  return data;
+};
+
+// receitas por usuario
+const findByUserId = async (userId) => {
+  const data = await connection()
+    .then((db) =>
+      db.getTable('recipes').select().where('user_id = :idBind').bind('idBind', userId)
+      .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
@@ -78,9 +99,27 @@ const add = (userId, user, recipeName, ingredients, instructions) => {
   );
 };
 
+const update = async (idRecipe, recipeName, ingredients, instructions) => {
+  const data = await connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', recipeName)
+      .set('ingredients', ingredients)
+      .set('instructions', instructions)
+      .where('id = :idBind')
+      .bind('idBind', idRecipe)
+      .execute(),
+  );
+};
+
+// exclusão de receita ou delete
+
 module.exports = {
   getAll,
   findById,
   findByName,
+  findByUserId,
   add,
+  update,
 };

@@ -42,6 +42,16 @@ const getByName = async (recipeName) => {
   return list;
 };
 
+const addNewRecipe = async (id, userName, name, ingredients, instructions) => {
+  const db = await connection();
+  await db
+    .getTable('recipes')
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, userName, name, ingredients, instructions)
+    .execute();
+  return true;
+};
+
 const getRecipesByUserId = async (userId) => {
   const db = await connection();
   const results = await db
@@ -59,4 +69,4 @@ const getRecipesByUserId = async (userId) => {
   }));
 };
 
-module.exports = { getAll, getById, getByName, getRecipesByUserId };
+module.exports = { getAll, getById, getByName, addNewRecipe, getRecipesByUserId };

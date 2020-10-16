@@ -24,4 +24,13 @@ const myRecipes = async (req, res) => {
   res.render('myRecipes', { recipes, user: req.user });
 };
 
-module.exports = { showAll, showOne, searchRecipes, myRecipes };
+const renderNewRecipe = (req, res) => res.render('newRecipe', { user: req.user });
+
+const addNewRecipe = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { name: userName, id } = req.user;
+  await Recipes.addNewRecipe(id, userName, name, ingredients, instructions);
+  res.render('newRecipe', { user: req.user });
+};
+
+module.exports = { showAll, showOne, searchRecipes, myRecipes, renderNewRecipe, addNewRecipe };

@@ -11,7 +11,7 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([id, userEmail, password, name, lastName]) => ({ id, userEmail, password, name, lastName }));
 };
 
 /**
@@ -30,7 +30,7 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([userId, email, password, name, lastName]) => ({ userId, email, password, name, lastName }));
 };
 
 module.exports = {

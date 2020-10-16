@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const findAllRecipes = async () => {
+const findAllRecipes = async function () {
   return connection()
     .then((db) =>
       db
@@ -9,14 +9,16 @@ const findAllRecipes = async () => {
         .execute(),
     )
     .then((results) => results.fetchAll())
-    .then((recipes) => recipes.map(([id, user_id, user, name, ingredients, instructions]) => ({
-      id,
-      user_id,
-      user,
-      name,
-      ingredients,
-      instructions,
-    })));
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    );
 };
 
 module.exports = { findAllRecipes };

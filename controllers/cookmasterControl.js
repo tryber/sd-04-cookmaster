@@ -58,7 +58,7 @@ const editPost = async (req, res) => {
   const { receita, ingredientes, preparo } = req.body;
   const id = req.params.id;
   await updateModels.updateRecipe(id, receita, ingredientes, preparo);
-  return res.redirect(`/recipes/${req.params.id}`);
+  return res.redirect('/me/recipes');
 };
 
 // Controller com Minhas Receitas
@@ -68,6 +68,7 @@ const myRecipe = async (req, res) => {
   res.render('myRecipe', { recipes, user: req.user });
 };
 
+// Controller com Deletar receitas GET
 const deleteRecipe = async (req, res) => {
   const id = req.params.id;
   return res.render('delete', { id, message: null });

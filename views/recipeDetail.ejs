@@ -14,14 +14,14 @@
       <div>
         <% if (user && user.id === recipe.userId) { %>
         <div class="d-flex justify-content-around">
-          <a href="/recipes/<%= recipe.id %>/edit">
-            <button data-testid="editar-receita" type="button" class="btn btn-primary">
-              Editar Receita
-            </button>
-          </a>
           <a href="/recipes/<%= recipe.id %>/delete">
             <button data-testid="excluir-receita" type="button" class="btn btn-primary">
               Excluir Receita
+            </button>
+          </a>
+          <a href="/recipes/<%= recipe.id %>/edit">
+            <button data-testid="editar-receita" type="button" class="btn btn-primary">
+              Editar Receita
             </button>
           </a>
         </div>

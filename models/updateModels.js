@@ -15,9 +15,13 @@ const updateRecipe = async (id, receita, ingredientes, preparo) => {
   );
 };
 
-const deleteRecipe = async (id) =>
+const deleteRecipe = async (idParams) =>
   connection().then((db) =>
-    db.getTable('recipes').delete().where('id like :id').bind('id', id).execute(),
+    db.getTable('recipes')
+    .delete()
+    .where('id like :id')
+    .bind('id', idParams)
+    .execute(),
   );
 
 module.exports = {

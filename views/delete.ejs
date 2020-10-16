@@ -15,6 +15,7 @@
     <div class="container-sm mt-5">
       <form method="POST" action="/recipes/<%= id %> /delete">
         <div class="form-group">
+          <h3>Confirme a exclusão da receita</h3>
           <label for="password">Senha</label>
           <input type="password" data-testid="senha" class="form-control" name="password" />
           <% if (message) {%>

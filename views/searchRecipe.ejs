@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookmaster - Buscar</title>
+</head>
+
+<body>
+  <h1>Cookmaster</h1>
+  <a data-testid="login" href="/login">Login</a>
+  <form action="/recipes/search" method="GET">
+    <input data-testid="receita" type="text" name="q" />
+    <button data-testid="buscar" type="submit">Buscar</button>
+  </form>
+  <ul>
+    <% if (recipes) { %>
+    <% recipes.forEach(({user, recipe, id}) => { %>
+    <li>
+      <%=`${recipe} ${user}`%>
+      <a href=<%= `/recipes/${id}` %>>Ver mais</a>
+    </li>
+    <% }) %>
+    <% } %>
+  </ul>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Receita</title>
+  </head>
+  <body>
+    <h1>Nova Receita</h1>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
+    <form action="/recipes" method="POST">
+      <label for="name">Nome da Receita</label>
+      <input data-testid="nome-receita" name="name" type="text" />
+      <label for="ingredients">Ingredientes</label>
+      <input id="add" data-testid="ingredientes" name="ingredients" type="text" />
+      <button onclick="clicked()" data-testid="adicionar-ingrediente" type="button">
+        Adicionar Ingrediente
+      </button>
+      <input type="hidden" name="secret" id="secret" />
+      <input type="hidden" name="user" value="<%=user.name + ' ' + user.lastName%>" />
+      <input type="hidden" name="userId" value="<%=user.id%>" />
+      <label for="setting">Modo de Preparo</label>
+      <input data-testid="modo-de-preparo" name="setting" type="text" />
+      <button data-testid="postar-receita">Salvar Receita</button>
+      <div>
+        <ul></ul>
+      </div>
+    </form>
+  </body>
+  <script>
+    function clicked() {
+      let add = document.querySelector('#add').value;
+      let secret = document.querySelector('#secret');
+      secret.value += add + ', ';
+      let item = document.createElement('LI');
+      let xButton = document.createElement('BUTTON');
+      xButton.setAttribute('type', 'button');
+      xButton.setAttribute('onclick', 'exclude(event)');
+      xButton.innerText = 'Excluir Ingrediente';
+      let ul = document.querySelector('UL');
+      item.innerText = add;
+      item.appendChild(xButton);
+      ul.appendChild(item);
+    }
+
+    function exclude(event) {
+      event.target.parentElement.remove();
+    }
+  </script>
+</html>

@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +43,29 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signUp = (_, res) => {
+  res.render('signUp', { message: '' });
+};
+
+const create = async (req, res) => {
+  const { name, password, passwordCheck, mail, lastname } = req.body;
+  if (
+    !userModel.isValidName(name, res) &&
+    !userModel.isValidLastname(lastname, res) &&
+    !userModel.isValidMail(mail, res) &&
+    !userModel.isvalidPass(password, res) &&
+    !userModel.isValidCheck(password, passwordCheck, res)
+  )
+    await userModel.addUser(name, lastname, mail, password);
+
+  res.render('signUp', { message: 'Cadastro efetuado com sucesso!' });
+  res.redirect('/login');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signUp,
+  create,
 };

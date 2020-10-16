@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coockmaster</title>
+  </head>
+  <body>
+    <h1><%=recipes[3]%></h1>
+    <% if(user) { if(user.name + ' ' + user.lastName === recipes[2]) { %>
+    <a href="/recipes/<%=recipes[0]%>/edit" data-testid="editar-receita">Editar receita</a>
+    <a href="/recipes/<%=recipes[0]%>/delete" data-testid="excluir-receita">Excluir receita</a>
+    <% }} %>
+    <span>Enviada por <%=recipes[2]%></span>
+    <h2>Ingredientes</h2>
+    <span><%=recipes[4]%></span>
+    <h2>Modo de Preparo</h2>
+    <span><%=recipes[5]%></span>
+  </body>
+</html>

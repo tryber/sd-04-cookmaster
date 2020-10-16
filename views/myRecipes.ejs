@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minhas Receitas</title>
+  </head>
+  <body>
+    <h1>Minhas Receitas</h1>
+    <h2>Cookmaster</h2>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
+    <p>Receitas:</p>
+    <ul>
+      <% recipesCC.forEach(recipe => { %>
+      <li><%= recipe[3] %></li>
+      <span><%= recipe[2] %></span>
+      <a href="/recipes/<%=recipe[0]%>">Ver mais</a>
+      <% }) %>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Receita</title>
+  </head>
+  <body>
+    <h1>Editar Receita</h1>
+    <% if(user)%><span>Usuário logado: <%=user.name%></span>
+    <form action="/recipes/<%=recipe[0]%>" method="POST">
+      <label for="name">Nome da Receita</label>
+      <input data-testid="nome-receita" type="text" name="name" value="<%=recipe[3]%>" />
+      <div>
+        <label for="items">Ingredientes</label>
+        <input
+          data-testid="ingredientes"
+          id="items"
+          name="items"
+          value="<%=recipe[4]%>"
+        />
+        <ul>
+          <% recipe[4].split(",").forEach(item => { %>
+          <li><%= item %>, <button onclick="del(event)">Excluir Ingrediente</button></li>
+          <% }) %>
+        </ul>
+      </div>
+      <input id="item" type="text" />
+      <button data-testid="adicionar-ingrediente" onclick="add()" type="button">
+        Adicionar ingrediente
+      </button>
+      <label for="setting">Modo de preparo</label>
+      <input data-testid="modo-de-preparo" type="text" name="setting" value="<%=recipe[5]%>" />
+      <button data-testid="postar-receita">Salvar Receita</button>
+    </form>
+  </body>
+  <script>
+    function del(event) {
+      event.target.parentElement.remove();
+      let items = document.querySelector('#items').value.split(',');
+
+      let valorAserExcluído = event.path[1].innerText.split(',')[0].trim();
+      document.querySelector('#items').value = items.filter((vlr) => vlr != valorAserExcluído);
+    }
+    function add() {
+      let items = document.querySelector('#items');
+      let ul = document.querySelector('ul');
+      let item = document.querySelector('#item').value;
+      let li = document.createElement('LI');
+      let xButton = document.createElement('BUTTON');
+      xButton.setAttribute('type', 'button');
+      xButton.setAttribute('onclick', 'del(event)');
+      xButton.innerText = 'Excluir ingrediente';
+      li.innerText = item + ',';
+      items.value += ',' + item;
+      li.appendChild(xButton);
+      ul.appendChild(li);
+    }
+  </script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Busca</title>
+  </head>
+  <body>
+    <form action="/recipes/search" method="GET">
+      <label for="q">Item de busca: </label>
+      <input data-testid="receita" type="text" name="q" />
+      <button data-testid="buscar">Buscar</button>
+    </form>
+    <% if(param !== '' || param !== undefined) { %>
+    <ul>
+      <% recipes.forEach(recipe => { %>
+      <li><%= recipe[3] %></li>
+      <p><%= recipe[2] %></p>
+      <a href="/recipes/<%=recipe.id%>">Ver mais</a>
+      <% }) %> %> <%} %>
+    </ul>
+  </body>
+</html>

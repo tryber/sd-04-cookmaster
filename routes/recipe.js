@@ -13,7 +13,7 @@ router.get('/recipes/search', middlewares.auth(false), controllers.recipeControl
 router.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.getRecipe);
 /** Recipe update */
 router.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.updateRecipe);
-// router.put('/recipes/:id', middlewares.auth(false), controllers.recipeController.updateRecipe);
+router.post('/recipes/:id', middlewares.auth(), controllers.recipeController.updateRecipe);
 /** Recipes home */
 router.get('/', middlewares.auth(false), controllers.recipeController.getRecipes);
 

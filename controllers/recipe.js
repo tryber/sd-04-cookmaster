@@ -74,9 +74,10 @@ const updateRecipe = async (req, res) => {
   const recipe = Object.keys(req.body).length !== 0 ? req.body : await recipeModel.recipe(id);
 
   if (!recipe) return res.redirect(204, '/');
-  if (recipe.userID !== user.id) res.redirect(302, `/recipes/${recipe.id}`);
+  if (recipe.userID && recipe.userID !== user.id) res.redirect(302, `/recipes/${recipe.id}`);
   if (Object.keys(req.body).length === 0) return res.render('update-recipe', { user, recipe, messages: null });
 
+  recipe.recipeId = id;
   const result = await recipeModel.update(recipe);
 
   return result

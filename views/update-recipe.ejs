@@ -11,8 +11,8 @@
     <h1>Editar Receita</h1>
     <% if (messages) { %>
     <span><%- messages %> </span>
-    <% } %> <% console.log(recipe.name) %>
-    <form action="/recipes" method="PUT" id="recipeEditForm">
+    <% } %>
+    <form action="/recipes/<%= recipe.id %>" method="POST" id="recipeEditForm">
       <label for="nameInput">Nome da Receita</label>
       <input
         data-testid="nome-receita"

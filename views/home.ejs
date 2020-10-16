@@ -33,11 +33,11 @@
     <a href="/recipes/search"
       ><button data-testid="buscar-receita" class="btn btn-primary">Buscar Receitas</button></a
     >
+    <% if(user) { %>
     <a href="/recipes/new"
       ><button data-testid="nova-receita" class="btn btn-primary">Nova Receita</button></a
     >
-
-    <% recipes.forEach(recipe => { %>
+    <% } %> <% recipes.forEach(recipe => { %>
     <h3><%= recipe.user + ' ' + recipe.name%></h3>
     <a class="btn btn-primary" href="/recipes/<%= recipe.id %>">Ver mais</a>
 

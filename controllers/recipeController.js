@@ -12,7 +12,7 @@ const index = async (req, res) => {
 const buscar = async (req, res) => {
   const { q } = req.query;
   const receita = await recipeModel.receitaByNome(q);
-  console.log('usuario', req.user)
+  console.log('usuario', req.user);
   res.render('buscar', { usuario: req.user, receita });
 };
 
@@ -35,6 +35,7 @@ const cadastrarReceita = async (req, res) => {
 
 const editar = async (req, res) => {
   const usuario = req.user;
+  // console.log('senha', req.pass)
   // console.log('req.params', req.params.id);
   const receita = await recipeModel.receitaById(req.params.id);
   res.render('edit', { usuario, receita });
@@ -43,25 +44,39 @@ const editar = async (req, res) => {
 const atualizarReceita = async (req, res) => {
   const { nomeReceita, preparo, ingredientes } = req.body;
   const id = req.params.id;
+  // console.log('erro', req.body);
   await recipeModel.atualizarBanco(nomeReceita, preparo, ingredientes, id);
-  return res.redirect(`/recipes/${id}`);
+  return res.redirect('/me/recipes');
 };
 
 const minhas = async (req, res) => {
   const usuario = req.user;
   const receitas = await recipeModel.receitaByUsuario(usuario.id);
+  // console.log('receitas', receitas);
   return res.render('minhas', { usuario, receitas });
 };
 
 const deletarGet = async (req, res) => {
   const usuario = req.user;
-  res.render('deletar', { usuario });
+  const id = req.params.id;
+  const senhaInvalida = false;
+
+  res.render('deletar', { usuario, id, senhaInvalida });
 };
 
 const deletar = async (req, res) => {
   const senha = req.body.senha;
-  const usuario = req.user;
-  if (senha === usuario.password) await recipeModel.deletarReceita(id)
+  // console.log('deletar senha', senha);
+  const usuario = req.pass;
+  // console.log('deletar usuario', usuario);
+
+  const id = req.params.id;
+  if (senha === usuario) {
+    await recipeModel.deletarReceita(id);
+    return res.redirect('/');
+  }
+  const senhaInvalida = 'Senha invalida';
+  return res.render('deletar', { usuario, senhaInvalida, id });
 };
 
 module.exports = {

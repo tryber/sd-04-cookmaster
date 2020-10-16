@@ -60,7 +60,7 @@
   <script>
     function add() {
       const idInput = document.getElementById('ingredienteInput').value;
-      if (idInput !== '') {
+      if (idInput) {
         const listaUl = document.getElementById('tabela');
         const itemLi = document.createElement('li');
         const input = document.createElement('input');

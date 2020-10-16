@@ -35,7 +35,7 @@ const receitaByNome = async (nome) => {
 
 const cadastrarReceita = async (nomeReceita, preparo, ingredientes, nomeUsuario, idUsuario) => {
   const string = ingredientes.toString();
-  connection().then((db) =>
+  return connection().then((db) =>
     db
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
@@ -46,7 +46,7 @@ const cadastrarReceita = async (nomeReceita, preparo, ingredientes, nomeUsuario,
 
 const atualizarBanco = async (nomeReceita, preparo, ingredientes, id) => {
   const ing = ingredientes.toString();
-  connection().then((db) =>
+  return connection().then((db) =>
     db
       .getTable('recipes')
       .update()
@@ -69,7 +69,11 @@ const receitaByUsuario = async (id) => {
   return receita;
 };
 
-const deletarReceita = async (id) => {}
+const deletarReceita = async (id) =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = :id').bind('id', id)
+    .execute(),
+  );
 
 module.exports = {
   receitaById,

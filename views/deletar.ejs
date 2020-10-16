@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deletar</title>
-</head>
-<body>
-  <form action="/recipes/<%= req.params.id %>" method="POST">
-    <h3>Confirme a exclusão da receita</h3>
-    <label for="deletInput">Senha</label>
-    <input
-      type="password"
-      name="senha"
-      id="deletInput"
-      data-testid="senha"      
-    /><br />
-    <a href="/" data-testid="cancelar">Cancelar</a>
-    <button type="submit" data-testid="confirmar">Confirmar</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deletar</title>
+  </head>
+  <body>
+    <form action="/recipes/<%= id %>/delete" method="POST">
+      <h3>Confirme a exclusão da receita</h3>
+      <% if(senhaInvalida) { %>
+      <span><%= senhaInvalida %></span>
+      <% } %>
+      <label for="deletInput">Senha</label>
+      <input type="password" name="senha" id="deletInput" data-testid="senha" /><br />
+      <a href="/" data-testid="cancelar">Cancelar</a>
+      <button type="submit" data-testid="confirmar">Confirmar</button>
+    </form>
+  </body>
 </html>

@@ -3,10 +3,9 @@ const user = require('../models/userModel');
 let message = '';
 
 const cadastroForm = (req, res) => res.render('cadastro', { message });
-const emailRegex = /[^@]+@[^.]+..+/g;
 
 const validarEmailePassword = (email, password, passwordconfirm) => {
-  if (!emailRegex.test(email)) {
+  if (!email.match(/\S+@\w+\.\w{2,6}(\.\w{2})?/i)) {
     return (message = 'O email deve ter o formato email@mail.com');
   } else if (password.length < 6) {
     return (message = 'A senha deve ter pelo menos 6 caracteres');

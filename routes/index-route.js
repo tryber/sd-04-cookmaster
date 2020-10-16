@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const recipeController = require('../controllers/recipeController');
 const userController = require('../controllers/userController');
@@ -7,7 +8,7 @@ const middlewares = require('../middlewares');
 
 router.get('/', middlewares.auth(false), recipeController.listRecipes);
 router.get('/admin', middlewares.auth(), (req, res) =>
-  res.render('admin/home', { user: req.user })
+  res.render('admin/home', { user: req.user }),
 );
 
 router.get('/login', userController.loginForm);

@@ -1,4 +1,4 @@
-const recipeModel = require('../models/recipeModel');
+const recipeModel = require('../models/recipeModels.js');
 
 exports.listRecipes = async (req, res) => {
   const recipes = await recipeModel.getAllRecipes();

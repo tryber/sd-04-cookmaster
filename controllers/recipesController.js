@@ -15,8 +15,9 @@ const showOne = async (req, res) => {
 
 const searchQuery = async (req, res) => {
   const searchedRecipes = await Recipes.getByName(req.query.q);
+  const userRecipes = await recipesModel.getUserRecipes(req.user.id);
 
-  res.render('recipes/search', { searchedRecipes, user: req.user });
+  res.render('recipes/search', { searchedRecipes, userRecipes, user: req.user });
 };
 
 const renderNew = (req, res) => res.render('recipes/new', { user: req.user });
@@ -26,7 +27,7 @@ const addNew = async (req, res) => {
   const { name: userName, id } = req.user;
   await recipesModel.addRecipe(id, userName, name, ingredients, instructions);
 
-  res.render('recipes/new', { user: req.user });
+  return res.redirect('/');
 };
 
 const renderUserRecipes = async (req, res) => {

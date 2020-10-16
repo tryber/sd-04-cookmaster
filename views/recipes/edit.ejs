@@ -10,7 +10,7 @@
   <div>
     <%- include('../stickers/header.ejs', {user}); %>
     <% if (recipe.userId === user.id) { %>
-    <form action=<%=`/recipes/${recipe.id}`%> method="POST" name="recipeForm">
+    <form action=<%=`/recipes/${recipe.recipeId}`%> method="POST" name="form">
       <h3>Editar Receita</h3>
       <div>
         <div>
@@ -24,7 +24,7 @@
         <div>
           <label for="ingredientInput">Adicionar ingrediente: </label>
           <input type="text" name="ingredients" id="ingredientInput" data-testid="ingredientes" />
-          <button type="button" data-testid="adicionar-ingrediente" onclick="addIngredient()">
+          <button type="button" data-testid="adicionar-ingrediente" onclick="addIng()">
             Adicionar ingrediente
           </button>
         </div>
@@ -68,7 +68,7 @@
       list.appendChild(li);
       ingredientsSet.add(ingredient);
     });
-    const addIngredient = () => {
+    const addIng = () => {
       const li = document.createElement('li');
       const ingredientInput = document.getElementById('ingredientInput');
       li.innerHTML = `<span>${ingredientInput.value}</span>
@@ -88,7 +88,7 @@
     const submitButton = () => {
       const ingredientInput = document.getElementById('ingredientInput');
       ingredientInput.value = [...ingredientsSet].join();
-      document.recipeForm.submit();
+      document.form.submit();
     };
   </script>
 </body>

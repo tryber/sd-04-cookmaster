@@ -54,7 +54,7 @@ const addRecipe = async (id, userName, name, ingredients, instructions) => {
 
 const editRecipe = async (id, name, ingredients, instructions) => {
   const db = await connection();
-  await db
+  return db
     .getTable('recipes')
     .update()
     .set('name', name)
@@ -63,7 +63,6 @@ const editRecipe = async (id, name, ingredients, instructions) => {
     .where('id = :id')
     .bind('id', id)
     .execute();
-  return true;
 };
 
 const getRecipeFromId = async (recipeId) => {
@@ -84,14 +83,20 @@ const getUserRecipes = async (userId) => {
 
   const results = await db
     .getTable('recipes')
-    .select(['id', 'user', 'name'])
+    .select(['id', 'user', 'name', 'ingredients', 'instructions'])
     .where('user_id = :userId')
     .bind('userId', userId)
     .execute();
 
   const recipesList = await results.fetchAll();
 
-  return recipesList.map(([id, user, name]) => ({ id, user, name }));
+  return recipesList.map(([id, user, name, ingredients, instructions]) => ({
+    id,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
 };
 
 module.exports = {

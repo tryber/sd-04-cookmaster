@@ -58,10 +58,20 @@ const findById = async (uId) => {
       ({ id, email, password, firstName, lastName }))[0];
 };
 
+const validateFullName = (firstName, lastName) => {
+  if (firstName.length < 3) {
+    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  if (lastName.length < 3) {
+    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return 'ok';
+};
+
 const validateUser = (user) => {
   const { email, password, cPassword, nome, sobrenome } = user;
-  const validateEmail = (email) =>
-    /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+  const validateEmail = (vEmail) =>
+    /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(vEmail);
 
   if (!validateEmail(email)) {
     return 'O email deve ter o formato email@mail.com';
@@ -72,13 +82,8 @@ const validateUser = (user) => {
   if (password !== cPassword) {
     return 'As senhas tem que ser iguais';
   }
-  if (nome.length < 3) {
-    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  if (sobrenome.length < 3) {
-    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  return 'ok';
+  
+  return validateFullName(nome, sobrenome);
 };
 
 const createUser = async (user) => {

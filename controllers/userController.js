@@ -43,8 +43,6 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-// Novo
-
 const registerForm = (_, res) => res.status(200).render('register', { message: null });
 
 const addUser = (req, res) => {

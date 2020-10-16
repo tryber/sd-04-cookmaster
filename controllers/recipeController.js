@@ -75,7 +75,7 @@ const deletar = async (req, res) => {
     await recipeModel.deletarReceita(id);
     return res.redirect('/');
   }
-  const senhaInvalida = 'Senha invalida';
+  const senhaInvalida = 'Senha Incorreta.';
   return res.render('deletar', { usuario, senhaInvalida, id });
 };
 

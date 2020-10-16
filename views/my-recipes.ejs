@@ -16,15 +16,5 @@
       <li><a href="/recipes/<%= recipe[0] %>">Ver mais</a></li>
     </ul>
     <% }) %>
-
-    <button data-testid="buscar-receita">
-      <a href="/recipes/search">Buscar Receita</a>
-    </button>
-    <!-- Only visible when logged in. -->
-    <% if (user) { %>
-    <button data-testid="nova-receita">
-      <a href="/recipes/new">Nova Receita</a>
-    </button>
-    <% } %>
   </body>
 </html>

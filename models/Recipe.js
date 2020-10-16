@@ -84,7 +84,7 @@ const recipes = async (searchQuery) => {
     search = `name LIKE "%${searchQuery}%"`;
   }
   if (typeof searchQuery === 'number') {
-    search = `id = "%${searchQuery}%"`;
+    search = `user_id = ${searchQuery}`;
   }
 
   const recipesData = await connection()

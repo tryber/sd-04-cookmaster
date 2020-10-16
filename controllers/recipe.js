@@ -58,10 +58,12 @@ const createRecipe = async (req, res) => {
 
   const result = await recipeModel.create(recipe);
 
-  return res.render('new-recipe', {
-    user,
-    messages: result ? 'Rerceita adicionada!' : 'Erro ao adiconar receita',
-  });
+  return result
+    ? res.redirect('/')
+    : res.render('new-recipe', {
+      user,
+      messages: 'Erro ao adiconar receita',
+    });
 };
 
 /**
@@ -81,7 +83,7 @@ const updateRecipe = async (req, res) => {
   const result = await recipeModel.update(recipe);
 
   return result
-    ? res.redirect(200, '/')
+    ? res.redirect('/')
     : res.render('update-recipe', {
       user,
       messages: 'Erro ao atualizar receita',

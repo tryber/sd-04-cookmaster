@@ -7,6 +7,7 @@ const controllers = require('./controllers');
 // const routes = require('./routes');
 
 const recipeRoutes = require('./routes/recipe');
+const userRoutes = require('./routes/user');
 const sessionRoutes = require('./routes/session');
 
 const app = express();
@@ -18,6 +19,8 @@ app.set('views', './views');
 
 /** Login routes */
 app.use('/', sessionRoutes);
+/** User routes */
+app.use('/', userRoutes);
 /** Recipes routes */
 app.use('/', recipeRoutes);
 

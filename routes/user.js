@@ -7,4 +7,6 @@ const router = express.Router();
 const middlewares = require('../middlewares');
 const controllers = require('../controllers');
 
-router.get('/me/recipes', middlewares.auth(false), controllers.userController.getUserRecipes);
+router.get('/me/recipes', middlewares.auth(), controllers.userController.getUserRecipes);
+
+module.exports = router;

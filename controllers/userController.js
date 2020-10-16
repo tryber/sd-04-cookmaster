@@ -56,7 +56,7 @@ const schema = yup.object().shape({
     .required(),
   confirma: yup
     .string()
-    .min(6)
+    .min(6, 'As senhas tem que ser iguais')
     .when('senha', (senha, field) => {
       if (senha) field.required().oneOf([yup.ref('senha'), 'As senhas tem que ser iguais']);
       return field;

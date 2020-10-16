@@ -20,6 +20,8 @@ app.get('/registrar', (req, res) => {
   return res.render('cadastro', { erroData });
 });
 app.post('/cadastrar', controllers.userController.cadastrar);
+
+app.get('/me/recipes', middlewares.auth(), controllers.recipeController.minhas);
 app.get('/recipes/new', middlewares.auth(), controllers.recipeController.novaReceita);
 app.post('/recipes', controllers.recipeController.cadastrarReceita);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.buscar);

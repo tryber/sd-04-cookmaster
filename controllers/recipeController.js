@@ -38,11 +38,18 @@ const editar = async (req, res) => {
   const receita = await recipeModel.receitaById(req.params.id);
   res.render('edit', { usuario, receita });
 };
+
 const atualizarReceita = async (req, res) => {
   const { nomeReceita, preparo, ingredientes } = req.body;
   const id = req.params.id;
   await recipeModel.atualizarBanco(nomeReceita, preparo, ingredientes, id);
   return res.redirect(`/recipes/${id}`);
+};
+
+const minhas = async (req, res) => {
+  const usuario = req.user;
+  const receitas = await recipeModel.receitaByUsuario(usuario.id);
+  return res.render('minhas', { usuario, receitas });
 };
 
 module.exports = {
@@ -52,4 +59,5 @@ module.exports = {
   cadastrarReceita,
   editar,
   atualizarReceita,
+  minhas,
 };

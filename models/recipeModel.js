@@ -59,9 +59,20 @@ const atualizarBanco = async (nomeReceita, preparo, ingredientes, id) => {
   );
 };
 
+const receitaByUsuario = async (id) => {
+  const idData = await connection()
+    .then((db) => db.getTable('recipes').select([]).where('user_id = :id').bind('id', id)
+    .execute())
+    .then((results) => results.fetchAll());
+
+  const receita = idData.map(([id, userId, user, name]) => ({ id, userId, user, name }));
+  return receita;
+};
+
 module.exports = {
   receitaById,
   receitaByNome,
   cadastrarReceita,
   atualizarBanco,
+  receitaByUsuario,
 };

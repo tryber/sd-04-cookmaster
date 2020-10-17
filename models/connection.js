@@ -11,8 +11,8 @@ const config = {
 
 let schema;
 
-const connection = () =>
-  schema
+function connection() {
+  return schema
     ? Promise.resolve(schema)
     : mysqlx
       .getSession(config)
@@ -20,6 +20,7 @@ const connection = () =>
         schema = session.getSchema('cookmaster');
         return schema;
       })
-      .catch((err) => process.exit(1));
+      .catch(() => process.exit(1));
+}
 
 module.exports = connection;

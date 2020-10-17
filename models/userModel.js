@@ -80,7 +80,7 @@ const userIsValid = (forms) => {
     return 'As senhas tem que ser iguais';
   }
 
-  return nameIsValid(nome, sobrenome)
+  return nameIsValid(nome, sobrenome);
 };
 
 module.exports = {

@@ -24,7 +24,7 @@ const showRecipeId = async (req, res) => {
 
 const recipeSearch = async (req, res) => {
   const q = req.query.q || null;
-  const recipes = await getByText(q)
+  const recipes = await getByText(q);
 
   return res.status(200).render('recipeSearch', { recipes });
 };

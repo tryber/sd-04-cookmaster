@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+  </head>
+  <body>
+
+    <% if (equal) { %>
+      <a href="/recipes/edit"><button data-testid="editar-receita">Editar Receita</button></a>
+      <a href="/recipes/delete"><button data-testid="excluir-receita">Excluir Receita</button></a>
+    <% } %>
+
+    <h2><%= recipe.name %></h2>
+    <h3>Ingredintes</h3>
+    <p><%= recipe.ingredients %></p>
+    <h3>Modo de preparo</h3>
+    <p><%= recipe.instructions %></p>
+  </body>
+</html>

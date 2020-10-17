@@ -1,4 +1,4 @@
-const { getAll, getById } = require('../models/recipeModel');
+const { getAll, getById, getByText } = require('../models/recipeModel');
 
 const showRecipes = async (req, res) => {
   const recipes = await getAll();
@@ -19,7 +19,14 @@ const showRecipeId = async (req, res) => {
   const equal = recipe.userId === lId;
 
   return res.status(200)
-    .render('recipe', { recipe, equal });
+    .render('recipeDetail', { recipe, equal });
+};
+
+const recipeSearch = async (req, res) => {
+  const q = req.query.q || null;
+  const recipes = await getByText(q)
+
+  return res.status(200).render('recipeSearch', { recipes });
 };
 
 const recipeEdit = (_, res) => {
@@ -36,4 +43,5 @@ module.exports = {
   showRecipeId,
   recipeEdit,
   recipeDelete,
+  recipeSearch,
 };

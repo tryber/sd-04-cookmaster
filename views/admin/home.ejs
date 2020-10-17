@@ -10,7 +10,7 @@
     <h1>Painel Administrativo Cookmaster</h1>
     <h2>Cookmaster</h2>
     <h2>Receitas</h2>
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <a href="/recipes/search"><button data-testid="buscar-receita">Buscar Receita</button></a>
     <button data-testid="nova-receita">Nova Receita</button>
     <a href="/recipes/edit"><button data-testid="editar-receita">Editar Receita</button></a>
     <a href="/recipes/delete"><button data-testid="excluir-receita">Excluir Receita</button></a>
@@ -21,7 +21,7 @@
 
       <% recipes.forEach((recipe) => { %>
         <li>
-          <%= recipe.name %> <%= recipe.user %> <a href="/recipes/<%= `${recipe.id}` %>">Ver mais</a>
+          <%= recipe.name %> do <%= recipe.user %> <a href="/recipes/<%= recipe.id %>">Ver mais</a>
         </li>
       <% }); %>
 

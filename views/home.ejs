@@ -9,12 +9,12 @@
     <h1>Boas vindas ao Cookmaster!</h1>
     <h2>Cookmaster</h2>
     <h2>Receitas</h2>
-    <button data-testid="buscar-receita">Buscar Receita</button>
+    <a href="/recipes/search"><button data-testid="buscar-receita">Buscar Receita</button></a>
     <a data-testid="login" href="/login">Login</a>
     <ul>
 
       <% recipes.forEach((recipe) => { %>
-        <li><%= recipe.name %> <%= recipe.user %> <a href="/recipes/<%= `${recipe.id}` %>">Ver mais</a></li>
+        <li><%= recipe.name %> do <%= recipe.user %> <a href="/recipes/<%= recipe.id %>">Ver mais</a></li>
       <% }); %>
 
     </ul>

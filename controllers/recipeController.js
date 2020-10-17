@@ -16,7 +16,7 @@ const showRecipeId = async (req, res) => {
   const { id } = req.params;
   const recipe = await getById(id);
   const { id: lId } = req.user || {};
-  const equal = (recipe.userId === lId ? true : false);
+  const equal = recipe.userId === lId;
 
   return res.status(200)
     .render('recipe', { recipe, equal });

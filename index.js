@@ -28,11 +28,10 @@ app.route('/register')
   .get(controllers.userController.registerForm)
   .post(controllers.userController.addUser);
 
-  
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
-  
+
 app.get('/recipes/edit', controllers.recipeController.recipeEdit);
 app.get('/recipes/delete', controllers.recipeController.recipeDelete);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.showRecipeId);

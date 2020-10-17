@@ -21,4 +21,25 @@ const findAllRecipes = async function () {
     );
 };
 
-module.exports = { findAllRecipes };
+const findRecipeById = async function (id) {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .where('id = :id_param')
+        .bind('id_param', id)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
+};
+
+module.exports = { findAllRecipes, findRecipeById };

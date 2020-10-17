@@ -23,7 +23,8 @@
   <button data-testid="buscar-receita">Buscar Receita</button>
   <h1>Receitas</h1>
   <% recipes.forEach((recipe) => { %>
-  <li><%= recipe.name %> <%= recipe.user %> <a href="#">Ver mais</a></li>
+  <li> <%= recipe.name %> <%= recipe.user %>
+  <a href='/recipes/<%= recipe.id %>'>Ver mais</a></li>
   <% }); %>
 </body>
 

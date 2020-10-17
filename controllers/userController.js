@@ -43,8 +43,24 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signUp = (_, res) => res.status(200).render('signUp', { message: null });
+
+const createUser = async (req, res) => {
+  const { email, password, confirmPassword, nome, sobrenome } = req.body;
+  const user = { email, password, confirmPassword, nome, sobrenome };
+  const forms = userModel.userIsValid(user);
+
+  if (forms === 'ok') {
+    await userModel.createUser(email, password, nome, sobrenome);
+    return res.status(200).render('signUp', { message: 'Cadastro efetuado com sucesso!' });
+  }
+  return res.status(400).render('signUp', { message: forms });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signUp,
+  createUser,
 };

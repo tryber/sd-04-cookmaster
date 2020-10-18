@@ -1,4 +1,4 @@
-const { 
+const {
   getAll,
   getById,
   getByName,
@@ -47,7 +47,6 @@ const addRecipe = async (req, res) => {
 
   createRecipe(recipe);
 
-  // return res.status(200).render('recipeNew', { message: 'Cadastro efetuado com sucesso!' });
   return res.status(200).render('admin/home', { user: req.user, recipes });
 };
 
@@ -107,7 +106,7 @@ const recipeDel = async (req, res) => {
   const { senha } = req.body;
 
   try {
-    await deleteRecipe(uId, recId, senha)
+    await deleteRecipe(uId, recId, senha);
   } catch (e) {
     res.status(500)
       .render('admin/recipeDelete', { message: e.message, id: recId });

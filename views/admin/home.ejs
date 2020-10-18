@@ -14,6 +14,7 @@
     <a href="/recipes/new"><button data-testid="nova-receita">Nova Receita</button></a>
     <a href="/recipes/edit"><button data-testid="editar-receita">Editar Receita</button></a>
     <a href="/recipes/delete"><button data-testid="excluir-receita">Excluir Receita</button></a>
+    <a href="/me/recipes"><button data-testid="minhas-receitas">Minhas Receitas</button></a>
     <p>Usuário atual: <%= `${user.firstName} ${user.lastName}` %></p>
     <pre><%= JSON.stringify(user, null, 4) %></pre>
     <button onclick="window.location.pathname='/logout'">Logout</button>

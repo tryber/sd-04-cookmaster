@@ -8,7 +8,7 @@
   <body>
 
     <% if (equal) { %>
-      <a href="/recipes/edit"><button data-testid="editar-receita">Editar Receita</button></a>
+      <a href="/recipes/<%= recipe.id %>/edit"><button data-testid="editar-receita">Editar Receita</button></a>
       <a href="/recipes/delete"><button data-testid="excluir-receita">Excluir Receita</button></a>
     <% } %>
 

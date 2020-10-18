@@ -24,12 +24,25 @@ const getById = async (rId) => {
       ({ id, userId, user, name, ingredients, instructions }))[0];
 };
 
-const getByText = async (q) => {
+const getByName = async (q) => {
   const table = await connection().then((db) => db.getTable('recipes'));
   const registers = await table
     .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
     .where('name like :q')
     .bind('q', `%${q}%`)
+    .execute();
+
+  return registers.fetchAll()
+    .map(([id, userId, user, name, ingredients, instructions]) =>
+      ({ id, userId, user, name, ingredients, instructions }));
+};
+
+const getByUser = async (uId) => {
+  const table = await connection().then((db) => db.getTable('recipes'));
+  const registers = await table
+    .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .where('user_id = :id')
+    .bind('id', uId)
     .execute();
 
   return registers.fetchAll()
@@ -46,12 +59,27 @@ const createRecipe = async (recipe) => {
     .execute();
 };
 
+const updateRecipe = async (recipe) => {
+  const { id, name, ingredients, instructions } = recipe;
+  const table = await connection().then((db) => db.getTable('recipes'));
+
+  table.update()
+    .set('name', name)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 // === IIFE teste ===
-// (async () => console.log(await getById(4)))();
+// (async () => console.log(await getByUser(1)))();
 
 module.exports = {
   getAll,
   getById,
-  getByText,
+  getByName,
   createRecipe,
+  updateRecipe,
+  getByUser,
 };

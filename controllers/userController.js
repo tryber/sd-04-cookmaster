@@ -24,6 +24,7 @@ const login = async (req, res) => {
     });
   }
   const user = await userModel.findByEmail(email);
+  console.log(`userController user = ${user.name}`);
 
   if (!user || user.password !== password) {
     return res.render('admin/login', {

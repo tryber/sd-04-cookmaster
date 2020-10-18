@@ -7,7 +7,6 @@ const { findById } = require('../models/userModel');
 
 const index = async (req, res) => {
   const recipes = await findAllRecipes();
-
   return res.render('home', { recipes, user: req.user });
 };
 

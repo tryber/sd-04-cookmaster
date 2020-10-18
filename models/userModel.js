@@ -95,6 +95,20 @@ const createUser = async (user) => {
     .execute();
 };
 
+const updateUser = async (user) => {
+  const { id, email, password, nome, sobrenome } = user;
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', nome)
+    .set('last_name', sobrenome)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 // === IIFE teste ===
 // (async () => console.log(await findById(3)))();
 
@@ -103,4 +117,5 @@ module.exports = {
   findById,
   createUser,
   validateUser,
+  updateUser,
 };

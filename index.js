@@ -42,4 +42,7 @@ app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController
 
 app.get('/me/recipes', middlewares.auth(), controllers.recipeController.showUserRecipes);
 
+app.get('/me/edit', middlewares.auth(), controllers.userController.userEditForm);
+app.post('/me/edit', middlewares.auth(), controllers.userController.userUpdate);
+
 app.listen(3000, () => console.log('Listening on 3000'));

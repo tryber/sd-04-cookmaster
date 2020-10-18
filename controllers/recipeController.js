@@ -1,4 +1,12 @@
-const { getAll, getById, getByName, createRecipe, updateRecipe, getByUser } = require('../models/recipeModel');
+const { 
+  getAll,
+  getById,
+  getByName,
+  createRecipe,
+  updateRecipe,
+  getByUser,
+  deleteRecipe,
+} = require('../models/recipeModel');
 
 const showRecipes = async (req, res) => {
   const recipes = await getAll();
@@ -79,8 +87,34 @@ const recipeUpdate = async (req, res) => {
   res.redirect('/');
 };
 
-const recipeDeleteForm = (_, res) => {
-  res.render('admin/recipeDelete');
+const recipeDeleteForm = async (req, res) => {
+  const recId = req.params.id;
+  const recipe = await getById(recId);
+  const idUserLog = req.user.id;
+  const idUserRec = recipe.userId;
+  const equal = idUserLog === idUserRec;
+
+  return (
+    equal
+      ? res.status(200).render('admin/recipeDelete', { id: recId, message: null })
+      : res.redirect(`/recipes/${recId}`)
+  );
+};
+
+const recipeDel = async (req, res) => {
+  const uId = req.user.id;
+  const recId = req.params.id;
+  const { senha } = req.body;
+
+  try {
+    await deleteRecipe(uId, recId, senha)
+  } catch (e) {
+    res.status(500)
+      .render('admin/recipeDelete', { message: e.message, id: recId });
+  }
+
+  const recipes = await getByUser(uId);
+  res.status(200).render('home', { recipes });
 };
 
 const showUserRecipes = async (req, res) => {
@@ -99,6 +133,7 @@ module.exports = {
   recipeUpdate,
   recipeDelete,
   recipeDeleteForm,
+  recipeDel,
   recipeSearch,
   recipeForm,
   addRecipe,

@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const { findById } = require('./userModel');
 
 const getAll = async () => {
   const table = await connection().then((db) => db.getTable('recipes'));
@@ -72,6 +73,22 @@ const updateRecipe = async (recipe) => {
     .execute();
 };
 
+const deleteRecipe = async (uId, recId, password) => {
+  const user = await findById(uId);
+  const uPassword = user.password;
+
+  if (password === uPassword) {
+    const table = await connection().then((db) => db.getTable('recipes'));
+
+    table.delete()
+      .where('id = :id')
+      .bind('id', recId)
+      .execute();
+  } else {
+    throw Error('Senha Incorreta.');
+  }
+};
+
 // === IIFE teste ===
 // (async () => console.log(await getByUser(1)))();
 
@@ -82,4 +99,5 @@ module.exports = {
   createRecipe,
   updateRecipe,
   getByUser,
+  deleteRecipe,
 };

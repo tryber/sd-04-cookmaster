@@ -76,7 +76,7 @@ const recipesUser = async (req, res) => {
 // Obtên todas as receitas do usuário
 const recipesAllUser = async (req, res) => {
   const recipes = await userModel.getAllRecipesId(req.user.id);
-  console.log(recipes);
+  // console.log(recipes);
   res.status(200).render('users/recipes', { recipes, message: null, user: req.user });
 };
 

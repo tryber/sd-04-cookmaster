@@ -28,8 +28,14 @@ const searchRecipe = async (req, res) => {
   res.render('searchRecipe', { user: req.user, message: 'Nenhuma receita encontrada', recipes });
 };
 
-const newRecipe = async (req, res) => {
+const newRecipePage = async (req, res) => {
   res.render('newRecipe', { user: req.user });
+};
+
+const newRecipe = async (req, res) => {
+  const { userId, userName, name, ingredients, instructions } = req.body;
+  await recipeModel.newRecipe(userId, userName, name, ingredients, instructions);
+  return res.redirect('/');
 };
 
 module.exports = {
@@ -38,5 +44,6 @@ module.exports = {
   editRecipe,
   deleteRecipe,
   searchRecipe,
+  newRecipePage,
   newRecipe,
 };

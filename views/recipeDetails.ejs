@@ -8,6 +8,14 @@
 </head>
 
 <body>
+    <h3>Cookmaster</h3>
+    <% if (user) { %>
+    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+    <a href='/logout'" data-testid=" logout">Logout</a>
+    <%}%>
+        <% if (!user) { %>
+    <a href="/login" data-testid="login">Login</a>
+    <% } %>
     <div>
         <h1><%= recipes.name %></h1>
         <p>Enviada por: <%= recipes.user %></p>

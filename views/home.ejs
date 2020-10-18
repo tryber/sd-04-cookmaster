@@ -19,12 +19,12 @@
     <nav>
       <a href="/recipes/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
 
-      <a href="" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/recipes/search" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
       <a href="/logout" class="btn btn-danger" data-testid="logout">Logout</a>
       <% }else { %>
       <p class="text-center">Usuário deslogado:</p>
       <hr />
-      <a href="" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/recipes/search" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
       <a href="/login" class="btn btn-dark" data-testid="login">Login</a>
       <% } %>
     </nav>

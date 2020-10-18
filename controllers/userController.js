@@ -67,8 +67,9 @@ const userRegister = async (req, res) => {
 };
 
 const recipesUser = async (req, res) => {
-  const recipeId = await userModel.recipesId(req.params.id);
-  res.status(200).render('users/recipesId', { recipeId, user: req.user });
+  // const { id } = req.body;
+  const recipe = await userModel.recipesId(req.params.id);
+  res.status(200).render('users/recipesId', { recipe, user: req.user });
 };
 
 module.exports = {

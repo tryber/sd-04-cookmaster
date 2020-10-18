@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Busca receita</title>
+  </head>
+  <body>
+    <h1>Buscar Receita</h1>
+    <form method="GET">
+      <input type="text" name="q" data-testid="receita" />
+      <button type="submit" data-testid="buscar">Buscar</button>
+      <hr>
+      <% if(recipes) { %>
+        <% recipes.forEach(recipe => { %>          
+        <li><h3><%= recipe.name %></h3></li>
+        <li><%= recipe.user %></li>
+        <li><a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a></li>
+        <br>
+       <% }) %>
+      <% } %>
+    </form>
+  </body>
+</html>

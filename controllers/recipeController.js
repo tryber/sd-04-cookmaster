@@ -18,4 +18,13 @@ const addRecipes = async (req, res) => {
     .then(() => res.send('Receita cadastrada!'));
 };
 
-module.exports = { listRecipes, recipesForm, addRecipes };
+// Encontra receita
+const findRecipes = async (req, res) => {
+  const { q } = req.query;
+  if (q == '' && !q)
+    return res.status(200).render('users/search', { recipes: null, user: req.user });
+  const recipes = await recipeModel.findRecipes(q);
+  res.render('users/search', { recipes, user: req.user, query: q });
+};
+
+module.exports = { listRecipes, recipesForm, addRecipes, findRecipes };

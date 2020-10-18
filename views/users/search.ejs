@@ -12,7 +12,7 @@
       <button type="submit" data-testid="buscar">Buscar</button>
       <hr>
       <% if(recipes) { %>
-        <% recipes.forEach(recipe => { %>          
+        <% recipes.forEach(recipe => { %>
         <li><h3><%= recipe.name %></h3></li>
         <li><%= recipe.user %></li>
         <li><a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a></li>

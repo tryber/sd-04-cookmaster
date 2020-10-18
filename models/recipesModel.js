@@ -42,8 +42,8 @@ const getRecipesId = async (idUser) =>
     });
 
 // Busca receita
-const findRecipes = async (recipe) => {
-  return connection()
+const findRecipes = async (recipe) =>
+  connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -63,7 +63,6 @@ const findRecipes = async (recipe) => {
         instructions,
       })),
     );
-};
 
 /**
  * Cadastro de receita

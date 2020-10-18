@@ -44,13 +44,11 @@ const addRecipe = async (req, res) => {
 };
 
 // ???
-const recipeEdit = (_, res) => {
-  return res.render('admin/recipeEdit');
-};
+const recipeEdit = (_, res) =>
+  res.render('admin/recipeEdit');
 
-const recipeDelete = (_, res) => {
-  return res.render('admin/recipeDelete');
-};
+const recipeDelete = (_, res) =>
+  res.render('admin/recipeDelete');
 // ???
 
 const recipeEditForm = async (req, res) => {
@@ -74,7 +72,7 @@ const recipeUpdate = async (req, res) => {
 
   try {
     await updateRecipe(recipe);
-  } catch(e) {
+  } catch (e) {
     res.status(500).send(e.message);
   }
 
@@ -88,7 +86,7 @@ const recipeDeleteForm = (_, res) => {
 const showUserRecipes = async (req, res) => {
   const { id } = req.user;
   const recipes = await getByUser(id);
-  
+
   res.status(200).render('admin/userRecipes', { recipes });
 };
 

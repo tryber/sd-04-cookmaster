@@ -54,11 +54,11 @@ const searchRecipe = async function (name) {
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>
-      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+      recipes.map(([id, userId, user, recipeName, ingredients, instructions]) => ({
         id,
         userId,
         user,
-        name,
+        recipeName,
         ingredients,
         instructions,
       })),

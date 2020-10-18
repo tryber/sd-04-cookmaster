@@ -32,4 +32,11 @@ const newRecipe = async (req, res) => {
   res.render('newRecipe', { user: req.user });
 };
 
-module.exports = { listAllRecipes, recipeDetail, editRecipe, deleteRecipe, searchRecipe, newRecipe };
+module.exports = {
+  listAllRecipes,
+  recipeDetail,
+  editRecipe,
+  deleteRecipe,
+  searchRecipe,
+  newRecipe,
+};

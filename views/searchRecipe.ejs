@@ -25,7 +25,7 @@
     </form>
     <% if (recipes.length > 0) { %>
     <% recipes.forEach((recipe) => { %>
-    <li> <%= recipe.name %> <%= recipe.user %>
+    <li> <%= recipe.recipeName %> <%= recipe.user %>
         <a href='/recipes/<%= recipe.id %>'>Ver mais</a>
     </li>
     <% }) %>

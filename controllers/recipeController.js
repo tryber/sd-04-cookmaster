@@ -11,4 +11,16 @@ const recipeDetail = async (req, res) => {
   res.render('recipeDetails', { user: req.user, recipes });
 };
 
-module.exports = { listAllRecipes, recipeDetail };
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipes = await recipeModel.findRecipeById(id);
+  res.render('editRecipe', { user: req.user, recipes });
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipes = await recipeModel.findRecipeById(id);
+  res.render('deleteRecipe', { user: req.user, recipes });
+};
+
+module.exports = { listAllRecipes, recipeDetail, editRecipe, deleteRecipe };

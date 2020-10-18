@@ -13,8 +13,8 @@
         <p>Enviada por: <%= recipes.user %></p>
         <% if (user) { %>
         <% if (user.userId === recipes.userId) { %>
-        <a href="/recipes/:id/edit" data-testid="editar-receita">Editar Receita</a>
-        <a href="/recipes/:id/delete" data-testid="excluir-receita">Excluir Receita</a>
+        <a href="/recipes/<%= recipes.recipeId %>/edit" data-testid="editar-receita">Editar Receita</a>
+        <a href="/recipes/<%= recipes.recipeId %>/delete" data-testid="excluir-receita">Excluir Receita</a>
         <%}%>
         <%}%>
     </div>

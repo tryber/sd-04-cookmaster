@@ -23,4 +23,13 @@ const deleteRecipe = async (req, res) => {
   res.render('deleteRecipe', { user: req.user, recipes });
 };
 
-module.exports = { listAllRecipes, recipeDetail, editRecipe, deleteRecipe };
+const searchRecipe = async (req, res) => {
+  const recipes = await recipeModel.searchRecipe(req.query.q);
+  res.render('searchRecipe', { user: req.user, message: 'Nenhuma receita encontrada', recipes });
+};
+
+const newRecipe = async (req, res) => {
+  res.render('newRecipe', { user: req.user });
+};
+
+module.exports = { listAllRecipes, recipeDetail, editRecipe, deleteRecipe, searchRecipe, newRecipe };

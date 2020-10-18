@@ -42,4 +42,28 @@ const findRecipeById = async function (id) {
     }));
 };
 
-module.exports = { findAllRecipes, findRecipeById };
+const searchRecipe = async function (name) {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .where('name like :name_param')
+        .bind('name_param'.toLowerCase(), `%${name.toLowerCase()}%`)
+        .execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+        id,
+        userId,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    )
+    .catch((err) => err);
+};
+
+module.exports = { findAllRecipes, findRecipeById, searchRecipe };

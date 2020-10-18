@@ -8,22 +8,24 @@
 </head>
 
 <body>
-  <h3>Cookmaster</h3>
+  <header>
+    <h3>Cookmaster</h3>
+    <% if (user) { %>
+    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+    <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
+    <a href='/logout'" data-testid=" logout">Logout</a>
+    <%}%>
+    <% if (!user) { %>
+    <a href="/login" data-testid="login">Login</a>
+    <% } %>
+  </header>
 
-  <% if (user) { %>
-  <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-  <button data-testid="nova-receita">Nova Receita</button>
-  <a href='/logout'" data-testid=" logout">Logout</a>
-  <%}%>
-  <% if (!user) { %>
-  <a href="/login" data-testid="login">Login</a>
-  <% } %>
-
-  <button data-testid="buscar-receita">Buscar Receita</button>
+  <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
   <h1>Receitas</h1>
   <% recipes.forEach((recipe) => { %>
   <li> <%= recipe.name %> <%= recipe.user %>
-  <a href='/recipes/<%= recipe.id %>'>Ver mais</a></li>
+    <a href='/recipes/<%= recipe.id %>'>Ver mais</a>
+  </li>
   <% }); %>
 </body>
 

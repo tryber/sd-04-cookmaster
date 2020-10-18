@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h3>Cookmaster</h3>
+        <% if (user) { %>
+        <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+        <a href='/logout'" data-testid=" logout">Logout</a>
+        <%}%>
+    <% if (!user) { %>
+        <a href="/login" data-testid="login">Login</a>
+        <% } %>
+    </header>
+
+    <form action="" method="post">
+        <input type="text" name="" placeholder="Nome da Receita" data-testid="nome-receita">
+        <input type="text" name="" placeholder="Ingredientes" data-testid="ingredientes">
+        <button data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+        <input type="text" name="" placeholder="Modo de Preparo">
+        <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+</body>
+
+</html>

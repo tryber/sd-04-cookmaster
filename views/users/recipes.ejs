@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minhas receitas</title>
+  </head>
+  <body>
+    <h1>Minhas receitas</h1>
+    <hr>
+    <% if (recipes) { %> <% recipes.forEach((recipe) => { %>
+    <li><%= recipe.name %></li>
+    <li><%= recipe.user %></li>
+    <li><a href=<%= `/recipes/${recipe.id}`%>>Ver mais</a></li>
+    <br>
+    <% }) %> <% } %>
+  </body>
+</html>

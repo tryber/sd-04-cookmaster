@@ -66,10 +66,18 @@ const userRegister = async (req, res) => {
     .then(() => res.status(200).render('users/success'));
 };
 
+// Obtên uma receita do usuáiro
 const recipesUser = async (req, res) => {
   // const { id } = req.body;
-  const recipe = await userModel.recipesId(req.params.id);
+  const recipe = await userModel.getRecipesId(req.params.id);
   res.status(200).render('users/recipesId', { recipe, user: req.user });
+};
+
+// Obtên todas as receitas do usuário
+const recipesAllUser = async (req, res) => {
+  const recipes = await userModel.getAllRecipesId(req.user.id);
+  console.log(recipes);
+  res.status(200).render('users/recipes', { recipes, message: null, user: req.user });
 };
 
 module.exports = {
@@ -79,4 +87,5 @@ module.exports = {
   userRegister,
   formRegister,
   recipesUser,
+  recipesAllUser,
 };

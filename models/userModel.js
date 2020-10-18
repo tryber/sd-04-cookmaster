@@ -78,11 +78,11 @@ const addUser = async (email, passWord, firstName, lastName) => {
 };
 
 /**
- * Busca receita por usuário
+ * Busca receita por usuário Id
  * @param {*} idUser
  * @return {*}
  */
-const recipesId = async (idUser) => {
+const getRecipesId = async (idUser) => {
   return connection()
     .then((db) =>
       db
@@ -103,9 +103,37 @@ const recipesId = async (idUser) => {
     }));
 };
 
+/**
+ * Busca todas as receitas por usuário Id
+ * @param {*} idUser
+ * @return {*}
+ */
+const getAllRecipesId = async (idUser) => {
+  const db = await connection();
+  const consult = await db
+    .getTable('recipes')
+    .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .where('user_id = :idBind')
+    .bind('idBind', idUser)
+    .execute();
+
+  const result = await consult.fetchAll();
+
+  // const [id, userId, user, name, ingredients, instructions] = result;
+  return result.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
+};
+
 module.exports = {
   findByEmail,
   findById,
   addUser,
-  recipesId,
+  getRecipesId,
+  getAllRecipesId,
 };

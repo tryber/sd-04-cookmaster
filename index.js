@@ -29,6 +29,9 @@ app.post('/recipes', middlewares.auth(true), recipeController.addRecipes);
 // Busca receita
 app.get('/recipes/search', middlewares.auth(false), recipeController.findRecipes);
 
+// Renderiza minhas receitas
+app.get('/me/recipes', middlewares.auth(true), userController.recipesAllUser);
+
 // Renderiza receitas pelo usuario Id
 app.get('/recipes/:id', middlewares.auth(false), userController.recipesUser);
 

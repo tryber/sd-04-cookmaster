@@ -27,7 +27,7 @@
       <h2>Modo de preparo</h2>
       <div><%=recipe.instructions %></div>
       <% } %> <% if(user) { %>
-      <p class="float-right">Usuário logado: <%=recipe.user %></p>
+      <p class="float-right">Usuário logado: <%=user.firstName %></p>
     </div>
     <br />
     <br />
@@ -45,7 +45,6 @@
     </ul>
     <h2>Modo de preparo</h2>
     <div><%=recipe.instructions %></div>
-
     <% } %>
   </body>
 </html>

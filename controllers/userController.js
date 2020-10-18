@@ -55,7 +55,7 @@ const addUser = (req, res) => {
     return res.status(200).render('userNew', { message: 'Cadastro efetuado com sucesso!' });
   }
 
-  res.status(500).render('register', { message });
+  res.status(500).render('userNew', { message });
 };
 
 module.exports = {

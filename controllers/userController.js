@@ -43,7 +43,7 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const registerForm = (_, res) => res.status(200).render('register', { message: null });
+const userForm = (_, res) => res.status(200).render('userNew', { message: null });
 
 const addUser = (req, res) => {
   const { email, password, cPassword, nome, sobrenome } = req.body;
@@ -52,7 +52,7 @@ const addUser = (req, res) => {
 
   if (message === 'ok') {
     userModel.createUser(user);
-    return res.status(200).render('register', { message: 'Cadastro efetuado com sucesso!' });
+    return res.status(200).render('userNew', { message: 'Cadastro efetuado com sucesso!' });
   }
 
   res.status(500).render('register', { message });
@@ -62,6 +62,6 @@ module.exports = {
   login,
   loginForm,
   logout,
-  registerForm,
+  userForm,
   addUser,
 };

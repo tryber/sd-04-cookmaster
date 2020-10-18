@@ -37,6 +37,15 @@ const getByText = async (q) => {
       ({ id, userId, user, name, ingredients, instructions }));
 };
 
+const createRecipe = async (recipe) => {
+  const { id, firstName, name, ingredients, instructions } = recipe;
+  const table = await connection().then((db) => db.getTable('recipes'));
+
+  table.insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, firstName, name, ingredients, instructions)
+    .execute();
+};
+
 // === IIFE teste ===
 // (async () => console.log(await getById(4)))();
 
@@ -44,4 +53,5 @@ module.exports = {
   getAll,
   getById,
   getByText,
+  createRecipe,
 };

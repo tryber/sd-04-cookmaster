@@ -1,4 +1,4 @@
-const { getAll, getById, getByText } = require('../models/recipeModel');
+const { getAll, getById, getByText, createRecipe } = require('../models/recipeModel');
 
 const showRecipes = async (req, res) => {
   const recipes = await getAll();
@@ -29,6 +29,17 @@ const recipeSearch = async (req, res) => {
   return res.status(200).render('recipeSearch', { recipes });
 };
 
+const recipeForm = (_, res) => res.status(200).render('recipeNew', { message: null });
+
+const addRecipe = (req, res) => {
+  const { id, firstName } = req.user;
+  const { name, ingredients, instructions } = req.body;
+  const recipe = { id, firstName, name, ingredients, instructions };
+  createRecipe(recipe);
+
+  res.status(200).render('recipeNew', { message: 'Cadastro efetuado com sucesso!' });
+};
+
 const recipeEdit = (_, res) => {
   res.render('admin/recipeEdit');
 };
@@ -44,4 +55,6 @@ module.exports = {
   recipeEdit,
   recipeDelete,
   recipeSearch,
+  recipeForm,
+  addRecipe,
 };

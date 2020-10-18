@@ -24,14 +24,16 @@ app.get('/', controllers.recipeController.showRecipes);
 
 app.get('/admin', middlewares.auth(), controllers.recipeController.showRecipesAdm);
 
-app.route('/register')
-  .get(controllers.userController.registerForm)
+app.route('/user/new')
+  .get(controllers.userController.userForm)
   .post(controllers.userController.addUser);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+app.get('/recipes/new', controllers.recipeController.recipeForm);
+app.post('/recipes', middlewares.auth(), controllers.recipeController.addRecipe);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.recipeSearch);
 app.get('/recipes/edit', controllers.recipeController.recipeEdit);
 app.get('/recipes/delete', controllers.recipeController.recipeDelete);

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de receitas</title>
+  </head>
+  <body>
+    <h3>Nova Receita</h3>
+    
+    <% if (message) { %>
+      <div class="message">
+        <%= message %>
+      </div>
+    <% } %>
+
+    <form name="recipeForm" action="/recipes" method="POST">
+      <label for="name">Nome da receita: </label>
+      <input id="name" data-testid="nome-receita" type="text" name="name" /><br />
+
+      <ul id="ingList"></ul>
+
+      <label for="ingredients">Ingredientes: </label>
+      <input id="ingredients" data-testid="ingredientes" type="text" name="ingredients" /><br />
+
+      <button id="AddIng" data-testid="adicionar-ingrediente" type="button" onclick="concatIng()">
+        Adicionar Ingrediente
+      </button><br />
+
+      <label for="instructions">Modo de preparo: </label>
+      <input id="instructions" data-testid="modo-de-preparo" type="text" name="instructions" /><br />
+
+      <button id="subForm" data-testid="postar-receita" type="button" onclick="submitForm()">
+        Salvar Receita
+      </button>
+      <a data-testid="login" href="/login">Fazer login</a>
+    </form>
+    <script>
+      const butAddIng = document.getElementById('AddIng'),
+            butSubForm = document.getElementById('subForm');
+      const inpIngredients = document.getElementById('ingredients');
+      const ulIng = document.getElementById('ingList');
+      const butExcIng = '<button type="button" onclick="excIng()">Excluir Ingrediente<button>';
+      let ingredients = [];
+
+      const excIng = () => {
+        ingredients.splice(ingredients.indexOf(ulIng.children[0].children[0].textContent), 1);  
+        ulIng.children[0].remove();
+      };
+
+      const concatIng = () => {
+        const li = document.createElement('li');
+
+        ingredients.push(inpIngredients.value);
+        li.innerHTML = `<span>${inpIngredients.value}</span> ${butExcIng}`;
+        ulIng.appendChild(li);
+        inpIngredients.value = '';
+      };
+
+      const submitForm = () => {
+        inpIngredients.value = ingredients.join(', ');
+        document.recipeForm.submit();
+      };
+    </script>
+  </body>
+</html>

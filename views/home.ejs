@@ -15,13 +15,11 @@
     <% if(user) {%>
       <a href='/me/edit' data-testid="minha-conta">Minha Conta</a>
       <a href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
-      <button data-testid="nova-receita">
-        <a href="/recipes/new">Nova Receita</a>
-      </button>
+      <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
     <% } %>
-    <button data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">
+    <a data-testid="buscar-receita" onclick="window.location.pathname='/recipes/search'">
       Buscar Receita
-    </button>
+    </a>
     <div>
       <%- include('./components/recipesCard.ejs', { recipes }) %>
 </body>

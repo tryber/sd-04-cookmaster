@@ -17,7 +17,9 @@
       </ul>
 
       <input type="text" id="ingredientes" /><br /><br />
-      <button type="button" for="adicionarButton" data-testid="adicionar-ingrediente" onclick="addIngredients()" >Adicionar Ingrediente</button><br/><br/>
+      <a class="btn btn-outline-primary" for="adicionarButton" data-testid="adicionar-ingrediente" onclick="addIngredients()" >
+        Adicionar Ingrediente
+      </a><br/><br/>
 
       <label for="modoPreparo">Modo de Preparo: </label>
       <input type="text" name="instructions" data-testid="modo-de-preparo" value="<%= recipe.instructions %>" /><br />

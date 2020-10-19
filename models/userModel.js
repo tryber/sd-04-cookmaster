@@ -8,6 +8,7 @@ const validaString = (string = '', regex) => string.match(regex);
 const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
 
 const validaAll = ({ email, password, passwordConfirm, nome, sobrenome }) => {
+  if (email) 
   if (!validaString(email, EMAIL)) return 'O email deve ter o formato email@mail.com';
   if (!validaString(password, SENHA)) return 'A senha deve ter pelo menos 6 caracteres';
   if (!validaString(nome, NAME)) {

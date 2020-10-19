@@ -11,6 +11,7 @@ async function newUser(req, res) {
     await userModel.createNewUser({ ...req.body });
     return res.render('register', { ...validation });
   }
+  return;
 }
 
 module.exports = {

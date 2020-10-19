@@ -1,4 +1,4 @@
-const { validationsForms} = require('../models/validationsForms');
+const { validationsForms } = require('../models/validationsForms');
 const userModel = require('../models/userModel');
 
 const signUp = (_, res) => {
@@ -6,7 +6,7 @@ const signUp = (_, res) => {
 };
 
 const newUser = async (req, res) => {
-  const validation = await validationsForms({ ...req.body });
+const validation = await validationsForms({ ...req.body });
 
   if (validation) {
     await userModel.createNewUser({ ...req.body });

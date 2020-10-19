@@ -65,5 +65,5 @@ const createNewUser = async ({ email, password, first_name, last_name }) => {
 module.exports = {
   findByEmail,
   findById,
-  createNewUser
+  createNewUser,
 };

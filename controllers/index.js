@@ -3,6 +3,6 @@ const userController = require('./userController');
 const cadastroController = require('./cadastroController');
 
 module.exports = {
-  userController, recipeController, cadastroController
+  userController, recipeController, cadastroController,
 };
 //

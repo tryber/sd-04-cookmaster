@@ -7,7 +7,7 @@ const signUp = (_, res) => {
 const newUser = async (req, res) => {
   const validation = await validationsForms({ ...req.body });
   if (validation) return res.render('register', { ...validation });
-  return;
+  return null;
 };
 
 module.exports = {

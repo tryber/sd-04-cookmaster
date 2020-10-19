@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Usuário</title>
+  </head>
+  <body>
+         
+    <div class="row justify-content-center mb-5 border">
+        <form action="/me/edit" method="POST">
+          <h5>Cookmaster - Editar usuário</h2>
+            <hr>
+          <div class="form-row ">
+            <div class="form-group col-sm-16">
+              <label class="sr-only" for="">Email:</label>
+              <input type="text" class="form-control" name="email" value="<%= editUser.email%>"  placeholder="Email" data-testid="email"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-16">
+              <label class="sr-only" for="">Nome:</label>
+              <input type="text" class="form-control" name="firstName" value="<%= editUser.firstName%>" placeholder="Nome" data-testid="nome"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-16">
+              <label class="sr-only" for="">Sobrenome:</label>
+              <input type="text" class="form-control" name="lastName" value="<%= editUser.lastName%>" placeholder="Sobrenome" data-testid="sobrenome"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-16">
+              <label class="sr-only" for="">Senha:</label>
+              <input type="password" class="form-control" name="passWord" value="<%= editUser.password%>" placeholder="Senha" data-testid="senha"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-15">
+              <label class="sr-only" for="">Confirme senha:</label>
+              <input type="password" class="form-control" name="confirmPassWord" placeholder="Confirme senha" data-testid="confirmar-senha"/>
+            </div>
+          </div>
+          <a href="/" class="btn btn-danger">Cancelar</a>
+          <button type="submit" class="btn btn-primary" data-testid="salvar">Salvar Alterações</button>
+        </form>
+      </div>
+    
+  </body>
+</html>

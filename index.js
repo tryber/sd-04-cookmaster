@@ -29,16 +29,21 @@ app.post('/recipes', middlewares.auth(true), recipeController.addRecipes);
 // Busca receita
 app.get('/recipes/search', middlewares.auth(false), recipeController.findRecipes);
 
+// Renderiza form userEdit
+app.get('/me/edit', middlewares.auth(true), userController.userEdit);
+// Atualiza usuário
+app.post('/me/edit', middlewares.auth(true), userController.userUpdate);
+
 // Renderiza minhas receitas
 app.get('/me/recipes', middlewares.auth(true), userController.recipesAllUser);
 
 // Renderiza receitas pelo usuario Id
 app.get('/recipes/:id', middlewares.auth(false), userController.recipesUser);
 
-// Renderiza pagaina editar receitas
-app.get('/edit', (req, res) => {
-  return res.render('users/recipesEdit');
-});
+// // Renderiza pagaina editar receitas
+// app.get('/edit', (req, res) => {
+//   return res.render('users/recipesEdit');
+// });
 
 // Renderiza pagina remove receitas
 app.get('/remove', (req, res) => {
@@ -53,4 +58,4 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(3001, () => console.log('Listening on 3000'));

@@ -77,7 +77,27 @@ const recipesUser = async (req, res) => {
 const recipesAllUser = async (req, res) => {
   const recipes = await userModel.getAllRecipesId(req.user.id);
   // console.log(recipes);
-  res.status(200).render('users/recipes', { recipes, message: null, user: req.user });
+  res.status(200).render('users/recipes', { recipes, user: req.user });
+};
+
+// Edita usuário
+const userEdit = async (req, res) => {
+  const editUser = await userModel.findById(req.user.id);
+  // console.log(req.user);
+  res.status(200).render('users/userEdit', { editUser, user: req.user });
+};
+
+// Atualiza usuário
+const userUpdate = async (req, res) => {
+  try {
+    const { email, firstName, lastName, passWord } = req.body;
+
+    await userModel.updateUser(req.user.id, email, firstName, lastName, passWord);
+    // res.status(200).render('/home', { userId, user: req.user });
+    return res.redirect('/');
+  } catch (error) {
+    return res.send('Erro...');
+  }
 };
 
 module.exports = {
@@ -88,4 +108,6 @@ module.exports = {
   formRegister,
   recipesUser,
   recipesAllUser,
+  userEdit,
+  userUpdate,
 };

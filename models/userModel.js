@@ -59,7 +59,6 @@ const findById = async (Id) => {
       lastName,
     }));
 };
-
 /**
  * Cadastro de usuário
  * @param {*} email
@@ -78,7 +77,7 @@ const addUser = async (email, passWord, firstName, lastName) => {
 };
 
 /**
- * Busca receita por usuário Id
+ * Busca uma receita do usuário pelo Id
  * @param {*} idUser
  * @return {*}
  */
@@ -104,7 +103,7 @@ const getRecipesId = async (idUser) => {
 };
 
 /**
- * Busca todas as receitas por usuário Id
+ * Busca todas as receitas do usuário pelo Id
  * @param {*} idUser
  * @return {*}
  */
@@ -130,10 +129,32 @@ const getAllRecipesId = async (idUser) => {
   }));
 };
 
+// Atualiza usuário
+const updateUser = async (id, email, firstName, lastName, password) => {
+  try {
+    // console.log(id, email, firstName, lastName, password);
+    const db = await connection();
+    const update = await db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('first_name', firstName)
+      .set('last_name', lastName)
+      .set('password', password)
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
+    return update.getAffectedItemsCount();
+  } catch (error) {
+    return null;
+  }
+};
+
 module.exports = {
   findByEmail,
   findById,
   addUser,
   getRecipesId,
   getAllRecipesId,
+  updateUser,
 };

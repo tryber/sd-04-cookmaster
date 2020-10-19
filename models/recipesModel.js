@@ -18,7 +18,7 @@ const getAllRecipes = async () =>
 
 // Obtên receitas por id
 const getRecipesId = async (idUser) =>
-  connection()
+  await connection()
     .then((db) =>
       db
         .getTable('recipes')

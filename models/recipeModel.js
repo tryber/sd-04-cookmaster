@@ -68,9 +68,8 @@ const searchRecipe = async function (name) {
 
 const newRecipe = async function (recipe) {
   const { id, firstName, name, ingredients, instructions } = recipe;
-  const table = await connection().then((db) => db.getTable('recipes'));
-
-  table
+  await connection()
+    .then((db) => db.getTable('recipes'))
     .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
     .values(id, firstName, name, ingredients, instructions)
     .execute();

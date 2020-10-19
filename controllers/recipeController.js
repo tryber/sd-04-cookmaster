@@ -28,7 +28,7 @@ const searchRecipe = async (req, res) => {
   res.render('searchRecipe', { user: req.user, message: 'Nenhuma receita encontrada', recipes });
 };
 
-const recipeForm = (_, res) => res.status(200).render('recipeNew', { message: null });
+const recipeForm = (_, res) => res.status(200).render('newRecipe', { message: null });
 
 const newRecipe = async (req, res) => {
   const { id, firstName } = req.user;
@@ -36,7 +36,7 @@ const newRecipe = async (req, res) => {
   const recipe = { id, firstName, name, ingredients, instructions };
   const recipes = await recipeModel.findAllRecipes();
 
-  newRecipe(recipe);
+  recipeModel.newRecipe(recipe);
 
   return res.status(200).render('home', { user: req.user, recipes });
 };

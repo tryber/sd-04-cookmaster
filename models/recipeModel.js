@@ -2,16 +2,14 @@ const connection = require('./connection');
 
 const findAll = async () =>
   connection()
-    .then((db) => db.getTable('recipes').select(['id', 'user', 'name'])
-      .execute())
+    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
     .then((results) => results.fetchAll())
     .then((recipe) => recipe.map(([id, user, name]) => ({ id, user, name })));
 
 const findById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput)
-      .execute(),
+      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, userId, user, name, ingredients, instructions]) => ({
@@ -43,7 +41,31 @@ const findByName = async (nameInput) =>
       instructions,
     }));
 
+const createRecipe = async ({ user_id, user, nome, ingredients, instructions }) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(user_id, user, nome, ingredients, instructions)
+      .execute(),
+  );
+
+const updateRecipe = async ({ id, nome, ingredients, instructions }) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', nome)
+      .set('ingredients', ingredients)
+      .set('instructions', instructions)
+      .where('id =:id')
+      .bind('id', id)
+      .execute(),
+  );
+
 module.exports = {
+  updateRecipe,
+  createRecipe,
   findByName,
   findById,
   findAll,

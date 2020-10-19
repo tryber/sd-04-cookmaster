@@ -1,18 +1,17 @@
 <%- include('header'); -%>
     <div class="receitas">
       <a class="navbar-brand">Receitas</a>
-      <% if( !user ) { %>
+      <% if( user ) { %>
+        <a href="/recipes/new" class="btn btn-outline-primary my-2 my-sm-0" data-testid="nova-receita">
+          Nova Receita
+        </a>
+        <a href="/me/recipes" data-testid="minhas-receitas">Minhas receiras</a>
+      <% } %>
       <a href="/recipes/search" class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
         Buscar Receita
       </a>
-      <% } else { %>
-      <a href="/recipes/search" class="btn btn-outline-primary my-2 my-sm-0" data-testid="buscar-receita">
-        Buscar Receita
-      </a>
-      <button class="btn btn-outline-primary my-2 my-sm-0" data-testid="nova-receita">
-        Nova Receita
-      </button>
-      <% } %> <% recipes.forEach(recipe => { %>
+
+      <% recipes.forEach(recipe => { %>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= recipe.name %></h5>

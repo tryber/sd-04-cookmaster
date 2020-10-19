@@ -2,8 +2,8 @@
     <div class="receitas">
       <a class="navbar-brand">Detalhes da Receita</a>
 
-      <% if( user !== undefined && user.id === recipe.user_id ) { %>
-      <a href="/editar" class="btn btn-outline-primary my-2 my-sm-0" data-testid="editar-receita">
+      <% if( user !== undefined && user.id === recipe.userId ) { %>      
+      <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-outline-primary my-2 my-sm-0" data-testid="editar-receita">
         Editar Receita
       </a>
       <a href="/delete" class="btn btn-outline-danger my-2 my-sm-0" data-testid="excluir-receita">
@@ -12,7 +12,7 @@
       <% } %>
       <h5 class="title"><%= recipe.name %></h5>
       <p class="ingredients"><%= recipe.ingredients %></p>
-      <p class="instrucoes"><%= recipe.instructions  %> </p>
+      <p class="instrucoes"><%= recipe.instructions %> </p>
     </div>
   </body>
 </html>

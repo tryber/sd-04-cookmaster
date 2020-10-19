@@ -53,7 +53,8 @@ const findByEmail = async (emailInput) => {
 const findById = async (idInput) => {
   return connection()
     .then((db) =>
-      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
+      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((result) => result.fetchOne())
     .then(([id, email, password, firstName, lastName]) => ({

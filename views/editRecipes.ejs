@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Nova Receita</title>
+    <title>Cookmaster - Editar Receita</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -43,7 +43,7 @@
               onclick="createIngredient()"
               type="button"
               id="addIng"
-              class="btn btn-dark btn-sm m-3"
+              class="btn btn-info btn-sm m-3"
             >
               Adicionar Ingrediente
             </button>
@@ -51,12 +51,12 @@
 
           <h6 class="text-center" id="ingTitle">Ingredientes:</h6>
 
-          <ul class="d-flex flex-column">
-            <div id="ing-list"></div>
-            <% recipe.ingredients.split(',').forEach((ingredient) => { %>
-            <li class="d-flex">
-              <input type="text" name="ingredient[]" value="<%= ingredient %>" />
+          <ul id="ing-list" class="d-flex flex-column">
+            <% recipe.ingredients.split(',').forEach((ingredient, index) => { %>
+            <li class="d-flex m-1">
+              <input class="m-1" type="text" name="ingredient[]" value="<%= ingredient %>" />
               <button
+                id="`${index}`"
                 class="btn btn-danger btn-sm"
                 onclick="dropList('<%= ingredient %>')"
                 type="button"
@@ -88,13 +88,12 @@
         <input type="hidden" name="ingredientList" id="inputHidden" />
       </form>
     </div>
+
     <script>
       function dropList(id) {
-        const deleteee = document.getElementById(id);
-        deleteee.parentElement.remove();
+        const btnRemove = document.getElementById(id);
+        btnRemove.parentElement.remove();
       }
-    </script>
-    <!-- <script>
       const buttonAddIngredient = document.getElementById('addIng');
       const ingredientsUL = document.getElementById('ing-list');
       const inputIngredient = document.getElementById('inputIngredient');
@@ -106,13 +105,17 @@
       const createIngredient = () => {
         const li = document.createElement('li');
         const btnRemove = document.createElement('button');
+        const inputNew = document.createElement('input');
+
+        inputNew.type = 'text';
+        inputNew.value = inputIngredient.value;
 
         btnRemove.textContent = 'Excluir Ingrediente';
 
         li.textContent = inputIngredient.value;
 
         inputValues.push(inputIngredient.value);
-        console.log('linha 95', inputValues);
+        console.log('linha 117', inputValues);
 
         inputIngredient.value = '';
 
@@ -127,12 +130,11 @@
           ingredientsUL.removeChild(li);
           ingredientsUL.removeChild(btnRemove);
           inputHidden.value = inputValues.join();
-          console.log('linha 110', inputValues);
+          console.log('linha 132', inputValues);
         });
 
         inputHidden.value = inputValues.join();
       };
-
-    </script> -->
+    </script>
   </body>
 </html>

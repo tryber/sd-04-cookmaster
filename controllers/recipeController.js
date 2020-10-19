@@ -29,7 +29,7 @@ const searchRecipe = async (req, res) => {
       return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
     }
 
-    console.log('linha 33', recipes);
+    console.log('linha 32', recipes);
     res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
   } catch (err) {
     console.log('catch', err.name);
@@ -61,7 +61,7 @@ const renderRemoveRecipe = async (req, res) => {
   const userDB = await User.findById(req.user.iD);
   console.log('linha 62, userActual, iD ', userDB.iD);
   console.log('linha 63, userActual, senha ', userDB.password);
-
+  console.log('linha 64, recipe Id', req.params.id);
   if (userDB.iD !== recipe.userId)
     return res.status(200).render('deleteRecipe', {
       user: req.user,
@@ -74,17 +74,23 @@ const removeRecipe = async (req, res) => {
   const { password } = req.body;
   const userData = await User.findById(req.user.iD);
   const validatePassword = await Recipes.isPasswordValid(userData.password, password);
-
-  console.log('linha 78 password input', password);
-  console.log('linha 79, user password', userData.password);
-  console.log('linha 80', validatePassword);
+  console.log('linha77 req.user.iD', req.user.iD);
+  console.log('linha78 userDataId', userData.iD);
+  console.log('linha79 user firstName', userData.firstName);
+  console.log('linha 80 password input', password);
+  console.log('linha 81, user password', userData.password);
+  console.log('linha 82', validatePassword);
+  const recipeId = req.params.id;
+  console.log('linha 84, req.params.id', recipeId);
 
   if (validatePassword) {
-    await Recipes.deleteRecipe(req.params.id);
-    res.redirect('/');
+    await Recipes.deleteRecipe(recipeId);
+    res.status(202).redirect('/');
   }
 
-  res.redirect('/');
+  // validatePassword ? await Recipes.deleteRecipe(recipeId) : null;
+
+  res.render('deleteRecipe', { message: 'Senha Incorreta.', user: req.user });
 };
 
 const renderEditRecipe = async (req, res) => {

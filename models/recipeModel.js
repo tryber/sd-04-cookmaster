@@ -66,14 +66,14 @@ const searchRecipe = async function (name) {
     .catch((err) => err);
 };
 
-const newRecipe = async function (userId, userName, name, ingredients, instructions) {
-  return connection().then((db) =>
-    db
-      .getTable('recipes')
-      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-      .values(userId, userName, name, ingredients, instructions)
-      .execute(),
-  );
+const newRecipe = async function (recipe) {
+  const { id, firstName, name, ingredients, instructions } = recipe;
+  const table = await connection().then((db) => db.getTable('recipes'));
+
+  table
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(id, firstName, name, ingredients, instructions)
+    .execute();
 };
 
 module.exports = { findAllRecipes, findRecipeById, searchRecipe, newRecipe };

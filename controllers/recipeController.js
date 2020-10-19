@@ -28,14 +28,17 @@ const searchRecipe = async (req, res) => {
   res.render('searchRecipe', { user: req.user, message: 'Nenhuma receita encontrada', recipes });
 };
 
-const newRecipePage = async (req, res) => {
-  res.render('newRecipe', { user: req.user });
-};
+const recipeForm = (_, res) => res.status(200).render('recipeNew', { message: null });
 
 const newRecipe = async (req, res) => {
-  const { userId, userName, name, ingredients, instructions } = req.body;
-  await recipeModel.newRecipe(userId, userName, name, ingredients, instructions);
-  return res.redirect('/');
+  const { id, firstName } = req.user;
+  const { name, ingredients, instructions } = req.body;
+  const recipe = { id, firstName, name, ingredients, instructions };
+  const recipes = await recipeModel.findAllRecipes();
+
+  newRecipe(recipe);
+
+  return res.status(200).render('home', { user: req.user, recipes });
 };
 
 module.exports = {
@@ -44,6 +47,6 @@ module.exports = {
   editRecipe,
   deleteRecipe,
   searchRecipe,
-  newRecipePage,
+  recipeForm,
   newRecipe,
 };

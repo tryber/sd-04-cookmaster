@@ -4,41 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de receitas</title>
 </head>
 
 <body>
-    <header>
-        <h3>Cookmaster</h3>
-        <% if (user) { %>
-        <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-        <a href='/logout'" data-testid=" logout">Logout</a>
-        <%}%>
-    <% if (!user) { %>
-        <a href="/login" data-testid="login">Login</a>
-        <% } %>
-    </header>
+    <h3>Nova Receita</h3>
 
-    <form action="/recipes" method="post">
-        <input type="hidden" name="userId" value='<%= `${user.userId}`  %>' />
-        <input type="hidden" name="userName" value='<%= `${user.name} ${user.lastName}`  %>' />
+    <% if (message) { %>
+    <div class="message">
+        <%= message %>
+    </div>
+    <% } %>
 
-        <label for="name">Nome da Receita</label>
-        <input type="text" id="name" name="name" data-testid="nome-receita"><br>
+    <form name="recipeForm" action="/recipes" method="POST">
+        <label for="name">Nome da receita: </label>
+        <input id="name" data-testid="nome-receita" type="text" name="name" /><br />
 
-        <label for="ingredients">Ingredientes</label>
         <ul id="ingList"></ul>
-        <input type="text" id="ingredients" name="ingredients" placeholder="Ingredientes" data-testid="ingredientes">
-        <button type="button" id="Add" onclick="concatIng()" data-testid="adicionar-ingrediente">Adicionar
-            Ingrediente</button><br>
 
-        <label for="instructions">Modo de Preparo</label>
-        <input type="text" id="instructions" name="instructions" data-testid="modo-de-preparo">
-        <button type="submit" data-testid="postar-receita" id="subForm" onclick="submitForm()">Salvar Receita</button>
+        <label for="ingredients">Ingredientes: </label>
+        <input id="ingredients" data-testid="ingredientes" type="text" name="ingredients" /><br />
+
+        <button id="AddIng" data-testid="adicionar-ingrediente" type="button" onclick="concatIng()">
+            Adicionar Ingrediente
+        </button><br />
+
+        <label for="instructions">Modo de preparo: </label>
+        <input id="instructions" data-testid="modo-de-preparo" type="text" name="instructions" /><br />
+
+        <button id="subForm" data-testid="postar-receita" type="button" onclick="submitForm()">
+            Salvar Receita
+        </button>
+        <a data-testid="login" href="/login">Fazer login</a>
     </form>
-
     <script>
-        const butAddIng = document.getElementById('Add'),
+        const butAddIng = document.getElementById('AddIng'),
             butSubForm = document.getElementById('subForm'),
             inpIngredients = document.getElementById('ingredients'),
             ulIng = document.getElementById('ingList'),

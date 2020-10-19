@@ -30,7 +30,7 @@ app
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipe);
 
 app.get('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipePage);
-app.post('/recipes', controllers.recipeController.newRecipe);
+app.post('/recipes', middlewares.auth(), controllers.recipeController.newRecipe);
 
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editRecipe);
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);

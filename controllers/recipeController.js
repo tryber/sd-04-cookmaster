@@ -25,16 +25,13 @@ const searchRecipe = async (req, res) => {
 
     if (recipes.length === 0) {
       const message = 'Nada encontrado...';
-      console.log('linha 29', message);
+
       return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
     }
 
     console.log('linha 32', recipes);
     res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
-  } catch (err) {
-    console.log('catch', err.name);
-    console.log('catch', err.message);
-  }
+  } catch (err) {}
 };
 
 const addRecipe = async (req, res) => {
@@ -56,12 +53,8 @@ const newRecipe = async (req, res) => {
 const renderRemoveRecipe = async (req, res) => {
   const recipe = await Recipes.getRecipeById(req.params.id);
 
-  console.log('linha 59, recipe userID', recipe.userId);
-
   const userDB = await User.findById(req.user.iD);
-  console.log('linha 62, userActual, iD ', userDB.iD);
-  console.log('linha 63, userActual, senha ', userDB.password);
-  console.log('linha 64, recipe Id', req.params.id);
+
   if (userDB.iD !== recipe.userId)
     return res.status(200).render('deleteRecipe', {
       user: req.user,
@@ -74,31 +67,23 @@ const removeRecipe = async (req, res) => {
   const { password } = req.body;
   const userData = await User.findById(req.user.iD);
   const validatePassword = await Recipes.isPasswordValid(userData.password, password);
-  console.log('linha77 req.user.iD', req.user.iD);
-  console.log('linha78 userDataId', userData.iD);
-  console.log('linha79 user firstName', userData.firstName);
-  console.log('linha 80 password input', password);
-  console.log('linha 81, user password', userData.password);
-  console.log('linha 82', validatePassword);
+
   const recipeId = req.params.id;
-  console.log('linha 84, req.params.id', recipeId);
 
   if (validatePassword) {
     await Recipes.deleteRecipe(recipeId);
     res.status(202).redirect('/');
   }
 
-  // validatePassword ? await Recipes.deleteRecipe(recipeId) : null;
-
   res.render('deleteRecipe', { message: 'Senha Incorreta.', user: req.user });
 };
 
 const renderEditRecipe = async (req, res) => {
   // const isUser = await User.findById(req.user.iD);
-  console.log('linha 92 is User', req.user);
-  console.log('linha 93 req.params', req.params);
+  console.log('linha 96 is User', req.user);
+  console.log('linha 97 req.params', req.params);
   const recipe = await Recipes.getRecipeById(req.params.id);
-  console.log('linha 95', recipe);
+  console.log('linha 99', recipe);
 
   res.status(200).render('editRecipes', { user: req.user, recipe });
 };

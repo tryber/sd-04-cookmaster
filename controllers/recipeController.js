@@ -45,7 +45,7 @@ const update = async (req, res) => {
 };
 
 const updateCommit = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id, 10);
   const { nome, instructions } = req.body;
   const ingredients = req.body.ingredients.toString();
 

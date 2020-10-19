@@ -2,14 +2,16 @@ const connection = require('./connection');
 
 const findAll = async () =>
   connection()
-    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
+    .then((db) => db.getTable('recipes').select(['id', 'user', 'name'])
+    .execute())
     .then((results) => results.fetchAll())
     .then((recipe) => recipe.map(([id, user, name]) => ({ id, user, name })));
 
 const findById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
+      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, userId, user, name, ingredients, instructions]) => ({

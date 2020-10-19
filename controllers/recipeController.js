@@ -18,20 +18,18 @@ const recipeDetails = async (req, res) => {
 };
 
 const searchRecipe = async (req, res) => {
-  try {
-    const { q } = req.query;
+  const { q } = req.query;
 
-    const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
+  const recipes = q ? await Recipes.searchRecipeByName(q) : await Recipes.getAllRecipes();
 
-    if (recipes.length === 0) {
-      const message = 'Nada encontrado...';
+  if (recipes.length === 0) {
+    const message = 'Nada encontrado...';
 
-      return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
-    }
+    return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
+  }
 
-    console.log('linha 32', recipes);
-    res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
-  } catch (err) {}
+  console.log('linha 32', recipes);
+  res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
 };
 
 const addRecipe = async (req, res) => {
@@ -80,10 +78,10 @@ const removeRecipe = async (req, res) => {
 
 const renderEditRecipe = async (req, res) => {
   // const isUser = await User.findById(req.user.iD);
-  console.log('linha 96 is User', req.user);
-  console.log('linha 97 req.params', req.params);
+  // console.log('linha 96 is User', req.user);
+  // console.log('linha 97 req.params', req.params);
   const recipe = await Recipes.getRecipeById(req.params.id);
-  console.log('linha 99', recipe);
+  // console.log('linha 99', recipe);
 
   res.status(200).render('editRecipes', { user: req.user, recipe });
 };

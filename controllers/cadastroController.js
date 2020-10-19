@@ -6,7 +6,8 @@ const signUp = (_, res) => {
 
 const newUser = async (req, res) => {
   const validation = await validationsForms({ ...req.body });
-  if (validation) return res.status(400).render('register', { ...validation });
+  if (validation) return res.render('register', { ...validation });
+  return;
 };
 
 module.exports = {

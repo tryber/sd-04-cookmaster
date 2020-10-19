@@ -28,8 +28,7 @@ const searchRecipe = async (req, res) => {
     return res.status(200).render('searchRecipe', { recipes, user: req.user, message });
   }
 
-  console.log('linha 32', recipes);
-  res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
+  return res.status(200).render('searchRecipe', { recipes, user: req.user, message: null });
 };
 
 const addRecipe = async (req, res) => {
@@ -53,12 +52,13 @@ const renderRemoveRecipe = async (req, res) => {
 
   const userDB = await User.findById(req.user.iD);
 
-  if (userDB.iD !== recipe.userId)
+  if (userDB.iD !== recipe.userId) {
     return res.status(200).render('deleteRecipe', {
       user: req.user,
       message: 'Você não tem autorização para excluir essa receita...',
     });
-  res.status(200).render('deleteRecipe', { message: null, user: req.user });
+  }
+  return res.status(200).render('deleteRecipe', { message: null, user: req.user });
 };
 
 const removeRecipe = async (req, res) => {

@@ -83,7 +83,11 @@ const createRecipe = async (userId, user, name, ingredients, instructions) =>
 const deleteRecipe = async (recipeId) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').delete().where('id = :recipeId').bind('recipeId', recipeId).execute(),
+      db.getTable('recipes')
+        .delete()
+        .where('id = :recipeId')
+        .bind('recipeId', recipeId)
+        .execute(),
     )
     .catch((err) => {
       throw err;

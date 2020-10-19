@@ -11,8 +11,7 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, emailDb, password, name, lastName]) =>
-    ({ id, emailDb, password, name, lastName }));
+    .then(([id, emailDb, password, name, lastName]) => ({ id, emailDb, password, name, lastName }));
 };
 
 // listar todos os usuarios
@@ -51,11 +50,20 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([idDb, email, password, name, lastName]) =>
-    ({ idDb, email, password, name, lastName }));
+    .then(([idDb, email, password, name, lastName]) => ({ idDb, email, password, name, lastName }));
+};
+
+const createNewUser = async ({ email, password, first_name, last_name }) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, first_name, last_name)
+    .execute();
 };
 
 module.exports = {
   findByEmail,
   findById,
+  createNewUser
 };

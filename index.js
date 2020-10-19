@@ -18,6 +18,9 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/register', controllers.cadastroController.signUp);
+app.post('/register', controllers.cadastroController.newUser);
+
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

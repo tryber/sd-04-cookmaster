@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>register</title>
+  </head>
+  <body>
+    <h2>Cookmaster - Cadastro</h2>
+    <% if (message){%>
+    <h4><%= message %></h4>
+    <% } %>
+    <form action="/register" method="POST">
+      <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" data-testid="email" required />
+        <label for="senha">Senha</label>
+        <input type="password" name="password" data-testid="senha" />
+        <label for="confirmar-senha">Confirmar Senha</label>
+        <input type="password" name="passwordConfirm" data-testid="confirmar-senha" />
+        <label for="nome">Nome</label>
+        <input type="text" name="first_name" data-testid="nome" />
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" name="last_name" data-testid="sobrenome" />
+      </div>
+      <div>
+        <a href="/login" data-testid="login">Login</a>
+        <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
+      </div>
+    </form>
+  </body>
+</html>

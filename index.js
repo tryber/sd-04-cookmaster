@@ -14,6 +14,8 @@ app.set('views', './views');
 
 app.get('/', controllers.recipeController.listRecipes);
 
+app.get('/', controllers.userController.login);
+
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 }); // colocar esse middleware no controller

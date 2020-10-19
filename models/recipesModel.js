@@ -16,7 +16,10 @@ const getRecipes = async () =>
           ingredients,
           instructions,
         })),
-      ),
-  );
+      )
+  )
+  .catch((err) => {
+    throw err
+  });
 
 module.exports = { getRecipes };

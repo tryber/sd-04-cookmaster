@@ -2,9 +2,9 @@ const connection = require('./connection');
 
 /**
  * Busca um usuário através do seu email e, se encontrado, retorna-o.
- * @param {string} email Email do usuário a ser encontrado
+ * @param {string} emailParam Email do usuário a ser encontrado
  */
-const findByEmail = (emailParam) =>
+const findByEmail = async (emailParam) =>
   connection()
     .then((db) =>
       db
@@ -28,15 +28,12 @@ const findByEmail = (emailParam) =>
 
 /**
  * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
+ * @param {string} idParam ID do usuário
  */
 const findById = async (idParam) =>
   connection()
     .then((db) =>
-      db.getTable('users')
-      .select([])
-      .where('id = :param_id')
-      .bind('param_id', idParam)
+      db.getTable('users').select([]).where('id = :param_id').bind('param_id', idParam)
       .execute(),
     )
     .then((results) => results.fetchOne())
@@ -48,7 +45,35 @@ const findById = async (idParam) =>
       lastName,
     }));
 
+/**
+ * Adiciona um usuário
+ * @param {string} email Email do usuário
+ * @param {string} password Password do usuário
+ * @param {string} firstName Primeiro nome do usuário
+ * @param {string} lastName Sobrenome do usuário
+ */
+const addUser = async (firstName, lastName, email, password) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password, firstName, lastName)
+      .execute(),
+  );
+
+/**
+ * Deleta um usuário através do seu ID
+ * @param {string} idParam ID do usuário
+ */
+const deleteUser = async (idParam) =>
+  connection().then((db) =>
+    db.getTable('users').delete().where('id = :param_id').bind('param_id', idParam)
+    .execute(),
+  );
+
 module.exports = {
   findByEmail,
   findById,
+  addUser,
+  deleteUser,
 };

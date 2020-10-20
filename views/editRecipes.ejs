@@ -54,7 +54,7 @@
           <ul id="ing-list" class="d-flex flex-column">
             <% recipe.ingredients.split(',').forEach((ingredient, index) => { %>
             <li class="d-flex m-1">
-              <input class="m-1" type="text" name="ingredient[]" value="<%= ingredient %>" />
+              <input class="m-1" type="text" name="ingredient" value="<%= ingredient %>" />
               <button
                 id="`${index}`"
                 class="btn btn-danger btn-sm"
@@ -94,6 +94,7 @@
         const btnRemove = document.getElementById(id);
         btnRemove.parentElement.remove();
       }
+
       const buttonAddIngredient = document.getElementById('addIng');
       const ingredientsUL = document.getElementById('ing-list');
       const inputIngredient = document.getElementById('inputIngredient');

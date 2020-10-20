@@ -77,17 +77,28 @@ const removeRecipe = async (req, res) => {
 };
 
 const renderEditRecipe = async (req, res) => {
-  // const isUser = await User.findById(req.user.iD);
-  // console.log('linha 96 is User', req.user);
-  // console.log('linha 97 req.params', req.params);
+  const isUser = await User.findById(req.user.iD);
+  console.log('linha 81, is User: ', isUser);
+  // console.log('linha 82, req.params: ', req.params);
   const recipe = await Recipes.getRecipeById(req.params.id);
-  // console.log('linha 99', recipe);
+  console.log('linha 84, recipe: ', recipe);
+
+  if (isUser.iD !== recipe.userId) {
+    res.redirect(`/recipes/${recipe.iD}`);
+  }
 
   res.status(200).render('editRecipes', { user: req.user, recipe });
 };
 
+const editRecipe = async (req, res) => {
+  const { id, name, ingredients, instructions } = req.body;
+  console.log('linha 95, recipe', name, ingredients, instructions);
+  await Recipes.updateRecipe(id, name, ingredients, instructions);
+  res.redirect('/');
+};
+
 const myRecipes = async (req, res) => {
-  res.status(200).render('myRecipes', { user: req.user });
+  res.status(200).render('myRecipes', { user: req.user, recipe: null });
 };
 module.exports = {
   recipeDetails,
@@ -98,5 +109,6 @@ module.exports = {
   removeRecipe,
   renderRemoveRecipe,
   renderEditRecipe,
+  editRecipe,
   myRecipes,
 };

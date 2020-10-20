@@ -7,7 +7,7 @@ const NAME = /[a-zA-Z]{3,}/;
 const validaString = (string = '', regex) => string.match(regex);
 const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
 
-const validaEmail = (email) => {
+function validaEmail(email){
   if (!validaString(email, EMAIL)) return 'O email deve ter o formato email@mail.com';
 };
 

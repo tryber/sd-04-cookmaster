@@ -48,6 +48,7 @@ const newRecipe = async (req, res) => {
 };
 
 const renderRemoveRecipe = async (req, res) => {
+  // console.log('linha 51, recipeId', req.params);
   const recipe = await Recipes.getRecipeById(req.params.id);
 
   const userDB = await User.findById(req.user.iD);
@@ -58,7 +59,8 @@ const renderRemoveRecipe = async (req, res) => {
       message: 'Você não tem autorização para excluir essa receita...',
     });
   }
-  return res.status(200).render('deleteRecipe', { message: null, user: req.user });
+
+  return res.status(200).render('deleteRecipe', { message: null, user: req.user, recipe });
 };
 
 const removeRecipe = async (req, res) => {
@@ -66,14 +68,21 @@ const removeRecipe = async (req, res) => {
   const userData = await User.findById(req.user.iD);
   const validatePassword = await Recipes.isPasswordValid(userData.password, password);
 
-  const recipeId = req.params.id;
+  const recipeId = req.params;
+  // console.log('linha70 recipeId', recipeId);
 
   if (validatePassword) {
-    await Recipes.deleteRecipe(recipeId);
-    res.status(202).redirect('/');
+    await Recipes.deleteRecipe(recipeId.id);
+    // console.log('linha 76', recipeId);
+
+    return res.status(200).redirect('/');
   }
 
-  res.render('deleteRecipe', { message: 'Senha Incorreta.', user: req.user });
+  res.render('deleteRecipe', {
+    message: 'Senha Incorreta.',
+    user: req.user,
+    recipe: req.params.id,
+  });
 };
 
 const renderEditRecipe = async (req, res) => {

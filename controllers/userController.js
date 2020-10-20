@@ -51,7 +51,10 @@ const cadastro = async (_req, res) => {
 function isEmpty(object) {
   let message = '';
   Object.values(object).map((item) => {
-    if (item) message = item;
+    if (item) {
+      message = item;
+    }
+    return message;
   });
   return message;
 }

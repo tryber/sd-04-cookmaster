@@ -44,9 +44,7 @@ const logout = async (req, res) => {
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
   return res.render('admin/logout');
 };
-const signupForm = (req, res) => {
-  return res.render('admin/signup', { message: null, redirect: null });
-};
+const signupForm = (req, res) => res.render('admin/signup', { message: null, redirect: null });
 
 const signup = async (req, res) => {
   const { name, lastname, email, password, agreePassword } = req.body;

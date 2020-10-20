@@ -49,14 +49,18 @@ const cadastro = async (_req, res) => {
 };
 
 const add = async (req, res) => {
-  const { email, password, nome, sobrenome } = req.body;
-  const validaMessage = userModel.validaAll(req.body);
+  const { email, password, passwordConfirm, nome, sobrenome } = req.body;
+  const validaEmail = userModel.validaEmail(email);
+  const validaPassword = userModel.validaSenha(password, passwordConfirm);
+  const validaNome = userModel.validaNome(nome);
+  const validaSobrenome = userModel.validaSobrenome(sobrenome);
 
-  if (validaMessage) return res.send(validaMessage);
-
-  return userModel
-    .createUser(email, password, nome, sobrenome)
-    .then(() => res.send('Cadastro efetuado com sucesso!'));
+  if (validaEmail || validaPassword || validaNome || validaSobrenome)
+    res.send(validaEmail || validaPassword || validaNome || validaSobrenome);
+  else
+    return userModel
+      .createUser(email, password, nome, sobrenome)
+      .then(() => res.send('Cadastro efetuado com sucesso!'));
 };
 
 module.exports = {

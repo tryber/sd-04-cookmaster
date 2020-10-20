@@ -15,4 +15,22 @@ const fetchAllRecipesModel = () =>
       })),
     );
 
-module.exports = { fetchAllRecipesModel };
+const fetchRecipeIdModel = () => connection.then((db) => db.getTable('recipes')).execute;
+
+const updateRecipeModel = () => connection.then((db) => db.getTable('recipes')).execute;
+
+const insertRecipeIdModel = () => connection.then((db) => db.getTable('recipes')).execute;
+
+const deleteRecipeIdModel = async () =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = param_id').bind('param_id')
+    .execute(),
+  );
+
+module.exports = {
+  fetchAllRecipesModel,
+  fetchRecipeIdModel,
+  updateRecipeModel,
+  insertRecipeIdModel,
+  deleteRecipeIdModel,
+};

@@ -78,7 +78,7 @@ const removeRecipe = async (req, res) => {
     return res.status(200).redirect('/');
   }
 
-  res.render('deleteRecipe', {
+  return res.render('deleteRecipe', {
     message: 'Senha Incorreta.',
     user: req.user,
     recipe: req.params.id,

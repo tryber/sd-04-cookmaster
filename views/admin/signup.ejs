@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Login</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar d-flex flex-row bd-highlight bg-dark text-white">
+        <div>
+          <p class="m-2">
+            <a href="/" class="text-white">Cookmaster</a>
+          </p>
+        </div>
+      </nav>
+    </header>
+
+    <section class="container pt-2">
+      <div class="d-flex justify-content-center w-100 mt-5">
+        <form action="/signup" method="POST" id="signup-form">
+          <div class="form-group">
+            <label for="nameInput">Nome:</label>
+            <input
+              type="text"
+              name="name"
+              id="nameInput"
+              aria-describedby="nameHelp"
+              class="form-control"
+              data-testid="nome"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastnameInput">Sobrenome:</label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastnameInput"
+              aria-describedby="lastnameHelp"
+              class="form-control"
+              data-testid="sobrenome"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="emailInput">Email: </label>
+            <input
+              type="email"
+              name="email"
+              id="emailInput"
+              aria-describedby="emailHelp"
+              class="form-control w-100"
+              data-testid="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="passwordInput">Senha:</label>
+            <input
+              type="password"
+              name="password"
+              id="passwordInput"
+              minlength="6"
+              aria-describedby="passwordHelp"
+              class="form-control"
+              data-testid="senha"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="agreePasswordInput">Confirmar Senha:</label>
+            <input
+              type="password"
+              name="agreePassword"
+              id="agreePasswordInput"
+              minlength="6"
+              aria-describedby="agreePasswordHelp"
+              class="form-control"
+              data-testid="confirmar-senha"
+              required
+            />
+          </div>
+
+          <div class="form-inline d-flex justify-content-between">
+            <a href="/login" data-testid="login">Login</a>
+            <button type="submit" class="btn-dark" data-testid="cadastrar">Cadastre-se</button>
+          </div>
+        </form>
+      </div>
+      <% if (message) {%>
+      <div class="message text-danger text-center"><%=message%></div>
+      <% } %> <% if (redirect) { %>
+      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+      <% } %>
+    </section>
+
+    <footer
+      class="navbar flex-row justify-content-center bg-dark text-white fixed-bottom text-center"
+    >
+      <div>
+        <a href="https://github.com/djonata-dias" target="_blank" rel="noopener noreferrer">
+          <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/djonata-dias/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
+        </a>
+        <a href="https://www.instagram.com/djosouzadias/" target="_blank" rel="noopener noreferrer">
+          <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
+        </a>
+      </div>
+      <h5 id="copyright">
+        Copyright © 2019-2020 Djonata de Souza Dias. Todos os direitos reservados
+      </h5>
+    </footer>
+  </body>
+</html>

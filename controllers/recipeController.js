@@ -1,8 +1,16 @@
-const recipes = require('../models/recipesModel');
+const Recipes = require('../models/recipesModel');
 
 const listRecipes = async (req, res) => {
-  const recipe = await recipes.getRecipes();
+  const recipe = await Recipes.getRecipes();
+  console.log('recipe', recipe);
+  console.log('linha 6 - recipecontroller',req.user);
   res.render('home', { recipe });
 };
 
-module.exports = { listRecipes };
+const listOneRecipe = async (req, res) => {
+  const { id } = req.params;
+  const recipeDetail = await Recipes.findById(id);
+  return res.render('recipeDetail', {recipeDetail});
+};
+
+module.exports = { listRecipes, listOneRecipe };

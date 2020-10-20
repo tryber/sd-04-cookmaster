@@ -21,7 +21,7 @@ const findByEmail = async (email) => {
   connection().then((db) =>
     db
       .getTable('users')
-      .select(['id", "email'])
+      .select([])
       .where('email = :email')
       .bind('email', email)
       .execute()
@@ -40,7 +40,7 @@ const findByEmail = async (email) => {
 const findById = async (id) => {
   return connection()
   .then((db) =>
-    db.getTable('users').select(['id", "firstName']).where('id = :id').bind('id', id)
+    db.getTable('users').select([]).where('id = :id').bind('id', id)
       .execute()
       .then((results) => results.fetchAll()[0])
       .then(([id, email, password, firstName, lastName]) => ({
@@ -51,6 +51,8 @@ const findById = async (id) => {
 };
 
 module.exports = {
+
   findByEmail,
   findById,
 };
+

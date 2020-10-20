@@ -43,9 +43,9 @@ const findByName = async (nameInput) =>
       instructions,
     }));
 
-const findByUserID = async (id) => 
+const findByUserID = async (id) =>
   connection()
-    .then((db) => 
+    .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user', 'name'])

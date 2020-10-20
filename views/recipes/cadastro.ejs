@@ -1,7 +1,7 @@
 <%- include('../header'); -%>
     <h1>Nova Receita</h1>
     <form action="/recipes" method="POST">
-      
+
       <label for="nomeReceita">Nome da Receita: </label>
       <input type="text" name="nome" data-testid="nome-receita" id="nomeReceita" /><br />
 
@@ -9,11 +9,11 @@
 
       <ul id="ingredientsList">
 
-      </ul>     
+      </ul>
 
       <input type="text" data-testid="ingredientes" id="ingredientes" /><br /><br />
       <a type="button" for="adicionarButton" data-testid="adicionar-ingrediente" >Adicionar Ingrediente</a><br/><br/>
-      
+
       <label for="modoPreparo">Modo de Preparo: </label>
       <input type="text" name="instructions" data-testid="modo-de-preparo" /><br />
 

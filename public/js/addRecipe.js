@@ -4,7 +4,7 @@ document
 
 document
   .querySelector('a[data-testid="adicionar-ingrediente"]')
-  .addEventListener('click', (event) => {
+  .addEventListener('click', () => {
     const inputIngredients = document.getElementById('ingredientes');
 
     if (inputIngredients.value !== '') {

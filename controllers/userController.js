@@ -48,6 +48,14 @@ const cadastro = async (_req, res) => {
   res.render('admin/cadastro', {});
 };
 
+function isEmpty(object) {
+  let message = '';
+  Object.values(object).map((item) => {
+    if (item) message = item;
+  })
+  return message;
+} 
+
 const add = async (req, res) => {
   const { email, password, passwordConfirm, nome, sobrenome } = req.body;
   const validaEmail = userModel.validaEmail(email);
@@ -56,9 +64,8 @@ const add = async (req, res) => {
   const validaSobrenome = userModel.validaSobrenome(sobrenome);
   const data = { validaEmail, validaPassword, validaNome, validaSobrenome };
 
-  console.log(data instanceof String);
-  if (validaEmail || validaPassword || validaNome || validaSobrenome)
-    res.send(validaEmail || validaPassword || validaNome || validaSobrenome);
+  if (isEmpty(data)) res.send(isEmpty(data));
+
   else {
     return userModel
     .createUser(email, password, nome, sobrenome)

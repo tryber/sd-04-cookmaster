@@ -46,7 +46,7 @@ const findById = async (id) =>
       throw err;
     });
 
-const findByName = async (name) => 
+const findByName = async (name) =>
   connection()
     .then((db) =>
       db

@@ -27,9 +27,9 @@ const findByEmail = async (email) => {
         .bind('email', email)
         .execute()
         .then((results) => results.fetchAll()[0])
-        .then(([id, email, password, firstName, lastName]) => ({
+        .then(([id, emailFind, password, firstName, lastName]) => ({
           id,
-          email,
+          emailFind,
           password,
           firstName,
           lastName,
@@ -54,8 +54,8 @@ const findById = async (id) => {
         .bind('id', id)
         .execute()
         .then((results) => results.fetchAll()[0])
-        .then(([id, email, password, firstName, lastName]) => ({
-          id,
+        .then(([idUser, email, password, firstName, lastName]) => ({
+          idUser,
           email,
           password,
           firstName,

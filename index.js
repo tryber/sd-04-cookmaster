@@ -15,10 +15,10 @@ app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
-app.get('/signup', controllers.userController.signupForm);
 app.get('/login', controllers.userController.loginForm);
-app.get('/logout', controllers.userController.logout);
 app.post('/signup', controllers.userController.signup);
+app.get('/signup', controllers.userController.signupForm);
+app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.get('*', (_req, res) => {

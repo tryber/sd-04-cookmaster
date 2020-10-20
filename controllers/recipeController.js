@@ -98,8 +98,15 @@ const editRecipe = async (req, res) => {
 };
 
 const myRecipes = async (req, res) => {
-  res.status(200).render('myRecipes', { user: req.user, recipe: null });
+  const userId = req.user.iD;
+  const allRecipes = await Recipes.getAllRecipes();
+  const userOwnerRecipe = allRecipes.filter((recipe) => recipe.userId === userId);
+  // console.log('userId: ', userId);
+  // console.log('receitas do user: ', userOwnerRecipe);
+
+  res.status(200).render('myRecipes', { user: req.user, recipes: userOwnerRecipe });
 };
+
 module.exports = {
   recipeDetails,
   listAllRecipes,

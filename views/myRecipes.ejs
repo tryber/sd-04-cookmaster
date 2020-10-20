@@ -14,40 +14,19 @@
   <body>
     <%- include('headerCook') %>
 
-    <div class="card w-75 mx-auto">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h3 class="card-title"><%= recipe.name %></h3>
+    <div class="container">
+      <h3 class="mx-auto text-center m-3">Minhas Receitas</h3>
 
-        <p class="card-text">Enviado por <%= recipe.user.toUpperCase() %></p>
+      <div class="row justify-content-around">
+        <% recipes.forEach((recipe) => { %>
+
+        <div class="card col-5 mb-3 text-white text-center mx-auto w-50 bg-secondary">
+          <h4 class="mt-1 card-title"><%= recipe.name %></h4>
+          <p class="card-text"><%= recipe.user %></p>
+          <a class="btn btn-info w-50 mx-auto mb-2" href="/recipes/<%= recipe.id %>">Ver mais</a>
+        </div>
+        <% }) %>
       </div>
-
-      <div class="card-body">
-        <h3 class="card-title">Ingredientes</h3>
-
-        <p class="card-text"><%= recipe.ingredients %></p>
-      </div>
-
-      <div class="card-body">
-        <h3 class="card-title">Modo de preparo</h3>
-
-        <p class="card-text"><%= recipe.instructions %></p>
-      </div>
-      <div class="card-footer d-flex justify-content-between">
-        <% if (user) { %>
-        <a class="btn btn-dark" href="/recipes/<%= recipe.iD %>/edit" data-testid="editar-receita"
-          >Editar Receita</a
-        >
-        <a
-          class="btn btn-dark"
-          href="/recipes/<%= recipe.iD %>/delete"
-          data-testid="excluir-receita"
-          >Excluir Receita</a
-        >
-        <% } %>
-      </div>
-    </div>
-    <div class="d-flex justify-content-end m-3">
-      <a class="btn btn-secondary" href="/">Voltar</a>
     </div>
   </body>
 </html>

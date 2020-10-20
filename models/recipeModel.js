@@ -4,12 +4,13 @@ const getAllRecipes = async () =>
   connection().then((db) =>
     db
       .getTable('recipes')
-      .select(['id', 'user', 'name', 'ingredients', 'instructions'])
+      .select([])
       .execute()
       .then((results) => results.fetchAll())
       .then((results) =>
-        results.map(([id, user, name, ingredients, instructions]) => ({
+        results.map(([id, userId, user, name, ingredients, instructions]) => ({
           id,
+          userId,
           user,
           name,
           ingredients,
@@ -100,11 +101,7 @@ const updateRecipe = async (id, name, ingredients, instructions) =>
 const deleteRecipe = async (recipeId) =>
   connection()
     .then((db) =>
-      db.getTable('recipes')
-        .delete()
-        .where('id = :recipeId')
-        .bind('recipeId', recipeId)
-        .execute(),
+      db.getTable('recipes').delete().where('id = :recipeId').bind('recipeId', recipeId).execute(),
     )
     .catch((err) => {
       throw err;

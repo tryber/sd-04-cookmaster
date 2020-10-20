@@ -26,4 +26,20 @@ const getAllRecipes = async () =>
       })),
     );
 
-module.exports = { getAllRecipes };
+const getByIdRecipe = (idd) =>
+  connection()
+    .then((bd) => bd.getTable('recipes').select([]).execute())
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+    recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    })),
+    )
+    .then((recipes) => recipes.find((recipe) => recipe.id === idd))
+
+module.exports = { getAllRecipes, getByIdRecipe };

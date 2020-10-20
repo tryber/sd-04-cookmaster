@@ -6,4 +6,12 @@ const listRecipes = async (req, res) => {
   res.render('home', { recipes, user });
 };
 
-module.exports = { listRecipes };
+const recipeById = async (req, res) => {
+  const { id } = req.params;
+  const idNumber = parseInt(id);
+  const recipe = await RecipeModel.getByIdRecipe(idNumber);
+  const user = req.user;
+  res.render('recipeById', { recipe, user });
+}
+
+module.exports = { listRecipes, recipeById };

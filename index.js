@@ -32,4 +32,6 @@ app.post('/login', controllers.userController.login);
 app.get('/cadastro', controllers.cadastroController.cadastroForm);
 app.post('/cadastro', controllers.cadastroController.entrar);
 
+app.get('/recipe/:id', middlewares.auth(false), controllers.recipeController.recipeById);
+
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Editar Receita</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <%- include('headerCook') %>
+
+    <h3 class="text-center">Editar Receita</h3>
+    <div class="card w-75 mx-auto">
+      <form action="/recipes/new" method="POST">
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="nome-receita">Nome da Receita:</label>
+          <input
+            data-testid="nome-receita"
+            name="name"
+            id="nome-receita"
+            type="text"
+            class="form-control"
+            value="<%= recipe.name %>"
+          />
+        </div>
+
+        <div class="card form-group w-75 mx-auto m-2">
+          <div class="d-flex align-items-center">
+            <input
+              data-testid="ingredientes"
+              placeholder="ingrediente aqui..."
+              type="text"
+              id="inputIngredient"
+              class="form-control m-2"
+            />
+            <button
+              data-testid="adicionar-ingrediente"
+              onclick="createIngredient()"
+              type="button"
+              id="addIng"
+              class="btn btn-info btn-sm m-3"
+            >
+              Adicionar Ingrediente
+            </button>
+          </div>
+
+          <h6 class="text-center" id="ingTitle">Ingredientes:</h6>
+
+          <ul id="ing-list" class="d-flex flex-column">
+            <% recipe.ingredients.split(',').forEach((ingredient, index) => { %>
+            <li class="d-flex m-1">
+              <input
+                class="m-1"
+                type="text"
+                name="ingredient"
+                value="<%= ingredient %>"
+                id="<%= index %>"
+              />
+              <button
+                id="`${index}`"
+                class="btn btn-danger btn-sm"
+                onclick="dropList('<%= index %>')"
+                type="button"
+              >
+                Excluir Ingrediente
+              </button>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <div class="form-group w-75 mx-auto m-2">
+          <label for="modo-de-preparo">Modo de Preparo:</label>
+          <textarea
+            data-testid="modo-de-preparo"
+            class="form-control"
+            name="instructions"
+            id="modo-de-preparo"
+          >
+<%= recipe.instructions %></textarea
+          >
+        </div>
+        <div class="d-flex justify-content-around m-3">
+          <a class="btn btn-secondary" href="/">Voltar</a>
+          <button class="btn btn-dark" type="submit" data-testid="postar-receita">
+            Salvar Receita
+          </button>
+        </div>
+        <input type="hidden" name="ingredientList" id="inputHidden" />
+      </form>
+    </div>
+
+    <script>
+      function dropList(id) {
+        const btnRemove = document.getElementById(id);
+        btnRemove.parentElement.remove();
+      }
+
+      const buttonAddIngredient = document.getElementById('addIng');
+      const ingredientsUL = document.getElementById('ing-list');
+      const inputIngredient = document.getElementById('inputIngredient');
+
+      const inputHidden = document.getElementById('inputHidden');
+
+      let inputValues = [];
+
+      const createIngredient = () => {
+        const li = document.createElement('li');
+        const btnRemove = document.createElement('button');
+        const inputNew = document.createElement('input');
+
+        inputNew.type = 'text';
+        inputNew.value = inputIngredient.value;
+
+        btnRemove.textContent = 'Excluir Ingrediente';
+
+        li.textContent = inputIngredient.value;
+
+        inputValues.push(inputIngredient.value);
+        console.log('linha 117', inputValues);
+
+        inputIngredient.value = '';
+
+        ingredientsUL.appendChild(li);
+        ingredientsUL.appendChild(btnRemove);
+
+        btnRemove.className += 'btn btn-danger btn-sm';
+        btnRemove.type = 'button';
+        btnRemove.addEventListener('click', () => {
+          inputValues = inputValues.filter((value) => value !== li.textContent);
+
+          ingredientsUL.removeChild(li);
+          ingredientsUL.removeChild(btnRemove);
+          inputHidden.value = inputValues.join();
+          console.log('linha 132', inputValues);
+        });
+
+        inputHidden.value = inputValues.join();
+      };
+    </script>
+  </body>
+</html>

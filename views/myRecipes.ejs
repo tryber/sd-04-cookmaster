@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Minhas Receitas</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -14,24 +14,9 @@
   <body>
     <%- include('headerCook') %>
 
-    <h3 class="text-center m-3">Receitas</h3>
-    <div class="d-flex justify-content-around">
-      <% if (user) { %>
-
-      <a class="btn btn-dark m-3" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
-
-      <a class="btn btn-dark m-3" href="/me/recipes" data-testid="minhas-receitas"
-        >Minhas Receitas</a
-      >
-      <a class="btn btn-dark m-3" href="/me/edit" data-testid="minha-conta">Minha Conta</a>
-
-      <% } %>
-
-      <a class="btn btn-dark m-3" data-testid="buscar-receita" href="/recipes/search"
-        >Buscar Receita</a
-      >
-    </div>
     <div class="container">
+      <h3 class="mx-auto text-center m-3">Minhas Receitas</h3>
+
       <div class="row justify-content-around">
         <% recipes.forEach((recipe) => { %>
 

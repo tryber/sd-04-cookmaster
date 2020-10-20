@@ -23,8 +23,8 @@ const getRecipes = async () =>
       throw err;
     });
 
-const findById = async (id) => {
-  return connection()
+const findById = async (id) =>
+  connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -33,8 +33,8 @@ const findById = async (id) => {
         .bind('id', id)
         .execute()
         .then((results) => results.fetchAll()[0])
-        .then(([id, userId, user, name, ingredients, instructions]) => ({
-          id,
+        .then(([idRecipe, userId, user, name, ingredients, instructions]) => ({
+          idRecipe,
           userId,
           user,
           name,
@@ -45,10 +45,9 @@ const findById = async (id) => {
     .catch((err) => {
       throw err;
     });
-};
 
-const findByName = async (name) => {
-  return connection()
+const findByName = async (name) => 
+  connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -58,11 +57,11 @@ const findByName = async (name) => {
         .execute()
         .then((results) => results.fetchAll())
         .then((recipes) =>
-          recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+          recipes.map(([id, userId, user, nameRecipe, ingredients, instructions]) => ({
             id,
             userId,
             user,
-            name,
+            nameRecipe,
             ingredients,
             instructions,
           })),
@@ -71,6 +70,5 @@ const findByName = async (name) => {
     .catch((err) => {
       throw err;
     });
-};
 
 module.exports = { getRecipes, findById, findByName };

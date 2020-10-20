@@ -54,11 +54,17 @@
           <ul id="ing-list" class="d-flex flex-column">
             <% recipe.ingredients.split(',').forEach((ingredient, index) => { %>
             <li class="d-flex m-1">
-              <input class="m-1" type="text" name="ingredient" value="<%= ingredient %>" />
+              <input
+                class="m-1"
+                type="text"
+                name="ingredient"
+                value="<%= ingredient %>"
+                id="<%= index %>"
+              />
               <button
                 id="`${index}`"
                 class="btn btn-danger btn-sm"
-                onclick="dropList('<%= ingredient %>')"
+                onclick="dropList('<%= index %>')"
                 type="button"
               >
                 Excluir Ingrediente

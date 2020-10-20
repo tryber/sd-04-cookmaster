@@ -78,6 +78,8 @@ const renderEditUser = async (req, res) => {
   const id = req.user.iD;
   const isUser = await userModel.findById(id);
 
+  console.log('linha 81, req.body: ', req.body);
+
   res.status(200).render('editUser', {
     user: isUser,
     isName: null,
@@ -88,8 +90,37 @@ const renderEditUser = async (req, res) => {
   });
 };
 
+const editUser = async (req, res) => {
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
+
+  const user = await userModel.findById(req.user.iD);
+
+  console.log('linha 97, user: ', user);
+
+  // const isName = validateName(firstName);
+  // const isLastName = validateLastName(lastName);
+  // const isEmail = validadeEmail(email);
+  // const isPassword = validatePassword(password);
+  // const isConfirmPassword = validateConfirmPassword(password, confirmPassword);
+  // if (isName || isLastName || isEmail || isPassword || isConfirmPassword) {
+  //   res.render('editUser', {
+  //     user,
+  //     isName,
+  //     isLastName,
+  //     isEmail,
+  //     isPassword,
+  //     isConfirmPassword,
+  //     success: null,
+  //   });
+  // }
+
+  await userModel.updateUser(user.iD, email, firstName, lastName, password);
+  res.redirect('/');
+};
+
 module.exports = {
   newUser,
   userForm,
   renderEditUser,
+  editUser,
 };

@@ -7,25 +7,35 @@ const NAME = /[a-zA-Z]{3,}/;
 const validaString = (string = '', regex) => string.match(regex);
 const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
 
-function validaEmail(email){
-  if (!validaString(email, EMAIL)) return 'O email deve ter o formato email@mail.com';
+const validaEmail = (email) => {
+  let message = '';
+  if (!validaString(email, EMAIL)) message = 'O email deve ter o formato email@mail.com';
+  return message;
 };
 
 const validaSenha = (password, passwordConfirm) => {
-  if (!validaString(password, SENHA)) return 'A senha deve ter pelo menos 6 caracteres';
-  if (!confirmSenha(password, passwordConfirm)) return 'As senhas tem que ser iguais';
+  let message = '';
+  let message2 = '';
+  if (!validaString(password, SENHA)) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (!confirmSenha(password, passwordConfirm)) message2 = 'As senhas tem que ser iguais';
+  return message || message2;
 };
 
 const validaNome = (nome) => {
+  let message = '';
   if (!validaString(nome, NAME)) {
-    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
+  return message;
 };
 
 const validaSobrenome = (sobrenome) => {
+  let message = '';
   if (!validaString(sobrenome, NAME)) {
-    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
+
+  return message;
 };
 
 const createUser = async (email, password, nome, sobrenome) =>

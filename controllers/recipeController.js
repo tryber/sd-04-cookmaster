@@ -78,10 +78,10 @@ const removeRecipe = async (req, res) => {
 
 const renderEditRecipe = async (req, res) => {
   const isUser = await User.findById(req.user.iD);
-  console.log('linha 81, is User: ', isUser);
+  // console.log('linha 81, is User: ', isUser);
   // console.log('linha 82, req.params: ', req.params);
   const recipe = await Recipes.getRecipeById(req.params.id);
-  console.log('linha 84, recipe: ', recipe);
+  // console.log('linha 84, recipe: ', recipe);
 
   if (isUser.iD !== recipe.userId) {
     res.redirect(`/recipes/${recipe.iD}`);
@@ -92,7 +92,7 @@ const renderEditRecipe = async (req, res) => {
 
 const editRecipe = async (req, res) => {
   const { id, name, ingredients, instructions } = req.body;
-  console.log('linha 95, recipe', name, ingredients, instructions);
+  // console.log('linha 95, recipe', name, ingredients, instructions);
   await Recipes.updateRecipe(id, name, ingredients, instructions);
   res.redirect('/');
 };

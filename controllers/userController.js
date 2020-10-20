@@ -47,9 +47,11 @@ const logout = async (req, res) => {
 const signupForm = (req, res) => res.render('admin/signup', { message: null, redirect: null });
 const emailValidation = (user) => {
   const parseEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
-  if (parseEmail.test(user.email)) {
+  let email;
+  if (user) email = user.email;
+  if (parseEmail.test(email)) {
     return 'O email deve ter o formato email@mail.com';
-  } else if (user.email) {
+  } else if (email) {
     return 'Este email já foi cadastrado';
   }
   return null;
@@ -62,28 +64,27 @@ const passValidation = (password, agreePassword) => {
   }
   return null;
 };
-const formValidation = (user, password, agreePassword) => {
-  let message;
-  const pass = passValidation(password, agreePassword);
-  const email = emailValidation(user);
-
-  if (pass) message = pass;
-  if (email) message = email;
-
-  return message;
-};
 
 const signup = async (req, res) => {
   const { name, lastname, email, password, agreePassword } = req.body;
-  const user = await userModel.findByEmail(email);
-  const resRender = (view, message, redirect) =>
-    res.render(view, { message, redirect: redirect || null });
-
   let message = 'Cadastro efetuado com sucesso';
-  message = formValidation(user, password, agreePassword);
-  userModel.addUser(name, lastname, email, password);
+  const user = await userModel.findByEmail(email);
 
-  return resRender('admin/signup', message);
+  const passMessage = emailValidation(user);
+  const emailMessage = passValidation(password, agreePassword);
+
+  if (emailMessage) {
+    message = emailMessage;
+  }
+  if (passMessage) {
+    message = passMessage;
+  }
+  const warnings = await userModel.addUser(name, lastname, email, password);
+  if (warnings > 0) {
+    res.status(500).send('Erro de conexão com o banco de dados');
+    message('Algo de errado aconteceu!');
+  }
+  return res.render('admin/signup', { message, redirect: null });
 };
 
 module.exports = {

@@ -52,9 +52,9 @@ function isEmpty(object) {
   let message = '';
   Object.values(object).map((item) => {
     if (item) message = item;
-  })
+  });
   return message;
-} 
+}
 
 const add = async (req, res) => {
   const { email, password, passwordConfirm, nome, sobrenome } = req.body;
@@ -65,11 +65,10 @@ const add = async (req, res) => {
   const data = { validaEmail, validaPassword, validaNome, validaSobrenome };
 
   if (isEmpty(data)) res.send(isEmpty(data));
-
   else {
     return userModel
-    .createUser(email, password, nome, sobrenome)
-    .then(() => res.send('Cadastro efetuado com sucesso!'));
+      .createUser(email, password, nome, sobrenome)
+      .then(() => res.send('Cadastro efetuado com sucesso!'));
   }
 };
 

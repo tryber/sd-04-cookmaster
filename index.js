@@ -28,7 +28,7 @@ app.post('/login', userController.login);
 app.get('/cadastro', userController.cadastro);
 app.post('/cadastro', userController.add);
 
-app.get('/details/:id', middlewares.auth(false), recipeController.detailsRecipe);
+app.get('/details/:id', middlewares.auth(), recipeController.detailsRecipe);
 app.get('/recipes/search', middlewares.auth(), recipeController.buscarRecipe);
 
 app.get('/recipes/new', middlewares.auth(), recipeController.adicionar);
@@ -37,6 +37,6 @@ app.post('/recipes', middlewares.auth(), recipeController.adicionarRecipe);
 app.post('/recipes/:id', middlewares.auth(), recipeController.updateCommit);
 app.get('/recipes/:id/edit', middlewares.auth(), recipeController.update);
 
-// app.get('/me/recipes', middlewares.auth(), recipeController.minhasReceitas);
+app.get('/me/recipes', middlewares.auth(true), recipeController.minhasReceitas);
 
 app.listen(3000, () => console.log('Listening on 3000'));

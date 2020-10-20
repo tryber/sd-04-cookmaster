@@ -27,7 +27,7 @@ const buscarRecipe = async (req, res) => {
   }
 };
 
-const adicionar = async (req, res) => res.render('recipes/cadastro', { user: req.user });
+const adicionar = (req, res) => res.render('recipes/cadastro', { user: req.user });
 
 const adicionarRecipe = async (req, res) => {
   const { user_id, user, nome, instructions } = req.body;
@@ -54,7 +54,13 @@ const updateCommit = async (req, res) => {
   recipeModel.updateRecipe(data).then(() => res.redirect('/'));
 };
 
-const minhasReceitas = async (req, res) => res.render('recipes/minhasReceitas');
+const minhasReceitas = async (req, res) => {
+  const { id } = req.user;
+
+  const recipes = await recipeModel.findByUserID(id);
+
+  res.render('recipes/minhasReceitas', { recipes, user: req.user });
+};
 
 module.exports = {
   minhasReceitas,

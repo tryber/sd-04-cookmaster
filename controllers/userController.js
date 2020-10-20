@@ -46,17 +46,15 @@ const logout = async (req, res) => {
 };
 const signupForm = (req, res) => res.render('admin/signup', { message: null, redirect: null });
 
-const emailValidation = (user, email) => {
-  const parseEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+const emailValidation = (email) => {
+  const parseEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+\.([a-zA-Z]+)?$/i;
   if (parseEmail.test(email) || !email) {
     return 'O email deve ter o formato email@mail.com';
-  } else if (user) {
-    return 'Este email já foi cadastrado';
   }
   return null;
 };
 const passValidation = (password, agreePassword) => {
-  if (password.length < 6 || agreePassword.length < 6) {
+  if (password.length < 6) {
     return 'A senha deve ter pelo menos 6 caracteres';
   } else if (password !== agreePassword) {
     return 'As senhas tem que ser iguais';
@@ -74,9 +72,8 @@ const nameValidation = (name, lastname) => {
 const signup = async (req, res) => {
   const { name, lastname, email, password, agreePassword } = req.body;
   let message = 'Cadastro efetuado com sucesso!';
-  const user = await userModel.findByEmail(email);
   const nameMessage = nameValidation(name, lastname);
-  const emailMessage = emailValidation(user, email);
+  const emailMessage = emailValidation(email);
   const passMessage = passValidation(password, agreePassword);
   if (nameMessage) {
     message = nameMessage;

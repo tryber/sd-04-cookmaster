@@ -45,38 +45,44 @@ const logout = async (req, res) => {
   return res.render('admin/logout');
 };
 const signupForm = (req, res) => res.render('admin/signup', { message: null, redirect: null });
-const emailValidation = (user) => {
+
+const emailValidation = (user, email) => {
   const parseEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
-  let email;
-  if (user) email = user.email;
-  if (parseEmail.test(email)) {
+  if (parseEmail.test(email) || !email) {
     return 'O email deve ter o formato email@mail.com';
-  } else if (email) {
+  } else if (user) {
     return 'Este email já foi cadastrado';
   }
   return null;
 };
 const passValidation = (password, agreePassword) => {
-  if (password.length < 6) {
+  if (password.length < 6 || agreePassword.length < 6) {
     return 'A senha deve ter pelo menos 6 caracteres';
   } else if (password !== agreePassword) {
     return 'As senhas tem que ser iguais';
   }
   return null;
 };
-
+const nameValidation = (name, lastname) => {
+  if (name.length < 3) {
+    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  } else if (lastname.length < 3) {
+    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return null;
+};
 const signup = async (req, res) => {
   const { name, lastname, email, password, agreePassword } = req.body;
-  let message = 'Cadastro efetuado com sucesso';
+  let message = 'Cadastro efetuado com sucesso!';
   const user = await userModel.findByEmail(email);
-
-  const passMessage = emailValidation(user);
-  const emailMessage = passValidation(password, agreePassword);
-
-  if (emailMessage) {
+  const nameMessage = nameValidation(name, lastname);
+  const emailMessage = emailValidation(user, email);
+  const passMessage = passValidation(password, agreePassword);
+  if (nameMessage) {
+    message = nameMessage;
+  } else if (emailMessage) {
     message = emailMessage;
-  }
-  if (passMessage) {
+  } else if (passMessage) {
     message = passMessage;
   }
   const warnings = await userModel.addUser(name, lastname, email, password);

@@ -282,15 +282,15 @@ Adicione na tela de login o botão ou link 'Cadastre-se' que deverá conter a ta
 
 ### Tela de Cadastro:
 
+- O campo 'Nome' deverá conter a tag `data-testid="nome"`
+
+- O campo 'Sobrenome' deverá conter a tag `data-testid="sobrenome"`
+
 - O campo 'Email' deverá conter a tag `data-testid="email"`
 
 - O campo 'Senha' deverá conter a tag `data-testid="senha"`
 
 - O campo 'Confirmar Senha' deverá conter a tag `data-testid="confirmar-senha"`
-
-- O campo 'Nome' deverá conter a tag `data-testid="nome"`
-
-- O campo 'Sobrenome' deverá conter a tag `data-testid="sobrenome"`
 
 - O botão 'Cadastar-se' deverá conter a tag `data-testid="cadastrar"`
 

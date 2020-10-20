@@ -43,14 +43,14 @@ const findByName = async (nameInput) =>
       instructions,
     }));
 
-const findByUserID = async (id) =>
+const findByUserID = async (idInput) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user', 'name'])
         .where('user_id =:id')
-        .bind('id', id)
+        .bind('id', idInput)
         .execute())
     .then((results) => results.fetchAll())
     .then((recipe) => recipe.map(([id, user, name]) => ({ id, user, name })));

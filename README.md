@@ -280,7 +280,7 @@ A validação dos campos deve acontecer no back-end, e uma mensagem deve ser env
 
 Adicione na tela de login o botão ou link 'Cadastre-se' que deverá conter a tag `data-testid="cadastrar"`
 
-### Tela de Cadastro:
+## Tela de Cadastro:
 
 - O campo 'Nome' deverá conter a tag `data-testid="nome"`
 

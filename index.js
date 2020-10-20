@@ -21,6 +21,8 @@ app.post('/recipes/new', middlewares.auth(true), controllers.recipeController.ad
 
 app.get('/me/recipes', middlewares.auth(), controllers.recipeController.myRecipes);
 
+app.get('/me/edit', middlewares.auth(), controllers.userFormController.renderEditUser);
+
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.renderEditRecipe);
 app.post('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editRecipe);
 

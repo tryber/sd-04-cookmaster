@@ -74,7 +74,22 @@ const newUser = async (req, res) => {
   });
 };
 
+const renderEditUser = async (req, res) => {
+  const id = req.user.iD;
+  const isUser = await userModel.findById(id);
+
+  res.status(200).render('editUser', {
+    user: isUser,
+    isName: null,
+    isLastName: null,
+    isEmail: null,
+    isPassword: null,
+    isConfirmPassword: null,
+  });
+};
+
 module.exports = {
   newUser,
   userForm,
+  renderEditUser,
 };

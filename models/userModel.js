@@ -18,19 +18,26 @@ de fato, realize a busca no banco de dados */
 //  */
 
 const findByEmail = async (email) => {
-  connection().then((db) =>
-    db
-      .getTable('users')
-      .select([])
-      .where('email = :email')
-      .bind('email', email)
-      .execute()
-      .then((results) => results.fetchAll()[0])
-      .then(([id, email, password, firstName, lastName]) => ({
-        id, email, password, firstName, lastName
-      }))
-  )
-  .catch((err) => {throw err});
+  connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select([])
+        .where('email = :email')
+        .bind('email', email)
+        .execute()
+        .then((results) => results.fetchAll()[0])
+        .then(([id, email, password, firstName, lastName]) => ({
+          id,
+          email,
+          password,
+          firstName,
+          lastName,
+        })),
+    )
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**
@@ -39,20 +46,28 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   return connection()
-  .then((db) =>
-    db.getTable('users').select([]).where('id = :id').bind('id', id)
-      .execute()
-      .then((results) => results.fetchAll()[0])
-      .then(([id, email, password, firstName, lastName]) => ({
-        id, email, password, firstName, lastName
-      }))
-  )
-  .catch((err) => { throw err });
+    .then((db) =>
+      db
+        .getTable('users')
+        .select([])
+        .where('id = :id')
+        .bind('id', id)
+        .execute()
+        .then((results) => results.fetchAll()[0])
+        .then(([id, email, password, firstName, lastName]) => ({
+          id,
+          email,
+          password,
+          firstName,
+          lastName,
+        })),
+    )
+    .catch((err) => {
+      throw err;
+    });
 };
 
 module.exports = {
-
   findByEmail,
   findById,
 };
-

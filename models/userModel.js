@@ -14,19 +14,19 @@ const validaEmail = (email) => {
 const validaSenha = (password, passwordConfirm) => {
   if (!validaString(password, SENHA)) return 'A senha deve ter pelo menos 6 caracteres';
   if (!confirmSenha(password, passwordConfirm)) return 'As senhas tem que ser iguais';
-}
+};
 
 const validaNome = (nome) => {
   if (!validaString(nome, NAME)) {
     return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
-}
+};
 
 const validaSobrenome = (sobrenome) => {
   if (!validaString(sobrenome, NAME)) {
     return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
   }
-}
+};
 
 const createUser = async (email, password, nome, sobrenome) =>
   connection().then((db) =>
@@ -60,7 +60,8 @@ const findByEmail = async (emailInput) => {
 const findById = async (idInput) => {
   return connection()
     .then((db) =>
-      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
+      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((result) => result.fetchOne())
     .then(([id, email, password, firstName, lastName]) => ({

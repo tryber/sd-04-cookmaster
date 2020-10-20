@@ -54,13 +54,16 @@ const add = async (req, res) => {
   const validaPassword = userModel.validaSenha(password, passwordConfirm);
   const validaNome = userModel.validaNome(nome);
   const validaSobrenome = userModel.validaSobrenome(sobrenome);
+  const data = { validaEmail, validaPassword, validaNome, validaSobrenome };
 
+  console.log(data instanceof String);
   if (validaEmail || validaPassword || validaNome || validaSobrenome)
     res.send(validaEmail || validaPassword || validaNome || validaSobrenome);
-  else
+  else {
     return userModel
-      .createUser(email, password, nome, sobrenome)
-      .then(() => res.send('Cadastro efetuado com sucesso!'));
+    .createUser(email, password, nome, sobrenome)
+    .then(() => res.send('Cadastro efetuado com sucesso!'));
+  }
 };
 
 module.exports = {

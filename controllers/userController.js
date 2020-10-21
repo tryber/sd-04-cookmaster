@@ -50,49 +50,24 @@ const add = async (req, res) => {
     email, password, confirm, name, lastname,
   } = req.body;
 
-  const data = {
-    error: null,
-    success: false,
-    message: [
-      'O email deve ter o formato email@mail.com',
-      'A senha deve ter pelo menos 6 caracteres',
-      'As senhas tem que ser iguais',
-      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-      'Cadastro efetuado com sucesso!',
-    ],
-  };
-
   const emailPattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
 
-  if (!emailPattern.test(email)) {
-    data.error = 'email';
-    return res.render('users/register', data);
-  }
+  if (!emailPattern.test(email)) res.render('users/register', { error: 'email', success: false });
 
-  if (password.length < 6) {
-    data.error = 'password';
-    return res.render('users/register', data);
-  }
+  if (password.length < 6) res.render('users/register', { error: 'password', success: false });
 
-  if (password !== confirm) {
-    data.error = 'confirm';
-    return res.render('users/register', data);
-  }
+  if (password !== confirm) res.render('users/register', { error: 'confirm', success: false });
 
   if (!/^[a-z]+$/i.test(name) || name.length < 3) {
-    data.error = 'name';
-    return res.render('users/register', data);
+    return res.render('users/register', { error: 'name', success: false });
   }
 
   if (!/^[a-z]+$/i.test(lastname) || lastname.length < 3) {
-    data.error = 'lastname';
-    return res.render('users/register', data);
+    return res.render('users/register', { error: 'lastname', success: false });
   }
 
-  data.success = true;
   await userModel.add(email, password, name, lastname);
-  return res.render('users/register', data);
+  return res.render('users/register', { error: false, success: true });
 };
 
 module.exports = {

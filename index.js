@@ -32,8 +32,17 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipeController
 app.get('/recipes/new', controllers.recipeController.recipeForm);
 app.post('/recipes', middlewares.auth(), controllers.recipeController.newRecipe);
 
-app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editRecipe);
-app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);
+app.get('/recipes/edit', controllers.recipeController.recipeEdit);
+app.get('/recipes/delete', controllers.recipeController.recipeDelete);
+
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.recipeEdit);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipeController.recipeUpdate);
+
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.recipeDelete);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.recipeDel);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetail);
+
+app.get('/me/recipes', middlewares.auth(), controllers.recipeController.showUserRecipes);
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -20,7 +20,7 @@ app.post('/cadastro', controllers.userController.signup);
 app.get('/cadastro', controllers.userController.signupForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
-
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.recipePage)
 app.get('*', (_req, res) => {
   res.status(404);
   res.render('notFound');

@@ -57,6 +57,7 @@
         inputIngredient.value = campoIngrediente;
         const botao = document.createElement('button');
         botao.type = 'button';
+        botao.className = 'btn btn-primary';
         botao.innerText = 'Excluir Ingrediente';
         botao.onclick = () => document.getElementById(campoIngrediente).parentElement.remove();
         inputIngredient.innerText = ingredienteInput.value;

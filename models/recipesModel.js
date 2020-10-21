@@ -15,17 +15,41 @@ const fetchAllRecipesModel = () =>
       })),
     );
 
-const fetchRecipeIdModel = () => connection.then((db) => db.getTable('recipes')).execute;
+const fetchRecipeIdModel = async (idParam) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table.select([]).where('id = :param_id').bind('param_id', idParam).execute();
+  const recipe = result.fetchOne();
+  const [id, userId, user, name, ingredients, instructions] = recipe;
+  return { id, userId, user, name, ingredients, instructions };
+};
 
-const updateRecipeModel = () => connection.then((db) => db.getTable('recipes')).execute;
+const updateRecipeModel = async (userId, user, name, ingredients, instructions) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values(userId, user, name, ingredients, instructions)
+    .execute();
+  return result.getWarningsCount();
+};
 
-const insertRecipeIdModel = () => connection.then((db) => db.getTable('recipes')).execute;
+const insertRecipeIdModel = async (name, ingredients, instructions) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table
+    .update(['name', 'ingredients', 'instructions'])
+    .values(name, ingredients, instructions)
+    .execute();
+  return result.getWarningsCount();
+};
 
-const deleteRecipeIdModel = async () =>
-  connection().then((db) =>
-    db.getTable('recipes').delete().where('id = param_id').bind('param_id')
-    .execute(),
-  );
+const deleteRecipeIdModel = async (idParam) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table.delete().where('id = param_id').bind('param_id', idParam).execute();
+  return result.getWarningsCount();
+};
 
 module.exports = {
   fetchAllRecipesModel,

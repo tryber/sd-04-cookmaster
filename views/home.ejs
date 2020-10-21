@@ -13,7 +13,7 @@
         <div>
           <p class="m-2">
             <a href="/" class="text-white">Cookmaster</a>
-            <button class="btn-default ml-3" data-testid="buscar-receita">Buscar Receita</button>
+            <a href="/recipes/search" class="btn-default ml-3" data-testid="buscar-receita">Buscar Receita</a>
           </p>
         </div>
         <div class="p-1 bd-highlight">
@@ -46,7 +46,7 @@
       </div>
       <%if(user){%>
       <div>
-        <a class="btn btn-primary mt-5" href="" data-testid="nova-receita">Nova Receita</a>
+        <a class="btn btn-primary mt-5" href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
       </div>
       <%}%>
     </section>

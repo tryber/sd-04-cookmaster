@@ -64,7 +64,7 @@ const recipesDelete = async (req, res) => {
   const senha = req.body.senha;
   const user = await userModel.findById(req.user.id);
   if (senha !== user.password) {
-    const mensagem = 'Senha incorreta.';
+    const mensagem = 'Senha Incorreta.';
     res.render('users/recipesRemove', { idRecipe, user: req.user, mensagem });
   }
 

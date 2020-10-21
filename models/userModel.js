@@ -26,7 +26,16 @@ const findById = async (idInput) => connection()
   }))
   .catch((error) => error);
 
+const add = async (email, password, firstName, lastName) => connection()
+  .then((db) => db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, firstName, lastName)
+    .execute())
+  .catch((error) => error);
+
 module.exports = {
   findByEmail,
   findById,
+  add,
 };

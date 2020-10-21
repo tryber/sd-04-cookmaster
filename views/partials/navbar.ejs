@@ -3,7 +3,7 @@
   <nav class="container-navbar">
     <h3>Cookmaster</h3>
     <% if (user) { %>
-      <a href="/logout" data-testid="logout">Logout</a>
+      <div><span><%= user.name %> | </span><a href="/logout" data-testid="logout">Logout</a></div>
     <% } else { %>
       <a href="/login" data-testid="login">Login</a>
     <% } %>

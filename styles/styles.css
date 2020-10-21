@@ -1,12 +1,28 @@
-html , body {
-  background: rgba(255 , 250 , 250);
-  font-family: Noto Sans, sans-serif;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,body {
+  background: rgba(255,250,250);
+  font-family: Noto Sans, sans-serif;
+}
+
 h3 {
   margin: 0;
+}
+
+input {
+  border: 1px solid lightgrey;
+  height: 25px;
+  margin: 5px 0 10px;
+  width: 100%;
+}
+
+.message {
+  color: red;
+  font-weight: 700;
 }
 
 .container {
@@ -14,15 +30,32 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.home {
   margin-top: 10px;
   max-width: 100%;
   padding: 0 50px;
 }
 
+.container-box {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.container-box > div {
+  background: rgba(211,211,211);
+  width: 300px;
+  padding: 50px;
+}
+
 .container-navbar {
   align-items: center;
-  background: rgba(211 , 211 , 211);
-  box-sizing: border-box;
+  background: rgba(211,211,211);
   display: flex;
   flex-direction: row;
   height: 50px;

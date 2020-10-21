@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password) {
@@ -45,8 +45,59 @@ const logout = (req, res) => {
   return res.render('admin/logout');
 };
 
+const add = async (req, res) => {
+  const {
+    email, password, confirm, name, lastname,
+  } = req.body;
+
+  const data = {
+    error: null,
+    success: false,
+    message: [
+      'O email deve ter o formato email@mail.com',
+      'A senha deve ter pelo menos 6 caracteres',
+      'As senhas tem que ser iguais',
+      'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+      'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+      'Cadastro efetuado com sucesso!',
+    ],
+  };
+
+  const emailPattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+
+  if (!emailPattern.test(email)) {
+    data.error = 'email';
+    return res.render('users/register', data);
+  }
+
+  if (password.length < 6) {
+    data.error = 'password';
+    return res.render('users/register', data);
+  }
+
+  if (password !== confirm) {
+    data.error = 'confirm';
+    return res.render('users/register', data);
+  }
+
+  if (!/^[a-z]+$/i.test(name) || name.length < 3) {
+    data.error = 'name';
+    return res.render('users/register', data);
+  }
+
+  if (!/^[a-z]+$/i.test(lastname) || lastname.length < 3) {
+    data.error = 'lastname';
+    return res.render('users/register', data);
+  }
+
+  data.success = true;
+  await userModel.add(email, password, name, lastname);
+  return res.render('users/register', data);
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  add,
 };

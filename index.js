@@ -24,6 +24,9 @@ app.get('/', middlewares.auth(false), controllers.recipesController.show);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
+app.get('/cadastrar', (req, res) => res.render('users/register', { error: false, success: false }));
+app.post('/cadastrar', controllers.userController.add);
+
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);

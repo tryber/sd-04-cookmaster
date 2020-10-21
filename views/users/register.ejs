@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster - Cadastrar'}) %>
+  <body>
+    <div class="container-box">
+      <div>
+        <form action="/cadastrar" method="POST">
+          <label for="emailInput"> Email:
+            <% if (error === 'email') {%>
+              <span class="message"><%= message[0] %></span>
+            <% } %>
+          </label>
+          <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+          <label for="passwordInput">Senha: 
+            <% if (error === 'password') {%>
+              <span class="message"><%= message[1] %></span>
+            <% } %>
+          </label>
+          <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+          <label for="confirmInput">Confirmar Senha: 
+            <% if (error === 'confirm') {%>
+              <span class="message"><%= message[2] %></span>
+            <% } %>
+          </label>
+          <input type="password" name="confirm" id="confirmInput" data-testid="confirmar-senha" /><br />
+          <label for="nameInput">Nome: 
+            <% if (error === 'name') {%>
+              <span class="message"><%= message[3] %></span>
+            <% } %> 
+          </label>
+          <input type="text" name="name" id="nameInput" data-testid="nome" /><br />
+          <label for="lastNameInput">Sobrenome: 
+            <% if (error === 'lastname') {%>
+              <span class="message"><%= message[4] %></span>
+            <% } %>  
+          </label>
+          <input type="text" name="lastname" id="lastNameInput" data-testid="sobrenome" /><br />
+          <br />
+          <div class="container">
+            <a href="/login" data-testid="login">Fazer Login</a>
+            <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
+          </div>
+        </form>
+        <% if (success) {%>
+          <span class="message">Cadastro efetuado com sucesso!</span>
+        <% } %>  
+      </div>
+    </div>
+  </body>
+</html>

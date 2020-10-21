@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <% if (message) {%>
+
+        <div class="alert alert-danger"><%= message %></div>
+      <div class="card">
+          <h3>Excluir Receita</h3>
+
+          <div class="card-title">
+
+<h3>Confirme a exclusão da receita</h3>
+
+          </div>
+        <div class="card-body">
+          <div class="message"><%= message %></div>
+          <% } %>
+          <form action="/recipes/<%= id %>/delete " method="POST">
+            <label for="passwordInput">Senha: </label>
+            <input type="password" name="passConfirmation" class="col-md-6" id="passwordInput" data-testid="senha" /><br />
+
+            <button type="submit" data-testid="confirmar">Confirmar</button>
+            <div class="col-lg" style="text-align: right">
+              <a href="/cadastro" data-testid="cancelar" class="btn btn-primary">
+                  Cancelar</a>
+                </button>
+              </a>
+            </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

@@ -2,6 +2,7 @@
 // const { recipeController } = require('.');
 const { getRecipe } = require('../models/recipeModel');
 const recipeModel = require('../models/recipeModel');
+const userModel = require('../models/userModel');
 
 async function listRecipes(req, res) {
   const recipes = await recipeModel.getAllRecipes();
@@ -63,6 +64,25 @@ async function newRecipe(req, res) {
   }
 }
 
+async function removeRecipe(req, res) {
+  const { id } = req.params;
+  res.render('deleteRecipe', { id, user: req.user, message: null });
+}
+
+async function confirmRemoveRecipe(req, res) {
+  const { passConfirmation } = req.body;
+  const user = await userModel.findById(req.user.idUser);
+
+  if (passConfirmation === user.password) {
+    await recipeModel.confirmRemove(req.params.id);
+    return res.redirect('/');
+  }
+  {
+    const { id } = req.params;
+    return res.render('deleteRecipe', { id, user: req.user, message: 'Senha Incorreta.' });
+  }
+}
+
 module.exports = {
   listRecipes,
   showRecipesByUser,
@@ -72,4 +92,6 @@ module.exports = {
   recipeEdit,
   saveEdit,
   myRecipes,
+  removeRecipe,
+  confirmRemoveRecipe,
 };

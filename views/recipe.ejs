@@ -22,7 +22,7 @@ VIEW DE RECEITAS POR ID DE USUÁRIO */ -->
       >Editar Receita</a
     >
     <a
-      href="recipes/<%= recipes.id %>/delete "
+      href="<%= `/recipes/${recipes.id}/delete` %>"
       data-testid="excluir-receita"
       class="btn btn-primary"
       >Excluir Receita</a

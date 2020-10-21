@@ -40,8 +40,8 @@ const findById = async (id) => {
       db
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
-        .where('id = :id_var')
-        .bind('id_var', id)
+        .where('id = :id')
+        .bind('id', id)
         .execute(),
     )
     .then((results) => results.fetchOne())

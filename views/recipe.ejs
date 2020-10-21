@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar d-flex flex-row bd-highlight bg-dark text-white">
+        <div>
+          <p class="m-2">
+            <a href="/" class="text-white">Cookmaster</a>
+          </p>
+        </div>
+        <div class="p-1 bd-highlight">
+          <div class="container d-flex flex-row bd-highlight justify-content-end">
+            <%if(user){%>
+            <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
+            <a class="m-2 text-white" href="logout" data-testid="logout">Logout</a>
+            <%}else{%>
+            <a class="m-2 text-white" href="login" data-testid="login">Login</a>
+            <%}%>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="text-center">
+      <div>
+        <h1><%=recipe.name%></h1>
+        <%if(user){%> <%if(user.id === recipe.userId){%>
+        <a class="btn btn-primary mt-5" href="/recipes/:id/edit" data-testid="editar-receita">
+          Editar receita
+        </a>
+        <a class="btn btn-primary mt-5" href="/recipes/:id/delete" data-testid="excluir-receita">
+          Excluir receita
+        </a>
+        <%}}%>
+      </div>
+      <h5>Enviado por <%=recipe.user%></h5>
+      <br />
+
+      <h4>Ingredientes</h4>
+      <ul>
+        <%recipe.ingredients.split(",").forEach((ingredient) => {%>
+        <li><%=ingredient%></li>
+        <%})%>
+      </ul>
+
+      <h4>Modo de Preparo</h4>
+      <ul>
+        <%recipe.instructions.split(",").forEach((instruction) => {%>
+        <li><%=instruction%></li>
+        <%})%>
+      </ul>
+    </section>
+
+    <footer
+      class="navbar flex-row justify-content-center bg-dark text-white fixed-bottom text-center"
+    >
+      <div>
+        <a href="https://github.com/djonata-dias" target="_blank" rel="noopener noreferrer">
+          <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/djonata-dias/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
+        </a>
+        <a href="https://www.instagram.com/djosouzadias/" target="_blank" rel="noopener noreferrer">
+          <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
+        </a>
+      </div>
+      <h5 id="copyright">
+        Copyright © 2019-2020 Djonata de Souza Dias. Todos os direitos reservados
+      </h5>
+    </footer>
+  </body>
+</html>

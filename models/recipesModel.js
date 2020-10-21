@@ -67,7 +67,7 @@ const findRecipes = async (recipe) =>
 const updateRecipe = async (id, name, ingredients, instructions) => {
   const seperador = ingredients.toString();
   try {
-    console.log(id, name, ingredients, instructions);
+    // console.log(id, name, ingredients, instructions);
     const db = await connection();
     const update = await db
       .getTable('recipes')
@@ -87,8 +87,7 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
 // Deleta receita
 const removeRecipes = async (id) =>
   connection().then((db) =>
-    db.getTable('recipes').delete().where('id = :id').bind('id', id)
-    .execute(),
+    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
   );
 
 /**
@@ -109,4 +108,11 @@ const addRecipes = async (userId, user, name, ingredients, instructions) => {
   );
 };
 
-module.exports = { getAllRecipes, addRecipes, getRecipeId, findRecipes, updateRecipe, removeRecipes };
+module.exports = {
+  getAllRecipes,
+  addRecipes,
+  getRecipeId,
+  findRecipes,
+  updateRecipe,
+  removeRecipes,
+};

@@ -53,7 +53,7 @@ async function getRecipeByName(q) {
 const verifyData = (recipeName, ingredients, prepare) => recipeName && ingredients && prepare;
 
 async function createRecipe(userId, userName, recipeName, ingredients, prepare) {
-  //console.log(userId, userName, recipeName, ingredients, prepare);
+  // console.log(userId, userName, recipeName, ingredients, prepare);
   return connection().then((db) =>
     db
       .getTable('recipes')
@@ -63,8 +63,8 @@ async function createRecipe(userId, userName, recipeName, ingredients, prepare) 
   );
 }
 
-const updateRecipe = async (id, recipeName, ingredients, prepare) => {
-  return connection().then((db) =>
+const updateRecipe = async (id, recipeName, ingredients, prepare) =>
+  connection().then((db) =>
     db
       .getTable('recipes')
       .update()
@@ -75,8 +75,7 @@ const updateRecipe = async (id, recipeName, ingredients, prepare) => {
       .bind('id', id)
       .execute(),
   );
-};
-
+  
 module.exports = {
   getAllRecipes,
   getRecipe,

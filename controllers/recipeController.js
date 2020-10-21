@@ -28,7 +28,7 @@ async function recipeRegister(req, res) {
 }
 
 async function recipeEdit(req, res) {
-  const { idUser } = req.user;
+  // const { idUser } = req.user;
   const { id } = req.params;
   const recipe = await getRecipe(id);
 
@@ -38,12 +38,11 @@ async function recipeEdit(req, res) {
 }
 
 async function saveEdit(req, res) {
-  const { idUser } = req.user;
+  // const { idUser } = req.user;
   const { id } = req.params;
   const { uRecipeName, uIngredients, uPrepare } = req.body;
 
   const recipe = await getRecipe(id);
-  console.log('AQUI RECIPE' + recipe);
   // const newIngredients = uIngredients.split(',');
 
   await recipeModel.updateRecipe(id, uRecipeName, uIngredients.toString(), uPrepare);

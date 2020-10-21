@@ -28,7 +28,7 @@ app.post('/login', userController.login);
 app.get('/cadastro', userController.cadastro);
 app.post('/cadastro', userController.add);
 
-app.get('/details/:id', middlewares.auth(), recipeController.detailsRecipe);
+app.get('/recipes/:id', middlewares.auth(false), recipeController.detailsRecipe);
 app.get('/recipes/search', middlewares.auth(), recipeController.buscarRecipe);
 
 app.get('/recipes/new', middlewares.auth(), recipeController.adicionar);

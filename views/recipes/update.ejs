@@ -10,13 +10,13 @@
       <ul id="ingredientsList">
         <% recipe.ingredients.split(',').forEach((item) => { %>
           <li>
-            <input type="text" name="ingredients[]" data-testid="ingredientes" id=<%= item %> value="<%= item %>"/>
+            <input type="text" name="ingredients[]" id=<%= item %> value="<%= item %>"/>
             <button type="button">Excluir Ingrediente</button>
           </li>
         <% }); %>
       </ul>
 
-      <input type="text" id="ingredientes" /><br /><br />
+      <input type="text" id="ingredientes" data-testid="ingredientes" /><br /><br />
       <a class="btn btn-outline-primary" for="adicionarButton" data-testid="adicionar-ingrediente" >
         Adicionar Ingrediente
       </a><br/><br/>

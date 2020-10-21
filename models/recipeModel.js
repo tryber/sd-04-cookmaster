@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const userModel = require('./userModel');
 
 const findAllRecipes = async function () {
   return connection()
@@ -90,7 +91,7 @@ const updateRecipe = async function (recipe) {
 };
 
 const deleteRecipe = async (uId, recId, password) => {
-  const user = await findById(uId);
+  const user = await userModel.findById(uId);
   const uPassword = user.password;
 
   if (password === uPassword) {

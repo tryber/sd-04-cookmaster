@@ -87,7 +87,7 @@ const recipeDel = async (req, res) => {
 
 const showUserRecipes = async (req, res) => {
   const { id } = req.user;
-  const recipes = await getByUser(id);
+  const recipes = await recipeModel.getByUser(id);
 
   res.status(200).render('userRecipes', { recipes });
 };

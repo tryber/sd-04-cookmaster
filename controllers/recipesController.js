@@ -1,8 +1,8 @@
-const recipiesModel = require('../models/recipiesModel');
+const recipesModel = require('../models/recipesModel');
 
 const show = async (req, res) => {
   try {
-    const recipes = await recipiesModel.getAllRecipes();
+    const recipes = await recipesModel.getAllRecipes();
     return res.render('home', { user: req.user, data: recipes });
   } catch (error) {
     return res.render('error', { error });

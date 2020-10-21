@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', middlewares.auth(false), controllers.homeController.show);
+app.get('/', middlewares.auth(false), controllers.recipesController.show);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 

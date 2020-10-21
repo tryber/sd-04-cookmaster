@@ -5,4 +5,9 @@ const allRecipes = async (req, res) => {
   res.render('home', { recipes, message: null, user: req.user });
 };
 
-module.exports = { allRecipes };
+const recipePage = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipesModel.fetchRecipeIdModel(id);
+  res.render('recipe', { recipe, message: null, user: req.user });
+};
+module.exports = { allRecipes, recipePage };

@@ -28,14 +28,13 @@ app.post('/login', userController.login);
 app.get('/cadastro', userController.cadastro);
 app.post('/cadastro', userController.add);
 
-app.get('/recipes/:id', middlewares.auth(false), recipeController.detailsRecipe);
 app.get('/recipes/search', middlewares.auth(), recipeController.buscarRecipe);
-
 app.get('/recipes/new', middlewares.auth(), recipeController.adicionar);
 app.post('/recipes', middlewares.auth(), recipeController.adicionarRecipe);
 
-app.post('/recipes/:id', middlewares.auth(), recipeController.updateCommit);
 app.get('/recipes/:id/edit', middlewares.auth(), recipeController.update);
+app.get('/recipes/:id', middlewares.auth(false), recipeController.detailsRecipe);
+app.post('/recipes/:id', middlewares.auth(), recipeController.updateCommit);
 
 app.get('/me/recipes', middlewares.auth(true), recipeController.minhasReceitas);
 

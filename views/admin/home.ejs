@@ -8,8 +8,24 @@
 
   <body>
     <h1>Painel Administrativo Cookmaster</h1>
-    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+    <h2>Cookmaster</h2>
+    <h2>Receitas</h2>
+    <a href="/recipes/search"><button data-testid="buscar-receita">Buscar Receita</button></a>
+    <a href="/recipes/new"><button data-testid="nova-receita">Nova Receita</button></a>
+    <a href="/recipes/edit"><button data-testid="editar-receita">Editar Receita</button></a>
+    <a href="/recipes/delete"><button data-testid="excluir-receita">Excluir Receita</button></a>
+    <a href="/me/recipes"><button data-testid="minhas-receitas">Minhas Receitas</button></a>
+    <p>Usuário atual: <%= `${user.firstName} ${user.lastName}` %></p>
     <pre><%= JSON.stringify(user, null, 4) %></pre>
     <button onclick="window.location.pathname='/logout'">Logout</button>
+    <ul>
+
+      <% recipes.forEach((recipe) => { %>
+        <li>
+          <%= recipe.name %> do <%= recipe.user %> <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+        </li>
+      <% }); %>
+
+    </ul>
   </body>
 </html>

@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/');
+  res.redirect(redirect || '/admin');
 };
 
 const logout = (req, res) => {
@@ -43,24 +43,25 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const signUp = (_, res) => res.status(200).render('signUp', { message: null });
+const userForm = (_, res) => res.status(200).render('userNew', { message: null });
 
-const createUser = async (req, res) => {
-  const { email, password, confirmPassword, nome, sobrenome } = req.body;
-  const user = { email, password, confirmPassword, nome, sobrenome };
-  const forms = userModel.userIsValid(user);
+const addUser = (req, res) => {
+  const { email, password, cPassword, nome, sobrenome } = req.body;
+  const user = { email, password, cPassword, nome, sobrenome };
+  const message = userModel.validateUser(user);
 
-  if (forms === 'ok') {
-    await userModel.createUser(email, password, nome, sobrenome);
-    return res.status(200).render('signUp', { message: 'Cadastro efetuado com sucesso!' });
+  if (message === 'ok') {
+    userModel.createUser(user);
+    return res.status(200).render('userNew', { message: 'Cadastro efetuado com sucesso!' });
   }
-  return res.status(400).render('signUp', { message: forms });
+
+  res.status(500).render('userNew', { message });
 };
 
 module.exports = {
   login,
   loginForm,
   logout,
-  signUp,
-  createUser,
+  userForm,
+  addUser,
 };

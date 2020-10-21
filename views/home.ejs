@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body>
+    <h1>Boas vindas ao Cookmaster!</h1>
+    <h2>Cookmaster</h2>
+    <h2>Receitas</h2>
+    <a href="/recipes/search"><button data-testid="buscar-receita">Buscar Receita</button></a>
+    <a data-testid="login" href="/login">Login</a>
+    <ul>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cookmaster - Home</title>
-</head>
+      <% recipes.forEach((recipe) => { %>
+        <li><%= recipe.name %> do <%= recipe.user %> <a href="/recipes/<%= recipe.id %>">Ver mais</a></li>
+      <% }); %>
 
-<body>
-  <header>
-    <h3>Cookmaster</h3>
-    <% if (user) { %>
-    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-    <a href="/recipes/new" data-testid="nova-receita">Nova Receita</a>
-    <a href='/logout'" data-testid=" logout">Logout</a>
-    <%}%>
-    <% if (!user) { %>
-    <a href="/login" data-testid="login">Login</a>
-    <% } %>
-  </header>
-
-  <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
-  <h1>Receitas</h1>
-  <% recipes.forEach((recipe) => { %>
-  <li> <%= recipe.name %> <%= recipe.user %>
-    <a href='/recipes/<%= recipe.id %>'>Ver mais</a>
-  </li>
-  <% }); %>
-</body>
-
+    </ul>
+  </body>
 </html>

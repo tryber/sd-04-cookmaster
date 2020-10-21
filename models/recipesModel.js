@@ -87,7 +87,8 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
 // Deleta receita
 const removeRecipes = async (id) =>
   connection().then((db) =>
-    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+    db.getTable('recipes').delete().where('id = :id').bind('id', id)
+    .execute(),
   );
 
 /**

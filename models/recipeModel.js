@@ -75,7 +75,7 @@ const updateRecipe = async (id, recipeName, ingredients, prepare) =>
       .bind('id', id)
       .execute(),
   );
-  
+
 module.exports = {
   getAllRecipes,
   getRecipe,

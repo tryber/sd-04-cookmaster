@@ -33,7 +33,6 @@ async function recipeEdit(req, res) {
   const recipe = await getRecipe(id);
 
   const ingredients = recipe.ingredients.split(',');
-  console.log(ingredients);
   res.render('edit', { recipe, ingredients, user: req.user, message: null });
 }
 
@@ -42,7 +41,7 @@ async function saveEdit(req, res) {
   const { id } = req.params;
   const { uRecipeName, uIngredients, uPrepare } = req.body;
 
-  const recipe = await getRecipe(id);
+  // const recipe = await getRecipe(id);
   // const newIngredients = uIngredients.split(',');
 
   await recipeModel.updateRecipe(id, uRecipeName, uIngredients.toString(), uPrepare);

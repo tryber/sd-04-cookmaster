@@ -32,8 +32,15 @@
     <br />
     <br />
     <div class="float-right">
-      <a href="/edit" class="btn btn-primary" data-testid="editar-receita"> Editar Receita </a>
-      <a href="/remove" class="btn btn-danger" data-testid="excluir-receita">Excluir Receita</a>
+      <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-primary" data-testid="editar-receita">
+        Editar Receita
+      </a>
+      <a
+        href="/recipes/<%= recipe.id %>/delete"
+        class="btn btn-danger"
+        data-testid="excluir-receita"
+        >Excluir Receita</a
+      >
     </div>
     <h2><%= recipe.name%></h2>
     <p>Enviado por : <%= recipe.user %></p>

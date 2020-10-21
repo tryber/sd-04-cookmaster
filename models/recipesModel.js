@@ -17,26 +17,25 @@ const getAllRecipes = async () =>
     });
 
 // Obtên receitas por id
-const getRecipesId = async (idUser) =>
+const getRecipeId = async (idRecipe) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
-        .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :idBind')
-        .bind('idBind', idUser)
+        .bind('idBind', idRecipe)
         .execute(),
     )
-    .then((results) => results.fetchAll())
-    .then((recipes) =>
-      recipes.forEach(([userId, user, name, ingredients, instructions]) => ({
-        userId,
-        user,
-        name,
-        ingredients,
-        instructions,
-      })),
-    )
+    .then((results) => results.fetchOne())
+    .then(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }))
     .catch((err) => {
       throw err;
     });
@@ -64,6 +63,34 @@ const findRecipes = async (recipe) =>
       })),
     );
 
+// Atualiza receita
+const updateRecipe = async (id, name, ingredients, instructions) => {
+  const seperador = ingredients.toString();
+  try {
+    console.log(id, name, ingredients, instructions);
+    const db = await connection();
+    const update = await db
+      .getTable('recipes')
+      .update()
+      .set('name', name)
+      .set('ingredients', seperador)
+      .set('instructions', instructions)
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
+    return update.getAffectedItemsCount();
+  } catch (error) {
+    return null;
+  }
+};
+
+// Deleta receita
+const removeRecipes = async (id) =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = :id').bind('id', id)
+    .execute(),
+  );
+
 /**
  * Cadastro de receita
  * @param {*} userId
@@ -82,4 +109,4 @@ const addRecipes = async (userId, user, name, ingredients, instructions) => {
   );
 };
 
-module.exports = { getAllRecipes, addRecipes, getRecipesId, findRecipes };
+module.exports = { getAllRecipes, addRecipes, getRecipeId, findRecipes, updateRecipe, removeRecipes };

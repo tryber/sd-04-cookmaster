@@ -1,0 +1,11 @@
+<!-- views/partials/navbar.ejs -->
+<header>
+  <nav class="container-navbar">
+    <h3>Cookmaster</h3>
+    <% if (user) { %>
+      <a href="/logout" data-testid="logout">Logout</a>
+    <% } else { %>
+      <a href="/login" data-testid="login">Login</a>
+    <% } %>
+  </nav>
+</header>

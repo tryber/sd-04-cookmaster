@@ -15,12 +15,16 @@ app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 
-app.get('/login', controllers.userController.loginForm);
 app.post('/cadastro', controllers.userController.signup);
 app.get('/cadastro', controllers.userController.signupForm);
+
 app.get('/logout', controllers.userController.logout);
+
+app.get('/login', controllers.userController.loginForm);
 app.post('/login', controllers.userController.login);
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.recipePage)
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.recipePage);
+
 app.get('*', (_req, res) => {
   res.status(404);
   res.render('notFound');

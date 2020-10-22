@@ -37,23 +37,13 @@
       ><button data-testid="nova-receita" class="btn btn-primary">Nova Receita</button></a
     >
     <a href="/me/recipes/" data-testid="minhas-receitas" class="btn btn-primary">Minhas Receitas</a>
-
-    <a href="/me/edit" data-testid="minha-conta" class="btn btn-primary">Minha Conta</a>
-
     <hr />
-    <br />
-    <div class="card">
-      <div class="col-sm-6">
-        <% } %> <% recipes.forEach(recipe => { %>
-        <div class="card-body">
-          <span><h3><%= recipe.user %> <%= recipe.name%></h3></span>
-          <a class="btn btn-primary" href="/recipes/<%= recipe.id %>">Ver mais</a>
-          <hr />
-        </div>
+    <% } %> <% recipes.forEach(recipe => { %>
+    <span><h3><%= recipe.user %> <%= recipe.name%></h3></span>
+    <a class="btn btn-primary" href="/recipes/<%= recipe.id %>">Ver mais</a>
+    <hr />
 
-        <% })%>
-      </div>
-    </div>
+    <% })%>
   </body>
 
   <script src="/js/bootstrap.min.js"></script>

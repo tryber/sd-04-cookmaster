@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { validationModel } = require('../models/validationModel');
 
 const userModel = require('../models/userModel');
 
@@ -34,7 +35,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,44 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signUp = (_, res) => {
+  res.render('cadastro', { message: null });
+};
+
+/* CONTROLLER QUE É SOLICITADO APÓS O USUÁRIO ENVIAR O FORMS DE CADASTRO
+CHAMA A FUNÇÃO NEWUSER PARA CRIAR UM NOVO USUÁRIO NO BANCO DE ACORDO COM O RESULTADO
+DA FUNÇÃO DE VALIDAÇÃO */
+const newUser = async (req, res) => {
+  const isValid = await validationModel({ ...req.body });
+
+  if (isValid) {
+    await userModel.createUser({ ...req.body });
+    return res.render('cadastro', { ...isValid });
+  }
+};
+
+async function editUser(req, res) {
+  res.render('editUser', { user: req.user, message: null });
+}
+
+async function confirmEditUser(req, res) {
+  const { idUser } = req.user;
+  const { email, password, first_name, last_name } = req.body;
+  const isValid = await validationModel({ ...req.body });
+
+  if (isValid) {
+    await userModel.saveEdit(idUser, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('editUser', { isValid, user: req.user });
+}
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signUp,
+  newUser,
+  editUser,
+  confirmEditUser,
 };

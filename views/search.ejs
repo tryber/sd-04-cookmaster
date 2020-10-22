@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+  </head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+  <body>
+    <div class="navbar">
+      <h1>Cookmaster!</h1>
+
+      <form class="form-inline my-2 my-lg-0" method="GET">
+        <input
+          class="form-control mr-sm-2"
+          name="q"
+          data-testid="receita"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" data-testid="buscar" type="submit">
+          Search
+        </button>
+      </form>
+      <% if(user) { %>
+      <a href="/">
+        <h3 data-testid="logout">Logout</h3>
+      </a>
+      <%} else{ %>
+      <a href="/login">
+        <h3 data-testid="login">Login</h3>
+      </a>
+
+      <%}%>
+    </div>
+
+    <% recipes.forEach(recipe => { %>
+
+    <div class="card" style="width: 18rem">
+      <h3 class="card-title"><%= recipe.user %></h3>
+      <h4 class="card-subtitle"><%= recipe.name %></h4>
+      <a class="btn btn-primary" href="/recipes/<%= recipe.id %>">Ver mais</a>
+    </div>
+
+    <% }) %>
+  </body>
+</html>

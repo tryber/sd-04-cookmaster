@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova receita</title>
+  </head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+
+  <body>
+    <% if(message) {%>
+    <p><%= message %></p>
+    <% } %> <% console.log(user) %>
+    <h1>Nova Receita <%= user.idUser %></h1>
+    <form action="/recipes" method="POST">
+      <label for="nomeInput">Nome da Receita</label>
+      <input type="text" name="recipeName" id="nomeInput" data-testid="nome-receita" /><br />
+
+      <div>
+        <span>Ingredientes</span>
+        <ul id="ingredientsList"></ul>
+      </div>
+
+      <label for="ingredienteInput">Ingredientes</label>
+      <input
+        type="text"
+        name="ingredientes[]"
+        id="ingredienteInput"
+        data-testid="ingredientes"
+      /><br />
+      <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
+        Adicionar Ingrediente
+      </button>
+
+      <label for="preparoInput">Modo de Preparo</label> <br />
+      <textarea name="prepare" id="preparoInput" data-testid="modo-de-preparo"></textarea><br />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <a href="/">Voltar</a>
+  </body>
+
+  <script>
+    function add() {
+      const campoIngrediente = document.getElementById('ingredienteInput').value;
+      if (campoIngrediente !== '') {
+        const listaIngredientes = document.getElementById('ingredientsList');
+        const itemLista = document.createElement('li');
+        const inputIngredient = document.createElement('input');
+        inputIngredient.id = campoIngrediente;
+        inputIngredient.name = 'ingredients[]';
+        inputIngredient.value = campoIngrediente;
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.className = 'btn btn-primary';
+        botao.innerText = 'Excluir Ingrediente';
+        botao.onclick = () => document.getElementById(campoIngrediente).parentElement.remove();
+        inputIngredient.innerText = ingredienteInput.value;
+        itemLista.appendChild(inputIngredient);
+        itemLista.appendChild(botao);
+        listaIngredientes.appendChild(itemLista);
+        document.getElementById('ingredienteInput').value = '';
+      }
+      return null;
+    }
+  </script>
+</html>

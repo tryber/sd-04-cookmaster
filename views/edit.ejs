@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body>
+    <% if(message) {%>
+    <p><%= message %></p>
+    <% } %> <% if(user) { %>
+    <div class="navbar">
+      <h1>Cookmaster</h1>
+      <span><%= user.name %> </span>
+
+      <a href="/logout">
+        <h3 data-testid="login">Logout</h3>
+      </a>
+    </div>
+    <hr />
+    <form action="/recipes/<%= recipe.id %>" method="POST">
+      <h1>Editar Receita</h1>
+      <div class="form-group">
+        <label for="uRecipeName">Nome da Receita</label>
+        <input
+          data-testid="nome-receita"
+          type="text"
+          name="uRecipeName"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+
+        <h3>Ingredientes</h3>
+
+        <ul id="myList" class="">
+        <% ingredients.forEach((ingredient, index) => { %>
+
+          <li id="itemList" index=<%= `${index}` %> ><input name="uIngredients[]" value=<%= `${ingredient}` %>  />
+            <a onclick=<%=`removeItem(${index})` %>
+            class="btn btn-danger">Excluir Ingrediente</a></li>
+        <% }) %>
+    </ul>
+        <hr />
+        <input
+        id="inputIngredient"
+          data-testid="ingredientes"
+          type="text"
+          name="uIngredients[]"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <br />
+        <a onclick=<%=`addItem()` %>
+            data-testid="adicionar-ingrediente"
+            class="btn btn-primary">Adicionar Ingrediente</a>
+        <hr />
+
+        <label for="modoPreparo">Modo de Preparo</label>
+        <br />
+        <textarea class="form-control" name="uPrepare" data-testid="modo-de-preparo" aria-label="With textarea"></textarea>
+        <br /><br />
+        <a href=""class="btn btn-secondary">
+          Voltar
+        </a>
+        <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </div>
+</form>
+    <%}%>
+  </body>
+
+
+  <script>
+
+      var ul = document.getElementById("myList");
+      var li;
+      var itemId;
+      var item
+
+const addItem = () => {
+    var inputingredient = document.getElementById("inputIngredient").value
+console.log(inputingredient)
+if(inputingredient == ""){
+    alert('digite um ingrediente válido')
+}else{
+    console.log('entrou no if')
+    item = document.getElementById("inputIngredient")
+    itemId = ul.childElementCount;
+    console.log(itemId);
+    li = createItemEl(item.value, itemId)
+    li.appendChild(createRemoveItemBtn(itemId))
+    ul.appendChild(li)
+    item.value=""
+}
+}
+
+const removeItem = (itemId) => {
+    for(i=0; i<ul.children.length; i++){
+        if(ul.children[i].getAttribute("index") == itemId){
+            ul.children[i].remove();
+        }
+    }
+}
+
+const createItemEl = (itemValue, itemId) => {
+    let li = document.createElement("li");
+    const input = document.createElement('input');
+      input.value = itemValue;
+      input.name = 'uIngredients[]';
+      li.setAttribute("index", itemId);
+    li.appendChild((input))
+    return li
+
+}
+
+const createRemoveItemBtn = (itemId) => {
+    let btn = document.createElement("button")
+    btn.setAttribute("onclick", "removeItem("+itemId+")");
+    btn.setAttribute("class", "btn btn-danger")
+    btn.innerHTML="Excluir Ingrediente";
+    return btn
+}
+
+  </script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de cadastro - usuario</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+  <% if (message) { %>
+    <p><%= message  %></p>
+  <% } %>
+  <div class="container">
+    <h3>Cookmaster - Cadastro</h3>
+    <form action="/cadastro" method="POST">
+      <div class="col-md-12 mb-3">
+        <label for="email">Email</label>
+        <input type="text" data-testid="email" class="form-control" name="email" required />
+        <div class="invalid-feedback">Digite um email válido.</div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="password">Senha</label>
+        <input type="password" data-testid="senha" class="form-control" name="password" required />
+        <div class="invalid-feedback">Digite uma senha válida.</div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="confirmar-senha">Confirmar Senha</label>
+        <input type="password"  name="passwordConfirmed" class="form-control" data-testid="confirmar-senha" name="passwordConfirmed" required />
+        <div class="invalid-feedback">Digite uma senha válida.</div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="firstName">Nome</label>
+        <input type="text" data-testid="nome" name="first_name" class="form-control" required />
+        <div class="invalid-feedback">Digite um nome válido.</div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="lastName">Sobrenome</label>
+        <input type="text" data-testid="sobrenome" class="form-control" name="last_name" required />
+        <div class="invalid-feedback">Digite um Sobrenome válido.</div>
+      </div>
+
+      <button data-testid="cadastrar" class="btn btn-primary">Cadastrar-se</button>
+      <div class="col-lg" style="text-align: right">
+
+      </div>
+
+      <a href="/login">
+        <div class="col-lg" style="text-align: left">
+          <button data-testid="login" type="submit">Login</button>
+        </div>
+      </a>
+    </div>
+    </form>
+  </body>
+</html>

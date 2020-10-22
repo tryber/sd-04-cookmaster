@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Receita</title>
+  </head>
+  <body>
+    <% if(user) { %>
+    <h1>Nova Receita</h1>
+    <% } %>
+    <form action="/recipes" method="POST">
+      <h4>Nome da receita</h4>
+      <input type="text" name="name" data-testid="nome-receita" />
+      <hr />
+      <h4>Ingredientes</h4>
+      <ul>
+        <br />
+      </ul>
+      <input type="text" name="ingredients[]" id="ingredients" data-testid="ingredientes" />
+      <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
+        Adicionar ingredientes
+      </button>
+      <br />
+      <hr />
+      <h4>Modo de preparo</h4>
+      <div>
+        <textarea
+          name="instructions"
+          id=""
+          cols="150"
+          rows="25"
+          data-testid="modo-de-preparo"
+        ></textarea>
+      </div>
+      <br />
+      <div>
+        <button type="submit" data-testid="postar-receita">Salvar</button>
+      </div>
+    </form>
+  </body>
+</html>
+
+<script>
+  function add() {
+    const ul = document.querySelector('ul');
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    const input = document.createElement('input');
+
+    const inputIngredientes = document.getElementById('ingredients');
+    if (inputIngredientes.value == '') return;
+
+    input.value = inputIngredientes.value;
+    input.name = 'ingredients[]';
+    button.appendChild(document.createTextNode('Excluir Ingrediente'));
+    button.type = 'button';
+    input.id = inputIngredientes.value;
+
+    button.id = `btn-${inputIngredientes.value}`;
+    button.onclick = function () {
+      document.getElementById(this.id.split('-')[1]).parentElement.remove();
+    };
+
+    li.appendChild(input);
+    li.appendChild(button);
+    ul.appendChild(li);
+
+    inputIngredientes.value = '';
+  }
+
+  function dropList() {
+    const list = document.getElementById('ingredientes');
+    list.parentElement.remove();
+  }
+</script>

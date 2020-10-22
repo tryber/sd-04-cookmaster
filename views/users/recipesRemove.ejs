@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Exclusão receita</title>
+  </head>
+  <body>
+    <h2>Confirme a exclusão da receita.</h2>
+    <form action="/recipes/<%= idRecipe %>/delete" method="POST">
+      <label for="senha">Senha:</label>
+      <input type="password" class="form-control" name="senha" id="senha" data-testid="senha" />
+      <a href="/" class="btn btn-danger">Cancelar</a>
+      <button type="submit" class="btn btn-primary" data-testid="confirmar">Confirmar</button>
+    </form>
+    <div>
+      <% if(mensagem) { %>
+      <h3><%= mensagem %></h3>
+      <% } %>
+    </div>
+  </body>
+</html>

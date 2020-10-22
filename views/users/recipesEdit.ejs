@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/recipes/<%= recipesId.id %>" method="POST">
+      <h1>Editar Receita</h1>
+      <h2>Nome da Receita</h2>
+      <input type="text" name="name" value="<%= recipesId.name %>" data-testid="nome-receita" />
+      <br />
+      <h3>Ingredientes</h3>
+      <ul>
+        <% recipesId.ingredients.split(',').forEach((recipe) => { %>
+        <li>
+          <input
+            id="<%= recipe %>"
+            name="ingredients[]"
+            value="<%= recipe %>"
+            data-testid="ingredientes"
+          />
+          <button type="button" onclick="dropList('<%= recipe %>')">Excluir Ingrediente</button>
+        </li>
+        <% }) %>
+      </ul>
+      <input type="text" id="ingredients" />
+      <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
+        Adicionar ingredientes
+      </button>
+      <br />
+      <hr />
+      <h4>Modo de preparo</h4>
+      <div>
+        <textarea name="instructions" cols="150" rows="25" data-testid="modo-de-preparo">
+        <%= recipesId.instructions %></textarea
+        >
+      </div>
+      <br />
+      <div>
+        <button type="submit" data-testid="postar-receita">Salvar</button>
+      </div>
+    </form>
+  </body>
+</html>
+
+<script>
+  function add() {
+    const ul = document.querySelector('ul');
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    const input = document.createElement('input');
+
+    const inputIngredientes = document.getElementById('ingredients');
+    if (inputIngredientes.value === '') return;
+
+    input.value = inputIngredientes.value;
+    input.name = 'ingredients[]';
+    button.appendChild(document.createTextNode('Excluir Ingrediente'));
+    button.type = 'button';
+    input.id = inputIngredientes.value;
+
+    button.onclick = function () {
+      document.getElementById(inputIngredientes.value).parentElement.remove();
+    };
+
+    li.appendChild(input);
+    li.appendChild(button);
+    ul.appendChild(li);
+
+    inputIngredientes.value = '';
+  }
+
+  function dropList(element) {
+    const list = document.getElementById(element);
+    list.parentElement.remove();
+  }
+</script>

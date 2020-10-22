@@ -3,9 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <h1>Cookmaster</h1>
+    <% if (user) { %>
+    <p class="text-center">Usuário logado: <%= user.firstName %></p>
+    <hr />
+    <nav>
+      <a href="/recipes/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
+
+      <a href="/recipes/search" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/me/recipes" class="btn btn-info" data-testid="minhas-receitas"> Minhas Receitas </a>
+      <a href="/me/edit" class="btn btn-success" data-testid="minha-conta"> Minha Conta </a>
+      <a href="/logout" class="btn btn-danger" data-testid="logout">Logout</a>
+      <ul>
+        <h2>Receitas</h2>
+        <% recipesAuthor.forEach((recipe) => { %>
+        <li><%= recipe.name %></li>
+        <li><%= recipe.user %></li>
+        <li><a href=<%= `/recipes/${recipe.id}`%>>Ver mais</a></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <% if (!user) { %>
+      <p class="text-center">Usuário deslogado:</p>
+      <hr />
+      <a href="/recipes/search" class="btn btn-secondary" data-testid="buscar-receita"> Buscar Receita </a>
+      <a href="/me/recipes" class="btn btn-info" data-testid="minhas-receitas"> Minhas Receitas </a>
+      <a href="/login" class="btn btn-dark" data-testid="login">Login</a>
+    </nav>
+    <hr />
+    <ul>
+      <h2>Receitas</h2>
+      <% recipesAuthor.forEach((recipe) => { %>
+        <li><%= recipe.name %></li>
+        <li><%= recipe.user %></li>
+        <li><a href=<%= `/recipes/${recipe.id}`%>>Ver mais</a></li>
+        <% }) %>
+      </ul>
+      <% } %>
   </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="row justify-content-center mb-5 border">
+      <form action="/registerUser" method="POST">
+        <h5>Cookmaster - Cadastro</h2>
+          <hr>
+        <div class="form-row ">
+          <div class="form-group col-sm-16">
+            <label class="sr-only" for="">Email:</label>
+            <input type="text" class="form-control" name="email"  placeholder="Email" data-testid="email"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-16">
+            <label class="sr-only" for="">Nome:</label>
+            <input type="text" class="form-control" name="firstName" placeholder="Nome" data-testid="nome"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-16">
+            <label class="sr-only" for="">Sobrenome:</label>
+            <input type="text" class="form-control" name="lastName" placeholder="Sobrenome" data-testid="sobrenome"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-16">
+            <label class="sr-only" for="">Senha:</label>
+            <input type="password" class="form-control" name="passWord" placeholder="Senha" data-testid="senha"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-sm-15">
+            <label class="sr-only" for="">Confirme senha:</label>
+            <input type="password" class="form-control" name="confirmPassWord" placeholder="Confirme senha" data-testid="confirmar-senha"/>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-testid="cadastrar">Cadastrar</button>
+      </form>
+    </div>
+  </body>
+</html>

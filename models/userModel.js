@@ -65,8 +65,24 @@ const createUser = async ({ email, password, first_name, last_name }) => {
     .execute();
 };
 
+const saveEdit = async (id, email, password, firstName, lastName) => {
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', firstName)
+      .set('last_name', lastName)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+};
+
 module.exports = {
   findByEmail,
   findById,
   createUser,
+  saveEdit,
 };

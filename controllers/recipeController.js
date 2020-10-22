@@ -3,6 +3,7 @@
 const { getRecipe } = require('../models/recipeModel');
 const recipeModel = require('../models/recipeModel');
 const userModel = require('../models/userModel');
+const validationModel = require('../models/validationModel');
 
 async function listRecipes(req, res) {
   const recipes = await recipeModel.getAllRecipes();

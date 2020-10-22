@@ -60,10 +60,29 @@ const newUser = async (req, res) => {
   }
 };
 
+async function editUser(req, res) {
+  res.render('editUser', { user: req.user, message: null });
+}
+
+async function confirmEditUser(req, res) {
+  const { idUser } = req.user;
+  const { email, password, passwordConfirmed, first_name, last_name } = req.body;
+  console.log(email, password, passwordConfirmed, first_name, last_name);
+  const isValid = await validationModel({ ...req.body });
+
+  if (isValid) {
+    await userModel.saveEdit(idUser, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('editUser', { isValid, user: req.user });
+}
+
 module.exports = {
   login,
   loginForm,
   logout,
   signUp,
   newUser,
+  editUser,
+  confirmEditUser,
 };

@@ -66,7 +66,7 @@ async function editUser(req, res) {
 
 async function confirmEditUser(req, res) {
   const { idUser } = req.user;
-  const { email, password, passwordConfirmed, first_name, last_name } = req.body;
+  const { email, password, first_name, last_name } = req.body;
   const isValid = await validationModel({ ...req.body });
 
   if (isValid) {

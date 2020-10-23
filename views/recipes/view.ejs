@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster'}) %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container home">
+      <h1>Receitas</h1>
+      <div>
+        <% if (user) { %>
+          <button data-testid="nova-receita">Nova Receita</button>
+        <% } %>
+        <button data-testid="buscar-receita">Buscar Receita</button>
+      </div>
+    </div>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

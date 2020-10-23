@@ -20,12 +20,11 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', middlewares.auth(false), controllers.recipesController.show);
+app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
 
-app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
-
-app.get('/cadastrar', (req, res) => res.render('users/register', { error: false, success: false }));
+app.get('/cadastrar', controllers.userController.show);
 app.post('/cadastrar', controllers.userController.add);
+app.get('/me/edit', middlewares.auth(), controllers.userController.edit);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

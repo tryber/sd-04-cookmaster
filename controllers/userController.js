@@ -70,9 +70,14 @@ const add = async (req, res) => {
   return res.render('users/register', { error: false, success: true });
 };
 
+const edit = (req, res) => res.render('users/edit', { user: req.user });
+const show = (req, res) => res.render('users/register', { error: false, success: false });
+
 module.exports = {
+  add,
+  edit,
   login,
   loginForm,
   logout,
-  add,
+  show,
 };

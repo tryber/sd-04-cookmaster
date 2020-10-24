@@ -1,8 +1,6 @@
 const { registerUser } = require('../models/registerModel');
 
-const registerForm = async (_, res) => {
-  res.render('register', { message: null });
-};
+const registerForm = async (_, res) => res.render('register', { message: null });
 
 const validation = (email, firstName, lastName) => {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

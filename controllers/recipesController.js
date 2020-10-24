@@ -1,4 +1,4 @@
-const { getRecipes, getRecipesById, getRecipesByName } = require('../models/recipesModel');
+const { getRecipes, getRecipesById, getRecipesByName, createNewRecipe } = require('../models/recipesModel');
 
 const recipesCtrl = async (req, res) => {
   const recipes = await getRecipes();
@@ -18,8 +18,27 @@ const recipesSearch = async (req, res) => {
   return res.render('searchRecipes', { recipes, user: req.user });
 };
 
+const newRecipeForm = async (req, res) => res.render('newRecipes', { user: req.user });
+
+const newRecipe = async (req, res) => {
+  const { nome, ingredientes, instrucoes } = req.body;
+  const { id, name, lastName } = req.user;
+  
+  await createNewRecipe(
+    id,
+    `${name} ${lastName}`,
+    nome,
+    ingredientes,
+    instrucoes,
+  );
+
+  return res.redirect('/');
+};
+
 module.exports = {
   recipesCtrl,
   recipesDtls,
   recipesSearch,
+  newRecipeForm,
+  newRecipe,
 };

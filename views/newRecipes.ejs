@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Nova Receita</title>
+  </head>
+  <body>
+    <header class="header-container">
+      <h1 class="p-2">Cookmaster</h1>
+      <div class="login-container p-2">
+        <% if (user) { %>
+          <p> <%= user.name %>| </p>
+          <a data-testid="logout" href="/logout" class="btn btn-outline-danger">
+          Logout
+          </a>
+        <% } else { %>
+        <a data-testid="login" href="/login" class="btn btn-primary">Login</a>
+        <% } %>
+      </div>
+    </header>
+    <section>
+      <h3>Nova Receita</h3>
+      <form action="/recipes/new" method="POST" name="recipeForm" class="form-container
+    form d-flex flex-column">
+        <div class="form-group">
+          <label for="nome">Nome da Receita</label><br>
+          <input data-testid="nome-receita" name="nome" id="nome" type="text" required>
+        </div>
+        <div class="form-group">
+          <input data-testid="ingredientes" name="ingredientes" id="ingredientes" type="text">
+          <button data-testid="adicionar-ingrediente" type="button" id="add-ingredient" class="btn btn-success">Adicionar Ingrediente</button>
+          <ul id="ingredients-list" class="list-group"></ul>
+        </div>
+        <div class="form-group">
+          <label for>Modo de preparo</h4>
+          <textarea data-testid="modo-de-preparo" name="instrucoes" type="text" rows="10" cols="50" required></textarea>
+        </div>
+        <div class="form-group">
+          <a href="/" class="btn btn-primary">Voltar</a>
+          <button data-testid="postar-receita" type="button" id="saveRecipe" class="btn btn-success">Salvar Receita</button>
+        </div>
+      </form>
+    </section>
+  </body>
+  <script>
+    const ingredients = new Set();
+    const ingredientInput = document.querySelector('#ingredientes');
+    const addIngredientBtn = document.querySelector('#add-ingredient');
+    const ingredientsList = document.querySelector('#ingredients-list');
+    const saveRecipeBtn = document.querySelector('#saveRecipe');
+
+    const removeItem = () => {
+      const { parentNode } = event.target;
+      ingredients.delete(parentNode.children[0].textContent);
+      parentNode.remove();
+      console.log(ingredients);
+    };
+
+    const addIngredient = () => {
+      const li = document.createElement('li');
+
+      const item = ingredientInput.value;
+      ingredients.add(item);
+      console.log('O Set:', ingredients);
+      li.innerHTML += `<span class="ingredients">${item}</span>
+          <button onclick="removeItem()" type="button" id="delete-btn" class="btn btn-danger delete-btn">
+            Excluir Ingrediente
+          </button>`;
+
+      ingredientsList.appendChild(li);
+      ingredientInput.value = '';
+    };
+
+    const saveRecipe = () => {
+      ingredientInput.value = [...ingredients].join(', ');
+      document.recipeForm.submit();
+    };
+
+    console.log('Ingredient Input:', document.recipeForm);
+
+    addIngredientBtn.addEventListener('click', addIngredient);
+    saveRecipeBtn.addEventListener('click', saveRecipe);
+    
+  </script>
+</html>

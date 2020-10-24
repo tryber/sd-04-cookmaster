@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
+app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 

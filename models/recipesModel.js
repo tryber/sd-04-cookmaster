@@ -41,10 +41,11 @@ const getRecipesByName = async (q) => {
 const createNewRecipe = async (userId, user, recipeName, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
-  return await table.insert([
-    'user_id', 'user', 'name', 'ingredients', 'instructions',
+  const insertRecipe = await table.insert([
+    'user_id', 'user', 'name', 'ingredients', 'instructions'
   ])
   .values(userId, user, recipeName, ingredients, instructions).execute();
+  return insertRecipe;
 };
 
 module.exports = {

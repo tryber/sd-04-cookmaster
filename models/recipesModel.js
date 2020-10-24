@@ -42,7 +42,7 @@ const createNewRecipe = async (userId, user, recipeName, ingredients, instructio
   const db = await connection();
   const table = await db.getTable('recipes');
   const insertRecipe = await table.insert([
-    'user_id', 'user', 'name', 'ingredients', 'instructions'
+    'user_id', 'user', 'name', 'ingredients', 'instructions',
   ])
   .values(userId, user, recipeName, ingredients, instructions).execute();
   return insertRecipe;

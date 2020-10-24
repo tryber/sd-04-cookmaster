@@ -20,4 +20,19 @@ const searchRecipes = async (req, res) => {
   return res.render('search', { recipes, message: null, user: req.user });
 };
 
-module.exports = { allRecipes, recipePage, searchRecipes };
+const createRecipePage = async (req, res) => {
+  return res.render('createRecipe', { message: null, redirect: null, user: req.user });
+};
+
+const createRecipe = async (req, res) => {
+  // console.log(req.body);
+
+  const {
+    body: { name, ingredients, method },
+    user,
+  } = req;
+
+  return res.render('createRecipe', { message: 'Receita cadastrada com sucesso', redirect: null, user: req.user });
+};
+
+module.exports = { allRecipes, recipePage, searchRecipes, createRecipe, createRecipePage };

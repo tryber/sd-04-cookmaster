@@ -23,7 +23,7 @@ const newRecipeForm = async (req, res) => res.render('newRecipes', { user: req.u
 const newRecipe = async (req, res) => {
   const { nome, ingredientes, instrucoes } = req.body;
   const { id, name, lastName } = req.user;
-  
+
   await createNewRecipe(
     id,
     `${name} ${lastName}`,

@@ -24,6 +24,25 @@ const fetchRecipeIdModel = async (idParam) => {
   return { id, userId, user, name, ingredients, instructions };
 };
 
+const fetchRecipeNameModel = async (nameParam) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const result = await table
+    .select([])
+    .where('name like :param_name')
+    .bind('param_name', `%${nameParam}%`)
+    .execute();
+  const recipes = result.fetchAll();
+  return recipes.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  }));
+};
+
 const updateRecipeModel = async (userId, user, name, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
@@ -54,6 +73,7 @@ const deleteRecipeIdModel = async (idParam) => {
 module.exports = {
   fetchAllRecipesModel,
   fetchRecipeIdModel,
+  fetchRecipeNameModel,
   updateRecipeModel,
   insertRecipeIdModel,
   deleteRecipeIdModel,

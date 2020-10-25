@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes</title>
+  </head>
+  <body>
+    <div>Cookmaster</div>
+    <% if(user){%>
+    <a href="/recipes/<%=cooks.id %>/edit" data-testid="editar-receita">Editar Receita</a>
+    <a href="/recipes/<%=cooks.id %>/delete" data-testid="excluir-receita">Excluir Receita</a>
+    <%}%>
+    <main>
+      <h2>Ingredientes</h2>
+      <h2><%=cooks.name%></h2>
+      <div>
+        <% cooks.ingredients.split(',').forEach((el)=>{%>
+        <h4><%= el%></h4>
+        <%})%>
+      </div>
+      <h2>Modo de Preparo</h2>
+      <div><%=cooks.instructions%></div>
+    </main>
+  </body>
+</html>

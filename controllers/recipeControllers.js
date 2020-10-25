@@ -7,9 +7,7 @@ const listarReceitas = async (req, res) => {
 };
 
 const viewRecipesUser = async (req, res) => {
-  console.log('req', req.user);
   const cooks = await recipesModel.listSpecificRecipe(Number(req.params.id));
-  console.log('cook', cooks);
   res.render('recipes', { cooks, user: req.user });
 };
 

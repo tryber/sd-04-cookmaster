@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-//função pega todas as receitas do BD
+// função pega todas as receitas do BD
 const listCook = async () =>
   connection()
     .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())

@@ -2,16 +2,14 @@ const connection = require('./connection');
 
 const findAll = async () =>
   connection()
-    .then((db) => db.getTable('recipes').select(['id', 'user', 'name'])
-    .execute())
+    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
     .then((results) => results.fetchAll())
     .then((recipe) => recipe.map(([id, user, name]) => ({ id, user, name })));
 
 const findById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput)
-      .execute(),
+      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, userId, user, name, ingredients, instructions]) => ({
@@ -51,7 +49,8 @@ const findByUserID = async (idInput) =>
         .select(['id', 'user', 'name'])
         .where('user_id =:id')
         .bind('id', idInput)
-        .execute())
+        .execute(),
+    )
     .then((results) => results.fetchAll())
     .then((recipe) => recipe.map(([id, user, name]) => ({ id, user, name })));
 
@@ -77,16 +76,11 @@ const updateRecipe = async ({ id, nome, ingredients, instructions }) =>
       .execute(),
   );
 
-const removeRecipe = (idInput) => { 
-  return connection().then((db) =>
-    db
-      .getTable("recipes")
-      .delete()
-      .where("id = :id")
-      .bind("id", idInput)
-      .execute()
+const removeRecipe = (idInput) => 
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = :id').bind('id', idInput)
+    .execute(),
   );
-};
 
 
 module.exports = {

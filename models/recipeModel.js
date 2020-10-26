@@ -57,15 +57,13 @@ const getRecipeByName = (qInput) =>
       })),
     );
 
-const createRecipe = async (id, user, name, ingredients, instructions) => {
+const createRecipe = async (id, user, name, ingredients, instructions) =>
   connection().then((db) =>
     db
       .getTable('recipes')
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
       .values(id, user, name, ingredients, instructions)
       .execute(),
-      
   );
-};
 
 module.exports = { getAllRecipes, getByIdRecipe, getRecipeByName, createRecipe };

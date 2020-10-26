@@ -1,0 +1,18 @@
+<%- include('../header'); -%>
+    <h1>Excluir Receita</h1>
+    <form action="/recipes/<%= id %>/delete" method="POST">
+      <%console.log("User", user);%>
+      <label for="confirmeExlusao">Confirme a exclusão da receita</label><br />
+      <label for="confirmeExlusao">Senha</label><br />
+      <input type="text" name="senha" data-testid="senha" id="senhaConfirm" /><br />
+
+      <input type="hidden" name="idUser" value="<%= user.id %> " />
+      <button type="reset" data-testid="cancelar">Cancelar</button>
+      <button type="submit" data-testid="confirmar">Confirmar</button><br />
+      <% if (message) { %>
+        <label><%= message %></label> 
+      <% } %> 
+    </form>
+    <script src="/js/addRecipe.js"></script>
+  </body>
+</html>

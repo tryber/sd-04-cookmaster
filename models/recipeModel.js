@@ -77,6 +77,18 @@ const updateRecipe = async ({ id, nome, ingredients, instructions }) =>
       .execute(),
   );
 
+const removeRecipe = (idInput) => { 
+  return connection().then((db) =>
+    db
+      .getTable("recipes")
+      .delete()
+      .where("id = :id")
+      .bind("id", idInput)
+      .execute()
+  );
+};
+
+
 module.exports = {
   findByUserID,
   updateRecipe,
@@ -84,4 +96,5 @@ module.exports = {
   findByName,
   findById,
   findAll,
+  removeRecipe,
 };

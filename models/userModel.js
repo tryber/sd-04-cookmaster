@@ -1,32 +1,111 @@
-/* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
-const TEMP_USER = {
-  id: 'd2a667c4-432d-4dd5-8ab1-b51e88ddb5fe',
-  email: 'taylor.doe@company.com',
-  password: 'password',
-  name: 'Taylor',
-  lastName: 'Doe',
+const connection = require('./connection');
+
+const EMAIL = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+const SENHA = /^.{6,}$/;
+const NAME = /[a-zA-Z]{3,}/;
+
+const validaString = (string = '', regex) => string.match(regex);
+const confirmSenha = (senha1 = '', senha2 = '') => senha1 === senha2;
+
+const validaEmail = (email) => {
+  let message = '';
+  if (!validaString(email, EMAIL)) message = 'O email deve ter o formato email@mail.com';
+  return message;
 };
 
-/* Substitua o código das funções abaixo para que ela,
-de fato, realize a busca no banco de dados */
-
-/**
- * Busca um usuário através do seu email e, se encontrado, retorna-o.
- * @param {string} email Email do usuário a ser encontrado
- */
-const findByEmail = async (email) => {
-  return TEMP_USER;
+const validaSenha = (password, passwordConfirm) => {
+  let message = '';
+  let message2 = '';
+  if (!validaString(password, SENHA)) message = 'A senha deve ter pelo menos 6 caracteres';
+  if (!confirmSenha(password, passwordConfirm)) message2 = 'As senhas tem que ser iguais';
+  return message || message2;
 };
 
-/**
- * Busca um usuário através do seu ID
- * @param {string} id ID do usuário
- */
-const findById = async (id) => {
-  return TEMP_USER;
+const validaNome = (nome) => {
+  let message = '';
+  if (!validaString(nome, NAME)) {
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return message;
+};
+
+const validaSobrenome = (sobrenome) => {
+  let message = '';
+  if (!validaString(sobrenome, NAME)) {
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+
+  return message;
+};
+
+const createUser = async (email, password, nome, sobrenome) =>
+  connection().then((db) =>
+    db
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
+      .values(email, password, nome, sobrenome)
+      .execute(),
+  );
+
+const findByEmail = async (emailInput) => {
+  return connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .select([])
+        .where('email =:emailInput')
+        .bind('emailInput', emailInput)
+        .execute(),
+    )
+    .then((result) => result.fetchOne())
+    .then(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    }));
+};
+
+const findById = async (idInput) => {
+  return connection()
+    .then((db) =>
+      db.getTable('users').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
+    )
+    .then((result) => result.fetchOne())
+    .then(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    }))
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const updateUser = async (id, email, password, nome, sobrenome) => {
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', nome)
+    .set('last_name', sobrenome)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
 };
 
 module.exports = {
+  validaEmail,
+  validaSenha,
+  validaNome,
+  validaSobrenome,
+  createUser,
   findByEmail,
   findById,
+  updateUser,
 };

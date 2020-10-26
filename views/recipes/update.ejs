@@ -1,0 +1,34 @@
+<%- include('../header'); -%>
+  <% console.log(recipe.id) %>
+    <form action="/recipes/<%= recipe.id %>" method="POST">
+
+      <label for="nomeReceita">Nome da Receita: </label>
+      <input type="text" name="nome" data-testid="nome-receita" id="nomeReceita" value="<%= recipe.name %> " /><br />
+
+      <label for="Ingredientes">Ingredientes: </label><br />
+
+      <ul id="ingredientsList">
+        <% recipe.ingredients.split(',').forEach((item) => { %>
+          <li>
+            <input type="text" name="ingredients[]" id=<%= item %> value="<%= item %>"/>
+            <button type="button">Excluir Ingrediente</button>
+          </li>
+        <% }); %>
+      </ul>
+
+      <input type="text" id="ingredientes" data-testid="ingredientes" /><br /><br />
+      <a class="btn btn-outline-primary" for="adicionarButton" data-testid="adicionar-ingrediente" >
+        Adicionar Ingrediente
+      </a><br/><br/>
+
+      <label for="modoPreparo">Modo de Preparo: </label>
+      <input type="text" name="instructions" data-testid="modo-de-preparo" value="<%= recipe.instructions %>" /><br />
+
+      <input type="hidden" name="user" value="<%= user.firstName %>" /><br />
+      <input type="hidden" name="user_id" value="<%= user.id %>" /><br />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <script src="/js/addRecipe.js"></script>
+  </body>
+</html>

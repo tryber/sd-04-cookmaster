@@ -1,0 +1,27 @@
+<%- include('../header'); -%>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+
+      <label for="nomeReceita">Nome da Receita: </label>
+      <input type="text" name="nome" data-testid="nome-receita" id="nomeReceita" /><br />
+
+      <label for="Ingredientes">Ingredientes: </label><br />
+
+      <ul id="ingredientsList">
+
+      </ul>
+
+      <input type="text" data-testid="ingredientes" id="ingredientes" /><br /><br />
+      <a type="button" for="adicionarButton" data-testid="adicionar-ingrediente" >Adicionar Ingrediente</a><br/><br/>
+
+      <label for="modoPreparo">Modo de Preparo: </label>
+      <input type="text" name="instructions" data-testid="modo-de-preparo" /><br />
+
+      <input type="hidden" name="user" value="<%= user.firstName %>" /><br />
+      <input type="hidden" name="user_id" value="<%= user.id %>" /><br />
+
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+    <script src="/js/addRecipe.js"></script>
+  </body>
+</html>

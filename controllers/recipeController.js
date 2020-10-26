@@ -80,7 +80,7 @@ const deleteRecipe = async (req, res) => {
 
     return res.redirect('/');
   }
-  res.render('recipes/delete', { id, user: req.user, message: 'Senha invalida.' });
+  return res.render('recipes/delete', { id, user: req.user, message: 'Senha invalida.' });
 };
 
 module.exports = {

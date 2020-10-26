@@ -9,7 +9,8 @@ const findAll = async () =>
 const findById = async (idInput) =>
   connection()
     .then((db) =>
-      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput).execute(),
+      db.getTable('recipes').select([]).where('id =:idInput').bind('idInput', idInput)
+      .execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, userId, user, name, ingredients, instructions]) => ({
@@ -76,7 +77,7 @@ const updateRecipe = async ({ id, nome, ingredients, instructions }) =>
       .execute(),
   );
 
-const removeRecipe = (idInput) => 
+const removeRecipe = (idInput) =>
   connection().then((db) =>
     db.getTable('recipes').delete().where('id = :id').bind('id', idInput)
     .execute(),

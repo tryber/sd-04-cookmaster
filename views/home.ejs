@@ -26,9 +26,9 @@
       <div class="collapse navbar-collapse">
         <h2 class="navbar-brand col text-light">Receitas</h2>
         <% if(user) { %>
-        <a class="btn btn-light mr-3" data-testid="nova-receita">Nova Receita</a>
+        <a class="btn btn-light mr-3" data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
         <% }%>
-        <a class="btn btn-light" data-testid="buscar-receita">Buscar Receitas</a>
+        <a class="btn btn-light" href="/recipes/search" data-testid="buscar-receita">Buscar Receitas</a>
       </div>
     </div>
     <div class="d-flex flex-column bd-highlight mb-1">

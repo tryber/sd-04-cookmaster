@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+  </head>
+  <body class="m-4 border border-secondary p-1">
+    <div class="navbar navbar-expand-lg navbar-light bg-dark rounded m-1">
+      <header class="collapse navbar-collapse">
+        <h1 class="navbar-brand col text-light">Cookmaster</h1>
+        <% if(user){%>
+        <h5><%= `${user.firstName} ${user.lastName}`%></h5>
+        <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
+        <%} else {%>
+        <a data-testid="login" class="btn btn-light" href="/login">Login</a>
+        <% }%>
+      </header>
+    </div>
+    <div class="navbar navbar-expand-lg navbar-light bg-primary rounded m-1">
+      <div class="collapse navbar-collapse">
+        <h2 class="navbar-brand col text-light">Buscar receita</h2>
+        <form method="GET">
+          <input type="text" id="buscaInput" name="q" class="m-2" data-testid="receita" />
+          <button type="submit" class="btn btn-light"  data-testid="buscar"">Buscar</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <% if(query && recipes.lenght > 1) {%>
+        <h5>palavra buscada: <%= query %></h5>
+      <%}%>
+    </div>
+    <div class="d-flex flex-column bd-highlight mb-1">
+      <% if(recipes) {%>
+      <% recipes.forEach((recipe)=> { %>
+        <div class="mx-auto container row text-center m-1 bg-primary text-light ">
+          <p class="col"><%= recipe.name %></p>
+          <p class="col"><%= recipe.user %></p>
+          <a class="m-1 btn-sm btn-light rounded-pill" href="recipe/<%=recipe.id%>">Ver mais</a>
+        </div>
+      <% })} %>
+    </div>
+  </body>
+</html>

@@ -34,4 +34,9 @@ app.post('/cadastro', controllers.cadastroController.entrar);
 
 app.get('/recipe/:id', middlewares.auth(false), controllers.recipeController.recipeById);
 
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.search);
+
+app.get('/recipes/new',middlewares.auth(false), controllers.recipeController.cadastroRecipe);
+app.post('/recipes',middlewares.auth(false), controllers.recipeController.registerRecipe);
+
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -42,4 +42,29 @@ const getByIdRecipe = (idd) =>
     )
     .then((recipes) => recipes.find((recipe) => recipe.id === idd));
 
-module.exports = { getAllRecipes, getByIdRecipe };
+const getRecipeByName = (qInput) =>
+  connection()
+    .then((bd) =>
+      bd.getTable('recipes').select([]).where('name like :q').bind('q', `%${qInput}%`).execute(),
+    )
+    .then((results) => results.fetchAll())
+    .then((recipes) =>
+      recipes.map(([id, userId, user, name]) => ({
+        id,
+        userId,
+        user,
+        name,
+      })),
+    );
+
+const createRecipe = async (id, user, name, ingredients, instructions) => {
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values(id, user, name, ingredients, instructions)
+      .execute(),
+  );
+};
+
+module.exports = { getAllRecipes, getByIdRecipe, getRecipeByName, createRecipe };

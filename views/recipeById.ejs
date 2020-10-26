@@ -11,31 +11,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Home</title>
   </head>
-  <body>
-    <header>
-      <h3>Cookmaster</h3>
-      <% if(user){%>
-      <h5><%= `${user.firstName} ${user.lastName}`%></h5>
-      <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
-      <%} else {%>
-      <a data-testid="login" class="btn btn-light" href="/login">Login</a>
-      <% }%>
-    </header>
+  <body class="m-4 border border-secondary p-1">
+    <div class="navbar navbar-expand-lg navbar-light bg-dark rounded m-1">
+      <header class="collapse navbar-collapse">
+        <h3 class="navbar-brand col text-light">Cookmaster</h3>
+        <% if(user){%>
+        <h5><%= `${user.firstName} ${user.lastName}`%></h5>
+        <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
+        <%} else {%>
+        <a data-testid="login" class="btn btn-light" href="/login">Login</a>
+        <% }%>
+      </header>
+    </div>
     <div>
-      <h1><%= recipe.name %></h1>
-      <h3><%= recipe.user %></h3>
+      <h1 class="card-title"><%= recipe.name %></h1>
+      <h6 class="card-title"><%= recipe.user %></h6>
       <% if(user && user.id === recipe.userId) { %>
-      <a data-testid="editar-receita" href="/editar">editar</a>
-      <a data-testid="excluir-receita" href="/delete">excluir</a>
+      <a data-testid="editar-receita" class="btn btn-light" href="/editar">editar</a>
+      <a data-testid="excluir-receita" class="btn btn-light" href="/delete">excluir</a>
       <% } %>
     </div>
-    <h3>Ingredientes</h3>
-    <ol>
+    <h5 class="card-subtitle mb-2 text-muted">Ingredientes</h5>
+    <ol class="list-group">
       <% recipe.ingredients.split(",").map((result) => { %>
-      <li><%= result %></li>
+      <li class="list-group-item"><%= result %></li>
       <% }) %>
     </ol>
-    <h3>Mode de preparo</h3>
-    <p><%= recipe.instructions %></p>
+    <h3 class="card-subtitle mb-2 text-muted m-1">Mode de preparo</h3>
+    <p class="card-text"><%= recipe.instructions %></p>
   </body>
 </html>

@@ -74,7 +74,7 @@ const deleteRecipe = async (req, res) => {
   const { senha, idUser } = req.body;
 
   const user = await userModel.findById(idUser);
-  console.log(senha, user.password);
+
   if (senha === user.password) {
     await recipeModel.removeRecipe(id);
 

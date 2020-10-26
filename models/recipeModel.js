@@ -64,6 +64,7 @@ const createRecipe = async (id, user, name, ingredients, instructions) => {
       .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
       .values(id, user, name, ingredients, instructions)
       .execute(),
+      
   );
 };
 

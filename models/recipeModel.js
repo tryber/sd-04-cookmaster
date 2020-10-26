@@ -45,7 +45,12 @@ const getByIdRecipe = (idd) =>
 const getRecipeByName = (qInput) =>
   connection()
     .then((bd) =>
-      bd.getTable('recipes').select([]).where('name like :q').bind('q', `%${qInput}%`).execute(),
+      bd
+        .getTable('recipes')
+        .select([])
+        .where('name like :q')
+        .bind('q', `%${qInput}%`)
+        .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>

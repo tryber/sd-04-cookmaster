@@ -7,9 +7,15 @@
   </head>
   <body>
     <form action="/me/edit" method="POST">
-      <% console.log(user) %> 
+      <% console.log(user) %>
       <label for="emailInput">Email: </label>
-      <input type="email" name="email" data-testid="email" id="emailInput" value="<%=user.email%> "/><br />
+      <input
+        type="email"
+        name="email"
+        data-testid="email"
+        id="emailInput"
+        value="<%=user.email%> "
+      /><br />
       <label for="passwordInput">Senha: </label>
       <input type="password" name="password" data-testid="senha" id="passwordInput" /><br />
       <label for="passwordInputConfirm">Confirmar Senha: </label>
@@ -20,11 +26,23 @@
         id="passwordInputConfirm"
       /><br />
       <label for="nomeInput">Nome: </label>
-      <input data-testid="nome" type="text" name="nome" id="nomeInput" value="<%= user.firstName %>" />
+      <input
+        data-testid="nome"
+        type="text"
+        name="nome"
+        id="nomeInput"
+        value="<%= user.firstName %>"
+      />
       <br />
       <label for="sobrenomeInput">Sobrenome: </label>
-      <input data-testid="sobrenome" type="text" name="sobrenome" id="sobrenomeInput" value="<%= user.lastName %>" />
-      <br />>
+      <input
+        data-testid="sobrenome"
+        type="text"
+        name="sobrenome"
+        id="sobrenomeInput"
+        value="<%= user.lastName %>"
+      />
+      <br />
       <button type="submit" data-testid="salvar">Cadastar-se</button>
     </form>
     <a href="/" data-testid="login">Home</a>

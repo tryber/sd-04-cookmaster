@@ -63,7 +63,7 @@ function isEmpty(object) {
   return message;
 }
 
-const valida = ({email, password, passwordConfirm, nome, sobrenome}) => {
+const valida = ( {email, password, passwordConfirm, nome, sobrenome }) => {
   const validaEmail = userModel.validaEmail(email);
   const validaPassword = userModel.validaSenha(password, passwordConfirm);
   const validaNome = userModel.validaNome(nome);
@@ -73,7 +73,6 @@ const valida = ({email, password, passwordConfirm, nome, sobrenome}) => {
 
 const add = async (req, res) => {
   const { email, password, nome, sobrenome } = req.body;
-  console.log("email",email)
   const data = valida(req.body);
 
   if (isEmpty(data)) res.send(isEmpty(data));
@@ -89,7 +88,6 @@ const updateCommit = async (req, res) => {
   const data = valida(req.body);
   const { id } = req.user;
 
-  console.log("req.body", req.body)
   if (isEmpty(data)) res.send(isEmpty(data));
   else {
     return userModel

@@ -86,6 +86,19 @@ const findById = async (idInput) => {
     });
 };
 
+const updateUser = async (id, email, password, nome, sobrenome) => {
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', nome)
+    .set('last_name', sobrenome)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 module.exports = {
   validaEmail,
   validaSenha,
@@ -94,4 +107,5 @@ module.exports = {
   createUser,
   findByEmail,
   findById,
+  updateUser,
 };

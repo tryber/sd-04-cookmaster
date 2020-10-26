@@ -48,6 +48,10 @@ const cadastro = async (_req, res) => {
   res.render('admin/cadastro', {});
 };
 
+const updateUser = async (req, res) => {
+  res.render('admin/update', { user: req.user });
+};
+
 function isEmpty(object) {
   let message = '';
   Object.values(object).map((item) => {
@@ -59,13 +63,18 @@ function isEmpty(object) {
   return message;
 }
 
-const add = async (req, res) => {
-  const { email, password, passwordConfirm, nome, sobrenome } = req.body;
+const valida = ({email, password, passwordConfirm, nome, sobrenome}) => {
   const validaEmail = userModel.validaEmail(email);
   const validaPassword = userModel.validaSenha(password, passwordConfirm);
   const validaNome = userModel.validaNome(nome);
   const validaSobrenome = userModel.validaSobrenome(sobrenome);
-  const data = { validaEmail, validaPassword, validaNome, validaSobrenome };
+  return { validaEmail, validaPassword, validaNome, validaSobrenome };
+};
+
+const add = async (req, res) => {
+  const { email, password, nome, sobrenome } = req.body;
+  console.log("email",email)
+  const data = valida(req.body);
 
   if (isEmpty(data)) res.send(isEmpty(data));
   else {
@@ -75,10 +84,26 @@ const add = async (req, res) => {
   }
 };
 
+const updateCommit = async (req, res) => {
+  const { email, password, nome, sobrenome } = req.body;
+  const data = valida(req.body);
+  const { id } = req.user;
+
+  console.log("req.body", req.body)
+  if (isEmpty(data)) res.send(isEmpty(data));
+  else {
+    return userModel
+      .updateUser(id, email, password, nome, sobrenome)
+      .then(() => res.redirect('/'));
+  }
+};
+
 module.exports = {
   add,
   cadastro,
   login,
   loginForm,
   logout,
+  updateUser,
+  updateCommit,
 };

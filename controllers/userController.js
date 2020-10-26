@@ -63,7 +63,7 @@ function isEmpty(object) {
   return message;
 }
 
-const valida = ( {email, password, passwordConfirm, nome, sobrenome }) => {
+const valida = ({ email, password, passwordConfirm, nome, sobrenome }) => {
   const validaEmail = userModel.validaEmail(email);
   const validaPassword = userModel.validaSenha(password, passwordConfirm);
   const validaNome = userModel.validaNome(nome);

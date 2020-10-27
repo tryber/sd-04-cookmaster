@@ -13,7 +13,7 @@ const viewRecipesUser = async (req, res) => {
 
 const searchRecipes = async (req, res) => {
   const cooks = await recipesModel.getSpecificRecipe(req.query.q);
-  res.render('search', { cooks, user: req.user })
+  res.render('search', { cooks, user: req.user });
 };
 
 module.exports = { listarReceitas, viewRecipesUser, searchRecipes };

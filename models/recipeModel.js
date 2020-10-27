@@ -25,7 +25,7 @@ const getByIdRecipe = async (id) => {
     const [userId, user, name, ingredients, instructions] = await results.fetchOne();
     return { id, userId, user, name, ingredients, instructions };
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
@@ -60,7 +60,7 @@ const createRecipe = async (id, user, name, ingredients, instructions) =>
 
 const updateRecipeModel = async (id, name, ingredients, instructions) => {
   try {
-    connection().then((db) =>
+    return connection().then((db) =>
       db
         .getTable('recipes')
         .update()
@@ -86,7 +86,7 @@ const deleteRecipeById = async (recipeId) => {
       .bind('recipeId', recipeId)
       .execute();
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

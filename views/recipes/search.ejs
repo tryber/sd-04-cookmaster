@@ -4,7 +4,7 @@
   <body>
     <%- include('../partials/navbar') %>
     <div class="container home">
-      <h1>Receitas</h1>      
+      <h1>Buscar Receitas</h1>
     </div>
     <div class="container">
       <form method="GET">
@@ -16,7 +16,7 @@
     </div>
     <div class="container-cards">
       <% if (recipes) { %>
-        <% for (let i = 0; i <= recipes.length-1; i++ ) { %> 
+        <% for (let i = 0; i <= recipes.length-1; i++ ) { %>
           <%- include('../partials/recipeCard', {i}) %>
         <% } %>
       <% } %>

@@ -6,14 +6,15 @@
     <div class="container home">
       <h1>Receitas</h1>
       <div>
-        <a% if (user) { %>
+        <% if (user) { %>
           <a class="button" href="/" data-testid="nova-receita">Nova Receita</a>
-        <a% } %>
+        <% } %>
         <a class="button" href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
       </div>
     </div>
     <div class="container-cards">
-      <% for (let i = 0; i <= data.length-1; i++ ) { %> <%- include('partials/recipeCard', {i}) %>
+      <% for (let i = 0; i <= recipes.length-1; i++ ) { %>
+        <%- include('partials/recipeCard', {i}) %>
       <% } %>
     </div>
     <%- include('partials/footer') %>

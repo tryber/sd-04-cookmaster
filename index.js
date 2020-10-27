@@ -6,13 +6,11 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
-const publicDirectoryPath = path.join(__dirname, './public');
 const cssDirectoryPath = path.join(__dirname, './styles');
-const staticDirectory = express.static(publicDirectoryPath);
 const cssDirectory = express.static(cssDirectoryPath);
 
 const app = express();
-app.use(staticDirectory);
+
 app.use('/styles', cssDirectory);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -21,7 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
+app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.search);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
 
 app.get('/cadastrar', controllers.userController.show);

@@ -3,10 +3,17 @@ const recipesModel = require('../models/recipesModel');
 const showAll = async (req, res) => {
   try {
     const recipes = await recipesModel.getAllRecipes();
-    return res.render('home', { user: req.user, data: recipes });
+    return res.render('home', { user: req.user, recipes });
   } catch (error) {
-    return res.render('error', { error });
+    return res.send(error);
   }
+};
+
+const search = async (req, res) => {
+  const { q } = req.query;
+  if (!q && q !== '') res.status(200).render('recipes/search', { recipes: null, user: req.user });
+  const recipes = await recipesModel.getRecipeByName(q);
+  return res.status(200).render('recipes/search', { recipes, user: req.user, query: q });
 };
 
 const showOne = async (req, res) => {
@@ -16,11 +23,12 @@ const showOne = async (req, res) => {
     recipe.ingredients = recipe.ingredients.split(',');
     return res.render('recipes/view', { user: req.user, recipe });
   } catch (error) {
-    return res.render('error', { error });
+    return res.send(error);
   }
 };
 
 module.exports = {
   showOne,
   showAll,
+  search,
 };

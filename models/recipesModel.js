@@ -22,7 +22,21 @@ const getRecipeById = async (inputId) => connection()
   }))
   .catch((error) => error);
 
+const getRecipeByName = async (inputName) => connection()
+  .then((db) => db
+    .getTable('recipes')
+    .select()
+    .where('name like :query')
+    .bind('query', `%${inputName}%`)
+    .execute())
+  .then((results) => results.fetchAll())
+  .then((data) => data.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id, userId, user, name, ingredients, instructions,
+  })))
+  .catch((error) => error);
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
+  getRecipeByName,
 };

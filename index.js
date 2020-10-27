@@ -18,6 +18,8 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipes);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.viewRecipesUser);
 app.get('/recipes/:id', middlewares.auth(), controllers.recipeController.viewRecipesUser);
 

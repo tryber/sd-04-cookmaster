@@ -29,4 +29,24 @@ const listSpecificRecipe = async (recipeId) =>
       instructions,
     }));
 
-module.exports = { listCook, listSpecificRecipe };
+const getSpecificRecipe = async (q) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user', 'name'])
+        .where('name like :name')
+        .orderBy(['name'])
+        .bind('name', `%${q}%`)
+        .execute(),
+    )
+    .then((result) => result.fetchAll())
+    .then((data) =>
+      data.map(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    );
+
+module.exports = { listCook, listSpecificRecipe, getSpecificRecipe };

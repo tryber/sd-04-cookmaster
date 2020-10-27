@@ -11,4 +11,11 @@ const viewRecipesUser = async (req, res) => {
   res.render('recipes', { cooks, user: req.user });
 };
 
-module.exports = { listarReceitas, viewRecipesUser };
+const searchRecipes = async (req, res) =>{
+  console.log("recipes");
+  const cooks = await recipesModel.getSpecificRecipe(req.query.q);
+  res.render('search',{ cooks, user: req.user})
+  console.log(cooks);
+};
+
+module.exports = { listarReceitas, viewRecipesUser, searchRecipes };

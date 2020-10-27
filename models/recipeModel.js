@@ -14,15 +14,19 @@ const getAllRecipes = async () =>
     );
 
 const getByIdRecipe = async (id) => {
-  const db = await connection();
-  const results = await db
-    .getTable('recipes')
-    .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-    .where('id = :id')
-    .bind('id', id)
-    .execute();
-  const [userId, user, name, ingredients, instructions] = await results.fetchOne();
-  return { id, userId, user, name, ingredients, instructions };
+  try {
+    const db = await connection();
+    const results = await db
+      .getTable('recipes')
+      .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .where('id = :id')
+      .bind('id', id)
+      .execute();
+    const [userId, user, name, ingredients, instructions] = await results.fetchOne();
+    return { id, userId, user, name, ingredients, instructions };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getRecipeByName = (qInput) =>

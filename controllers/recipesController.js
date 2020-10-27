@@ -11,9 +11,10 @@ const showAll = async (req, res) => {
 
 const showOne = async (req, res) => {
   try {
-    console.log(req.url);
-    const recipe = await recipesModel.getRecipeById();
-    return res.render('home', { user: req.user, data: recipe });
+    const { id } = req.params;
+    const recipe = await recipesModel.getRecipeById(id);
+    recipe.ingredients = recipe.ingredients.split(',');
+    return res.render('recipes/view', { user: req.user, recipe });
   } catch (error) {
     return res.render('error', { error });
   }

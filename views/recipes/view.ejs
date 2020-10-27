@@ -4,13 +4,24 @@
   <body>
     <%- include('../partials/navbar') %>
     <div class="container home">
-      <h1>Receitas</h1>
+      <h1><%= recipe.name %></h1>
+      <h3>Enviado por <%= recipe.user %></h3>
       <div>
         <% if (user) { %>
-          <button data-testid="nova-receita">Nova Receita</button>
+          <a class="button" href="/edit"  data-testid="editar-receita">Editar Receita</a>
+          <a class="button" href="/delete" data-testid="excluir-receita">Excluir Receita</a>
         <% } %>
-        <button data-testid="buscar-receita">Buscar Receita</button>
       </div>
+    </div>
+    <div>
+      <h2>Ingredientes</h2>
+      <ul>
+        <% for (let i = 0; i <= recipe.ingredients.length-1; i++ ) { %> 
+          <li><%- recipe.ingredients[i] %></li>
+        <% } %>
+      </ul>
+      <h2>Modo de preparo</h2>
+      <p><%= recipe.instructions %></p>
     </div>
     <%- include('../partials/footer') %>
   </body>

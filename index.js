@@ -21,6 +21,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
+app.get('/recipe/:id', middlewares.auth(false), controllers.recipesController.showOne);
 
 app.get('/cadastrar', controllers.userController.show);
 app.post('/cadastrar', controllers.userController.add);

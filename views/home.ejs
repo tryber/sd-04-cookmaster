@@ -27,6 +27,7 @@
         <h2 class="navbar-brand col text-light">Receitas</h2>
         <% if(user) { %>
         <a class="btn btn-light mr-3" data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+        <a class="btn btn-light mr-3" data-testid="minhas-receitas" href="/me/recipes">Minhas Receitas</a>
         <% }%>
         <a class="btn btn-light" href="/recipes/search" data-testid="buscar-receita">Buscar Receitas</a>
       </div>
@@ -41,7 +42,7 @@
       <div class="mx-auto container row text-center m-1 bg-primary text-light ">
         <p class="col"><%= recipe.name %></p>
         <p class="col"><%= recipe.user %></p>
-        <a class="m-1 btn-sm btn-light rounded-pill" href="recipe/<%=recipe.id%>"">Ver mais</a>
+        <a class="m-1 btn-sm btn-light rounded-pill" href="recipes/<%=recipe.id%>">Ver mais</a>
       </div>
       <% }) %>
     </div>

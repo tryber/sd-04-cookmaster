@@ -27,8 +27,8 @@
       <h1 class="card-title"><%= recipe.name %></h1>
       <h6 class="card-title"><%= recipe.user %></h6>
       <% if(user && user.id === recipe.userId) { %>
-      <a data-testid="editar-receita" class="btn btn-light" href="/editar">editar</a>
-      <a data-testid="excluir-receita" class="btn btn-light" href="/delete">excluir</a>
+      <a data-testid="editar-receita" class="btn btn-light" href="<%=recipe.id%>/edit">editar</a>
+      <a data-testid="excluir-receita" class="btn btn-light" href="<%=recipe.id%>/delete">excluir</a>
       <% } %>
     </div>
     <h5 class="card-subtitle mb-2 text-muted">Ingredientes</h5>

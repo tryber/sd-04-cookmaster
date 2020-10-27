@@ -28,15 +28,20 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+app.get('/recipe/search', middlewares.auth(false), controllers.recipeController.search);
 
 app.get('/cadastro', controllers.cadastroController.cadastroForm);
 app.post('/cadastro', controllers.cadastroController.entrar);
 
-app.get('/recipe/:id', middlewares.auth(false), controllers.recipeController.recipeById);
-
-app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.search);
-
 app.get('/recipes/new', middlewares.auth(false), controllers.recipeController.cadastroRecipe);
 app.post('/recipes', middlewares.auth(false), controllers.recipeController.registerRecipe);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeById);
+
+app.get('/recipes/:id/edit', middlewares.auth(false), controllers.recipeController.editRecipe);
+app.post('/recipes/:id', middlewares.auth(true), controllers.recipeController.updateRecipe);
+
+app.get('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deleteRecipe);
+app.post('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deletarRecipe);
 
 app.listen(3000, () => console.log('Listening on 3000'));

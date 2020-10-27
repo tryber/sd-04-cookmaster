@@ -17,7 +17,7 @@ input {
 }
 
 .button {
-  background-color: rgba(28,135,201);
+  background: rgba(28,135,201);
   border: none;
   color: white;
   cursor: pointer;

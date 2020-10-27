@@ -20,6 +20,8 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.search);
+app.get('/recipes/new', middlewares.auth(), (req, res) => res.render('recipes/add', { user: req.user }));
+app.post('/recipes', middlewares.auth(false), controllers.recipesController.search);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
 
 app.get('/cadastrar', controllers.userController.show);

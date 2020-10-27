@@ -9,9 +9,21 @@ h3 {
   margin: 0;
 }
 
+form {
+  width: 100%;
+}
+
 input {
   border: 1px solid lightgrey;
+  box-sizing: border-box;
   height: 25px;
+  margin: 5px 0 10px;
+  width: 100%;
+}
+
+textarea {
+  border: 1px solid lightgrey;
+  box-sizing: border-box;
   margin: 5px 0 10px;
   width: 100%;
 }
@@ -45,6 +57,11 @@ input {
   margin-top: 10px;
   max-width: 100%;
   padding: 0 50px;
+}
+
+.form {
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .container-box {

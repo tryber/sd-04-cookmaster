@@ -100,12 +100,12 @@ const getByUserIdRecipe = async (userID) => {
       .bind('userId', userID)
       .execute();
     const allByUsers = await results.fetchAll();
-    return  allByUsers.map(([id, userId, user, name]) => ({
+    return allByUsers.map(([id, userId, user, name]) => ({
       id,
       userId,
       user,
       name,
-    }))
+    }));
   } catch (error) {
     return error;
   }

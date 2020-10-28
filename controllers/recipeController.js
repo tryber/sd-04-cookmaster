@@ -62,8 +62,10 @@ const editRecipe = async (req, res) => {
 const updateRecipe = async (req, res) => {
   const { id } = req.params;
   const { nomeReceitaInput, ingredients, modoPreparo } = req.body;
-  if(ingredients.indexOf(",") === -1) await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients, modoPreparo);
-  else await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients.join(','), modoPreparo);
+  if (ingredients.indexOf(',') === -1)
+    await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients, modoPreparo);
+  else
+    await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients.join(','), modoPreparo);
   res.redirect('/');
 };
 

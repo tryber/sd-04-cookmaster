@@ -14,8 +14,8 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
 
-app.get('/recipes/new', middlewares.auth(false), controllers.recipesController.createRecipePage);
-app.post('/recipes/new', middlewares.auth(false), controllers.recipesController.createRecipe);
+app.get('/recipes/new', middlewares.auth(true), controllers.recipesController.createRecipePage);
+app.post('/recipes/new', middlewares.auth(true), controllers.recipesController.createRecipe);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 

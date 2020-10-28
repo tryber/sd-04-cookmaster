@@ -16,21 +16,27 @@
       <header class="collapse navbar-collapse">
         <h1 class="navbar-brand col text-light">Cookmaster - Home</h1>
         <% if(!user) { %>
-        <a data-testid="login" class="btn btn-light"href="/login">Login</a>
+        <a data-testid="login" class="btn btn-light" href="/login">Login</a>
         <% } else { %>
         <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
         <% } %>
       </header>
     </div>
-    <div class="navbar navbar-expand-lg navbar-light bg-primary rounded m-1" >
+    <div class="navbar navbar-expand-lg navbar-light bg-primary rounded m-1">
       <div class="collapse navbar-collapse">
         <h2 class="navbar-brand col text-light">Receitas</h2>
         <% if(user) { %>
-        <a class="btn btn-light mr-3" data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
-        <a class="btn btn-light mr-3" data-testid="minhas-receitas" href="/me/recipes">Minhas Receitas</a>
-        <a class="btn btn-light mr-3" data-testid="minha-conta" href="/recipes/search">Minhas conta</a>
+        <a class="btn btn-light mr-3" data-testid="nova-receita" href="/recipes/new"
+          >Nova Receita</a
+        >
+        <a class="btn btn-light mr-3" data-testid="minhas-receitas" href="/me/recipes"
+          >Minhas Receitas</a
+        >
+        <a class="btn btn-light mr-3" data-testid="minha-conta" href="/me/edit">Minhas conta</a>
         <% }%>
-        <a class="btn btn-light" href="/recipes/search" data-testid="buscar-receita">Buscar Receitas</a>
+        <a class="btn btn-light" href="/recipes/search" data-testid="buscar-receita"
+          >Buscar Receitas</a
+        >
       </div>
     </div>
     <div class="d-flex flex-column bd-highlight mb-1">
@@ -40,7 +46,7 @@
         <a class="m-1 btn btn-light invisible">invisivel</a>
       </div>
       <% recipes.forEach((recipe)=> { %>
-      <div class="mx-auto container row text-center m-1 bg-primary text-light ">
+      <div class="mx-auto container row text-center m-1 bg-primary text-light">
         <p class="col"><%= recipe.name %></p>
         <p class="col"><%= recipe.user %></p>
         <a class="m-1 btn-sm btn-light rounded-pill" href="recipes/<%=recipe.id%>">Ver mais</a>

@@ -47,4 +47,7 @@ app.post('/recipes/:id/delete', middlewares.auth(true), controllers.recipeContro
 
 app.get('/me/recipes', middlewares.auth(true), controllers.recipeController.recipeByUserId);
 
+app.get('/me/edit', middlewares.auth(true), controllers.cadastroController.editForm);
+app.post('/me/edit', middlewares.auth(false), controllers.cadastroController.updadeUser);
+
 app.listen(3000, () => console.log('Listening on 3000'));

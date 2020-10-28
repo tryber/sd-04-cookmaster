@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookmaster - Login</title>
   </head>
-  <body>
-    <% if (message) {%>
-    <div class="message">
-      <%= message %>
-    </div>
-    <% } %>
-    <form action="/login" method="POST">
-      <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" /><br />
-      <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
-      <% if (redirect) { %>
-      <input
-        type="hidden"
-        name="redirect"
-        value="<%= decodeURIComponent(redirect) %>"
-      />
-      <% } %>
-      <button type="submit">Entrar</button>
-    </form>
+  <body class="text-center">
+    <form class="form-singin p-5 m-5" action="/login" method="POST">
+        <% if (message) {%>
+        <div class="message"><%= message %></div>
+        <% } %>
+          <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+            <label class="sr-only"for="emailInput">Email: </label>
+            <input class="form-control" placeholder="Email" type="text" name="email" id="emailInput" data-testid="email" /><br />
+            <label for="passwordInput" class="sr-only">Senha: </label>
+            <input  class="form-control" placeholder="Senha" type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+          <% if (redirect) { %>
+          <</input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+          <% } %>
+          <a data-testid="cadastrar" href="/cadastro">cadastrar</a>
+          <button class="btn btn-lg btn-block btn-primary" data-testid="entrar" type="submit">Entrar</button>
+        </form>
+      </div>
   </body>
 </html>

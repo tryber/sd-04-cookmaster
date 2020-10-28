@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster</title>
+  </head>
+  <body class="m-4 border border-secondary p-1">
+    <div class="navbar navbar-expand-lg navbar-light bg-dark rounded m-1">
+      <header class="collapse navbar-collapse">
+        <h1 class="navbar-brand col text-light">Cookmaster - Home</h1>
+        <% if(!user) { %>
+        <a data-testid="login" class="btn btn-light" href="/login">Login</a>
+        <% } else { %>
+        <p class="text-light m-3"><%= `${user.firstName} ${user.lastName}` %></p>
+        <a data-testid="logout" class="btn btn-light" href="/logout">Logout</a>
+        <% } %>
+      </header>
+    </div>
+    <form class="form-singin p-5 m-5" action="/recipes/<%=recipe.id%>" method="POST">
+      <h1 class="h3 mb-3 font-weight-normal">Nova Receita</h1>
+      <label class="sr-only" for="nomeReceitaInput">Nome da Receita</label>
+      <input
+        class="form-control m-1"
+        placeholder="Nome da Receita"
+        required
+        data-testid="nome-receita"
+        name="nomeReceitaInput"
+        id="nomeReceita"
+        value="<%= recipe.name %>"
+      />
+      <h5 class="mb-3 font-weight-normal">Ingredientes</h5>
+      <ol></ol>
+      <label class="sr-only" for="IngredientesInput">Ingredientes</label>
+      <div class="input-group mb-3" id="listIngredientes">
+        <% if(recipe.ingredients.indexOf(",") === -1) { %>
+        <div class="input-group-prepend">
+          <input value="<%= recipe.ingredients %>" name="ingredients" />
+          <button name="excluir" type="button" class="btn btn-outline-secondary">
+            Excluir Ingrediente
+          </button>
+        </div>
+        <% } else {%><% recipe.ingredients.split(',').map((ingrediente) => { %>
+        <div class="input-group-prepend">
+          <input value="<%= ingrediente %>" name="ingredients" />
+          <button name="excluir" type="button" class="btn btn-outline-secondary">
+            Excluir Ingrediente
+          </button>
+        </div>
+        <%}) }%>
+      </div>
+      <input
+        class="form-control m-1"
+        placeholder="Digite o ingrediente"
+        data-testid="ingredientes"
+        name="nomeIngredienteInput"
+        id="nomeIngrediente"
+      />
+      <button
+        type="button"
+        class="btn btn-lg btn-block btn-dark"
+        data-testid="adicionar-ingrediente"
+        name="IngredientesInput"
+        id="ingredientes"
+      >
+        Adicionar Ingrediente
+      </button>
+      <label class="sr-only" for="lastNameInput">Sobrenome</label>
+      <h5 class="m-3 font-weight-normal">Modo de preparo</h5>
+      <textarea
+        name="modoPreparo"
+        cols="10"
+        rows="9"
+        class="form-control m-1"
+        data-testid="modo-de-preparo"
+      >
+<%=recipe.instructions %></textarea
+      >
+      <button data-testid="postar-receita" class="btn btn-lg btn-block btn-dark" type="submit">
+        Salvar receita
+      </button>
+    </form>
+  </body>
+  <script>
+    const adicionarBtn = document.getElementById('ingredientes');
+    const ingredienteInput = document.getElementById('nomeIngrediente');
+    const listIngredientes = document.getElementById('listIngredientes');
+    const deletarBtn = document.getElementsByName('excluir');
+    for (var i = 0, max = deletarBtn.length; i < max; i++) {
+      deletarBtn[i].addEventListener('click', () => {
+        event.target.parentNode.remove();
+      });
+    }
+
+    adicionarBtn.addEventListener('click', lista);
+
+    function lista() {
+      if (ingredienteInput.value === '' || !ingredienteInput.value) {
+      } else {
+        const container = document.createElement('div');
+        const novoItem = document.createElement('input');
+        const btnDelete = document.createElement('button');
+        container.className = 'input-group-prepend';
+        btnDelete.className = 'btn btn-outline-secondary';
+        novoItem.name = 'ingredients';
+        btnDelete.type = 'button';
+        btnDelete.innerHTML = 'Excluir Ingrediente';
+        novoItem.value = ingredienteInput.value;
+        listIngredientes.appendChild(container);
+        container.appendChild(novoItem);
+        container.appendChild(btnDelete);
+        ingredienteInput.value = '';
+        btnDelete.addEventListener('click', () => {
+          event.target.parentNode.remove();
+        });
+      }
+    }
+  </script>
+</html>

@@ -16,7 +16,7 @@ function addEvents(addIngredientBtn, ingredientsList, ingredientesInput) {
       li.remove();
     });
     button.style.marginLeft = '10px';
-    button.innerText = 'x';
+    button.innerText = 'Excluir Ingrediente';
     button.className = 'btn-danger';
     if (input.value) {
       li.appendChild(button);

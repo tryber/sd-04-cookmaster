@@ -27,7 +27,16 @@ const showOne = async (req, res) => {
   }
 };
 
+const add = (req, res) => {
+  const { id, name: firstName, lastName } = req.user;
+  const { name, ingredientes, instructions } = req.body;
+  const userName = `${firstName} ${lastName}`;
+  recipesModel.add(id, userName, name, ingredientes, instructions);
+  res.redirect('/');
+};
+
 module.exports = {
+  add,
   showOne,
   showAll,
   search,

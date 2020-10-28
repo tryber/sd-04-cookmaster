@@ -1,8 +1,4 @@
-window.onload = () => {
-  const addIngredientBtn = document.getElementById('addIngredient');
-  const ingredientsList = document.getElementById('ingredientsList');
-  const ingredientesInput = document.getElementById('ingredientesInput');
-
+function addEvents(addIngredientBtn, ingredientsList, ingredientesInput) {
   addIngredientBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const li = document.createElement('li');
@@ -24,9 +20,15 @@ window.onload = () => {
     button.className = 'btn-danger';
     if (input.value) {
       li.appendChild(button);
+      ingredientsList.appendChild(li);
     }
-
-    ingredientsList.appendChild(li);
     ingredientesInput.value = '';
   });
+}
+
+window.onload = () => {
+  const addIngredientBtn = document.getElementById('addIngredient');
+  const ingredientsList = document.getElementById('ingredientsList');
+  const ingredientesInput = document.getElementById('ingredientesInput');
+  addEvents(addIngredientBtn, ingredientsList, ingredientesInput);
 };

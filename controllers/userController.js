@@ -43,6 +43,9 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+//No arquivo controllers/userController.js modifique a linha 45 para redirecionar para rota / no lugar de /admin.
+return res.redirect(redirect || '/');
+
 module.exports = {
   login,
   loginForm,

@@ -62,7 +62,8 @@ const editRecipe = async (req, res) => {
 const updateRecipe = async (req, res) => {
   const { id } = req.params;
   const { nomeReceitaInput, ingredients, modoPreparo } = req.body;
-  await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients.join(','), modoPreparo);
+  if(ingredients.indexOf(",") === -1) await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients, modoPreparo);
+  else await RecipeModel.updateRecipeModel(id, nomeReceitaInput, ingredients.join(','), modoPreparo);
   res.redirect('/');
 };
 
@@ -86,7 +87,13 @@ const deletarRecipe = async (req, res) => {
     await RecipeModel.deleteRecipeById(id);
     res.redirect('/');
   }
-  res.render('deletePage', { recipe, message: 'Senha Incorreta .' });
+  res.render('deletePage', { recipe, message: 'Senha Incorreta.' });
+};
+
+const recipeByUserId = async (req, res) => {
+  const user = req.user;
+  const recipes = await RecipeModel.getByUserIdRecipe(user.id);
+  return res.render('myRecipes', { recipes, user });
 };
 
 module.exports = {
@@ -99,4 +106,5 @@ module.exports = {
   updateRecipe,
   deleteRecipe,
   deletarRecipe,
+  recipeByUserId,
 };

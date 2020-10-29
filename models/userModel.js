@@ -19,7 +19,13 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
+    .then(([id, userEmail, password, name, lastName]) => ({
+      id,
+      email: userEmail,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 /**
@@ -28,7 +34,7 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   // implementar o método findById usando o método findByEmail como referência
-  return TEMP_USER;
+  // return TEMP_USER;
 };
 
 module.exports = {

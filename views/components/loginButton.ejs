@@ -1,0 +1,9 @@
+<% if (user) {%>
+  <a>
+    <button data-testid="logout"><%=user%> Logout</button>
+  </a>
+<%} else {%>
+  <a href="/login">
+    <button data-testid="login">Login</button>
+  </a>
+<%}%>

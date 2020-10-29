@@ -8,12 +8,8 @@
   <body>
     <h1>Cookmaster</h1>
     <h2>Receitas</h2>
-    <% recipes.forEach(({ name, user, id}) => { %>
-      <div>
-        <h3><%= name %></h3>
-        <p><%= user %></p>
-        <a href='<%id%>'>Ver mais</a>
-      </div>
-    <% }) %>
+    <%- include('components/loginButton'); %>
+    <%- include('components/navbar'); %>
+    <%- include('components/listRecipes'); %>
   </body>
 </html>

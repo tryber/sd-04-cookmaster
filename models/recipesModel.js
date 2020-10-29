@@ -13,7 +13,7 @@ const getAllRecipes = async () =>
         ingredients,
         instructions,
       })),
-    )
+    );
 
 module.exports = {
   getAllRecipes,

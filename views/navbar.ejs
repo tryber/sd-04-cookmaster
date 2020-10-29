@@ -12,9 +12,9 @@
     <span>Cookmaster</span>
     <% if (!user) {%>
     <a href="/login"> <button data-testid="login">Login</button> </a>
-    <%}%> 
+    <%}%>
     <% if (user) { %>
-    <span><%= user.name %> <%= user.lastName %></span> | 
+    <span><%= user.name %> <%= user.lastName %></span> |
     <a href="/login"><button data-testid="logout">Logout</button></a>
     <%}%>
   </nav>

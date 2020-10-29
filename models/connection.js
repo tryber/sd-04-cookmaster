@@ -20,7 +20,7 @@ const connection = () => (
         schema = session.getSchema('cookmaster'); /* Armazenamos a conexão na variável `schema`*/
         return schema; /* E retornamos o schema de dentro da Promise */
       })
-      .catch((err) => { /* Caso um erro ocorra: */
+      .catch(() => { /* Caso um erro ocorra: */
         /* Apaguei a linha que exibia o erro no console, o CC só reclamava */
         process.exit(1); /* E encerramos o processo */
       })

@@ -2,9 +2,6 @@
 <html lang="en">
   <%- include('../partials/head', {title: 'Cookmaster - Login'}) %>
   <body>
-    <% if (message) {%>
-    <div class="message"><%= message %></div>
-    <% } %>
     <div class="container-box">
       <div>
         <form action="/login" method="POST">
@@ -13,12 +10,15 @@
           <label for="passwordInput">Senha: </label>
           <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
           <% if (redirect) { %>
-          <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+            <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+          <% } %>
+          <% if (message) {%>
+            <div class="message"><%= message %></div>
           <% } %>
           <br/>
           <div class="container">
-            <button type="submit" data-testid="entrar">Entrar</button>
-            <a href="/cadastrar" data-testid="cadastrar">Cadastre-se</a>
+            <button type="submit" class="button btn-ok" data-testid="entrar">Entrar</button>
+            <a href="/cadastrar" class="button btn-ok" data-testid="cadastrar">Cadastre-se</a>
           </div>
         </form>
       </div>

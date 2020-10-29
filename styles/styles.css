@@ -29,7 +29,6 @@ textarea {
 }
 
 .button {
-  background: rgba(28,135,201);
   border: none;
   color: white;
   cursor: pointer;
@@ -39,6 +38,14 @@ textarea {
   padding: 10px 17px;
   text-align: center;
   text-decoration: none;
+}
+
+.btn-ok {
+  background: rgba(28,135,201);
+}
+
+.btn-warning {
+  background: rgb(199,72,72);
 }
 
 .message {
@@ -85,7 +92,7 @@ textarea {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  height: 50px;
+  height: 80px;
   justify-content: space-between;
   padding: 6px 50px;
   width: 100%;

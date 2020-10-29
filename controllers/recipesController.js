@@ -45,15 +45,29 @@ const editForm = async (req, res) => {
   return res.redirect(`/recipes/${id}`);
 };
 
-const edit = async (req, res) => {
+const edit = (req, res) => {
   const { id } = req.params;
   const { name, ingredientes, instructions } = req.body;
   recipesModel.update(id, name, ingredientes, instructions);
   res.redirect('/');
 };
 
+const delForm = (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  res.render('recipes/delete', { user: req.user, id, message: 'teste' });
+};
+
+const del = async (req, res) => {
+  const { id } = req.params;
+  await recipesModel.del(id);
+  res.redirect('/');
+};
+
 module.exports = {
   add,
+  del,
+  delForm,
   edit,
   editForm,
   showOne,

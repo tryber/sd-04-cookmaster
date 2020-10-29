@@ -16,7 +16,7 @@
           <% for (let i = 0; i <= recipe.ingredients.length-1; i++ ) { %>
             <li>
               <span><%= recipe.ingredients[i] %></span>
-              <button type="button" class="button">Excluir Ingrediente</button>
+              <button type="button" class="button btn-warning">Excluir Ingrediente</button>
             </li>
           <% } %>
         </ul>
@@ -28,7 +28,7 @@
           />
           <button
             type="button"
-            class="button"
+            class="button btn-ok"
             data-testid="adicionar-ingrediente"
             onclick="addIngredient()"
           >
@@ -50,7 +50,7 @@
             required
           ><%= recipe.instructions %></textarea>
         </div>
-        <button type="submit" class="button" data-testid="postar-receita">
+        <button type="submit" class="button btn-ok" data-testid="postar-receita">
           Salvar Receita
         </button>
       </form>

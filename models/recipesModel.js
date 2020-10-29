@@ -54,8 +54,16 @@ const update = async (id, name, ingredients, instructions) => connection().then(
   .bind('id', id)
   .execute());
 
+const del = async (recipeId) => connection().then((db) => db
+  .getTable('recipes')
+  .delete()
+  .where('id = :recipeId')
+  .bind('recipeId', recipeId)
+  .execute());
+
 module.exports = {
   add,
+  del,
   getAllRecipes,
   getRecipeById,
   getRecipeByName,

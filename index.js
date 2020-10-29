@@ -25,9 +25,11 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipesControlle
 app.get('/recipes/new', middlewares.auth(), (req, res) => res.render('recipes/add', { user: req.user }));
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.editForm);
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.delForm);
 
 app.post('/recipes', middlewares.auth(false), controllers.recipesController.add);
 app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.edit);
+app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.del);
 
 app.get('/cadastrar', controllers.userController.show);
 app.get('/me/edit', middlewares.auth(), controllers.userController.edit);

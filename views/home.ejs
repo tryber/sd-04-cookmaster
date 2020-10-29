@@ -12,6 +12,13 @@
     <%- include('navbar'); %> <% if (recipes) {%>
     <h1>Receitas</h1>
     <section>
+      <a href="/recipes/search">
+      <button data-testid="buscar-receita">Buscar Receita</button>
+      </a>
+      <% if (user) {%>
+      <button data-testid="nova-receita">Nova Receita</button>
+      <button data-testid="minhas-receitas">Minhas Receitas</button>
+      <%}%>
       <% recipes.forEach(recipe => { %>
       <div>
         <p> Receita: <%= recipe.name %></p>

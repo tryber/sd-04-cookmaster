@@ -1,4 +1,5 @@
 const recipesModel = require('../models/recipesModel');
+const userModel = require('../models/userModel');
 
 const showAll = async (req, res) => {
   try {
@@ -54,14 +55,18 @@ const edit = (req, res) => {
 
 const delForm = (req, res) => {
   const { id } = req.params;
-  console.log(id);
-  res.render('recipes/delete', { user: req.user, id, message: 'teste' });
+  res.render('recipes/delete', { user: req.user, id, message: '' });
 };
 
 const del = async (req, res) => {
   const { id } = req.params;
+  const { password: insertedPass } = req.body;
+  const { password: userPass } = await userModel.findById(req.user.id);
+  if (insertedPass !== userPass) {
+    return res.render('recipes/delete', { user: req.user, id, message: 'Senha Incorreta.' });
+  }
   await recipesModel.del(id);
-  res.redirect('/');
+  return res.redirect('/');
 };
 
 module.exports = {

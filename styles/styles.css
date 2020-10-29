@@ -120,6 +120,7 @@ textarea {
   bottom: 0;
   height: 30px;
   position: absolute;
+  z-index: -1;
 }
 
 .footer > p {

@@ -7,8 +7,11 @@
     <title>Nova Receita</title>
   </head>
   <body>
+
     <header class="header-container">
+
       <h1 class="p-2">Cookmaster</h1>
+
       <div class="login-container p-2">
         <% if (user) { %>
           <p> <%= user.name %>| </p>
@@ -19,30 +22,41 @@
         <a data-testid="login" href="/login" class="btn btn-primary">Login</a>
         <% } %>
       </div>
+
     </header>
+
     <section>
+
       <h3>Nova Receita</h3>
+
       <form action="/recipes/new" method="POST" name="recipeForm" class="form-container
     form d-flex flex-column">
+
         <div class="form-group">
           <label for="nome">Nome da Receita</label><br>
           <input data-testid="nome-receita" name="nome" id="nome" type="text" required>
         </div>
+
         <div class="form-group">
           <input data-testid="ingredientes" name="ingredientes" id="ingredientes" type="text">
           <button data-testid="adicionar-ingrediente" type="button" id="add-ingredient" class="btn btn-success">Adicionar Ingrediente</button>
           <ul id="ingredients-list" class="list-group"></ul>
         </div>
+
         <div class="form-group">
           <label for>Modo de preparo</h4>
           <textarea data-testid="modo-de-preparo" name="instrucoes" type="text" rows="10" cols="50" required></textarea>
         </div>
+
         <div class="form-group">
           <a href="/" class="btn btn-primary">Voltar</a>
           <button data-testid="postar-receita" type="button" id="saveRecipe" class="btn btn-success">Salvar Receita</button>
         </div>
+
       </form>
+
     </section>
+
   </body>
   <script>
     const ingredients = new Set();
@@ -74,7 +88,7 @@
     };
 
     const saveRecipe = () => {
-      ingredientInput.value = [...ingredients].join(', ');
+      ingredientInput.value = [...ingredients].join(',');
       document.recipeForm.submit();
     };
 

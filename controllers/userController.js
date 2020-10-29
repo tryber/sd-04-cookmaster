@@ -34,7 +34,8 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  // No arquivo controllers/userController.js modifique a linha *37* para redirecionar para rota / no lugar de /admin.
+  // No arquivo controllers/userController.js modifique a linha *37* para redirecionar
+  // para rota / no lugar de /admin.
   return res.redirect(redirect || '/');
 };
 

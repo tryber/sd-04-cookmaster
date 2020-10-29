@@ -21,7 +21,7 @@ const connection = () => (
         return schema; /* E retornamos o schema de dentro da Promise */
       })
       .catch((err) => { /* Caso um erro ocorra: */
-        console.error(err.message); /* Exibimos o erro no console */
+        console.error(err); /* Exibimos o erro no console */
         process.exit(1); /* E encerramos o processo */
       })
 );

@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-//Rota de "/"
+// Rota de "/"
 app.get('/', controllers.recipeControler.showRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {

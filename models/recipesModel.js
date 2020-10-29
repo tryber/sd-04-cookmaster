@@ -1,24 +1,22 @@
 const connection = require('./connection');
 
 const getAllRecipes = async () => connection()
-  .then((db) => db
-    .getTable('recipes')
-    .select(['id', 'user', 'name'])
-    .execute())
+  .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
   .then((results) => results.fetchAll())
   .then((data) => data.map(([id, user, name]) => ({ id, user, name })))
   .catch((error) => error);
 
 const getRecipeById = async (inputId) => connection()
-  .then((db) => db
-    .getTable('recipes')
-    .select()
-    .where('id = :id_param')
-    .bind('id_param', inputId)
+  .then((db) => db.getTable('recipes').select().where('id = :id_param').bind('id_param', inputId)
     .execute())
   .then((results) => results.fetchOne())
   .then(([id, userId, user, name, ingredients, instructions]) => ({
-    id, userId, user, name, ingredients, instructions,
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
   }))
   .catch((error) => error);
 
@@ -31,20 +29,35 @@ const getRecipeByName = async (inputName) => connection()
     .execute())
   .then((results) => results.fetchAll())
   .then((data) => data.map(([id, userId, user, name, ingredients, instructions]) => ({
-    id, userId, user, name, ingredients, instructions,
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
   })))
   .catch((error) => error);
 
-const add = async (userId, user, name, ingredients, instructions) => connection()
-  .then((db) => db
-    .getTable('recipes')
-    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-    .values(userId, user, name, ingredients, instructions)
-    .execute());
+const add = async (userId, user, name, ingredients, instructions) => connection().then((db) => db
+  .getTable('recipes')
+  .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+  .values(userId, user, name, ingredients, instructions)
+  .execute());
+
+const update = async (id, name, ingredients, instructions) => connection().then((db) => db
+  .getTable('recipes')
+  .update()
+  .set('name', name)
+  .set('ingredients', ingredients)
+  .set('instructions', instructions)
+  .where('id = :id')
+  .bind('id', id)
+  .execute());
 
 module.exports = {
   add,
   getAllRecipes,
   getRecipeById,
   getRecipeByName,
+  update,
 };

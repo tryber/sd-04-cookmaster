@@ -4,15 +4,22 @@
   <body>
     <%- include('../partials/navbar') %>
     <div class="container home">
-      <h1>Nova Receita</h1>
+      <h1>Editar Receita</h1>
     </div>
     <div class="container home">
-      <form action="/recipes" method="POST" name="addRecipe">
+      <form action="/recipes/<%= id %>" method="POST" name="addRecipe">
         <div class="container form">
           <label for="name">Nome da Receita</label>
-          <input id="name" name="name" type="text" data-testid="nome-receita" required />
+          <input id="name" name="name" type="text" data-testid="nome-receita" value="<%= recipe.name %>"required />
         </div>
-        <ul></ul>
+        <ul>
+          <% for (let i = 0; i <= recipe.ingredients.length-1; i++ ) { %>
+            <li>
+              <span><%= recipe.ingredients[i] %></span>
+              <button type="button" class="button">Excluir Ingrediente</button>
+            </li>
+          <% } %>
+        </ul>
         <div class="container">
           <input
             id="listInput"
@@ -41,7 +48,7 @@
             rows="20"
             data-testid="modo-de-preparo"
             required
-          ></textarea>
+          ><%= recipe.instructions %></textarea>
         </div>
         <button type="submit" class="button" data-testid="postar-receita">
           Salvar Receita

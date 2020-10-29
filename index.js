@@ -5,9 +5,9 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
 
-const cssDirectoryPath = path.join(__dirname, './styles');
+const cssDirectoryPath = path.join(__dirname, '/styles');
 const cssDirectory = express.static(cssDirectoryPath);
-const scriptsDirectoryPath = path.join(__dirname, './scripts');
+const scriptsDirectoryPath = path.join(__dirname, '/scripts');
 const scriptsDirectory = express.static(scriptsDirectoryPath);
 
 const app = express();
@@ -23,15 +23,20 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.search);
 app.get('/recipes/new', middlewares.auth(), (req, res) => res.render('recipes/add', { user: req.user }));
-app.post('/recipes', middlewares.auth(false), controllers.recipesController.add);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.editForm);
+
+app.post('/recipes', middlewares.auth(false), controllers.recipesController.add);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.edit);
 
 app.get('/cadastrar', controllers.userController.show);
-app.post('/cadastrar', controllers.userController.add);
 app.get('/me/edit', middlewares.auth(), controllers.userController.edit);
+
+app.post('/cadastrar', controllers.userController.add);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
+
 app.post('/login', controllers.userController.login);
 
 app.listen(3000);

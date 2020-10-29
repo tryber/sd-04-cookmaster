@@ -8,7 +8,7 @@
       <h3>Enviado por <%= recipe.user %></h3>
       <div>
         <% if (user) { %>
-          <a class="button" href="/edit"  data-testid="editar-receita">Editar Receita</a>
+          <a class="button" href="/recipes/<%= id %>/edit"  data-testid="editar-receita">Editar Receita</a>
           <a class="button" href="/delete" data-testid="excluir-receita">Excluir Receita</a>
         <% } %>
       </div>

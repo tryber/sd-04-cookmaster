@@ -16,14 +16,13 @@ const connection = () =>
     ? Promise.resolve(schema)
     : mysqlx
       .getSession(config)
-      .then((session) => {
-        schema = session.getSchema('cookmaster');
+      .then(async (session) => {
+        schema = await session.getSchema('cookmaster');
         return schema;
       })
       .catch((err) => {
         console.log(err);
         process.exit();
       });
-;
 
 module.exports = connection;

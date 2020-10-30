@@ -1,0 +1,17 @@
+<header>
+  <div>
+    <% if (user) { %>
+    <h1>Home - <%= user.name %></h1>
+    <% } else { %>
+    <h1>Home - Não autenticado</h1>
+    <% } %>
+  </div>
+  <div>
+    <h1>Cookmaster</h1>
+    <% if (user) { %>
+    <a data-testid="logout" href="/logout">Logout</a>
+    <% } else { %>
+    <a data-testid="login" href="/login">Login</a>
+    <% } %>
+  </div>
+</header>

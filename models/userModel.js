@@ -1,3 +1,5 @@
+const connection = require('./connection');
+
 /* Quando você implementar a conexão com o banco, não deve mais precisar desse objeto */
 /* Mudança para meu primeiro commit */
 

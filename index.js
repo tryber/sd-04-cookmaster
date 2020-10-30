@@ -14,8 +14,11 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
 
-app.get('/recipes/new', middlewares.auth(true), controllers.recipesController.createRecipePage);
-app.post('/recipes/new', middlewares.auth(true), controllers.recipesController.createRecipe);
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.createRecipePage);
+app.post('/recipes/new', middlewares.auth(), controllers.recipesController.createRecipe);
+
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.editRecipePage);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.editRecipe);
 
 app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { user: req.user }));
 

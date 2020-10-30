@@ -23,6 +23,6 @@ const connection = () => (
           /* console.error(err);  Exibimos o erro no console */
           process.exit(1); /* E encerramos o processo */
         })
-)
+);
 
 module.exports = connection;

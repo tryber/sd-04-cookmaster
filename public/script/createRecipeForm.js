@@ -2,6 +2,7 @@ function addEvents(addIngredientBtn, ingredientsList, ingredientesInput) {
   addIngredientBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const li = document.createElement('li');
+    li.className = 'item-ingredient';
     const input = document.createElement('input');
     const button = document.createElement('button');
 
@@ -15,9 +16,9 @@ function addEvents(addIngredientBtn, ingredientsList, ingredientesInput) {
       e.preventDefault();
       li.remove();
     });
-    button.style.marginLeft = '10px';
+    button.style.marginLeft = '2px';
     button.innerText = 'Excluir Ingrediente';
-    button.className = 'btn-danger';
+    button.className = 'delete-button btn-danger';
     if (input.value) {
       li.appendChild(button);
       ingredientsList.appendChild(li);

@@ -8,7 +8,7 @@ const config = {
   port: 33060,
 };
 let schema; /* Aqui entra a variável que salva à conexão, começa como undefined */
-const connection = () =>
+const connection = () => (
   schema /* Se schema já existir: */
     ? Promise.resolve(schema) /* Retorna o schema numa Promise: */
     : mysqlx
@@ -22,6 +22,7 @@ const connection = () =>
           /* Caso um erro ocorra: */
           /* console.error(err);  Exibimos o erro no console */
           process.exit(1); /* E encerramos o processo */
-        });
+        })
+)
 
 module.exports = connection;

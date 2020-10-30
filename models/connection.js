@@ -20,7 +20,7 @@ const connection = () => {
         })
         .catch((err) => {
           /* Caso um erro ocorra: */
-          console.error(err); /* Exibimos o erro no console */
+          /* console.error(err);  Exibimos o erro no console */
           process.exit(1); /* E encerramos o processo */
         });
 };

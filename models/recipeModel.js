@@ -1,21 +1,17 @@
 const connection = require('./connection');
 
-const findAllRecipes = () => {
-  return connection()
-    .then((db) => db.getTable('recipes').select([]).execute())
+const findAllRecipes = () =>
+  connection()
+    .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
     .then((results) => results.fetchAll())
     .then((results) =>
-      results.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      results.map(([id, user, name]) => ({
         id,
-        user_id,
         user,
         name,
-        ingredients,
-        instructions,
       })),
     );
-};
 
 module.exports = {
   findAllRecipes,
-}
+};

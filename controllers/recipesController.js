@@ -28,7 +28,7 @@ const createRecipe = async (req, res) => {
     body: { name, ingredients, instructions },
     user,
   } = req;
-  const warningCounts = recipesModel.insertRecipeIdModel(
+  const warningCounts = await recipesModel.insertRecipeIdModel(
     user.id,
     `${user.firstName} ${user.lastName}`,
     name,
@@ -44,11 +44,33 @@ const createRecipe = async (req, res) => {
     });
   }
   res.status(200);
-  return res.render('createRecipe', {
-    message: 'Receita cadastrada com sucesso!',
-    redirect: null,
-    user: req.user,
-  });
+  res.redirect('/');
+};
+const editRecipePage = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipesModel.fetchRecipeIdModel(id);
+  const user = req.user;
+  if (user.id !== recipe.userId) {
+    return res.redirect('/');
+  }
+
+  return res.render('editRecipe', { recipe, message: null, redirect: null, user: req.user });
+};
+const editRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { name, ingredients, instructions } = req.body;
+  if (name && ingredients && instructions) {
+    await recipesModel.updateRecipeModel(id, name, ingredients.join(), instructions);
+  }
+  return res.redirect('/');
 };
 
-module.exports = { allRecipes, recipePage, searchRecipes, createRecipe, createRecipePage };
+module.exports = {
+  allRecipes,
+  recipePage,
+  searchRecipes,
+  createRecipe,
+  createRecipePage,
+  editRecipe,
+  editRecipePage,
+};

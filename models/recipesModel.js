@@ -43,9 +43,7 @@ const fetchRecipeNameModel = async (nameParam) => {
   }));
 };
 
-const insertRecipeIdModel = async (recipe) => {
-  const { id, user, name, ingredients, instructions } = recipe;
-
+const insertRecipeIdModel = async (id, user, name, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
   const result = await table
@@ -55,12 +53,16 @@ const insertRecipeIdModel = async (recipe) => {
   return result.getWarningsCount();
 };
 
-const updateRecipeModel = async (name, ingredients, instructions) => {
+const updateRecipeModel = async (id, name, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
   const result = await table
-    .update(['name', 'ingredients', 'instructions'])
-    .values(name, ingredients, instructions)
+    .update()
+    .set('name', name)
+    .set('ingredients', ingredients)
+    .set('instructions', instructions)
+    .where('id = :param_id')
+    .bind('param_id', id)
     .execute();
   return result.getWarningsCount();
 };

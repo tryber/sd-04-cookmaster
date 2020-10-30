@@ -1,4 +1,4 @@
-function addEvents(addIngredientBtn, ingredientsList, ingredientesInput) {
+function addButtons(addIngredientBtn, ingredientsList, ingredientesInput) {
   addIngredientBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const li = document.createElement('li');
@@ -31,7 +31,7 @@ window.onload = () => {
   const ingredientsList = document.getElementById('ingredientsList');
   const ingredientesInput = document.getElementById('ingredientesInput');
 
-  addEvents(addIngredientBtn, ingredientsList, ingredientesInput);
+  addButtons(addIngredientBtn, ingredientsList, ingredientesInput);
   const liArray = [...document.getElementsByTagName('li')] || [];
   liArray.forEach((li) => {
     li.children[1].addEventListener('click', (e) => {

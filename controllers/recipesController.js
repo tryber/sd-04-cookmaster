@@ -44,7 +44,7 @@ const createRecipe = async (req, res) => {
     });
   }
   res.status(200);
-  res.redirect('/');
+  return res.redirect('/');
 };
 const editRecipePage = async (req, res) => {
   const { id } = req.params;

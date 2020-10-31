@@ -19,7 +19,8 @@
         <div class="p-1 bd-highlight">
           <div class="container d-flex flex-row bd-highlight justify-content-end">
             <%if(user){%>
-            <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
+              <a class="m-2 text-white" href="/me/recipes" data-testid="minhas-receitas">Minhas Receitas</a>
+              <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
             <a class="m-2 text-white" href="/logout" data-testid="logout">Logout</a>
             <%}else{%>
             <a class="m-2 text-white" href="/login" data-testid="login">Login</a>

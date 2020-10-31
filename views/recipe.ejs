@@ -33,10 +33,10 @@
         <h1><%=recipe.name%></h1>
         <%if(user){%> <%if(user.id === recipe.userId){%>
         <a class="btn btn-primary mt-5" href="<%=`/recipes/${recipe.id}/edit`%>" data-testid="editar-receita">
-          Editar receita
+          Editar Receita
         </a>
         <a class="btn btn-primary mt-5" href="<%=`/recipes/${recipe.id}/delete`%>" data-testid="excluir-receita">
-          Excluir receita
+          Excluir Receita
         </a>
         <%}}%>
       </div>

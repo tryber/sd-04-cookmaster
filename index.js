@@ -13,6 +13,7 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.allRecipes);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.searchRecipes);
+app.get('/me/recipes', middlewares.auth(), controllers.recipesController.myRecipes);
 
 app.get('/recipes/new', middlewares.auth(), controllers.recipesController.createRecipePage);
 app.post('/recipes/new', middlewares.auth(), controllers.recipesController.createRecipe);

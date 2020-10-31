@@ -11,7 +11,7 @@ const getUser = async (req) => {
 
   const user = await userModel.findById(userId);
   if (!user) return null;
-
+  (user)
   return user;
 };
 

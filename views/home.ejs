@@ -15,7 +15,7 @@
     <%- include('./components/header.ejs', {user}); %>
     <main>
       <h2>Receitas</h2>
-      <%- include('./components/myRecipesBtn', {}); %>
+      <%- include('./components/myRecipesBtn', {user}); %>
       <%- include('./components/bodyHome.ejs', {recipes}); %>
     </main>
   </body>

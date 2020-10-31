@@ -23,7 +23,7 @@ const findByEmail = (emailParam) => {
  * @param {string} id ID do usuário
  */
 
-const findById = async (idParam) => {
+const findById = (idParam) => {
   return connection()
     .then((db) =>
       db

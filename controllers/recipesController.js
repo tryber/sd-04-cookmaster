@@ -65,6 +65,12 @@ const editRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
+const myRecipes = async (req, res) => {
+  let recipes = (await recipesModel.fetchAllRecipesModel()) || [];
+  const user = req.user;
+  recipes = recipes.filter((recipe) => recipe.userId === user.id);
+  return res.render('myRecipes', { recipes, message: null, user });
+};
 module.exports = {
   allRecipes,
   recipePage,
@@ -73,4 +79,5 @@ module.exports = {
   createRecipePage,
   editRecipe,
   editRecipePage,
+  myRecipes,
 };

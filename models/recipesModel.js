@@ -43,14 +43,14 @@ const fetchRecipeNameModel = async (nameParam) => {
   }));
 };
 
-const insertRecipeIdModel = async (id, user, name, ingredients, instructions) => {
+const insertRecipeIdModel = async (userId, userName, name, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
   const result = await table
     .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-    .values(id, user, name, ingredients, instructions)
+    .values(userId, userName, name, ingredients, instructions)
     .execute();
-  return result.getWarningsCount();
+  return result.getAutoIncrementValue();
 };
 
 const updateRecipeModel = async (id, name, ingredients, instructions) => {

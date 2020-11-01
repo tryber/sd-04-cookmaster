@@ -112,7 +112,7 @@ O código para cadastro de usuários deve ser criado por você utilizando os con
 
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+O projeto tem até a seguinte data: `16/10/2020 - 14:00h`. Para ser entregue a avaliação final.
 
 ---
 
@@ -160,8 +160,8 @@ Haverá um arquivo no caminho: `sd-04-cookmaster/cypress/plugins/index.js`. Nest
 module.exports = {
   "development": {
     "username": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD, 
-    "database": 'cookmaster', 
+    "password": process.env.MYSQL_PASSWORD,
+    "database": 'cookmaster',
     "host": process.env.HOSTNAME,
     "dialect": 'mysql',
   },
@@ -216,7 +216,7 @@ Variáveis:
 * Tela para visualizar uma receita específica
 * Página de cadastro de pessoas usuárias
 
-### 1 - Crie uma tela de listagem de receitas.
+## 1 - Crie uma tela de listagem de receitas.
 
 **Obrigatório o projeto estar rodando na porta 3000, ex: http://localhost:3000/**
 
@@ -260,7 +260,7 @@ Um botão "Nova receita" deve ser exibido **apenas quando houver um usuário log
 
 ![Tela Home](./public/login.png)
 
-#### Além disso, as seguintes verificações serão feitas:
+### Além disso, as seguintes verificações serão feitas:
 
 **[Verificar se estou na home e há os títulos 'Cookmaster' e 'Receitas' na tela]**
 
@@ -270,7 +270,7 @@ Um botão "Nova receita" deve ser exibido **apenas quando houver um usuário log
 
 **[Verificar se existe, na tela, uma receita previamente cadastrada com 'nome da receita', 'nome do usuário' e o link da receita em 'Ver mais']**
 
-### 2 - Crie uma página de cadastro de usuários.
+## 2 - Crie uma página de cadastro de usuários.
 
 Um pessoa usuária precisa ter preenchido os campos `ID`, `E-mail`, `Senha`, `Nome` e `Sobrenome`. Todos os campos são obrigatórios. O `ID` deve ser gerado automaticamente, não devendo ser preenchido pela pessoa usuária no momento do cadastro.
 
@@ -282,15 +282,15 @@ Adicione na tela de login o botão ou link 'Cadastre-se' que deverá conter a ta
 
 ### Tela de Cadastro:
 
+- O campo 'Nome' deverá conter a tag `data-testid="nome"`
+
+- O campo 'Sobrenome' deverá conter a tag `data-testid="sobrenome"`
+
 - O campo 'Email' deverá conter a tag `data-testid="email"`
 
 - O campo 'Senha' deverá conter a tag `data-testid="senha"`
 
 - O campo 'Confirmar Senha' deverá conter a tag `data-testid="confirmar-senha"`
-
-- O campo 'Nome' deverá conter a tag `data-testid="nome"`
-
-- O campo 'Sobrenome' deverá conter a tag `data-testid="sobrenome"`
 
 - O botão 'Cadastar-se' deverá conter a tag `data-testid="cadastrar"`
 
@@ -298,7 +298,7 @@ Adicione na tela de login o botão ou link 'Cadastre-se' que deverá conter a ta
 
 ![Tela Cadastro de usuário](./public/cadastro.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Cadastro de uma pessoa usuária com sucesso]**
 
@@ -324,7 +324,7 @@ Adicione na tela de login o botão ou link 'Cadastre-se' que deverá conter a ta
 
 - Ao cadastar um sobrenome inválido deverá aparecer a mensagem "O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras"
 
-### 3 - Crie uma tela para visualizar uma receita específica.
+## 3 - Crie uma tela para visualizar uma receita específica.
 
 A tela deve estar diponível no endpoint `/recipes/:id`
 
@@ -346,7 +346,7 @@ Esta página deve exibir o título, os ingredientes, e a forma de preparo da rec
 
 ![Tela Receita Especifica](./public/receita_especifica_autenticada.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Verificar se consigo acessar uma receita especifica]**
 
@@ -362,7 +362,7 @@ Esta página deve exibir o título, os ingredientes, e a forma de preparo da rec
 
 **[Quando a pessoa está logada, verificar se na página de uma receita específica existem os botões 'Editar Receita' e 'Excluir Receita']**
 
-### 4 - Cria uma página de buscar de receitas.
+## 4 - Cria uma página de buscar de receitas.
 
 A página deve estar acessível através do endpoint `/recipes/search`.
 
@@ -392,7 +392,7 @@ O botão 'Buscar Receitas' ficará sempre visível na tela home, estando a pesso
 
 **[Validar se não possível buscar uma receita que não existe]**
 
-#### Funções administrativas
+### Funções administrativas
 
 > As páginas abaixo só podem ser acessadas fazendo login:
 
@@ -403,7 +403,7 @@ O botão 'Buscar Receitas' ficará sempre visível na tela home, estando a pesso
 
 > Páginas que **não** podem ser acessadas sem login. Para essas páginas, utilize o `authMiddleware` sem passar parâmetro algum.
 
-### 5 - Crie uma página de cadastro de receitas.
+## 5 - Crie uma página de cadastro de receitas.
 
 A página deve ser acessível através do endpoint `/recipes/new`, e o formulário deve ser enviado para o endpoint `POST /recipes`
 
@@ -427,7 +427,7 @@ Na Tela inicial('/') acidione o botão 'Nova Receita' deverá conter a tag `data
 
 ![Tela cadastro de Receita](./public/cadastro_receita.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Verificar se o botão 'Nova Receita' direciona para página de cadastrar receitas]**
 
@@ -435,7 +435,7 @@ Na Tela inicial('/') acidione o botão 'Nova Receita' deverá conter a tag `data
 
 **[Remover um ingrediente da receita]**
 
-### 6 - Crie uma página de edição de receitas.
+## 6 - Crie uma página de edição de receitas.
 
 A página deve ser acessível através do endpoint `/recipes/:id/edit`, formulário deve ser enviado para o endpoint `POST /recipes/:id`.
 
@@ -463,7 +463,7 @@ A validação dos campos deve ser realizada no backend.
 
 ![Tela editar Receita](./public/editar_receita.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Editar o nome da receita]**
 
@@ -471,7 +471,7 @@ A validação dos campos deve ser realizada no backend.
 
 **[Editar o modo de preparo da receita]**
 
-### 7 - Crie uma página de exclusão de uma receita.
+## 7 - Crie uma página de exclusão de uma receita.
 
 A página deve ser acessível através do endpoint `/recipes/:id/delete`, e só pode ser acessada pela pessoa que cadastrou a receita.
 
@@ -491,7 +491,7 @@ Caso a receita seja excluída com sucesso, a pessoa deve ser redirecionada à p�
 
 ![Tela Excluir Receita](./public/excluir_receita.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Tentar excluir uma receita passando a senha errada e validar a mensagem de erro]**
 
@@ -499,7 +499,7 @@ Ao inserir a senha errada deverá mostrar a mensagem 'Senha Incorreta.'
 
 **[Excluir receita com sucesso e verificar se foi houve redirecionamento à página de listagem de receitas]**
 
-### 8 - Crie uma página de "Minhas receitas"
+## 8 - Crie uma página de "Minhas receitas"
 
 O link para acessar essa página só deve estar visível para pessoas logadas.
 
@@ -515,7 +515,7 @@ Na Tela inicial('/'), acidione o botão 'Minhas Receitas', que deverá conter a 
 
 ![Tela 'Minhas Receita'](./public/minhas_receitas.png)
 
-#### As seguintes verificações serão feitas:
+### As seguintes verificações serão feitas:
 
 **[Validar se o botão 'Minhas Receitas' está redirecionando para página das minhas receitas]**
 
@@ -539,7 +539,7 @@ O ID da pessoa não deve poder ser editado. Nem através da tela, nem através d
 
 Na Tela inicial('/'), acidione o botão 'Minha Conta', que deverá conter a tag `data-testid="minha-conta"` e, ao clicar-se nele, deverá redirecionar para a página de 'Editar Usuário'. Ele só poderá ser visualizado caso se esteja logado.
 
-### Tela de Editar Usuario:
+#### Tela de Editar Usuario:
 
 - O campo input 'Email' deverá conter a tag `data-testid="email"`
 
@@ -569,7 +569,7 @@ Na Tela inicial('/'), acidione o botão 'Minha Conta', que deverá conter a tag 
 
 ---
 
-### DURANTE O DESENVOLVIMENTO
+## DURANTE O DESENVOLVIMENTO
 
 * Faça `commits` das alterações que você fizer no código regularmente
 

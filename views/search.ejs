@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Buscar Receitas</title>
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
   </head>
 
@@ -13,15 +13,11 @@
         <div>
           <p class="m-2">
             <a href="/" class="text-white">Cookmaster</a>
-            <a href="/recipes/search" class="btn-default ml-3" data-testid="buscar-receita"
-              >Buscar Receita</a
-            >
           </p>
         </div>
         <div class="p-1 bd-highlight">
           <div class="container d-flex flex-row bd-highlight justify-content-end">
             <%if(user){%>
-            <a class="m-2 text-white" href="/me/edit" data-testid="minha-conta">Minha Conta</a>
             <a class="m-2 text-white" href="/me/recipes" data-testid="minhas-receitas"
               >Minhas Receitas</a
             >
@@ -36,7 +32,12 @@
     </header>
 
     <section class="text-center">
-      <h1>Receitas</h1>
+      <h1 class="text-left m-4">Buscar Receitas</h1>
+      <br />
+      <form action="/recipes/search" method="GET" id="search-form">
+        <input type="text" data-testid="receita" name="q" class="w-50" />
+        <input type="submit" data-testid="buscar" class="btn-primary" value="Buscar" />
+      </form>
       <div class="row px-5 m-5">
         <%recipes.forEach((recipe, index) => {%>
         <div class="col-sm mx-5 mt-2">
@@ -50,41 +51,25 @@
         </div>
         <%})%>
       </div>
-      <%if(user){%>
-      <div>
-        <a class="btn btn-primary mb-5" href="/recipes/new" data-testid="nova-receita"
-          >Nova Receita</a
-        >
-      </div>
-      <%}%>
     </section>
 
     <footer
-      class="navbar flex-row justify-content-center bg-dark text-white bottom text-center mt-5"
+      class="navbar flex-row justify-content-center bg-dark text-white fixed-bottom text-center"
     >
       <div>
-        <button
-          onclick='window.location.href="https://github.com/djonata-dias"'
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://github.com/djonata-dias" target="_blank" rel="noopener noreferrer">
           <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
-        </button>
-        <button
-          onclick='window.location.href="https://www.linkedin.com/in/djonata-dias/"'
+        </a>
+        <a
+          href="https://www.linkedin.com/in/djonata-dias/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
-        </button>
-        <button
-          onclick='window.location.href="https://www.instagram.com/djosouzadias/"'
-          align-content-center
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        </a>
+        <a href="https://www.instagram.com/djosouzadias/" target="_blank" rel="noopener noreferrer">
           <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
-        </button>
+        </a>
       </div>
       <h5 id="copyright">
         Copyright © 2019-2020 Djonata de Souza Dias. Todos os direitos reservados

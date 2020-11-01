@@ -6,6 +6,7 @@
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "start:watch": "nodemon index.js",
     "cypress:open": "cypress open"
@@ -33,14 +34,15 @@
     "uuid": "^8.1.0"
   },
   "devDependencies": {
-    "cypress": "^3.8.3",
+    "cypress": "^5.4.0",
     "cypress-multi-reporters": "^1.2.3",
+    "dotenv": "^8.2.0",
     "faker": "^4.1.0",
     "mocha": "^7.0.1",
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^4.0.0",
     "mochawesome-report-generator": "^4.1.0",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.6",
     "sequelize-cli": "^6.2.0"
   }
 }

@@ -34,6 +34,8 @@ exclude_patterns:
   - "**/libs/*.js"
   - "**/*.{gif,png,jpeg,jpg}"
   - "node_modules/"
+  - "public/css/"
+  - "migrations"
 plugins:
   csslint:
     enabled: true

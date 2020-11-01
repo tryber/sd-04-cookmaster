@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Login</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="/script/createRecipeForm.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar d-flex flex-row bd-highlight bg-dark text-white">
+        <div>
+          <p class="m-2">
+            <a href="/" class="text-white">Cookmaster</a>
+          </p>
+        </div>
+        <div class="p-1 bd-highlight">
+          <div class="container d-flex flex-row bd-highlight justify-content-end">
+            <%if(user){%>
+            <a class="m-2 text-white" href="/me/recipes" data-testid="minhas-receitas"
+              >Minhas Receitas</a
+            >
+            <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
+            <%}else{%>
+            <a class="m-2 text-white" href="/logout" data-testid="logout">Logout</a>
+            <%}%>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="container pt-2">
+      <h1 class="text-left">Nova Receita</h1>
+      <div class="d-flex justify-content-center mt-5">
+        <form action="/recipes/new" method="POST" id="create-recipe-form" class="full w-100">
+          <div>
+            <label for="nameInput">Nome da receita:</label>
+            <input
+              type="text"
+              name="name"
+              id="nameInput"
+              aria-describedby="nameHelp"
+              class="form-control"
+              data-testid="nome-receita"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="ingredientesInput">Ingredientes</label>
+
+            <ul id="ingredientsList" class="ingredientsList" name="ingredientes"></ul>
+
+            <div class="d-flex">
+              <input
+                type="text"
+                id="ingredientesInput"
+                class="form-control w-50 ingredientesInput"
+                data-testid="ingredientes"
+              />
+              <button
+                id="addIngredient"
+                class="btn-success ml-3 addIngredient"
+                data-testid="adicionar-ingrediente"
+              >
+                Adicionar Ingrediente
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="instructionsInput">Modo de preparo</label>
+            <textarea
+              type="text"
+              name="instructions"
+              id="instructionsInput"
+              aria-describedby="methodHelp"
+              class="form-control"
+              data-testid="modo-de-preparo"
+              rows="7"
+            ></textarea>
+          </div>
+
+          <div class="form-inline d-flex justify-content-between">
+            <a href="/">Voltar</a>
+            <button type="submit" class="btn-dark" data-testid="postar-receita">
+              Salvar Receita
+            </button>
+          </div>
+        </form>
+      </div>
+      <% if (message) {%>
+      <div class="message text-danger text-center"><%=message%></div>
+      <% } %> <% if (redirect) { %>
+      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
+      <% } %>
+    </section>
+
+    <footer
+      class="navbar flex-row justify-content-center bg-dark text-white fixed-bottom text-center"
+    >
+      <div>
+        <a href="https://github.com/djonata-dias" target="_blank" rel="noopener noreferrer">
+          <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/djonata-dias/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
+        </a>
+        <a href="https://www.instagram.com/djosouzadias/" target="_blank" rel="noopener noreferrer">
+          <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
+        </a>
+      </div>
+      <h5 id="copyright">
+        Copyright © 2019-2020 Djonata de Souza Dias. Todos os direitos reservados
+      </h5>
+    </footer>
+  </body>
+</html>

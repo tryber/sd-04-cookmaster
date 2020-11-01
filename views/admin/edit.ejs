@@ -17,9 +17,27 @@
         </div>
       </nav>
     </header>
-    <section class="container mt-5 pt-5">
-      <div class="d-flex justify-content-center w-100 text-center mt-5">
-        <form action="/login" method="POST" id="login-form">
+
+    <section class="container pt-2">
+      <div class="d-flex justify-content-center w-100 mt-5">
+        <form action="/me/edit" method="POST" id="userEdit-form">
+          <div class="form-group">
+            <label for="nameInput">Nome:</label>
+            <input type="text" name="name" id="nameInput" aria-describedby="nameHelp"
+            class="form-control" data-testid="nome" value="<%=user.firstName%>"" />
+          </div>
+          <div class="form-group">
+            <label for="lastnameInput">Sobrenome:</label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastnameInput"
+              aria-describedby="lastnameHelp"
+              class="form-control"
+              data-testid="sobrenome"
+              value="<%=user.lastName%>"
+            />
+          </div>
           <div class="form-group">
             <label for="emailInput">Email: </label>
             <input
@@ -29,28 +47,42 @@
               aria-describedby="emailHelp"
               class="form-control w-100"
               data-testid="email"
-            /><br />
+              value="<%=user.email%>"
+            />
           </div>
           <div class="form-group">
-            <label for="passwordInput">Senha: </label>
+            <label for="passwordInput">Senha:</label>
             <input
               type="password"
               name="password"
               id="passwordInput"
-              class="form-control w-100"
+              aria-describedby="passwordHelp"
+              class="form-control"
               data-testid="senha"
-            /><br />
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary" data-testid="entrar">Entrar</button>
-            </div>
-            <div class="form-group">
-              <a href="/cadastro" class="text-danger" data-testid="cadastrar">Cadastre-se</a>
-            </div>
+              value=""
+            />
+          </div>
+          <div class="form-group">
+            <label for="agreePasswordInput">Confirmar Senha:</label>
+            <input
+              type="password"
+              name="agreePassword"
+              id="agreePasswordInput"
+              aria-describedby="agreePasswordHelp"
+              class="form-control"
+              data-testid="confirmar-senha"
+              value=""
+            />
+          </div>
+
+          <div class="form-inline d-flex justify-content-between">
+            <a href="/login" data-testid="login">Login</a>
+            <button type="submit" class="btn-dark" data-testid="salvar">Ssalvar</button>
           </div>
         </form>
       </div>
       <% if (message) {%>
-      <div class="message text-danger text-center"><%= message %></div>
+      <div class="message text-danger text-center"><%=message%></div>
       <% } %> <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>

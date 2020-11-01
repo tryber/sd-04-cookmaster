@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Home</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar d-flex flex-row bd-highlight bg-dark text-white">
+        <div>
+          <p class="m-2">
+            <a href="/" class="text-white">Cookmaster</a>
+            <a href="/recipes/search" class="btn-default ml-3" data-testid="buscar-receita">Buscar Receita</a>
+          </p>
+        </div>
+        <div class="p-1 bd-highlight">
+          <div class="container d-flex flex-row bd-highlight justify-content-end">
+            <%if(user){%>
+              <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
+            <a class="m-2 text-white" href="/logout" data-testid="logout">Logout</a>
+            <%}else{%>
+            <a class="m-2 text-white" href="/login" data-testid="login">Login</a>
+            <%}%>
+          </div>
+        </div>
+    </header>
+
+    <section class="text-center">
+      <h1>Receitas</h1>
+      <div class="row px-5 m-5">
+        <%recipes.forEach((recipe, index) => {%>
+        <div class="col-sm mx-5 mt-2">
+          <div class="card text-center" style="width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title"><%=recipe.name%></h4>
+              <p class="card-text">Criado por: <%=recipe.user%></p>
+              <a class="btn btn-danger text-dark" href="/recipes/<%=recipe.id%>">Ver mais</a>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+    </section>
+  </body>
+</html>

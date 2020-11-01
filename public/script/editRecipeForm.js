@@ -33,10 +33,12 @@ window.onload = () => {
 
   addButtons(addIngredientBtn, ingredientsList, ingredientesInput);
   const liArray = [...document.getElementsByTagName('li')] || [];
-  liArray.forEach((li) => {
-    li.children[1].addEventListener('click', (e) => {
-      e.preventDefault();
-      li.remove();
+  if (liArray.length) {
+    liArray.forEach((li) => {
+      li.children[1].addEventListener('click', (e) => {
+        e.preventDefault();
+        li.remove();
+      });
     });
-  });
+  }
 };

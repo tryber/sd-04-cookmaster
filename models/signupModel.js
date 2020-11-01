@@ -4,13 +4,14 @@ const emailRegex = /[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
 const passwordRegex = /^(\d|\w){6,}$/;
 const nameRegex = /^\w{3,}$/;
 
-const validator = ({ email, password, password_comparisor, first_name, last_name }) => {
+const validator = ({ email, password, passwordComparisor, first_name, last_name }) => {
+  console.log(passwordComparisor)
   switch (true) {
     case !emailRegex.test(email):
       return { message: 'O email deve ter o formato email@mail.com' };
     case !passwordRegex.test(password):
       return { message: 'A senha deve ter pelo menos 6 caracteres' };
-    case password !== password_comparisor:
+    case password !== passwordComparisor:
       return { message: 'As senhas tem que ser iguais' };
     case !nameRegex.test(first_name):
       return {
@@ -25,15 +26,15 @@ const validator = ({ email, password, password_comparisor, first_name, last_name
   }
 };
 
-const createUser = ({ email, password, password_comparisor, first_name, last_name }) => {
-  return connection().then((db) =>
+const createUser = ({ email, password, first_name, last_name }) => (
+  connection().then((db) =>
     db
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
       .values(email, password, first_name, last_name)
       .execute(),
-  );
-};
+  )
+);
 
 module.exports = {
   createUser,

@@ -29,6 +29,9 @@ app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { u
 app.post('/cadastro', controllers.userController.signup);
 app.get('/cadastro', controllers.userController.signupForm);
 
+app.get('/me/edit', middlewares.auth(), controllers.userController.editUserForm);
+app.post('/me/edit', middlewares.auth(), controllers.userController.editUser);
+
 app.get('/logout', controllers.userController.logout);
 
 app.get('/login', controllers.userController.loginForm);

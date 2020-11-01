@@ -21,6 +21,7 @@
         <div class="p-1 bd-highlight">
           <div class="container d-flex flex-row bd-highlight justify-content-end">
             <%if(user){%>
+            <a class="m-2 text-white" href="/me/edit" data-testid="minha-conta">Minha Conta</a>
             <a class="m-2 text-white" href="/me/recipes" data-testid="minhas-receitas"
               >Minhas Receitas</a
             >
@@ -62,16 +63,26 @@
       class="navbar flex-row justify-content-center bg-dark text-white bottom text-center mt-5"
     >
       <div>
-        <button onclick='window.location.href="https://github.com/djonata-dias"' target="_blank" rel="noopener noreferrer">
+        <button
+          onclick='window.location.href="https://github.com/djonata-dias"'
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="/images/github-pages-icon.png" alt="Icone do GitHub" width="50px" />
         </button>
-        <button onclick='window.location.href="https://www.linkedin.com/in/djonata-dias/"'
+        <button
+          onclick='window.location.href="https://www.linkedin.com/in/djonata-dias/"'
           target="_blank"
           rel="noopener noreferrer"
         >
           <img src="/images/linkedin-icon.png" alt="Icone do Linkedin" width="30px" />
         </button>
-        <button onclick='window.location.href="https://www.instagram.com/djosouzadias/"'align-content-center target="_blank" rel="noopener noreferrer">
+        <button
+          onclick='window.location.href="https://www.instagram.com/djosouzadias/"'
+          align-content-center
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="/images/instagram-icon.png" alt="Icone do Instagram" width="55px" />
         </button>
       </div>

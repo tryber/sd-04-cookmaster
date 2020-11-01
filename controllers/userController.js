@@ -90,10 +90,40 @@ const signup = async (req, res) => {
   return res.render('admin/signup', { message, redirect: null });
 };
 
+const editUserForm = async (req, res) => {
+  const systemUser = req.user;
+  const user = await userModel.findById(systemUser.id);
+  return res.render('admin/edit', { user, message: null, redirect: null });
+};
+
+const editUser = async (req, res) => {
+  const { name, lastname, email, password, agreePassword } = req.body;
+  const user = req.user;
+  let message = 'Cadastro efetuado com sucesso!';
+  const nameMessage = nameValidation(name, lastname);
+  const emailMessage = emailValidation(email);
+  const passMessage = passValidation(password, agreePassword);
+  if (nameMessage) {
+    message = nameMessage;
+  } else if (emailMessage) {
+    message = emailMessage;
+  } else if (passMessage) {
+    message = passMessage;
+  }
+  const warnings = await userModel.updateUser(user.id, email, password, name, lastname);
+  if (warnings > 0) {
+    res.status(500).send('Erro de conexão com o banco de dados');
+    message('Algo de errado aconteceu!');
+  }
+  res.redirect('/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   signup,
   signupForm,
+  editUserForm,
+  editUser,
 };

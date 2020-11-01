@@ -30,10 +30,11 @@ window.onload = () => {
   const addIngredientBtn = document.getElementById('addIngredient');
   const ingredientsList = document.getElementById('ingredientsList');
   const ingredientesInput = document.getElementById('ingredientesInput');
-
-  addButtons(addIngredientBtn, ingredientsList, ingredientesInput);
-  const liArray = [...document.getElementsByTagName('li')] || [];
-  if (liArray.length) {
+  if ((addIngredientBtn, ingredientsList, ingredientesInput)) {
+    addButtons(addIngredientBtn, ingredientsList, ingredientesInput);
+  }
+  const liArray = [...document.getElementsByTagName('li')];
+  if (liArray) {
     liArray.forEach((li) => {
       li.children[1].addEventListener('click', (e) => {
         e.preventDefault();

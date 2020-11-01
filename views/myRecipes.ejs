@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    
+
     <header class="header-container p-2">
       <h1>Cookmaster</h1>
 
@@ -29,13 +29,13 @@
 
       <div class="second-header-container mt-2">
         <h3>Minhas Receitas</h3>
-  
+
         <div class="btn-panel">
           <a data-testid="nova-receita" href="/recipes/new" class="btn btn-success">Nova Receita</a>
         </div>
-  
+
       </div>
-  
+
       <div class="">
         <% recipes.map(({user, name, id}) =>{ %>
           <div class="card mt-2">
@@ -48,6 +48,5 @@
       </div>
     </section>
   
-
   </body>
 </html>

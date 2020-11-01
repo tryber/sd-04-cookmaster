@@ -85,7 +85,7 @@ const deleteRecipe = async (req, res) => {
     return res.render('deleteRecipe', { redirect: null, message, user, id });
   }
   recipesModel.deleteRecipeIdModel(id);
-  res.redirect('/');
+  return res.redirect('/');
 };
 
 const myRecipes = async (req, res) => {

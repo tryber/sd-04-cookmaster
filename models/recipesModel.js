@@ -66,7 +66,6 @@ const getRecipesByUserID = async (inputId) => {
   const table = await db.getTable('recipes');
   const results = await table.select(['id', 'user', 'name']).where(('user_id = :inputId')).bind('inputId', inputId).execute();
   const recipes = await results.fetchAll();
-  console.log(recipes);
   return recipes.map(([id, user, name]) => ({ id, user, name }));
 };
 

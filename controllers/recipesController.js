@@ -29,23 +29,15 @@ const createRecipe = async (req, res) => {
     body: { name, ingredients, instructions },
     user,
   } = req;
-  const warningCounts = await recipesModel.insertRecipeIdModel(
+  const recipe = await recipesModel.insertRecipeIdModel(
     user.id,
     `${user.firstName} ${user.lastName}`,
     name,
     ingredients.join(),
     instructions,
   );
-  if (warningCounts > 0) {
-    res.status(400);
-    return res.render('createRecipe', {
-      message: 'Algum erro aconteceu e a receita não foi cadastrada!',
-      redirect: null,
-      user: req.user,
-    });
-  }
   res.status(200);
-  return res.redirect('/');
+  return res.redirect(`/recipes/${recipe}`);
 };
 const editRecipePage = async (req, res) => {
   const { id } = req.params;
@@ -81,7 +73,7 @@ const deleteRecipe = async (req, res) => {
   } = req;
   const { password } = await userModel.findById(user.id);
   if (password !== userPass) {
-    message = 'Senha incorreta';
+    message = 'Senha Incorreta.';
     return res.render('deleteRecipe', { redirect: null, message, user, id });
   }
   recipesModel.deleteRecipeIdModel(id);

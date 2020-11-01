@@ -70,7 +70,7 @@ const updateRecipeModel = async (id, name, ingredients, instructions) => {
 const deleteRecipeIdModel = async (idParam) => {
   const db = await connection();
   const table = await db.getTable('recipes');
-  const result = await table.delete().where('id = param_id').bind('param_id', idParam).execute();
+  const result = await table.delete().where('id = :param_id').bind('param_id', idParam).execute();
   return result.getWarningsCount();
 };
 

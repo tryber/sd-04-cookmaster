@@ -18,6 +18,9 @@
         <div class="p-1 bd-highlight">
           <div class="container d-flex flex-row bd-highlight justify-content-end">
             <%if(user){%>
+            <a class="m-2 text-white" href="/me/recipes" data-testid="minhas-receitas"
+              >Minhas Receitas</a
+            >
             <p class="m-2">Usuário atual: <b><%= `${user.firstName} ${user.lastName}` %></b></p>
             <a class="m-2 text-white" href="/logout" data-testid="logout">Logout</a>
             <%}else{%>
@@ -32,10 +35,18 @@
       <div>
         <h1><%=recipe.name%></h1>
         <%if(user){%> <%if(user.id === recipe.userId){%>
-        <a class="btn btn-primary mt-5" href="<%=`/recipes/${recipe.id}/edit`%>" data-testid="editar-receita">
+        <a
+          class="btn btn-primary mt-5"
+          href="<%=`/recipes/${recipe.id}/edit`%>"
+          data-testid="editar-receita"
+        >
           Editar Receita
         </a>
-        <a class="btn btn-primary mt-5" href="<%=`/recipes/${recipe.id}/delete`%>" data-testid="excluir-receita">
+        <a
+          class="btn btn-primary mt-5"
+          href="<%=`/recipes/${recipe.id}/delete`%>"
+          data-testid="excluir-receita"
+        >
           Excluir Receita
         </a>
         <%}}%>

@@ -36,8 +36,8 @@
 
       </div>
 
-      <div class="">
-        <% recipes.map(({user, name, id}) =>{ %>
+      <div>
+        <% recipes.map(({id, user, name}) =>{ %>
           <div class="card mt-2">
             <li class="card-body">
               <%=`${name} ${user}`%>

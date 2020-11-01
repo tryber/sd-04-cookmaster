@@ -5,7 +5,6 @@ const passwordRegex = /^(\d|\w){6,}$/;
 const nameRegex = /\w{3,25}/;
 
 const validator = ({ email, password, passwordComparisor, first_name, last_name }) => {
-  console.log(email, password, passwordComparisor, first_name, last_name)
   switch (true) {
     case !emailRegex.test(email):
       return { message: 'O email deve ter o formato email@mail.com' };

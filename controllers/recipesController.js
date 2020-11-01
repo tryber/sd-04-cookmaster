@@ -1,4 +1,4 @@
-const { getRecipes, getRecipesById, getRecipesByName, createNewRecipe, updateRecipe } = require('../models/recipesModel');
+const { getRecipes, getRecipesById, getRecipesByName, createNewRecipe, updateRecipe, getRecipesByUserID } = require('../models/recipesModel');
 
 const recipesCtrl = async (req, res) => {
   const recipes = await getRecipes();
@@ -51,6 +51,13 @@ const editRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
+const myRecipes = async (req, res) => {
+  const { user } = req;
+  const recipes = await getRecipesByUserID(user.id);
+
+  res.render('myRecipes', { recipes, user })
+};
+
 module.exports = {
   recipesCtrl,
   recipesDtls,
@@ -59,4 +66,5 @@ module.exports = {
   newRecipe,
   editRecipeForm,
   editRecipe,
+  myRecipes,
 };

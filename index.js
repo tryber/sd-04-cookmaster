@@ -20,13 +20,15 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/me/recipes', middlewares.auth(), recipesController.myRecipes);
+
 app.get('/recipes/new', middlewares.auth(false), recipesController.newRecipeForm);
 app.post('/recipes/new', middlewares.auth(false), recipesController.newRecipe);
 
 app.get('/recipes/search', middlewares.auth(false), recipesController.recipesSearch);
 
 app.get('/recipes/:id/edit', middlewares.auth(), recipesController.editRecipeForm);
-app.post('/recipes/:id/', middlewares.auth(), recipesController.editRecipe);
+app.post('/recipes/:id', middlewares.auth(), recipesController.editRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipesDtls);
 

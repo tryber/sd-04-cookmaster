@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Style CSS -->
     <link rel="stylesheet" href="style/home.css" type="text/css"/>
-    <title>Cookmaster - Home</title>
+    <title>Cookmaster - Minhas Receitas</title>
   </head>
+
   <body>
+    
     <header class="header-container p-2">
       <h1>Cookmaster</h1>
 
       <div class="login-container p-2">
-        <% if (!token) { %>
+        <% if (user) { %>
           <a data-testid="login" href="/login" class="btn btn-primary">Login</a>
         <% } else { %>
           <a data-testid="logout" href="/logout" class="btn btn-danger">Logout</a>
@@ -25,30 +27,27 @@
 
     <section class="container">
 
-    <div class="second-header-container mt-2">
-      <h3>Receitas</h3>
-
-      <div class="btn-panel">
-        <% if (token) { %>
-          <a data-testid="minhas-receitas" href="/me/recipes" class="btn btn-warning">Minhas Receitas</a>
+      <div class="second-header-container mt-2">
+        <h3>Minhas Receitas</h3>
+  
+        <div class="btn-panel">
           <a data-testid="nova-receita" href="/recipes/new" class="btn btn-success">Nova Receita</a>
-        <% } %>
-        <a data-testid="buscar-receita" href="/recipes/search" class="btn btn-primary">Buscar Receitas</a>
-      </div>
-
-    </div>
-
-    <div class="">
-      <% recipes.map(({user, name, id}) =>{ %>
-        <div class="card mt-2">
-          <li class="card-body">
-            <%=`${name} ${user}`%>
-            <a href=<%=`recipes/${id}` %> >Ver mais<a/>
-          </li>
         </div>
-      <% }) %>
-    </div>
+  
+      </div>
+  
+      <div class="">
+        <% recipes.map(({user, name, id}) =>{ %>
+          <div class="card mt-2">
+            <li class="card-body">
+              <%=`${name} ${user}`%>
+              <a href=<%=`recipes/${id}` %> >Ver mais<a/>
+            </li>
+          </div>
+        <% }) %>
+      </div>
     </section>
+  
 
   </body>
 </html>

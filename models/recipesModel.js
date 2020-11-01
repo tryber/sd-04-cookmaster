@@ -61,10 +61,19 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
     .execute();
 };
 
+const getRecipesByUserID = async (inputId) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const results = await table.select([]).where(('user_id = :inputId')).bind('inputId', inputId).execute();
+  const recipes = await results.fetchAll();
+  return recipes.map(([id, user, name]) => ({ id, user, name }));
+};
+
 module.exports = {
   getRecipes,
   getRecipesById,
   getRecipesByName,
   createNewRecipe,
   updateRecipe,
+  getRecipesByUserID,
 };

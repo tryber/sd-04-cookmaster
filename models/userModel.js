@@ -57,9 +57,25 @@ const deleteUser = async (idParam) => {
   return result.getWarningsCount();
 };
 
+const updateUser = async (id, email, password, firstName, lastName) => {
+  const db = await connection();
+  const table = await db.getTable('users');
+  const result = await table
+    .update()
+    .set('first_name', firstName)
+    .set('last_name', lastName)
+    .set('email', email)
+    .set('password', password)
+    .where('id = :param_id')
+    .bind('param_id', id)
+    .execute();
+  return result.getWarningsCount();
+};
+
 module.exports = {
   findByEmail,
   findById,
   addUser,
   deleteUser,
+  updateUser,
 };

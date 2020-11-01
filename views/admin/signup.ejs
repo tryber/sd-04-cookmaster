@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <main>
-    <form action="/signup" method="POST">
-      <section>
-        <div>
-          <label for="emailInput">Email: </label>
-          <input type="text" name="email" id="emailInput" data-testid="email" /><br />
-        </div>
-        <div>
-          <label for="passwordInput">Senha: </label>
-          <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
-        </div>
-        <div>
-          <label for="passwordComparisor">Confirmar Senha: </label>
-          <input type="password" name="password_comparisor" id="passwordComparisor" data-testid="confirmar-senha" /><br />
-        </div>
-        <div>
-          <label for="nameInput">Nome: </label>
-          <input type="text" name="first_name" id="nameInput" data-testid="nome" /><br />
-        </div>
-        <div>
-          <label for="lastNameInput">Sobrenome: </label>
-          <input type="text" name="last_name" id="lastNameInput" data-testid="sobrenome" /><br />
-        </div>
-      </section>
-      <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
-    </form>
-    <a href="/login" data-testid="login">Login</a>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <% if (message) { %>
+      <p><%= message %></p>
+      <% } %>
+      <form action="/signup" method="POST">
+        <section>
+          <div>
+            <label for="emailInput">Email: </label>
+            <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+          </div>
+          <div>
+            <label for="passwordInput">Senha: </label>
+            <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+          </div>
+          <div>
+            <label for="passwordComparisor">Confirmar Senha: </label>
+            <input
+              type="password"
+              name="password_comparisor"
+              id="passwordComparisor"
+              data-testid="confirmar-senha"
+            /><br />
+          </div>
+          <div>
+            <label for="nameInput">Nome: </label>
+            <input type="text" name="first_name" id="nameInput" data-testid="nome" /><br />
+          </div>
+          <div>
+            <label for="lastNameInput">Sobrenome: </label>
+            <input type="text" name="last_name" id="lastNameInput" data-testid="sobrenome" /><br />
+          </div>
+        </section>
+        <button type="submit" data-testid="cadastrar">Cadastrar-se</button>
+      </form>
+      <a href="/login" data-testid="login">Login</a>
+    </main>
+  </body>
 </html>

@@ -52,10 +52,8 @@ const editRecipePage = async (req, res) => {
 const editRecipe = async (req, res) => {
   const { id } = req.params;
   const { name, ingredients, instructions } = req.body;
-  if (name && ingredients && instructions) {
-    await recipesModel.updateRecipeModel(id, name, ingredients.join(), instructions);
-  }
-  return res.redirect('/');
+  await recipesModel.updateRecipeModel(id, name, ingredients.join(), instructions);
+  return res.redirect(`/recipes/${id}`);
 };
 
 const deleteRecipePage = (req, res) => {

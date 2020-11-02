@@ -29,7 +29,7 @@ const findRecipeById = (RecipeId) =>
         userId,
         user,
         name,
-        ingredients,  
+        ingredients,
         instructions,
       })),
     );

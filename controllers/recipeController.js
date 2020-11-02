@@ -11,6 +11,7 @@ const getAllRecipes = async (req, res) => {
 
 const showMoreInfo = async (req, res) => {
   const recipeData = await recipeModel.findRecipeById(req.params.id);
+  console.log(recipeData[0])
   return res.render('recipes/recipeInfo', {
     recipeData: recipeData[0],
     message: null,

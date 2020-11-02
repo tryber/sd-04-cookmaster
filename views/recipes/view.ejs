@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster'}) %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container home">
+      <h1><%= recipe.name %></h1>
+      <h3>Enviado por <%= recipe.user %></h3>
+      <div>
+        <% if (user) { %>
+          <a class="button btn-ok" href="/recipes/<%= id %>/edit"  data-testid="editar-receita">Editar Receita</a>
+          <a class="button btn-warning" href="/recipes/<%= id %>/delete" data-testid="excluir-receita">Excluir Receita</a>
+        <% } %>
+      </div>
+    </div>
+    <div>
+      <h2>Ingredientes</h2>
+      <ul>
+        <% for (let i = 0; i <= recipe.ingredients.length-1; i++ ) { %>
+          <li><%- recipe.ingredients[i] %></li>
+        <% } %>
+      </ul>
+      <h2>Modo de preparo</h2>
+      <p><%= recipe.instructions %></p>
+    </div>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

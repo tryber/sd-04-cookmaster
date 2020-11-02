@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster - Cadastrar'}) %>
+  <body>
+    <div class="container-box">
+      <div>
+        <form action="/cadastrar" method="POST">
+          <label for="emailInput"> Email:
+            <% if (error.email) {%>
+              <span class="message"> O email deve ter o formato email@mail.com</span>
+            <% } %>
+          </label>
+          <input type="text" name="email" id="emailInput" data-testid="email" /><br />
+          <label for="passwordInput">Senha:
+            <% if (error.password) {%>
+              <span class="message"> A senha deve ter pelo menos 6 caracteres</span>
+            <% } %>
+          </label>
+          <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+          <label for="confirmInput">Confirmar Senha:
+            <% if (error.confirm) {%>
+              <span class="message"> As senhas tem que ser iguais</span>
+            <% } %>
+          </label>
+          <input type="password" name="confirm" id="confirmInput" data-testid="confirmar-senha" /><br />
+          <label for="nameInput">Nome:
+            <% if (error.name) {%>
+              <span class="message"> O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras</span>
+            <% } %>
+          </label>
+          <input type="text" name="name" id="nameInput" data-testid="nome" /><br />
+          <label for="lastNameInput">Sobrenome:
+            <% if (error.lastname) {%>
+              <span class="message"> O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras</span>
+            <% } %>
+          </label>
+          <input type="text" name="lastname" id="lastNameInput" data-testid="sobrenome" /><br />
+          <br />
+          <div class="container">
+            <a href="/login" class="button btn-ok" data-testid="login">Fazer Login</a>
+            <button type="submit" class="button btn-ok" data-testid="cadastrar">Cadastrar-se</button>
+          </div>
+        </form>
+        <% if (success) {%>
+          <span class="message">Cadastro efetuado com sucesso!</span>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

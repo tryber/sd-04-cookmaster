@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster'}) %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container home">
+      <h1>Nova Receita</h1>
+    </div>
+    <div class="container home">
+      <form action="/recipes" method="POST" name="addRecipe">
+        <div class="container form">
+          <label for="name">Nome da Receita</label>
+          <input id="name" name="name" type="text" data-testid="nome-receita" required />
+        </div>
+        <ul></ul>
+        <div class="container">
+          <input
+            id="listInput"
+            type="text"
+            data-testid="ingredientes"
+          />
+          <button
+            type="button"
+            class="button btn-ok"
+            data-testid="adicionar-ingrediente"
+            onclick="addIngredient()"
+          >
+            Adicionar Ingrediente
+          </button>
+          <input
+            id="listItems"
+            name="ingredientes"
+            type="hidden"
+          />
+        </div>
+        <div class="container form">
+          <label for="instructions">Modo de Preparo</label>
+          <textarea
+            id="instructions"
+            name="instructions"
+            rows="20"
+            data-testid="modo-de-preparo"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="button btn-ok" data-testid="postar-receita">
+          Salvar Receita
+        </button>
+      </form>
+    </div>
+    <script src="/scripts/recipeList.js"></script>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', {title: 'Cookmaster - Deletar'}) %>
+  <body>
+    <div class="container-box">
+      <div>
+        <form action="/recipes/<%= id %>/delete" method="POST">
+          <h3>Confirme a exclusão da receita</h3><br />
+          <label for="passwordInput">Senha: </label>
+          <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
+          <% if (message) {%>
+            <div class="message"><%= message %></div>
+          <% } %>
+          <br/>
+          <div class="container">
+            <button type="submit" class="button btn-warning" data-testid="confirmar">Confirmar</button>
+            <button type="button" class="button btn-ok" data-testid="cancelar">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

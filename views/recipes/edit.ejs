@@ -9,7 +9,7 @@
     <%- include('../header.ejs', {user}); %>
     <div>
       <% if (recipe.userId === user.id) { %>
-      <form action="<%= `/recipes/${recié.id}`%>" method="POST" name="recipeForm">
+      <form action="<%= `/recipes/${recipe.id}`%>" method="POST" name="recipeForm">
         <h3>Editar Receita</h3>
         <div>
           <label for="namelInput">Nome da receita: </label>

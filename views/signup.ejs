@@ -11,23 +11,23 @@
     <% } %>
     <form action="/signup" method="POST">
       <label for="emailInput">Email: </label>
-      <input data-testid="email" type="text" name="email" id="emailInput" required /><br />
-      <label for="password">Senha: </label>
-      <input data-testid="senha" type="password" name="password" id="password" required /><br />
-      <label for="passwordConfirmation">Confirmar senha: </label>
+      <input data-testid="email" type="text" name="email" id="emailinput" required /><br />
+      <label for="passwordInput">Senha: </label>
+      <input data-testid="senha" type="password" name="password" id="passwordInput" required /><br />
+      <label for="passwordConfirmationInput">Confirmar senha: </label>
       <input
         data-testid="confirmar-senha"
         type="password" name="passwordConfirmation"
-        id="passwordConfirmation"
+        id="passwordConfirmationInput"
         required
       /><br />
-      <label for="firstName">Nome: </label>
-      <input data-testid="nome" type="text" name="firstName" id="firstName" required /><br />
-      <label for="lastName">Sobrenome: </label>
-      <input data-testid="sobrenome" type="text" name="lastName" id="lastName" required /><br />
+      <label for="firstNameInput">Nome: </label>
+      <input data-testid="nome" type="text" name="firstName" id="firstNameInput" required /><br />
+      <label for="lastNameInput">Sobrenome: </label>
+      <input data-testid="sobrenome" type="text" name="lastName" id="lastNameInput" required /><br />
       <button data-testid="cadastrar" type="submit">Cadastre-se</button>
       <a href="/login">
-        <spam data-testid=login">Login</spam>
+        <spam data-testid="login">Login</spam>
       </a>
     </form>
 </body>

@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password)
@@ -43,8 +43,47 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const signupForm = (_req, res) =>
+  res.render('signup', { message: null });
+
+const signup = async (req, res) => {
+  const { email, password, passwordConfirmation, firstName, lastName } = req.body;
+
+  //https://regexr.com/3e48o
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  
+  if (!regex.test(email)) {
+    res.render('signup', { message: "O email deve ter o formato email@mail.com"});
+  }
+
+  if (password.lenght < 6 ) {
+    res.render('signup', { message: "A senha deve ter pelo menos 6 caracteres"});
+  }
+
+  if (passwordConfirmation !== password) {
+    res.render('signup', { message: "As senhas tem que ser iguais"});
+  }
+
+  if (firstName.lenght < 3 || typeof firstName !== 'string') {
+    res.render('signup', {
+      message: "O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras"
+    });
+  }
+
+  if (lastName.lenght < 3 || typeof lastName !== 'string') {
+    res.render('signup', {
+      message: "O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras"
+    });
+  }
+
+  await userModel.registerNewUser(email, password, firstName, lastName);
+  res.status(201).render('signup', { message: "Cadastro efetuado com sucesso!" });
+}
+
 module.exports = {
   login,
   loginForm,
   logout,
+  signupForm,
+  signup,
 };

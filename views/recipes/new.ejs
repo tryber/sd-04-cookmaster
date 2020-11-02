@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cookmaster</title>
-</head>
-
-<body>
-  <div>
-    <div class="title">
-      <nav class="navbar">
-        <h2>Cookmaster</h2></span>
-        <% if (!user) { %>
-          <span><a href='/login' data-testid="login">Login</a></span>
-        <% } else { %>
-          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
-        <% } %>
-      </nav>
-    </div>
+  <body>
+    <%- include('../header.ejs', {user}); %>
     <form action="/recipes" method="POST" name="recipeForm">
       <h3>Nova Receita</h3>
       <div>
@@ -96,7 +85,5 @@
         document.recipeForm.submit();
       };
     </script>
-  </div>
-</body>
-
+  </body>
 </html>

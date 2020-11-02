@@ -1,45 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Pesquisa de Receitas</title>
+    <link type="text/css" rel="stylesheet" href="/styles/styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookmaster - Pesquisa de Receitas</title>
-  <link type="text/css" rel="stylesheet" href="/styles/styles.css">
-</head>
-
-<body>
-  <div>
-    <div class="title">
-      <nav class="navbar">
-        <h2>Cookmaster</h2></span>
-        <% if (!user) { %>
-          <span><a href='/login' data-testid="login">Login</a></span>
-        <% } else { %>
-          <span><a href='/logout' data-testid="logout">Logout</a></span> <br>
-        <% } %>
-      </nav>
-    </div>
+  <body>
+    <%- include('../header.ejs', {user}); %>
     <div>
       <form method="GET">
         <div>
-          <input id="search" name="q" type="text" data-testid="receita" required>
+          <input id="search" name="q" type="text" data-testid="receita" required />
           <button type="submit" data-testid="buscar">Buscar</button>
         </div>
       </form>
     </div>
     <div class="box">
-      <% if (recipes) { %>
-        <% recipes.forEach(recipe => { %>
-          <div class="recipe">
-            <h3><%= recipe.name %></h3>
-            <p><%= recipe.user %></p>
-            <a href=<%= `/recipes/${recipe.id}` %>>Ver mais</a>
-          </div>
-        <% }) %>
-      <% } %>
+      <% if (recipes) { %> <% recipes.forEach(recipe => { %>
+      <div class="recipe">
+        <h3><%= recipe.name %></h3>
+        <p><%= recipe.user %></p>
+        <a href="<%= `/recipes/${recipe.id}` %>">Ver mais</a>
+      </div>
+      <% }) %> <% } %>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

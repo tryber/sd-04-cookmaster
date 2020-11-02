@@ -73,6 +73,30 @@ const myRecipes = async (req, res) => {
   res.status(200).render('me/recipes', { recipes, message: null, user: req.user });
 };
 
+const deletForm = async (req, res) => {
+  const { id } = req.params;
+  res.status(201).render('recipes/delete', {
+    user: req.user,
+    message: null,
+    id,
+  });
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+  const auth = await recipesModel.verifyUser(id, req.user.id, password);
+  if (auth) {
+    await recipesModel.deleteRecipeById(id);
+    res.status(202).redirect('/');
+  }
+  res.status(401).render('recipes/delete', {
+    user: req.user,
+    id,
+    message: 'Senha Incorreta.',
+  });
+};
+
 module.exports = {
   index,
   show,
@@ -82,4 +106,6 @@ module.exports = {
   edit,
   update,
   myRecipes,
+  deleteRecipe,
+  deletForm,
 };

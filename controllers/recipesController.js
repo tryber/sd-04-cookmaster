@@ -42,10 +42,22 @@ const edit = async (req, res) => {
   });
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { name, ingredients, instructions } = req.body;
+  try {
+    await recipesModel.updateRecipe(id, name, ingredients, instructions);
+    res.redirect('/');
+  } catch (err) {
+    res.send(err);
+  }
+};
+
 module.exports = {
   index,
   show,
   search,
   newRecipe,
   edit,
+  update,
 };

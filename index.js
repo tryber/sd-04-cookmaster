@@ -18,8 +18,11 @@ app.get('/admin', middlewares.auth(), (req, res) => res.render('admin/home', { u
 
 app.get('/recipes/new', middlewares.auth(false), controllers.recipesController.newRecipe);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.search);
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.show);
-app.get('recipes/:id/edit', middlewares.auth(false), controllers.recipesController.edit);
+app.post('/recipes/:id', middlewares.auth(false), controllers.recipesController.update);
+
+app.get('recipes/:id/edit', middlewares.auth(), controllers.recipesController.edit);
 
 app.get('/signup', controllers.userController.renderSignup);
 app.post('/signup', middlewares.validation, controllers.userController.signUp);

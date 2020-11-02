@@ -24,9 +24,9 @@ const findRecipeById = (RecipeId) =>
     )
     .then((result) => result.fetchAll())
     .then((result) =>
-      result.map(([id, user_id, user, name, ingredients, instructions]) => ({
+      result.map(([id, user_Id, user, name, ingredients, instructions]) => ({
         id,
-        user_id,
+        user_Id,
         user,
         name,
         ingredients,

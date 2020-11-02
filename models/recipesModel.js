@@ -51,7 +51,7 @@ const getById = async (recipeId) => {
 };
 
 const getRecipeById = async (id) => {
-  const db = await conn();
+  const db = await connection();
   const results = await db
     .getTable('recipes')
     .select(['user_id', 'user', 'name', 'ingredients', 'instructions'])

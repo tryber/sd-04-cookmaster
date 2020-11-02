@@ -22,7 +22,7 @@ app.get('/recipes/search', middlewares.auth(false), controllers.recipesControlle
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.show);
 app.post('/recipes/:id', middlewares.auth(false), controllers.recipesController.update);
 
-app.get('recipes/:id/edit', middlewares.auth(), controllers.recipesController.edit);
+app.get('/recipes/:id/edit', middlewares.auth(false), controllers.recipesController.edit);
 
 app.get('/signup', controllers.userController.renderSignup);
 app.post('/signup', middlewares.validation, controllers.userController.signUp);

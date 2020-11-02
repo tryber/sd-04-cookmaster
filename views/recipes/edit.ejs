@@ -6,59 +6,63 @@
     <title>Cookmaster - Editar</title>
   </head>
   <body>
-    <%- include('../header.ejs', {user}); %> <% if (recipe.userId === user.id) { %>
-    <form action="<%= `/recipes/${recié.id}`%>" method="POST" name="recipeForm">
-      <h3>Editar Receita</h3>
-      <div>
-        <label for="namelInput">Nome da receita: </label>
-        <input
-          type="text"
-          name="name"
-          id="namelInput"
-          data-testid="nome-receita"
-          value="<%= recipe.name %> "
-        />
-        <% if (nameMessage) {%>
-        <span> <%= nameMessage %> </span>
-        <% } %>
-      </div>
-      <div>
-        <ul id="ingredientList"></ul>
-      </div>
-      <div>
-        <label for="ingredientInput">Adicionar ingrediente:</label>
-        <input type="text" name="ingredients" id="ingredientInput" data-testid="ingredientes" />
-        <% if (ingredientsMessage) {%>
-        <span><%= ingredientsMessage %> </span>
-        <% } %>
-        <button type="button" data-testid="adicionar-ingrediente" onclick="addIngredient()">
-          Adicionar ingrediente
-        </button>
-      </div>
-      <div>
-        <label for="ingredientInput">Modo de preparo:</label>
-        <textarea data-testid="modo-de-preparo" name="instructions" id="instructions">
-          <%= `${recipe.instructions}` %>
-        </textarea>
-        <% if (instructionsMessage) {%>
-        <span><%= instructionsMessage %> </span>
-        <% } %>
-      </div>
-      <div>
-        <a href="/">Voltar</a>
+    <%- include('../header.ejs', {user}); %>
+    <div>
+      <% if (recipe.userId === user.id) { %>
+      <form action="<%= `/recipes/${recié.id}`%>" method="POST" name="recipeForm">
+        <h3>Editar Receita</h3>
         <div>
-          <button type="button" data-testid="postar-receita" onclick="submitRecipe()">
-            Salvar receita
-          </button>
-          <% if (successMessage) {%>
-          <span><%= successMessage %> </span>
+          <label for="namelInput">Nome da receita: </label>
+          <input
+            type="text"
+            name="name"
+            id="namelInput"
+            data-testid="nome-receita"
+            value="<%= recipe.name %> "
+          />
+          <% if (nameMessage) {%>
+          <span> <%= nameMessage %> </span>
           <% } %>
         </div>
-      </div>
-    </form>
-    <% } else { %>
-    <span>Sem permissão para editar receitas.</span>
-    <% } %>
+        <div>
+          <ul id="ingredientList"></ul>
+        </div>
+        <div>
+          <label for="ingredientInput">Adicionar ingrediente:</label>
+          <input type="text" name="ingredients" id="ingredientInput" data-testid="ingredientes" />
+          <% if (ingredientsMessage) {%>
+          <span><%= ingredientsMessage %> </span>
+          <% } %>
+          <button type="button" data-testid="adicionar-ingrediente" onclick="addIngredient()">
+            Adicionar ingrediente
+          </button>
+        </div>
+        <div>
+          <label for="ingredientInput">Modo de preparo:</label>
+          <textarea data-testid="modo-de-preparo" name="instructions" id="instructions">
+          <%= `${recipe.instructions}` %>
+        </textarea
+          >
+          <% if (instructionsMessage) {%>
+          <span><%= instructionsMessage %> </span>
+          <% } %>
+        </div>
+        <div>
+          <a href="/">Voltar</a>
+          <div>
+            <button type="button" data-testid="postar-receita" onclick="submitRecipe()">
+              Salvar receita
+            </button>
+            <% if (successMessage) {%>
+            <span><%= successMessage %> </span>
+            <% } %>
+          </div>
+        </div>
+      </form>
+      <% } else { %>
+      <span>Sem permissão para editar receitas.</span>
+      <% } %>
+    </div>
     <script>
       const ingredients = new Set();
       const list = document.getElementById('ingredientList');

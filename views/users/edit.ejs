@@ -6,31 +6,31 @@
       <div>
         <form action="/me/edit" method="POST">
           <label for="emailInput"> Email:
-            <% if (error === 'email') {%>
+            <% if (error.email) {%>
               <span class="message"> O email deve ter o formato email@mail.com</span>
             <% } %>
           </label>
           <input type="text" name="email" id="emailInput" value="<%= user.email %>" data-testid="email" /><br />
           <label for="passwordInput">Senha:
-            <% if (error === 'password') {%>
+            <% if (error.password) {%>
               <span class="message"> A senha deve ter pelo menos 6 caracteres</span>
             <% } %>
           </label>
           <input type="password" name="password" id="passwordInput" data-testid="senha" /><br />
           <label for="confirmInput">Confirmar Senha:
-            <% if (error === 'confirm') {%>
+            <% if (error.confirm) {%>
               <span class="message"> As senhas tem que ser iguais</span>
             <% } %>
           </label>
           <input type="password" name="confirm" id="confirmInput" data-testid="confirmar-senha" /><br />
           <label for="nameInput">Nome:
-            <% if (error === 'name') {%>
+            <% if (error.name) {%>
               <span class="message"> O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras</span>
             <% } %>
           </label>
           <input type="text" name="name" id="nameInput" value="<%= user.name %>" data-testid="nome" /><br />
           <label for="lastNameInput">Sobrenome:
-            <% if (error === 'lastname') {%>
+            <% if (error.lastname) {%>
               <span class="message"> O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras</span>
             <% } %>
           </label>

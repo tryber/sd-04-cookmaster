@@ -8,11 +8,29 @@ const add = async (req, res) => {
     email, password, name, lastname,
   } = req.body;
 
+  Object.values(req.validation).map((value) => {
+    if (value) {
+      return res.render('users/register', {
+        error: req.validation,
+        success: false,
+      });
+    }
+    return null;
+  });
+
   await userModel.add(email, password, name, lastname);
-  return res.render('users/register', { error: false, success: true });
+  return res.render('users/register', {
+    error: req.validation,
+    success: true,
+  });
 };
 
-const addForm = (req, res) => res.render('users/register', { error: false, success: false });
+const addForm = (req, res) => res.render('users/register', {
+  error: {
+    email: false, password: false, confirm: false, name: false, lastname: false,
+  },
+  success: false,
+});
 
 const edit = async (req, res) => {
   const { id } = req.user;
@@ -20,11 +38,28 @@ const edit = async (req, res) => {
     email, password, name, lastname,
   } = req.body;
 
+  Object.values(req.validation).map((value) => {
+    if (value) {
+      return res.render('users/edit', {
+        user: req.user,
+        error: req.validation,
+        success: false,
+      });
+    }
+    return null;
+  });
+
   await userModel.update(id, email, password, name, lastname);
   return res.redirect('/');
 };
 
-const editForm = (req, res) => res.render('users/edit', { user: req.user, error: false, success: false });
+const editForm = (req, res) => res.render('users/edit', {
+  user: req.user,
+  error: {
+    email: false, password: false, confirm: false, name: false, lastname: false,
+  },
+  success: false,
+});
 
 const login = async (req, res) => {
   const { email, password, redirect } = req.body;

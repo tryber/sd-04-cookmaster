@@ -5,19 +5,17 @@ const validation = (req, res, next) => {
     email, password, confirm, name, lastname,
   } = req.body;
 
-  if (!validator.isEmail(email)) res.render('users/register', { error: 'email', success: false });
+  const error = {
+    email: false, password: false, confirm: false, name: false, lastname: false,
+  };
 
-  if (!validator.isLength(password, { min: 6 })) res.render('users/register', { error: 'password', success: false });
+  error.email = !validator.isEmail(email);
+  error.password = !validator.isLength(password, { min: 6 });
+  error.confirm = password !== confirm;
+  error.name = !validator.isLength(name, { min: 3 }) || !validator.isAlpha(name);
+  error.lastname = !validator.isLength(lastname, { min: 3 }) || !validator.isAlpha(lastname);
 
-  if (password !== confirm) res.render('users/register', { error: 'confirm', success: false });
-
-  if (!validator.isLength(name, { min: 3 }) || !validator.isAlpha(name)) {
-    return res.render('users/register', { error: 'name', success: false });
-  }
-
-  if (!validator.isLength(lastname, { min: 3 }) || !validator.isAlpha(lastname)) {
-    return res.render('users/register', { error: 'lastname', success: false });
-  }
+  req.validation = error;
 
   return next();
 };

@@ -56,9 +56,14 @@ const signup = async (req, res) => {
   const firstNameValidation = validationsController.firstNameValidation(firstName);
   const lastNameValidation = validationsController.lastNameValidation(lastName);
 
-  if (emailValidation || passwordValidation || passwordConfirmValidation || firstNameValidation || lastNameValidation )
+  if (emailValidation || passwordValidation || passwordConfirmValidation)
     return res.render('signup', {
-      message: emailValidation || passwordValidation || passwordConfirmValidation || firstNameValidation || lastNameValidation,
+      message: emailValidation || passwordValidation || passwordConfirmValidation,
+    });
+
+  if (firstNameValidation || lastNameValidation)
+    return res.render('signup', {
+      message: firstNameValidation || lastNameValidation,
     });
 
   await userModel.registerNewUser(email, password, firstName, lastName);

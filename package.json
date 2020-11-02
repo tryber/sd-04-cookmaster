@@ -30,7 +30,8 @@
     "express-rescue": "^1.1.26",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "validator": "^13.1.17"
   },
   "devDependencies": {
     "cypress": "^3.8.3",

@@ -9,6 +9,16 @@ const getAllRecipes = async (req, res) => {
   });
 };
 
+const showMoreInfo = async (req, res) => {
+  const recipeData = await recipeModel.findRecipeById(req.params.id);
+  return res.render('recipes/recipeInfo', {
+    recipeData: recipeData[0],
+    message: null,
+    user: req.user,
+  })
+};
+
 module.exports = {
   getAllRecipes,
+  showMoreInfo,
 };

@@ -12,6 +12,29 @@ const findAllRecipes = () =>
       })),
     );
 
+const findRecipeById = (id) =>
+  connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+    .then((result) => result.fetchAll())
+    .then((result) =>
+      result.map(([id, user_id, user, name, ingredients, instructions]) => ({
+        id,
+        user_id,
+        user,
+        name,
+        ingredients,
+        instructions,
+      })),
+    );
+
 module.exports = {
   findAllRecipes,
+  findRecipeById,
 };

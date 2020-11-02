@@ -2,6 +2,7 @@ const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
+const validationsController = require('./signupValidationsController');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -49,26 +50,15 @@ const signupForm = (_req, res) =>
 const signup = async (req, res) => {
   const { email, password, passwordConfirmation, firstName, lastName } = req.body;
 
-  // https://regexr.com/3e48o
-  const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailValidation = validationsController.emailValidation(email);
+  const passwordValidation = validationsController.passwordValidation(password);
+  const passwordConfirmValidation = validationsController.passwordConfirmValidation(passwordConfirmation, password);
+  const firstNameValidation = validationsController.firstNameValidation(firstName);
+  const lastNameValidation = validationsController.lastNameValidation(lastName);
 
-  if (!regex.test(email))
-    return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
-
-  if (password.length < 6)
-    return res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
-
-  if (passwordConfirmation !== password)
-    return res.render('signup', { message: 'As senhas tem que ser iguais' });
-
-  if (firstName.length < 3 || typeof firstName !== 'string')
+  if (emailValidation || passwordValidation || passwordConfirmValidation || firstNameValidation || lastNameValidation )
     return res.render('signup', {
-      message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
-    });
-
-  if (lastName.length < 3 || typeof lastName !== 'string')
-    return res.render('signup', {
-      message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
+      message: emailValidation || passwordValidation || passwordConfirmValidation || firstNameValidation || lastNameValidation,
     });
 
   await userModel.registerNewUser(email, password, firstName, lastName);

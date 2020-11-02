@@ -28,6 +28,20 @@ const newRecipe = async (req, res) => {
   });
 };
 
+const add = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+
+  await recipesModel.addRecipe(
+    `${req.user.name} ${req.user.lastName}`,
+    req.user.id,
+    name,
+    ingredients,
+    instructions,
+  );
+
+  res.redirect('/');
+};
+
 const edit = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipesModel.getRecipeById(id);
@@ -43,14 +57,20 @@ const edit = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { id } = req.params;
   const { name, ingredients, instructions } = req.body;
+  const { id } = req.params;
   try {
-    await recipesModel.updateRecipe(id, name, ingredients, instructions);
+    await recipeModel.updateRecipe(id, name, ingredients, instructions);
     res.redirect('/');
   } catch (err) {
     res.send(err);
   }
+};
+
+const myRecipes = async (req, res) => {
+  const recipes = await recipesModel.getAllByUserId(req.user.id);
+
+  res.status(200).render('me/recipes', { recipes, message: null, user: req.user });
 };
 
 module.exports = {
@@ -58,6 +78,8 @@ module.exports = {
   show,
   search,
   newRecipe,
+  add,
   edit,
   update,
+  myRecipes,
 };

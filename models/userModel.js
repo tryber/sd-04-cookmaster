@@ -1,13 +1,13 @@
-const connection = require('./connection')
+const connection = require('./connection');
 
-const findByEmail = async (email) => 
+const findByEmail = async (userEmail) =>
   connection()
     .then((db) => db
       .getTable('users')
       .select()
       .where('email = :email')
-      .bind('email', email)
-      .execute()
+      .bind('email', userEmail)
+      .execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, firstName, lastName]) => ({
@@ -15,16 +15,16 @@ const findByEmail = async (email) =>
       email,
       password,
       firstName,
-      lastName
+      lastName,
     }));
 
-const findById = async (id) => connection()
+const findById = async (userId) => connection()
   .then((db) => db
     .getTable('users')
     .select()
     .where('id = :id')
-    .bind('id', id)
-    .execute()
+    .bind('id', userId)
+    .execute(),
   )
   .then((results) => results.fetchOne())
   .then(([id, email, password, firstName, lastName]) => ({
@@ -32,7 +32,7 @@ const findById = async (id) => connection()
     email,
     password,
     firstName,
-    lastName
+    lastName,
   }));
 
 module.exports = {

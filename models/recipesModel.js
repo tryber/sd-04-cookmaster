@@ -1,5 +1,18 @@
 const connection = require('./connection');
 
+const add = async (userId, user, name, ingredients, instructions) => connection().then((db) => db
+  .getTable('recipes')
+  .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+  .values(userId, user, name, ingredients, instructions)
+  .execute());
+
+const del = async (recipeId) => connection().then((db) => db
+  .getTable('recipes')
+  .delete()
+  .where('id = :recipeId')
+  .bind('recipeId', recipeId)
+  .execute());
+
 const getAllRecipes = async () => connection()
   .then((db) => db.getTable('recipes').select(['id', 'user', 'name']).execute())
   .then((results) => results.fetchAll())
@@ -38,11 +51,19 @@ const getRecipeByName = async (inputName) => connection()
   })))
   .catch((error) => error);
 
-const add = async (userId, user, name, ingredients, instructions) => connection().then((db) => db
-  .getTable('recipes')
-  .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-  .values(userId, user, name, ingredients, instructions)
-  .execute());
+const getRecipeByUserId = async (inputId) => connection()
+  .then((db) => db.getTable('recipes').select().where('user_id = :id_param').bind('id_param', inputId)
+    .execute())
+  .then((results) => results.fetchAll())
+  .then((data) => data.map(([id, userId, user, name, ingredients, instructions]) => ({
+    id,
+    userId,
+    user,
+    name,
+    ingredients,
+    instructions,
+  })))
+  .catch((error) => error);
 
 const update = async (id, name, ingredients, instructions) => connection().then((db) => db
   .getTable('recipes')
@@ -54,18 +75,12 @@ const update = async (id, name, ingredients, instructions) => connection().then(
   .bind('id', id)
   .execute());
 
-const del = async (recipeId) => connection().then((db) => db
-  .getTable('recipes')
-  .delete()
-  .where('id = :recipeId')
-  .bind('recipeId', recipeId)
-  .execute());
-
 module.exports = {
   add,
   del,
   getAllRecipes,
   getRecipeById,
   getRecipeByName,
+  getRecipeByUserId,
   update,
 };

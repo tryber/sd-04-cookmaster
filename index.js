@@ -22,7 +22,7 @@ app.set('views', './views');
 
 app.get('/', middlewares.auth(false), controllers.recipesController.showAll);
 app.get('/recipes/search', middlewares.auth(false), controllers.recipesController.search);
-app.get('/recipes/new', middlewares.auth(), (req, res) => res.render('recipes/add', { user: req.user }));
+app.get('/recipes/new', middlewares.auth(), controllers.recipesController.addForm);
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipesController.showOne);
 app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipesController.editForm);
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.delForm);
@@ -33,6 +33,7 @@ app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesControlle
 
 app.get('/cadastrar', controllers.userController.show);
 app.get('/me/edit', middlewares.auth(), controllers.userController.edit);
+app.get('/me/recipes', middlewares.auth(), controllers.recipesController.userRecipes);
 
 app.post('/cadastrar', controllers.userController.add);
 

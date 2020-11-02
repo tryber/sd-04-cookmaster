@@ -3,16 +3,28 @@ const { SESSIONS } = require('../middlewares/auth');
 
 const userModel = require('../models/userModel');
 
-const loginForm = (req, res) => {
-  const { token = '' } = req.cookies || {};
+const add = async (req, res) => {
+  const {
+    email, password, name, lastname,
+  } = req.body;
 
-  if (SESSIONS[token]) return res.redirect('/');
-
-  return res.render('admin/login', {
-    message: null,
-    redirect: req.query.redirect,
-  });
+  await userModel.add(email, password, name, lastname);
+  return res.render('users/register', { error: false, success: true });
 };
+
+const addForm = (req, res) => res.render('users/register', { error: false, success: false });
+
+const edit = async (req, res) => {
+  const { id } = req.user;
+  const {
+    email, password, name, lastname,
+  } = req.body;
+
+  await userModel.update(id, email, password, name, lastname);
+  return res.redirect('/');
+};
+
+const editForm = (req, res) => res.render('users/edit', { user: req.user, error: false, success: false });
 
 const login = async (req, res) => {
   const { email, password, redirect } = req.body;
@@ -39,45 +51,29 @@ const login = async (req, res) => {
   return res.redirect(redirect || '/');
 };
 
+const loginForm = (req, res) => {
+  const { token = '' } = req.cookies || {};
+
+  if (SESSIONS[token]) return res.redirect('/');
+
+  return res.render('admin/login', {
+    message: null,
+    redirect: req.query.redirect,
+  });
+};
+
 const logout = (req, res) => {
   res.clearCookie('token');
   if (!req.cookies || !req.cookies.token) return res.redirect('/login');
   return res.render('admin/logout');
 };
 
-const add = async (req, res) => {
-  const {
-    email, password, confirm, name, lastname,
-  } = req.body;
-
-  const emailPattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-
-  if (!emailPattern.test(email)) res.render('users/register', { error: 'email', success: false });
-
-  if (password.length < 6) res.render('users/register', { error: 'password', success: false });
-
-  if (password !== confirm) res.render('users/register', { error: 'confirm', success: false });
-
-  if (!/^[a-z]+$/i.test(name) || name.length < 3) {
-    return res.render('users/register', { error: 'name', success: false });
-  }
-
-  if (!/^[a-z]+$/i.test(lastname) || lastname.length < 3) {
-    return res.render('users/register', { error: 'lastname', success: false });
-  }
-
-  await userModel.add(email, password, name, lastname);
-  return res.render('users/register', { error: false, success: true });
-};
-
-const edit = (req, res) => res.render('users/edit', { user: req.user });
-const show = (req, res) => res.render('users/register', { error: false, success: false });
-
 module.exports = {
   add,
+  addForm,
   edit,
+  editForm,
   login,
   loginForm,
   logout,
-  show,
 };

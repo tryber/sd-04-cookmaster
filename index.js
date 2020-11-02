@@ -31,11 +31,12 @@ app.post('/recipes', middlewares.auth(false), controllers.recipesController.add)
 app.post('/recipes/:id', middlewares.auth(), controllers.recipesController.edit);
 app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipesController.del);
 
-app.get('/cadastrar', controllers.userController.show);
-app.get('/me/edit', middlewares.auth(), controllers.userController.edit);
+app.get('/cadastrar', controllers.userController.addForm);
+app.get('/me/edit', middlewares.auth(), controllers.userController.editForm);
 app.get('/me/recipes', middlewares.auth(), controllers.recipesController.userRecipes);
 
-app.post('/cadastrar', controllers.userController.add);
+app.post('/cadastrar', middlewares.userValidation, controllers.userController.add);
+app.post('/me/edit', middlewares.auth(false), middlewares.userValidation, controllers.userController.edit);
 
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);

@@ -4,7 +4,7 @@ let message;
 
 const emailValidation = (email) => {
   if (!regex.test(email)) {
-    let message = 'O email deve ter o formato email@mail.com';
+    message = 'O email deve ter o formato email@mail.com';
     return message;
   }
   return message;
@@ -12,7 +12,7 @@ const emailValidation = (email) => {
 
 const passwordValidation = (password) => {
   if (password.length < 6) {
-    let message = 'A senha deve ter pelo menos 6 caracteres';
+    message = 'A senha deve ter pelo menos 6 caracteres';
     return message;
   }
   return message;
@@ -20,7 +20,7 @@ const passwordValidation = (password) => {
 
 const passwordCheckValidation = (passwordCheck, password) => {
   if (passwordCheck !== password) {
-    let message = 'As senhas tem que ser iguais';
+    message = 'As senhas tem que ser iguais';
     return message;
   }
   return message;
@@ -28,7 +28,7 @@ const passwordCheckValidation = (passwordCheck, password) => {
 
 const firstNameValidation = (firstName) => {
   if (firstName.length < 3 || typeof firstName !== 'string') {
-    let message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    message = 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
     return message;
   }
   return message;
@@ -36,7 +36,7 @@ const firstNameValidation = (firstName) => {
 
 const lastNameValidation = (lastName) => {
   if (lastName.length < 3 || typeof lastName !== 'string') {
-    let message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+    message = 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
     return message;
   }
   return message;

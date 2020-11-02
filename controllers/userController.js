@@ -48,17 +48,17 @@ const signupForm = (_req, res) =>
   res.render('signup', { message: null });
 
 const signup = async (req, res) => {
-  const { email, password, passwordConfirmation, firstName, lastName } = req.body;
+  const { email, password, passwordCheck, firstName, lastName } = req.body;
 
   const emailValidation = validationsController.emailValidation(email);
   const passwordValidation = validationsController.passwordValidation(password);
-  const passwordConfirmValidation = validationsController.passwordConfirmValidation(passwordConfirmation, password);
+  const checkValidation = validationsController.passwordCheckValidation(passwordCheck, password);
   const firstNameValidation = validationsController.firstNameValidation(firstName);
   const lastNameValidation = validationsController.lastNameValidation(lastName);
 
-  if (emailValidation || passwordValidation || passwordConfirmValidation)
+  if (emailValidation || passwordValidation || checkValidation)
     return res.render('signup', {
-      message: emailValidation || passwordValidation || passwordConfirmValidation,
+      message: emailValidation || passwordValidation || checkValidation,
     });
 
   if (firstNameValidation || lastNameValidation)

@@ -60,7 +60,7 @@ const update = async (req, res) => {
   const { name, ingredients, instructions } = req.body;
   const { id } = req.params;
   try {
-    await recipeModel.updateRecipe(id, name, ingredients, instructions);
+    await recipesModel.updateRecipe(id, name, ingredients, instructions);
     res.redirect('/');
   } catch (err) {
     res.send(err);

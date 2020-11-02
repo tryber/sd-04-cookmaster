@@ -75,7 +75,6 @@ const userRecipes = async (req, res) => {
   try {
     const { id } = req.user;
     const recipes = await recipesModel.getRecipeByUserId(id);
-    console.log(recipes);
     return res.render('recipes/userRecipes', { user: req.user, recipes });
   } catch (error) {
     return res.send(error);

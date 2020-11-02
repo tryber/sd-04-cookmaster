@@ -12,14 +12,14 @@ const findAllRecipes = () =>
       })),
     );
 
-const findRecipeById = (id) =>
+const findRecipeById = (RecipeId) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
         .where('id = :id')
-        .bind('id', id)
+        .bind('id', RecipeId)
         .execute(),
     )
     .then((result) => result.fetchAll())

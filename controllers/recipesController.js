@@ -28,9 +28,24 @@ const newRecipe = async (req, res) => {
   });
 };
 
+const edit = async (req, res) => {
+  const { id } = req.params;
+  const recipe = await recipesModel.getRecipeById(id);
+
+  res.status(201).render('recipes/edit', {
+    user: req.user,
+    nameMessage: null,
+    ingredientsMessage: null,
+    instructionsMessage: null,
+    successMessage: null,
+    recipe,
+  });
+};
+
 module.exports = {
   index,
   show,
   search,
   newRecipe,
+  edit,
 };

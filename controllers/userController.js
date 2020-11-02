@@ -53,21 +53,21 @@ const signup = async (req, res) => {
   const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!regex.test(email))
-    res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
+    return res.render('signup', { message: 'O email deve ter o formato email@mail.com' });
 
-  if (password.lenght < 6)
-    res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
+  if (password.length < 6)
+    return res.render('signup', { message: 'A senha deve ter pelo menos 6 caracteres' });
 
   if (passwordConfirmation !== password)
-    res.render('signup', { message: 'As senhas tem que ser iguais' });
+    return res.render('signup', { message: 'As senhas tem que ser iguais' });
 
-  if (firstName.lenght < 3 || typeof firstName !== 'string')
-    res.render('signup', {
+  if (firstName.length < 3 || typeof firstName !== 'string')
+    return res.render('signup', {
       message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 
-  if (lastName.lenght < 3 || typeof lastName !== 'string')
-    res.render('signup', {
+  if (lastName.length < 3 || typeof lastName !== 'string')
+    return res.render('signup', {
       message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',
     });
 

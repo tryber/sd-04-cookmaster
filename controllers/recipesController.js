@@ -48,7 +48,7 @@ const editRecipe = async (req, res) => {
 
   await updateRecipe(id, nome, ingredientes, instrucoes);
 
-  return res.redirect('/');
+  return res.redirect('/me/recipes');
 };
 
 const myRecipes = async (req, res) => {

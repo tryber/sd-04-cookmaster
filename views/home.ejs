@@ -38,12 +38,12 @@
 
     </div>
 
-    <div class="">
+    <div>
       <% recipes.map(({user, name, id}) =>{ %>
         <div class="card mt-2">
           <li class="card-body">
             <%=`${name} ${user}`%>
-            <a href=<%=`recipes/${id}` %> >Ver mais<a/>
+            <a href="<%=`recipes/<%= id %>">Ver mais</a>
           </li>
         </div>
       <% }) %>

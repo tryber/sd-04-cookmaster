@@ -58,7 +58,7 @@ const deleteRecipeForm = async (req, res) => {
 
   if (userId === req.user.id) return res.render('deleteRecipe', { id, message: null });
   return res.redirect('/');
-}
+};
 
 const delRecipe = async (req, res) => {
   const { id } = req.params;
@@ -72,7 +72,7 @@ const delRecipe = async (req, res) => {
   }
 
   return res.render('deleteRecipe', { id, message: 'Senha incorreta' });
-}
+};
 
 const myRecipes = async (req, res) => {
   const { user } = req;

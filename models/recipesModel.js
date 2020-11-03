@@ -1,5 +1,4 @@
 const connection = require('./connection');
-const { findById } = require('./userModel');
 
 const getRecipes = async () => {
   const db = await connection();
@@ -67,7 +66,7 @@ const deleteRecipe = async (id) => {
   const table = await db.getTable('recipes');
   const delRecipe = await table.delete().where('id = :id').bind('id', id).execute();
   return delRecipe;
-}
+};
 
 const getRecipesByUserID = async (inputId) => {
   const db = await connection();

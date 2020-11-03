@@ -96,7 +96,7 @@ const updateRecipe = async (recipe) => {
 const deleteRecipe = async (uId, recId, password) => {
   const user = await userModel.findById(uId);
   const uPassword = user.password;
-  
+
   if (password === uPassword) {
     await connection()
       .then((db) => db.getTable('recipes'))

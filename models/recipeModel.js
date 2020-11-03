@@ -36,7 +36,7 @@ const findRecipeById = (RecipeId) =>
 
 const findSearchRecipes = (q) =>
   connection()
-    .then((db) => 
+    .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user', 'name'])

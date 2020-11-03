@@ -58,9 +58,7 @@ const createNewRecipes = async (userId, userName, nameRecipe, ingredients, prepa
       .execute(),
   );
 
-const verifyRecipes = (nameRecipe, ingredients, prepare) => {
-  return nameRecipe && ingredients && prepare;
-};
+const verifyRecipes = (nameRecipe, ingredients, prepare) => nameRecipe && ingredients && prepare;
 
 module.exports = {
   listCook,

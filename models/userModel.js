@@ -10,15 +10,15 @@ const findByEmail = async (uEmail) => {
     .select(['id', 'email', 'password', 'first_name', 'last_name'])
     .where('email = :email')
     .bind('email', uEmail)
-    .execute();
-
-  return fetchAll().map(([id, email, password, firstName, lastName]) => ({
-    id,
-    email,
-    password,
-    firstName,
-    lastName,
-  }))[0];
+    .execute()
+    .fetchAll()
+    .map(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    }))[0];
 };
 
 /**
@@ -31,15 +31,15 @@ const findById = async (uId) => {
     .select(['id', 'email', 'password', 'first_name', 'last_name'])
     .where('id = :id')
     .bind('id', uId)
-    .execute();
-
-  return fetchAll().map(([id, email, password, firstName, lastName]) => ({
-    id,
-    email,
-    password,
-    firstName,
-    lastName,
-  }))[0];
+    .execute()
+    .fetchAll()
+    .map(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    }))[0];
 };
 
 const validateFullName = (firstName, lastName) => {

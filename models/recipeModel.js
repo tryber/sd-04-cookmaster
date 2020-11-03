@@ -5,16 +5,16 @@ const getAll = async () => {
   await connection()
     .then((db) => db.getTable('recipes'))
     .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
-    .execute();
-
-  return fetchAll().map(([id, userId, user, name, ingredients, instructions]) => ({
-    id,
-    userId,
-    user,
-    name,
-    ingredients,
-    instructions,
-  }));
+    .execute()
+    .fetchAll()
+    .map(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
 };
 
 const getById = async (rId) => {
@@ -23,16 +23,16 @@ const getById = async (rId) => {
     .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
     .where('id = :id')
     .bind('id', rId)
-    .execute();
-
-  return fetchAll().map(([id, userId, user, name, ingredients, instructions]) => ({
-    id,
-    userId,
-    user,
-    name,
-    ingredients,
-    instructions,
-  }))[0];
+    .execute()
+    .fetchAll()
+    .map(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }))[0];
 };
 
 const getByName = async (q) => {
@@ -41,16 +41,16 @@ const getByName = async (q) => {
     .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
     .where('name like :q')
     .bind('q', `%${q}%`)
-    .execute();
-
-  return fetchAll().map(([id, userId, user, name, ingredients, instructions]) => ({
-    id,
-    userId,
-    user,
-    name,
-    ingredients,
-    instructions,
-  }));
+    .execute()
+    .fetchAll()
+    .map(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
 };
 
 const getByUser = async (uId) => {
@@ -59,16 +59,16 @@ const getByUser = async (uId) => {
     .select(['id', 'user_id', 'user', 'name', 'ingredients', 'instructions'])
     .where('user_id = :id')
     .bind('id', uId)
-    .execute();
-
-  return fetchAll().map(([id, userId, user, name, ingredients, instructions]) => ({
-    id,
-    userId,
-    user,
-    name,
-    ingredients,
-    instructions,
-  }));
+    .execute()
+    .fetchAll()
+    .map(([id, userId, user, name, ingredients, instructions]) => ({
+      id,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }));
 };
 
 const createRecipe = async (recipe) => {

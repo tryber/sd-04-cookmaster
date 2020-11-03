@@ -49,18 +49,23 @@ const getSpecificRecipe = async (q) =>
       })),
     );
 
-    const createNewRecipes = async (userId, userName, nameRecipe,ingredients, prepare) =>
-      connection()
-      .then((db) =>
-      db
+const createNewRecipes = async (userId, userName, nameRecipe, ingredients, prepare) =>
+  connection().then((db) =>
+    db
       .getTable('recipes')
-      .insert(['user_id','user','name','ingredients','instructions'])
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
       .values([userId, userName, nameRecipe, ingredients, prepare])
       .execute(),
-      )
-      
-      const verifyRecipes = (nameRecipe, ingredients, prepare ) => {
-        return nameRecipe && ingredients && prepare
-      } 
+  );
 
-module.exports = { listCook, listSpecificRecipe, getSpecificRecipe, createNewRecipes, verifyRecipes};
+const verifyRecipes = (nameRecipe, ingredients, prepare) => {
+  return nameRecipe && ingredients && prepare;
+};
+
+module.exports = {
+  listCook,
+  listSpecificRecipe,
+  getSpecificRecipe,
+  createNewRecipes,
+  verifyRecipes,
+};

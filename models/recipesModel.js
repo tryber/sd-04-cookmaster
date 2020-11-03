@@ -44,14 +44,14 @@ const createNewRecipe = async (userId, user, recipeName, ingredients, instructio
   const insertRecipe = await table.insert([
     'user_id', 'user', 'name', 'ingredients', 'instructions',
   ])
-  .values(userId, user, recipeName, ingredients, instructions).execute();
+    .values(userId, user, recipeName, ingredients, instructions).execute();
   return insertRecipe;
 };
 
 const updateRecipe = async (id, name, ingredients, instructions) => {
   const db = await connection();
-  return db
-    .getTable('recipes')
+  const table = await db.getTable('recipes');
+  const updateRecipe = await table
     .update()
     .set('name', name)
     .set('ingredients', ingredients)
@@ -59,6 +59,7 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
     .where('id = :id')
     .bind('id', id)
     .execute();
+  return updateRecipe;
 };
 
 const deleteRecipe = async (id) => {

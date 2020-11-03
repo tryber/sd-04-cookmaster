@@ -31,8 +31,8 @@
         </div>
         <% if (user) { %>
           <div>
-            <a data-testid="editar-receita" href=<%= `${recipe.id}/edit` %> class="btn btn-success">Editar Receita</a>
-            <a data-testid="excluir-receita" href=<%= `${recipe.id}/delete` %> class="btn btn-danger">Excluir Receita</a>
+            <a data-testid="editar-receita" href="/recipes/<%= recipe.id %>/edit" class=" btn btn-success">Editar Receita</a>
+            <a data-testid="excluir-receita" href="/recipes/<%= recipe.id %>/delete" class="btn btn-danger">Excluir Receita</a>
           </div>
         <% } %>
       </div>

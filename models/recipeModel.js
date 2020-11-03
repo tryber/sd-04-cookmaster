@@ -1,6 +1,7 @@
 const connection = require('./connection');
 const userModel = require('./userModel');
 
+
 const getAll = async () => {
   await connection()
     .then((db) => db.getTable('recipes'))

@@ -28,7 +28,7 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   return connection()
-  .then((db) => 
+  .then((db) =>
   db
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])

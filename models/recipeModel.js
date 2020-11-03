@@ -22,7 +22,7 @@ const searchRecipesModel = async (search) =>
     recipes.map(([id, user, name]) => ({
       id,
       user,
-      name
+      name,
     })),
   );
 

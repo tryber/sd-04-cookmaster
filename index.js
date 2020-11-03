@@ -21,7 +21,7 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 // Rota de Busca de Receitas
 app.get('/recipes/search', controllers.recipeControler.searchRecipesController);
-app.get('/recipes/search', middlewares.auth(false), (req, res) =>{
+app.get('/recipes/search', middlewares.auth(false), (req, res) => {
   return res.render('searchRecipes', { user: req.user });
 });
 

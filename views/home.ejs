@@ -7,5 +7,17 @@
   </head>
   <body>
     <h1>Boas vindas ao Cookmaster!</h1>
+    <h2>Cookmaster</h2>
+    <h2>Receitas</h2>
+    <a href="/me/edit"><button data-testid="minha-conta">Minha Conta</button></a>
+    <a href="/recipes/search"><button data-testid="buscar-receita">Buscar Receita</button></a>
+    <a data-testid="login" href="/login">Login</a>
+    <ul>
+
+      <% recipes.forEach((recipe) => { %>
+        <li><%= recipe.name %> do <%= recipe.user %> <a href="/recipes/<%= recipe.id %>">Ver mais</a></li>
+      <% }); %>
+
+    </ul>
   </body>
 </html>

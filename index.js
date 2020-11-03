@@ -31,6 +31,7 @@ app.post('/recipes/:id/delete', middlewares.auth(false), controllers.recipesCont
 
 app.get('/signup', controllers.userController.renderSignup);
 app.post('/signup', middlewares.validation, controllers.userController.signUp);
+app.get('/me/edit', middlewares.auth(true), controllers.userController.renderEditUser);
 
 app.get('/logout', controllers.userController.logout);
 app.get('/login', controllers.userController.loginForm);

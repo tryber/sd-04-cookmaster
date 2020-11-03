@@ -49,4 +49,18 @@ const getSpecificRecipe = async (q) =>
       })),
     );
 
-module.exports = { listCook, listSpecificRecipe, getSpecificRecipe };
+    const createNewRecipes = async (userId, userName, nameRecipe,ingredients, prepare) =>
+      connection()
+      .then((db) =>
+      db
+      .getTable('recipes')
+      .insert(['user_id','user','name','ingredients','instructions'])
+      .values([userId, userName, nameRecipe, ingredients, prepare])
+      .execute(),
+      )
+      
+      const verifyRecipes = (nameRecipe, ingredients, prepare ) => {
+        return nameRecipe && ingredients && prepare
+      } 
+
+module.exports = { listCook, listSpecificRecipe, getSpecificRecipe, createNewRecipes, verifyRecipes};

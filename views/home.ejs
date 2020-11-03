@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookmaster - Home</title>
-  </head>
+<%- include("./partials/head.ejs") %>
   <body>
-    <h1>Cookmaster</h1>
-    <button data-testid="buscar-receita" >Buscar Receita</button>
-    <% if (user) { %>
-      <button data-testid="nova-receita" >Nova Receita</button>
-      <button data-testid="logout" >Logout</button>
-    <% } %>
-    <button data-testid="login" href="/login">Login</button>
     <div>
-      <h1>Receitas</h1>
+      <h1>Cookmaster</h1>
+      <% if (!user) { %>
+      <a data-testid="login" href="/login">Login</a>
+      <% } else { %>
+        <a data-testid="nova-receita" href="/">Nova Receita</a>
+        <a data-testid="logout" href="/" >Logout</a>
+        <% } %>
+        <a data-testid="buscar-receita" data-testid="buscar-receita" >Buscar Receita</a>
+      <h2>Receitas</h2>
       <ul>
         <% recipe.forEach((recipe) => { %>
           <li><%= recipe.name %></li>
@@ -23,5 +20,6 @@
         <% }) %>
       </ul>
     </div>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>

@@ -17,57 +17,68 @@ de fato, realize a busca no banco de dados */
 //  * @param {string} email Email do usuário a ser encontrado
 //  */
 
-const findByEmail = async (email) => {
-  connection()
+const findByEmail = async (userEmail) => {
+  const user = await connection()
     .then((db) =>
       db
         .getTable('users')
         .select([])
         .where('email = :email')
-        .bind('email', email)
+        .bind('email', userEmail)
         .execute()
-        .then((results) => results.fetchAll()[0])
-        .then(([id, emailFind, password, firstName, lastName]) => ({
-          id,
-          emailFind,
-          password,
-          firstName,
-          lastName,
-        })),
     )
-    .catch((err) => {
-      throw err;
-    });
+    .then((results) => results.fetchOne())
+    .catch((err) => { throw err } );
+    
+  const [id, email, password, firstName, lastName] = user;
+
+  return { id, email, password, firstName, lastName };
 };
 
 /**
  * Busca um usuário através do seu ID
  * @param {string} id ID do usuário
  */
-const findById = async (id) => {
-  return connection()
+
+
+const findById = async (userId) => {
+  const user = await connection()
     .then((db) =>
       db
         .getTable('users')
         .select([])
         .where('id = :id')
-        .bind('id', id)
+        .bind('id', userId)
         .execute()
-        .then((results) => results.fetchAll()[0])
-        .then(([idUser, email, password, firstName, lastName]) => ({
-          idUser,
-          email,
-          password,
-          firstName,
-          lastName,
-        })),
     )
-    .catch((err) => {
-      throw err;
-    });
+    .then((results) => results.fetchOne())
+    
+  const [id, email, password, firstName, lastName] = user;
+
+  return { id, email, password, firstName, lastName };
 };
+
+const addUser = async (email, password, firstName, lastName) => {
+  return connection()
+  .then((db) =>
+    db
+      .getTable("users")
+      .insert(["email", "password", "first_name", "last_name"])
+      .values(email, password, firstName, lastName)
+      .execute()
+  )
+};
+
+const isValidEmail = (email) => {
+  if(email === '')
+    return false;
+  
+  return true;
+}
 
 module.exports = {
   findByEmail,
   findById,
+  addUser,
+  isValidEmail
 };

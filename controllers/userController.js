@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const userModel = require('../models/userModel');
+const UserModel = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -23,7 +23,7 @@ const login = async (req, res) => {
       redirect: null,
     });
 
-  const user = await userModel.findByEmail(email);
+  const user = await UserModel.findByEmail(email);
   if (!user || user.password !== password)
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
@@ -31,6 +31,8 @@ const login = async (req, res) => {
     });
 
   const token = uuid();
+
+  console.log("linha 35", req.user);
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
@@ -43,8 +45,20 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const newUser = (req, res) => {
+    const { email, password, firstName, lastName } = req.body
+
+  if(!UserModel.isValidEmail(email))
+    return res.status(402).json({ data: 'Dados errados' })
+    
+  UserModel.addUser(email, password, firstName, lastName)
+    .then(sucess => res.status(200).json({ data: 'Cadastrado' }) )
+}
+
+
 module.exports = {
   login,
   loginForm,
   logout,
+  newUser
 };

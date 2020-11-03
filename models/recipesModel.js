@@ -51,7 +51,7 @@ const createNewRecipe = async (userId, user, recipeName, ingredients, instructio
 const updateRecipe = async (id, name, ingredients, instructions) => {
   const db = await connection();
   const table = await db.getTable('recipes');
-  const updateRecipe = await table
+  const updateRcp = await table
     .update()
     .set('name', name)
     .set('ingredients', ingredients)
@@ -59,7 +59,7 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
     .where('id = :id')
     .bind('id', id)
     .execute();
-  return updateRecipe;
+  return updateRcp;
 };
 
 const deleteRecipe = async (id) => {

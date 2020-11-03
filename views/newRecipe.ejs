@@ -56,12 +56,14 @@
         const inputIngredients = document.createElement('input');
         // a variavel receberá um id com o nome da variavel campoIngrediente
         inputIngredients.id = campoIngrediente;
+        // a variavel recebe o valor do camppoIngrediente
         inputIngredients.value = campoIngrediente;
         inputIngredients.name = 'ingredients[]';
-
+        // cira um novo botao para excluir os ingredientes
         const newButton = document.createElement('button');
         newButton.type = 'button';
         newButton.innerText = 'Excluir Ingrediente';
+        // função pra de click, onde remove o parente(filho) da lista
         newButton.onclick = () => {
           return document.getElementById(campoIngrediente).parentElement.remove();
         };

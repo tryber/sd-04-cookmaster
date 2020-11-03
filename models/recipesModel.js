@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const { findById } = require('./userModel');
 
 const getRecipes = async () => {
   const db = await connection();
@@ -61,6 +62,13 @@ const updateRecipe = async (id, name, ingredients, instructions) => {
     .execute();
 };
 
+const deleteRecipe = async (id) => {
+  const db = await connection();
+  const table = await db.getTable('recipes');
+  const delRecipe = await table.delete().where('id = :id').bind('id', id).execute();
+  return delRecipe;
+}
+
 const getRecipesByUserID = async (inputId) => {
   const db = await connection();
   const table = await db.getTable('recipes');
@@ -75,5 +83,6 @@ module.exports = {
   getRecipesByName,
   createNewRecipe,
   updateRecipe,
+  deleteRecipe,
   getRecipesByUserID,
 };

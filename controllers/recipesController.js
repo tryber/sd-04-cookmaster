@@ -1,4 +1,5 @@
-const { getRecipes, getRecipesById, getRecipesByName, createNewRecipe, updateRecipe, getRecipesByUserID } = require('../models/recipesModel');
+const { getRecipes, getRecipesById, getRecipesByName, createNewRecipe, updateRecipe, getRecipesByUserID, deleteRecipe } = require('../models/recipesModel');
+const { findById } = require('../models/userModel');
 
 const recipesCtrl = async (req, res) => {
   const recipes = await getRecipes();
@@ -51,6 +52,28 @@ const editRecipe = async (req, res) => {
   return res.redirect('/me/recipes');
 };
 
+const deleteRecipeForm = async (req, res) => {
+  const { id } = req.params;
+  const { userId } = await getRecipesById(id);
+
+  if (userId === req.user.id) return res.render('deleteRecipe', { id, message: null });
+  return res.redirect('/');
+}
+
+const delRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  const user = await findById(req.user.id);
+
+  if (user.password === password) {
+    await deleteRecipe(id);
+    return res.redirect('/');
+  }
+
+  return res.render('deleteRecipe', { id, message: 'Senha incorreta' });
+}
+
 const myRecipes = async (req, res) => {
   const { user } = req;
   const recipes = await getRecipesByUserID(user.id);
@@ -66,5 +89,7 @@ module.exports = {
   newRecipe,
   editRecipeForm,
   editRecipe,
+  deleteRecipeForm,
+  delRecipe,
   myRecipes,
 };

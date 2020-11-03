@@ -18,7 +18,8 @@ const showRecipeId = async (req, res) => {
   const { id: lId } = req.user || {};
   const equal = recipe.userId === lId;
 
-  return res.status(200).render('recipeDetail', { recipe, equal });
+  return res.status(200)
+    .render('recipeDetail', { recipe, equal });
 };
 
 const recipeSearch = async (req, res) => {
@@ -41,9 +42,11 @@ const addRecipe = async (req, res) => {
   return res.status(200).render('admin/home', { user: req.user, recipes });
 };
 
-const recipeEdit = (_, res) => res.render('admin/recipeEdit');
+const recipeEdit = (_, res) =>
+  res.render('admin/recipeEdit');
 
-const recipeDelete = (_, res) => res.render('admin/recipeDelete');
+const recipeDelete = (_, res) =>
+  res.render('admin/recipeDelete');
 
 const recipeEditForm = async (req, res) => {
   const idRec = req.params.id;
@@ -52,9 +55,11 @@ const recipeEditForm = async (req, res) => {
   const idUserRec = recipe.userId;
   const equal = idUserLog === idUserRec;
 
-  return equal
-    ? res.status(200).render('admin/recipeIdEdit', { recipe })
-    : res.redirect(`/recipes/${idRec}`);
+  return (
+    equal
+      ? res.status(200).render('admin/recipeIdEdit', { recipe })
+      : res.redirect(`/recipes/${idRec}`)
+  );
 };
 
 const recipeUpdate = async (req, res) => {
@@ -78,9 +83,11 @@ const recipeDeleteForm = async (req, res) => {
   const idUserRec = recipe.userId;
   const equal = idUserLog === idUserRec;
 
-  return equal
-    ? res.status(200).render('admin/recipeDelete', { id: recId, message: null })
-    : res.redirect(`/recipes/${recId}`);
+  return (
+    equal
+      ? res.status(200).render('admin/recipeDelete', { id: recId, message: null })
+      : res.redirect(`/recipes/${recId}`)
+  );
 };
 
 const recipeDel = async (req, res) => {
@@ -91,7 +98,8 @@ const recipeDel = async (req, res) => {
   try {
     await recipeModel.deleteRecipe(uId, recId, senha);
   } catch (e) {
-    res.status(500).render('admin/recipeDelete', { message: e.message, id: recId });
+    res.status(500)
+      .render('admin/recipeDelete', { message: e.message, id: recId });
   }
 
   const recipes = await recipeModel.getByUser(uId);

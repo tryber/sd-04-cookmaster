@@ -5,20 +5,16 @@ const connection = require('./connection');
  * @param {string} email Email do usuário a ser encontrado
  */
 const findByEmail = async (uEmail) => {
-  await connection()
-    .then((db) => db.getTable('users'))
+  const table = await connection().then((db) => db.getTable('users'));
+  const register = await table
     .select(['id', 'email', 'password', 'first_name', 'last_name'])
     .where('email = :email')
     .bind('email', uEmail)
-    .execute()
-    .fetchAll()
-    .map(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    }))[0];
+    .execute();
+
+  return register.fetchAll()
+    .map(([id, email, password, firstName, lastName]) =>
+      ({ id, email, password, firstName, lastName }))[0];
 };
 
 /**
@@ -26,20 +22,16 @@ const findByEmail = async (uEmail) => {
  * @param {string} id ID do usuário
  */
 const findById = async (uId) => {
-  await connection()
-    .then((db) => db.getTable('users'))
+  const table = await connection().then((db) => db.getTable('users'));
+  const register = await table
     .select(['id', 'email', 'password', 'first_name', 'last_name'])
     .where('id = :id')
     .bind('id', uId)
-    .execute()
-    .fetchAll()
-    .map(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    }))[0];
+    .execute();
+
+  return register.fetchAll()
+    .map(([id, email, password, firstName, lastName]) =>
+      ({ id, email, password, firstName, lastName }))[0];
 };
 
 const validateFullName = (firstName, lastName) => {
@@ -54,7 +46,8 @@ const validateFullName = (firstName, lastName) => {
 
 const validateUser = (user) => {
   const { email, password, cPassword, nome, sobrenome } = user;
-  const validateEmail = (vEmail) => /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(vEmail);
+  const validateEmail = (vEmail) =>
+    /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(vEmail);
 
   if (!validateEmail(email)) {
     return 'O email deve ter o formato email@mail.com';
@@ -71,18 +64,18 @@ const validateUser = (user) => {
 
 const createUser = async (user) => {
   const { email, password, nome, sobrenome } = user;
-  await connection()
-    .then((db) => db.getTable('users'))
-    .insert(['email', 'password', 'first_name', 'last_name'])
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.insert(['email', 'password', 'first_name', 'last_name'])
     .values(email, password, nome, sobrenome)
     .execute();
 };
 
 const updateUser = async (user) => {
   const { id, email, password, nome, sobrenome } = user;
-  await connection()
-    .then((db) => db.getTable('users'))
-    .update()
+  const table = await connection().then((db) => db.getTable('users'));
+
+  table.update()
     .set('email', email)
     .set('password', password)
     .set('first_name', nome)

@@ -19,7 +19,6 @@ const connection = () =>
         return schema;
       })
       .catch(() => {
-        // console.error(e);
         process.exit(1);
       })
   );

@@ -29,8 +29,8 @@ app.post('/recipes', middlewares.auth(), controllers.recipeController.addRecipe)
 
 app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.recipeSearch);
 
-app.get('/recipes/edit', controllers.recipeController.recipeEdit);
-app.get('/recipes/delete', controllers.recipeController.recipeDelete);
+app.get('/recipes/edit', controllers.recipeController.recipeEdit); // ???
+app.get('/recipes/delete', controllers.recipeController.recipeDelete); // ???
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.showRecipeId);
 

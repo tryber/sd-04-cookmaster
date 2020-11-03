@@ -18,7 +18,18 @@ const showMoreInfo = async (req, res) => {
   });
 };
 
+const searchPage = async (req, res) => {
+  const { q } = req.query;
+  if (!q) {
+    return res.render('recipes/recipeSearch', {recipes: null, user: req.user})
+  }
+
+  const recipes = await recipeModel.findSearchRecipes(q);
+  return res.render('recipes/recipeSearch', { recipes, user: req.user })
+}
+
 module.exports = {
   getAllRecipes,
   showMoreInfo,
+  searchPage,
 };

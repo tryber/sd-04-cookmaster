@@ -34,7 +34,28 @@ const findRecipeById = (RecipeId) =>
       })),
     );
 
+const findSearchRecipes = (q) =>
+  connection()
+    .then((db) => 
+      db
+        .getTable('recipes')
+        .select(['id', 'user', 'name'])
+        .where('name like :name')
+        .bind('name', `%${q}%`)
+        .execute(),
+    )
+    .then((result) => result.fetchAll())
+    .then((result) =>
+      result.map(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    );
+
+
 module.exports = {
   findAllRecipes,
   findRecipeById,
+  findSearchRecipes,
 };

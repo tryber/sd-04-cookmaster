@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusão de receita</title>
+  </head>
+  <body>
+    <h2>Confirme a exclusão da receita</h2>
+    <form action="/recipes/<%= id %>/delete" method="POST">
+      <label for="senha">Senha: </label>
+      <input id="senha" data-testid="senha" type="text" name="senha" /><br />
+      <button data-testid="confirmar" type="submit">Confirmar</button>
+      <button data-testid="cancelar" type="button">Cancelar</button>
+
+      <% if (message) { %>
+        <div class="message">
+          <%= message %>
+        </div>
+      <% } %>
+
+    </form>
+  </body>
+</html>

@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // Rota de "/"
-app.get('/', controllers.recipeControler.showRecipes);
+app.get('/', middlewares.auth(false), controllers.recipeControler.showRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
@@ -21,7 +21,7 @@ app.get('/admin', middlewares.auth(), (req, res) => {
 
 // Rota de Busca de Receitas
 app.get('/recipes/search', controllers.recipeControler.searchRecipesController);
-app.get('/recipes/search', middlewares.auth(), (req, res) =>{
+app.get('/recipes/search', middlewares.auth(false), (req, res) =>{
   return res.render('searchRecipes', { user: req.user });
 });
 

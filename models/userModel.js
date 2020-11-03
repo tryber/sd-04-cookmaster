@@ -19,13 +19,7 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, userEmail, password, name, lastName]) => ({
-      id,
-      email: userEmail,
-      password,
-      name,
-      lastName,
-    }));
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
 /**
@@ -33,8 +27,17 @@ const findByEmail = async (email) => {
  * @param {string} id ID do usuário
  */
 const findById = async (id) => {
-  // implementar o método findById usando o método findByEmail como referência
-  // return TEMP_USER;
+  return connection()
+  .then((db) => 
+  db
+        .getTable('users')
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
 module.exports = {

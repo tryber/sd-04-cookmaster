@@ -70,6 +70,41 @@ const renderEditUser = async (req, res) => {
   });
 };
 
+const handleEmailMessage = (email) => {
+  if (!userModel.emailIsValid(email)) {
+    return 'O email deve ter o formato email@mail.com';
+  }
+  return null;
+};
+
+const handlePassMessage = (password) => {
+  if (!userModel.passwordIsValid(password)) {
+    return 'A senha deve ter pelo menos 6 caracteres';
+  }
+  return null;
+};
+
+const handleConfirmPass = (password, confirmPass) => {
+  if (!userModel.confirmPass(password, confirmPass)) {
+    return 'As senhas tem que ser iguais';
+  }
+  return null;
+};
+
+const handleFirstNameMessage = (firstName) => {
+  if (!userModel.nameIsValid(firstName)) {
+    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return null;
+};
+
+const handleLastNameMessage = (lastName) => {
+  if (!userModel.nameIsValid(lastName)) {
+    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
+  }
+  return null;
+};
+
 const editUser = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 

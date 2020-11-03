@@ -40,7 +40,21 @@ const findById = async (id) => {
     .then(([id, email, password, name, lastName]) => ({ id, email, password, name, lastName }));
 };
 
+// Usuário precisa ter: ID, E-mail, Senha, Nome e Sobrenome (obrigatórios)
+// ID deve ser gerado automaticamente, não devendo ser preenchido no momento do cadastro.
+const registerModel = async ({ email, password, name, lastName }) => {
+  return connection()
+  .then((db) => 
+    db
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, name, lastName)
+    .execute(),
+  );
+};
+
 module.exports = {
   findByEmail,
   findById,
+  registerModel,
 };

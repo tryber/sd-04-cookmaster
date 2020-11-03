@@ -25,8 +25,13 @@ app.get('/recipes/search', middlewares.auth(false), (req, res) => {
   return res.render('searchRecipes', { user: req.user });
 });
 
+// Rotas de login e logout
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+// Rota de cadastro
+app.get('/register', controllers.userController.registerUser);
+app.post('/register', controllers.userController.registerUserValid);
 
 app.listen(3000, () => console.log('Listening on 3000'));

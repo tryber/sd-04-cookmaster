@@ -9,7 +9,17 @@
   <%- include('../navbar.ejs', { user }); %>
   <h1>Nova Receita</h1>
   <form action="/recipes" method="POST">
-
+    <label htmlFor="nome-receita">Nome da Receita</label>
+    <input type="text" id="nome-receita" data-testid="nome-receita" required />
+    <label htmlFor="ingredientes">Ingredientes</label>
+    <input type="text" id="ingredientes" data-testid="ingredientes" />
+    <button data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+    <label htmlFor="modo-de-preparo">Modo de preparo</label>
+    <input id="modo-de-preparo" type="text" data-testid="modo-de-preparo" />
+    <button data-testid="postar-receita">Salvar Receita</button>
   </form>
+
+  <button>Voltar</button>
+
 </body>
 </html>

@@ -28,8 +28,8 @@ const findByEmail = async (email) => {
  */
 const findById = async (id) => {
   return connection()
-  .then((db) =>
-  db
+    .then((db) =>
+      db
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
         .where('id = :id')
@@ -44,13 +44,13 @@ const findById = async (id) => {
 // ID deve ser gerado automaticamente, não devendo ser preenchido no momento do cadastro.
 const registerModel = async ({ email, password, name, lastName }) => {
   return connection()
-  .then((db) => 
-    db
-    .getTable('users')
-    .insert(['email', 'password', 'first_name', 'last_name'])
-    .values(email, password, name, lastName)
-    .execute(),
-  );
+    .then((db) =>
+      db
+        .getTable('users')
+        .insert(['email', 'password', 'first_name', 'last_name'])
+        .values(email, password, name, lastName)
+        .execute(),
+    );
 };
 
 module.exports = {

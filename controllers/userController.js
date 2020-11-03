@@ -58,30 +58,35 @@ const registerUser = (_req, res) => res.render('register', { message: null });
 const registerUserValid = async (req, res) => {
   const { email, password, senhaConfirm, name, lastName } = req.body;
 
-  if (!emailRegex.test(email))
-  return res.render('register', {
-    message: "O email deve ter o formato email@mail.com"
-  });
-  if (!passwordRegex.test(password))
-  return res.render('register', {
-    message: "A senha deve ter pelo menos 6 caracteres"
-  });
-  if (password !== senhaConfirm)
-  return res.render('register', {
-    message: "As senhas tem que ser iguais"
-  });
-  if (!namesRegex.test(name))
-  return res.render('register', {
-    message: "O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras"
-  });
-    if (!namesRegex.test(lastName))
-  return res.render('register', {
-    message: "O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras"
-  });
+  switch (true) {
+    case !emailRegex.test(email):
+      return res.render('register', {
+        message: 'O email deve ter o formato email@mail.com'
+      });
+    case !passwordRegex.test(password):
+      return res.render('register', {
+        message: 'A senha deve ter pelo menos 6 caracteres'
+      });
+    case (password !== senhaConfirm):
+      return res.render('register', {
+        message: 'As senhas tem que ser iguais'
+      });
+    case (!namesRegex.test(name)):
+      return res.render('register', {
+        message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras'
+      });
+    case (!namesRegex.test(lastName)):
+      return res.render('register', {
+        message: 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras'
+      });
+    default:
+      await userModel.registerModel({ ...req.body });
+      return res.status(200).render('register', {
+        message: 'Cadastro efetuado com sucesso!'
+      });
+  };
 
-  await userModel.registerModel({ ...req.body });
-  return res.status(200).render('register', { message: "Cadastro efetuado com sucesso!" })
-}
+};
 
 module.exports = {
   login,

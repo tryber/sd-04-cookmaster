@@ -67,9 +67,7 @@ const registerUserValid = async (req, res) => {
         message: 'A senha deve ter pelo menos 6 caracteres',
       });
     case (password !== senhaConfirm):
-      return res.render('register', {
-        message: 'As senhas tem que ser iguais',
-      });
+      return res.render('register', { message: 'As senhas tem que ser iguais' });
     case (!namesRegex.test(name)):
       return res.render('register', {
         message: 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras',

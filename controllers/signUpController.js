@@ -28,29 +28,29 @@ const regexValidation = (email, name, lastname) => {
 };
 
 const registerUser = async (req, res) => {
-  const {
-    email, password, verifyPassword, name, lastName,
-  } = req.body;
+  try {
+    const {
+      email, password, verifyPassword, name, lastName,
+    } = req.body;
 
-  if (!email || !password || !verifyPassword || !name || !lastName) {
-    return res.render('cadastro', { message: 'Preeencha todos os campos' });
-  }
+    if (!email || !password || !verifyPassword || !name || !lastName) {
+      return res.render('cadastro', { message: 'Preeencha todos os campos' });
+    }
 
-  const regexMessage = regexValidation(email, name, lastName);
-  const passwordMessage = passwordValidation(password, verifyPassword);
+    const regexMessage = regexValidation(email, name, lastName);
+    const passwordMessage = passwordValidation(password, verifyPassword);
 
-  if (regexMessage || passwordMessage) {
-    return res.render('cadastro', { message: passwordMessage || regexMessage });
-  }
-  const warningCount = await UserModel.signUpUserModel(email, password, name, lastName);
-  if (warningCount > 0) {
+    if (regexMessage || passwordMessage) {
+      return res.render('cadastro', { message: passwordMessage || regexMessage });
+    }
+    await UserModel.signUpUserModel(email, password, name, lastName);
+
+    return res.render('admin/login', {
+      message: 'Cadastro efetuado com sucesso!',
+      redirect: null,
+    });
+  } catch (_error) {
     return res.render('cadastro', { message: 'erro ao inserir usuario no banco de dados' });
   }
-
-  return res.render('admin/login', {
-    message: 'Cadastro efetuado com sucesso!',
-    redirect: null,
-  });
 };
-
 module.exports = registerUser;

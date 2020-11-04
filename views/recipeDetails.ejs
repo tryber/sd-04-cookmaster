@@ -9,7 +9,7 @@
 
 <body>
   <h1></h1>
-  <% if (isRecipeOwner) {%>
+  <% if (user && recipe.userId === user.id) {%>
   <a data-testid="editar-receita" href=<%= `/recipes/${recipe.id}/edit` %>>Editar Receita</a>
   <a data-testid="excluir-receita" href=<%= `/recipes/${recipe.id}/delete` %>>Excluir Receita</a>
   <% } %>

@@ -1,6 +1,6 @@
 const {
   findAllRecipes, findRecipeById, searchRecipeByName,
-  addRecipe, updateRecipe, deleteRecipe,
+  addRecipe, updateRecipe, deleteRecipe, searchRecipeByUser,
 } = require('../models/recipeModel');
 
 const { findById } = require('../models/userModel');
@@ -56,6 +56,14 @@ const excludeRecipeView = async (req, res) => {
   res.render('deleteRecipe', { message: null, recipe, user: req.user });
 };
 
+const myRecipes = async (req, res) => {
+  const { id } = req.user;
+
+  const recipes = await searchRecipeByUser(id);
+
+  res.render('myRecipes', { recipes, user: req.user });
+};
+
 const excludeRecipe = async (req, res) => {
   const recipe = req.params;
   const { id } = req.user;
@@ -81,4 +89,5 @@ module.exports = {
   recipeUpdate,
   excludeRecipeView,
   excludeRecipe,
+  myRecipes,
 };

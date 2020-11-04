@@ -3,8 +3,10 @@
 </head>
 <body>
   <div>
-    <li> <%= {recipeDetail} %> </li>
-    <p>Oi</p>
+    <h2> <%= theRecipe.user %> </h2>
+    <h2> <%= theRecipe.name %> </h2>
+    <h2> <%= theRecipe.ingredients %> </h2>
+    <h2> <%= theRecipe.instructions %> </h2>
   </div>
   <%- include("./partials/footer.ejs") %>
 </body>

@@ -27,9 +27,25 @@ const openRecipesController = async (req, res) => {
   res.render('recipeDetails', { ...recipe, user });
 };
 
+//Controllers da página de Cadastro de Nova Receita
+const newRecipePage = async (req, res) => {
+  const user = req.user;
+  res.render('admin/newRecipe', { user });
+};
+
+const createRecipeController = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { id, name: firstName, lastName } = req.user;
+  const fullName = `${firstName} ${lastName}`;
+  await recipeModel.createRecipeModel(id, fullName, name, ingredients, instructions);
+  res.redirect('/');
+}
+
 // Exportando para ser usado no index.js
 module.exports = {
   showRecipes,
   searchRecipesController,
   openRecipesController,
+  newRecipePage,
+  createRecipeController,
 };

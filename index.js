@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares');
 const userController = require('./controllers/userController');
 const recipesController = require('./controllers/recipesController');
-const recipesModel = require('./models/recipesModel');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +31,6 @@ app.get('/signup', userController.signupForm);
 app.post('/signup', userController.signup);
 
 // detalhes
-app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail)
+app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
 
 app.listen(3000, () => console.log('Listening on 3000'));

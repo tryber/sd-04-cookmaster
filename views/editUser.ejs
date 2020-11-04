@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../style/register.css" type="text/css"/>
+    <title>Cookmaster - Editar Usuário</title>
+  </head>
+  <body>
+    <% if (message) { %>
+      <div class="message"><%= message %></div>
+    <% } %>
+
+    <form action="/me/edit" method="POST" class="form-container
+    form d-flex flex-column justify-content-center">
+
+      <h3>Cookmaster - Editar usuário</h3>
+
+      <div class="form-group">
+        <label for="emailInput">Email: </label>
+        <input data-testid="email" type="email" name="email" value="<%= user.email %>" id="emailInput" class="form-control" /><br />
+      </div>
+
+      <div class="form-group">
+        <label for="passwordInput">Senha: </label>
+        <input data-testid="senha" type="password" name="password" id="passwordInput" class="form-control" /><br />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPasswordInput">Confirmar Senha: </label>
+        <input data-testid="confirmar-senha" type="password" name="confirmPassword" id="emailInput" class="form-control" /><br />
+      </div>
+
+      <div class="form-group">
+        <label for="nameInput">Nome: </label>
+        <input data-testid="nome" type="text" name="firstName" value="<%= user.name %>" id="emailInput" class="form-control" /><br />
+      </div>
+
+      <div class="form-group">
+        <label for="lastNameInput">Sobrenome: </label>
+        <input data-testid="sobrenome" type="text" name="lastName" value="<%= user.lastName %>" id="emailInput" class="form-control"/><br />
+      </div>
+
+      <div class="d-flex justify-content-around">
+        <a href="/" class="btn btn-primary mr-1">Cancelar</a>
+        <button data-testid="salvar" type="submit" class="btn btn-success ml-1">Cadastre-se</button>
+      </div>
+
+    </form>
+  </body>
+</html>

@@ -16,7 +16,7 @@ const findById = async (userId) => {
   return { id, email, password, name, lastName };
 };
 
-/* const editUser = async (id, email, password, firstName, lastName) => {
+const editUser = async (id, email, password, firstName, lastName) => {
   const db = await connection();
   return db
     .getTable('users')
@@ -28,9 +28,10 @@ const findById = async (userId) => {
     .where('id = :id')
     .bind('id', id)
     .execute();
-} */
+};
 
 module.exports = {
   findByEmail,
   findById,
+  editUser,
 };

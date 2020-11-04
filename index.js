@@ -20,6 +20,9 @@ app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/me/edit', middlewares.auth(), userController.updateUserForm);
+app.post('/me/edit', middlewares.auth(false), userController.updateUser);
+
 app.get('/me/recipes', middlewares.auth(), recipesController.myRecipes);
 
 app.get('/recipes/new', middlewares.auth(false), recipesController.newRecipeForm);

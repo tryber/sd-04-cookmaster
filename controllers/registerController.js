@@ -18,7 +18,7 @@ const validation = (email, firstName, lastName) => {
 
 const register = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
-  const regexVerification = validation(email, firstName, lastName);
+  const regexVerification = await validation(email, firstName, lastName);
 
   if (!email || !password || !confirmPassword || !firstName || !lastName) {
     return res.render('register', { message: 'Você deve preencher todos os campos' });
@@ -39,4 +39,5 @@ const register = async (req, res) => {
 module.exports = {
   registerForm,
   register,
+  validation,
 };

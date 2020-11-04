@@ -1,5 +1,4 @@
 const recipesModel = require('../models/recipesModel');
-// const userModel = require('../models/userModel');
 
 const listAllRecipes = async (req, res) => {
   const recipes = await recipesModel.getAllRecipes();
@@ -11,6 +10,17 @@ const listAllRecipes = async (req, res) => {
   }
 };
 
+const recipeDetail = async (req, res) => {
+  const recipe = await recipesModel.getRecipeById(req.params.id);
+
+  const { ingredients } = recipe;
+  const ingredientsSplit = ingredients.split(',');
+  recipe.ingredients = ingredientsSplit;
+
+  res.status(200).render('details', { recipe, user: req.user });
+};
+
 module.exports = {
   listAllRecipes,
+  recipeDetail,
 };

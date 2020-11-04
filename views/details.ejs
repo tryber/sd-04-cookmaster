@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Receita</title>
+</head>
+<body>
+  <% if (user && user.id === recipe.userId) {%>
+    <a href="/recipes/:id/edit">
+      <button data-testid="editar-receita">Editar Receita</button>
+    </a>
+    <a href="/recipes/:id/edelete">
+      <button data-testid="excluir-receita">Excluir Receita</button>
+    </a>
+  <%}%>
+  <h1><%= recipe.name %></h1>
+  <p>Enviado por <%= recipe.user %></p>
+  <h2>Ingredientes</h2>
+  <ul>
+    <% recipe.ingredients.map(ingredient => { %>
+      <li><%= ingredient %></li>
+    <%})%>
+  </ul>
+  <h2>Modo de Preparo</h2>
+  <p><%= recipe.instructions %></p>
+</body>
+</html>

@@ -18,22 +18,23 @@ const findByEmail = async (userEmail) =>
       lastName,
     }));
 
-const findById = async (userId) => connection()
-  .then((db) => db
-    .getTable('users')
-    .select()
-    .where('id = :id')
-    .bind('id', userId)
-    .execute(),
-  )
-  .then((results) => results.fetchOne())
-  .then(([id, email, password, firstName, lastName]) => ({
-    id,
-    email,
-    password,
-    firstName,
-    lastName,
-  }));
+const findById = async (userId) =>
+  connection()
+    .then((db) => db
+      .getTable('users')
+      .select()
+      .where('id = :id')
+      .bind('id', userId)
+      .execute(),
+    )
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, firstName, lastName]) => ({
+      id,
+      email,
+      password,
+      firstName,
+      lastName,
+    }));
 
 const registerNewUser = async (email, password, firstName, lastName) =>
 connection()

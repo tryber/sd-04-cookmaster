@@ -23,7 +23,8 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 app.get('/cadastro', (_req, res) => res.render('admin/register', { message: null }));
-app.post('/cadastro', controllers.signUpController);
+app.post('/cadastro',
+  controllers.signUpController.registerUser);
 
 app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.excludeRecipeView);
 app.post('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.excludeRecipe);

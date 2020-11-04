@@ -2,8 +2,8 @@ const UserModel = require('../models/userModel');
 
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
-  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
   if (password !== verifyPassword) message = 'As senhas tem que ser iguais';
+  if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
 
   return message;
 };
@@ -11,7 +11,7 @@ const passwordValidation = (password, verifyPassword) => {
 const regexValidation = (email, name, lastname) => {
   let message = '';
   // Espressão regex consultada externamente (https://regex101.com/library/SOgUIV)
-  const regexEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+  const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
   const regexNumber = /[0-9]/;
 
   if (!regexEmail.test(email)) message = 'O email deve ter o formato email@mail.com';
@@ -32,16 +32,18 @@ const registerUser = async (req, res) => {
     const {
       email, password, verifyPassword, name, lastName,
     } = req.body;
+    console.log(req.body);
 
     if (!email || !password || !verifyPassword || !name || !lastName) {
-      return res.render('cadastro', { message: 'Preeencha todos os campos' });
+      return res.render('admin/register', { message: 'Preeencha todos os campos' });
     }
 
     const regexMessage = regexValidation(email, name, lastName);
+    console.log(regexMessage);
     const passwordMessage = passwordValidation(password, verifyPassword);
 
     if (regexMessage || passwordMessage) {
-      return res.render('cadastro', { message: passwordMessage || regexMessage });
+      return res.render('admin/register', { message: passwordMessage || regexMessage });
     }
     await UserModel.signUpUserModel(email, password, name, lastName);
 
@@ -50,7 +52,7 @@ const registerUser = async (req, res) => {
       redirect: null,
     });
   } catch (_error) {
-    return res.render('cadastro', { message: 'erro ao inserir usuario no banco de dados' });
+    return res.render('admin/register', { message: 'erro ao inserir usuario no banco de dados' });
   }
 };
-module.exports = registerUser;
+module.exports = { registerUser };

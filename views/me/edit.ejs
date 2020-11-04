@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - Editar Usuario</title>
+  </head>
+  <body>
+    <h2>Cookmaster - Editar Usuario</h2>
+    <form action="/me/edit" method="POST">
+      <label for="emailInput">
+        Email
+        <input
+          type="text"
+          name="email"
+          id="emailInput"
+          data-testid="email"
+          value="<%= userId.email %>"
+        /><br />
+        <% if (messages) { %>
+        <div>
+          <span><%= messages.email %></span>
+        </div>
+        <% } %>
+      </label>
+      <label for="passwordInput">
+        Senha
+        <input
+          type="password"
+          name="password"
+          id="passwordInput"
+          data-testid="senha"
+          value="<%= userId.password %>"
+        /><br />
+        <% if (messages) { %>
+        <div>
+          <span><%= messages.password %></span>
+        </div>
+        <% } %>
+      </label>
+      <label for="passwordInput">
+        Confirmar Senha
+        <input
+          type="password"
+          name="passwordConfirm"
+          id="passwordConfirmInput"
+          data-testid="confirmar-senha"
+        /><br />
+        <% if (messages) { %>
+        <div>
+          <span><%= messages.confirmPassword %></span>
+        </div>
+        <% } %>
+      </label>
+      <label for="passwordInput">Nome</label>
+      <input
+        type="text"
+        name="firstName"
+        id="fNameInput"
+        data-testid="nome"
+        value="<%= userId.name %>"
+      /><br />
+      <% if (messages) { %>
+      <div>
+        <span><%= messages.firstName %></span>
+      </div>
+      <% } %>
+      <label for="passwordInput">
+        Sobrenome
+        <input
+          type="text"
+          name="lastName"
+          id="lNameInput"
+          data-testid="sobrenome"
+          value="<%= userId.lastName %>"
+        /><br />
+        <% if (messages) { %>
+        <div>
+          <span><%= messages.lastName %></span>
+        </div>
+        <% } %>
+      </label>
+      <a href="/" data-testid="cancelar">Cancelar</a>
+      <button type="submit" data-testid="salvar">Salvar</button>
+    </form>
+  </body>
+</html>

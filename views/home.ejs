@@ -6,6 +6,28 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <h1>Boas vindas ao Cookmaster!</h1>
+    <nav>
+      <h1>Cookmaster</h1>
+      <% if (user) { %>
+        <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+        <pre><%= JSON.stringify(user, null, 4) %></pre>
+        <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+        <% } else { %>
+        <button data-testid="login" onclick="window.location.pathname='/login'">Login</button>
+      <% } %>
+    </nav>
+    <section>
+      <nav>
+        <h1>Receitas</h1>
+        <button data-testid="buscar-receita">Buscar</button>
+      </nav>
+      <article>
+        <div>
+          <span>Nome da Receita</span>
+          <span>Nome do usuário</span>
+          <a href="Link">Ver mais</a>
+        </div>
+      </article>
+    </section>
   </body>
 </html>

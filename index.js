@@ -27,11 +27,21 @@ app.post('/recipes/:id', middlewares.auth(false), controllers.recipesController.
 app.get('/me/recipes', middlewares.auth(true), controllers.recipesController.myRecipes);
 
 app.get('/recipes/:id/delete', middlewares.auth(false), controllers.recipesController.deletForm);
-app.post('/recipes/:id/delete', middlewares.auth(false), controllers.recipesController.deleteRecipe);
+app.post(
+  '/recipes/:id/delete',
+  middlewares.auth(false),
+  controllers.recipesController.deleteRecipe,
+);
 
 app.get('/signup', controllers.userController.renderSignup);
 app.post('/signup', middlewares.validation, controllers.userController.signUp);
-app.get('/me/edit', middlewares.auth(true), controllers.userController.renderEditUser);
+app.get('/me/edit', middlewares.auth(true), controllers.userController.editForm);
+app.post(
+  '/me/edit',
+  middlewares.auth(true),
+  middlewares.validation,
+  controllers.userController.editUser,
+);
 
 app.get('/logout', controllers.userController.logout);
 app.get('/login', controllers.userController.loginForm);

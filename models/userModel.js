@@ -50,6 +50,20 @@ const addUser = async ({ email, password, firstName, lastName }) => {
   return true;
 };
 
+const updateUser = async ({ id, email, password, firstName, lastName }) => {
+  const db = await connection();
+  await db
+    .getTable('users')
+    .update()
+    .set('email', email)
+    .set('password', password)
+    .set('first_name', firstName)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', id)
+    .execute();
+};
+
 const emailCheck = (userEmail) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(userEmail);
 
 const passwordCheck = (userPass) => /^(\d|\w){6,}$/.test(userPass);
@@ -69,5 +83,6 @@ module.exports = {
   findByEmail,
   findById,
   addUser,
+  updateUser,
   isValid,
 };

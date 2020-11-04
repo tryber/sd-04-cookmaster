@@ -57,76 +57,18 @@ const signUp = async (req, res) => {
   return res.status(200).render('admin/signup', { messages: req.messages, done: true });
 };
 
-const renderEditUser = async (req, res) => {
-  const user = await userModel.findById(req.user.id);
+const editForm = async (req, res) => {
+  const userId = await userModel.findById(req.user.id);
 
-  res.render('me/edit', {
-    user,
-    emailMessage: null,
-    passMessage: null,
-    confirmPassMessage: null,
-    firstNameMessage: null,
-    lastNameMessage: null,
-  });
-};
-
-const handleEmailMessage = (email) => {
-  if (!userModel.emailIsValid(email)) {
-    return 'O email deve ter o formato email@mail.com';
-  }
-  return null;
-};
-
-const handlePassMessage = (password) => {
-  if (!userModel.passwordIsValid(password)) {
-    return 'A senha deve ter pelo menos 6 caracteres';
-  }
-  return null;
-};
-
-const handleConfirmPass = (password, confirmPass) => {
-  if (!userModel.confirmPass(password, confirmPass)) {
-    return 'As senhas tem que ser iguais';
-  }
-  return null;
-};
-
-const handleFirstNameMessage = (firstName) => {
-  if (!userModel.nameIsValid(firstName)) {
-    return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  return null;
-};
-
-const handleLastNameMessage = (lastName) => {
-  if (!userModel.nameIsValid(lastName)) {
-    return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-  }
-  return null;
+  res.render('me/edit', { userId, messages: null });
 };
 
 const editUser = async (req, res) => {
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
-
-  const emailMessage = handleEmailMessage(email);
-  const passMessage = handlePassMessage(password);
-  const confirmPassMessage = handleConfirmPass(password, confirmPassword);
-  const firstNameMessage = handleFirstNameMessage(firstName);
-  const lastNameMessage = handleLastNameMessage(lastName);
-
-  const user = await userModel.findById(req.user.id);
-  if (emailMessage || passMessage || confirmPassMessage || firstNameMessage || lastNameMessage) {
-    return res.status(402).render('me/edit', {
-      user,
-      emailMessage,
-      passMessage,
-      confirmPassMessage,
-      firstNameMessage,
-      lastNameMessage,
-    });
+  if (!req.isValid) {
+    return res.status(400).render('me/edit', { user: req.user, messages: null });
   }
-
-  await userModel.updateUser(req.user.id, email, password, firstName, lastName);
+  await userModel.updateUser(req.user.id, { ...req.user.id });
+  console.log(req.user);
   return res.redirect('/');
 };
 
@@ -136,6 +78,6 @@ module.exports = {
   logout,
   renderSignup,
   signUp,
-  renderEditUser,
+  editForm,
   editUser,
 };

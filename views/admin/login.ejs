@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../style/login.css" type="text/css"/>
     <title>Cookmaster - Login</title>
   </head>
   <body>
@@ -11,11 +14,11 @@
       <%= message %>
     </div>
     <% } %>
-    <form action="/login" method="POST">
+    <form caction="/login" method="POST" class="form-container form d-flex flex-column justify-content-center">
       <label for="emailInput">Email: </label>
-      <input type="text" name="email" id="emailInput" /><br />
+      <input data-testid="email" type="text" name="email" id="emailInput" class="form-group" /><br />
       <label for="passwordInput">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
+      <input data-testid="senha" type="password" name="password" id="passwordInput" class="form-group" /><br />
       <% if (redirect) { %>
       <input
         type="hidden"
@@ -23,7 +26,11 @@
         value="<%= decodeURIComponent(redirect) %>"
       />
       <% } %>
-      <button type="submit">Entrar</button>
+      <div class="d-flex justify-content-center">
+        <button data-testid="entrar" type="submit" class="btn btn-primary mr-2">Entrar</button>
+        <a data-testid="cadastrar" href="/register" class="btn btn-success ml-2">Cadastre-se</a>
+      </div>
+
     </form>
   </body>
 </html>

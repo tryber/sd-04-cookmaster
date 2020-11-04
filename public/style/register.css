@@ -1,0 +1,14 @@
+.form-container {
+  left: 30%;
+  position: absolute;
+  top: 5%;
+  width: 40%;
+}
+
+.form-group {
+  margin: 2px;
+}
+
+.form-group input {
+  margin: -10px;
+}

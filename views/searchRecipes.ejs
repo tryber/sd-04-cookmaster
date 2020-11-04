@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Cookmaster - Buscar Receitas</title>
+  </head>
+  <body>
+    <header>
+      <h3 class="p-2">Cookmaster</h1>
+      <div class="login-container p-2">
+        <% if (user) { %>
+          <p> <%= user.name %>| </p>
+          <a data-testid="logout" href="/logout" class="btn btn-outline-danger">
+          Logout
+          </a>
+        <% } else { %>
+        <a data-testid="login" href="/login" class="btn btn-primary">Login</a>
+        <% } %>
+      </div>
+    </header>
+
+    <section>
+      <form action="/recipes/search" method="GET">
+        <div>
+          <input data-testid="receita" name="q" id="search" type="text">
+          <button data-testid="buscar" type="submit">Buscar</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <div class="">
+        <% recipes.map(({user, name, id}) =>{ %>
+          <div class="card mt-2">
+            <li class="card-body">
+              <%=`${name} ${user}`%>
+              <a href=<%=`recipes/${id}` %> >Ver mais<a/>
+            </li>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </body>
+</html>

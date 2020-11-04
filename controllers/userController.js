@@ -1,5 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { findById, editUser } = require('../models/userModel');
+const { validation } = require('../controllers/registerController');
 
 const userModel = require('../models/userModel');
 
@@ -34,7 +36,7 @@ const login = async (req, res, next) => {
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +45,40 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const updateUserForm = async (req, res) => {
+  const { id } = req.user;
+
+  const user = await findById(id);
+
+  if (id !== user.id) return res.redirect('/login');
+  return res.render('editUser', { message: null, user: req.user });
+};
+
+const updateUser = async (req, res) => {
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const { id } = req.user;
+  const regexVerification = await validation(email, firstName, lastName);
+
+  if (!email || !password || !confirmPassword || !firstName || !lastName) {
+    return res.render('editUser', { message: 'Você deve preencher todos os campos' });
+  }
+
+  if (password.length < 6) return res.render('editUser', { message: 'A senha deve ter pelo menos 6 caracteres' });
+
+  if (password !== confirmPassword) res.render('editUser', { message: 'As senhas tem que ser iguais' });
+
+  if (regexVerification === '') {
+    await editUser(id, email, password, firstName, lastName);
+    return res.redirect('/');
+  }
+
+  return res.render('editUser', { message: regexVerification });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  updateUserForm,
+  updateUser,
 };

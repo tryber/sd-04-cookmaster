@@ -1,0 +1,25 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.header-container {
+  background-color: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.second-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+}

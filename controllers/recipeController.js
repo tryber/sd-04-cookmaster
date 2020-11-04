@@ -9,19 +9,17 @@ const listRecipes = async (req, res) => {
 };
 
 const recipeDetail = async (req, res) => {
-
   Recipes.findById(req.params.id)
-    .then(rec => res.render({data: rec }))
-    .catch(r => console.log(r))
-  
+    .then((rec) => res.render({ data: rec }))
+    .catch((r) => console.log(r));
+
   // const { id } = req.params;
   // const recipeDetail = await Recipes.findById(id);
-  
+
   // return res.render('recipeDetail', { recipeDetail, user: req.user });
 };
 
 module.exports = { listRecipes, recipeDetail };
-
 
 // const theRecipeName = async (req, res) => {
 //   const { name } = req.params;

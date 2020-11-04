@@ -2,12 +2,7 @@ const connection = require('./connection');
 
 const getRecipes = async () =>
   connection()
-    .then((db) =>
-      db
-        .getTable('recipes')
-        .select([])
-        .execute()
-    )
+    .then((db) => db.getTable('recipes').select([]).execute())
     .then((res) => res.fetchAll())
     .then((result) =>
       result.map(([id, userID, user, name, ingredients, instructions]) => ({
@@ -25,14 +20,7 @@ const getRecipes = async () =>
 
 const findById = async (id) =>
   connection()
-    .then((db) =>
-      db
-        .getTable('recipes')
-        .select([])
-        .where('id = :id')
-        .bind('id', id)
-        .execute()
-    )
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
     .then((results) => results.fetchAll()[0])
     .then(([idRecipe, userId, user, name, ingredients, instructions]) => ({
       idRecipe,
@@ -41,8 +29,7 @@ const findById = async (id) =>
       name,
       ingredients,
       instructions,
-    }),
-    )
+    }))
     .catch((err) => {
       throw err;
     });
@@ -55,7 +42,7 @@ const findByName = async (name) =>
         .select([])
         .where('name LIKE :name')
         .bind('name', `%${name}%`)
-        .execute()
+        .execute(),
     )
     .then((results) => results.fetchAll())
     .then((recipes) =>

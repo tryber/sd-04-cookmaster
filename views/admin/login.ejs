@@ -1,22 +1,16 @@
 <html lang="en">
-<%- include("../partials/head.ejs") %>
+  <%- include("../partials/head.ejs") %>
   <body>
     <% if (message) {%>
-    <div class="message">
-      <%= message %>
-    </div>
+    <div class="message"><%= message %></div>
     <% } %>
     <form action="/login" method="POST">
       <label for="emailInput">Email: </label>
       <input type="text" data-testid="email" name="email" id="emailInput" /><br />
-      <label for="passwordInput" data-testid="senha" >Senha: </label>
+      <label for="passwordInput" data-testid="senha">Senha: </label>
       <input type="password" name="password" id="passwordInput" /><br />
       <% if (redirect) { %>
-      <input
-        type="hidden"
-        name="redirect"
-        value="<%= decodeURIComponent(redirect) %>"
-      />
+      <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>
       <button type="submit">Entrar</button>
       <a data-testid="cadastrar" href="/register">Cadastre-se</a>

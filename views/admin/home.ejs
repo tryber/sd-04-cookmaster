@@ -1,11 +1,11 @@
 <html lang="en">
-<%- include("../partials/head.ejs") %>
+  <%- include("../partials/head.ejs") %>
 
-<body>
-  <h1>Painel Administrativo Cookmaster</h1>
-  <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-  <pre><%= JSON.stringify(user, null, 4) %></pre>
-  <button onclick="window.location.pathname='/logout'">Logout</button>
-  <%- include("../partials/footer.ejs") %>
-</body>
+  <body>
+    <h1>Painel Administrativo Cookmaster</h1>
+    <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
+    <pre><%= JSON.stringify(user, null, 4) %></pre>
+    <button onclick="window.location.pathname='/logout'">Logout</button>
+    <%- include("../partials/footer.ejs") %>
+  </body>
 </html>

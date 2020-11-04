@@ -20,16 +20,13 @@ de fato, realize a busca no banco de dados */
 const findByEmail = async (userEmail) => {
   const user = await connection()
     .then((db) =>
-      db
-        .getTable('users')
-        .select([])
-        .where('email = :email')
-        .bind('email', userEmail)
-        .execute()
+      db.getTable('users').select([]).where('email = :email').bind('email', userEmail).execute(),
     )
     .then((results) => results.fetchOne())
-    .catch((err) => { throw err } );
-    
+    .catch((err) => {
+      throw err;
+    });
+
   const [id, email, password, firstName, lastName] = user;
 
   return { id, email, password, firstName, lastName };
@@ -40,45 +37,35 @@ const findByEmail = async (userEmail) => {
  * @param {string} id ID do usuário
  */
 
-
 const findById = async (userId) => {
   const user = await connection()
-    .then((db) =>
-      db
-        .getTable('users')
-        .select([])
-        .where('id = :id')
-        .bind('id', userId)
-        .execute()
-    )
-    .then((results) => results.fetchOne())
-    
+    .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', userId).execute())
+    .then((results) => results.fetchOne());
+
   const [id, email, password, firstName, lastName] = user;
 
   return { id, email, password, firstName, lastName };
 };
 
 const addUser = async (email, password, firstName, lastName) => {
-  return connection()
-  .then((db) =>
+  return connection().then((db) =>
     db
-      .getTable("users")
-      .insert(["email", "password", "first_name", "last_name"])
+      .getTable('users')
+      .insert(['email', 'password', 'first_name', 'last_name'])
       .values(email, password, firstName, lastName)
-      .execute()
-  )
+      .execute(),
+  );
 };
 
 const isValidEmail = (email) => {
-  if(email === '')
-    return false;
-  
+  if (email === '') return false;
+
   return true;
-}
+};
 
 module.exports = {
   findByEmail,
   findById,
   addUser,
-  isValidEmail
+  isValidEmail,
 };

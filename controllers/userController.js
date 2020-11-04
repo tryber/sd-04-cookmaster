@@ -68,7 +68,6 @@ const editUser = async (req, res) => {
     return res.status(400).render('me/edit', { user: req.user, messages: null });
   }
   await userModel.updateUser(req.user.id, { ...req.user.id });
-  console.log(req.user);
   return res.redirect('/');
 };
 

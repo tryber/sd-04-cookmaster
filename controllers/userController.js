@@ -47,7 +47,7 @@ const logout = (req, res) => {
 
 const updateUserForm = async (req, res) => {
   const { id } = req.user;
-  
+
   const user = await findById(id);
 
   if (id !== user.id) return res.redirect('/login');

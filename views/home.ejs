@@ -28,9 +28,9 @@
 
       <% recipes.forEach(recipe => { %>
       <div>
-        <p> Receita: <%= recipe.name %></p>
+        <p>Receita: <%= recipe.name %></p>
         <p>Autor: <%= recipe.user %></p>
-        <a href="/recipes/<%= recipes.id %>">Ver mais</a>
+        <a href=/recipes/<%= `${recipe.id}` %>> Ver mais</a>
       </div>
       <%})%>
     </section>

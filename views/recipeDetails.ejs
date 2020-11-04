@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookmaster - Receita</title>
+</head>
+
+<body>
+  <%- include('navbar', { user }) %>
+  <article>
+    <% if (user && user.id === userId) {%>
+    <section>
+      <a href="/recipes/<%= recipes.id %>/edit">
+        <button data-testid="editar-receita">Editar Receita</button>
+      </a>
+      <a href="/recipes/<%= recipes.id %>/delete">
+        <button data-testid="excluir-receita">Excluir Receita</button>
+      </a>
+    </section>
+    <%}%>
+    <section>
+      <h1><%= name %></h1>
+      <h4>Enviada por <%= userFromModel %></h4>
+
+      <h3>Ingredientes</h3>
+      <ul>
+        <% ingredients.split(',').map(ingredient => { %>
+          <li><%= ingredient %></li>
+        <%})%>
+      </ul>
+
+      <h3>Modo de Preparo</h3>
+      <p><%= instructions %></p>
+    </section>
+
+    <a href="/">
+      <button>Voltar</button>
+    </a>
+  </article>
+</body>
+</html>

@@ -13,25 +13,30 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // Rota de "/"
-app.get('/', middlewares.auth(false), controllers.recipeControler.showRecipes);
+app.get('/', middlewares.auth(false), controllers.recipeController.showRecipes);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
-// Rota de Busca de Receitas
-app.get('/recipes/search', controllers.recipeControler.searchRecipesController);
-app.get('/recipes/search', middlewares.auth(false), (req, res) => {
-  return res.render('searchRecipes', { user: req.user });
-});
+// Rota de cadastro
+app.get('/register', controllers.userController.registerUser);
+app.post('/register', controllers.userController.registerUserValid);
 
 // Rotas de login e logout
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
-// Rota de cadastro
-app.get('/register', controllers.userController.registerUser);
-app.post('/register', controllers.userController.registerUserValid);
+
+// Rota de Busca de Receitas
+app.get('/recipes/search', controllers.recipeController.searchRecipesController);
+app.get('/recipes/search', middlewares.auth(false), (req, res) => {
+  return res.render('searchRecipes', { user: req.user });
+});
+
+// Rotas de ver receita detalhada, editar e deletar
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.openRecipesController);
+
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -24,7 +24,7 @@ const findByEmail = async (email) => {
       email: userEmail,
       password,
       name,
-      lastName
+      lastName,
     }));
 };
 
@@ -48,7 +48,7 @@ const findById = async (id) => {
       email: userEmail,
       password,
       name,
-      lastName
+      lastName,
     }));
 };
 

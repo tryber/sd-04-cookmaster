@@ -20,7 +20,7 @@ app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetail);
 
-app.get('/newUser', userController.newUser);
+app.get('/newUser', controllers.userController.newUser);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

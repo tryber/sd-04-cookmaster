@@ -32,7 +32,6 @@ const login = async (req, res) => {
 
   const token = uuid();
 
-  console.log("linha 35", req.user);
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
@@ -52,9 +51,8 @@ const newUser = (req, res) => {
     return res.status(402).json({ data: 'Dados errados' })
     
   UserModel.addUser(email, password, firstName, lastName)
-    .then(sucess => res.status(200).json({ data: 'Cadastrado' }) )
+    return res.render('register', { email, password, firstName, lastName })
 }
-
 
 module.exports = {
   login,

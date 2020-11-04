@@ -11,7 +11,7 @@ const listRecipes = async (req, res) => {
 const recipeDetail = async (req, res) => {
 
   Recipes.findById(req.params.id)
-    .then(rec => res.json({data: rec }))
+    .then(rec => res.render({data: rec }))
     .catch(r => console.log(r))
   
   // const { id } = req.params;

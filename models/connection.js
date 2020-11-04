@@ -3,8 +3,8 @@ require('dotenv/config');
 
 let schema;
 
-const connection = () => {
-  return schema
+const connection = () => (
+  schema
     ? Promise.resolve(schema)
     : mysqlx
         .getSession({
@@ -21,6 +21,6 @@ const connection = () => {
         .catch((err) => {
           throw err;
         });
-};
+);
 
 module.exports = connection;

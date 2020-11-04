@@ -2,6 +2,7 @@ const UserModel = require('../models/userModel');
 
 const passwordValidation = (password, verifyPassword) => {
   let message = '';
+
   if (password !== verifyPassword) message = 'As senhas tem que ser iguais';
   if (password.length < 6) message = 'A senha deve ter pelo menos 6 caracteres';
 
@@ -32,14 +33,12 @@ const registerUser = async (req, res) => {
     const {
       email, password, verifyPassword, name, lastName,
     } = req.body;
-    console.log(req.body);
 
     if (!email || !password || !verifyPassword || !name || !lastName) {
       return res.render('admin/register', { message: 'Preeencha todos os campos' });
     }
 
     const regexMessage = regexValidation(email, name, lastName);
-    console.log(regexMessage);
     const passwordMessage = passwordValidation(password, verifyPassword);
 
     if (regexMessage || passwordMessage) {

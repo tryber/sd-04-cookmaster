@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const middlewares = require('./middlewares');
 const controllers = require('./controllers');
-const userController = require('./controllers/userController');
+// const userController = require('./controllers/userController');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

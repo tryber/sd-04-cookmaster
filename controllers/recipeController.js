@@ -13,8 +13,8 @@ const recipeDetail = async (req, res) => {
 
 const recipeName = async (req, res) => {
   const { name } = req.params;
-  const recipeName = await Recipes.findByName(name);
-  return res.render('recipeDetail', { recipeName, user: req.user });
+  const recName = await Recipes.findByName(name);
+  return res.render('recipeDetail', { recName, user: req.user });
 };
 
 module.exports = { listRecipes, recipeDetail, recipeName };

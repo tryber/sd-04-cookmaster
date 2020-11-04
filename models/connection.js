@@ -20,7 +20,7 @@ const connection = () => (
         })
         .catch((err) => {
           throw err;
-        });
+        })
 );
 
 module.exports = connection;

@@ -64,11 +64,17 @@ const editForm = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-  if (!req.isValid) {
-    return res.status(400).render('me/edit', { user: req.user, messages: null });
+  const { id } = req.user;
+  const { email, password, firstName, lastName } = req.body;
+  const user = { id, email, password, firstName, lastName };
+
+  try {
+    await userModel.updateUser(user);
+  } catch (e) {
+    res.status(500).send(e.message);
   }
-  await userModel.updateUser(req.user.id, { ...req.user.id });
-  return res.redirect('/');
+
+  res.redirect('/');
 };
 
 module.exports = {

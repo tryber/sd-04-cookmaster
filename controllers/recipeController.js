@@ -1,4 +1,6 @@
 const recipeModel = require('../models/recipesModel');
+const userModel = require('../models/userModel');
+const recipesModel = require('../models/recipesModel');
 
 const recipeDetails = async (req, res) => {
   const { id } = req.params;
@@ -44,6 +46,19 @@ const recipeRegister = async (req, res) => {
   res.render('home', { recipes, user: req.user });
 };
 
+const deleteRecipeValidate = async (req, res) => {
+  const { id } = req.user;
+  const { password } = await userModel.findById(id);
+  const { confirmationPassword } = req.body;
+
+  if (password === confirmationPassword) {
+    await recipeModel.deleteRecipe(id);
+    res.redirect('/');
+  }
+
+  res.render('deleteRecipe', { id, mensage: 'Senha Incorreta.' });
+};
+
 const myRecipes = async (req, res) => {
   const { id } = req.user;
   const recipes = await recipeModel.filterRecipesByUser(id);
@@ -51,10 +66,35 @@ const myRecipes = async (req, res) => {
   res.render('myRecipes', { recipes });
 };
 
+const editRecipeValidation = async (req, res) => {
+  const { id } = req.params;
+
+  const recipe = await recipeModel.getRecipesById(id);
+
+  res.render('editRecipe', { ...recipe });
+};
+
+const editRecipe = async (req, res) => {
+  const { id } = req.user;
+  const { id: recipeId } = req.params;
+  const { name, ingredients, instructions } = req.body;
+  const { userId } = await recipeModel.getRecipesById(recipeId);
+
+  if (id === userId) {
+    await recipesModel.editRecipe(recipeId, name, ingredients, instructions);
+    res.redirect(`/recipes/${recipeId}`);
+  }
+
+  res.redirect('/');
+};
+
 module.exports = {
   recipeDetails,
   searchFilterRecipes,
   notFilteredRecipes,
   recipeRegister,
+  deleteRecipeValidate,
   myRecipes,
+  editRecipeValidation,
+  editRecipe,
 };

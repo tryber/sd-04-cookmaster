@@ -32,6 +32,18 @@ const notFilteredRecipes = async (_req, res) => {
   res.render('search', { recipes, validation: false });
 };
 
+const recipeRegister = async (req, res) => {
+  const { id, fullName } = req.user;
+
+  const { recipeName, ingredients, instructions } = req.body;
+
+  await recipeModel.addRecipe(id, fullName, recipeName, ingredients, instructions);
+
+  const recipes = await recipeModel.getRecipes();
+
+  res.render('home', { recipes, user: req.user });
+};
+
 const myRecipes = async (req, res) => {
   const { id } = req.user;
   const recipes = await recipeModel.filterRecipesByUser(id);
@@ -43,5 +55,6 @@ module.exports = {
   recipeDetails,
   searchFilterRecipes,
   notFilteredRecipes,
+  recipeRegister,
   myRecipes,
 };

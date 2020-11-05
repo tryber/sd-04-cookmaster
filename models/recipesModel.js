@@ -44,11 +44,13 @@ const getRecipeByQuery = async (searchInput) =>
       .execute(),
     )
     .then((results) => results.fetchAll())
-    .then(([id, user, name]) => ({
-      id,
-      user,
-      name,
-    }));
+    .then((recipes) =>
+      recipes.map(([id, user, name]) => ({
+        id,
+        user,
+        name,
+      })),
+    )
 
 module.exports = {
   getAllRecipes,

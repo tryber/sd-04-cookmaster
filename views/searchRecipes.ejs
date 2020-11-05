@@ -11,5 +11,8 @@
     <input data-testid="receita" name="q" type="text" />
     <button data-testid="buscar" type="submit">Buscar</button>
   </form>
+  <% if (recipes) {%>
+    <%- include('components/listRecipes', { recipes }); %>
+  <% } %>
 </body>
 </html>

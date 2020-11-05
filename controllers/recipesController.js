@@ -22,14 +22,11 @@ const recipeDetail = async (req, res) => {
 
 const searchRecipesByQuery = async (req, res) => {
   const { q } = req.query;
-  console.log('q:', q);
-  
-  if (q === '') return res.render('searchRecipes', { recipes: [], user: req.user });
-  
-  const recipes = await recipesModel.getRecipeByQuery(q);
-  console.log('recipes:', recipes);
 
-  
+  if (q === undefined) return res.render('searchRecipes', { recipes: [], user: req.user });
+
+  const recipes = await recipesModel.getRecipeByQuery(q);
+
   return res.render('searchRecipes', { recipes, user: req.user });
 };
 

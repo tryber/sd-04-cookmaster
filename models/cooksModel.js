@@ -60,10 +60,24 @@ const createNewRecipes = async (userId, userName, nameRecipe, ingredients, prepa
 
 const verifyRecipes = (nameRecipe, ingredients, prepare) => nameRecipe && ingredients && prepare;
 
+const updateRecipes = async (id, recipeName, ingredients, prepare) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .update()
+      .set('name', recipeName)
+      .set('ingredients', ingredients)
+      .set('instructions', prepare)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+
 module.exports = {
   listCook,
   listSpecificRecipe,
   getSpecificRecipe,
   createNewRecipes,
   verifyRecipes,
+  updateRecipes,
 };

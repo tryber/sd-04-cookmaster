@@ -1,4 +1,5 @@
 const recipesModel = require('../models/cooksModel');
+const { listSpecificRecipe } = require('../models/cooksModel')
 
 const listarReceitas = async (req, res) => {
   const cooks = await recipesModel.listCook();
@@ -38,4 +39,24 @@ const newRecipe = async (req, res) => {
   }
 };
 
-module.exports = { listarReceitas, viewRecipesUser, searchRecipes, recipeRegister, newRecipe };
+const myRecipes = async (req, res ) => {
+  const cooks = await recipesModel.listCook();
+  res.render('userRecipe',{ cooks, user: req.user })
+};
+
+async function editRecipe(req, res) {
+  const { id } = req.params;
+  const cooks = await listSpecificRecipe(id);
+  const ingredients = cooks.ingredients.split(',');
+  res.render('edit', { cooks, ingredients, user: req.user, message: null });
+}
+
+const saveEditRecipe = async (req, res ) =>{
+  const { id } = req.params;
+  const {nameRecipe, listIngredients, textPrepare} = req.body;
+  const cooks = await listSpecificRecipe(id);
+  await recipesModel.updateRecipes(id, nameRecipe, listIngredients.toString(), textPrepare);
+  res.redirect('/');
+}
+
+module.exports = { listarReceitas, viewRecipesUser, searchRecipes, recipeRegister, newRecipe, myRecipes, editRecipe, saveEditRecipe };

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Recipe</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Cookmaster!</h1>
+        <% if(user) { %>
+        <p><%= console.log(user) %></p>
+        <a href="/">
+          <h3 data-testid="logout">Logout</h3>
+        </a>
+        <%} else{ %>
+        <a href="/login">
+          <h3 data-testid="login">Login</h3>
+        </a>
+        <%}%>
+      </div>
+      <hr />
+      <h1>Receitas</h1>
+  
+      <a href="/recipes/search"
+        ><button data-testid="buscar-receita">Buscar Receitas</button></a
+      >
+      <% if(user) { %>
+      <a href="/recipes/newRecipes"
+        ><button data-testid="nova-receita">Nova Receita</button></a
+      >
+      <a href="/me/recipes/" data-testid="minhas-receitas">Minhas Receitas</a>
+      <hr />
+      <% } %> <% cooks.forEach(recipe => { %>
+      <span><h3><%= recipe.user %> <%= recipe.name%></h3></span>
+      <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+      <hr />
+      <% })%>
+</body>
+</html>

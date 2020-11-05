@@ -36,7 +36,7 @@
     <%- include('../Components/header',{user}) %>
     <main>
       <div class="d-flex justify-content-around">
-        <h2>Receitas</h2>
+        <h1>Receitas</h1  >
         <a href="/recipes/search" data-testid="buscar-receita" class="btn btn-primary">
           Buscar Receitas
         </a>
@@ -46,9 +46,15 @@
         >
         <% } %>
       </div>
-      <div class="justify-content-lg-around">
+
+      <div>
+        <div>
+          <a href="/me/recipes/" data-testid="minhas-receitas">Minhas Receitas</a>
+      <hr />
+      <br />
+      <div >
         <% cooks.forEach((elemento) => { %>
-        <div class="card card-body">
+        <div>
           <span><%= elemento.user%></span>
           <span><%= elemento.name%></span>
           <a href="/recipes/<%=elemento.id %>">Ver mais</a>

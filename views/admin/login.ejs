@@ -12,7 +12,7 @@
       <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>
-      <button type="submit">Entrar</button>
+      <button type="submit" data-testid="entrar">Entrar</button>
       <a data-testid="cadastrar" href="/register">Cadastre-se</a>
     </form>
   </body>

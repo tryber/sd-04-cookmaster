@@ -2,17 +2,19 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body>
-    <form>
+    <form action="/register" method="POST" >
       <label>Email</label>
       <input data-testid="email" name="email" type="text" />
       <label>Senha</label>
-      <input data-testid="senha" name="senha" type="text" />
+      <input data-testid="senha" name="password" type="password" />
       <label>Confirmar Senha</label>
-      <input data-testid="confirmar-senha" name="confirma-senha" type="text" />
+      <input data-testid="confirmar-senha" name="password" type="text" />
       <label>Nome</label>
-      <input data-testid="nome" name="nome" type="text" />
+      <input data-testid="nome" name="name" type="text" />
       <label>Sobrenome</label>
-      <input data-testid="sobrenome" name="sobrenome" type="text" />
+      <input data-testid="sobrenome" name="lastName" type="text" />
+      <button type="submit" data-testid="cadastrar">Cadastre-se></button>
+      <a href="/login" data-testid="login" >Fazer login</a>
     </form>
   </body>
 </html>

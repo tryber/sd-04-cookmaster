@@ -44,18 +44,8 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const newUser = (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
-
-  if (!UserModel.isValidEmail(email)) return res.status(402).json({ data: 'Dados errados' });
-
-  UserModel.addUser(email, password, firstName, lastName);
-  return res.render('register', { email, password, firstName, lastName });
-};
-
 module.exports = {
   login,
   loginForm,
   logout,
-  newUser,
 };

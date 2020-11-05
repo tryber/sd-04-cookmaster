@@ -51,20 +51,17 @@ const signup = async (req, res) => {
   const { email, password, passwordCheck, firstName, lastName } = req.body;
 
   const emailValidation = validationsController.emailValidation(email);
-  const passwordValidation = validationsController.passwordValidation(password);
-  const checkValidation = validationsController.passwordCheckValidation(passwordCheck, password);
-  const firstNameValidation = validationsController.firstNameValidation(firstName);
-  const lastNameValidation = validationsController.lastNameValidation(lastName);
+  const passwordValidation = validationsController.passwordValidation(password, passwordCheck);
+  const nameValidation = validationsController.nameValidation(firstName, lastName);
 
-  if (emailValidation || passwordValidation || checkValidation)
-    return res.render('signup', {
-      message: emailValidation || passwordValidation || checkValidation,
-    });
+  if (emailValidation !== '')
+    return res.render('signup', { message: emailValidation });
 
-  if (firstNameValidation || lastNameValidation)
-    return res.render('signup', {
-      message: firstNameValidation || lastNameValidation,
-    });
+  if (passwordValidation !== '')
+    return res.render('signup', { message: passwordValidation });
+
+  if (nameValidation !== '')
+    return res.render('signup', { message: nameValidation });
 
   await userModel.registerNewUser(email, password, firstName, lastName);
   res.status(201).render('signup', { message: 'Cadastro efetuado com sucesso!' });

@@ -59,12 +59,13 @@ const saveEditRecipe = async (req, res) => {
   res.redirect('/');
 };
 
-module.exports = { 
-  listarReceitas, 
-  viewRecipesUser, 
-  searchRecipes, 
-  recipeRegister, 
-  newRecipe, 
-  myRecipes, 
-  editRecipe, 
-  saveEditRecipe };
+module.exports = {
+  listarReceitas,
+  viewRecipesUser,
+  searchRecipes,
+  recipeRegister,
+  newRecipe,
+  myRecipes,
+  editRecipe,
+  saveEditRecipe,
+};

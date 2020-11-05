@@ -19,8 +19,8 @@ module.exports = () => (
           schema = await session.getSchema('cookmaster');
           return schema;
         })
-        // .catch((err) => {
-        //   console.error(err);
-        //   process.exit(1);
-        // })
+        .catch((err) => {
+          console.error(err);
+          process.exit(1);
+        })
 );

@@ -54,4 +54,4 @@ const registerUser = async (req, res) => {
     return res.render('admin/register', { message: 'erro ao inserir usuario no banco de dados' });
   }
 };
-module.exports = { registerUser };
+module.exports = { registerUser, regexValidation, passwordValidation };

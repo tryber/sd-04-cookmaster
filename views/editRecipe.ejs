@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookmaster - New Recipe</title>
+  </head>
+  <body>
+    <%- include('./components/header.ejs', { user }) %>
+    <form action="/recipes/<%= recipe.id %>" method="POST" name="form">
+      <label for="nameInput">Nome da Receita</label>
+      <input type="text" name="recipeName" id="nameInput" value="<%= recipe.title %>" data-testid="nome-receita" required/><br />
+      <div>
+        <ul id="IngList"></ul>
+        <label for="IngInput">Ingredientes</label>
+        <input type="text" name="ingredients" class="IngInput" data-testid="ingredientes" required/><br />
+        <button data-testid="adicionar-ingrediente" type="button" id="addBtn" onclick="addClick()">
+          Adicionar Ingrediente
+        </button>
+      </div>
+      <label for="prepInput">Modo de preparo</label>
+      <input type="text" name="instructions" id="prepInput" value="<%= recipe.instructions %>" height="auto" data-testid="modo-de-preparo" required /><br />
+      <button onclick="window.location.pathname='/'">Voltar</button>
+      <button type="submit" data-testid="postar-receita" onclick="submitForm()" >Salvar Receita</button>
+    </form>
+    <script>
+      const ingredients = [];
+      const ingInput = document.getElementsByClassName('IngInput')[0];
+      const IngList = document.getElementById('IngList');
+      let count = 0;
+      const addClick = () => {
+        if (ingInput.value !== '') {
+          ingredients.push(ingInput.value);
+          count += 1
+          const li = document.createElement('li');
+          li.innerHTML = `<span>${ingInput.value}</span>
+            <button type="button" onclick="removeElem(${count})">Excluir Ingrediente</button> `;
+          li.setAttribute('id', count);
+          IngList.appendChild(li);
+          ingInput.value = '';
+        }
+      }
+      const removeElem = (numero) => {
+        const removeLi = document.getElementById(numero);
+        const ing = removeLi.children[0].innerText;
+        IngList.removeChild(removeLi);
+        ingredients.splice(numero-1, 1)
+      };
+      const submitForm = () => {
+        console.log("submit")
+        ingInput.value = ingredients.join(',')
+        document.form.submit()
+      }
+      window.onload = function () {
+        const startIngridients = '<%= recipe.ingredients %>'.split(',');
+        startIngridients.forEach(element => {
+          ingredients.push(element);
+          count += 1
+          const li = document.createElement('li');
+          li.innerHTML = `<span>${element}</span>
+            <button type="button" onclick="removeElem(${count})">Excluir Ingrediente</button> `;
+          li.setAttribute('id', count);
+          IngList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -50,7 +50,7 @@ const getRecipeByQuery = async (searchInput) =>
         user,
         name,
       })),
-    )
+    );
 
 module.exports = {
   getAllRecipes,

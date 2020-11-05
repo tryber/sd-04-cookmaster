@@ -92,9 +92,5 @@ module.exports = {
   recipeDetails,
   searchFilterRecipes,
   notFilteredRecipes,
-  recipeRegister,
-  deleteRecipeValidate,
   myRecipes,
-  editRecipeValidation,
-  editRecipe,
 };

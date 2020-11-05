@@ -13,9 +13,10 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// Home Login
 app.use('/', routes.homeRouter);
+app.use('/login/cadaster', routes.registerRouter);
 app.use('/recipes', routes.recipeRouter);
+app.use('/me', routes.meRouter);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

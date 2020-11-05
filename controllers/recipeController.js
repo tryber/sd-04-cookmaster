@@ -1,6 +1,4 @@
 const recipeModel = require('../models/recipesModel');
-const userModel = require('../models/userModel');
-const recipesModel = require('../models/recipesModel');
 
 const recipeDetails = async (req, res) => {
   const { id } = req.params;

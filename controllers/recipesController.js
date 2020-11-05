@@ -20,7 +20,17 @@ const recipeDetail = async (req, res) => {
   res.status(200).render('details', { recipe, user: req.user });
 };
 
+const searchRecipesByQuery = async (req, res) => {
+  const { q } = req.query;
+
+  if (q === '') return res.render('search', { recipes: [], user: req.user });
+
+  const recipes = await recipesModel.getRecipeByQuery(q);
+  return res.render('searchRecipes', { recipes, user: req.user });
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetail,
+  searchRecipesByQuery,
 };

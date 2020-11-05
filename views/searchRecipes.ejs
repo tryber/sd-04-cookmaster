@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Receita</title>
+</head>
+<body>
+  <h1>Buscar Receitas</h1>
+  <form method="GET" action="/recipes/search">
+    <input data-testid="receita" name="q" type="text" />
+    <button data-testid="buscar" type="submit">Buscar</button>
+  </form>
+  <% if (recipes) { %>
+    <%- include('components/listRecipes', { recipes }); %>
+  <% } %>
+</body>
+</html>

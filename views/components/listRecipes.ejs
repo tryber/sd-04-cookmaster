@@ -1,4 +1,4 @@
-<% recipes.forEach(({ name, user, id}) => { %>
+<% recipes.map(({ name, user, id}) => { %>
   <div>
     <h3><%= name %></h3>
     <p>Autor: <%= user %></p>

@@ -42,8 +42,23 @@ const signUpUserModel = async (email, password, firstName, lastName) => {
   return result;
 };
 
+const userUpdate = async (Id, name, lastName, password, email) => {
+  const db = await connection();
+  const result = await db.getTable('users')
+    .update()
+    .set('password', password)
+    .set('email', email)
+    .set('first_name', name)
+    .set('last_name', lastName)
+    .where('id = :id')
+    .bind('id', Id)
+    .execute();
+  return result;
+};
+
 module.exports = {
   findByEmail,
   findById,
   signUpUserModel,
+  userUpdate,
 };

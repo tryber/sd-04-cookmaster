@@ -36,6 +36,4 @@ app.get('/recipes/search', recipesController.searchRecipesByQuery);
 // detalhes
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
 
-
-
 app.listen(3000, () => console.log('Listening on 3000'));

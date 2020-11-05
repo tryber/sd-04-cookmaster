@@ -30,11 +30,12 @@ app.post('/login', userController.login);
 app.get('/signup', userController.signupForm);
 app.post('/signup', userController.signup);
 
+// search
+app.get('/recipes/search', recipesController.searchRecipesByQuery);
+
 // detalhes
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
 
-// search
-app.get('/recipes/search', recipesController.searchRecipesByQuery);
 
 
 app.listen(3000, () => console.log('Listening on 3000'));

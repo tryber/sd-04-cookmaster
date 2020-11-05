@@ -10,7 +10,7 @@ const config = {
 };
 
 let schema;
-function connection() {
+function connect() {
   return schema
     ? Promise.resolve(schema)
     : mysqlx
@@ -24,4 +24,4 @@ function connection() {
         });
 }
 
-module.exports = connection;
+module.exports = connect;

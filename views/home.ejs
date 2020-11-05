@@ -6,28 +6,29 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <nav>
-      <h1>Cookmaster</h1>
+    <header>
+      <div>
+        Cookmaster
+      </div>
       <% if (user) { %>
-        <p>Usuário atual: <%= `${user.name} ${user.lastName}` %></p>
-        <pre><%= JSON.stringify(user, null, 4) %></pre>
-        <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
-        <% } else { %>
-        <button data-testid="login" onclick="window.location.pathname='/login'">Login</button>
+        <a href="/logout" data-testid="login">Logout</a>
+      <% } else { %>
+        <a href="/login" data-testid="login">Login</a>
       <% } %>
-    </nav>
-    <section>
-      <nav>
-        <h1>Receitas</h1>
-        <button data-testid="buscar-receita">Buscar</button>
-      </nav>
-      <article>
-        <div>
-          <span>Nome da Receita</span>
-          <span>Nome do usuário</span>
-          <a href="Link">Ver mais</a>
-        </div>
-      </article>
-    </section>
+    </header>
+    <h2>Receitas</h2>
+    <% if (user) { %>
+      <a href="/" data-testid="nova-receita">Nova Receita</a>
+      <a href="/" data-testid="minhas-receitas">Minhas Receitas</a>
+      <a href="/" data-testid="minha-conta">Minha Conta</a>
+    <% } %>
+    <a href="/recipes/search" data-testid="buscar-receita">Buscar Receita</a>
+    <% recipes.forEach((recipe) => { %>
+      <div>
+        <h4><%= recipe.nameRecipe %></h4>
+        <h5><%= recipe.user %></h5>
+        <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+      </div>
+    <% }) %>
   </body>
 </html>

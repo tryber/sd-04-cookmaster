@@ -49,7 +49,7 @@ const editRecipe = async (req, res) => {
   const cooks = await listSpecificRecipe(id);
   const ingredients = cooks.ingredients.split(',');
   res.render('edit', { cooks, ingredients, user: req.user, message: null });
-}
+};
 
 const saveEditRecipe = async (req, res) => {
   const { id } = req.params;

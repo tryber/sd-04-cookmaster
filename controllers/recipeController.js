@@ -17,15 +17,15 @@ const recipeName = async (req, res) => {
   return res.render('recipeDetail', { recName, user: req.user });
 };
 
-const addNewRecipe = (req, res) => { 
-  res.render('newRecipe', { user: req.user, msg: 'Bom tb' })
+const addNewRecipe = (req, res) => {
+  res.render('newRecipe', { user: req.user, msg: 'Bom tb' });
 };
 const newRecipe = async (req, res) => {
   const { recipeName, ingredients, instruction } = req.body;
   const { id, firstName, lastName } = req.user;
   const fullName = `${firstName} ${lastName}`;
-  await Recipes.addRecipe( id, fullName, recipeName, ingredients, instruction)
-  res.redirect('/'); 
-}
+  await Recipes.addRecipe(id, fullName, recipeName, ingredients, instruction);
+  res.redirect('/');
+};
 
 module.exports = { listRecipes, recipeDetail, recipeName, addNewRecipe, newRecipe };

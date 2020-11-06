@@ -20,8 +20,7 @@ const getRecipes = async () =>
 
 const findById = async (id) =>
   connection()
-    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id)
-    .execute())
+    .then((db) => db.getTable('recipes').select([]).where('id = :id').bind('id', id).execute())
     .then((results) => results.fetchAll()[0])
     .then(([idRecipe, userId, user, name, ingredients, instructions]) => ({
       idRecipe,
@@ -62,8 +61,14 @@ const findByName = async (name) =>
 
 const getRecipeByUserId = async (userId) =>
   connection()
-    .then((db) => db.getTable('recipes').select([]).where('user_id = :user_id').bind('user_id', userId)
-    .execute())
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .select([])
+        .where('user_id = :user_id')
+        .bind('user_id', userId)
+        .execute(),
+    )
     .then((results) => results.fetchAll()[0])
     .then(([idRecipe, userId, user, name, ingredients, instructions]) => ({
       idRecipe,
@@ -77,25 +82,25 @@ const getRecipeByUserId = async (userId) =>
       throw err;
     });
 
-  const addRecipe = async (user_id, user, name, ingredients, instructions) =>
-  connection()
-    .then((db) => db.getTable('recipes')
-    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
-    .values([user_id, user, name, ingredients, instructions])
-    .execute());
+const addRecipe = async (user_id, user, name, ingredients, instructions) =>
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+      .values([user_id, user, name, ingredients, instructions])
+      .execute(),
+  );
 
+const deleteRecipe = async (id) =>
+  connection().then((db) =>
+    db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+  );
 
-const deleteRecipe = async (id) => 
-  connection()
-    .then((db) => db.getTable('recipes')
-    .delete().where('id = :id').bind('id', id)
-    .execute());
-
-module.exports = { 
-  getRecipes, 
-  findById, 
-  findByName, 
-  getRecipeByUserId, 
-  addRecipe, 
-  deleteRecipe 
+module.exports = {
+  getRecipes,
+  findById,
+  findByName,
+  getRecipeByUserId,
+  addRecipe,
+  deleteRecipe,
 };

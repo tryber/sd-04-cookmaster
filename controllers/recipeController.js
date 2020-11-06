@@ -28,9 +28,7 @@ const searchPage = async (req, res) => {
   return res.render('recipes/recipeSearch', { recipes, user: req.user });
 };
 
-const newRecipe = (req, res) => {
-  return res.render('recipes/newRecipe', { user: req.user });
-};
+const newRecipe = (req, res) => res.render('recipes/newRecipe', { user: req.user });
 
 const postRecipe = async (req, res) => {
   const user = req.user;

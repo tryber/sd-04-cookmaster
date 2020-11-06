@@ -67,7 +67,7 @@ const registerModel = async ({ email, password, name, lastName }) => {
     );
 };
 
-const editUserModel = async (email, password, name, lastName, id) => 
+const editUserModel = async (email, password, name, lastName, id) =>
   connection()
     .then((db) =>
       db

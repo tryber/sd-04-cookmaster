@@ -54,7 +54,7 @@ const newUser = async (req, res) => {
   if (!UserModel.isValidEmail(email)) return res.status(402).json({ data: 'Dados errados' });
 
   await UserModel.addUser(email, password, firstName, lastName);
-  
+
   return res.redirect('/');
 };
 

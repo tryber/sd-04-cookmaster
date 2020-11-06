@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include("./partials/head.ejs") %>
-  <body> <% if ( msg !== '' ) { %>
-    <p> <%= msg %> </p> <% } %>
-    <form action="/register" method="POST" >
+  <body>
+    <% if ( msg !== '' ) { %>
+    <p><%= msg %></p>
+    <% } %>
+    <form action="/register" method="POST">
       <label>Email </label>
       <input data-testid="email" name="email" type="text" />
       <label>Senha</label>
@@ -15,7 +17,7 @@
       <label>Sobrenome</label>
       <input data-testid="sobrenome" name="lastName" type="text" />
       <button type="submit" data-testid="cadastrar">Cadastre-se></button>
-      <a href="/login" data-testid="login" >Fazer login</a>
+      <a href="/login" data-testid="login">Fazer login</a>
     </form>
   </body>
 </html>

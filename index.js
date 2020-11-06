@@ -21,7 +21,7 @@ app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.re
 
 app.get('/register', controllers.userController.renderUser);
 console.log(middlewares);
-app.post('/register', middlewares.userAuth.validation , controllers.userController.newUser);
+app.post('/register', middlewares.userAuth.validation, controllers.userController.newUser);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });

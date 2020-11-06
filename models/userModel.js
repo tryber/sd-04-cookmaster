@@ -3,8 +3,7 @@ const connection = require('./connection');
 const findByEmail = async (userEmail) => {
   const user = await connection()
     .then((db) => db.getTable('users').select([]).where('email = :email').bind('email', userEmail)
-    .execute()
-    )
+    .execute())
     .then((results) => results.fetchOne())
     .then(([id, email, password, firstName, lastName]) => ({
       id,

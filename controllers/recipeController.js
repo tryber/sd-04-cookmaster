@@ -47,7 +47,7 @@ const editRecipePage = async (req, res) => {
   const recipes = await recipeModel.openRecipesModel(req.params.id);
 
   if (req.user.id !== recipes.userId) {
-    res.redirect(`/recipes/${recipe.id}`);
+    res.redirect(`/recipes/${recipes.id}`);
   }
   return res.render('admin/editRecipe', { recipes, user: req.user });
 };

@@ -19,7 +19,7 @@ const emailIsValid = (email) => {
 };
 
 const passwValid = (password, confirm) => {
-  let msg = '';
+  const msg = '';
 
   if (password !== confirm) return 'As senhas tem que ser iguais';
 

@@ -60,4 +60,42 @@ const findByName = async (name) =>
       throw err;
     });
 
-module.exports = { getRecipes, findById, findByName };
+const getRecipeByUserId = async (userId) =>
+  connection()
+    .then((db) => db.getTable('recipes').select([]).where('user_id = :user_id').bind('user_id', userId)
+    .execute())
+    .then((results) => results.fetchAll()[0])
+    .then(([idRecipe, userId, user, name, ingredients, instructions]) => ({
+      idRecipe,
+      userId,
+      user,
+      name,
+      ingredients,
+      instructions,
+    }))
+    .catch((err) => {
+      throw err;
+    });
+
+  const addRecipe = async (user_id, user, name, ingredients, instructions) =>
+  connection()
+    .then((db) => db.getTable('recipes')
+    .insert(['user_id', 'user', 'name', 'ingredients', 'instructions'])
+    .values([user_id, user, name, ingredients, instructions])
+    .execute());
+
+
+const deleteRecipe = async (id) => 
+  connection()
+    .then((db) => db.getTable('recipes')
+    .delete().where('id = :id').bind('id', id)
+    .execute());
+
+module.exports = { 
+  getRecipes, 
+  findById, 
+  findByName, 
+  getRecipeByUserId, 
+  addRecipe, 
+  deleteRecipe 
+};

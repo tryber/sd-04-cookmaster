@@ -13,14 +13,16 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(express.static('public'));
-
 app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
+
+app.get('/recipes/new', middlewares.auth(), controllers.recipeController.addNewRecipe);
+
+app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetail);
 
 app.get('/register', controllers.userController.renderUser);
-console.log(middlewares);
+
 app.post('/register', middlewares.userAuth.validation, controllers.userController.newUser);
 
 app.get('/admin', middlewares.auth(), (req, res) => {

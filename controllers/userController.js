@@ -49,11 +49,12 @@ const renderUser = (req, res) => res.render('register', { msg: '' });
 const newUser = async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
 
-  if (!UserModel.isValidEmail(email)) return res.status(402).json({ data: 'Dados errados' });
-
   await UserModel.addUser(email, password, firstName, lastName);
 
-  return res.redirect('/');
+  return res.render('admin/login', {
+    message: 'Cadastro efetuado com sucesso!',
+    redirect: null,
+  });
 };
 
 module.exports = {

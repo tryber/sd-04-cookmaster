@@ -11,7 +11,7 @@ const recipeDetail = async (req, res) => {
   return res.render('recipeDetail', { theRecipe, user: req.user });
 };
 
-const recipeName = async (req, res) => {
+const recipeByName = async (req, res) => {
   const { name } = req.params;
   const recName = await Recipes.findByName(name);
   return res.render('recipeDetail', { recName, user: req.user });
@@ -28,4 +28,4 @@ const newRecipe = async (req, res) => {
   res.redirect('/');
 };
 
-module.exports = { listRecipes, recipeDetail, recipeName, addNewRecipe, newRecipe };
+module.exports = { listRecipes, recipeDetail, recipeByName, addNewRecipe, newRecipe };

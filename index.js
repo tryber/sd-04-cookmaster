@@ -16,13 +16,11 @@ app.set('views', './views');
 app.get('/', middlewares.auth(false), controllers.recipeController.listRecipes);
 
 app.get('/recipes/new', middlewares.auth(), controllers.recipeController.addNewRecipe);
-
-app.post('/recipes/new', middlewares.auth(), controllers.recipeController.newRecipe);
+app.post('/recipes', middlewares.auth(), controllers.recipeController.newRecipe);
 
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.recipeDetail);
 
 app.get('/register', controllers.userController.renderUser);
-
 app.post('/register', middlewares.userAuth.validation, controllers.userController.newUser);
 
 app.get('/admin', middlewares.auth(), (req, res) => {

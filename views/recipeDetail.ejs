@@ -1,12 +1,12 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
 </head>
-<body> 
+<body>
   <% if (user) {%>
     <a data-testid="editar-receita">Editar Receita</a>
     <a data-testid="excluir-receita">Excluir Receita</a>
   <% } %>
-  <div> 
+  <div>
     <h2> <%= theRecipe.user %> </h2>
     <h2> <%= theRecipe.name %> </h2>
     <h2> <%= theRecipe.ingredients %> </h2>

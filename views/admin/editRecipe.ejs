@@ -1,25 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookmaster - Editar Receita</title>
 </head>
+
 <body>
   <%- include('../navbar.ejs', { user }); %>
   <h1>Editar Receita</h1>
 
-  <form action="/recipes" method="POST">
+  <form action="/recipes/<%= recipes.id %>" method="POST">
     <label htmlFor="nome-receita">Nome da Receita</label>
-    <input type="text" id="nome-receita" data-testid="nome-receita" required />
+    <input type="text"
+     id="nome-receita"
+     name="name"
+     data-testid="nome-receita" 
+     value="<%= recipes.name %>"
+     required />
+
+    <ul id="ingredientsList">
+      <% recipes.ingredients.split(',').forEach((ingredient) => {%>
+        <li id="ingredientItem" value="<%= ingredient %>"><%= ingredient %><button id="dltIngredient" type="button">Excluir
+            Ingrediente</button></li>
+      <%})%>
+    </ul>
+    <input type="hidden" name="ingredients" id="ingredients-hidden-input" />
     <label htmlFor="ingredientes">Ingredientes</label>
-    <input type="text" id="ingredientes" data-testid="ingredientes" />
-    <button data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+    <input type="text" id="new-ingredient" data-testid="ingredientes" />
+    <button id="btn-adicionar" type="button" data-testid="adicionar-ingrediente">Adicionar Ingrediente</button>
+
     <label htmlFor="modo-de-preparo">Modo de preparo</label>
-    <input id="modo-de-preparo" type="text" data-testid="modo-de-preparo" />
+    <input
+     id="modo-de-preparo"
+     name="instructions"
+     type="text"
+     data-testid="modo-de-preparo"
+     value="<%= recipes.instructions %>"
+     required
+     />
+
     <button type="submit" data-testid="postar-receita">Salvar Receita</button>
   </form>
-
-  <button>Voltar</button>
+  <a>
+    <button>Voltar</button>
+  </a>
 </body>
+<script>
+  const ingredientsList = document.querySelector('#ingredientsList');
+  const btnAdicionaIngredient = document.querySelector('#btn-adicionar');
+  let arrayIngredients = [];
+
+  const addItemToRecipe = () => {
+    const listItem = document.createElement('li');
+    const inputNewIngredients = document.querySelector('#new-ingredient');
+    listItem.innerText = inputNewIngredients.value;
+    arrayIngredients.push(inputNewIngredients.value);
+    const btnDeleteItem = document.createElement('button');
+    btnDeleteItem.innerText = 'Excluir Ingrediente';
+    const inputIngredients = document.querySelector('#ingredients-hidden-input');
+    inputIngredients.value = arrayIngredients.join(',');
+
+    ingredientsList.appendChild(listItem);
+    ingredientsList.appendChild(btnDeleteItem);
+    inputNewIngredients.value = null;
+    btnDeleteItem.addEventListener('click', () => {
+      arrayIngredients = arrayIngredients.filter((ingredient) => ingredient !== listItem.innerText);
+      listItem.remove();
+      btnDeleteItem.remove();
+      inputIngredients.value = arrayIngredients.join(',');
+    })
+  };
+
+  const clickedItem = document.querySelector('#dltIngredient');
+
+  btnAdicionaIngredient.addEventListener('click', addItemToRecipe);
+
+  clickedItem.addEventListener('click', () => {
+    clickedItem.parentElement.remove();
+  });
+
+</script>
 </html>

@@ -1,4 +1,5 @@
 const recipeModel = require('../models/recipeModel');
+const userModel = require('../models/userModel');
 
 // Controller de mostrar receitas na home
 const showRecipes = async (req, res) => {
@@ -39,7 +40,34 @@ const createRecipeController = async (req, res) => {
   const fullName = `${firstName} ${lastName}`;
   await recipeModel.createRecipeModel(id, fullName, name, ingredients, instructions);
   res.redirect('/');
-}
+};
+
+//Controllers da página de Edição de Receita
+const editRecipePage = async (req, res) => {
+  const recipes = await recipeModel.openRecipesModel(req.params.id);
+
+  if (req.user.id !== recipes.userId) {
+    res.redirect(`/recipes/${recipe.id}`);
+  }
+  return res.render('admin/editRecipe', { recipes, user: req.user });
+};
+
+const editRecipe = async (req, res) => {
+  const id = req.params.id;
+  const { name, ingredients, instructions } = req.body;
+  await recipeModel.editRecipeModel(id, name, ingredients, instructions);
+  res.redirect('/me/recipes');
+};
+
+//Controllers da página Minhas Receitas
+const myRecipesPage = async (req, res) => {
+  const userId = req.user.id;
+  recipeModel.getRecipeByUser(userId)
+  .then((recipes) => {
+    res.render('admin/myRecipes', { user: req.user, recipes });
+  })
+};
+ 
 
 // Exportando para ser usado no index.js
 module.exports = {
@@ -48,4 +76,7 @@ module.exports = {
   openRecipesController,
   newRecipePage,
   createRecipeController,
+  editRecipePage,
+  editRecipe,
+  myRecipesPage,
 };

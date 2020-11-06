@@ -29,7 +29,7 @@ app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
 // Rota de "Minhas Receitas" - Disponível apenas para pessoas logadas
-app.get('/me/recipes', middlewares.auth(true));
+app.get('/me/recipes', middlewares.auth(true), controllers.recipeController.myRecipesPage);
 
 
 // Rota de Busca de Receitas
@@ -43,7 +43,10 @@ app.get('/recipes/new', middlewares.auth(false), controllers.recipeController.ne
 app.post('/recipes', middlewares.auth(true), controllers.recipeController.createRecipeController);
 
 // Rotas de ver receita detalhada, editar e deletar
-app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.openRecipesController);
+app.get('/recipes/:id/edit', middlewares.auth(true), controllers.recipeController.editRecipePage);
+app.post('/recipes/:id/', middlewares.auth(true), controllers.recipeController.editRecipe);
 // app.get('/recipes/:id/delete');
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.openRecipesController);
+
 
 app.listen(3000, () => console.log('Listening on 3000'));

@@ -28,7 +28,7 @@ const openRecipesController = async (req, res) => {
   res.render('recipeDetails', { ...recipe, user });
 };
 
-//Controllers da página de Cadastro de Nova Receita
+// Controllers da página de Cadastro de Nova Receita
 const newRecipePage = async (req, res) => {
   const user = req.user;
   res.render('admin/newRecipe', { user });
@@ -42,7 +42,7 @@ const createRecipeController = async (req, res) => {
   res.redirect('/');
 };
 
-//Controllers da página de Edição de Receita
+// Controllers da página de Edição de Receita
 const editRecipePage = async (req, res) => {
   const recipes = await recipeModel.openRecipesModel(req.params.id);
 
@@ -59,13 +59,13 @@ const editRecipe = async (req, res) => {
   res.redirect('/me/recipes');
 };
 
-//Controllers da página Minhas Receitas
+// Controllers da página Minhas Receitas
 const myRecipesPage = async (req, res) => {
   const userId = req.user.id;
   recipeModel.getRecipeByUser(userId)
-  .then((recipes) => {
-    res.render('admin/myRecipes', { user: req.user, recipes });
-  })
+    .then((recipes) => {
+      res.render('admin/myRecipes', { user: req.user, recipes });
+    })
 };
 
 // Controllers da página de deletar receitas
@@ -83,7 +83,7 @@ const deleteRecipes = async (req, res) => {
   const { senha } = req.body;
   const userPass = await userModel.findById(user)
   if (senha === userPass.password) {
-  await recipeModel.deleteRecipe(req.params.id);
+    await recipeModel.deleteRecipe(req.params.id);
     res.redirect('/');
   }
   return res.render('admin/deleteRecipe', {

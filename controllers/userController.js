@@ -83,7 +83,7 @@ const registerUserValid = async (req, res) => {
 };
 
 // Controller de edição de usuário
-const editUserPage = async (req,res) => {
+const editUserPage = async (req, res) => {
   const user = req.user;
   return res.render('admin/editUser', { user });
 };

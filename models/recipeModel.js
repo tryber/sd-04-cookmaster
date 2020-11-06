@@ -73,7 +73,8 @@ const editRecipeModel = async (id, name, ingredients, instructions) => {
         .bind('id', id)
         .execute(),
     );
-}
+};
+
 // Buscar receita por usuário
 const getRecipeByUser = async (userId) => {
   return await connection()
@@ -96,7 +97,7 @@ const getRecipeByUser = async (userId) => {
 
 // Deletar receita
 const deleteRecipe = async (id) => {
-   connection()
+  connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -104,7 +105,7 @@ const deleteRecipe = async (id) => {
         .where('id = :id')
         .bind('id', id)
         .execute(),
-    )
+    );
 };
 
 

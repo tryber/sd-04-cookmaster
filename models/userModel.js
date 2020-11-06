@@ -19,7 +19,7 @@ const findByEmail = async (email) => {
         .execute(),
     )
     .then((results) => {
-      return results.fetchOne()
+      return results.fetchOne();
     })
     .then(([userId, userEmail, password, name, lastName]) => ({
       id: userId,

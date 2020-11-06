@@ -62,7 +62,8 @@ const saveEditRecipe = async (req, res) => {
 const deleteRecipe = async (req, res) => {
   const { id } = req.params;
   res.render('delete', { id, user: req.user, message: null });
-}
+};
+
 const confirmDelete = async (req, res) => {
   const { passwordUser } = req.body;
   const user = await userModel.findById(req.user.idUser);
@@ -75,7 +76,7 @@ const confirmDelete = async (req, res) => {
     const { id } = req.params;
     return res.render('delete', { id, user: req.user, message: 'Senha Incorreta.' });
   }
-}
+};
 
 module.exports = {
   listarReceitas,

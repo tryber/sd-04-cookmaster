@@ -2,12 +2,12 @@ const nameIsValid = (firstName, lastName) => {
   const regNum = /[0-9]/;
   const msg = '';
 
-  if (!firstName || firstName.length < 3 || regNum.test(firstName))
+  if (!firstName || firstName.length < 3 || regNum.test(firstName)) {
     return 'O primeiro nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-
-  if (!lastName || lastName.length < 3 || regNum.test(lastName))
+  }
+  if (!lastName || lastName.length < 3 || regNum.test(lastName)) {
     return 'O segundo nome deve ter, no mínimo, 3 caracteres, sendo eles apenas letras';
-
+  }
   return msg;
 };
 

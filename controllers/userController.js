@@ -44,9 +44,7 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const renderUser = (req, res) => {
-  return res.render('register', { msg: '' });
-};
+const renderUser = (req, res) => res.render('register', { msg: '' });
 
 const newUser = async (req, res) => {
   const { email, password, firstName, lastName } = req.body;

@@ -7,13 +7,12 @@ const findByEmail = async (userEmail) => {
     .execute(),
     )
     .then((results) => results.fetchOne())
+    .then(([id, email, password, firstName, lastName]) => 
+    ({id, email, password, firstName, lastName}))
     .catch((err) => {
       throw err;
     });
-
-  const [id, email, password, firstName, lastName] = user;
-
-  return { id, email, password, firstName, lastName };
+    return user;
 };
 
 const findById = async (userId) => {
@@ -21,11 +20,13 @@ const findById = async (userId) => {
     .then((db) => db.getTable('users').select([]).where('id = :id').bind('id', userId)
     .execute(),
     )
-    .then((results) => results.fetchOne());
-
-  const [id, email, password, firstName, lastName] = user;
-
-  return { id, email, password, firstName, lastName };
+    .then((results) => results.fetchOne())
+    .then(([id, email, password, firstName, lastName]) => 
+      ({id, email, password, firstName, lastName}))
+    .catch((error) => { 
+      throw error 
+    });
+    return user;
 };
 
 const addUser = async (email, password, firstName, lastName) => {
@@ -33,7 +34,7 @@ const addUser = async (email, password, firstName, lastName) => {
     db
       .getTable('users')
       .insert(['email', 'password', 'first_name', 'last_name'])
-      .values(email, password, firstName, lastName)
+      .values([email, password, firstName, lastName])
       .execute(),
   );
 };

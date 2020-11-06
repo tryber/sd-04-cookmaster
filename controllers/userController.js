@@ -44,8 +44,24 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const renderUser = (req, res) => {
+  return res.render('register', { msg: '' });
+};
+
+const newUser = async (req, res) => {
+  const { email, password, firstName, lastName } = req.body;
+
+  if (!UserModel.isValidEmail(email)) return res.status(402).json({ data: 'Dados errados' });
+
+  await UserModel.addUser(email, password, firstName, lastName);
+  
+  return res.redirect('/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  renderUser,
+  newUser,
 };

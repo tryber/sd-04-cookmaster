@@ -39,8 +39,8 @@ const openRecipesModel = async (id) =>
         .execute(),
     )
     .then((resultados) => (resultados).fetchAll()[0])
-    .then(([id, userId, user, name, ingredients, instructions]) => ({
-      id,
+    .then(([recipeId, userId, user, name, ingredients, instructions]) => ({
+      id: recipeId,
       userId,
       userFromModel: user,
       name,
@@ -60,8 +60,8 @@ const createRecipeModel = async (userId, user, name, ingredients, instructions) 
     );
 
 // Para editar receitas
-const editRecipeModel = async (id, name, ingredients, instructions) => {
-  return await connection()
+const editRecipeModel = async (id, name, ingredients, instructions) =>
+  await connection()
     .then((db) =>
       db
         .getTable('recipes')
@@ -73,17 +73,17 @@ const editRecipeModel = async (id, name, ingredients, instructions) => {
         .bind('id', id)
         .execute(),
     );
-};
+
 
 // Buscar receita por usuário
-const getRecipeByUser = async (userId) => {
-  return await connection()
+const getRecipeByUser = async (user_Id) =>
+  await connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name'])
         .where('user_id = :user_id')
-        .bind('user_id', userId)
+        .bind('user_id', user_Id)
         .execute(),
     )
     .then((resultados) => resultados.fetchAll())
@@ -93,7 +93,6 @@ const getRecipeByUser = async (userId) => {
       user,
       name,
     })));
-};
 
 // Deletar receita
 const deleteRecipe = async (id) => {

@@ -65,7 +65,7 @@ const myRecipesPage = async (req, res) => {
   recipeModel.getRecipeByUser(userId)
     .then((recipes) => {
       res.render('admin/myRecipes', { user: req.user, recipes });
-    })
+    });
 };
 
 // Controllers da página de deletar receitas
@@ -81,7 +81,7 @@ const deleteRecipePage = async (req, res) => {
 const deleteRecipes = async (req, res) => {
   const user = req.user.id;
   const { senha } = req.body;
-  const userPass = await userModel.findById(user)
+  const userPass = await userModel.findById(user);
   if (senha === userPass.password) {
     await recipeModel.deleteRecipe(req.params.id);
     res.redirect('/');

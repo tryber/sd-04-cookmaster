@@ -28,6 +28,10 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+// Rota de edição de usuário
+app.get('/me/edit', middlewares.auth(true), controllers.userController.editUserPage);
+app.post('/me/edit', middlewares.auth(true),controllers.userController.editUser);
+
 // Rota de "Minhas Receitas" - Disponível apenas para pessoas logadas
 app.get('/me/recipes', middlewares.auth(true), controllers.recipeController.myRecipesPage);
 

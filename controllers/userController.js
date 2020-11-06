@@ -82,10 +82,25 @@ const registerUserValid = async (req, res) => {
   }
 };
 
+// Controller de edição de usuário
+const editUserPage = async (req,res) => {
+  const user = req.user;
+  return res.render('admin/editUser', { user });
+};
+
+const editUser = async (req, res) => {
+  const userId = req.user.id;
+  const { email, password, name, lastName } = req.body;
+  await userModel.editUserModel(email, password, name, lastName, userId);
+  return res.redirect('/');
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
   registerUser,
   registerUserValid,
+  editUserPage,
+  editUser,
 };

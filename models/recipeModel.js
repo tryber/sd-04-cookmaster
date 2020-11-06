@@ -93,6 +93,21 @@ const getRecipeByUser = async (userId) => {
       name,
     })));
 };
+
+// Deletar receita
+const deleteRecipe = async (id) => {
+   connection()
+    .then((db) =>
+      db
+        .getTable('recipes')
+        .delete()
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
+    )
+};
+
+
 // Exportando métodos para o Controller
 module.exports = {
   findAll,
@@ -101,4 +116,5 @@ module.exports = {
   createRecipeModel,
   editRecipeModel,
   getRecipeByUser,
+  deleteRecipe,
 };

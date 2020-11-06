@@ -67,7 +67,32 @@ const myRecipesPage = async (req, res) => {
     res.render('admin/myRecipes', { user: req.user, recipes });
   })
 };
- 
+
+// Controllers da página de deletar receitas
+const deleteRecipePage = async (req, res) => {
+  const recipes = await recipeModel.openRecipesModel(req.params.id);
+
+  if (req.user.id !== recipes.userId) {
+    res.redirect('/');
+  }
+  return res.render('admin/deleteRecipe', { user: req.user, recipeId: req.params.id, message: null });
+};
+
+const deleteRecipes = async (req, res) => {
+  const user = req.user.id;
+  const { senha } = req.body;
+  const userPass = await userModel.findById(user)
+  if (senha === userPass.password) {
+  await recipeModel.deleteRecipe(req.params.id);
+    res.redirect('/');
+  }
+  return res.render('admin/deleteRecipe', {
+    message: 'Senha Incorreta.',
+    user: req.user,
+    recipeId: req.params.id,
+  });
+};
+
 
 // Exportando para ser usado no index.js
 module.exports = {
@@ -79,4 +104,6 @@ module.exports = {
   editRecipePage,
   editRecipe,
   myRecipesPage,
+  deleteRecipePage,
+  deleteRecipes,
 };

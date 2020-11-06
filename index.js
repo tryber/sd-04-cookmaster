@@ -43,9 +43,11 @@ app.get('/recipes/new', middlewares.auth(false), controllers.recipeController.ne
 app.post('/recipes', middlewares.auth(true), controllers.recipeController.createRecipeController);
 
 // Rotas de ver receita detalhada, editar e deletar
+app.get('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deleteRecipePage);
+app.post('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deleteRecipes);
 app.get('/recipes/:id/edit', middlewares.auth(true), controllers.recipeController.editRecipePage);
 app.post('/recipes/:id/', middlewares.auth(true), controllers.recipeController.editRecipe);
-// app.get('/recipes/:id/delete');
+
 app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.openRecipesController);
 
 

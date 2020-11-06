@@ -73,6 +73,12 @@ const updateRecipes = async (id, recipeName, ingredients, prepare) =>
       .execute(),
   );
 
+const confirmRemove = async (id) => {
+    return connection().then((db) =>
+      db.getTable('recipes').delete().where('id = :id').bind('id', id).execute(),
+    );
+  }
+
 module.exports = {
   listCook,
   listSpecificRecipe,
@@ -80,4 +86,5 @@ module.exports = {
   createNewRecipes,
   verifyRecipes,
   updateRecipes,
+  confirmRemove,
 };

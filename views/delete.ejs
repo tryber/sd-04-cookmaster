@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Recipe</title>
+  </head>
+  <body>
+
+    <% if (message) {%>
+      <div><%= message %></div>
+    <div>
+        <h3>Excluir Receita</h3>
+        <div>
+<h3>Confirme a exclusão da receita</h3>
+        </div>
+    </div>
+    <div class="card-body">
+      <div class="message"><%= message %></div>
+      <% } %>
+      <form action="/recipes/<%= id %>/delete" method="POST">
+        <div>
+          <h3>Confirme a exclusão da receita</h3>
+        </div>
+        <div>
+            <span>Senha</span>
+            <input type="password" name="passwordUser" data-testid="senha">
+        </div>
+        <div>
+            <a href="/register" type="button" data-testid="cancelar">Cancelar</a>
+            <button type="submit" data-testid="confirmar">confirmar</button>
+        </div>
+      </form>
+  </body>
+</html>

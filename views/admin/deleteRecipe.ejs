@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookmaster - Apagar Receita</title>
+</head>
+<body>
+  <article>
+    <form action="/recipes/<%= recipeId %>/delete" method="POST">
+    <% if (message) {%>
+      <p> Senha Incorreta. </p>
+    <%}%>
+
+    <p>Confirme a exclusão da receita</p>
+    <p>Senha</p>
+    <input type="password" name="senha" data-testid="senha" />
+    <a data-testid="cancelar" href="/">Cancelar</a>
+    <button type="submit" data-testid="confirmar">Confirmar</button>
+    </form>
+  </article>
+</body>
+</html>

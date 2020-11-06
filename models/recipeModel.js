@@ -53,9 +53,19 @@ const findSearchRecipes = (q) =>
       })),
     );
 
+const createRecipe = ({ user_id, user, name, ingredients, instructions }) => {
+  connection().then((db) =>
+    db
+      .getTable('recipes')
+      .insert('user_id', 'user', 'name', 'ingredients', 'instructions')
+      .values(user_id, user, name, ingredients, instructions)
+      .execute(),
+  );
+};
 
 module.exports = {
   findAllRecipes,
   findRecipeById,
   findSearchRecipes,
+  createRecipe,
 };

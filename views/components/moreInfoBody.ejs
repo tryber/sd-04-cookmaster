@@ -10,7 +10,11 @@
   <section>
     <div>
       <h2>Ingredientes</h2>
-      <p><%=recipeData.ingredients %></p>
+      <ul>
+        <% recipeData.ingredients.split(',').map((ingredient) => { %>
+        <li><%=ingredient%></li>
+        <% }) %>
+      </ul>
     </div>
     <div>
       <h2>Modo de preparo</h2>

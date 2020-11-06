@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../components/header', {user}); %>
+    <h1>Nova Receita</h1>
+    <form action="/recipes" method="POST">
+      <label for="recipeName">Nova Receita</label>
+      <input type="text" name="recipeName" id="recipeName" data-testid="nome-receita" />
+      <p>Ingredients</p>
+      <ul id="list"></ul>
+      <input type="text" name="ingredientInput" id="ingredientInput" data-testid="ingredientes" />
+      <button type="button" onclick="addIngredient()" data-testid="adicionar-ingrediente">
+        Adicionar Ingrediente
+      </button>
+      <h2>Modo de preparo</h2>
+      <input type="text" name="preparing" id="preparing" data-testid="modo-de-preparo" />
+      <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+    </form>
+  </body>
+  <script>
+    const list = document.getElementById('list');
+    const input = document.getElementById('ingredientInput');
+
+    const createButton = () => {
+      let btn = document.createElement('button');
+      btn.innerHTML = 'Excluir ingrediente';
+      btn.addEventListener('click', (event) => {
+        event.target.parentNode.remove();
+      });
+      return btn;
+    };
+
+    const createInput = (ingredient) => {
+      let inputElement = document.createElement('input');
+      inputElement.id = ingredient;
+      inputElement.value = ingredient;
+      inputElement.placeholder = ingredient;
+      inputElement.name = 'ingredients[]';
+      return inputElement;
+    };
+
+    const addIngredient = () => {
+      const newLi = document.createElement('li');
+      list.appendChild(newLi);
+      const newIngredient = createInput(input.value);
+      newLi.appendChild(newIngredient);
+      const newExludeBtn = createButton();
+      newLi.appendChild(newExludeBtn);
+    };
+  </script>
+</html>

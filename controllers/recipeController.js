@@ -28,8 +28,31 @@ const searchPage = async (req, res) => {
   return res.render('recipes/recipeSearch', { recipes, user: req.user });
 };
 
+const newRecipe = (req, res) => {
+  return res.render('recipes/newRecipe', { user: req.user });
+};
+
+const postRecipe = async (req, res) => {
+  const user = req.user;
+  if (user) {
+    const recipeData = {
+      user_id: req.user.id,
+      user: `${req.user.firstName} ${req.user.lastName}`,
+      name: req.body.recipeName,
+      ingredients: req.body.ingredients.join(','),
+      instructions: req.body.preparing,
+    };
+    await recipeModel.createRecipe(recipeData);
+    return res.redirect('/');
+  }
+
+  return res.redirect('/');
+};
+
 module.exports = {
   getAllRecipes,
   showMoreInfo,
   searchPage,
+  newRecipe,
+  postRecipe,
 };

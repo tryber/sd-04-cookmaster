@@ -76,14 +76,14 @@ const editRecipeModel = async (id, name, ingredients, instructions) =>
 
 
 // Buscar receita por usuário
-const getRecipeByUser = async (user_id) =>
+const getRecipeByUser = async (idDoUser) =>
   connection()
     .then((db) =>
       db
         .getTable('recipes')
         .select(['id', 'user_id', 'user', 'name'])
         .where('user_id = :user_id')
-        .bind('user_id', user_id)
+        .bind('user_id', idDoUser)
         .execute(),
     )
     .then((resultados) => resultados.fetchAll())

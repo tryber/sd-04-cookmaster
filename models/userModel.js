@@ -67,8 +67,8 @@ const registerModel = async ({ email, password, name, lastName }) => {
     );
 };
 
-const editUserModel = async (email, password, name, lastName, id) => {
-  return await connection()
+const editUserModel = async (email, password, name, lastName, id) => 
+  connection()
     .then((db) =>
       db
         .getTable('users')
@@ -81,7 +81,6 @@ const editUserModel = async (email, password, name, lastName, id) => {
         .bind('id', id)
         .execute(),
     );
-};
 
 module.exports = {
   findByEmail,

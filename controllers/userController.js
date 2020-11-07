@@ -63,7 +63,9 @@ const signup = async (req, res) => {
   if (nameValidation !== '')
     return res.render('signup', { message: nameValidation });
 
-  await userModel.registerNewUser(email, password, firstName, lastName);
+  const user = await userModel.registerNewUser(email, password, firstName, lastName);
+
+  if(!user) res.status(500).render('signup', { message: 'Ocorreu um erro, tente novamente' });
   res.status(201).render('signup', { message: 'Cadastro efetuado com sucesso!' });
 };
 

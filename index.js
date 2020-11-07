@@ -33,6 +33,10 @@ app.post('/signup', userController.signup);
 // search
 app.get('/recipes/search', recipesController.searchRecipesByQuery);
 
+// nova receita
+app.get('/recipes/new', middlewares.auth(), recipesController.registerNewRecipeForm);
+app.post('/recipes', middlewares.auth(), recipesController.registerNewRecipe);
+
 // detalhes
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
 

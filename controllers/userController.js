@@ -47,7 +47,7 @@ const logout = (req, res) => {
 const signupForm = (_req, res) =>
   res.render('signup', { message: null });
 
-  const signup = async (req, res) => {
+const signup = async (req, res) => {
   const { email, password, passwordCheck, firstName, lastName } = req.body;
 
   const emailValidation = validationsController.emailValidation(email);

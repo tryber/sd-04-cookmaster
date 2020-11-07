@@ -45,7 +45,7 @@
       }
 
       const deleteButton = document.createElement('button');
-      deleteButton.innerHTML = 'Exclir Ingrediente';
+      deleteButton.innerHTML = 'Excluir Ingrediente';
       deleteButton.className = 'deleteIngredientButton';
       deleteButton.type = 'button'
       list.appendChild(deleteButton);
@@ -57,7 +57,7 @@
         deleteButton.remove();
         ingredientsArray.splice( ingredientsArray.indexOf(li.innerText), 1 )
       }
-      
+
       ingredientesDBField.value = ingredientsArray.join(',');
 
       deleteButton.addEventListener('click', deleteIngredient);
@@ -66,5 +66,4 @@
     addButton.addEventListener('click', addIngredient)
   </script>
 </body>
-
 </html>

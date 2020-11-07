@@ -47,7 +47,7 @@ const logout = (req, res) => {
 const signupForm = (_req, res) =>
   res.render('signup', { message: null });
 
-const signup = async (req, res) => {
+  const signup = async (req, res) => {
   const { email, password, passwordCheck, firstName, lastName } = req.body;
 
   const emailValidation = validationsController.emailValidation(email);
@@ -65,7 +65,7 @@ const signup = async (req, res) => {
 
   const user = await userModel.registerNewUser(email, password, firstName, lastName);
 
-  if(!user) res.status(500).render('signup', { message: 'Ocorreu um erro, tente novamente' });
+  if (!user) res.status(500).render('signup', { message: 'Ocorreu um erro, tente novamente' });
   res.status(201).render('signup', { message: 'Cadastro efetuado com sucesso!' });
 };
 

@@ -46,10 +46,10 @@ const registerNewRecipe = async (req, res) => {
     ingredients,
     instructions,
   );
-  
-  !recipe
-    ? res.status(500).send('<p>Desculpe, ocorreu um erro, tente novamente<p>')
-    : res.redirect('/');
+
+  if (!recipe)
+   res.status(500).send('<p>Desculpe, ocorreu um erro, tente novamente<p>')
+   return res.redirect('/');
 };
 
 module.exports = {

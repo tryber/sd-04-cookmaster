@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Receitas</title>
+</head>
+<body>
+  <h1>Minhas Receitas</h1>
+  <button data-testid="nova-receita" onclick="window.location.pathname='/recipes/new'">Nova Receita</button>
+  <% if (recipes.length > 0) { %>
+  <ul>
+    <% recipes.forEach((recipe) => { %>
+    <li>
+      <p><%= recipe[2] %></p>
+      <p><%= recipe[3] %></p>
+    </li>
+    <a href='/recipes/<%= recipe[0] %>'>Ver mais</a>
+    <% }) %>
+    <% } %>
+  </ul>
+</body>
+</html>

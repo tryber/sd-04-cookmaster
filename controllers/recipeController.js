@@ -1,3 +1,4 @@
+const { findByName } = require('../models/recipesModel');
 const Recipes = require('../models/recipesModel');
 
 const listRecipes = async (req, res) => {
@@ -17,6 +18,12 @@ const recipeByName = async (req, res) => {
   return res.render('recipeDetail', { recName, user: req.user });
 };
 
+const recipeSearch = async (req, res) => {
+  const { search } = req.query;
+  const recipe = await findByName(search);
+  return res.render('searchRecipe', { recipe });
+};
+
 const addNewRecipe = (req, res) => {
   res.render('newRecipe', { user: req.user });
 };
@@ -30,7 +37,14 @@ const createRecipe = async (req, res) => {
 };
 
 // const deleteTheRecipe = async (req, res) => {
-  
+
 // }
 
-module.exports = { listRecipes, recipeDetail, recipeByName, addNewRecipe, createRecipe };
+module.exports = {
+  listRecipes,
+  recipeDetail,
+  recipeByName,
+  recipeSearch,
+  addNewRecipe,
+  createRecipe,
+};

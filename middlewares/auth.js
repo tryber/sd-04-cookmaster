@@ -22,7 +22,7 @@ const authMiddleware = (required = true) => async (req, res, next) => {
 
   if (!user && !required) return next();
 
-  const { password, ...userData } = user; // tirou a senha por ser dados pessoal
+  const { password, ...userData } = user; // tirou a senha por ser dados pessoais
 
   req.user = userData;
 

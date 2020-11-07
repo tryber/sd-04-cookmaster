@@ -7,8 +7,8 @@
     <form action="/login" method="POST">
       <label for="emailInput">Email: </label>
       <input type="text" data-testid="email" name="email" id="emailInput" /><br />
-      <label for="passwordInput" data-testid="senha">Senha: </label>
-      <input type="password" name="password" id="passwordInput" /><br />
+      <label for="passwordInput">Senha: </label>
+      <input type="password" data-testid="senha" name="password" id="passwordInput" /><br />
       <% if (redirect) { %>
       <input type="hidden" name="redirect" value="<%= decodeURIComponent(redirect) %>" />
       <% } %>

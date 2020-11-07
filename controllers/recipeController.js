@@ -18,9 +18,10 @@ const recipeByName = async (req, res) => {
 };
 
 const addNewRecipe = (req, res) => {
-  res.render('newRecipe', { user: req.user, msg: 'Bom tb' });
+  res.render('newRecipe', { user: req.user });
 };
-const newRecipe = async (req, res) => {
+
+const createRecipe = async (req, res) => {
   const { recipeName, ingredients, instruction } = req.body;
   const { id, firstName, lastName } = req.user;
   const fullName = `${firstName} ${lastName}`;
@@ -28,4 +29,8 @@ const newRecipe = async (req, res) => {
   res.redirect('/');
 };
 
-module.exports = { listRecipes, recipeDetail, recipeByName, addNewRecipe, newRecipe };
+// const deleteTheRecipe = async (req, res) => {
+  
+// }
+
+module.exports = { listRecipes, recipeDetail, recipeByName, addNewRecipe, createRecipe };

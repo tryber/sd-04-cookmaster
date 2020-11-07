@@ -21,9 +21,9 @@ const emailIsValid = (email) => {
 const passwValid = (password, confirm) => {
   const msg = '';
 
-  if (password !== confirm) return 'As senhas tem que ser iguais';
-
   if (!password || password.length < 6) return 'A senha deve ter pelo menos 6 caracteres';
+
+  if (password !== confirm) return 'As senhas tem que ser iguais';
 
   return msg;
 };

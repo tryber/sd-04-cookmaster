@@ -7,13 +7,15 @@ const findByEmail = async (userEmail) => {
       .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, firstName, lastName]) => ({
-      id,
-      email,
-      password,
-      firstName,
-      lastName,
-    }))
+    .then(([id, email, password, firstName, lastName]) => {
+      return ({
+        id,
+        email,
+        password,
+        firstName,
+        lastName,
+      });
+    })
     .catch((err) => {
       throw err;
     });
@@ -48,15 +50,8 @@ const addUser = async (email, password, firstName, lastName) => {
   );
 };
 
-const isValidEmail = (email) => {
-  if (email === '') return false;
-
-  return true;
-};
-
 module.exports = {
   findByEmail,
   findById,
   addUser,
-  isValidEmail,
 };

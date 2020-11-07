@@ -20,8 +20,8 @@ const recipeByName = async (req, res) => {
 
 const recipeSearch = async (req, res) => {
   const { search } = req.query;
-  const recipe = await findByName(search);
-  return res.render('searchRecipe', { recipe });
+  const recipes = await findByName(search);
+  return res.render('searchRecipe', { recipes, user: req.user });
 };
 
 const addNewRecipe = (req, res) => {
@@ -35,10 +35,6 @@ const createRecipe = async (req, res) => {
   await Recipes.addRecipe(id, fullName, recipeName, ingredients, instruction);
   res.redirect('/');
 };
-
-// const deleteTheRecipe = async (req, res) => {
-
-// }
 
 module.exports = {
   listRecipes,

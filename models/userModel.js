@@ -27,8 +27,8 @@ const findByEmail = async (email) => {
 
 const findById = async (id) => {
   return connection()
-    .then((db) =>
-      db
+    .then((dataBase) =>
+      dataBase
         .getTable('users')
         .select(['id', 'email', 'password', 'first_name', 'last_name'])
         .where('id = :id')
@@ -44,8 +44,33 @@ const findById = async (id) => {
       lastName,
     }));
 };
+const createUser = async ({ email, password, first_name, last_name }) => {
+  const dataBase = await connection();
+  await dataBase
+    .getTable('users')
+    .insert(['email', 'password', 'first_name', 'last_name'])
+    .values(email, password, first_name, last_name)
+    .execute();
+};
+
+const editUser = async (id, email, password, fName, lName) => {
+  connection().then((dataBase) =>
+    dataBase
+      .getTable('users')
+      .update()
+      .set('email', email)
+      .set('password', password)
+      .set('first_name', fName)
+      .set('last_name', lName)
+      .where('id = :id')
+      .bind('id', id)
+      .execute(),
+  );
+};
 
 module.exports = {
   findByEmail,
   findById,
+  createUser,
+  editUser,
 };

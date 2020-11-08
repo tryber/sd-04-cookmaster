@@ -22,4 +22,7 @@ app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
 
+app.get('/cadastro', controllers.userController.signUp);
+app.post('/cadastro', controllers.userController.newUser);
+
 app.listen(3000, () => console.log('Listening on 3000'));

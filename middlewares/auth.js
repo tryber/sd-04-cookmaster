@@ -1,6 +1,5 @@
 const userModel = require('../models/userModel');
 
-
 const SESSIONS = {};
 
 const getUser = async (req) => {

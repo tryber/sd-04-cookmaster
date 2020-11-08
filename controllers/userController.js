@@ -51,7 +51,7 @@ const newUser = async (req, res) => {
 
   await UserModel.addUser(email, password, firstName, lastName);
 
-  return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!' });
+  return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
 };
 
 module.exports = {

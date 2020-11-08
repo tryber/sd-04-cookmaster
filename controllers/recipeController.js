@@ -1,26 +1,28 @@
-const { findByName } = require('../models/recipesModel');
 const Recipes = require('../models/recipesModel');
+const User = require('../models/userModel');
 
-const listRecipes = async (req, res) => {
+const allRecipes = async (req, res) => {
   const recipe = await Recipes.getRecipes();
   return res.render('home', { recipe, user: req.user });
 };
 
 const recipeDetail = async (req, res) => {
-  const { id } = req.params;
-  const theRecipe = await Recipes.findById(id);
-  return res.render('recipeDetail', { theRecipe, user: req.user });
+  const { user } = req;
+  const recipe = await findRecipeById(req.params.id);
+  const isRecipeCreator = !!user && user.id === recipe.userId;
+
+  return res.render('recipeDetails', { recipe, isRecipeCreator });
 };
 
-const recipeByName = async (req, res) => {
-  const { name } = req.params;
-  const recName = await Recipes.findByName(name);
-  return res.render('recipeDetail', { recName, user: req.user });
+const userRecipe = async (req, res) => {
+  const { user } = req;
+  const recipes = await findRecipeByUserId(user.id);
+  return res.render('/myRecipe', { recipes, user });
 };
 
-const recipeSearch = async (req, res) => {
+const searchRecipe = async (req, res) => {
   const { search } = req.query;
-  const recipes = await findByName(search);
+  const recipes = search ? await Recipes.findByName(search) : await Recipes.getRecipes();
   return res.render('searchRecipe', { recipes, user: req.user });
 };
 
@@ -36,11 +38,32 @@ const createRecipe = async (req, res) => {
   res.redirect('/');
 };
 
+const removeRecipe = async (req, res) => {
+  const { user, params, body } = req;
+  const { password } = await User.findById(user.id);
+
+  if (password !== body.password) {
+    return res.render('admin/confirmPassword', { id: params.id, message: 'Senha Incorreta.' });
+  }
+
+  const delRec = await deleteRecipeById(params.id);
+
+  if (delRec > 0) {
+    return res.render('admin/confirmPassword', {
+      id: params.id,
+      message: 'erro ao excluir receita',
+    });
+  }
+
+  return res.status(200).redirect('/');
+};
+
 module.exports = {
-  listRecipes,
+  allRecipes,
   recipeDetail,
-  recipeByName,
-  recipeSearch,
+  userRecipe,
+  searchRecipe,
   addNewRecipe,
   createRecipe,
+  removeRecipe,
 };

@@ -1,0 +1,29 @@
+<div>
+  <h3><%= recipe.name %></h3>
+
+  <p>Enviado por <%= recipe.user.toUpperCase() %></p>
+</div>
+
+<div>
+  <h3>Ingredientes</h3>
+  <p><%= recipe.ingredients %></p>
+</div>
+
+<div>
+  <h3>Modo de preparo</h3>
+
+  <p><%= recipe.instructions %></p>
+</div>
+<div>
+  <% if (user) { %>
+  <a href="/recipes/<%= recipe.iD %>/edit" data-testid="editar-receita"
+    >Editar Receita</a
+  >
+  <a href="/recipes/<%= recipe.iD %>/delete" data-testid="excluir-receita"
+    >Excluir Receita</a
+  >
+  <% } %>
+</div>
+<div>
+  <a href="/">Voltar</a>
+</div>

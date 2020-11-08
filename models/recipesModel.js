@@ -61,7 +61,7 @@ const registerNewRecipe = async (userId, user, name, ingredients, instructions) 
       .execute(),
     );
 
-const updateRecipe = async (id, name, ingredients, instructions) =>
+const updateRecipe = async (recipeId, name, ingredients, instructions) =>
   connection()
     .then((db) => db
       .getTable('recipes')
@@ -69,8 +69,8 @@ const updateRecipe = async (id, name, ingredients, instructions) =>
       .set('name', name)
       .set('ingredients', ingredients)
       .set('instructions', instructions)
-      .where('id = : id')
-      .bind('id', id)
+      .where('id = :id')
+      .bind('id', recipeId)
       .execute(),
     );
 

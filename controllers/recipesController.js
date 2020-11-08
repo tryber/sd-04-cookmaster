@@ -58,11 +58,10 @@ const updateRecipeData = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipesModel.getRecipeById(id);
   const { ingredients } = recipe;
+  console.log(recipe);
 
   const ingredientsArray = ingredients.split(',');
   recipe.ingredients = ingredientsArray;
-
-  // if (userId !== id) res.redirect(`/recipes/${recipeId}`);
 
   return res.render('updateRecipe', { recipe, user: req.user });
 };
@@ -70,7 +69,6 @@ const updateRecipeData = async (req, res) => {
 const updateRecipeForm = async (req, res) => {
   const { id } = req.params;
   const { name, ingredients, instructions } = req.body;
-  // console.log(id, name, ingredients, instructions);
 
   await recipesModel.updateRecipe(id, name, ingredients, instructions);
 

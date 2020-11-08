@@ -60,7 +60,7 @@ const newUser = async (req, res) => {
 const newUse = async () => {
   //  const valided = await validationModel({ ...req.body });
   //  await userModel.createUser({ ...req.body });
-   //  return res.render('cadastro', { message: 'cadastrado!' });
+  //  return res.render('cadastro', { message: 'cadastrado!' });
 };
 
 module.exports = {

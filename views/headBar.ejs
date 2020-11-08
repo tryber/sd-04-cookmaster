@@ -1,8 +1,8 @@
 <header>
   <h1>COOKMASTER</h1>
   <% if (user) { %>
-    <a data-testid='logout'>Logout</a>
+    <a data-testid='logout' href='/logout'>Logout</a>
   <% } else { %>
-    <a data-testid='login'>Login</a>
+    <a data-testid='login' href='/login'>Login</a>
   <% } %>
 </header>

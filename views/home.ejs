@@ -8,13 +8,13 @@
   <body>
     <%- include('./headBar.ejs', { user }); %>
     <div>
-      <h3>Recipes</h3>
+      <h3>Receitas</h3>
       <% if (user) { %>
-      <a data-testid='minhas-receitas' >My Recipes</a>
-      <a data-testid="nova-receita" >New Recipes</a>
-      <a data-testid="minha-conta" >My Acount</a>
+      <a data-testid='minhas-receitas' >Minhas Receitas</a>
+      <a data-testid="nova-receita" >Nova Receita</a>
+      <a data-testid="minha-conta" >Minha Conta</a>
       <% } %>
-      <a data-testid="buscar-receita">Find Recipes</a>
+      <a data-testid="buscar-receita">Encontar Receitas</a>
     </div>
     <%- include('./cardRecipe.ejs', { recipes }); %>
   </body>

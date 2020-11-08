@@ -1,8 +1,8 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
-const { validationModel } = require('../models/validation');
 
 const userModel = require('../models/userModel');
+const { validation, createUser } = require('../models/signUpModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -44,29 +44,40 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
-const signUp = (_req, res) => {
-  res.render('cadastro', { message: null });
+const signup = (_req, res) => {
+  res.render('admin/signup', { message: null });
 };
 
 const newUser = async (req, res) => {
-  const valided = await validationModel({ ...req.body });
-  if (valided !== 400) {
-    return res.render('cadastro', { ...valided });
-  }
-  await userModel.createUser({ ...req.body });
-  return res.render('cadastro', { message: 'cadastrado!' });
+  const isValid = await validation({ ...req.body });
+
+  if (!isValid) return res.status(400).render('admin/signup', { ...isValid });
+
+  await createUser({ ...req.body });
+  res.status(200).render('admin/signup', { ...isValid });
 };
 
-const newUse = async () => {
-  //  const valided = await validationModel({ ...req.body });
-  //  await userModel.createUser({ ...req.body });
-  //  return res.render('cadastro', { message: 'cadastrado!' });
+const editUserRender = (req, res) =>
+  res.render('my-recipes/myRegister', { message: null, user: req.user });
+
+const editUser = async (req, res) => {
+  const { id } = req.user;
+  const { email, password, first_name, last_name } = req.body;
+  const isValid = await validation({ ...req.body });
+
+  if (isValid) {
+    await userModel.editUser(id, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('my-recipes/myRegister', { ...isValid, user: req.user });
 };
 
 module.exports = {
   login,
   loginForm,
   logout,
-  signUp,
+  signup,
   newUser,
+  editUserRender,
+  editUser,
 };

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookmaster - Login</title>
+</head>
+
+<body>
+  <form action="/signUp" method="POST">
+    <h3>Cadastro</h3>
+    <div>
+      <label for="emailInput">Email </label>
+      <input type="text" name="email" data-testid="email" id="emailInput" />
+      <% if (emailMessage) { %>
+      <div>
+        <span><%= emailMessage %></span>
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <label for="passInput">Senha </label>
+      <input type="password" name="password" data-testid="senha" id="passInput" />
+      <% if (passMessage) { %>
+      <div>
+        <span><%= passMessage %></span>
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <label for="confirmPassInput">Confirmar senha </label>
+      <input
+        type="password"
+        name="confirmPass"
+        data-testid="confirmar-senha"
+        id="confirmPassInput"
+      />
+      <% if (confirmPassMessage) { %>
+      <div>
+        <span><%= confirmPassMessage %></span>
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <label for="firstNameInput">Nome </label>
+      <input type="text" name="firstName" data-testid="nome" id="firstNameInput" />
+      <% if (firstNameMessage) { %>
+      <div>
+        <span><%= firstNameMessage %></span>
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <label for="lastNameInput">Sobrenome </label>
+      <input type="text" name="lastName" data-testid="sobrenome" id="lastNameInput" />
+      <% if (lastNameMessage) { %>
+      <div>
+        <span><%= lastNameMessage %></span>
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <a href="/login" data-testid="login">Fazer login</a>
+      <button type="submit" data-testid="cadastrar">Cadastre-se</button>
+      <% if (successMessage) { %>
+        <div>
+          <span><%= successMessage %></span>
+        </div>
+        <% } %>
+    </div>
+  </form>
+</body>
+
+</html>

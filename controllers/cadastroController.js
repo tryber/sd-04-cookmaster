@@ -1,3 +1,4 @@
+const userModel = require('../models/userModel');
 const { validationsForms } = require('../models/validationsForms');
 
 const signUp = (_, res) => {
@@ -6,8 +7,10 @@ const signUp = (_, res) => {
 
 const newUser = async (req, res) => {
   const validation = await validationsForms({ ...req.body });
-  if (validation) return res.render('register', { ...validation });
-  return null;
+  if(validation) {
+    await userModel.createNewUser({...req.body});
+    return res.render('register', { ...validation });
+  } 
 };
 
 module.exports = {

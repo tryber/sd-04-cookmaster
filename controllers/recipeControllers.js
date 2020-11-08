@@ -1,6 +1,7 @@
 const recipesModel = require('../models/cooksModel');
 const { listSpecificRecipe } = require('../models/cooksModel');
 const userModel = require('../models/userModel');
+const validationForms = require('../models/validationsForms');
 
 const listarReceitas = async (req, res) => {
   const cooks = await recipesModel.listCook();
@@ -54,7 +55,6 @@ const editRecipe = async (req, res) => {
 const saveEditRecipe = async (req, res) => {
   const { id } = req.params;
   const { nameRecipe, listIngredients, textPrepare } = req.body;
-  // const cooks = await listSpecificRecipe(id);
   await recipesModel.updateRecipes(id, nameRecipe, listIngredients.toString(), textPrepare);
   res.redirect('/');
 };
@@ -77,6 +77,8 @@ const confirmDelete = async (req, res) => {
     return res.render('delete', { id, user: req.user, message: 'Senha Incorreta.' });
   }
 };
+
+
 
 module.exports = {
   listarReceitas,

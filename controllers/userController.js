@@ -1,5 +1,6 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
+const { validationsForms} = require('../models/validationsForms');
 
 const userModel = require('../models/userModel');
 
@@ -43,8 +44,27 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const editUser = (req, res) => {
+  res.render('editUser', {user: req.user, message: null });
+};
+
+const confirmEdit = async (req, res) => {
+  const { idUser } = req.user;
+  const {email, password, confirPassword:passwordConfirm, name:first_name, lastName:last_name} = req.body;
+  console.log("variaveis",email, password, passwordConfirm, first_name, last_name);
+  const valid = await validationsForms({email, password, passwordConfirm, first_name, last_name});
+  console.log("VARIAVEL VALUE",valid );
+  if (valid) {
+    await userModel.saveEdit(idUser, email, password, first_name, last_name);
+    return res.redirect('/');
+  }
+  return res.render('editeUser',{valid, user: req.user})
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  editUser,
+  confirmEdit,
 };

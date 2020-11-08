@@ -70,26 +70,13 @@ const signup = async (req, res) => {
 };
 
 const updateUserForm = async (req, res) => {
-  const userData = await userModel.findById(req.user.id);
+  // const userData = await userModel.findById(req.user.id);
 
-  return res.render('admin/updateUser', { userData, message: null, user: req.user });
+  return res.render('admin/updateUser', { message: null, user: req.user });
 };
 
 const updateUser = async (req, res) => {
-  const { email, password, passwordCheck, firstName, lastName } = req.body;
-
-  const emailValidation = validationsController.emailValidation(email);
-  const passwordValidation = validationsController.passwordValidation(password, passwordCheck);
-  const nameValidation = validationsController.nameValidation(firstName, lastName);
-
-  if (emailValidation !== '')
-    return res.render('admin/updateUser', { message: emailValidation });
-
-  if (passwordValidation !== '')
-    return res.render('admin/updateUser', { message: passwordValidation });
-
-  if (nameValidation !== '')
-    return res.render('admin/updateUser', { message: nameValidation });
+  const { email, password, firstName, lastName } = req.body;
 
   await userModel.updateUser(req.user.id, email, password, firstName, lastName);
 

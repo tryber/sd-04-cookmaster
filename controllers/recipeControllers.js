@@ -78,8 +78,6 @@ const confirmDelete = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   listarReceitas,
   viewRecipesUser,

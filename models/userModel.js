@@ -25,8 +25,13 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([idUser, email, password, name, lastName]) =>
-    ({ idUser, email, password, name, lastName }));
+    .then(([idUser, email, password, name, lastName]) => ({
+      idUser,
+      email,
+      password,
+      name,
+      lastName,
+    }));
 };
 
 const createNewUser = async ({ email, password, first_name, last_name }) => {

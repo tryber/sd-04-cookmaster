@@ -58,7 +58,6 @@ const updateRecipeData = async (req, res) => {
   const { id } = req.params;
   const recipe = await recipesModel.getRecipeById(id);
   const { ingredients } = recipe;
-  console.log(recipe);
 
   const ingredientsArray = ingredients.split(',');
   recipe.ingredients = ingredientsArray;

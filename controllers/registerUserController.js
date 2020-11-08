@@ -10,7 +10,7 @@ const verifyEmpty = (req, res, next) => {
   }
   return next();
 };
-//feço
+
 const verifyEmail = (req, res, next) => {
   const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
   const { email } = req.body;

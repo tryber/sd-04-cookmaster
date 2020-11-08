@@ -31,8 +31,8 @@ const findById = async (id) => {
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({
-      id,
+    .then(([idUser, email, password, name, lastName]) => ({
+      idUser,
       email,
       password,
       name,

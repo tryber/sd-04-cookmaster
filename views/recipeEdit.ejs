@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form class="recipesAddForm" action="/recipes/<%= recipe[0][0] %>" method="POST">
+   <label for="recipeNameInput">Nome da Receita</label>
+    <input type="text" name="recipeName" id="recipeNameInput" data-testid="nome-receita" value="<%= recipe[0][3] %>"/>
+    <ul class="ingredientsListBox">
+      <% recipe[0][4].split(',').forEach((ingredient) => {%>
+        <li class="ingredientsListItem">
+          <input type="hidden" name="ingredients[]" value='<%= ingredient %>' />
+          <%= ingredient %>
+          <button class="btnRemoveIngredient">Excluir Ingrediente</button>
+        </li>
+      <% }) %>
+    </ul>
+    <input type="text" name="recipeIngredients" id="recipeIngredientsInput" data-testid="ingredientes" />
+    <button type="button" data-testid="adicionar-ingrediente" id="btnAddIngredients">Adicionar Ingrediente</button>
+    <label for="recipeInstructionsInput">Modo de Preparo</label>
+    <input type="text" maxlength="300" name="recipeInstructions" id="recipeInstructionsInput"
+      data-testid="modo-de-preparo" value="<%= recipe[0][5] %>">
+    <button type="button" onclick="window.location.pathname='/'">Voltar</button>
+    <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+  </form>
+  <script>
+
+    const btnAddIngredients = document.querySelector('#btnAddIngredients');
+
+    const recipeIngredientsInput = document.querySelector('#recipeIngredientsInput');
+
+    const ingredientsListBox = document.querySelector('.ingredientsListBox');
+
+    const btnRemoveIngredientDb = document.querySelectorAll('.btnRemoveIngredient');
+
+    function btnRemoveIngredientDbFunc() {
+     btnRemoveIngredientDb.forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        event.target.parentNode.remove()
+      });
+     });
+    }
+
+    btnRemoveIngredientDbFunc();
+
+    function onClickAddIngredients() {
+      const ingredientsListItem = document.createElement('li');
+      ingredientsListItem.classList.add('ingredientsListItem');
+      ingredientsListItem.innerText = recipeIngredientsInput.value;
+      ingredientsListBox.appendChild(ingredientsListItem);
+      const btnRemoveIngredient = document.createElement('button');
+      btnRemoveIngredient.classList.add('btnRemoveIngredient');
+      btnRemoveIngredient.innerText = 'Excluir Ingrediente';
+      btnRemoveIngredient.type = 'button';
+      ingredientsListItem.appendChild(btnRemoveIngredient);
+      btnRemoveIngredient.addEventListener('click', (event) => {
+        event.target.parentNode.remove()
+      });
+      const itemInputHidden = document.createElement('input');
+      itemInputHidden.type = 'hidden';
+      itemInputHidden.name = 'ingredients[]';
+      itemInputHidden.value = recipeIngredientsInput.value;
+      const recipesAddForm = document.querySelector('.recipesAddForm');
+      ingredientsListItem.appendChild(itemInputHidden);
+      recipeIngredientsInput.value = null;
+    }
+
+    function addIngredients() {
+      btnAddIngredients.addEventListener('click', onClickAddIngredients)
+    }
+
+    addIngredients();
+
+  </script>
+</body>
+
+</html>

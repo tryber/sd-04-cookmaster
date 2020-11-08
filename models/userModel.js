@@ -23,7 +23,12 @@ const findByEmail = async (mail) => {
 const findById = async (id) => {
   connection()
     .then((dataBase) =>
-      dataBase.getTable('users').select(['id']).where('id = :id').bind('id', id).execute(),
+      dataBase
+        .getTable('users')
+        .select()
+        .where('id = :id')
+        .bind('id', id)
+        .execute(),
     )
     .then((results) => results.fetchOne())
     .then(([id, email, password, name, lastName]) => ({

@@ -12,16 +12,38 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', (_req, res) => {
-  return res.render('home');
-});
+app.get('/', middlewares.auth(false), controllers.recipeController.listarReceitas);
 
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
 
+app.get('/recipes/newRecipe', middlewares.auth(), controllers.recipeController.recipeRegister);
+app.post('/recipes', middlewares.auth(false), controllers.recipeController.newRecipe);
+app.get('/recipes', middlewares.auth(false), controllers.recipeController.listarReceitas);
+
+app.get('/recipes/search', middlewares.auth(false), controllers.recipeController.searchRecipes);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.viewRecipesUser);
+app.get('/recipes/:id', middlewares.auth(), controllers.recipeController.viewRecipesUser);
+
+app.get('/register', controllers.cadastroController.signUp);
+app.post('/register', controllers.cadastroController.newUser);
+
 app.get('/login', controllers.userController.loginForm);
 app.get('/logout', controllers.userController.logout);
 app.post('/login', controllers.userController.login);
+
+app.get('/recipes/:id/edit', middlewares.auth(), controllers.recipeController.editRecipe);
+app.post('/recipes/:id', middlewares.auth(), controllers.recipeController.saveEditRecipe);
+
+app.get('/me/recipes', middlewares.auth(), controllers.recipeController.myRecipes);
+
+app.get('/recipes/:id/delete', middlewares.auth(), controllers.recipeController.deleteRecipe);
+app.post('/recipes/:id/delete', middlewares.auth(false), controllers.recipeController.confirmDelete);
+
+app.get('/me/edit', middlewares.auth(), controllers.userController.editUser);
+app.post('/me/edit', middlewares.auth(), controllers.userController.confirmEdit);
+
 
 app.listen(3000, () => console.log('Listening on 3000'));

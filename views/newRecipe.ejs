@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="/js/funcaoAdd.js"></script> -->
+    <title>New Recipes</title>
+  </head>
+  <body>
+    <% if(message) {%>
+    <p><%= message %></p>
+    <% } %>
+    <form action="/recipes" method="post">
+      <div>
+        <label for="newRecipe">Nova Receita</label>
+        <input type="text" name="nameRecipe" id="newRecipe" data-testid="nome-receita" />
+      </div>
+      <div>
+        <h4>Ingredientes</h4>
+        <ol id="listRecipes"></ol>
+      </div>
+      <div>
+        <label for="addIngredients"></label>
+        <input type="text" name="ingredients[]" id="addIngredients" data-testid="ingredientes" />
+        <button type="button" onclick="add()" data-testid="adicionar-ingrediente">
+          Adicionar Ingrediente
+        </button>
+      </div>
+      <div>
+        <label for="prepareRecipe">Modo de preparo</label>
+        <textarea
+          name="prepare"
+          id="prepareRecipe"
+          cols="30"
+          rows="20"
+          data-testid="modo-de-preparo"
+        ></textarea>
+        <div>
+          <a href="/">Voltar</a>
+          <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+        </div>
+      </div>
+    </form>
+  </body>
+  <script>
+    function add() {
+      // salva o id addIngredients do input na variavel campoIngrediente
+      const campoIngrediente = document.getElementById('addIngredients').value;
+      // caso a variavel por diferente de vazio ela vai criar a codificação de pegar e excuir ingredientes dentro do IF
+      if (campoIngrediente !== '') {
+        // salva o id lisRecipes da lista ordenada na variavel listIngredients
+        const listIngredients = document.getElementById('listRecipes');
+        // cria uma lista na variavel itensList que será jogada dentro do tag ol (lista ordenada)
+        const itensList = document.createElement('li');
+        //cria um input na variavel inputIngredients que vai receber o valor dos ingredientes
+        const inputIngredients = document.createElement('input');
+        // a variavel receberá um id com o nome da variavel campoIngrediente
+        inputIngredients.id = campoIngrediente;
+        // a variavel recebe o valor do camppoIngrediente
+        inputIngredients.value = campoIngrediente;
+        inputIngredients.name = 'ingredients[]';
+        // cira um novo botao para excluir os ingredientes
+        const newButton = document.createElement('button');
+        newButton.type = 'button';
+        newButton.innerText = 'Excluir Ingrediente';
+        // função pra de click, onde remove o parente(filho) da lista
+        newButton.onclick = () => {
+          return document.getElementById(campoIngrediente).parentElement.remove();
+        };
+
+        inputIngredients.innerText = addIngredients.value;
+
+        itensList.appendChild(inputIngredients);
+        itensList.appendChild(newButton);
+
+        listIngredients.appendChild(itensList);
+
+        document.getElementById('addIngredients').value = '';
+      }
+      return null;
+    }
+  </script>
+</html>

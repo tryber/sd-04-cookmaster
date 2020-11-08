@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% if(message) {%>
+    <p><%= message %></p>
+    <%}%>
+    <% if(user) { %>
+    <h1>Cookmaster</h1>
+    <div>
+      <a href="/logout">
+        <h3>Logout</h3>
+      </a>
+    </div>
+    <form action="/recipes/<%= cooks.id %>" method="POST">
+      <h1>Editar Receita</h1>
+      <div>
+        <label for="nameRecipe">Nome da Receita</label>
+        <input type="text" name="nameRecipe" data-testid="nome-receita" />
+        <div>
+          <h3>ingredientes</h3>
+          <div>
+            <ul id="list">
+              <% ingredients.forEach((ingredient, index) => { %>
+              <li id="itemList" index=<%=`${index}` %>
+                ><input name="listIngredients[]" value=<%=`${ingredient}` %> />
+                <button onclick=<%=`removeItem(${index})` %>
+                 Excluir Ingrediente
+                </button>
+              </li>
+              <%})%>
+            </ul>
+              <div>
+                <input type="text" id="inputIngredient" name="listIngredients[]" data-testid="ingredientes" />
+                <button type="button" data-testid="adicionar-ingrediente" onclick=<%=`addIngredient()`%>
+                  >Adicionar Ingrediente
+                </button>
+              </div>
+              <div>
+                <label for="modoPreparo">Modo de Preparo</label>
+                <br />
+                <textarea name="textPrepare" data-testid="modo-de-preparo" ></textarea>
+                <a href="">
+                  Voltar
+                </a>
+              </div>
+                <button type="submit" data-testid="postar-receita">Salvar Receita</button>
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+  <script>
+    const list = document.getElementById('list');
+    var li;
+    var itemId;
+    var item;
+
+    const addIngredient = () => {
+      console.log("entrou");
+      var inputingredient = document.getElementById('inputIngredient').value;
+      console.log(inputingredient);
+      if (inputingredient == '') {
+        alert('Digite um ingrediente válido');
+      } else {
+        item = document.getElementById('inputIngredient');
+        itemId = list.childElementCount;
+        console.log(itemId);
+        li = createItemEl(item.value, itemId);
+        li.appendChild(createRemoveItemBtn(itemId));
+        list.appendChild(li);
+        item.value = '';
+      }
+    };
+
+    const removeItem = (itemId) => {
+      for (i = 0; i < list.children.length; i++) {
+        if (list.children[i].getAttribute('index') == itemId) {
+          list.children[i].remove();
+        }
+      }
+    };
+
+    const createItemEl = (itemValue, itemId) => {
+      let li = document.createElement('li');
+      const input = document.createElement('input');
+      input.value = itemValue;
+      input.name = 'listIngredients[]';
+      li.setAttribute('index', itemId);
+      li.appendChild(input);
+      return li;
+    };
+
+    const createRemoveItemBtn = (itemId) => {
+      let btn = document.createElement('button');
+      btn.setAttribute('onclick', 'removeItem(' + itemId + ')');
+      btn.setAttribute('class', 'btn btn-danger');
+      btn.innerHTML = 'Excluir Ingrediente';
+      return btn;
+    };
+
+  </script>
+</html>

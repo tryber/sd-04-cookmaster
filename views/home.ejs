@@ -6,15 +6,15 @@
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('./headBar.ejs', { user }); %>
+    <%- include('./headBar.ejs', { token }); %>
     <div>
       <h3>Receitas</h3>
-      <% if (user) { %>
-      <a data-testid='minhas-receitas' >Minhas Receitas</a>
-      <a data-testid="nova-receita" >Nova Receita</a>
-      <a data-testid="minha-conta" >Minha Conta</a>
+      <% if (token) { %>
+      <a data-testid='minhas-receitas' href="/me/recipes">Minhas Receitas</a>
+      <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+      <a data-testid="minha-conta" href="/me/edit">Minha Conta</a>
       <% } %>
-      <a data-testid="buscar-receita">Encontar Receitas</a>
+      <a data-testid="buscar-receita" href="/recipes/search">Encontar Receitas</a>
     </div>
     <%- include('./cardRecipe.ejs', { recipes }); %>
   </body>

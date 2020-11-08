@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:watch": "nodemon index.js",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,7 @@
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^4.0.0",
     "mochawesome-report-generator": "^4.1.0",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.6",
     "sequelize-cli": "^6.2.0"
   }
 }

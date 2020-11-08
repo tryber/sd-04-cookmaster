@@ -1,19 +1,24 @@
 const connection = require('./connection');
 
-const findByEmail = async (mail) => {
-  connection()
+/**
+ * Busca um usuário através do seu email e, se encontrado, retorna-o.
+ * @param {string} email Email do usuário a ser encontrado
+ */
+
+const findByEmail = async (email) => {
+  return connection()
     .then((dataBase) =>
       dataBase
         .getTable('users')
-        .select()
-        .where('email = :email')
-        .bind('email', mail)
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('email = :email_param')
+        .bind('email_param', email)
         .execute(),
     )
     .then((results) => results.fetchOne())
-    .then(([id, email, password, name, lastName]) => ({
+    .then(([id, emailUser, password, name, lastName]) => ({
       id,
-      email,
+      emailUser,
       password,
       name,
       lastName,
@@ -21,13 +26,13 @@ const findByEmail = async (mail) => {
 };
 
 const findById = async (id) => {
-  connection()
-    .then((dataBase) =>
-      dataBase
+  return connection()
+    .then((db) =>
+      db
         .getTable('users')
-        .select()
-        .where('id = :idParams')
-        .bind('idParams', id)
+        .select(['id', 'email', 'password', 'first_name', 'last_name'])
+        .where('id = :id')
+        .bind('id', id)
         .execute(),
     )
     .then((results) => results.fetchOne())

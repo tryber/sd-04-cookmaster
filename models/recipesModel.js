@@ -2,16 +2,13 @@ const connection = require('./connection');
 
 const getAllRecipes = async () =>
   connection()
-    .then((dataBase) => dataBase.getTable('recipes').select().execute())
+    .then((dataBase) => dataBase.getTable('recipes').select(['id', 'user', 'name']).execute())
     .then((results) => results.fetchAll())
     .then((data) =>
-      data.map(([id, userId, user, name, ingredients, instructions]) => ({
+      data.map(([id, user, name]) => ({
         id,
-        userId,
         user,
         name,
-        ingredients,
-        instructions,
       })),
     );
 

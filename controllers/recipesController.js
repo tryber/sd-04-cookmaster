@@ -53,10 +53,36 @@ const registerNewRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
+const updateRecipeData = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const recipe = await recipesModel.getRecipeById(id);
+  const { ingredients } = recipe;
+ 
+  const ingredientsArray = ingredients.split(',');
+  recipe.ingredients = ingredientsArray;
+
+  // if (userId !== id) res.redirect(`/recipes/${recipeId}`);
+
+  return res.render('updateRecipe', { recipe, user: req.user });
+};
+
+const updateRecipeForm = async (req, res) => {
+  const { name, ingredients, instructions } = req.body;
+  const { id } = req.params;
+  console.log(id, name, ingredients, instructions);
+
+  await recipesModel.updateRecipe(id, name, ingredients, instructions);
+
+  return res.redirect('/');
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetail,
   searchRecipesByQuery,
   registerNewRecipeForm,
   registerNewRecipe,
+  updateRecipeData,
+  updateRecipeForm,
 };

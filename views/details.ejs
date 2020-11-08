@@ -6,14 +6,7 @@
   <title>Detalhes da Receita</title>
 </head>
 <body>
-  <% if (user && user.id === recipe.userId) {%>
-    <a href="/recipes/:id/edit">
-      <button data-testid="editar-receita">Editar Receita</button>
-    </a>
-    <a href="/recipes/:id/delete">
-      <button data-testid="excluir-receita">Excluir Receita</button>
-    </a>
-  <%}%>
+  <%- include('components/editRecipeButtons', { user }) %>
   <h1><%= recipe.name %></h1>
   <p>Enviado por <%= recipe.user %></p>
   <h2>Ingredientes</h2>

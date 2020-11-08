@@ -39,5 +39,7 @@ app.post('/recipes', middlewares.auth(), recipesController.registerNewRecipe);
 
 // detalhes
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
+app.post('/recipes/:id', middlewares.auth(), recipesController.updateRecipeForm);
+app.get('/recipes/:id/edit', middlewares.auth(), recipesController.updateRecipeData);
 
 app.listen(3000, () => console.log('Listening on 3000'));

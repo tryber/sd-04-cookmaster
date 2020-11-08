@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const { SESSIONS } = require('../middlewares/auth');
 
-const userModel = require('../models/userModel');
+const UserModel = require('../models/userModel');
 
 const loginForm = (req, res) => {
   const { token = '' } = req.cookies || {};
@@ -14,7 +14,7 @@ const loginForm = (req, res) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { email, password, redirect } = req.body;
 
   if (!email || !password)
@@ -23,7 +23,7 @@ const login = async (req, res, next) => {
       redirect: null,
     });
 
-  const user = await userModel.findByEmail(email);
+  const user = await UserModel.findByEmail(email);
   if (!user || user.password !== password)
     return res.render('admin/login', {
       message: 'Email ou senha incorretos',
@@ -31,10 +31,11 @@ const login = async (req, res, next) => {
     });
 
   const token = uuid();
+
   SESSIONS[token] = user.id;
 
   res.cookie('token', token, { httpOnly: true, sameSite: true });
-  res.redirect(redirect || '/admin');
+  res.redirect(redirect || '/');
 };
 
 const logout = (req, res) => {
@@ -43,8 +44,20 @@ const logout = (req, res) => {
   res.render('admin/logout');
 };
 
+const renderUser = (req, res) => res.render('register', { msg: '' });
+
+const newUser = async (req, res) => {
+  const { email, password, firstName, lastName } = req.body;
+
+  await UserModel.addUser(email, password, firstName, lastName);
+
+  return res.render('admin/login', { message: 'Cadastro efetuado com sucesso!', redirect: null });
+};
+
 module.exports = {
   login,
   loginForm,
   logout,
+  renderUser,
+  newUser,
 };

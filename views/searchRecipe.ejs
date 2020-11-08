@@ -1,0 +1,20 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+</head>
+<body>
+  <h1>Cookmaster</h1>
+  <h3>Buscar receita</h3>
+  <a data-testid="login" href="/login" >Login</a>
+  <form action="/recipes/search" method="GET">
+    <input data-testid="receita" type="text" name="search" />
+    <button data-testid="buscar" type="submit">Buscar</button>
+  </form>
+  <ul>
+    <% recipes.forEach((recipe) => { %>
+    <li><%= recipe.name %></li>
+    <li><%= recipe.user %></li>
+    <a href="/recipes/<%= recipe.id%>">Ver mais</a>
+    <% }) %>
+  </ul>
+</body>
+</html>

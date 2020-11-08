@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <% if ( msg ) { %>
+    <p><%= msg %></p>
+    <% } %>
+    <h1>Nova Receita</h1>
+    <form action="/recipes/new" method="POST">
+      <label>Nome da Receita </label>
+      <input data-testid="nome-receita" name="recipeName" type="text" />
+      <label>Ingredientes</label>
+      <input data-testid="ingredientes" name="ingredients" type="text" />
+      <label>Adicionar Ingrediente</label>
+      <input data-testid="adicionar-ingrediente" type="text" />
+      <label>Modo de preparo</label>
+      <input data-testid="modo-de-preparo" name="instruction" type="text" />
+      <button type="submit" data-testid="postar-receita">Salvar Receita></button>
+      <a href="/">Voltar</a>
+    </form>
+  </body>
+</html>

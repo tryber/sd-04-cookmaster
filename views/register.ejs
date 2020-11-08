@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <% if ( msg !== '' ) { %>
+    <p><%= msg %></p>
+    <% } %>
+    <form action="/register" method="POST">
+      <label>Email </label>
+      <input data-testid="email" name="email" type="text" />
+      <label>Senha</label>
+      <input data-testid="senha" name="password" type="password" />
+      <label>Confirmar Senha</label>
+      <input data-testid="confirmar-senha" name="confirm" type="password" />
+      <label>Nome</label>
+      <input data-testid="nome" name="firstName" type="text" />
+      <label>Sobrenome</label>
+      <input data-testid="sobrenome" name="lastName" type="text" />
+      <button type="submit" data-testid="cadastrar">Cadastre-se></button>
+      <a href="/login" data-testid="login">Fazer login</a>
+    </form>
+  </body>
+</html>

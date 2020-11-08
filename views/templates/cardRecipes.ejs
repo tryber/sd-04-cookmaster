@@ -1,0 +1,9 @@
+<section>
+  <% if(recipes) { recipes.forEach(recipe => {%>
+  <div>
+    <span><%= recipe.user %></span>
+    <span><%= recipe.name %></span>
+    <a href="/recipes/<%= recipe.id %>">Ver mais</a>
+  </div>
+  <% })} %>
+</section>

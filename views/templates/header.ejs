@@ -1,0 +1,10 @@
+<header class="container-header">
+  <nav class="navbar navbar-dark" style="background-color: #ECE2D0;">
+    <h1 class="navbar-brand mb-0 h1" style="color: #582C4D; font-weight:600;">Cookmaster</h1>
+    <% if (user) { %>
+      <a class="btn btn-outline-danger my-2 my-sm-0" data-testid="logout" href='/logout'">Logout</a>
+      <% } else { %>
+      <a class="btn btn-outline-success my-2 my-sm-0" data-testid="login" href='/login'">Login</a>
+      <% } %>
+  </nav>
+</header>

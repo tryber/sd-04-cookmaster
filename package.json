@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:watch": "nodemon index.js",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
     "express-rescue": "^1.1.26",
@@ -40,7 +42,7 @@
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^4.0.0",
     "mochawesome-report-generator": "^4.1.0",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.6",
     "sequelize-cli": "^6.2.0"
   }
 }

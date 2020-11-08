@@ -11,17 +11,18 @@
   <% } %>
   <h1>Editar Usuário</h1>
   <form action="/me/edit" method="POST">
-    <label for="emailInput">Email: </label>
-    <input data-testid="email" type="text" name="email" id="emailinput" required /><br />
-    <label for="passwordInput">Senha: </label>
-    <input data-testid="senha" type="password" name="password" id="passwordInput" required /><br />
-    <label for="passwordCheckInput">Confirmar senha: </label>
-    <input data-testid="confirmar-senha" type="password" name="passwordCheck" id="passwordCheckInput" required /><br />
-    <label for="firstNameInput">Nome: </label>
-    <input data-testid="nome" type="text" name="firstName" id="firstNameInput" required /><br />
-    <label for="lastNameInput">Sobrenome: </label>
-    <input data-testid="sobrenome" type="text" name="lastName" id="lastNameInput" required /><br />
-    <button data-testid="salvar" type="submit">Salvar</button>
+    <label for="emailInput">Email</label>
+    <input type="text" name="email" id="emailInput" data-testid="email" value="<%= user.email %>" required/><br />
+    <label for="passwordInput">Senha</label>
+    <input type="password" name="password" id="passwordInput" data-testid="senha" value="<%= user.password %>" required/><br />
+    <label for="passwordInput">Confirmar Senha</label>
+    <input type="password" name="passwordCheck" id="passwordInput" data-testid="confirmar-senha" required/><br />
+    <label for="nameInput">Nome</label>
+    <input type="text" name="firstName" id="nameInput" data-testid="nome" value="<%= user.firstName %>" required/><br />
+    <label for="lastNameInput">Sobrenome</label>
+    <input type="text" name="lastName" id="lastNameInput" data-testid="sobrenome" value="<%= user.lastName %>" required/><br />
+    <button type="button">Cancelar</button>
+    <button type="submit" data-testid="salvar">Salvar</button>
   </form>
 </body>
 </html>

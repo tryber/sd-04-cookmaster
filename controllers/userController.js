@@ -72,7 +72,7 @@ const signup = async (req, res) => {
 const updateUserForm = async (req, res) => {
   const userData = await userModel.findById(req.user.id);
 
-  return res.render('admin/updateUser', { message: null, user: req.user });
+  return res.render('admin/updateUser', {userData, message: null, user: req.user });
 };
 
 const updateUser = async (req, res) => {

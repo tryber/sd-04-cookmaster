@@ -10,7 +10,8 @@
     <div>
       <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
       <% if (token) { %>
-        <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+        <a href="/recipes/new"
+        ><button data-testid="nova-receita" class="btn btn-primary">Nova Receita</button></a>
         <a data-testid='minhas-receitas' href="/me/recipes">Minhas Receitas</a>
         <% } %>
     </div>

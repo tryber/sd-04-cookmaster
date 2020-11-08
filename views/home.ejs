@@ -8,14 +8,13 @@
   <body>
     <%- include('./headBar.ejs', { token }); %>
     <div>
-      <h3>Receitas</h3>
-      <% if (token) { %>
-      <a data-testid='minhas-receitas' href="/me/recipes">Minhas Receitas</a>
-      <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
-      <a data-testid="minha-conta" href="/me/edit">Minha Conta</a>
-      <% } %>
       <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
+      <% if (token) { %>
+        <a data-testid="nova-receita" href="/recipes/new">Nova Receita</a>
+        <a data-testid='minhas-receitas' href="/me/recipes">Minhas Receitas</a>
+        <% } %>
     </div>
+    <h1>Receitas</h1>
     <%- include('./cardRecipe.ejs', { recipes }); %>
   </body>
 </html>

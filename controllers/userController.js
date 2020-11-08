@@ -89,7 +89,7 @@ const updateUser = async (req, res) => {
     return res.render('admin/updateUser', { message: passwordValidation });
 
   if (nameValidation !== '')
-    return res.render('admin/updateUser', { message: nameValidation })
+    return res.render('admin/updateUser', { message: nameValidation });
 
   await userModel.updateUser(req.user.id, email, password, firstName, lastName);
 
@@ -103,5 +103,5 @@ module.exports = {
   signupForm,
   signup,
   updateUserForm,
-  updateUser
+  updateUser,
 };

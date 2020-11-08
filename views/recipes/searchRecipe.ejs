@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <title>Cookmaster - Search</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs', {user}); %>
+    <section class="container-fluid">
+      <nav>
+        <h1>Buscar Receitas</h1>
+        <% if (user) { %>
+        <a class="btn btn-primary">Minhas Receitas</a>
+        <a href="/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
+        <a class="btn btn-primary">Minha Conta</a>
+        <% } %>
+        <form action="/recipes/search" method="GET">
+          <input type="text" name="q" data-testid="receita" />
+          <button type="submit" class="btn btn-primary" data-testid="buscar">Buscar</button>
+        </form>
+      </nav>
+      <%- include('../templates/cardRecipes.ejs', {recipes}) %>
+    </section>
+  </body>
+</html>

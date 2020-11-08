@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs', {user}) %>
+    <section>
+      <h1><%= name %></h1>
+      <% if(user) { %>
+      <a href="/recipes/<%= id %>/edit" class="btn btn-primary" data-testid="editar-receita">
+        Editar Receita
+      </a>
+      <a href="/recipes/<%= id %>/delete" class="btn btn-primary" data-testid="excluir-receita">
+        Excluir Receita
+      </a>
+      <% } %>
+    </section>
+    <section>
+      <h3><%= ingredients %></h3>
+    </section>
+    <section>
+      <h2>Modo de Preparo</h2>
+      <p><%= instructions %></p>
+    </section>
+  </body>
+</html>

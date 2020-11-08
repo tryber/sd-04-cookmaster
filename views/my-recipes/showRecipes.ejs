@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <title>Cookmaster - Minhas Receitas</title>
+  </head>
+  <body>
+    <%- include('../templates/header.ejs', {user}); %>
+    <section class="container-fluid">
+      <nav>
+        <h1>Minhas Receitas</h1>
+        <a href="/recipes/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
+      </nav>
+      <%- include('../templates/cardRecipes.ejs', { recipes}) %>
+    </section>
+  </body>
+</html>

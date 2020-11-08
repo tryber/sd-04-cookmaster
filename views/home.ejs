@@ -3,19 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <title>Cookmaster - Home</title>
   </head>
   <body>
-    <%- include('./headBar.ejs', { token }); %>
-    <div>
-      <a data-testid="buscar-receita" href="/recipes/search">Buscar Receita</a>
-      <% if (token) { %>
-        <a href="/recipes/new"
-        ><button data-testid="nova-receita">Nova Receita</button></a>
-        <a data-testid='minhas-receitas' href="/me/recipes">Minhas Receitas</a>
+    <%- include('./templates/header.ejs', {user}); %>
+    <section class="container-fluid">
+      <nav>
+        <h1>Receitas</h1>
+        <% if (user) { %>
+        <a href="/me/recipes" class="btn btn-primary" data-testid="minhas-receitas"
+          >Minhas Receitas</a
+        >
+        <a href="/recipes/new" class="btn btn-primary" data-testid="nova-receita">Nova Receita</a>
+        <a href='/me/edit' data-testid="minha-conta" class="btn btn-primary">Minha Conta</a>
         <% } %>
-    </div>
-    <h1>Receitas</h1>
-    <%- include('./cardRecipe.ejs', { recipes }); %>
+        <a href="/recipes/search" class="btn btn-primary" data-testid="buscar-receita">Buscar</a>
+      </nav>
+      <%- include('./templates/cardRecipes.ejs', {recipes}) %>
+    </section>
   </body>
 </html>

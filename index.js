@@ -45,7 +45,7 @@ app.get('/recipes/:id/delete', middlewares.auth(), recipesController.deleteRecip
 app.post('/recipes/:id/delete', middlewares.auth(), recipesController.deleteRecipe);
 
 // admin de usuário
-// app.get('/me/recipes', middlewares.auth(), recipesController.getUserRecipes);
+app.get('/me/recipes', middlewares.auth(), recipesController.getUserRecipes);
 // app.get('/me/edit', middlewares.auth(), userController.editUserForm);
 // app.post('/me', middlewares.auth(), userController.editUser);
 

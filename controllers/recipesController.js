@@ -100,6 +100,15 @@ const deleteRecipe = async (req, res) => {
   return res.redirect('/');
 };
 
+const getUserRecipes = async (req, res) => {
+  const { id } = req.user;
+
+  const recipes = await recipesModel.getRecipesByUserId(id);
+
+  return res.render('myRecipes', { recipes, user: req.user });
+};
+
+
 module.exports = {
   listAllRecipes,
   recipeDetail,
@@ -110,4 +119,5 @@ module.exports = {
   updateRecipeForm,
   deleteRecipeForm,
   deleteRecipe,
+  getUserRecipes,
 };

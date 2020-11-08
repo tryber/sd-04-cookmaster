@@ -1,7 +1,6 @@
 const recipesModel = require('../models/cooksModel');
 const { listSpecificRecipe } = require('../models/cooksModel');
 const userModel = require('../models/userModel');
-const validationForms = require('../models/validationsForms');
 
 const listarReceitas = async (req, res) => {
   const cooks = await recipesModel.listCook();

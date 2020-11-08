@@ -23,31 +23,32 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/', middlewares.auth(false), (req, res) => {
-  return res.render('home', { user: req.user });
-});
-
+app.get('/', middlewares.auth(false), controllers.recipeController.showRecipes);
 app.get('/admin', middlewares.auth(), (req, res) => {
   return res.render('admin/home', { user: req.user });
 });
-app.get('/register', middlewares.auth(false), (_req, res) => {
-  return res.render('cadastro', { message: null });
-});
-app.post('/newUser', middlewares.auth(false), controllers.userController.formSubmit);
 
-app.get('/recipes/search', (_req, res) => {
-  return res.render('admin/search');
-});
-app.get('/recipes/teste', (_req, res) => {
-  return res.render('admin/recipe');
-});
-app.get('/recipes/teste/delete', (_req, res) => {
-  return res.render('admin/deleteRecipe');
+app.get('/register', controllers.userController.userRegistration);
+app.post('/register', controllers.userController.userRegistrationSuccess);
+
+app.get('/me/edit', middlewares.auth(true), controllers.userController.editUserPage);
+app.post('/me/edit', middlewares.auth(true), controllers.userController.editUser);
+
+app.get('/recipes/search', controllers.recipeController.searchRecipesController);
+app.get('/recipes/search', middlewares.auth(false), (req, res) => {
+  return res.render('searchRecipes', { user: req.user });
 });
 
-app.get('/recipes/modify', (_req, res) => {
-  return res.render('admin/modifyRecipe');
-});
+app.get('/me/recipes', middlewares.auth(true), controllers.recipeController.myRecipesPage);
+
+app.get('/recipes/new', middlewares.auth(false), controllers.recipeController.newRecipePage);
+app.post('/recipes', middlewares.auth(true), controllers.recipeController.createRecipeController);
+
+app.get('/recipes/:id', middlewares.auth(false), controllers.recipeController.openRecipesController);
+app.get('/recipes/:id/edit', middlewares.auth(true), controllers.recipeController.editRecipePage);
+app.post('/recipes/:id/', middlewares.auth(true), controllers.recipeController.editRecipe);
+app.get('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deleteRecipePage);
+app.post('/recipes/:id/delete', middlewares.auth(true), controllers.recipeController.deleteRecipes);
 
 
 app.get('/login', controllers.userController.loginForm);

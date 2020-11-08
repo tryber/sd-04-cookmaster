@@ -46,7 +46,7 @@ app.post('/recipes/:id/delete', middlewares.auth(), recipesController.deleteReci
 
 // admin de usuário
 app.get('/me/recipes', middlewares.auth(), recipesController.getUserRecipes);
-// app.get('/me/edit', middlewares.auth(), userController.editUserForm);
-// app.post('/me', middlewares.auth(), userController.editUser);
+app.get('/me/edit', middlewares.auth(), userController.updateUserForm);
+app.post('/me/edit', middlewares.auth(), userController.updateUser);
 
 app.listen(3000, () => console.log('Listening on 3000'));

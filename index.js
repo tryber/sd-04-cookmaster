@@ -41,5 +41,12 @@ app.post('/recipes', middlewares.auth(), recipesController.registerNewRecipe);
 app.get('/recipes/:id', middlewares.auth(false), recipesController.recipeDetail);
 app.post('/recipes/:id', middlewares.auth(), recipesController.updateRecipeForm);
 app.get('/recipes/:id/edit', middlewares.auth(), recipesController.updateRecipeData);
+app.get('/recipes/:id/delete', middlewares.auth(), recipesController.deleteRecipeForm);
+app.post('/recipes/:id/delete', middlewares.auth(), recipesController.deleteRecipe);
+
+// admin de usuário
+// app.get('/me/recipes', middlewares.auth(), recipesController.getUserRecipes);
+// app.get('/me/edit', middlewares.auth(), userController.editUserForm);
+// app.post('/me', middlewares.auth(), userController.editUser);
 
 app.listen(3000, () => console.log('Listening on 3000'));

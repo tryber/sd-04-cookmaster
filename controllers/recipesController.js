@@ -1,4 +1,5 @@
 const recipesModel = require('../models/recipesModel');
+const userModel = require('../models/userModel');
 
 const listAllRecipes = async (req, res) => {
   const recipes = await recipesModel.getAllRecipes();
@@ -76,6 +77,29 @@ const updateRecipeForm = async (req, res) => {
   return res.redirect('/');
 };
 
+const deleteRecipeForm = async (req, res) => {
+  const { id } = req.user;
+  const { userId } = await recipesModel.getRecipeById(req.params.id);
+
+  if (userId !== id) res.redirect('/');
+
+  return res.render('deleteRecipe', { message: null, user: req.user, id: req.params.id });
+};
+
+const deleteRecipe = async (req, res) => {
+  const { id } = req.user;
+  const { password: senha } = req.body;
+  const { password } = await userModel.findById(id);
+
+  if (password !== senha) {
+    res.render('deleteRecipe', { message: 'Senha Incorreta.', user: req.user, id: req.params.id });
+  }
+
+  await recipesModel.deleteRecipe(req.params.id);
+
+  return res.redirect('/');
+};
+
 module.exports = {
   listAllRecipes,
   recipeDetail,
@@ -84,4 +108,6 @@ module.exports = {
   registerNewRecipe,
   updateRecipeData,
   updateRecipeForm,
+  deleteRecipeForm,
+  deleteRecipe,
 };

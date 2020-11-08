@@ -26,8 +26,8 @@ const findById = async (id) => {
       dataBase
         .getTable('users')
         .select()
-        .where('id = :id')
-        .bind('id', id)
+        .where('id = :idParams')
+        .bind('idParams', id)
         .execute(),
     )
     .then((results) => results.fetchOne())

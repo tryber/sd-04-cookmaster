@@ -1,0 +1,14 @@
+<% if (user) { %>
+  <a href="/me/edit">
+    <button data-testid="minha-conta">Editar Usuário</button>
+  </a>
+  <a href="/me/recipes">
+    <button data-testid="minhas-receitas">Minhas Receitas</button>
+  </a>
+  <a href="/recipes/new">
+    <button data-testid="nova-receita">Nova Receita</button>
+  </a>
+<% } %>
+<a href="/recipes/search">
+  <button data-testid="buscar-receita">Buscar Receitas</button>
+</a>

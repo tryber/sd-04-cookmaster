@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Receita</title>
+</head>
+<body>
+  <%- include('components/editRecipeButtons', { user }) %>
+  <h1><%= recipe.name %></h1>
+  <p>Enviado por <%= recipe.user %></p>
+  <h2>Ingredientes</h2>
+  <ul>
+    <% recipe.ingredients.map(ingredient => { %>
+      <li><%= ingredient %></li>
+    <%})%>
+  </ul>
+  <h2>Modo de Preparo</h2>
+  <p><%= recipe.instructions %></p>
+</body>
+</html>

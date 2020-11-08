@@ -1,0 +1,10 @@
+<% if (user) {%>
+  <spam><%=user.firstName%> <%=user.lastName%></spam>
+  <a>
+    <button data-testid="logout" onclick="window.location.pathname='/logout'">Logout</button>
+  </a>
+<%} else {%>
+  <a href="/login">
+    <button data-testid="login">Login</button>
+  </a>
+<%}%>

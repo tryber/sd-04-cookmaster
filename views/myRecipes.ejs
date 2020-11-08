@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minhas Receitas</title>
+  </head>
+  <body>
+    <%- include('components/loginButton', { user }); %>
+    <h2>Minhas Receitas</h2>
+    <% if (recipes) {%>
+      <%- include('components/listRecipes', { recipes }); %>
+    <% } %>
+  </body>
+</html>

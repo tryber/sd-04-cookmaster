@@ -36,20 +36,20 @@
     let ingredientsDBField = document.getElementById('ingredientsDBField');
     let list = document.getElementById('list');
     let ingredientsArray = [];
-    
+
     const addExistingIngredients = () => {
       const listItem = document.querySelectorAll('.item');
-    
+
       for (let i = 0; i < listItem.length; i += 1) {
         const deleteButton = document.createElement('button');
-        
+
         ingredientsArray.push(listItem[i].innerText);
         ingredientsDBField.value = ingredientsArray.join(',');
-    
+
         deleteButton.innerText = 'Excluir Ingrediente';
         deleteButton.className = 'delete-button';
         listItem[i].insertAdjacentElement('afterend', deleteButton);
-        
+
         deleteButton.addEventListener('click', () => {
           ingredientsArray = ingredientsArray.filter((ingredient) => ingredient !== listItem[i].innerText);
           ingredientsDBField.value = ingredientsArray.join(',');
@@ -58,39 +58,39 @@
         });
       };
     };
-    
+
     const addIngredient = () => {
       const li = document.createElement('li');
       li.innerHTML = ingredientInput.value;
       list.appendChild(li);
-      
+
       ingredientInput.value = '';
-      
+
       if (!ingredientsArray.includes(li.innerText)) {
         ingredientsArray.push(li.innerText); console.log(ingredientsArray);
       }
-      
+
       const deleteButton = document.createElement('button');
       deleteButton.innerHTML = 'Excluir Ingrediente';
       deleteButton.className = 'deleteIngredientButton';
       deleteButton.type = 'button'
       list.appendChild(deleteButton);
-      
+
       ingredientInput.innerText = '';
-      
+
       const deleteIngredient = () => {
         li.remove();
         deleteButton.remove();
         ingredientsArray.splice( ingredientsArray.indexOf(li.innerText), 1 )
       }
-      
+
       ingredientsDBField.value = ingredientsArray.join(',');
-      
+
       deleteButton.addEventListener('click', deleteIngredient);
     };
 
     window.onload = () => addExistingIngredients();
-    
+
     addButton.addEventListener('click', addIngredient)
     </script>
 </body>

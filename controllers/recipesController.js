@@ -55,10 +55,9 @@ const registerNewRecipe = async (req, res) => {
 
 const updateRecipeData = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const recipe = await recipesModel.getRecipeById(id);
   const { ingredients } = recipe;
- 
+
   const ingredientsArray = ingredients.split(',');
   recipe.ingredients = ingredientsArray;
 
@@ -68,9 +67,9 @@ const updateRecipeData = async (req, res) => {
 };
 
 const updateRecipeForm = async (req, res) => {
-  const { name, ingredients, instructions } = req.body;
   const { id } = req.params;
-  console.log(id, name, ingredients, instructions);
+  const { name, ingredients, instructions } = req.body;
+  // console.log(id, name, ingredients, instructions);
 
   await recipesModel.updateRecipe(id, name, ingredients, instructions);
 

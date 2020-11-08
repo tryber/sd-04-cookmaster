@@ -52,10 +52,9 @@ const newUser = async (req, res) => {
   const valided = await validationModel({ ...req.body });
   if (valided !== 400) {
     return res.render('cadastro', { ...valided });
-  } else {
-    await userModel.createUser({ ...req.body });
-    return res.render('cadastro', {message: 'cadastrado!'});
   }
+  await userModel.createUser({ ...req.body });
+  return res.render('cadastro', { message: 'cadastrado!' });
 };
 
 module.exports = {
